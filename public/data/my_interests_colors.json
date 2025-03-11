@@ -1,0 +1,46 @@
+{
+  "name": "My Interests",
+  "children": [
+    {
+      "name": "Technology",
+      "curve": "Leads to the future",
+      "color": "#C473E5",
+      "children": [
+        { "name": "Personal Assistant" },
+        { "name": "Physical/Mental Health" },
+        { "name": "Human-machine Interaction" }
+      ]
+    },
+    {
+      "name": "Data",
+      "curve": "Soil in the 21c",
+      "color": "#E5B15C",
+      "children": [{ "name": "Data Visualization" }, { "name": "Aesthetic & Insightful" }]
+    },
+    {
+      "name": "Biology",
+      "curve": "Nature is art",
+      "color": "#3498DB",
+      "children": [
+        { "name": "Slime Mold" },
+        { "name": "Bone Physiques" },
+        { "name": "Flight Feather Structure" },
+        { "name": "Animal Linguistics" },
+        { "name": "Language of Trees" }
+      ]
+    },
+
+    {
+      "name": "Design",
+      "curve": "Human Warmness",
+      "color": "#FF6F61",
+      "children": [{ "name": "Human-Centered" }, { "name": "Design System" }, { "name": "Frictionless" }]
+    },
+    {
+      "name": "Podcast",
+      "curve": "Spotify enthusiast",
+      "color": "#2ECC71",
+      "children": [{ "name": "Experience" }, { "name": "Algorithm" }, { "name": "Genuineness" }]
+    }
+  ]
+}

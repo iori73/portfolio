@@ -1,0 +1,47 @@
+## Sp📲
+h1 = 48px
+h2 = 40px
+h3 = 32px
+
+（1番大きい）p = 24px
+（2番目）p = 21px
+例： A sales support app for easy schedule adjustment with a smartphone
+
+（最小）p = 18px
+
+
+
+
+## Md💻
+h1 = 56px = heading-xl-m-120
+h2 = 48px = text-heading-l-20
+h3 = 40px
+
+（1番大きい）p = 28px
+（2番目）p = 24px
+（最小）p = 21px
+
+-----
+
+h1:
+text-heading-l-120 md:text-heading-xl-m-120
+
+h2:
+text-heading-m-120 md:text-heading-l-20
+
+h3:
+text-heading-s-120 md:text-heading-m-120
+
+
+（1番大きい）p :
+text-body-xl-140 md:text-body-xxl-140
+
+（2番目）p:
+text-body-l-140 md:text-body-xl-140
+
+（最小）p:
+text-body-m-140 md:text-body-l-140
+
+
+
+
