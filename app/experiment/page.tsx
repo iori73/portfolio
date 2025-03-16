@@ -148,7 +148,7 @@ const ExperimentPage: React.FC = () => {
       <section className="pt-4 md:pt-16 pb-4 md:pb-16">
         <h1 className="text-heading-l-120 md:text-heading-xl-m-120 mb-2">Hobby blog</h1>
         <p className="max-w-full text-body-l-140 md:text-body-xl-140 font-sf-pro">
-          I listened to the podcast too much and was driven by the desire to organize the information
+          I listen to the podcast  everyday and was driven by the desire to organize the input.
         </p>
       </section>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-12">
@@ -185,25 +185,27 @@ const ExperimentPage: React.FC = () => {
               <img
                 className="relative w-[72px] h-[72px] object-cover"
                 alt="Today_I_Learned"
+                // If Japanese is included, it will not be loaded on the site.
                 src="/experiment/covers/Today_I_Learned.png"
               />
 
               <img
                 className="relative w-[72px] h-[72px] object-cover"
                 alt="デデデータ"
-                src="/experiment/covers/デデデータ.png"
+                src="/experiment/covers/dededata.png"
+               
               />
 
               <img
                 className="relative w-[72px] h-[72px] object-cover"
-                alt="STEAM_fm"
-                src="/experiment/covers/STEAM_fm.png"
+                alt="ミモリラジオ-自然の面白さを聴く"
+                src="/experiment/covers/mimori radio.jpeg"
               />
 
               <img
                 className="relative w-[72px] h-[72px] object-cover"
-                alt="ハイパー起業ラジオ"
-                src="/experiment/covers/ハイパー起業ラジオ.png"
+                alt="Ologies with Alie Ward"
+                src="/experiment/covers/ologies.jpeg"
               />
 
               <img
@@ -215,13 +217,13 @@ const ExperimentPage: React.FC = () => {
               <img
                 className="relative w-[72px] h-[72px] object-cover"
                 alt="バイリンガルニュース (Bilingual News)"
-                src="/experiment/covers/バイリンガルニュース (Bilingual News).png"
+                src="/experiment/covers/Bilingual News.png"
               />
 
               <img
                 className="relative w-[72px] h-[72px] object-cover"
-                alt="ゆるコンピュータ科学ラジオ"
-                src="/experiment/covers/ゆるコンピュータ科学ラジオ.png"
+                alt="START/FM"
+                src="/experiment/covers/START_FM.jpeg"
               />
 
               <img

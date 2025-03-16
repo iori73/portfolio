@@ -69,17 +69,12 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
         scroll-mt-32 を付与することで、アンカーリンクで飛んだときにも
         ヘッダーと被らないようにする。
       */}
-      <section className="bg-white pt-32 scroll-mt-32">
+      <section className="bg-white ">
         <div className="max-w-[896px] w-full mx-auto">
           <div className="flex flex-wrap justify-center">
             {/* Hero Image */}
             <img
-              style={{
-                // Optional: a simple box-shadow
-                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-                borderRadius: '8px',
-              }}
-              src="/work/image2.png"
+              src="/work/google_ux_design_certificate_project/thumbnail.png"
               alt="Phone mockups"
               className="w-full max-w-[896px]"
             />

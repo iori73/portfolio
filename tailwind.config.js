@@ -70,8 +70,6 @@ module.exports = {
         'sf-mono': ['"SF Mono"', 'ui-monospace', 'monospace'],
       },
 
-
-
       fontSize: {
         /* Heading */
         'heading-xl-m-120': [
@@ -190,6 +188,34 @@ module.exports = {
         ],
         'caption-m-120': [
           '18px',
+          {
+            lineHeight: '120%',
+            fontWeight: '400',
+          },
+        ],
+        'caption-s-120': [
+          '16px',
+          {
+            lineHeight: '120%',
+            fontWeight: '400',
+          },
+        ],
+        'caption-xs-120': [
+          '14px',
+          {
+            lineHeight: '120%',
+            fontWeight: '400',
+          },
+        ],
+        'caption-xxs-120': [
+          '12px',
+          {
+            lineHeight: '120%',
+            fontWeight: '400',
+          },
+        ],
+        'caption-xxxs-120': [
+          '10px',
           {
             lineHeight: '120%',
             fontWeight: '400',

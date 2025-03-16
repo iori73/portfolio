@@ -712,9 +712,6 @@
 //   );
 // }
 
-
-
-
 'use client';
 
 import Link from 'next/link';
@@ -740,33 +737,28 @@ export default function Footer() {
     // gradient.addColorStop(1, 'rgba(75, 139, 190, 1)');
     // Gradient reflecting blue neck radish colors:
 
+    // 画面幅によって MD / SP を切り替える
+    if (window.innerWidth < 768) {
+      // SP 用のグラデーション
+      const gradient = ctx.createLinearGradient(0, 0, 0, height);
+      gradient.addColorStop(0.01, 'rgba(255, 255, 255, 1)');
+      gradient.addColorStop(0.1, 'rgba(249, 250, 235, .4)');
+      gradient.addColorStop(0.4, 'rgba(214, 228, 174, .6)');
+      gradient.addColorStop(1, 'rgba(125, 181, 118, .6)');
 
-// 画面幅によって MD / SP を切り替える
-if (window.innerWidth < 768) {
-  // SP 用のグラデーション
-  const gradient = ctx.createLinearGradient(0, 0, 0, height);
-  gradient.addColorStop(0.01, 'rgba(255, 255, 255, 1)');
-  gradient.addColorStop(0.1, 'rgba(249, 250, 235, .4)');
-  gradient.addColorStop(0.4, 'rgba(214, 228, 174, .6)');
-  gradient.addColorStop(1, 'rgba(125, 181, 118, .6)');
-  
-  ctx.fillStyle = gradient;
-  ctx.fillRect(0, 0, width, height);
-} else {
-  // MD 用のグラデーション
-  const gradient = ctx.createLinearGradient(0, 0, 0, height);
-  gradient.addColorStop(0.1, 'rgba(255, 255, 255, 1)');
-  gradient.addColorStop(0.3, 'rgba(249, 250, 235, .4)');
-  gradient.addColorStop(0.5, 'rgba(214, 228, 174, .6)');
-  gradient.addColorStop(1, 'rgba(125, 181, 118, .6)');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, width, height);
+    } else {
+      // MD 用のグラデーション
+      const gradient = ctx.createLinearGradient(0, 0, 0, height);
+      gradient.addColorStop(0.1, 'rgba(255, 255, 255, 1)');
+      gradient.addColorStop(0.3, 'rgba(249, 250, 235, .4)');
+      gradient.addColorStop(0.5, 'rgba(214, 228, 174, .6)');
+      gradient.addColorStop(1, 'rgba(125, 181, 118, .6)');
 
-  ctx.fillStyle = gradient;
-  ctx.fillRect(0, 0, width, height);
-}
-
-
-
-
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, width, height);
+    }
 
     // Add grain effect
     const imageData = ctx.getImageData(0, 0, width, height);
@@ -816,27 +808,40 @@ if (window.innerWidth < 768) {
       <canvas ref={canvasRef} width="1200" height="600" className="absolute inset-0 w-full h-full object-cover z-0" />
 
       <div className="w-full max-w-3xl relative z-10">
-        <div className="flex flex-col items-center gap-4 justify-center md:flex-row">
+        <div className="flex flex-col items-center gap-4 justify-center flex-column">
           {/* Frequency legend (desktop only, vertical) */}
           <div className="hidden md:flex flex-col items-center gap-2 top-1/2 left-80">
-            <div
+            {/* <div
               className="w-6 h-6 rounded-full"
               style={{
                 background: 'linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.20) 100%)',
                 backdropFilter: 'blur(4px)',
               }}
-            />
+            /> */}
             <span
-              className="font-mono"
+              className="font-mono text-caption-s-120"
               style={{
-                writingMode: 'vertical-rl',
+                // writingMode: 'vertical-rl',
                 textOrientation: 'mixed',
               }}
             >
-              frequency
+              The size of each circle represents its frequency
             </span>
           </div>
-
+          {/* Frequency legend (mobile only, horizontal) */}
+          <div className="flex md:hidden w-full flex-column items-center justify-center gap-2">
+            {/* <div
+              className="w-6 h-6 rounded-full"
+              style={{
+                background: 'linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.20) 100%)',
+                backdropFilter: 'blur(4px)',
+              }}
+            /> */}
+            <span className="font-mono text-caption-xs-120 text-center">
+              The size of each circle
+              <br /> represents its frequency
+            </span>
+          </div>
 
           {/* Icon list */}
           <div className="relative md:mx-auto flex flex-wrap items-center justify-center gap-4">
@@ -954,22 +959,10 @@ if (window.innerWidth < 768) {
               />
             </Link>
           </div>
-          {/* Frequency legend (mobile only, horizontal) */}
-          <div className="flex md:hidden w-full flex-row items-center justify-center gap-2">
-            <div
-              className="w-6 h-6 rounded-full"
-              style={{
-                background: 'linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.20) 100%)',
-                backdropFilter: 'blur(4px)',
-              }}
-            />
-            <span className="font-mono">frequency</span>
-          </div>
-
         </div>
 
         {/* Copyright */}
-        <div className="text-center text-body-m-140 md:text-body-l-140 mt-16 md:mt-8">@ 2025 Iori Kawano</div>
+        <div className="text-center text-body-m-140 md:text-body-l-140 mt-8 md:mt-8">@ 2025 Iori Kawano</div>
       </div>
     </div>
   );

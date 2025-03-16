@@ -46,7 +46,7 @@ const CaseStudyPage: React.FC = () => {
         <div className="max-w-[896px] w-full mx-auto">
           <div className="flex flex-wrap justify-center">
             {/* Hero Image */}
-            <img src="/work/image1.png" alt="Phone mockups" className="w-full max-w-[896px]" />
+            <img src="/work/2_day_internship/thumbnail.png" alt="Phone mockups" className="w-full max-w-[896px]" />
           </div>
         </div>
       </section>

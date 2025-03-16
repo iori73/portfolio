@@ -4,6 +4,8 @@ import { Link, Underline } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import InterestsVisualization from './InterestsVisualization';
 
+
+
 const BlogPage: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('overview');
 
