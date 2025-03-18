@@ -136,13 +136,6 @@ module.exports = {
             fontWeight: '400',
           },
         ],
-        'body-xl-m-140': [
-          '24px',
-          {
-            lineHeight: '140%',
-            fontWeight: '600',
-          },
-        ],
         'body-xl-140': [
           '24px',
           {

@@ -764,7 +764,7 @@ export default function Footer() {
     const imageData = ctx.getImageData(0, 0, width, height);
     const data = imageData.data;
 
-    for (let i = 0; i < data.length; i += 4) {
+    for (let i = 0; i < data.length; i += 6) {
       // Add variations to each pixel
       const grainAmount = Math.random() * 20 - 10; // Random value between -10 and 10
 

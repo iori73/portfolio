@@ -61,7 +61,7 @@ const InterestsVisualization: React.FC = () => {
     svg.selectAll('*').remove();
 
     const width = 800;
-    const height = 800;
+    const height = 1000;
 
     svg
       .attr('viewBox', [-width / 2, -height / 3, width, height])

@@ -109,7 +109,7 @@ export default function BlogPage() {
         <img src={thumbnail} alt={title} />
         <div className="article-text flex flex-col gap-2 md:gap-4 py-2">
           <p className="article-date text-caption-l-120 md:text-caption-xl-120">{formatDate(pubDate)}</p>
-          <h3 className="article-title text-heading-xxs-120 md:text-heading-s-120">{title}</h3>
+          <h3 className="article-title text-heading-xxs-120  md:text-heading-s-120">{title}</h3>
           {/* description に「続きを見る」などが含まれていれば、置換や削除など工夫 */}
           <div
             dangerouslySetInnerHTML={{
@@ -179,12 +179,9 @@ export default function BlogPage() {
           <button
             onClick={() => window.open('https://note.com/io_73', '_blank')}
             aria-label="Go to note"
-            className="all-[unset] box-border inline-flex flex-col px-10 py-2 relative flex-[0_0_auto] bg-[#002a38] rounded-[40px]"
-            style={{
-              background: 'linear-gradient(180deg, rgba(100, 100, 100, 0.6) 0%, rgba(100, 100, 100, 1) 100%)',
-            }}
+            className="all-[unset] box-border inline-flex flex-col px-10 py-2 relative flex-[0_0_auto] border-4 border-black rounded-[40px]"
           >
-            <div className="text-body-xl-m-140 text-white py-1" >Go to note</div>
+            <div className="text-heading-xxs-120 py-1 z-10 ">Go to note</div>
           </button>
         </div>
       </div>
@@ -202,16 +199,29 @@ export default function BlogPage() {
           ))}
         </div>
 
-        <div className="flex w-full justify-center">
+        {/* <div className="flex w-full justify-center">
           <button
             onClick={() => window.open('https://medium.com/@iori730002204294', '_blank')}
             aria-label="Go to Medium"
             className="all-[unset] box-border inline-flex flex-col px-10 py-2 relative flex-[0_0_auto] bg-[#002a38] rounded-[40px]"
+            // style={{
+            //   background: 'linear-gradient(180deg, rgba(100, 100, 100, 0.6) 0%, rgba(100, 100, 100, 1) 100%)',
+            // }}
             style={{
-              background: 'linear-gradient(180deg, rgba(100, 100, 100, 0.6) 0%, rgba(100, 100, 100, 1) 100%)',
+              background: 'linear-gradient(180deg,  rgba(249, 250, 235, 0.4) 0%, rgba(214, 228, 174, 0.6) 100%)',
             }}
+            
           >
-            <div className="text-body-xl-m-140 text-white py-1">Go to Medium</div>
+            <div className="text-heading-xxs-120  py-1">Go to Medium</div>
+          </button>
+        </div> */}
+        <div className="flex w-full justify-center">
+          <button
+            onClick={() => window.open('https://medium.com/@iori730002204294', '_blank')}
+            aria-label="Go to Medium"
+            className="all-[unset] box-border inline-flex flex-col px-10 py-2 relative flex-[0_0_auto] border-4 border-black rounded-[40px]"
+          >
+            <div className="text-heading-xxs-120 py-1 z-10">Go to Medium</div>
           </button>
         </div>
       </div>

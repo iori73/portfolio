@@ -65,7 +65,7 @@ const CaseStudyPage: React.FC = () => {
           </div>
 
           {/* 説明文: Body/XL_140 */}
-          <p className="text-body-xl-140 font-sf-pro text-gray-600 mb-8">
+          <p className="text-heading-xxs-120 font-sf-pro text-gray-600 mb-8">
             A sales support app for easy schedule adjustment with a smartphone
           </p>
 
@@ -239,7 +239,7 @@ const CaseStudyPage: React.FC = () => {
             <section id="solution" className="py-8">
               <h2 className="text-heading-s-120 md:text-heading-m-120 font-sf-pro mb-6">Solution</h2>
               <div className="mb-8">
-                <h3 className="text-body-xl-m-140 font-sf-pro mb-4">1. Condition Search</h3>
+                <h3 className="text-heading-xxs-120 font-sf-pro mb-4">1. Condition Search</h3>
                 <p className="mb-4 text-body-m-140 md:text-body-l-140 font-sf-pro">
                   Search by “Refine by criteria” at the top of the calendar view (companion / business target / location
                   / duration)
@@ -250,7 +250,7 @@ const CaseStudyPage: React.FC = () => {
               </div>
 
               <div className="mb-8">
-                <h3 className="text-body-xl-m-140 font-sf-pro mb-4">2. Search Results</h3>
+                <h3 className="text-heading-xxs-120 font-sf-pro mb-4">2. Search Results</h3>
                 <p className="mb-4 text-body-m-140 md:text-body-l-140 font-sf-pro">
                   The "Search results" view dims the surrounding area, highlighting the specified period (from the 5th
                   to the 9th). Results are presented in a list view at the bottom on the page, and users can easily
@@ -266,7 +266,7 @@ const CaseStudyPage: React.FC = () => {
               </div>
 
               <div className="mb-8">
-                <h3 className="text-body-xl-m-140 font-sf-pro mb-4">3. Send Request</h3>
+                <h3 className="text-heading-xxs-120 font-sf-pro mb-4">3. Send Request</h3>
                 <p className="mb-4 text-body-m-140 md:text-body-l-140 font-sf-pro">
                   The screen transitions to the confirmation page about the detail.
                 </p>
@@ -280,7 +280,7 @@ const CaseStudyPage: React.FC = () => {
             <section id="reflection" className="py-8">
               <h2 className="text-heading-s-120 md:text-heading-m-120 font-sf-pro mb-6">Reflection</h2>
               <div className="mb-6">
-                <h3 className="text-body-xl-m-140 font-sf-pro mb-3">Impressions</h3>
+                <h3 className="text-heading-xxs-120 font-sf-pro mb-3">Impressions</h3>
                 <ul className="list-disc pl-5 space-y-2 text-body-m-140 md:text-body-l-140 font-sf-pro">
                   <li>
                     The most impressive part was interviewing the sales staff and receiving valuable feedback on the
@@ -297,7 +297,7 @@ const CaseStudyPage: React.FC = () => {
                 </ul>
               </div>
               <div className="mb-6">
-                <h3 className="text-body-xl-m-140 font-sf-pro mb-3">Reflection</h3>
+                <h3 className="text-heading-xxs-120 font-sf-pro mb-3">Reflection</h3>
                 <ul className="list-disc pl-5 space-y-2 text-body-m-140 md:text-body-l-140 font-sf-pro">
                   <li>
                     As mentioned above, I got an opportunity to interview a sales person and his feedback provided me
@@ -331,7 +331,7 @@ const CaseStudyPage: React.FC = () => {
                     className={
                       activeSection === 'overview'
                         ? 'text-left text-body-xxl-140 font-sf-pro transition-transform duration-900 scale-110'
-                        : 'text-left text-body-xl-140 font-sf-pro transition-transform duration-900 scale-100 opacity-50'
+                        : 'text-left text-heading-xxs-120 font-sf-pro transition-transform duration-900 scale-100 opacity-50'
                     }
                   >
                     Overview
@@ -343,7 +343,7 @@ const CaseStudyPage: React.FC = () => {
                     className={
                       activeSection === 'design-process'
                         ? 'text-left text-body-xxl-140 font-sf-pro transition-transform duration-900 scale-110'
-                        : 'text-left text-body-xl-140 font-sf-pro transition-transform duration-900 scale-100 opacity-50'
+                        : 'text-left text-heading-xxs-120 font-sf-pro transition-transform duration-900 scale-100 opacity-50'
                     }
                   >
                     Design Process
@@ -355,7 +355,7 @@ const CaseStudyPage: React.FC = () => {
                     className={
                       activeSection === 'solution'
                         ? 'text-left text-body-xxl-140 font-sf-pro transition-transform duration-900 scale-110'
-                        : 'text-left text-body-xl-140 font-sf-pro transition-transform duration-900 scale-100 opacity-50'
+                        : 'text-left text-heading-xxs-120 font-sf-pro transition-transform duration-900 scale-100 opacity-50'
                     }
                   >
                     Solution
@@ -367,7 +367,7 @@ const CaseStudyPage: React.FC = () => {
                     className={
                       activeSection === 'reflection'
                         ? 'text-left text-body-xxl-140 font-sf-pro transition-transform duration-900 scale-110'
-                        : 'text-left text-body-xl-140 font-sf-pro transition-transform duration-900 scale-100 opacity-50'
+                        : 'text-left text-heading-xxs-120 font-sf-pro transition-transform duration-900 scale-100 opacity-50'
                     }
                   >
                     Reflection

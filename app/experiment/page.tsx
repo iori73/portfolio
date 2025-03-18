@@ -148,7 +148,7 @@ const ExperimentPage: React.FC = () => {
       <section className="pt-4 md:pt-16 pb-4 md:pb-16">
         <h1 className="text-heading-l-120 md:text-heading-xl-m-120 mb-2">Hobby blog</h1>
         <p className="max-w-full text-body-l-140 md:text-body-xl-140 font-sf-pro">
-          I listen to the podcast  everyday and was driven by the desire to organize the input.
+          I listen to the podcast everyday and was driven by the desire to organize the input.
         </p>
       </section>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-12">
@@ -193,7 +193,6 @@ const ExperimentPage: React.FC = () => {
                 className="relative w-[72px] h-[72px] object-cover"
                 alt="デデデータ"
                 src="/experiment/covers/dededata.png"
-               
               />
 
               <img
@@ -238,12 +237,10 @@ const ExperimentPage: React.FC = () => {
             <button
               onClick={() => window.open('https://podcastnotes.studio.site/', '_blank')}
               aria-label="Podcast Notes"
-              className="all-[unset] box-border inline-flex flex-col items-start px-10 py-2 relative flex-[0_0_auto] bg-[#002a38] rounded-[40px]"
-              style={{
-                background: 'linear-gradient(180deg, rgba(100, 100, 100, 0.6) 0%, rgba(100, 100, 100, 1) 100%)',
-              }}
+              className="all-[unset] box-border inline-flex flex-col items-start px-10 py-2 relative flex-[0_0_auto] border-4 border-black rounded-[40px]"
+
             >
-              <div className=" text-body-xl-m-140 text-white py-1">Go to Page</div>
+              <div className="text-heading-xxs-120 py-1 z-10">Go to Page</div>
             </button>
           </div>
         </div>
