@@ -242,7 +242,7 @@ const ExperimentPage: React.FC = () => {
             </div>
 
             <button
-              onClick={() => window.open('https://podcastnotes.studio.site/', '_blank')}
+              onClick={() => window.open('https://paint-foam-7ff.notion.site/Podcast-notes-1bc264826e0c8009bf10ee284f3cc5b4?pvs=4', '_blank')}
               aria-label="Podcast Notes"
               className="all-[unset] box-border inline-flex flex-col items-start px-10 py-2 relative flex-[0_0_auto] border-2 border-black rounded-[40px]"
 

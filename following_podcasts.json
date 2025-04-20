@@ -1,0 +1,608 @@
+{
+    "name": "Podcasts",
+    "children": [
+      {
+        "category": "AI",
+        "children": [
+          {
+            "name": "regonn&curry.fm - 最新の生成AI動向を週刊でお届け -"
+          },
+          {
+            "name": "AI4Dラジオ - デザインが動き出す-"
+          },
+          {
+            "name": "ながらAIラジオ"
+          },
+          {
+            "name": "Podcast by Yuka Studio // ユカスタポッドキャスト"
+          },
+          {
+            "name": "AI未来話"
+          },
+          {
+            "name": "耳で学ぶAI、ロボシンク"
+          },
+          {
+            "name": "No Priors: Artificial Intelligence | Technology | Startups"
+          },
+          {
+            "name": "Generative Now | AI Builders on Creating the Future"
+          }
+        ]
+      },
+      {
+        "category": "Biology & Nature",
+        "children": [
+          {
+            "name": "Smologies with Alie Ward"
+          },
+          {
+            "name": "植物マナブラジオ"
+          },
+          {
+            "name": "小農ラジオ"
+          },
+          {
+            "name": "The Science of Birds"
+          },
+          {
+            "name": "All Creatures Podcast"
+          },
+          {
+            "name": "生物をざっくり紹介するラジオ　〜ぶつざくネオ〜"
+          },
+          {
+            "name": "Weekend Birder"
+          },
+          {
+            "name": "YUKA on SAFARI"
+          },
+          {
+            "name": "ゼロからはじめる独立農家〜命の時代に向けて〜"
+          },
+          {
+            "name": "ベジフル大百科　The CROPS"
+          },
+          {
+            "name": "SAMURAI養鶏"
+          },
+          {
+            "name": "YAMAP ポッドキャスト"
+          },
+          {
+            "name": "生物をざっくり紹介するラジオ　〜ぶつざく〜"
+          },
+          {
+            "name": "生物をざっくり紹介するラジオ　〜ぶつざくⅡ〜"
+          },
+          {
+            "name": "Patagonia Radio"
+          },
+          {
+            "name": "腸内細菌相談室"
+          },
+          {
+            "name": "生きもの地球ツアー"
+          },
+          {
+            "name": "Whale Tales Podcast"
+          },
+          {
+            "name": "すごい進化ラジオ"
+          },
+          {
+            "name": "ノウカノタネ"
+          }
+        ]
+      },
+      {
+        "category": "Business",
+        "children": [
+          {
+            "name": "深津貴之のGUILD TALK"
+          },
+          {
+            "name": "あいだのハナシ - 社会課題をビジネスで解決するドキュメンタリー"
+          },
+          {
+            "name": "プロダクトストーリー"
+          },
+          {
+            "name": "The Colin and Samir Show"
+          },
+          {
+            "name": "Culture First with Damon Klotz"
+          },
+          {
+            "name": "ボーダレス・ラジオ | 面白いぞソーシャルビジネス"
+          },
+          {
+            "name": "Planet Money"
+          },
+          {
+            "name": "ポッドキャスト Export"
+          },
+          {
+            "name": "【本音茶会】じっくりブランディング学"
+          },
+          {
+            "name": "東京ビジネスハブ"
+          },
+          {
+            "name": "オトマーケ｜音声とマーケティングを考えるポッドキャスト"
+          },
+          {
+            "name": "Business Wars"
+          },
+          {
+            "name": "才能が見つかれば、仕事も人生もうまくいく｜TALENT TALK（タレントーク）"
+          },
+          {
+            "name": "Zero Topic - ゼロトピック - "
+          },
+          {
+            "name": "Equity"
+          },
+          {
+            "name": "Think Fast Talk Smart: Communication Techniques"
+          },
+          {
+            "name": "グロービス経営大学院「ちょっと差がつくビジネスサプリ」"
+          },
+          {
+            "name": "G1知見録Podcast"
+          },
+          {
+            "name": "CEREAL TALK / シリアルトーク"
+          },
+          {
+            "name": "Lenny's Podcast: Product | Growth | Career"
+          }
+        ]
+      },
+      {
+        "category": "Career",
+        "children": [
+          {
+            "name": "すしかな夫婦の海外ぐらし"
+          },
+          {
+            "name": "ハヤカワ五味の「なに考えてるの〜？」"
+          },
+          {
+            "name": "海外移住channel"
+          },
+          {
+            "name": "London Tech Talk"
+          },
+          {
+            "name": "海外で働くことについて知れる番組｜海外で働く人ラジオ"
+          },
+          {
+            "name": "Your Life After Tech"
+          },
+          {
+            "name": "海外ではたらく私たち20’s"
+          },
+          {
+            "name": "Ray Wow FM"
+          }
+        ]
+      },
+      {
+        "category": "Design & Art",
+        "children": [
+          {
+            "name": "DESIGNTIDE TOKYO"
+          },
+          {
+            "name": "デザインの手前"
+          },
+          {
+            "name": "Future of UX | Your Design, Tech and User Experience Podcast | AI Design"
+          },
+          {
+            "name": "Honest UX Talks"
+          },
+          {
+            "name": "Sera Tajima Podcast"
+          },
+          {
+            "name": "Finding Our Way"
+          },
+          {
+            "name": "【農業に売る力を！】農業デザイン！アグデザ"
+          },
+          {
+            "name": "AXIS DESIGN RADIO"
+          },
+          {
+            "name": "Design Better"
+          },
+          {
+            "name": "舘山佳奈のUXデザインチャンネル"
+          },
+          {
+            "name": "むいのはなし"
+          },
+          {
+            "name": "デザぽ／デザインがしたい人のためのポッドキャスト"
+          },
+          {
+            "name": "BTRAXのCEOによるサンフランシスコ・デザイントーク"
+          },
+          {
+            "name": "アートのミーム"
+          },
+          {
+            "name": "原研哉 Kenya HARA"
+          },
+          {
+            "name": "NN/g UX Podcast "
+          },
+          {
+            "name": "鈴木敏夫のジブリ汗まみれ"
+          },
+          {
+            "name": "YOWATARI RADIO"
+          },
+          {
+            "name": "Design Tracks"
+          },
+          {
+            "name": "The Informed Life"
+          },
+          {
+            "name": "YUMEMIアート×デザイン"
+          },
+          {
+            "name": "お元気ですか.fm"
+          },
+          {
+            "name": "Behind the Craft"
+          },
+          {
+            "name": "Takram Cast"
+          },
+          {
+            "name": "UX Collective"
+          },
+          {
+            "name": "Beyond UX Design"
+          },
+          {
+            "name": "Experience Designed"
+          },
+          {
+            "name": "resize.fm"
+          },
+          {
+            "name": "デザインシテン"
+          },
+          {
+            "name": "今日のデザインニュース"
+          },
+          {
+            "name": "Automagic Podcast"
+          }
+        ]
+      },
+      {
+        "category": "Education",
+        "children": [
+          {
+            "name": "All Ears English Podcast"
+          },
+          {
+            "name": "裏技英語"
+          },
+          {
+            "name": "FEEL GOOD TV on KEENSTREAM"
+          },
+          {
+            "name": "Learning English Grammar"
+          },
+          {
+            "name": "Luke's ENGLISH Podcast - Learn British English with Luke Thompson"
+          },
+          {
+            "name": "The Diary Of A CEO with Steven Bartlett"
+          },
+          {
+            "name": "ゆる言語学ラジオ"
+          },
+          {
+            "name": "How to Be a Better Human"
+          },
+          {
+            "name": "Speaking of Psychology"
+          },
+          {
+            "name": "LISTEN to books"
+          },
+          {
+            "name": "a scope 〜資本主義の未来編〜"
+          },
+          {
+            "name": "a scope ~リベラルアーツで世界を視る目が変わる~"
+          },
+          {
+            "name": "コテンラジオ Spotifyオリジナル"
+          },
+          {
+            "name": "Hapa英会話 Podcast"
+          },
+          {
+            "name": "TED Talks Daily"
+          },
+          {
+            "name": "Business English from All Ears English"
+          },
+          {
+            "name": "TAKRAM RADIO"
+          },
+          {
+            "name": "歴史を面白く学ぶコテンラジオ （COTEN RADIO）"
+          },
+          {
+            "name": "いろはにマネーの「ながら学習」"
+          }
+        ]
+      },
+      {
+        "category": "Health",
+        "children": [
+          {
+            "name": "The Peter Attia Drive"
+          },
+          {
+            "name": "The Psychology of your 20s"
+          },
+          {
+            "name": "ZOE Science & Nutrition"
+          },
+          {
+            "name": "This is Stuart"
+          },
+          {
+            "name": "Body Electric"
+          },
+          {
+            "name": "Huberman Lab"
+          }
+        ]
+      },
+      {
+        "category": "News",
+        "children": [
+          {
+            "name": "Lobsterr FM"
+          },
+          {
+            "name": "Morning Brew Daily"
+          },
+          {
+            "name": "ながら日経"
+          },
+          {
+            "name": "バイリンガルニュース (Bilingual News)"
+          },
+          {
+            "name": "News Connect あなたと経済をつなぐ5分間 #ニュースコネクト"
+          },
+          {
+            "name": "TechCrunch Daily Crunch"
+          },
+          {
+            "name": "Level 5 by Palo Alto Insight　AI時代のキャリア戦略"
+          },
+          {
+            "name": "グローバルニュース DAILY BRIEF"
+          }
+        ]
+      },
+      {
+        "category": "Others",
+        "children": [
+          {
+            "name": "The Severance Podcast with Ben Stiller & Adam Scott"
+          },
+          {
+            "name": "Ologies with Alie Ward"
+          },
+          {
+            "name": "noiseless world - Japanese"
+          },
+          {
+            "name": "Kanayafrica"
+          },
+          {
+            "name": "ことのあわoO"
+          },
+          {
+            "name": "FREE AGENDA by hikaru & yamotty"
+          },
+          {
+            "name": "99% Invisible"
+          }
+        ]
+      },
+      {
+        "category": "Science",
+        "children": [
+          {
+            "name": "Short Wave"
+          },
+          {
+            "name": "STEAM.fm"
+          },
+          {
+            "name": "Science Vs"
+          },
+          {
+            "name": "Quanta Science Podcast"
+          },
+          {
+            "name": "科学のラジオ ～Radio Scientia～"
+          },
+          {
+            "name": "Unexplainable"
+          },
+          {
+            "name": "サイエントーク"
+          },
+          {
+            "name": "サイエンマニア"
+          },
+          {
+            "name": "姿勢が変わると、人生が変わる。"
+          },
+          {
+            "name": "ノダ☆カズキの野良歩き〜自然の面白さを聴く"
+          },
+          {
+            "name": "ミモリラジオ-自然の面白さを聴く"
+          },
+          {
+            "name": "超相対性理論"
+          },
+          {
+            "name": "Lex Fridman Podcast"
+          },
+          {
+            "name": "Deep Health insight/ディープヘルスインサイト"
+          },
+          {
+            "name": "ポッドサイエンティスト"
+          }
+        ]
+      },
+      {
+        "category": "Startup & VC",
+        "children": [
+          {
+            "name": "Startup Chat"
+          },
+          {
+            "name": "Burning cast"
+          },
+          {
+            "name": "DEEP TECH起業熱｜Go Beyond, Be Brave."
+          },
+          {
+            "name": "海外スタートアップレポート「シリコンバレーによろしく リターンズ 」"
+          },
+          {
+            "name": "ハイパー起業ラジオ"
+          },
+          {
+            "name": "前田ヒロ Startup Podcast"
+          },
+          {
+            "name": "ALL STAR SAAS PODCAST"
+          },
+          {
+            "name": "FoundX スタートアップ支援 Podcast"
+          },
+          {
+            "name": "Y Combinator Startup Podcast"
+          },
+          {
+            "name": "Inside Algomatic"
+          },
+          {
+            "name": "Repeat Rhyme / リピートライム"
+          },
+          {
+            "name": "One Capital SaaS Channel"
+          }
+        ]
+      },
+      {
+        "category": "Technology",
+        "children": [
+          {
+            "name": "The Straw Millionaire Podcast"
+          },
+          {
+            "name": "The PolicyViz Podcast"
+          },
+          {
+            "name": "Paul Graham's Essays"
+          },
+          {
+            "name": "Data Stories"
+          },
+          {
+            "name": "中島聡のLife is Beautiful"
+          },
+          {
+            "name": "DeepTech研究所"
+          },
+          {
+            "name": "『WIRED』日本版"
+          },
+          {
+            "name": "日本IBM　誰かに話したくなる“〇〇”の話"
+          },
+          {
+            "name": "ITトリオの日常 ~エンジニア3人のゆる学びラジオ~"
+          },
+          {
+            "name": "デデデータ!!〜“あきない”データの話〜"
+          },
+          {
+            "name": "Today I Learned -シリコンバレーの現場から-"
+          },
+          {
+            "name": "ゆるコンピュータ科学ラジオ"
+          },
+          {
+            "name": "メタバースえとせとら / Metaverse etc.（齋藤精一・若林恵）"
+          },
+          {
+            "name": "ほろよいWeb3"
+          },
+          {
+            "name": "はろーわーるど！ - 世界で働くエンジニアのポッドキャスト（旧バンクーバーのえんじに屋）"
+          },
+          {
+            "name": "10X.fm"
+          },
+          {
+            "name": "Rebuild"
+          },
+          {
+            "name": "LayerX NOW!"
+          },
+          {
+            "name": "Bizchat.fm"
+          },
+          {
+            "name": "GCP House"
+          },
+          {
+            "name": "Waveform: The MKBHD Podcast"
+          },
+          {
+            "name": "Off Topic // オフトピック"
+          },
+          {
+            "name": "Decoder with Nilay Patel"
+          },
+          {
+            "name": "Joi Ito's Podcast"
+          },
+          {
+            "name": "devchat.fm"
+          },
+          {
+            "name": "となりのデータ分析屋さん"
+          },
+          {
+            "name": "START/FM"
+          }
+        ]
+      }
+    ]
+  }
