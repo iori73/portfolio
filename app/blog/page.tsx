@@ -179,7 +179,7 @@ export default function BlogPage() {
           <button
             onClick={() => window.open('https://note.com/io_73', '_blank')}
             aria-label="Go to note"
-            className="all-[unset] box-border inline-flex flex-col px-10 py-2 relative flex-[0_0_auto] border-4 border-black rounded-[40px]"
+            className="all-[unset] box-border inline-flex flex-col px-10 py-2 relative flex-[0_0_auto] border-2 border-black rounded-[40px]"
           >
             <div className="text-heading-xxs-120 py-1 z-10 ">Go to note</div>
           </button>
@@ -219,7 +219,7 @@ export default function BlogPage() {
           <button
             onClick={() => window.open('https://medium.com/@iori730002204294', '_blank')}
             aria-label="Go to Medium"
-            className="all-[unset] box-border inline-flex flex-col px-10 py-2 relative flex-[0_0_auto] border-4 border-black rounded-[40px]"
+            className="all-[unset] box-border inline-flex flex-col px-10 py-2 relative flex-[0_0_auto] border-2 border-black rounded-[40px]"
           >
             <div className="text-heading-xxs-120 py-1 z-10">Go to Medium</div>
           </button>

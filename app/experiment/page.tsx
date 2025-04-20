@@ -102,10 +102,15 @@
 //   );
 // }
 
+
+
 // /app/experiment/page.tsx
 'use client';
 import { Link } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
+
+// /Users/i_kawano/Documents/portfolio/app/experiment/SplineWork.tsxをimportする
+import SplineWork from './spline';
 
 const ExperimentPage: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('overview');
@@ -172,12 +177,14 @@ const ExperimentPage: React.FC = () => {
 
               <p className="text-body-l-140 md:text-body-xl-140">My personal notes to leave learnings from podcasts</p>
 
-              <div className="inline-flex items-start gap-2 md:gap-6 relative flex-[0_0_auto]">
+              <div className="inline-flex items-start gap-2 md:gap-6 relative flex-[0_0_auto] flex-wrap md:flex-nowrap">
                 <div className="text-caption-l-120">#business</div>
 
-                <div className="text-caption-l-120">#techNology</div>
+                <div className="text-caption-l-120">#technology</div>
 
                 <div className="text-caption-l-120">#science</div>
+
+                <div className="text-caption-l-120">#liberal arts</div>
               </div>
             </div>
 
@@ -237,7 +244,7 @@ const ExperimentPage: React.FC = () => {
             <button
               onClick={() => window.open('https://podcastnotes.studio.site/', '_blank')}
               aria-label="Podcast Notes"
-              className="all-[unset] box-border inline-flex flex-col items-start px-10 py-2 relative flex-[0_0_auto] border-4 border-black rounded-[40px]"
+              className="all-[unset] box-border inline-flex flex-col items-start px-10 py-2 relative flex-[0_0_auto] border-2 border-black rounded-[40px]"
 
             >
               <div className="text-heading-xxs-120 py-1 z-10">Go to Page</div>
@@ -245,6 +252,13 @@ const ExperimentPage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Spline 3D モデル */}
+      <SplineWork
+        style={{ width: '90%' }}
+        className="spline"
+        scene="https://prod.spline.design/HS2WPsXRP-WLukO0/scene.splinecode"
+      />
     </div>
   );
 };

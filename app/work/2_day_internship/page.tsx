@@ -72,7 +72,7 @@ const CaseStudyPage: React.FC = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div>
               {/* キャプション: Caption/XL_120 (font-sf-mono) */}
-              <h3 className="text-caption-m-120 font-sf-mono text-gray-500 mb-2">Time Limit</h3>
+              <h3 className="text-caption-m-120 font-sf-mono text-gray-500 mb-2">Timeline</h3>
               {/* 小テキスト: Body/L_140 */}
               <p className="text-body-l-140 font-sf-pro">Feb 19, 2024 - Feb 15, 2024</p>
             </div>
@@ -304,13 +304,13 @@ const CaseStudyPage: React.FC = () => {
                     with more practical design ideas. For me, the interview was my first experience and very valuable.
                   </li>
                   <li>
-                    I received realistic advice for improvement that we need to consider not only available slots but
+                    I received realistic advice for improvement that I need to consider not only available slots but
                     also travel time. I learned not only to consider the usability and usability of the application, but
                     also the perspective of what users want to use this application in what environment and for what
                     purpose.
                   </li>
                   <li>
-                    As for the function to obtain location information of each individual, we felt that privacy concerns
+                    As for the function to obtain location information of each individual, I felt that privacy concerns
                     and the fact that some people register locations in their calendars while others do not, were
                     challenges in connecting design with the real world.
                   </li>
