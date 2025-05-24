@@ -38,11 +38,11 @@ const translations: Translations = {
   // ホームページのコンテンツ
   heroDescription1: {
     en: 'A UI designer passionate about crafting design to the next level.',
-    jp: 'デザインをより磨き上げることに情熱を持つです。',
+    jp: 'デザインをより磨き上げることに情熱を持つUIデザイナーです。',
   },
   heroDescription2: {
     en: 'Especially interested in how data, design, and technology that blends seamlessly into daily life can work together to enhance human experience.',
-    jp: '特に日常生活にシームレスに溶け込むデータ・デザイン・テクノロジーが連携して人間の体験を向上させる方法に強い関心があります。',
+    jp: '特に日常生活にシームレスに溶け込むデータ・デザイン・テクノロジーが連携して人間の体験を向上させることに強い関心があります。',
   },
   // プロジェクト1の説明
   project1Description1: {
