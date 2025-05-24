@@ -2,6 +2,7 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
+import { useJPFontSize } from '@/src/lib/i18n';
 
 interface InterestNode {
   name: string;
@@ -17,6 +18,7 @@ interface InterestData {
 
 const InterestsVisualization: React.FC = () => {
   const svgRef = useRef<SVGSVGElement | null>(null);
+  const { jpFontSize } = useJPFontSize();
 
   // ✅ useState を useEffect の前に配置
   const [scaleFactor, setScaleFactor] = useState(1.2); // 初期値: デスクトップ
@@ -26,7 +28,7 @@ const InterestsVisualization: React.FC = () => {
       if (window.innerWidth < 768) {
         setScaleFactor(1.7); // モバイル
       } else {
-        setScaleFactor(1.2); // デスクトップ
+        setScaleFactor(1.5); // デスクトップ
       }
     };
 
@@ -173,16 +175,28 @@ const InterestsVisualization: React.FC = () => {
 
   return (
     <div className="w-full h-full flex flex-col items-center py-4 gap-8 md:gap-4">
-      <p
-        className="font-sf-mono py-2 px-4 text-caption-xxxs-120 md:text-caption-s-120"
-        style={{
-          backgroundColor: '#646464',
-          borderRadius: '100px',
-          color: '#fff',
-        }}
+      <div
+        className="flex items-center justify-center gap-2 py-2 px-4 rounded-[16px] bg-[#f5f5f7] text-[#696969]"
+        // style={{
+        //   backgroundColor: '#646464',
+        //   borderRadius: '100px',
+        // }}
       >
-        You can drag me
-      </p>
+        <img src="/about/drag_icon.svg" alt="Drag icon" width={32} height={32} className="flex-shrink-0" />
+        <p
+          className={`font-space-mono ${jpFontSize(
+            'text-caption-xxxs-120',
+            'text-caption-s-120',
+            'text-caption-xxs-120',
+            'text-caption-m-120',
+          )}`}
+          style={{
+            color: '#0A0A0A',
+          }}
+        >
+          You can drag me
+        </p>
+      </div>
       <svg ref={svgRef} className="w-full h-full" />
     </div>
   );

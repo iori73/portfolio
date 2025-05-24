@@ -1,0 +1,6 @@
+https://redesigner.jp/jobs?occupations=1,2,10&jobLocations=100,13,14&salary=3&employments=1&workEnvironmentFeatures=87
+https://redesigner.jp/jobs?occupations=1,2,10&jobLocations=100,13,14&salary=3&employments=1&workEnvironmentFeatures=87&page=2
+https://redesigner.jp/jobs?occupations=1,2,10&jobLocations=100,13,14&salary=3&employments=1&workEnvironmentFeatures=87&page=3
+https://redesigner.jp/jobs?occupations=1,2,10&jobLocations=100,13,14&salary=3&employments=1&workEnvironmentFeatures=87&page=4
+
+

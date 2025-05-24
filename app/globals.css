@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Noto+Sans+JP:wght@100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* Local Fonts */
 @font-face {
   font-family: 'SF Pro';
   src: url('/fonts/SF-Pro.ttf') format('truetype');
@@ -16,11 +20,75 @@
   font-style: normal;
 }
 
+/* SPACE MONO */
+.space-mono-regular {
+  font-family: "Space Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.space-mono-bold {
+  font-family: "Space Mono", monospace;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.space-mono-regular-italic {
+  font-family: "Space Mono", monospace;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.space-mono-bold-italic {
+  font-family: "Space Mono", monospace;
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* Merriweather Sans */
+.merriweather-sans {
+  font-family: "Merriweather Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Merriweather Sans Local';
+  src: url('/fonts/MerriweatherSans-VariableFont_wght.ttf') format('truetype');
+  font-weight: 300 800;
+  font-style: normal;
+}
+
+/* イタリック用（必要な場合） */
+@font-face {
+  font-family: 'Merriweather Sans Local';
+  src: url('/fonts/MerriweatherSans-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 300 800;
+  font-style: italic;
+}
+
+/* NOTO SANS JP */
+.noto-sans-jp {
+  font-family: "Noto Sans JP", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+/* ROBOTO */
+.roboto {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  /* font roboto */
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgba(249, 250, 235, 1);
+  background-color: #fcfbfc;
 }
 
 p {
@@ -68,7 +136,16 @@ p {
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    
+    /* Font family variables */
+    --font-space-mono: 'Space Mono', monospace;
+    --font-merriweather: 'Merriweather Sans', sans-serif;
+    --font-noto-sans-jp: 'Noto Sans JP', sans-serif;
+    --font-roboto: 'Roboto', sans-serif;
+    --font-sf-pro: 'SF Pro', sans-serif;
+    --font-sf-mono: 'SF Mono', monospace;
   }
+  
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -112,27 +189,30 @@ p {
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* Apply font families using CSS variables */
+  .font-space-mono {
+    font-family: var(--font-space-mono);
+  }
+  
+  .font-merriweather {
+    font-family: var(--font-merriweather);
+  }
+  
+  .font-noto-sans-jp {
+    font-family: var(--font-noto-sans-jp);
+  }
+  
+  .font-sf-pro {
+    font-family: var(--font-sf-pro);
+  }
+  
+  .font-sf-mono {
+    font-family: var(--font-sf-mono);
+  }
 }
-
-/* globals.css などに追記 */
-@font-face {
-  font-family: 'SF Pro';
-  src: url('/fonts/SF-Pro.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'SF Mono';
-  src: url('/fonts/SFMono.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-/* ---- */
 
 /* NOTE */
-
 .note {
 }
 
@@ -186,16 +266,13 @@ p {
   }
 }
 
-/* className="all-[unset] box-border inline-flex flex-col items-start px-10 py-2 relative flex-[0_0_auto] bg-[#002a38] rounded-[40px]" を以下に適用 */
 .article-desc > a {
-  /* background-color: #002a38; */
   border: #002a38 solid 2px;
   border-radius: 40px;
   padding: 0.5rem 1rem;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  /* color: white; */
   font-size: 18px;
   font-weight: 600;
 }
@@ -205,19 +282,15 @@ p {
   /* width: 90%; */
 }
 
-
 .medium__story {
   width: 100%;
   display: flex;
-  flex-direction: row-reverse;
-  gap: 2rem;
-  position: relative;
-  /* padding: 1rem; */
-  background-color: #F2F2F2;
-  border-radius: 24px;
   flex-direction: column;
   align-items: center;
   gap: 2rem;
+  position: relative;
+  background-color: #F2F2F2;
+  border-radius: 24px;
 }
 
 .medium__story:hover {
@@ -225,55 +298,9 @@ p {
   color: #000b00;
 }
 
-
-/* 
-.story-image {
-  width: 100%;
-}
-
-.story-text-container {
-  width: 100%;
-}
-
-.medium h3 {
-  text-align: left;
-  font-size: 1.5rem;
-}
-
-.medium__profile-container {
-  display: flex;
-  width: 60%;
-  align-items: center;
-  gap: 1rem;
-  flex-direction: column;
-}
-
-.medium__button-container {
-  font-size: 1rem;
-  min-width: 60%;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-  padding-right: 0;
-  gap: 2rem;
-}
-
-.medium__profile-img {
-  width: 15vw;
-  height: 15vw;
-}
-
-.medium__profile-p {
-  text-align: center;
-} */
-
-
-
 .bg-noise {
-  /* background: linear-gradient(180deg, rgba(229, 230, 215, .1) 0%, rgba(214, 228, 174, .9) 100%); */
-  /* background: linear-gradient(180deg, rgba(249, 250, 235, 0.3) 0%, rgba(214, 228, 174, .9) 40%, rgba(125, 181, 118, .6) 100%); */
-  background-color: rgba(214, 228, 174, .5) ;
-  fill: rgb(115, 171, 108) ;
+  background-color: rgba(214, 228, 174, .5);
+  fill: rgb(115, 171, 108);
   position: relative;
   overflow: hidden;
 }

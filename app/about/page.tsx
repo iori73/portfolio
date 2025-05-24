@@ -3,11 +3,11 @@
 import { Link, Underline } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import InterestsVisualization from './InterestsVisualization';
+import { useLanguage } from '@/src/lib/i18n';
 
-
-
-const BlogPage: React.FC = () => {
+const AboutPage: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('overview');
+  const { t } = useLanguage();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -49,15 +49,10 @@ const BlogPage: React.FC = () => {
         <div className="lg:col-span-6">
           <div className="flex flex-col items-start gap-10 relative">
             <div className="flex flex-col items-start gap-4 relative self-stretch w-full flex-[0_0_auto]">
-              <h1 className=" mb-2   text-heading-l-120 md:text-heading-xl-m-120 ">Iori Kawano</h1>
-              <p className="max-w-full    text-body-m-140 md:text-body-xxl-140  ">
-                I'm a UI/UX designer with a passion for creating structured, detail-oriented designs that drive scalable and idiomatic solutions.
-              </p>
+              <h1 className=" mb-2 text-heading-l-120 md:text-heading-xl-m-120 ">Iori Kawano</h1>
+              <p className="max-w-full text-body-m-140 md:text-body-xxl-140">{t('aboutDescription1')}</p>
               {/* Idiomatic means (here: 71. 直観的より慣用的に)[https://www.sociomedia.co.jp/9752] */}
-              <p className="max-w-full    text-body-m-140 md:text-body-xxl-140  ">
-                I specialize in building robust <b>design systems</b> that grow with products and ensure consistency
-                across platforms.
-              </p>
+              <p className="max-w-full text-body-m-140 md:text-body-xxl-140">{t('aboutDescription2')}</p>
             </div>
           </div>
         </div>
@@ -70,18 +65,12 @@ const BlogPage: React.FC = () => {
       </div>
 
       <section className="pt-4 md:pt-0 pb-4 md:pb-0 flex flex-col gap-4">
-        <h2 className="text-heading-m-120 md:text-heading-l-20"> My Interests</h2>
-        <p className="max-w-full   text-body-m-140 md:text-body-xxl-140 ">
-          This visualization highlights the topics I am deeply interested in. Each node represents a subject that
-          inspires my curiosity and enriches my perception of the world.
-        </p>
-        {/* <p className="max-w-full text-body-xxl-140 font-sf-pro">
-        You can explore the detailed code and learn more about how this visualization was created by visiting <a href='https://observablehq.com/d/bd3961d63646b374' style={{ textDecoration: "underline" }}>this Observable notebook</a>.
-        </p> */}
+        <h2 className="text-heading-m-120 md:text-heading-l-20">{t('myInterests')}</h2>
+        <p className="max-w-full text-body-m-140 md:text-body-xxl-140">{t('interestsDescription')}</p>
         <InterestsVisualization />
       </section>
     </div>
   );
 };
 
-export default BlogPage;
+export default AboutPage;

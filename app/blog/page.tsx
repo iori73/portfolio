@@ -1,6 +1,7 @@
 // // // /app/blog/page.tsx
 'use client';
 import React, { useEffect, useState } from 'react';
+import { useLanguage, useJPFontSize } from '@/src/lib/i18n';
 
 // ===== note の記事型 =====
 interface NoteArticle {
@@ -21,6 +22,9 @@ interface MediumStory {
 }
 
 export default function BlogPage() {
+  const { t } = useLanguage();
+  const { jpFontSize } = useJPFontSize();
+
   // ----------------------
   // note記事
   // ----------------------
@@ -108,14 +112,28 @@ export default function BlogPage() {
       <div className="article lg:col-span-6 flex flex-col gap-2 relative cursor-pointer" onClick={handleArticleClick}>
         <img src={thumbnail} alt={title} />
         <div className="article-text flex flex-col gap-2 md:gap-4 py-2">
-          <p className="article-date text-caption-l-120 md:text-caption-xl-120">{formatDate(pubDate)}</p>
-          <h3 className="article-title text-heading-xxs-120  md:text-heading-s-120">{title}</h3>
+          <p
+            className={`article-date ${jpFontSize(
+              'text-caption-l-120',
+              'text-caption-xl-120',
+              'text-caption-s-120',
+              'text-caption-l-120',
+            )}`}
+          >
+            {formatDate(pubDate)}
+          </p>
+          <h3 className="article-title text-heading-xxxs-120 md:text-heading-s-120">{title}</h3>
           {/* description に「続きを見る」などが含まれていれば、置換や削除など工夫 */}
           <div
             dangerouslySetInnerHTML={{
               __html: description.replace('続きをみる', ''), // 例: "続きをみる" を消す
             }}
-            className="article-desc text-body-s-140"
+            className={`article-desc ${jpFontSize(
+              'text-body-s-140',
+              'text-body-s-140',
+              'text-caption-s-120',
+              'text-body-s-140',
+            )}`}
           />
         </div>
       </div>
@@ -149,9 +167,20 @@ export default function BlogPage() {
         )}
         {/* テキスト */}
         <div className="flex flex-col md:flex-1  gap-2 md:gap-4">
-          <p className="text-caption-l-120 md:text-caption-xl-120">{formatDate(pubDate)}</p>
-          <h3 className="text-heading-xxs-120 md:text-heading-s-120">{title}</h3>
-          <p className="text-body-m-140 md:text-body-l-140">{summary}</p>
+          <p
+            className={jpFontSize(
+              'text-caption-l-120',
+              'text-caption-xl-120',
+              'text-caption-s-120',
+              'text-caption-l-120',
+            )}
+          >
+            {formatDate(pubDate)}
+          </p>
+          <h3 className="text-heading-xxxs-120 md:text-heading-s-120">{title}</h3>
+          <p className={jpFontSize('text-body-s-140', 'text-body-m-140', 'text-body-s-140', 'text-body-s-140')}>
+            {summary}
+          </p>
         </div>
       </div>
     );
@@ -181,7 +210,7 @@ export default function BlogPage() {
             aria-label="Go to note"
             className="all-[unset] box-border inline-flex flex-col px-10 py-2 relative flex-[0_0_auto] border-2 border-black rounded-[40px]"
           >
-            <div className="text-heading-xxs-120 py-1 z-10 ">Go to note</div>
+            <div className="text-heading-xxs-120 py-1 z-10">{t('goToNote')}</div>
           </button>
         </div>
       </div>
@@ -199,29 +228,13 @@ export default function BlogPage() {
           ))}
         </div>
 
-        {/* <div className="flex w-full justify-center">
-          <button
-            onClick={() => window.open('https://medium.com/@iori730002204294', '_blank')}
-            aria-label="Go to Medium"
-            className="all-[unset] box-border inline-flex flex-col px-10 py-2 relative flex-[0_0_auto] bg-[#002a38] rounded-[40px]"
-            // style={{
-            //   background: 'linear-gradient(180deg, rgba(100, 100, 100, 0.6) 0%, rgba(100, 100, 100, 1) 100%)',
-            // }}
-            style={{
-              background: 'linear-gradient(180deg,  rgba(249, 250, 235, 0.4) 0%, rgba(214, 228, 174, 0.6) 100%)',
-            }}
-            
-          >
-            <div className="text-heading-xxs-120  py-1">Go to Medium</div>
-          </button>
-        </div> */}
         <div className="flex w-full justify-center">
           <button
             onClick={() => window.open('https://medium.com/@iori730002204294', '_blank')}
             aria-label="Go to Medium"
             className="all-[unset] box-border inline-flex flex-col px-10 py-2 relative flex-[0_0_auto] border-2 border-black rounded-[40px]"
           >
-            <div className="text-heading-xxs-120 py-1 z-10">Go to Medium</div>
+            <div className="text-heading-xxs-120 py-1 z-10">{t('goToMedium')}</div>
           </button>
         </div>
       </div>

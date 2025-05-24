@@ -1,10 +1,11 @@
-// // // // /Users/i_kawano/Documents/portfolio/app/work/google_ux_design_certificate_project/page.tsx
 'use client';
 import React, { useState, useEffect } from 'react';
 import BackToTopButton from '@/src/compositions/BackToTopButton';
+import { useLanguage } from '@/src/lib/i18n';
 
 const GoogleUXDesignCertificateProject: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('overview');
+  const { t } = useLanguage();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -69,7 +70,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
         scroll-mt-32 を付与することで、アンカーリンクで飛んだときにも
         ヘッダーと被らないようにする。
       */}
-      <section className="bg-white ">
+      <section className="  ">
         <div className="max-w-[896px] w-full mx-auto">
           <div className="flex flex-wrap justify-center">
             {/* Hero Image */}
@@ -83,7 +84,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
       </section>
 
       {/* Project Info */}
-      <section id="project-info" className="bg-white pt-4 pb-8 scroll-mt-32">
+      <section id="project-info" className="  pt-4 pb-8 scroll-mt-32">
         <div className="max-w-[896px] w-full mx-auto">
           <div className="flex items-center gap-6 mb-4 flex-wrap md:flex-nowrap">
             {/* モバイルでは text-heading-s-120, md以上では text-heading-m-120 */}
@@ -91,40 +92,38 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
               Google UX Design Certificate Project
             </h1>
             <div className="flex gap-2">
-              <span className="text-body-l-140 font-sf-pro px-4 py-1 rounded-full  bg-[#646464] text-[#fff]">
+              <span className="text-body-l-140 font-sf-pro px-4 py-1 rounded-[16px] bg-[#f5f5f7] text-[#696969]">
                 Research
               </span>
-              <span className="text-body-l-140 font-sf-pro px-4 py-1 rounded-full  bg-[#646464] text-[#fff]">UI</span>
-              <span className="text-body-l-140 font-sf-pro px-4 py-1 rounded-full  bg-[#646464] text-[#fff]">UX</span>
+              <span className="text-body-l-140 font-sf-pro px-4 py-1 rounded-[16px] bg-[#f5f5f7] text-[#696969]">UI</span>
+              <span className="text-body-l-140 font-sf-pro px-4 py-1 rounded-[16px] bg-[#f5f5f7] text-[#696969]">UX</span>
             </div>
           </div>
 
           {/* 説明文: Body/XL_140 */}
-          <p className="text-body-xl-140 font-sf-pro text-gray-600 mb-8">
-            Navigating the best 100 yen shops in your neighborhood.
-          </p>
+          <p className="text-body-xl-140 font-sf-pro text-gray-600 mb-8">{t('googleUXDescription')}</p>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div>
               <h3 className="text-caption-m-120 font-sf-mono text-gray-500 mb-2">Timeline</h3>
-              <p className="text-body-l-140 font-sf-pro">Apr 2024 - June 2024</p>
+              <p className="text-body-l-140 font-sf-pro">{t('googleUXTimeline')}</p>
             </div>
             <div>
               <h3 className="text-caption-m-120 font-sf-mono text-gray-500 mb-2">My Role</h3>
-              <p className="text-body-l-140 font-sf-pro">UX</p>
+              <p className="text-body-l-140 font-sf-pro">{t('uxRole')}</p>
             </div>
             <div>
               <h3 className="text-caption-m-120 font-sf-mono text-gray-500 mb-2">Team</h3>
-              <p className="text-body-l-140 font-sf-pro">Solo</p>
+              <p className="text-body-l-140 font-sf-pro">{t('solo')}</p>
             </div>
             <div>
               <h3 className="text-caption-m-120 font-sf-mono text-gray-500 mb-2">Deliverables</h3>
               <p className="text-body-l-140 font-sf-pro">
-                Secondary Research
+                {t('secondaryResearch')}
                 <br />
-                Storyboards
+                {t('storyboard')}
                 <br />
-                Prototypes
+                {t('prototype')}
               </p>
             </div>
           </div>
@@ -138,8 +137,8 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
           <div className="md:w-3/4 md:pr-8">
             {/* Project overview (h2, border preserved) */}
             {/* scroll-mt-32 を付与して、ヘッダー下に隠れないようにする */}
-            <section id="overview" className="w-full mx-auto py-8 bg-white text-[#002a38] scroll-mt-32">
-              <h2 className="text-heading-s-120 md:text-heading-m-120 font-sf-pro mb-6">Project overview</h2>
+            <section id="overview" className="w-full mx-auto py-8   text-[#002a38] scroll-mt-32">
+              <h2 className="text-heading-s-120 md:text-heading-m-120 font-sf-pro mb-6">{t('projectOverview')}</h2>
               <img
                 style={{
                   // Optional: a simple box-shadow
@@ -174,7 +173,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
 
             {/* Understanding the User (h2, border preserved) */}
             <section id="understanding-the-user" className="py-8 border-t border-gray-400 scroll-mt-32">
-              <h2 className="text-heading-s-120 md:text-heading-m-120 font-sf-pro mb-4">Understanding the User</h2>
+              <h2 className="text-heading-s-120 md:text-heading-m-120 font-sf-pro mb-4">{t('understandingTheUser')}</h2>
               <img
                 style={{
                   // Optional: a simple box-shadow
@@ -190,7 +189,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
             {/* 以下、h3 セクションは border を削除 */}
             {/* Secondary research */}
             <section id="secondary-research" className="py-4 scroll-mt-32">
-              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">Secondary research</h3>
+              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">{t('secondaryResearch')}</h3>
               <img
                 style={{
                   // Optional: a simple box-shadow
@@ -225,7 +224,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
 
             {/* Personas */}
             <section id="personas" className="py-4 scroll-mt-32">
-              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">Personas</h3>
+              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">{t('personas')}</h3>
               <img
                 style={{
                   // Optional: a simple box-shadow
@@ -250,7 +249,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
 
             {/* Empathy map */}
             <section id="empathy-map" className="py-4 scroll-mt-32">
-              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">Empathy map</h3>
+              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">{t('empathyMap')}</h3>
               <img
                 style={{
                   // Optional: a simple box-shadow
@@ -265,7 +264,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
 
             {/* Pain points */}
             <section id="pain-points" className="py-4 scroll-mt-32">
-              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">Pain points</h3>
+              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">{t('painPoints')}</h3>
               <img
                 style={{
                   // Optional: a simple box-shadow
@@ -280,7 +279,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
 
             {/* User journey map */}
             <section id="user-journey-map" className="py-4 scroll-mt-32">
-              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">User journey map</h3>
+              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">{t('userJourneyMap')}</h3>
               <img
                 style={{
                   // Optional: a simple box-shadow
@@ -305,7 +304,9 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
 
             {/* Value Proposition Canvas */}
             <section id="value-proposition-canvas" className="py-4 scroll-mt-32">
-              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">Value Proposition Canvas</h3>
+              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">
+                {t('valuePropositionCanvas')}
+              </h3>
               <img
                 style={{
                   // Optional: a simple box-shadow
@@ -320,7 +321,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
 
             {/* Feature Ideas */}
             <section id="feature-ideas" className="py-4 scroll-mt-32">
-              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">Feature Ideas</h3>
+              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">{t('featureIdeas')}</h3>
               <img
                 style={{
                   // Optional: a simple box-shadow
@@ -335,7 +336,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
 
             {/* Competitive audit */}
             <section id="competitive-audit" className="py-4 scroll-mt-32">
-              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">Competitive audit</h3>
+              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">{t('competitiveAudit')}</h3>
               <img
                 style={{
                   // Optional: a simple box-shadow
@@ -400,7 +401,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
 
             {/* Starting the design (h2, border preserved) */}
             <section id="starting-the-design" className="py-8 border-t border-gray-400 scroll-mt-32">
-              <h2 className="text-heading-s-120 md:text-heading-m-120 font-sf-pro mb-4">Starting the design</h2>
+              <h2 className="text-heading-s-120 md:text-heading-m-120 font-sf-pro mb-4">{t('startingTheDesign')}</h2>
               <img
                 style={{
                   // Optional: a simple box-shadow
@@ -415,7 +416,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
 
             {/* User flow */}
             <section id="user-flow" className="py-4 scroll-mt-32">
-              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">User flow</h3>
+              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">{t('userFlow')}</h3>
               <img
                 style={{
                   // Optional: a simple box-shadow
@@ -430,7 +431,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
 
             {/* Storyboard */}
             <section id="storyboard" className="py-4 scroll-mt-32">
-              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">Storyboard</h3>
+              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">{t('storyboard')}</h3>
               <img
                 style={{
                   // Optional: a simple box-shadow
@@ -455,7 +456,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
 
             {/* Paper wireframes */}
             <section id="paper-wireframes" className="py-4 scroll-mt-32">
-              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">Paper wireframes</h3>
+              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">{t('paperWireframes')}</h3>
               <img
                 style={{
                   // Optional: a simple box-shadow
@@ -470,7 +471,9 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
 
             {/* Low-fidelity prototypes */}
             <section id="low-fidelity-prototypes" className="py-4 scroll-mt-32">
-              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">Low-fidelity prototypes</h3>
+              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">
+                {t('lowFidelityPrototypes')}
+              </h3>
               <img
                 style={{
                   // Optional: a simple box-shadow
@@ -515,7 +518,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
 
             {/* Refining the design (h2, border preserved) */}
             <section id="refining-the-design" className="py-8 border-t border-gray-400 scroll-mt-32">
-              <h2 className="text-heading-s-120 md:text-heading-m-120 font-sf-pro mb-4">Refining the design</h2>
+              <h2 className="text-heading-s-120 md:text-heading-m-120 font-sf-pro mb-4">{t('refiningTheDesign')}</h2>
               <img
                 style={{
                   // Optional: a simple box-shadow
@@ -540,7 +543,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
 
             {/* Mockups */}
             <section id="mockups" className="py-4 scroll-mt-32">
-              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">Mockups</h3>
+              <h3 className="text-heading-xs-120 md:text-heading-s-120 font-sf-pro mb-2">{t('mockups')}</h3>
               <img
                 style={{
                   // Optional: a simple box-shadow
@@ -555,7 +558,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
 
             {/* Going forward (h2, border preserved) */}
             <section id="going-forward" className="py-8 border-t border-gray-400 scroll-mt-32">
-              <h2 className="text-heading-s-120 md:text-heading-m-120 font-sf-pro mb-4">Going forward</h2>
+              <h2 className="text-heading-s-120 md:text-heading-m-120 font-sf-pro mb-4">{t('goingForward')}</h2>
               <img
                 style={{
                   // Optional: a simple box-shadow
@@ -599,11 +602,11 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('overview')}
                     className={
                       activeSection === 'overview'
-                        ? 'text-left text-body-xxl-140 font-sf-pro transition-transform duration-900 scale-110'
-                        : 'text-left text-body-xl-140 font-sf-pro transition-transform duration-900 scale-100 opacity-50'
+                        ? 'text-left text-body-l-140 font-sf-pro opacity-100 font-medium'
+                        : 'text-left text-body-l-140 font-sf-pro opacity-50'
                     }
                   >
-                    Project overview
+                    {t('projectOverview')}
                   </button>
                 </li>
 
@@ -613,11 +616,11 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('understanding-the-user')}
                     className={
                       activeSection === 'understanding-the-user'
-                        ? 'text-left text-body-xxl-140 font-sf-pro transition-transform duration-900 scale-110'
-                        : 'text-left text-body-xl-140 font-sf-pro transition-transform duration-900 scale-100 opacity-50'
+                        ? 'text-left text-body-l-140 font-sf-pro opacity-100 font-medium'
+                        : 'text-left text-body-l-140 font-sf-pro opacity-50'
                     }
                   >
-                    Understanding the User
+                    {t('understandingTheUser')}
                   </button>
                 </li>
 
@@ -628,88 +631,88 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('secondary-research')}
                     className={
                       activeSection === 'secondary-research'
-                        ? 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 scale-110'
-                        : 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 opacity-50'
+                        ? 'text-left text-body-l-140 font-sf-pro opacity-100 font-medium ml-4'
+                        : 'text-left text-body-l-140 font-sf-pro opacity-50 ml-4'
                     }
                   >
-                    Secondary research
+                    {t('secondaryResearch')}
                   </button>
                   {/* Personas */}
                   <button
                     onClick={() => scrollToSection('personas')}
                     className={
                       activeSection === 'personas'
-                        ? 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 scale-110'
-                        : 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 opacity-50'
+                        ? 'text-left text-body-l-140 font-sf-pro opacity-100 font-medium ml-4'
+                        : 'text-left text-body-l-140 font-sf-pro opacity-50 ml-4'
                     }
                   >
-                    Personas
+                    {t('personas')}
                   </button>
                   {/* Empathy map */}
                   <button
                     onClick={() => scrollToSection('empathy-map')}
                     className={
                       activeSection === 'empathy-map'
-                        ? 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 scale-110'
-                        : 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 opacity-50'
+                        ? 'text-left text-body-l-140 font-sf-pro opacity-100 font-medium ml-4'
+                        : 'text-left text-body-l-140 font-sf-pro opacity-50 ml-4'
                     }
                   >
-                    Empathy map
+                    {t('empathyMap')}
                   </button>
                   {/* Pain points */}
                   <button
                     onClick={() => scrollToSection('pain-points')}
                     className={
                       activeSection === 'pain-points'
-                        ? 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 scale-110'
-                        : 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 opacity-50'
+                        ? 'text-left text-body-l-140 font-sf-pro opacity-100 font-medium ml-4'
+                        : 'text-left text-body-l-140 font-sf-pro opacity-50 ml-4'
                     }
                   >
-                    Pain points
+                    {t('painPoints')}
                   </button>
                   {/* User journey map */}
                   <button
                     onClick={() => scrollToSection('user-journey-map')}
                     className={
                       activeSection === 'user-journey-map'
-                        ? 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 scale-110'
-                        : 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 opacity-50'
+                        ? 'text-left text-body-l-140 font-sf-pro opacity-100 font-medium ml-4'
+                        : 'text-left text-body-l-140 font-sf-pro opacity-50 ml-4'
                     }
                   >
-                    User journey map
+                    {t('userJourneyMap')}
                   </button>
                   {/* Value Proposition Canvas */}
                   <button
                     onClick={() => scrollToSection('value-proposition-canvas')}
                     className={
                       activeSection === 'value-proposition-canvas'
-                        ? 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 scale-110'
-                        : 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 opacity-50'
+                        ? 'text-left text-body-l-140 font-sf-pro opacity-100 font-medium ml-4'
+                        : 'text-left text-body-l-140 font-sf-pro opacity-50 ml-4'
                     }
                   >
-                    Value Proposition Canvas
+                    {t('valuePropositionCanvas')}
                   </button>
                   {/* Feature Ideas */}
                   <button
                     onClick={() => scrollToSection('feature-ideas')}
                     className={
                       activeSection === 'feature-ideas'
-                        ? 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 scale-110'
-                        : 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 opacity-50'
+                        ? 'text-left text-body-l-140 font-sf-pro opacity-100 font-medium ml-4'
+                        : 'text-left text-body-l-140 font-sf-pro opacity-50 ml-4'
                     }
                   >
-                    Feature Ideas
+                    {t('featureIdeas')}
                   </button>
                   {/* Competitive audit */}
                   <button
                     onClick={() => scrollToSection('competitive-audit')}
                     className={
                       activeSection === 'competitive-audit'
-                        ? 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 scale-110'
-                        : 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 opacity-50'
+                        ? 'text-left text-body-l-140 font-sf-pro opacity-100 font-medium ml-4'
+                        : 'text-left text-body-l-140 font-sf-pro opacity-50 ml-4'
                     }
                   >
-                    Competitive audit
+                    {t('competitiveAudit')}
                   </button>
                 </div>
 
@@ -719,11 +722,11 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('starting-the-design')}
                     className={
                       activeSection === 'starting-the-design'
-                        ? 'text-left text-body-xxl-140 font-sf-pro transition-transform duration-900 scale-110'
-                        : 'text-left text-body-xl-140 font-sf-pro transition-transform duration-900 scale-100 opacity-50'
+                        ? 'text-left text-body-l-140 font-sf-pro opacity-100 font-medium'
+                        : 'text-left text-body-l-140 font-sf-pro opacity-50'
                     }
                   >
-                    Starting the design
+                    {t('startingTheDesign')}
                   </button>
                 </li>
 
@@ -734,44 +737,44 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('user-flow')}
                     className={
                       activeSection === 'user-flow'
-                        ? 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 scale-110'
-                        : 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 opacity-50'
+                        ? 'text-left text-body-l-140 font-sf-pro opacity-100 font-medium ml-4'
+                        : 'text-left text-body-l-140 font-sf-pro opacity-50 ml-4'
                     }
                   >
-                    User flow
+                    {t('userFlow')}
                   </button>
                   {/* Storyboard */}
                   <button
                     onClick={() => scrollToSection('storyboard')}
                     className={
                       activeSection === 'storyboard'
-                        ? 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 scale-110'
-                        : 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 opacity-50'
+                        ? 'text-left text-body-l-140 font-sf-pro opacity-100 font-medium ml-4'
+                        : 'text-left text-body-l-140 font-sf-pro opacity-50 ml-4'
                     }
                   >
-                    Storyboard
+                    {t('storyboard')}
                   </button>
                   {/* Paper wireframes */}
                   <button
                     onClick={() => scrollToSection('paper-wireframes')}
                     className={
                       activeSection === 'paper-wireframes'
-                        ? 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 scale-110'
-                        : 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 opacity-50'
+                        ? 'text-left text-body-l-140 font-sf-pro opacity-100 font-medium ml-4'
+                        : 'text-left text-body-l-140 font-sf-pro opacity-50 ml-4'
                     }
                   >
-                    Paper wireframes
+                    {t('paperWireframes')}
                   </button>
                   {/* Low-fidelity prototypes */}
                   <button
                     onClick={() => scrollToSection('low-fidelity-prototypes')}
                     className={
                       activeSection === 'low-fidelity-prototypes'
-                        ? 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 scale-110'
-                        : 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 opacity-50'
+                        ? 'text-left text-body-l-140 font-sf-pro opacity-100 font-medium ml-4'
+                        : 'text-left text-body-l-140 font-sf-pro opacity-50 ml-4'
                     }
                   >
-                    Low-fidelity prototypes
+                    {t('lowFidelityPrototypes')}
                   </button>
                 </div>
 
@@ -781,11 +784,11 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('refining-the-design')}
                     className={
                       activeSection === 'refining-the-design'
-                        ? 'text-left text-body-xxl-140 font-sf-pro transition-transform duration-900 scale-110'
-                        : 'text-left text-body-xl-140 font-sf-pro transition-transform duration-900 scale-100 opacity-50'
+                        ? 'text-left text-body-l-140 font-sf-pro opacity-100 font-medium'
+                        : 'text-left text-body-l-140 font-sf-pro opacity-50'
                     }
                   >
-                    Refining the design
+                    {t('refiningTheDesign')}
                   </button>
                 </li>
 
@@ -796,11 +799,11 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('mockups')}
                     className={
                       activeSection === 'mockups'
-                        ? 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 scale-110'
-                        : 'text-left text-body-l-140 font-sf-pro transition-transform duration-900 opacity-50'
+                        ? 'text-left text-body-l-140 font-sf-pro opacity-100 font-medium ml-4'
+                        : 'text-left text-body-l-140 font-sf-pro opacity-50 ml-4'
                     }
                   >
-                    Mockups
+                    {t('mockups')}
                   </button>
                 </div>
 
@@ -810,11 +813,11 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('going-forward')}
                     className={
                       activeSection === 'going-forward'
-                        ? 'text-left text-body-xxl-140 font-sf-pro transition-transform duration-900 scale-110'
-                        : 'text-left text-body-xl-140 font-sf-pro transition-transform duration-900 scale-100 opacity-50'
+                        ? 'text-left text-body-l-140 font-sf-pro opacity-100 font-medium'
+                        : 'text-left text-body-l-140 font-sf-pro opacity-50'
                     }
                   >
-                    Going forward
+                    {t('goingForward')}
                   </button>
                 </li>
               </ul>
@@ -827,11 +830,3 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
 };
 
 export default GoogleUXDesignCertificateProject;
-
-// "use client";
-// import CaseStudyLayout from "@/components/CaseStudyLayout";
-// import googleUXData from "@/data/googleUXDesignCertificateProjectData";
-
-// export default function GoogleUXDesignCertificateProjectPage() {
-//   return <CaseStudyLayout data={googleUXData} />;
-// }

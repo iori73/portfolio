@@ -8,9 +8,9 @@
 //       {/* Hero Section */}
 //       <section className="py-20">
 //         {/* h1: Heading/L_M_120 */}
-//         <h1 className="text-heading-l-20 font-sf-pro mb-2">Hi, I'm Iori!</h1>
+//         <h1 className="text-heading-l-20  mb-2">Hi, I'm Iori!</h1>
 //         {/* Hero テキスト: Body/XXL_140 */}
-//         <p className="max-w-full text-body-xxl-140 font-sf-pro">
+//         <p className="max-w-full text-body-xxl-140 ">
 //           A interface designer who loves crafting design to the next level.
 //           <br />
 //           Especially curious about the integration of data and design.
@@ -19,7 +19,7 @@
 
 //       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-6">
 //         <div className="lg:col-span-6">
-//           <p className="text-body-l-140 font-sf-pro mb-4">
+//           <p className="text-body-l-140  mb-4">
 //             The project was inspired by the following hypothetical scenario, provided by the company:
 //           </p>
 
@@ -102,17 +102,17 @@
 //   );
 // }
 
-
-
 // /app/experiment/page.tsx
 'use client';
 import { Link } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
+import { useLanguage } from '@/src/lib/i18n';
 
 // /Users/i_kawano/Documents/portfolio/app/experiment/SplineWork.tsxをimportする
 import SplineWork from './spline';
 
 const ExperimentPage: React.FC = () => {
+  const { t, language } = useLanguage();
   const [activeSection, setActiveSection] = useState<string>('overview');
 
   const scrollToSection = (sectionId: string) => {
@@ -151,10 +151,8 @@ const ExperimentPage: React.FC = () => {
     <div className="font-sans">
       {/* Hero Section */}
       <section className="pt-4 md:pt-16 pb-4 md:pb-16">
-        <h1 className="text-heading-l-120 md:text-heading-xl-m-120 mb-2">Hobby blog</h1>
-        <p className="max-w-full text-body-l-140 md:text-body-xl-140 font-sf-pro">
-          I listen to the podcast everyday and was driven by the desire to organize the input.
-        </p>
+        <h1 className="text-heading-l-120 md:text-heading-xl-m-120 mb-2">Experiment</h1>
+        <p className="max-w-full text-body-l-140 md:text-body-xl-140 ">{t('experimentDescription')}</p>
       </section>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-12">
         <div className="lg:col-span-6 relative">
@@ -172,19 +170,39 @@ const ExperimentPage: React.FC = () => {
             <div className="flex flex-col items-start gap-4 relative self-stretch w-full flex-[0_0_auto]">
               <div className="inline-flex items-center gap-2 relative flex-[0_0_auto]">
                 <img className="relative w-14 h-14" alt="S" src="/experiment/podcast_notes_icon.svg" />
-                <h2 className="text-heading-m-120 md:text-heading-l-20">Podcast notes</h2>
+                <h2 className="text-heading-m-120 md:text-heading-l-20">Podcast Notes</h2>
               </div>
 
-              <p className="text-body-l-140 md:text-body-xl-140">My personal notes to leave learnings from podcasts</p>
+              <p className="text-body-l-140 md:text-body-xl-140">{t('podcastNotesDescription')}</p>
 
-              <div className="inline-flex items-start gap-2 md:gap-6 relative flex-[0_0_auto] flex-wrap md:flex-nowrap">
-                <div className="text-caption-l-120">#business</div>
+              <div className="inline-flex items-start gap-2 relative flex-[0_0_auto] flex-wrap md:flex-nowrap">
+                <div
+                  className="text-caption-s-120 md:text-caption-m-120 font-space-mono"
+                  style={{ backgroundColor: '#F5F5F5', padding: ' 8px', borderRadius: '8px' }}
+                >
+                  #business
+                </div>
 
-                <div className="text-caption-l-120">#technology</div>
+                <div
+                  className="text-caption-s-120 md:text-caption-m-120 font-space-mono"
+                  style={{ backgroundColor: '#F5F5F5', padding: ' 8px', borderRadius: '8px' }}
+                >
+                  #technology
+                </div>
 
-                <div className="text-caption-l-120">#science</div>
+                <div
+                  className="text-caption-s-120 md:text-caption-m-120 font-space-mono"
+                  style={{ backgroundColor: '#F5F5F5', padding: ' 8px', borderRadius: '8px' }}
+                >
+                  #science
+                </div>
 
-                <div className="text-caption-l-120">#liberal arts</div>
+                <div
+                  className="text-caption-s-120 md:text-caption-m-120 font-space-mono"
+                  style={{ backgroundColor: '#F5F5F5', padding: ' 8px', borderRadius: '8px' }}
+                >
+                  #liberal arts
+                </div>
               </div>
             </div>
 
@@ -222,7 +240,7 @@ const ExperimentPage: React.FC = () => {
 
               <img
                 className="relative w-[72px] h-[72px] object-cover"
-                alt="バイリンガルニュース (Bilingual News)"
+                alt="バイリンガルニュース (Bilingual News)"
                 src="/experiment/covers/Bilingual News.png"
               />
 
@@ -238,27 +256,28 @@ const ExperimentPage: React.FC = () => {
                 src="/experiment/covers/Design Better.png"
               />
 
+              {/* <div className="relative text-body-m-140">{t('andMore')}</div> */}
               <div className="relative text-body-m-140">and more!</div>
             </div>
 
             <button
-              onClick={() => window.open('https://paint-foam-7ff.notion.site/Podcast-notes-1bc264826e0c8009bf10ee284f3cc5b4?pvs=4', '_blank')}
+              onClick={() =>
+                window.open(
+                  'https://paint-foam-7ff.notion.site/Podcast-notes-1bc264826e0c8009bf10ee284f3cc5b4?pvs=4',
+                  '_blank',
+                )
+              }
               aria-label="Podcast Notes"
               className="all-[unset] box-border inline-flex flex-col items-start px-10 py-2 relative flex-[0_0_auto] border-2 border-black rounded-[40px]"
-
             >
-              <div className="text-heading-xxs-120 py-1 z-10">Go to Page</div>
+              <div className="text-heading-xxs-120 py-1 z-10">{t('goToPage')}</div>
             </button>
           </div>
         </div>
       </div>
 
       {/* Spline 3D モデル */}
-      <SplineWork
-        style={{ width: '90%' }}
-        className="spline"
-        scene="https://prod.spline.design/HS2WPsXRP-WLukO0/scene.splinecode"
-      />
+      <SplineWork />
     </div>
   );
 };
