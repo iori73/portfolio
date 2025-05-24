@@ -112,7 +112,11 @@ export default function Footer() {
           >
             <Image
               src={`/socials/${
-                platform === 'twitter' ? 'X' : platform.charAt(0).toUpperCase() + platform.slice(1)
+                platform === 'twitter'
+                  ? 'X'
+                  : platform === 'note'
+                  ? 'note'
+                  : platform.charAt(0).toUpperCase() + platform.slice(1)
               }.svg`}
               alt={platform}
               width={32}
