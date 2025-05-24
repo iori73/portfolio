@@ -116,6 +116,10 @@ export default function Footer() {
                   ? 'X'
                   : platform === 'note'
                   ? 'note'
+                  : platform === 'github'
+                  ? 'GitHub'
+                  : platform === 'linkedin'
+                  ? 'LinkedIn'
                   : platform.charAt(0).toUpperCase() + platform.slice(1)
               }.svg`}
               alt={platform}
