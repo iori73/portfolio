@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '@/src/lib/i18n';
+import { cn } from '@/src/lib/utils';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,17 +61,22 @@ export default function Header() {
               <div key={item.path} className="relative flex flex-col items-center">
                 <Link
                   href={item.path}
-                  className="text-body-xl-140 font-merriweather"
-                  style={{
-                    fontWeight: isActive(item.path) ? 600 : 400,
-                    transition: 'font-weight 300ms ease',
-                  }}
+                  className={cn(
+                    'text-body-xl-140 font-merriweather min-h-[44px] px-4 flex items-center justify-center transition-colors duration-200',
+                    isActive(item.path) ? 'font-bold text-accent' : 'font-normal text-gray-700',
+                  )}
+                  style={{ position: 'relative' }}
                 >
                   {item.name}
+                  <span
+                    className={cn(
+                      'absolute left-0 -bottom-1 w-full h-0.5 bg-accent transition-transform duration-300',
+                      isActive(item.path) ? 'scale-x-100' : 'scale-x-0',
+                      'origin-left',
+                    )}
+                    aria-hidden="true"
+                  />
                 </Link>
-                {isActive(item.path) && (
-                  <div className="absolute top-full mt-1 w-2 h-2 rounded-full bg-[#1A1A1A]"></div>
-                )}
               </div>
             ))}
           </nav>
@@ -79,22 +85,16 @@ export default function Header() {
           <div className="flex items-center">
             <button
               onClick={() => toggleLanguage('en')}
-              className="text-body-xl-140 font-merriweather"
-              style={{
-                fontWeight: language === 'en' ? 600 : 400,
-                transition: 'font-weight 300ms ease',
-              }}
+              className="text-body-xl-140 font-merriweather min-h-[44px] px-4"
+              aria-pressed={language === 'en'}
             >
               {t('languageEN')}
             </button>
             <span className="mx-2">|</span>
             <button
               onClick={() => toggleLanguage('jp')}
-              className="text-body-xl-140 font-merriweather"
-              style={{
-                fontWeight: language === 'jp' ? 600 : 400,
-                transition: 'font-weight 300ms ease',
-              }}
+              className="text-body-xl-140 font-merriweather min-h-[44px] px-4"
+              aria-pressed={language === 'jp'}
             >
               {t('languageJP')}
             </button>
@@ -185,22 +185,16 @@ export default function Header() {
             >
               <button
                 onClick={() => toggleLanguage('en')}
-                className="text-body-xl-140 font-merriweather"
-                style={{
-                  fontWeight: language === 'en' ? 600 : 400,
-                  transition: 'font-weight 300ms ease',
-                }}
+                className="text-body-xl-140 font-merriweather min-h-[44px] px-4"
+                aria-pressed={language === 'en'}
               >
                 {t('languageEN')}
               </button>
               <span className="mx-2">|</span>
               <button
                 onClick={() => toggleLanguage('jp')}
-                className="text-body-xl-140 font-merriweather"
-                style={{
-                  fontWeight: language === 'jp' ? 600 : 400,
-                  transition: 'font-weight 300ms ease',
-                }}
+                className="text-body-xl-140 font-merriweather min-h-[44px] px-4"
+                aria-pressed={language === 'jp'}
               >
                 {t('languageJP')}
               </button>

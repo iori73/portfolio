@@ -13,18 +13,23 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        gray: {
+          50: '#fafafa',
+          100: '#f4f4f5',
+          200: '#e4e4e7',
+          300: '#d4d4d8',
+          400: '#a1a1aa',
+          500: '#71717a',
+          600: '#52525b',
+          700: '#3f3f46',
+          800: '#27272a',
+          900: '#18181b',
+        },
+        accent: {
+          DEFAULT: '#007aff', // Appleブルー
+        },
         white: '#ffffff',
         black: '#000000',
-        gray: {
-          100: '#f2f2f2',
-          200: '#ebebeb',
-          300: '#e3e3e3',
-          800: '#2d2d2d',
-          900: '#2a2929',
-        },
-        blue: {
-          900: '#002a38',
-        },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -46,10 +51,6 @@ module.exports = {
           DEFAULT: 'hsl(var(--muted))',
           foreground: 'hsl(var(--muted-foreground))',
         },
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
-        },
         popover: {
           DEFAULT: 'hsl(var(--popover))',
           foreground: 'hsl(var(--popover-foreground))',
@@ -69,8 +70,24 @@ module.exports = {
         'sf-pro': ['"SF Pro"', 'system-ui', 'sans-serif'],
         'sf-mono': ['"SF Mono"', 'ui-monospace', 'monospace'],
       },
-
+      spacing: {
+        1: '8px',
+        2: '16px',
+        3: '24px',
+        4: '32px',
+        5: '40px',
+        6: '48px',
+        7: '56px',
+        8: '64px',
+        9: '72px',
+        10: '80px',
+      },
       fontSize: {
+        h1: ['2.5rem', { lineHeight: '1.1', fontWeight: '700' }], // 40px
+        h2: ['1.75rem', { lineHeight: '1.2', fontWeight: '600' }], // 28px
+        h3: ['1.5rem', { lineHeight: '1.2', fontWeight: '500' }], // 24px
+        body: ['1.25rem', { lineHeight: '1.6', fontWeight: '400' }], // 20px
+        sm: ['1rem', { lineHeight: '1.6', fontWeight: '400' }], // 16px
         /* Heading */
         'heading-xl-m-120': [
           '56px',
