@@ -42,7 +42,7 @@ const AboutPage: React.FC = () => {
   }, [activeSection]);
 
   return (
-    <div className="font-sans">
+    <div className="font-sans my-24 md:mt-28 md:mb-16">
       {/* Hero Section */}
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-12">

@@ -28,20 +28,20 @@ const SplineWork: React.FC = () => {
           {/* 制作情報 */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div>
-              <h3 className="text-caption-m-120 font-sf-mono text-gray-500 mb-2">Timeline</h3>
-              <p className="text-body-l-140 font-sf-pro">{t('twoWeeksInJan2024')}</p>
+              <h3 className="text-caption-m-120 font-jetbrains-mono text-gray-500 mb-2">Timeline</h3>
+              <p className="text-body-l-140 font-inter">{t('twoWeeksInJan2024')}</p>
             </div>
             <div>
-              <h3 className="text-caption-m-120 font-sf-mono text-gray-500 mb-2">My Skills</h3>
-              <p className="text-body-l-140 font-sf-pro">Spline</p>
+              <h3 className="text-caption-m-120 font-jetbrains-mono text-gray-500 mb-2">My Skills</h3>
+              <p className="text-body-l-140 font-inter">Spline</p>
             </div>
             <div>
-              <h3 className="text-caption-m-120 font-sf-mono text-gray-500 mb-2">Type</h3>
-              <p className="text-body-l-140 font-sf-pro">{t('solo')}</p>
+              <h3 className="text-caption-m-120 font-jetbrains-mono text-gray-500 mb-2">Type</h3>
+              <p className="text-body-l-140 font-inter">{t('solo')}</p>
             </div>
             <div>
-              <h3 className="text-caption-m-120 font-sf-mono text-gray-500 mb-2">Deliverables</h3>
-              <p className="text-body-l-140 font-sf-pro">{t('prototype')}</p>
+              <h3 className="text-caption-m-120 font-jetbrains-mono text-gray-500 mb-2">Deliverables</h3>
+              <p className="text-body-l-140 font-inter">{t('prototype')}</p>
             </div>
           </div>
 

@@ -237,7 +237,7 @@
 
 //   return (
 //     <div className="w-full h-full pt-8">
-//       <p className='font-sf-mono'>Drag me!</p>
+//       <p className='font-jetbrains-mono'>Drag me!</p>
 //       <svg
 //         ref={svgRef}
 //         className="w-full h-full"
@@ -1021,7 +1021,7 @@ const InterestsVisualization: React.FC = () => {
       .attr('stroke-opacity', 0.4)
       .attr('stroke-width', (d) => (d.source.depth === 0 ? 2 : 1));
 
-    const node = g.append('g').selectAll('.node').data(nodes).join('g').attr('class', 'node').call(drag(simulation));
+    const node = g.append('g').selectAll('.node').data(nodes).join('g').attr('class', 'node').call(drag(simulation) as any);
 
     node
       .append('circle')

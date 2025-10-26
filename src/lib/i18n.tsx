@@ -63,6 +63,16 @@ const translations: Translations = {
     jp: 'Smart100はリアルタイムの価格と在庫データで100円ショップの買い物を革新します。プロモーションとカスタムリストを組み合わせ、最大限の節約と満足度のために訪問を効率化します。',
   },
 
+  // プロジェクト3（ジムダッシュボード）の説明
+  project3Description1: {
+    en: 'I extracted crowd patterns from real data and built a dashboard system that enables efficient gym usage.',
+    jp: 'リアルデータから混雑パターンを抽出し、効率的なジム利用を実現するダッシュボードシステムを構築',
+  },
+  project3Description2: {
+    en: 'A comprehensive data pipeline from iOS automation to cloud processing, optimizing gym usage through data-driven insights.',
+    jp: 'iOS自動化からクラウド処理まで一貫したデータパイプラインで、データ駆動型の洞察によりジム利用を最適化します。',
+  },
+
   // Aboutページのコンテンツ
   aboutDescription1: {
     en: "I'm a UI designer with a passion for creating structured, detail-oriented designs that drive scalable and idiomatic solutions.",
@@ -430,6 +440,321 @@ const translations: Translations = {
     en: 'Going forward',
     jp: '今後の展開',
   },
+
+  // Gym Dashboard Project Content
+  gymDashboardTitle: {
+    en: 'Gym Crowd Status Dashboard',
+    jp: 'Gym Crowd Status Dashboard',
+  },
+  gymDashboardDescription: {
+    en: 'I extracted crowd patterns from real data and built a dashboard system that enables efficient gym usage.',
+    jp: 'リアルデータから混雑パターンを抽出し、効率的なジム利用を実現するダッシュボードシステムを構築',
+  },
+  gymTimeline: {
+    en: 'June 2025 - November 2025',
+    jp: '2025年6月 - 2025年11月',
+  },
+  gymSkills: {
+    en: 'System Design, Next.js, Python, CI/CD',
+    jp: 'システム設計, Next.js, Python, CI/CD',
+  },
+  personalProject: {
+    en: 'Personal Project',
+    jp: '個人プロジェクト',
+  },
+  gymDeliverables: {
+    en: 'Web Dashboard',
+    jp: 'Webダッシュボード',
+  },
+  gymOverviewText: {
+    en: 'Urban gyms face unpredictable crowd conditions, making it impossible to plan efficient training schedules. Particularly during evening hours, long wait times prevent effective use of limited exercise time. This project built a system that optimizes gym usage through a data-driven approach.',
+    jp: '都市部のジムでは混雑状況が予測できず、効率的なトレーニング計画が立てられませんでした。特に夕方の時間帯では待ち時間が長く、限られた運動時間を有効活用できない問題が存在していました。このプロジェクトは、データ駆動型アプローチにより、ジム利用の最適化を実現するシステムを構築しました。',
+  },
+  gymChallengesIntro: {
+    en: 'This project tackled the following major technical challenges:',
+    jp: 'このプロジェクトでは、以下の主要な技術的課題に取り組みました：',
+  },
+  gymDataAutomation: {
+    en: 'Data Collection Automation: Screenshot acquisition system under iOS constraints',
+    jp: 'データ収集の自動化: iOS制約下でのスクリーンショット取得システム',
+  },
+  gymOCRImprovement: {
+    en: 'OCR Accuracy Improvement: Significant improvement from 61% to 89.3%',
+    jp: 'OCR精度向上: 61%から89.3%への大幅な改善',
+  },
+  gymCICDIntegration: {
+    en: 'CI/CD Integration: Fully automated pipeline with GitHub Actions',
+    jp: 'CI/CD統合: GitHub Actions による完全自動化パイプライン',
+  },
+  gymDataVisualization: {
+    en: 'Data Visualization: Insight-providing dashboard with Next.js + Chart.js',
+    jp: 'データ可視化: Next.js + Chart.js による洞察提供ダッシュボード',
+  },
+  gymSystemIntegration: {
+    en: 'System Integration: Seamless coordination between 4 platforms',
+    jp: 'システム統合: 4つのプラットフォーム間のシームレス連携',
+  },
+  gymOperationOptimization: {
+    en: 'Operation Optimization: Robust infrastructure with 99.1% uptime',
+    jp: '運用最適化: 99.1%稼働率の堅牢なインフラ構築',
+  },
+  gymDataPoints: {
+    en: 'Collected Data Points',
+    jp: '収集データポイント',
+  },
+  gymProcessingAccuracy: {
+    en: 'Data Processing Accuracy',
+    jp: 'データ処理精度',
+  },
+  gymSystemUptime: {
+    en: 'System Uptime',
+    jp: 'システム稼働率',
+  },
+  gymRoleDescription: {
+    en: 'I was consistently responsible for the entire system architecture design, implementation, and operation, demonstrating practical skills in creative problem-solving under constrained environments and integration of multiple technical domains.',
+    jp: '私は、システム全体のアーキテクチャ設計から実装、運用まで一貫して担当し、制約のある環境での創意工夫と複数技術ドメインの統合において実践的スキルを発揮しました。',
+  },
+  impactReflection: {
+    en: 'Impact & Reflection',
+    jp: 'Impact & Reflection',
+  },
+  gymGitHubActionsSuccess: {
+    en: 'After 7 failures with GitHub Actions, I achieved initial success on the 8th attempt.',
+    jp: 'GitHub Actionsで7回の失敗を経て8回目で初回成功を達成しました。',
+  },
+  gymFailureCausesProcess: {
+    en: 'The main failure causes and resolution process are as follows.',
+    jp: '主な失敗原因と解決プロセスは次の通りです。',
+  },
+
+  // Gym Dashboard Main Content
+  gymMainOverviewText: {
+    en: 'My 24-hour gym had unpredictable crowd conditions, making it impossible to plan efficient training schedules. Particularly during evening hours, long wait times prevented effective use of limited exercise time. This project built a system that optimizes gym usage through a data-driven approach.',
+    jp: '私の通う24時間営業のジムでは混雑状況が予測できず、効率的なトレーニング計画が立てられませんでした。特に夕方の時間帯では待ち時間が長く、限られた運動時間を有効活用できない問題が存在していました。このプロジェクトは、データ駆動型アプローチにより、ジム利用の最適化を実現するシステムを構築しました。',
+  },
+  gymTechnicalChallengesIntro: {
+    en: 'This project built a distributed system integrating 4 platforms (iOS, iCloud, GitHub Actions, Vercel) and tackled the following technical challenges:',
+    jp: 'このプロジェクトでは、4つのプラットフォーム（iOS、iCloud、GitHub Actions、Vercel）を統合した分散システムを構築し、以下の技術的課題に取り組みました：',
+  },
+  gymDataCollectionSemiAuto: {
+    en: 'Data Collection Semi-Automation: From screenshot acquisition to iCloud sync under iOS constraints',
+    jp: 'データ収集の半自動化: iOS制約下でのスクリーンショット取得からiCloud同期まで',
+  },
+  gymOCRAccuracyImprovement: {
+    en: 'OCR Accuracy Improvement: Achieved 80% OCR processing success rate through image preprocessing',
+    jp: 'OCR精度向上: 画像前処理によるOCR処理成功率80%を実現',
+  },
+  gymCICDIntegrationFull: {
+    en: 'CI/CD Integration: Fully automated pipeline with GitHub Actions',
+    jp: 'CI/CD統合: GitHub Actionsによる完全自動化パイプライン',
+  },
+  gymDataVisualizationDash: {
+    en: 'Data Visualization: Interactive dashboard with Next.js + Chart.js',
+    jp: 'データ可視化: Next.js + Chart.jsによるインタラクティブダッシュボード',
+  },
+  gymOperationOptimizationInfra: {
+    en: 'Operation Optimization: Robust infrastructure achieving 99.1% uptime',
+    jp: '運用最適化: 99.1%稼働率を実現する堅牢なインフラ構築',
+  },
+  gymRoleDescriptionFull: {
+    en: 'I was consistently responsible for the entire system architecture design, implementation, and operation, demonstrating practical skills in creative problem-solving under constrained environments and integration of multiple technical domains.',
+    jp: 'システム全体のアーキテクチャ設計から実装、運用まで一貫して担当し、制約のある環境での創意工夫と複数技術ドメインの統合において実践的スキルを発揮しました。',
+  },
+  gymPerformanceMetrics: {
+    en: 'Performance Metrics',
+    jp: '実績指標',
+  },
+  gymCollectedDataPoints: {
+    en: 'Collected Data Points: 354 (as of October 2025)',
+    jp: '収集データポイント: 354件（2025年10月時点）',
+  },
+  gymOCRSuccessRate: {
+    en: 'OCR Processing Success Rate: 80% (Tesseract + OpenCV preprocessing)',
+    jp: 'OCR処理成功率: 80%（Tesseract + OpenCV前処理）',
+  },
+  gymSystemUptimeRate: {
+    en: 'System Uptime: 99.1%',
+    jp: 'システム稼働率: 99.1%',
+  },
+
+  // Design Process Section
+  gymDesignProcessText: {
+    en: 'In designing a complex system that integrates multiple technical domains, I adopted a phased approach. I proceeded systematically from personal problem-solving through understanding technical constraints to implementation.',
+    jp: '複数の技術ドメインを統合する複雑なシステム設計において、段階的なアプローチを採用しました。個人的な課題解決から技術制約の把握、そして実装まで体系的に進めました。',
+  },
+  gymDesignStep1: {
+    en: 'Problem Analysis & Requirements Definition: Analysis of gym user behavior patterns and identification of pain points. Investigation of technical constraints (iOS automation limitations, OCR accuracy constraints) and feasibility assessment.',
+    jp: '課題分析・要件定義: ジム利用者の行動パターン分析と痛点の洗い出し。技術制約（iOS自動化の限界、OCRの精度制約）の調査と実現可能性評価。',
+  },
+  gymDesignStep2: {
+    en: 'System Design & Prototyping: Distributed system design for iOS → iCloud → GitHub Actions → Vercel. End-to-end design from screenshot acquisition to dashboard display.',
+    jp: 'システム設計・プロトタイピング: iOS → iCloud → GitHub Actions → Vercel の分散システム設計。スクリーンショット取得からダッシュボード表示までのエンドツーエンド設計。',
+  },
+  gymDesignStep3: {
+    en: 'Implementation, Validation & Improvement: OCR accuracy optimization through image preprocessing. Resolution of synchronization issues between 4 platforms and UX optimization.',
+    jp: '実装・検証・改善: OCR精度向上のための画像前処理最適化。4つのプラットフォーム間の同期問題解決とUX最適化。',
+  },
+
+  // Solution Section Content
+  gymSmartDataCollection: {
+    en: 'Smart Data Collection System',
+    jp: 'スマートデータ収集システム',
+  },
+  gymDataCollectionText1: {
+    en: 'My gym\'s dedicated app is only accessible through a closed iOS app with no web version, making complete automation technically impossible. Therefore, I designed a "context-aware semi-automation" system that achieved sustainable data collection integrated into my natural behavior flow.',
+    jp: '私の通うジム専用アプリはWeb版がなくクローズドなiOSアプリでのみアクセス可能で、完全自動化は技術的に不可能でした。そこで「コンテキスト認識型半自動化」システムを設計し、私の自然な行動フローに統合された継続可能なデータ収集を実現しました。',
+  },
+  gymDataCollectionText2: {
+    en: 'Initially, I configured Apple Shortcut to perform OCR within Automation and extract time, number of people, and crowd labels, but text corruption and unwanted text extraction occurred. Therefore, I changed the design to specialize Apple Shortcut for screenshot capturing and saving to iCloud Drive with datetime filenames, while performing OCR processing on the GitHub Actions side.',
+    jp: '当初はApple ShortcutのAutomation内でOCRを行い、時刻・人数・混雑ラベルを抽出する設定をしていましたが、文字化けや不要部分のテキスト化が発生していました。そこで、Apple Shortcutをスクリーンショット撮影と日時ファイル名でのiCloud Drive保存に特化させ、OCR処理はGitHub Actions側で行う設計に変更しました。',
+  },
+  gymIOSAutomationWorkflow: {
+    en: 'iOS Automation Workflow',
+    jp: 'iOS自動化ワークフロー',
+  },
+  gymIOSWorkflowSteps: {
+    en: 'Shortcuts App → Screenshot → iCloud Sync',
+    jp: 'ショートカットアプリ → スクリーンショット → iCloud同期',
+  },
+
+  gymHighAccuracyOCR: {
+    en: 'High-Accuracy OCR Processing Engine',
+    jp: '高精度OCR処理エンジン',
+  },
+  gymOCRText1: {
+    en: 'I learned that image preprocessing is more important than expected for OCR accuracy improvement. Initially, I performed OCR processing within Apple Shortcut, but text corruption and unwanted text extraction occurred, so I moved the processing to the GitHub Actions side.',
+    jp: 'OCRの精度向上には画像前処理が想像以上に重要であることを学びました。当初はApple Shortcut内でOCR処理を行っていましたが、文字化けや不要部分のテキスト化が発生していたため、処理をGitHub Actions側に移行しました。',
+  },
+  gymOCRText2: {
+    en: 'I implemented 3-stage image preprocessing using OpenCV:',
+    jp: 'OpenCVを使用した3段階の画像前処理を実装しています：',
+  },
+  gymOCRStep1: {
+    en: 'Grayscale Conversion (cv2.cvtColor) - Convert color images to a more processable format',
+    jp: 'グレースケール変換 (cv2.cvtColor) - カラー画像を処理しやすい形式に変換',
+  },
+  gymOCRStep2: {
+    en: 'Noise Removal (cv2.fastNlMeansDenoising) - Effectively remove image noise',
+    jp: 'ノイズ除去 (cv2.fastNlMeansDenoising) - 画像の雑音を効果的に除去',
+  },
+  gymOCRStep3: {
+    en: 'Adaptive Contrast Enhancement (cv2.createCLAHE) - Clarify character outlines',
+    jp: '適応的コントラスト強化 (cv2.createCLAHE) - 文字の輪郭を明確化',
+  },
+  gymOCRText3: {
+    en: 'Currently, I use Tesseract OCR as the main engine with Japanese and English support (jpn+eng), and EasyOCR is disabled for performance optimization. I have accumulated 354 data points and built a stable data collection pipeline.',
+    jp: '現在はTesseract OCRをメインエンジンとして日本語・英語対応（jpn+eng）で処理を行い、EasyOCRは性能最適化のため無効化しています。354件のデータを蓄積し、安定したデータ収集パイプラインを構築しています。',
+  },
+  gymOCRPipeline: {
+    en: 'OCR Processing Pipeline',
+    jp: 'OCR処理パイプライン',
+  },
+  gymOCRPipelineSteps: {
+    en: 'Preprocessing → tesseract → Postprocessing → Structured Data',
+    jp: '前処理 → tesseract → 後処理 → 構造化データ',
+  },
+
+  gymCICDInfrastructure: {
+    en: 'CI/CD Infrastructure',
+    jp: 'CI/CDインフラストラクチャ',
+  },
+
+  gymFailureHistory: {
+    en: 'Failure History:',
+    jp: '失敗の経緯:',
+  },
+  gymFailureRun5: {
+    en: 'Run #5: YAML syntax error (HEREDOC multi-line commit message)',
+    jp: '実行 #5: YAML構文エラー（HEREDOCの複数行コミットメッセージ）',
+  },
+  gymFailureRun67: {
+    en: 'Run #6, #7: Exit Code 100 (OpenGL library mismatch)',
+    jp: '実行 #6, #7: Exit Code 100（OpenGLライブラリ不整合）',
+  },
+  gymDecisiveFix: {
+    en: 'Decisive Fix:',
+    jp: '決定的な修正:',
+  },
+  gymDecisiveFixText: {
+    en: 'Resolved the issue where the libgl1-mesa-glx package was deprecated in Ubuntu 24.04 environment with a single change to libgl1-mesa-dev, normalizing OpenCV initialization.',
+    jp: 'Ubuntu 24.04環境でlibgl1-mesa-glxパッケージが廃止されていた問題を、libgl1-mesa-devへの1変更で解決し、OpenCV初期化を正常化させました。',
+  },
+  gymTwoStageSync: {
+    en: '2-Stage Synchronization Problem Resolution:',
+    jp: '2段階の同期問題解決:',
+  },
+  gymSyncStep1: {
+    en: 'GitHub Actions side: OpenGL library compatibility fix',
+    jp: 'GitHub Actions側: OpenGLライブラリの互換性修正',
+  },
+  gymSyncStep2: {
+    en: 'Local side: launchd script Git integration fix',
+    jp: 'ローカル側: launchdスクリプトのGit統合修正',
+  },
+  gymSyncResult: {
+    en: 'This enabled the hybrid system (local iCloud sync + GitHub Actions processing) to work properly, achieving 99.1% uptime.',
+    jp: 'これにより、ハイブリッドシステム（ローカルiCloud同期 + GitHub Actions処理）が正常に動作し、99.1%の稼働率を達成しました。',
+  },
+  gymAutomationPipeline: {
+    en: 'Automation Pipeline',
+    jp: '自動化パイプライン',
+  },
+  gymPipelineSteps: {
+    en: 'iCloud monitoring → Image acquisition → OCR processing → JSON update → Vercel redeploy',
+    jp: 'iCloud監視 → 画像取得 → OCR処理 → JSON更新 → Vercel再デプロイ',
+  },
+
+  // Impact & Reflection Section
+  gymQuantitativeResults: {
+    en: 'Quantitative Results',
+    jp: '定量的な成果',
+  },
+  gymResult1: {
+    en: 'Identified that Tuesday 21:00 is 1.7 times more crowded than average, clarifying efficient gym usage patterns',
+    jp: '火曜21時は平均の1.7倍混雑することを特定し、効率的なジム利用パターンを明確化',
+  },
+  gymResult2: {
+    en: 'Maintained 99.1% system uptime for 3.5 months, demonstrating operational stability',
+    jp: '99.1%のシステム稼働率を3.5ヶ月間維持し、運用安定性を実証',
+  },
+  gymProjectLearnings: {
+    en: 'Learnings Through the Project',
+    jp: 'プロジェクトを通じた学び',
+  },
+  gymLearningText1: {
+    en: 'Through this project, I experienced the joy of solving small daily problems with technology. While I initially aimed for complete automation, finding the "right level of automation" with manual operation when launching the gym app was a significant learning.',
+    jp: 'このプロジェクトを通じて、日常の小さな課題を技術で解決する面白さを実感しました。当初は完全自動化を目指していましたが、ジムアプリ起動時の手動操作という「ちょうどいい自動化レベル」を見つけられたことが大きな学びでした。',
+  },
+  gymLearningText2: {
+    en: "Technically, I faced an unexpected challenge where BOT commits from GitHub Actions do not trigger Vercel's automatic deployment. In solving this problem, I gained deep understanding of CI/CD pipeline mechanisms and inter-service coordination.",
+    jp: '技術的には、GitHub ActionsのBOTコミットがVercelの自動デプロイをトリガーしないという予期せぬ課題に直面しました。この問題を解決する過程で、CI/CDパイプラインの仕組みやサービス間の連携について深く理解することができました。',
+  },
+  gymFutureProspects: {
+    en: 'Future Prospects',
+    jp: '今後の展望',
+  },
+  gymProspectsText: {
+    en: "Currently, data acquisition timing is unstable as it depends on when I remember to do it, so I haven't achieved regular and stable data collection like acquiring data at 0 minutes of every hour. I expect that future AI developments will enable Siri to operate apps, or Shortcuts will evolve to allow more advanced configurations, making more complete automation possible.",
+    jp: '現在はデータ取得のタイミングが思いついた時という不安定な方法のため、毎時間0分に取得するような規則的で安定したデータ収集ができていません。今後AIの発展によりSiriがアプリ操作を行えるようになる、もしくはショートカットがより発展し高度な設定ができるようになることで、より完全な自動化が実現できると期待しています。',
+  },
+
+  // Navigation items
+  navOverview: {
+    en: 'Overview',
+    jp: '概要',
+  },
+  navDesignProcess: {
+    en: 'Design Process',
+    jp: 'デザインプロセス',
+  },
+  navSolution: {
+    en: 'Solution',
+    jp: '解決策',
+  },
+  navImpactReflection: {
+    en: 'Impact & Reflection',
+    jp: 'インパクト・振り返り',
+  },
 };
 
 // コンテキストの型定義
@@ -493,11 +818,14 @@ export const useJPFontSize = () => {
   const jpFontSize = (
     mobileBaseClass: string,
     desktopBaseClass: string,
-    mobileJpClass: string,
-    desktopJpClass: string,
+    mobileJpClass?: string,
+    desktopJpClass?: string,
   ) => {
     if (language === 'jp') {
-      return `${mobileJpClass} md:${desktopJpClass}`;
+      // 日本語用のクラスが指定されていない場合は、英語と同じサイズを使用
+      const jpMobile = mobileJpClass || mobileBaseClass;
+      const jpDesktop = desktopJpClass || desktopBaseClass;
+      return `${jpMobile} md:${jpDesktop}`;
     }
     return `${mobileBaseClass} md:${desktopBaseClass}`;
   };

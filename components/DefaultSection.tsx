@@ -17,13 +17,13 @@
 // }: DefaultSectionProps) {
 //   return (
 //     <section className="py-8 bg-white text-[#002a38]">
-//       <h2 className="text-heading-s-120 md:text-heading-m-120 font-sf-pro mb-6">
+//       <h2 className="text-heading-s-120 md:text-heading-m-120 font-inter mb-6">
 //         {heading}
 //       </h2>
 
 //       {/* Description */}
 //       {description && (
-//         <p className="text-body-l-140 font-sf-pro mb-4">{description}</p>
+//         <p className="text-body-l-140 font-inter mb-4">{description}</p>
 //       )}
 
 //       {/* 画像があれば複数並べる */}
@@ -53,8 +53,8 @@ interface DefaultSectionProps {
 export function DefaultSection({ heading, description, images = [] }: DefaultSectionProps) {
   return (
     <section className="py-8 bg-white text-[#002a38] scroll-mt-32">
-      <h2 className="text-heading-s-120 md:text-heading-m-120 font-sf-pro mb-6">{heading}</h2>
-      {description && <p className="text-body-l-140 font-sf-pro mb-6">{description}</p>}
+      <h2 className="text-heading-s-120 md:text-heading-m-120 font-inter mb-6">{heading}</h2>
+      {description && <p className="text-body-l-140 font-inter mb-6">{description}</p>}
       {images.length > 0 && (
         <div className="grid grid-cols-1 gap-4 mt-6">
           {images.map((img, idx) => (

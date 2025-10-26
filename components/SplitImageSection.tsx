@@ -9,12 +9,12 @@
 //   export function SplitImageSection({ heading, bullets, image }: SplitImageSectionProps) {
 //     return (
 //       <section className="py-8 bg-white text-[#002a38]">
-//         <h2 className="text-heading-s-120 md:text-heading-m-120 font-sf-pro mb-6">{heading}</h2>
+//         <h2 className="text-heading-s-120 md:text-heading-m-120 font-inter mb-6">{heading}</h2>
   
 //         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-6">
 //           {/* 左側 */}
 //           <div className="lg:col-span-6">
-//             <p className="text-body-l-140 font-sf-pro mb-4">
+//             <p className="text-body-l-140 font-inter mb-4">
 //               {/* 必要であれば追加の説明文 */}
 //               The project was inspired by the following hypothetical scenario...
 //             </p>
@@ -63,8 +63,8 @@ export function SplitImageSection({ heading, description, bullets, image }: Spli
     <section  className="py-8 bg-white text-[#002a38] scroll-mt-32">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         <div className="lg:col-span-6">
-          <h2 className="text-heading-s-120 md:text-heading-m-120 font-sf-pro mb-6">{heading}</h2>
-          {description && <p className="text-body-l-140 font-sf-pro mb-4">{description}</p>}
+          <h2 className="text-heading-s-120 md:text-heading-m-120 font-inter mb-6">{heading}</h2>
+          {description && <p className="text-body-l-140 font-inter mb-4">{description}</p>}
           {bullets && bullets.length > 0 && (
             <ul className="space-y-2 mb-6 text-body-l-140">
               {bullets.map((bullet, idx) => (

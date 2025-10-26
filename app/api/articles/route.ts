@@ -58,12 +58,14 @@ interface Article {
   pubDate: string;
 }
 
+export const revalidate = 3600; // 1時間キャッシュ
+
 export async function GET() {
   try {
     console.log('Starting RSS fetch...');
     const rssUrl = 'https://note.com/io_73/rss';
     const response = await fetch(rssUrl, {
-      cache: 'no-store', // キャッシュを無効化
+      next: { revalidate: 3600 }, // 1時間キャッシュ
       headers: {
         'User-Agent': 'Mozilla/5.0 (compatible; RSS Reader)',
       },

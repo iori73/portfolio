@@ -112,14 +112,7 @@ export default function BlogPage() {
       <div className="article lg:col-span-6 flex flex-col gap-2 relative cursor-pointer" onClick={handleArticleClick}>
         <img src={thumbnail} alt={title} />
         <div className="article-text flex flex-col gap-2 md:gap-4 py-2">
-          <p
-            className={`article-date ${jpFontSize(
-              'text-caption-l-120',
-              'text-caption-xl-120',
-              'text-caption-s-120',
-              'text-caption-l-120',
-            )}`}
-          >
+          <p className={`article-date ${jpFontSize('text-caption-l-120', 'text-caption-xl-120')}`}>
             {formatDate(pubDate)}
           </p>
           <h3 className="article-title text-heading-xxxs-120 md:text-heading-s-120">{title}</h3>
@@ -128,12 +121,7 @@ export default function BlogPage() {
             dangerouslySetInnerHTML={{
               __html: description.replace('続きをみる', ''), // 例: "続きをみる" を消す
             }}
-            className={`article-desc ${jpFontSize(
-              'text-body-s-140',
-              'text-body-s-140',
-              'text-caption-s-120',
-              'text-body-s-140',
-            )}`}
+            className={`article-desc ${jpFontSize('text-body-s-140', 'text-body-s-140')}`}
           />
         </div>
       </div>
@@ -167,20 +155,9 @@ export default function BlogPage() {
         )}
         {/* テキスト */}
         <div className="flex flex-col md:flex-1  gap-2 md:gap-4">
-          <p
-            className={jpFontSize(
-              'text-caption-l-120',
-              'text-caption-xl-120',
-              'text-caption-s-120',
-              'text-caption-l-120',
-            )}
-          >
-            {formatDate(pubDate)}
-          </p>
+          <p className={jpFontSize('text-caption-l-120', 'text-caption-xl-120')}>{formatDate(pubDate)}</p>
           <h3 className="text-heading-xxxs-120 md:text-heading-s-120">{title}</h3>
-          <p className={jpFontSize('text-body-s-140', 'text-body-m-140', 'text-body-s-140', 'text-body-s-140')}>
-            {summary}
-          </p>
+          <p className={jpFontSize('text-body-s-140', 'text-body-m-140')}>{summary}</p>
         </div>
       </div>
     );
@@ -190,7 +167,7 @@ export default function BlogPage() {
   // レンダリング
   // =====================
   return (
-    <div className="w-full flex flex-col gap-16">
+    <div className="w-full flex flex-col gap-16 my-24 md:mt-28 md:mb-16">
       {/* -------------- noteセクション -------------- */}
       <div className="note__container">
         <section className="pt-4 md:pt-16 pb-4 md:pb-16">

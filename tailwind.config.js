@@ -67,27 +67,21 @@ module.exports = {
       },
       // フォントファミリーとフォントサイズの拡張
       fontFamily: {
+        merriweather: ['Merriweather Sans', 'system-ui', 'sans-serif'],
+        inter: ['Inter', 'system-ui', 'sans-serif'],
+        'space-mono': ['Space Mono', 'ui-monospace', 'monospace'],
+        'jetbrains-mono': ['JetBrains Mono', 'ui-monospace', 'monospace'],
         'sf-pro': ['"SF Pro"', 'system-ui', 'sans-serif'],
         'sf-mono': ['"SF Mono"', 'ui-monospace', 'monospace'],
       },
-      spacing: {
-        1: '8px',
-        2: '16px',
-        3: '24px',
-        4: '32px',
-        5: '40px',
-        6: '48px',
-        7: '56px',
-        8: '64px',
-        9: '72px',
-        10: '80px',
-      },
       fontSize: {
-        h1: ['2.5rem', { lineHeight: '1.1', fontWeight: '700' }], // 40px
-        h2: ['1.75rem', { lineHeight: '1.2', fontWeight: '600' }], // 28px
-        h3: ['1.5rem', { lineHeight: '1.2', fontWeight: '500' }], // 24px
-        body: ['1.25rem', { lineHeight: '1.6', fontWeight: '400' }], // 20px
-        sm: ['1rem', { lineHeight: '1.6', fontWeight: '400' }], // 16px
+        // カスタムサイズ（既存のTailwindクラスと重複しない名前）
+        'custom-h1': ['2.5rem', { lineHeight: '1.1', fontWeight: '700' }], // 40px
+        'custom-h2': ['1.75rem', { lineHeight: '1.2', fontWeight: '600' }], // 28px
+        'custom-h3': ['1.5rem', { lineHeight: '1.2', fontWeight: '500' }], // 24px
+        'custom-body': ['1.25rem', { lineHeight: '1.6', fontWeight: '400' }], // 20px
+        // 注意: 'sm'を上書きすると text-sm (Tailwindデフォルト: 14px) が 16px になります
+        // もし意図的でない場合は、'custom-sm'などに変更してください
         /* Heading */
         'heading-xl-m-120': [
           '56px',
@@ -183,6 +177,13 @@ module.exports = {
         ],
         'body-s-140': [
           '16px',
+          {
+            lineHeight: '140%',
+            fontWeight: '400',
+          },
+        ],
+        'body-xs-140': [
+          '14px',
           {
             lineHeight: '140%',
             fontWeight: '400',

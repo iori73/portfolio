@@ -148,7 +148,7 @@ const ExperimentPage: React.FC = () => {
   }, [activeSection]);
 
   return (
-    <div className="font-sans">
+    <div className="font-sans my-24 md:mt-28 md:mb-16">
       {/* Hero Section */}
       <section className="pt-4 md:pt-16 pb-4 md:pb-16">
         <h1 className="text-heading-l-120 md:text-heading-xl-m-120 mb-2">Experiment</h1>

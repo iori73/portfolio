@@ -119,7 +119,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen">
         <LanguageProvider>
           <Header />
-          <main className="max-w-6xl mx-auto px-6 my-24 md:mt-28 md:mb-16">{children}</main>
+          <main className="max-w-6xl mx-auto px-6">{children}</main>
           <Footer />
         </LanguageProvider>
       </body>

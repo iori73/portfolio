@@ -71,7 +71,7 @@ export default function Footer() {
         </Link>
       </div>
 
-      <p className="text-center text-body-m-140 md:text-body-l-140 font-sf-pro">© 2025 Iori Kawano</p>
+      <p className="text-center text-body-m-140 md:text-body-l-140 font-inter">© 2025 Iori Kawano</p>
     </footer>
   );
 }
