@@ -25,3 +25,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# CV page (local only)
+/app/cv/
+/src/data/cvData.ts
+/app/api/linkedin/
