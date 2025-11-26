@@ -191,7 +191,9 @@ const GymDashboardPage: React.FC = () => {
               <span className="text-caption-lg font-space-mono font-semibold text-gray-500 mb-2 block">
                 Deliverables
               </span>
-              <p className="text-body-base md:text-body-lg tracking-[0.2px]">{t('projects.gymDashboard.deliverables')}</p>
+              <p className="text-body-base md:text-body-lg tracking-[0.2px]">
+                {t('projects.gymDashboard.deliverables')}
+              </p>
             </div>
           </div>
         </div>

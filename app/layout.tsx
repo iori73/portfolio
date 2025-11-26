@@ -1,12 +1,7 @@
-// app/layout.tsx
+// app/layout.tsx - Root layout (minimal)
 import type { Metadata } from 'next';
 import './globals.css';
-import Header from '@/src/compositions/Header';
-import Footer from '@/src/compositions/Footer';
 import { Noto_Sans_JP, Space_Mono } from 'next/font/google';
-import { MenuProvider } from '@/src/contexts/MenuContext';
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages, getLocale } from 'next-intl/server';
 
 // Define your fonts
 const notoSansJP = Noto_Sans_JP({
@@ -30,27 +25,14 @@ export const metadata: Metadata = {
   generator: 'v0.dev',
   icons: {
     icon: '/icon.svg',
-    // apple: '/apple-touch-icon.png', // iOS向けアイコンがある場合など
   },
 };
 
-// Root layout for next-intl
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const locale = await getLocale();
-  const messages = await getMessages();
-
+// Root layout - minimal setup
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang={locale} className={`${notoSansJP.variable} ${spaceMono.variable}`}>
-      <body className="min-h-screen">
-        <NextIntlClientProvider messages={messages}>
-          <MenuProvider>
-            <Header />
-            <main className="max-w-6xl mx-auto px-6">{children}</main>
-            <Footer />
-          </MenuProvider>
-        </NextIntlClientProvider>
-      </body>
+    <html className={`${notoSansJP.variable} ${spaceMono.variable}`}>
+      <body className="min-h-screen">{children}</body>
     </html>
   );
 }
-

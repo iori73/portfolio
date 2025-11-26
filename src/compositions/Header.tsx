@@ -25,7 +25,7 @@ export default function Header() {
   
   const toggleLanguage = (newLocale: 'en' | 'jp') => {
     startTransition(() => {
-      router.replace(pathname, { locale: newLocale });
+      router.replace(pathname, { locale: newLocale, scroll: false });
     });
   };
 
