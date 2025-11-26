@@ -1,7 +1,8 @@
 // // // /app/blog/page.tsx
 'use client';
 import React, { useEffect, useState } from 'react';
-import { useLanguage, useJPFontSize } from '@/src/lib/i18n';
+import { useTranslations } from 'next-intl';
+import { useJPFontSize, useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
 
 // ===== note の記事型 =====
 interface NoteArticle {
@@ -22,8 +23,10 @@ interface MediumStory {
 }
 
 export default function BlogPage() {
-  const { t } = useLanguage();
+  const t = useTranslations('common');
   const { jpFontSize } = useJPFontSize();
+  const { getBodyFontClass, getBodyFontStyle } = useBodyFont();
+  const { getHeadingFontClass, getHeadingFontStyle } = useHeadingFont();
 
   // ----------------------
   // note記事
@@ -109,19 +112,24 @@ export default function BlogPage() {
     };
 
     return (
-      <div className="article lg:col-span-6 flex flex-col gap-2 relative cursor-pointer" onClick={handleArticleClick}>
-        <img src={thumbnail} alt={title} />
-        <div className="article-text flex flex-col gap-2 md:gap-4 py-2">
-          <p className={`article-date ${jpFontSize('text-caption-l-120', 'text-caption-xl-120')}`}>
-            {formatDate(pubDate)}
-          </p>
-          <h3 className="article-title text-heading-xxxs-120 md:text-heading-s-120">{title}</h3>
+      <div className="article flex flex-col gap-1.5 relative cursor-pointer" onClick={handleArticleClick}>
+        <img src={thumbnail} alt={title} className="w-full aspect-video object-cover" />
+        <div className="article-text flex flex-col gap-1.5 md:gap-2 py-1">
+          <p className={`article-date ${jpFontSize('text-caption-lg', 'text-caption-xl')}`}>{formatDate(pubDate)}</p>
+          <h3
+            className={`article-title text-body-lg md:text-body-xl ${getHeadingFontClass()} line-clamp-4 md:line-clamp-none`}
+          >
+            {title}
+          </h3>
           {/* description に「続きを見る」などが含まれていれば、置換や削除など工夫 */}
           <div
             dangerouslySetInnerHTML={{
               __html: description.replace('続きをみる', ''), // 例: "続きをみる" を消す
             }}
-            className={`article-desc ${jpFontSize('text-body-s-140', 'text-body-s-140')}`}
+            className={`article-desc ${getBodyFontClass()} tracking-[0.2px] ${jpFontSize(
+              'text-body-sm',
+              'text-body-base',
+            )} line-clamp-4`}
           />
         </div>
       </div>
@@ -142,22 +150,29 @@ export default function BlogPage() {
 
     return (
       <div
-        className="medium-article medium__story p-4 md:p-8 lg:col-span-6 flex flex-col md:flex-row gap-8 relative cursor-pointer"
+        className="medium-article medium__story lg:col-span-6 flex flex-col md:flex-row gap-8 relative cursor-pointer"
         onClick={handleStoryClick}
       >
         {/* 画像コンテナ：md以上で幅520px、16:9のアスペクト比 */}
         {imageUrl && (
-          <div className="w-full md:w-[520px]">
+          <div className="w-full md:w-[420px]">
             <div className="relative w-full aspect-video">
               <img src={imageUrl} alt={title} className="absolute inset-0 w-full h-full object-cover" />
             </div>
           </div>
         )}
         {/* テキスト */}
-        <div className="flex flex-col md:flex-1  gap-2 md:gap-4">
-          <p className={jpFontSize('text-caption-l-120', 'text-caption-xl-120')}>{formatDate(pubDate)}</p>
-          <h3 className="text-heading-xxxs-120 md:text-heading-s-120">{title}</h3>
-          <p className={jpFontSize('text-body-s-140', 'text-body-m-140')}>{summary}</p>
+        <div className="flex flex-col md:flex-1 gap-2 md:gap-4">
+          <p className={`text-[#0A0A0A] ${jpFontSize('text-caption-xl', 'text-caption-2xl')}`}>{formatDate(pubDate)}</p>
+          <h3 className={`article-title text-[#0A0A0A] text-heading-base ${getHeadingFontClass()}`}>{title}</h3>
+          <p
+            className={`text-[#0A0A0A] ${getBodyFontClass()} tracking-[0.2px] ${jpFontSize(
+              'text-body-sm',
+              'text-body-base',
+            )}`}
+          >
+            {summary}
+          </p>
         </div>
       </div>
     );
@@ -171,48 +186,93 @@ export default function BlogPage() {
       {/* -------------- noteセクション -------------- */}
       <div className="note__container">
         <section className="pt-4 md:pt-16 pb-4 md:pb-16">
-          <h2 className="text-heading-m-120 md:text-heading-l-20 mb-2">note</h2>
+          <h2 className="text-heading-2xl md:text-heading-3xl mb-2">note</h2>
         </section>
 
         {/* 記事一覧 */}
-        <div className="note__articles-container grid grid-cols-1 lg:grid-cols-12 gap-16 items-start mb-12">
+        <div className="note__articles-container grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-16 items-start mb-12">
           {noteArticles.map((article, index) => (
             <NoteArticleItem key={index} {...article} />
           ))}
         </div>
 
-        <div className="flex w-full justify-center">
-          <button
-            onClick={() => window.open('https://note.com/io_73', '_blank')}
-            aria-label="Go to note"
-            className="all-[unset] box-border inline-flex flex-col px-10 py-2 relative flex-[0_0_auto] border-2 border-black rounded-[40px]"
+        <div className="flex w-full justify-center md:justify-center">
+          <a
+            href="https://note.com/io_73"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative flex items-center justify-center px-6 py-3 rounded-[100px] text-[#0000008f] hover:text-white cursor-pointer transition-[color] duration-300 whitespace-nowrap overflow-hidden group w-full md:w-auto"
+            style={{
+              background:
+                'radial-gradient(75% 150% at 100% 114.2%, rgba(210, 210, 215, 0.4) 0%, rgba(180, 180, 185, 0.4) 100%)',
+              backdropFilter: 'blur(8px)',
+            }}
           >
-            <div className="text-heading-xxs-120 py-1 z-10">{t('goToNote')}</div>
-          </button>
+            {/* Hover background overlay */}
+            <span
+              className="absolute inset-0 rounded-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+              style={{
+                background:
+                  'radial-gradient(75% 150% at 100% 114.2%, rgba(210, 210, 215, 0.8) 0%, rgba(180, 180, 185, 0.8) 100%)',
+                backdropFilter: 'blur(8px)',
+              }}
+            />
+            <span className="relative z-10 text-body-lg md:text-body-xl font-medium">{t('goToNote')}</span>
+          </a>
         </div>
       </div>
 
       {/* -------------- Mediumセクション -------------- */}
-      <div className="medium__container mt-16 md:mb-16">
-        <section className="pt-4 md:pt-16 pb-4 md:pb-16">
-          <h2 className="text-heading-m-120 md:text-heading-l-20 mb-2">Medium</h2>
-        </section>
+      <div className="relative mt-16 md:mb-16">
+        {/* 画面幅いっぱいの背景 */}
+        <div
+          className="absolute inset-0 bg-[#0A0A0A]/10"
+          style={{
+            left: '50%',
+            right: '50%',
+            marginLeft: '-50vw',
+            marginRight: '-50vw',
+            width: '100vw',
+          }}
+        />
 
-        {/* medium記事一覧 */}
-        <div className="grid grid-cols-1 lg:grid-cols-6 gap-16 items-start mb-12">
-          {mediumStories.map((story, idx) => (
-            <MediumStoryItem key={idx} {...story} />
-          ))}
-        </div>
+        {/* コンテンツ */}
+        <div className="medium__container relative pb-4 md:pb-16">
+          <section className="pt-4 md:pt-16 pb-4 md:pb-16">
+            <h2 className="text-[#0A0A0A] text-heading-2xl md:text-heading-3xl mb-2">Medium</h2>
+          </section>
 
-        <div className="flex w-full justify-center">
-          <button
-            onClick={() => window.open('https://medium.com/@iori730002204294', '_blank')}
-            aria-label="Go to Medium"
-            className="all-[unset] box-border inline-flex flex-col px-10 py-2 relative flex-[0_0_auto] border-2 border-black rounded-[40px]"
-          >
-            <div className="text-heading-xxs-120 py-1 z-10">{t('goToMedium')}</div>
-          </button>
+          {/* medium記事一覧 */}
+          <div className="grid grid-cols-1 lg:grid-cols-6 gap-16 items-start mb-12">
+            {mediumStories.map((story, idx) => (
+              <MediumStoryItem key={idx} {...story} />
+            ))}
+          </div>
+
+          <div className="flex w-full justify-center md:justify-center">
+            <a
+              href="https://medium.com/@iori730002204294"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative flex items-center justify-center px-6 py-3 rounded-[100px] text-[#0A0A0A] hover:text-[#0A0A0A] cursor-pointer transition-[color] duration-300 whitespace-nowrap overflow-hidden group w-full md:w-auto"
+              style={{
+                background:
+                  'radial-gradient(75% 150% at 100% 114.2%, rgba(210, 210, 215, 0.4) 0%, rgba(180, 180, 185, 0.4) 100%)',
+                backdropFilter: 'blur(8px)',
+              }}
+            >
+              {/* Hover background overlay */}
+              <span
+                className="absolute inset-0 rounded-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                style={{
+                  background:
+                    'radial-gradient(75% 150% at 100% 114.2%, rgba(210, 210, 215, 0.8) 0%, rgba(180, 180, 185, 0.8) 100%)',
+                  backdropFilter: 'blur(8px)',
+                }}
+              />
+              <span className="relative z-10 text-body-lg md:text-body-xl font-medium">{t('goToMedium')}</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>

@@ -17,13 +17,13 @@
 // }: DefaultSectionProps) {
 //   return (
 //     <section className="py-8 bg-white text-[#002a38]">
-//       <h2 className="text-heading-s-120 md:text-heading-m-120 font-inter mb-6">
+//       <h2 className="text-heading-xl md:text-heading-2xl font-helvetica-neue mb-6">
 //         {heading}
 //       </h2>
 
 //       {/* Description */}
 //       {description && (
-//         <p className="text-body-l-140 font-inter mb-4">{description}</p>
+//         <p className="text-body-lg font-helvetica-neue mb-4">{description}</p>
 //       )}
 
 //       {/* 画像があれば複数並べる */}
@@ -38,23 +38,28 @@
 //   );
 // }
 
-
-
 // /components/DefaultSection.tsx
-"use client";
-import React from "react";
+'use client';
+import React from 'react';
 
 interface DefaultSectionProps {
   heading: string;
   description?: string;
   images?: string[];
+  headingLevel?: 'h2' | 'h3';
 }
 
-export function DefaultSection({ heading, description, images = [] }: DefaultSectionProps) {
+export function DefaultSection({ heading, description, images = [], headingLevel = 'h2' }: DefaultSectionProps) {
+  const HeadingTag = headingLevel === 'h3' ? 'h3' : 'h2';
+  const headingClassName =
+    headingLevel === 'h3'
+      ? 'text-heading-base font-merriweather font-semibold mb-4'
+      : 'text-heading-xl md:text-heading-2xl font-helvetica-neue mb-6';
+
   return (
     <section className="py-8 bg-white text-[#002a38] scroll-mt-32">
-      <h2 className="text-heading-s-120 md:text-heading-m-120 font-inter mb-6">{heading}</h2>
-      {description && <p className="text-body-l-140 font-inter mb-6">{description}</p>}
+      <HeadingTag className={headingClassName}>{heading}</HeadingTag>
+      {description && <p className="text-body-lg font-helvetica-neue mb-6">{description}</p>}
       {images.length > 0 && (
         <div className="grid grid-cols-1 gap-4 mt-6">
           {images.map((img, idx) => (

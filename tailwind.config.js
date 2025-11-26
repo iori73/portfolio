@@ -67,178 +67,48 @@ module.exports = {
       },
       // フォントファミリーとフォントサイズの拡張
       fontFamily: {
+        'helvetica-neue': [
+          'Helvetica Neue',
+          'Helvetica',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Segoe UI',
+          'sans-serif',
+        ],
         merriweather: ['Merriweather Sans', 'system-ui', 'sans-serif'],
-        inter: ['Inter', 'system-ui', 'sans-serif'],
         'space-mono': ['Space Mono', 'ui-monospace', 'monospace'],
-        'jetbrains-mono': ['JetBrains Mono', 'ui-monospace', 'monospace'],
-        'sf-pro': ['"SF Pro"', 'system-ui', 'sans-serif'],
-        'sf-mono': ['"SF Mono"', 'ui-monospace', 'monospace'],
+        'noto-sans-jp': ['Noto Sans JP', 'sans-serif'],
       },
       fontSize: {
-        // カスタムサイズ（既存のTailwindクラスと重複しない名前）
-        'custom-h1': ['2.5rem', { lineHeight: '1.1', fontWeight: '700' }], // 40px
-        'custom-h2': ['1.75rem', { lineHeight: '1.2', fontWeight: '600' }], // 28px
-        'custom-h3': ['1.5rem', { lineHeight: '1.2', fontWeight: '500' }], // 24px
-        'custom-body': ['1.25rem', { lineHeight: '1.6', fontWeight: '400' }], // 20px
-        // 注意: 'sm'を上書きすると text-sm (Tailwindデフォルト: 14px) が 16px になります
-        // もし意図的でない場合は、'custom-sm'などに変更してください
-        /* Heading */
-        'heading-xl-m-120': [
-          '56px',
-          {
-            lineHeight: '120%',
-            fontWeight: '600',
-          },
-        ],
-        'heading-l-120': [
-          '48px',
-          {
-            lineHeight: '120%',
-            fontWeight: '600',
-          },
-        ],
-        'heading-m-120': [
-          '40px',
-          {
-            lineHeight: '120%',
-            fontWeight: '600',
-          },
-        ],
-        'heading-s-120': [
-          '32px',
-          {
-            lineHeight: '120%',
-            fontWeight: '600',
-          },
-        ],
-        'heading-xs-120': [
-          '28px',
-          {
-            lineHeight: '120%',
-            fontWeight: '600',
-          },
-        ],
-        'heading-xxs-120': [
-          '24px',
-          {
-            lineHeight: '120%',
-            fontWeight: '600',
-          },
-        ],
-        'heading-xxxs-120': [
-          '21px',
-          {
-            lineHeight: '120%',
-            fontWeight: '600',
-          },
-        ],
-        /* Body */
-        'body-xxxxl-140': [
-          '40px',
-          {
-            lineHeight: '140%',
-            fontWeight: '400',
-          },
-        ],
-        'body-xxxl-140': [
-          '32px',
-          {
-            lineHeight: '140%',
-            fontWeight: '400',
-          },
-        ],
-        'body-xxl-140': [
-          '28px',
-          {
-            lineHeight: '140%',
-            fontWeight: '400',
-          },
-        ],
-        'body-xl-140': [
-          '24px',
-          {
-            lineHeight: '140%',
-            fontWeight: '400',
-          },
-        ],
-        'body-l-140': [
-          '21px',
-          {
-            lineHeight: '140%',
-            fontWeight: '400',
-          },
-        ],
-        'body-m-140': [
-          '18px',
-          {
-            lineHeight: '140%',
-            fontWeight: '400',
-          },
-        ],
-        'body-s-140': [
-          '16px',
-          {
-            lineHeight: '140%',
-            fontWeight: '400',
-          },
-        ],
-        'body-xs-140': [
-          '14px',
-          {
-            lineHeight: '140%',
-            fontWeight: '400',
-          },
-        ],
-        /* Caption */
-        'caption-xl-120': [
-          '24px',
-          {
-            lineHeight: '120%',
-            fontWeight: '400',
-          },
-        ],
-        'caption-l-120': [
-          '21px',
-          {
-            lineHeight: '120%',
-            fontWeight: '400',
-          },
-        ],
-        'caption-m-120': [
-          '18px',
-          {
-            lineHeight: '120%',
-            fontWeight: '400',
-          },
-        ],
-        'caption-s-120': [
-          '16px',
-          {
-            lineHeight: '120%',
-            fontWeight: '400',
-          },
-        ],
-        'caption-xs-120': [
-          '14px',
-          {
-            lineHeight: '120%',
-            fontWeight: '400',
-          },
-        ],
-        'caption-xxs-120': [
-          '12px',
-          {
-            lineHeight: '120%',
-            fontWeight: '400',
-          },
-        ],
-        'caption-xxxs-120': [
-          '10px',
-          {
-            lineHeight: '120%',
-            fontWeight: '400',
-          },
-        ],
+        // shadcn/ui準拠: fontWeightは含めず、fontSizeとlineHeightのみ定義
+        // fontWeightは別クラス（font-normal, font-medium, font-semibold, font-bold）で制御
+
+        /* Body Scale (line-height: 1.4 = 140%) */
+        'body-xs': ['14px', { lineHeight: '1.4' }],
+        'body-sm': ['16px', { lineHeight: '1.4' }], // 旧: body-s-140
+        'body-base': ['18px', { lineHeight: '1.4' }], // 旧: body-m-140
+        'body-lg': ['21px', { lineHeight: '1.4' }], // 旧: body-l-140
+        'body-xl': ['24px', { lineHeight: '1.4' }], // 旧: body-xl-140
+        'body-2xl': ['28px', { lineHeight: '1.4' }], // 旧: body-xxl-140
+        'body-3xl': ['32px', { lineHeight: '1.4' }], // 旧: body-xxxl-140
+        'body-4xl': ['40px', { lineHeight: '1.4' }], // 旧: body-xxxxl-140
+
+        /* Heading Scale (line-height: 1.2 = 120%) */
+        'heading-sm': ['21px', { lineHeight: '1.2' }], // 旧: heading-xxxs-120
+        'heading-base': ['24px', { lineHeight: '1.2' }], // 旧: heading-xxs-120
+        'heading-lg': ['28px', { lineHeight: '1.2' }], // 旧: heading-xs-120
+        'heading-xl': ['32px', { lineHeight: '1.2' }], // 旧: heading-s-120
+        'heading-2xl': ['40px', { lineHeight: '1.2' }], // 旧: heading-m-120
+        'heading-3xl': ['48px', { lineHeight: '1.2' }], // 旧: heading-l-120
+        'heading-4xl': ['56px', { lineHeight: '1.2' }], // 旧: heading-xl-m-120
+
+        /* Caption Scale (line-height: 1.2 = 120%) - 必要最小限のみ */
+        'caption-xs': ['12px', { lineHeight: '1.2' }], // 旧: caption-xxs-120
+        'caption-sm': ['14px', { lineHeight: '1.2' }], // 旧: caption-xs-120
+        'caption-base': ['16px', { lineHeight: '1.2' }], // 旧: caption-s-120
+        'caption-lg': ['18px', { lineHeight: '1.2' }], // 旧: caption-m-120
+        'caption-xl': ['21px', { lineHeight: '1.2' }], // 旧: caption-l-120
+        'caption-2xl': ['24px', { lineHeight: '1.2' }], // 旧: caption-xl-120
       },
     },
   },

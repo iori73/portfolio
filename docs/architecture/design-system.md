@@ -6,6 +6,14 @@
 
 ## Typography System
 
+### Design Principles
+
+このプロジェクトのタイポグラフィシステムは、**shadcn/uiのベストプラクティスに準拠**しています：
+
+1. **Font SizeとFont Weightの分離**: `fontSize`定義には`fontWeight`を含めず、`fontSize`と`lineHeight`のみを定義
+2. **Font Weightの独立制御**: `font-normal`, `font-medium`, `font-semibold`, `font-bold`などの標準Tailwindクラスで制御
+3. **セマンティックな命名**: `text-body-sm`, `text-heading-xl`など、直感的で拡張しやすい命名規則
+
 ### Font Families
 
 - **Merriweather Sans**: 見出し（Heading）用
@@ -15,32 +23,69 @@
 
 ### Font Size Scale
 
-#### Heading Scale (line-height: 120%)
+#### Heading Scale (line-height: 1.2 = 120%)
 
-- `heading-xl-m-120`: 56px
-- `heading-l-120`: 48px
-- `heading-m-120`: 40px
-- `heading-s-120`: 32px
-- `heading-xs-120`: 28px
-- `heading-xxs-120`: 24px
-- `heading-xxxs-120`: 21px
+| クラス名 | サイズ | 旧クラス名 |
+|---------|--------|-----------|
+| `text-heading-sm` | 21px | `text-heading-xxxs-120` |
+| `text-heading-base` | 24px | `text-heading-xxs-120` |
+| `text-heading-lg` | 28px | `text-heading-xs-120` |
+| `text-heading-xl` | 32px | `text-heading-s-120` |
+| `text-heading-2xl` | 40px | `text-heading-m-120` |
+| `text-heading-3xl` | 48px | `text-heading-l-120` |
+| `text-heading-4xl` | 56px | `text-heading-xl-m-120` |
 
-#### Body Scale (line-height: 140%)
+#### Body Scale (line-height: 1.4 = 140%)
 
-- `body-xxxxl-140`: 40px
-- `body-xxxl-140`: 32px
-- `body-xxl-140`: 28px
-- `body-xl-140`: 24px
-- `body-l-140`: 21px
-- `body-m-140`: 18px
-- `body-s-140`: 16px
-- `body-xs-140`: 14px
+| クラス名 | サイズ | 旧クラス名 |
+|---------|--------|-----------|
+| `text-body-xs` | 14px | `text-body-xs-140` |
+| `text-body-sm` | 16px | `text-body-s-140` |
+| `text-body-base` | 18px | `text-body-m-140` |
+| `text-body-lg` | 21px | `text-body-l-140` |
+| `text-body-xl` | 24px | `text-body-xl-140` |
+| `text-body-2xl` | 28px | `text-body-xxl-140` |
+| `text-body-3xl` | 32px | `text-body-xxxl-140` |
+| `text-body-4xl` | 40px | `text-body-xxxxl-140` |
 
-#### Caption Scale (line-height: 120%)
+#### Caption Scale (line-height: 1.2 = 120%)
 
-- `caption-xl-120`: 24px
-- `caption-l-120`: 16px
-- `caption-m-120`: 14px
+| クラス名 | サイズ | 旧クラス名 |
+|---------|--------|-----------|
+| `text-caption-xs` | 12px | `text-caption-xxs-120` |
+| `text-caption-sm` | 14px | `text-caption-xs-120` |
+| `text-caption-base` | 16px | `text-caption-s-120` |
+| `text-caption-lg` | 18px | `text-caption-m-120` |
+| `text-caption-xl` | 21px | `text-caption-l-120` |
+| `text-caption-2xl` | 24px | `text-caption-xl-120` |
+
+### Font Weight
+
+Font Weightは`fontSize`定義から分離され、標準のTailwindクラスで制御します：
+
+- `font-normal` (400)
+- `font-medium` (500)
+- `font-semibold` (600)
+- `font-bold` (700)
+
+#### セマンティックなHTMLタグのデフォルトFont Weight
+
+shadcn/ui準拠のアプローチとして、セマンティックなHTMLタグにデフォルトのfont-weightを設定しています（`app/globals.css`の`@layer base`）：
+
+- **h1**: `font-bold` (700)
+- **h2, h3, h4, h5, h6**: `font-semibold` (600)
+
+これにより、見出しタグを使用する際に明示的に`font-bold`や`font-semibold`を指定しなくても、適切な太さが適用されます。必要に応じて、個別にオーバーライドも可能です。
+
+使用例：
+```tsx
+{/* デフォルトスタイルが適用される */}
+<h1 className="text-heading-3xl font-merriweather">Main Title</h1>
+<h2 className="text-heading-2xl font-inter">Section Title</h2>
+
+{/* 必要に応じてオーバーライド可能 */}
+<h3 className="text-heading-xl font-normal">Light Weight Heading</h3>
+```
 
 ## Responsive Strategy
 
@@ -62,8 +107,8 @@
 
 両言語で統一されたサイズ：
 
-- モバイル: `text-body-s-140` (16px)
-- デスクトップ: `text-body-l-140` (21px)
+- モバイル: `text-body-sm` (16px)
+- デスクトップ: `text-body-lg` (21px)
 - 比率: 約 76% (21px → 16px)
 
 詳細は [ADR-003: モバイルフォントサイズの標準化](../decisions/003-mobile-font-size-standardization.md) を参照。
@@ -83,16 +128,18 @@
 const { jpFontSize } = useJPFontSize();
 
 // 両言語で同じサイズ
-jpFontSize('text-body-s-140', 'text-body-l-140');
+jpFontSize('text-body-sm', 'text-body-lg');
 
 // 言語ごとに異なるサイズ
 jpFontSize(
-  'text-body-xl-140', // モバイル英語
-  'text-body-xxl-140', // デスクトップ英語
-  'text-body-l-140', // モバイル日本語
-  'text-body-xl-140', // デスクトップ日本語
+  'text-body-xl',   // モバイル英語
+  'text-body-2xl',  // デスクトップ英語
+  'text-body-lg',   // モバイル日本語
+  'text-body-xl',  // デスクトップ日本語
 );
 ```
+
+**注意**: `useJPFontSize`は柔軟な実装のため、新旧どちらのクラス名でも動作しますが、新クラス名の使用を推奨します。
 
 ## Color System
 
@@ -130,6 +177,19 @@ Tailwind のデフォルトスケールを使用：
 - Mobile: `my-24`
 - Desktop: `md:mt-28 md:mb-16`
 
+## Migration Notes
+
+### 旧クラス名からの移行
+
+2025年1月に、タイポグラフィシステムをshadcn/ui準拠に再構築しました。旧クラス名（例: `text-body-s-140`）から新クラス名（例: `text-body-sm`）への移行が完了しています。
+
+主な変更点：
+- `fontSize`定義から`fontWeight`を削除
+- セマンティックな命名規則に統一（`-sm`, `-base`, `-lg`, `-xl`, `-2xl`など）
+- `font-semibold`などの標準Tailwindクラスが正しく動作するように修正
+
+詳細は [Typography Refactor Plan](../typography-refactor-plan.md) を参照。
+
 ## Last Updated
 
-2025-01-17
+2025-01-17 (Typography System Refactored)

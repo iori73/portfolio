@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* Google Fonts Import */
-@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Noto+Sans+JP:wght@100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Noto+Sans+JP:wght@100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 /* Local Fonts - SF fonts removed due to licensing */
 
@@ -61,18 +61,9 @@
   font-style: normal;
 }
 
-/* ROBOTO */
-.roboto {
-  font-family: 'Roboto', sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-}
-
 body {
-  /* font roboto */
-  font-family: 'Roboto', sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
+  /* Default system font stack */
+  font-family: 'Helvetica Neue', 'Helvetica', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #fcfbfc;
@@ -80,6 +71,18 @@ body {
 
 p {
   font-size: 1rem;
+}
+
+/* モバイルでの本文要素の可読性向上 */
+@media (max-width: 640px) {
+  /* 一般的なp要素とli要素 */
+  p {
+    line-height: 160%;
+  }
+
+  li {
+    line-height: 160%;
+  }
 }
 
 @layer utilities {
@@ -126,11 +129,7 @@ p {
 
     /* Font family variables */
     --font-space-mono: 'Space Mono', monospace;
-    --font-merriweather: 'Merriweather Sans', sans-serif;
     --font-noto-sans-jp: 'Noto Sans JP', sans-serif;
-    --font-roboto: 'Roboto', sans-serif;
-    --font-sf-pro: 'SF Pro', sans-serif;
-    --font-sf-mono: 'SF Mono', monospace;
   }
 
   .dark {
@@ -177,25 +176,24 @@ p {
     @apply bg-background text-foreground;
   }
 
+  /* Typography - Semantic HTML tags with default font weights */
+  /* shadcn/ui準拠: セマンティックなHTMLタグにデフォルトスタイルを設定 */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-helvetica-neue font-medium;
+  }
+
   /* Apply font families using CSS variables */
   .font-space-mono {
     font-family: var(--font-space-mono);
   }
 
-  .font-merriweather {
-    font-family: var(--font-merriweather);
-  }
-
   .font-noto-sans-jp {
     font-family: var(--font-noto-sans-jp);
-  }
-
-  .font-sf-pro {
-    font-family: var(--font-sf-pro);
-  }
-
-  .font-sf-mono {
-    font-family: var(--font-sf-mono);
   }
 }
 
@@ -241,17 +239,8 @@ p {
   flex-direction: column;
 }
 
-.article-desc > p {
-  font-size: 21px;
-  line-height: 160%;
-}
-/* モバイルの時はline height: 120%にする */
-@media (max-width: 640px) {
-  .article-desc > p {
-    font-size: 18px;
-    line-height: 120%;
-  }
-}
+/* .article-desc > p のスタイルは Tailwind クラスで管理（text-body-sm md:text-body-base） */
+/* 以前の固定スタイルは削除し、Tailwind クラスに統一 */
 
 .article-desc > a {
   border: #002a38 solid 2px;
@@ -276,8 +265,7 @@ p {
   align-items: center;
   gap: 2rem;
   position: relative;
-  background-color: #f2f2f2;
-  border-radius: 24px;
+  /* background-color: #f2f2f2; */
 }
 
 .medium__story:hover {

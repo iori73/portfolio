@@ -56,7 +56,7 @@ export type SectionData = {
   images: string[];             // 表示する画像パスの配列
   layoutType?: "default" | "splitImage";  // デフォルトレイアウトか分割レイアウトか
   bullets?: string[];           // 分割レイアウトなどで使う箇条書き（任意）
-  // さらに必要なら、headingLevel: "h2" | "h3"、borderTop?: boolean など追加可能
+  headingLevel?: "h2" | "h3";   // 見出しレベル（デフォルト: "h2"）。サイドバーにはh2のみ表示される
 };
 
 export type CaseStudyData = {

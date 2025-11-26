@@ -85,7 +85,7 @@ export async function GET() {
 
     console.log('Total items found:', result.rss.channel[0].item.length);
 
-    const items = result.rss.channel[0].item.slice(0, 4); // 最新4件
+    const items = result.rss.channel[0].item.slice(0, 6); // 最新6件
     console.log('Processing items:', items.length);
 
     const articles: Article[] = items.map((item: any, index: number) => {

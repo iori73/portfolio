@@ -57,45 +57,45 @@
 // // //       <section id="project-info" className="bg-white pt-4 pb-8 scroll-mt-32">
 // // //         <div className="max-w-[896px] w-full mx-auto">
 // // //           <div className="flex items-center gap-6 mb-4 flex-wrap md:flex-nowrap">
-// // //             <h1 className="text-heading-s-120 md:text-heading-m-120 font-inter">{data.projectTitle}</h1>
+// // //             <h1 className="text-heading-xl md:text-heading-2xl font-helvetica-neue">{data.projectTitle}</h1>
 // // //             <div className="flex gap-2">
 // // //               {data.tags.map(tag => (
-// // //                 <span key={tag} className="text-body-l-140 font-inter px-4 py-1 rounded-full bg-[#e3e3e3]">{tag}</span>
+// // //                 <span key={tag} className="text-body-lg font-helvetica-neue px-4 py-1 rounded-full bg-[#e3e3e3]">{tag}</span>
 // // //               ))}
 // // //             </div>
 // // //           </div>
-// // //           <p className="text-body-xl-140 font-inter text-gray-600 mb-8">
+// // //           <p className="text-body-xl font-helvetica-neue text-gray-600 mb-8">
 // // //             {data.projectDescription}
 // // //           </p>
 // // //           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
 // // //             <div>
-// // //               <h3 className="text-caption-xl-120 font-jetbrains-mono text-gray-500 mb-2">Timeline</h3>
-// // //               <p className="text-body-l-140 font-inter">{data.infoGrid.timeline}</p>
+// // //               <h3 className="text-caption-2xl font-jetbrains-mono text-gray-500 mb-2">Timeline</h3>
+// // //               <p className="text-body-lg font-helvetica-neue">{data.infoGrid.timeline}</p>
 // // //             </div>
 // // //             <div>
-// // //               <h3 className="text-caption-xl-120 font-jetbrains-mono text-gray-500 mb-2">My Role</h3>
-// // //               <p className="text-body-l-140 font-inter">{data.infoGrid.role}</p>
+// // //               <h3 className="text-caption-2xl font-jetbrains-mono text-gray-500 mb-2">My Role</h3>
+// // //               <p className="text-body-lg font-helvetica-neue">{data.infoGrid.role}</p>
 // // //             </div>
 // // //             <div>
-// // //               <h3 className="text-caption-xl-120 font-jetbrains-mono text-gray-500 mb-2">Team</h3>
-// // //               <p className="text-body-l-140 font-inter">{data.infoGrid.team}</p>
+// // //               <h3 className="text-caption-2xl font-jetbrains-mono text-gray-500 mb-2">Team</h3>
+// // //               <p className="text-body-lg font-helvetica-neue">{data.infoGrid.team}</p>
 // // //             </div>
 // // //             <div>
-// // //               <h3 className="text-caption-xl-120 font-jetbrains-mono text-gray-500 mb-2">Tool + Deliverables</h3>
-// // //               <p className="text-body-l-140 font-inter">{data.infoGrid.deliverables}</p>
+// // //               <h3 className="text-caption-2xl font-jetbrains-mono text-gray-500 mb-2">Tool + Deliverables</h3>
+// // //               <p className="text-body-lg font-helvetica-neue">{data.infoGrid.deliverables}</p>
 // // //             </div>
 // // //           </div>
 // // //         </div>
 // // //       </section>
 
 // // //       {/* Main Content */}
-// // //       <div className="max-w-[1152px] w-full mx-auto flex flex-col md:flex-row">
+// // //       <div className="max-w-7xl w-full mx-auto flex flex-col md:flex-row">
 // // //         <div className="md:w-3/4">
 // // //           {data.sections.map(section => (
 // // //             <section key={section.id} id={section.id} className="py-4 scroll-mt-32">
-// // //               <h2 className="text-heading-s-120 md:text-heading-m-120 font-inter mb-4">{section.heading}</h2>
+// // //               <h2 className="text-heading-xl md:text-heading-2xl font-helvetica-neue mb-4">{section.heading}</h2>
 // // //               {section.description && (
-// // //                 <p className="text-body-xl-140 font-inter mb-4">{section.description}</p>
+// // //                 <p className="text-body-xl font-helvetica-neue mb-4">{section.description}</p>
 // // //               )}
 // // //               {section.images.map((img, idx) => (
 // // //                 <img key={idx} src={img} alt={`${section.heading} placeholder`} className="w-full mb-8" />
@@ -113,8 +113,8 @@
 // // //                     onClick={() => scrollToSection(section.id)}
 // // //                     className={
 // // //                       activeSection === section.id
-// // //                         ? "text-left text-body-xl-140 font-inter transition-transform duration-900 scale-110"
-// // //                         : "text-left text-body-xl-140 font-inter transition-transform duration-900 scale-100 opacity-50"
+// // //                         ? "text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110"
+// // //                         : "text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-100 opacity-50"
 // // //                     }
 // // //                   >
 // // //                     {section.heading}
@@ -192,51 +192,51 @@
 // //       <section id="project-info" className="bg-white pt-4 pb-8 scroll-mt-32">
 // //         <div className="max-w-[896px] w-full mx-auto">
 // //           <div className="flex items-center gap-6 mb-4 flex-wrap md:flex-nowrap">
-// //             <h1 className="text-heading-s-120 md:text-heading-m-120 font-inter">
+// //             <h1 className="text-heading-xl md:text-heading-2xl font-helvetica-neue">
 // //               {data.projectTitle}
 // //             </h1>
 // //             <div className="flex gap-2">
 // //               {data.tags.map((tag) => (
-// //                 <span key={tag} className="text-body-l-140 font-inter px-4 py-1 rounded-full bg-[#e3e3e3]">
+// //                 <span key={tag} className="text-body-lg font-helvetica-neue px-4 py-1 rounded-full bg-[#e3e3e3]">
 // //                   {tag}
 // //                 </span>
 // //               ))}
 // //             </div>
 // //           </div>
-// //           <p className="text-body-xl-140 font-inter text-gray-600 mb-8">
+// //           <p className="text-body-xl font-helvetica-neue text-gray-600 mb-8">
 // //             {data.projectDescription}
 // //           </p>
 // //           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
 // //             <div>
-// //               <h3 className="text-caption-xl-120 font-jetbrains-mono text-gray-500 mb-2">Timeline</h3>
-// //               <p className="text-body-l-140 font-inter">{data.infoGrid.timeline}</p>
+// //               <h3 className="text-caption-2xl font-jetbrains-mono text-gray-500 mb-2">Timeline</h3>
+// //               <p className="text-body-lg font-helvetica-neue">{data.infoGrid.timeline}</p>
 // //             </div>
 // //             <div>
-// //               <h3 className="text-caption-xl-120 font-jetbrains-mono text-gray-500 mb-2">My Role</h3>
-// //               <p className="text-body-l-140 font-inter">{data.infoGrid.role}</p>
+// //               <h3 className="text-caption-2xl font-jetbrains-mono text-gray-500 mb-2">My Role</h3>
+// //               <p className="text-body-lg font-helvetica-neue">{data.infoGrid.role}</p>
 // //             </div>
 // //             <div>
-// //               <h3 className="text-caption-xl-120 font-jetbrains-mono text-gray-500 mb-2">Team</h3>
-// //               <p className="text-body-l-140 font-inter">{data.infoGrid.team}</p>
+// //               <h3 className="text-caption-2xl font-jetbrains-mono text-gray-500 mb-2">Team</h3>
+// //               <p className="text-body-lg font-helvetica-neue">{data.infoGrid.team}</p>
 // //             </div>
 // //             <div>
-// //               <h3 className="text-caption-xl-120 font-jetbrains-mono text-gray-500 mb-2">Tool + Deliverables</h3>
-// //               <p className="text-body-l-140 font-inter">{data.infoGrid.deliverables}</p>
+// //               <h3 className="text-caption-2xl font-jetbrains-mono text-gray-500 mb-2">Tool + Deliverables</h3>
+// //               <p className="text-body-lg font-helvetica-neue">{data.infoGrid.deliverables}</p>
 // //             </div>
 // //           </div>
 // //         </div>
 // //       </section>
 
 // //       {/* Main Content */}
-// //       {/* <div className="max-w-[1152px] w-full mx-auto flex flex-col md:flex-row">
+// //       {/* <div className="max-w-7xl w-full mx-auto flex flex-col md:flex-row">
 // //         <div className="md:w-3/4">
 // //           {data.sections.map((section) => (
 // //             <section key={section.id} id={section.id} className="py-4 scroll-mt-32">
-// //               <h2 className="text-heading-s-120 md:text-heading-m-120 font-inter mb-4">
+// //               <h2 className="text-heading-xl md:text-heading-2xl font-helvetica-neue mb-4">
 // //                 {section.heading}
 // //               </h2>
 // //               {section.description && (
-// //                 <p className="text-body-xl-140 font-inter mb-4">{section.description}</p>
+// //                 <p className="text-body-xl font-helvetica-neue mb-4">{section.description}</p>
 // //               )}
 // //               {section.images.map((img, idx) => (
 // //                 <img key={idx} src={img} alt={`${section.heading} placeholder`} className="w-full mb-8" />
@@ -253,8 +253,8 @@
 // //                     onClick={() => scrollToSection(section.id)}
 // //                     className={
 // //                       activeSection === section.id
-// //                         ? "text-left text-body-xl-140 font-inter transition-transform duration-900 scale-110"
-// //                         : "text-left text-body-xl-140 font-inter transition-transform duration-900 scale-100 opacity-50"
+// //                         ? "text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110"
+// //                         : "text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-100 opacity-50"
 // //                     }
 // //                   >
 // //                     {section.heading}
@@ -328,54 +328,54 @@
 //       <section id="project-info" className="bg-white pt-4 pb-8 scroll-mt-32">
 //         <div className="max-w-[896px] w-full mx-auto">
 //           <div className="flex items-center gap-6 mb-4 flex-wrap md:flex-nowrap">
-//             <h1 className="text-heading-s-120 md:text-heading-m-120 font-inter">
+//             <h1 className="text-heading-xl md:text-heading-2xl font-helvetica-neue">
 //               {data.projectTitle}
 //             </h1>
 //             <div className="flex gap-2">
 //               {data.tags.map((tag, index) => (
 //                 <span
 //                   key={index}
-//                   className="text-body-l-140 font-inter px-4 py-1 rounded-full bg-[#e3e3e3]"
+//                   className="text-body-lg font-helvetica-neue px-4 py-1 rounded-full bg-[#e3e3e3]"
 //                 >
 //                   {tag}
 //                 </span>
 //               ))}
 //             </div>
 //           </div>
-//           <p className="text-body-xl-140 font-inter text-gray-600 mb-8">
+//           <p className="text-body-xl font-helvetica-neue text-gray-600 mb-8">
 //             {data.projectDescription}
 //           </p>
 //           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
 //             <div>
-//               <h3 className="text-caption-xl-120 font-jetbrains-mono text-gray-500 mb-2">
+//               <h3 className="text-caption-2xl font-jetbrains-mono text-gray-500 mb-2">
 //                 Timeline
 //               </h3>
-//               <p className="text-body-l-140 font-inter">{data.infoGrid.timeline}</p>
+//               <p className="text-body-lg font-helvetica-neue">{data.infoGrid.timeline}</p>
 //             </div>
 //             <div>
-//               <h3 className="text-caption-xl-120 font-jetbrains-mono text-gray-500 mb-2">
+//               <h3 className="text-caption-2xl font-jetbrains-mono text-gray-500 mb-2">
 //                 My Role
 //               </h3>
-//               <p className="text-body-l-140 font-inter">{data.infoGrid.role}</p>
+//               <p className="text-body-lg font-helvetica-neue">{data.infoGrid.role}</p>
 //             </div>
 //             <div>
-//               <h3 className="text-caption-xl-120 font-jetbrains-mono text-gray-500 mb-2">
+//               <h3 className="text-caption-2xl font-jetbrains-mono text-gray-500 mb-2">
 //                 Team
 //               </h3>
-//               <p className="text-body-l-140 font-inter">{data.infoGrid.team}</p>
+//               <p className="text-body-lg font-helvetica-neue">{data.infoGrid.team}</p>
 //             </div>
 //             <div>
-//               <h3 className="text-caption-xl-120 font-jetbrains-mono text-gray-500 mb-2">
+//               <h3 className="text-caption-2xl font-jetbrains-mono text-gray-500 mb-2">
 //                 Tool + Deliverables
 //               </h3>
-//               <p className="text-body-l-140 font-inter">{data.infoGrid.deliverables}</p>
+//               <p className="text-body-lg font-helvetica-neue">{data.infoGrid.deliverables}</p>
 //             </div>
 //           </div>
 //         </div>
 //       </section>
 
 //       {/* Main Content and Sidebar */}
-//       <div className="max-w-[1152px] w-full mx-auto">
+//       <div className="max-w-7xl w-full mx-auto">
 //         <div className="flex flex-col md:flex-row">
 //           {/* Main Content */}
 //           <div className="md:w-3/4">
@@ -416,7 +416,7 @@
 //                           el.scrollIntoView({ behavior: "smooth" });
 //                         }
 //                       }}
-//                       className="text-left text-body-xl-140 font-inter transition-transform duration-900"
+//                       className="text-left text-body-xl font-helvetica-neue transition-transform duration-900"
 //                     >
 //                       {section.heading}
 //                     </button>
@@ -444,7 +444,9 @@ type CaseStudyLayoutProps = {
 
 export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
   // サイドバーのハイライト用に、現在のセクションIDを管理
-  const [activeSection, setActiveSection] = useState<string>(data.sections[0]?.id || '');
+  // 初期値はサイドバーに表示される最初のセクション（h2）にする
+  const h2Sections = data.sections.filter((section) => !section.headingLevel || section.headingLevel === 'h2');
+  const [activeSection, setActiveSection] = useState<string>(h2Sections[0]?.id || '');
 
   // セクションへのスムーズスクロール
   const scrollToSection = (sectionId: string) => {
@@ -456,11 +458,14 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
 
   // スクロール位置に応じて activeSection を更新
   useEffect(() => {
+    // サイドバーに表示するセクション（h2のみ）を取得
+    const sidebarSections = data.sections.filter((section) => !section.headingLevel || section.headingLevel === 'h2');
+
     const handleScroll = () => {
       let current = activeSection;
 
-      // sections の順番通りにチェックして、画面上部から 150px 程度に入ったら active 扱い
-      for (const section of data.sections) {
+      // sidebarSections の順番通りにチェックして、画面上部から 150px 程度に入ったら active 扱い
+      for (const section of sidebarSections) {
         const element = document.getElementById(section.id);
         if (element) {
           const rect = element.getBoundingClientRect();
@@ -494,44 +499,44 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
       <section id="project-info" className="bg-white pt-4 pb-8 scroll-mt-32">
         <div className="max-w-[896px] w-full mx-auto">
           <div className="flex items-center gap-6 mb-4 flex-wrap md:flex-nowrap">
-            <h1 className="text-heading-s-120 md:text-heading-m-120 font-inter">{data.projectTitle}</h1>
+            <h1 className="text-heading-xl md:text-heading-2xl font-helvetica-neue">{data.projectTitle}</h1>
             <div className="flex gap-2">
               {data.tags.map((tag, index) => (
-                <span key={index} className="text-body-l-140 font-inter px-4 py-1 rounded-full bg-[#e3e3e3]">
+                <span key={index} className="text-body-lg font-helvetica-neue px-4 py-1 rounded-full bg-[#e3e3e3]">
                   {tag}
                 </span>
               ))}
             </div>
           </div>
 
-          <p className="text-body-xl-140 font-inter text-gray-600 mb-8">{data.projectDescription}</p>
+          <p className="text-body-xl font-helvetica-neue text-gray-600 mb-8">{data.projectDescription}</p>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div>
-              <h3 className="text-caption-xl-120 font-jetbrains-mono text-gray-500 mb-2">Timeline</h3>
-              <p className="text-body-l-140 font-inter">{data.infoGrid.timeline}</p>
+              <h3 className="text-caption-2xl font-jetbrains-mono text-gray-500 mb-2">Timeline</h3>
+              <p className="text-body-lg font-helvetica-neue">{data.infoGrid.timeline}</p>
             </div>
             <div>
-              <h3 className="text-caption-xl-120 font-jetbrains-mono text-gray-500 mb-2">My Role</h3>
-              <p className="text-body-l-140 font-inter">{data.infoGrid.role}</p>
+              <h3 className="text-caption-2xl font-jetbrains-mono text-gray-500 mb-2">My Role</h3>
+              <p className="text-body-lg font-helvetica-neue">{data.infoGrid.role}</p>
             </div>
             <div>
-              <h3 className="text-caption-xl-120 font-jetbrains-mono text-gray-500 mb-2">Team</h3>
-              <p className="text-body-l-140 font-inter">{data.infoGrid.team}</p>
+              <h3 className="text-caption-2xl font-jetbrains-mono text-gray-500 mb-2">Team</h3>
+              <p className="text-body-lg font-helvetica-neue">{data.infoGrid.team}</p>
             </div>
             <div>
-              <h3 className="text-caption-xl-120 font-jetbrains-mono text-gray-500 mb-2">Tool + Deliverables</h3>
-              <p className="text-body-l-140 font-inter">{data.infoGrid.deliverables}</p>
+              <h3 className="text-caption-2xl font-jetbrains-mono text-gray-500 mb-2">Tool + Deliverables</h3>
+              <p className="text-body-lg font-helvetica-neue">{data.infoGrid.deliverables}</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Main Content and Sidebar */}
-      <div className="max-w-[1152px] w-full mx-auto">
-        <div className="flex flex-col md:flex-row">
+      <div className="max-w-7xl w-full mx-auto">
+        <div className="flex flex-col md:flex-row justify-between">
           {/* Main Content */}
-          <div className="md:w-3/4">
+          <div className="md:w-[80%]">
             {data.sections.map((section) => {
               if (section.layoutType === 'splitImage') {
                 // 画像＋テキストが左右分割のレイアウト
@@ -542,6 +547,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     description={section.description}
                     bullets={section.bullets}
                     image={section.images[0] || ''}
+                    headingLevel={section.headingLevel}
                   />
                 );
               } else {
@@ -552,31 +558,34 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     heading={section.heading}
                     description={section.description}
                     images={section.images}
+                    headingLevel={section.headingLevel}
                   />
                 );
               }
             })}
           </div>
           {/* Sidebar - スクロール連動ナビゲーション */}
-          <div className="hidden md:flex md:w-1/4 pl-4 pt-8 items-start justify-center">
+          <div className="hidden md:flex md:w-[20%] pl-4 pt-8 items-start justify-center">
             <nav className="sticky top-24">
               <ul className="space-y-3">
-                {data.sections.map((section) => (
-                  <li key={section.id}>
-                    <button
-                      onClick={() => scrollToSection(section.id)}
-                      className={
-                        activeSection === section.id
-                          ? // アクティブ時
-                            'text-left text-body-xl-140 font-inter transition-transform duration-900 scale-110'
-                          : // 非アクティブ時
-                            'text-left text-body-xl-140 font-inter transition-transform duration-900 scale-100 opacity-50'
-                      }
-                    >
-                      {section.heading}
-                    </button>
-                  </li>
-                ))}
+                {data.sections
+                  .filter((section) => !section.headingLevel || section.headingLevel === 'h2')
+                  .map((section) => (
+                    <li key={section.id}>
+                      <button
+                        onClick={() => scrollToSection(section.id)}
+                        className={
+                          activeSection === section.id
+                            ? // アクティブ時
+                              'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110'
+                            : // 非アクティブ時
+                              'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-100 opacity-50'
+                        }
+                      >
+                        {section.heading}
+                      </button>
+                    </li>
+                  ))}
               </ul>
             </nav>
           </div>
@@ -592,8 +601,8 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     // アクティブ:   scale-110, opacity-100
                     className={
                       activeSection === 'overview'
-                        ? 'text-left text-body-xl-140 font-inter transition-transform duration-900 scale-110'
-                        : 'text-left text-body-xl-140 font-inter transition-transform duration-900 scale-100 opacity-50'
+                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110'
+                        : 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-100 opacity-50'
                     }
                   >
                     Overview
@@ -604,8 +613,8 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     onClick={() => scrollToSection('design-process')}
                     className={
                       activeSection === 'design-process'
-                        ? 'text-left text-body-xl-140 font-inter transition-transform duration-900 scale-110'
-                        : 'text-left text-body-xl-140 font-inter transition-transform duration-900 scale-100 opacity-50'
+                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110'
+                        : 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-100 opacity-50'
                     }
                   >
                     Design Process
@@ -616,8 +625,8 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     onClick={() => scrollToSection('solution')}
                     className={
                       activeSection === 'solution'
-                        ? 'text-left text-body-xl-140 font-inter transition-transform duration-900 scale-110'
-                        : 'text-left text-body-xl-140 font-inter transition-transform duration-900 scale-100 opacity-50'
+                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110'
+                        : 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-100 opacity-50'
                     }
                   >
                     Solution
@@ -628,8 +637,8 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     onClick={() => scrollToSection('reflection')}
                     className={
                       activeSection === 'reflection'
-                        ? 'text-left text-body-xl-140 font-inter transition-transform duration-900 scale-110'
-                        : 'text-left text-body-xl-140 font-inter transition-transform duration-900 scale-100 opacity-50'
+                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110'
+                        : 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-100 opacity-50'
                     }
                   >
                     Reflection

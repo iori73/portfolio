@@ -2,7 +2,7 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
-import { useJPFontSize } from '@/src/lib/i18n';
+import { useJPFontSize } from '@/src/hooks/useFonts';
 
 interface InterestNode {
   name: string;
@@ -176,7 +176,7 @@ const InterestsVisualization: React.FC = () => {
   return (
     <div className="w-full h-full flex flex-col items-center py-4 gap-8 md:gap-4">
       <div
-        className="flex items-center justify-center gap-2 py-2 px-4 rounded-[16px] bg-[#f5f5f7] text-[#696969]"
+        className="flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-[#f5f5f7] text-[#696969]"
         // style={{
         //   backgroundColor: '#646464',
         //   borderRadius: '100px',
@@ -185,10 +185,10 @@ const InterestsVisualization: React.FC = () => {
         <img src="/about/drag_icon.svg" alt="Drag icon" width={32} height={32} className="flex-shrink-0" />
         <p
           className={`font-space-mono ${jpFontSize(
-            'text-caption-xxxs-120',
-            'text-caption-s-120',
-            'text-caption-xxs-120',
-            'text-caption-m-120',
+            'text-caption-xs',
+            'text-caption-base',
+            'text-caption-xs',
+            'text-caption-lg',
           )}`}
           style={{
             color: '#0A0A0A',

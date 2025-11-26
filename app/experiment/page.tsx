@@ -8,9 +8,9 @@
 //       {/* Hero Section */}
 //       <section className="py-20">
 //         {/* h1: Heading/L_M_120 */}
-//         <h1 className="text-heading-l-20  mb-2">Hi, I'm Iori!</h1>
+//         <h1 className="text-heading-3xl  mb-2">Hi, I'm Iori!</h1>
 //         {/* Hero テキスト: Body/XXL_140 */}
-//         <p className="max-w-full text-body-xxl-140 ">
+//         <p className="max-w-full text-body-2xl ">
 //           A interface designer who loves crafting design to the next level.
 //           <br />
 //           Especially curious about the integration of data and design.
@@ -19,11 +19,11 @@
 
 //       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-6">
 //         <div className="lg:col-span-6">
-//           <p className="text-body-l-140  mb-4">
+//           <p className="text-body-lg  mb-4">
 //             The project was inspired by the following hypothetical scenario, provided by the company:
 //           </p>
 
-//           <ul className="space-y-2 mb-6 text-body-l-140">
+//           <ul className="space-y-2 mb-6 text-body-lg">
 //             <li className="flex gap-2">
 //               <span className="text-lg">•</span>
 //               <div>
@@ -104,15 +104,19 @@
 
 // /app/experiment/page.tsx
 'use client';
-import { Link } from 'lucide-react';
+import { Link, MoveUpRight } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
-import { useLanguage } from '@/src/lib/i18n';
+import { useTranslations, useLocale } from 'next-intl';
+import { useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
 
-// /Users/i_kawano/Documents/portfolio/app/experiment/SplineWork.tsxをimportする
-import SplineWork from './spline';
+// /Users/i_kawano/Documents/portfolio/app/experiment/FavoriteVisuals.tsxをimportする
+import FavoriteVisuals from './spline';
 
 const ExperimentPage: React.FC = () => {
-  const { t, language } = useLanguage();
+  const t = useTranslations('experiment');
+  const locale = useLocale();
+  const { getBodyFontClass, getBodyFontStyle } = useBodyFont();
+  const { getHeadingFontClass, getHeadingFontStyle } = useHeadingFont();
   const [activeSection, setActiveSection] = useState<string>('overview');
 
   const scrollToSection = (sectionId: string) => {
@@ -151,8 +155,8 @@ const ExperimentPage: React.FC = () => {
     <div className="font-sans my-24 md:mt-28 md:mb-16">
       {/* Hero Section */}
       <section className="pt-4 md:pt-16 pb-4 md:pb-16">
-        <h1 className="text-heading-l-120 md:text-heading-xl-m-120 mb-2">Experiment</h1>
-        <p className="max-w-full text-body-l-140 md:text-body-xl-140 ">{t('experimentDescription')}</p>
+        <h1 className="text-heading-3xl md:text-heading-4xl mb-2">Experiment</h1>
+        <p className={`max-w-full text-body-lg md:text-body-xl ${getBodyFontClass()}`}>{t('experimentDescription')}</p>
       </section>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-12">
         <div className="lg:col-span-6 relative">
@@ -169,41 +173,40 @@ const ExperimentPage: React.FC = () => {
           <div className="flex flex-col items-start gap-10 relative">
             <div className="flex flex-col items-start gap-4 relative self-stretch w-full flex-[0_0_auto]">
               <div className="inline-flex items-center gap-2 relative flex-[0_0_auto]">
-                <img className="relative w-14 h-14" alt="S" src="/experiment/podcast_notes_icon.svg" />
-                <h2 className="text-heading-m-120 md:text-heading-l-20">Podcast Notes</h2>
+                {/* <img className="relative w-14 h-14" alt="S" src="/experiment/podcast_notes_icon.svg" /> */}
+                <h2 className="text-heading-2xl md:text-heading-3xl">Podcast Notes</h2>
               </div>
 
-              <p className="text-body-l-140 md:text-body-xl-140">{t('podcastNotesDescription')}</p>
-
-              <div className="inline-flex items-start gap-2 relative flex-[0_0_auto] flex-wrap md:flex-nowrap">
-                <div
-                  className="text-caption-s-120 md:text-caption-m-120 font-space-mono"
-                  style={{ backgroundColor: '#F5F5F5', padding: ' 8px', borderRadius: '8px' }}
-                >
-                  #business
-                </div>
-
-                <div
-                  className="text-caption-s-120 md:text-caption-m-120 font-space-mono"
-                  style={{ backgroundColor: '#F5F5F5', padding: ' 8px', borderRadius: '8px' }}
-                >
-                  #technology
-                </div>
-
-                <div
-                  className="text-caption-s-120 md:text-caption-m-120 font-space-mono"
-                  style={{ backgroundColor: '#F5F5F5', padding: ' 8px', borderRadius: '8px' }}
-                >
-                  #science
-                </div>
-
-                <div
-                  className="text-caption-s-120 md:text-caption-m-120 font-space-mono"
-                  style={{ backgroundColor: '#F5F5F5', padding: ' 8px', borderRadius: '8px' }}
-                >
-                  #liberal arts
-                </div>
+              <div className="flex gap-2 items-start flex-wrap">
+                <span className="font-space-mono text-body-base px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                  Al
+                </span>
+                <span className="font-space-mono text-body-base px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                  Biology/Nature
+                </span>
+                <span className="font-space-mono text-body-base px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                  Business
+                </span>
+                <span className="font-space-mono text-body-base px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                  Career
+                </span>
+                <span className="font-space-mono text-body-base px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                  Design & Art
+                </span>
+                <span className="font-space-mono text-body-base px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                  Liberal Arts
+                </span>
+                <span className="font-space-mono text-body-base px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                  Science
+                </span>
+                <span className="font-space-mono text-body-base px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                  Startup/VC
+                </span>
+                <span className="font-space-mono text-body-base px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                  Technology
+                </span>
               </div>
+              <p className={`text-body-base md:text-body-lg ${getBodyFontClass()}`}>{t('podcastNotesDescription')}</p>
             </div>
 
             <div className="flex flex-wrap items-end gap-[16px_24px] relative self-stretch w-full flex-[0_0_auto]">
@@ -211,73 +214,83 @@ const ExperimentPage: React.FC = () => {
                 className="relative w-[72px] h-[72px] object-cover"
                 alt="Today_I_Learned"
                 // If Japanese is included, it will not be loaded on the site.
-                src="/experiment/covers/Today_I_Learned.png"
+                src="https://i.scdn.co/image/ab6765630000ba8a66df42744157019b4156d323"
               />
 
               <img
                 className="relative w-[72px] h-[72px] object-cover"
                 alt="デデデータ"
-                src="/experiment/covers/dededata.png"
+                src="https://i.scdn.co/image/ab6765630000ba8a8cf1ff631fdba63c7a354fff"
               />
 
               <img
                 className="relative w-[72px] h-[72px] object-cover"
                 alt="ミモリラジオ-自然の面白さを聴く"
-                src="/experiment/covers/mimori radio.jpeg"
+                src="https://i.scdn.co/image/ab6765630000ba8ae29175ad2623d601ede331e2"
               />
 
               <img
                 className="relative w-[72px] h-[72px] object-cover"
                 alt="Ologies with Alie Ward"
-                src="/experiment/covers/ologies.jpeg"
+                src="https://i.scdn.co/image/ab6765630000ba8a44e9ed06f94f5391dbd73049"
               />
 
               <img
                 className="relative w-[72px] h-[72px] object-cover"
                 alt="Off Topic"
-                src="/experiment/covers/Off Topic.png"
+                src="https://i.scdn.co/image/ab6765630000ba8a2332b679810aa74a364db7fd"
               />
 
               <img
                 className="relative w-[72px] h-[72px] object-cover"
                 alt="バイリンガルニュース (Bilingual News)"
-                src="/experiment/covers/Bilingual News.png"
+                src="https://i.scdn.co/image/ab6765630000ba8aea2b4558f98bd78edd90beb8"
               />
 
               <img
                 className="relative w-[72px] h-[72px] object-cover"
                 alt="START/FM"
-                src="/experiment/covers/START_FM.jpeg"
+                src="https://i.scdn.co/image/ab6765630000ba8a10bfd90aa0934995794d5bb4"
               />
 
               <img
                 className="relative w-[72px] h-[72px] object-cover"
                 alt="Design Better"
-                src="/experiment/covers/Design Better.png"
+                src="https://i.scdn.co/image/ab6765630000ba8a5383d40bcd6e695ff40eed19"
               />
 
-              {/* <div className="relative text-body-m-140">{t('andMore')}</div> */}
-              <div className="relative text-body-m-140">and more!</div>
+              {/* <div className="relative text-body-base">{t('andMore')}</div> */}
+              <div className="relative text-body-base">and more!</div>
             </div>
 
-            <button
-              onClick={() =>
-                window.open(
-                  'https://paint-foam-7ff.notion.site/Podcast-notes-1bc264826e0c8009bf10ee284f3cc5b4?pvs=4',
-                  '_blank',
-                )
-              }
-              aria-label="Podcast Notes"
-              className="all-[unset] box-border inline-flex flex-col items-start px-10 py-2 relative flex-[0_0_auto] border-2 border-black rounded-[40px]"
+            <a
+              href="https://paint-foam-7ff.notion.site/Podcast-notes-1bc264826e0c8009bf10ee284f3cc5b4?pvs=4"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative flex items-center justify-center px-6 py-3 rounded-[100px] text-[#0000008f] hover:text-white cursor-pointer transition-[color] duration-300 whitespace-nowrap overflow-hidden group w-full md:w-auto"
+              style={{
+                background:
+                  'radial-gradient(75% 150% at 100% 114.2%, rgba(210, 210, 215, 0.4) 0%, rgba(180, 180, 185, 0.4) 100%)',
+                backdropFilter: 'blur(8px)',
+              }}
             >
-              <div className="text-heading-xxs-120 py-1 z-10">{t('goToPage')}</div>
-            </button>
+              {/* Hover background overlay */}
+              <span
+                className="absolute inset-0 rounded-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                style={{
+                  background:
+                    'radial-gradient(75% 150% at 100% 114.2%, rgba(210, 210, 215, 0.8) 0%, rgba(180, 180, 185, 0.8) 100%)',
+                  backdropFilter: 'blur(8px)',
+                }}
+              />
+              <span className="relative z-10 text-body-lg md:text-body-xl font-medium">{t('goToPage')}</span>
+            </a>
           </div>
         </div>
       </div>
 
-      {/* Spline 3D モデル */}
-      <SplineWork />
+      {/* Favorite Visuals */}
+      <FavoriteVisuals />
     </div>
   );
 };

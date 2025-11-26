@@ -1,61 +1,66 @@
 'use client';
 
 import React from 'react';
-import Spline from '@splinetool/react-spline';
-import { useLanguage } from '@/src/lib/i18n';
+import { useTranslations } from 'next-intl';
+import { useBodyFont } from '@/src/hooks/useFonts';
 
-const SplineWork: React.FC = () => {
-  const { t } = useLanguage();
+const FavoriteVisuals: React.FC = () => {
+  const t = useTranslations('experiment');
+  const { getBodyFontClass } = useBodyFont();
 
   return (
     <section className="w-full py-12">
       {/* 横並びのflexレイアウト */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        {/* 左カラム：Spline 3D */}
-        <div className="lg:col-span-6 relative w-full h-[400px] md:h-[500px]">
-          <div className="absolute inset-0 bg-gray-100 -z-10"></div>
-          <Spline
-            className="w-full rounded-[16px]"
-            scene="https://prod.spline.design/HS2WPsXRP-WLukO0/scene.splinecode"
-          />
+        {/* 左カラム：ビジュアル */}
+        <div className="lg:col-span-6 relative">
+          <div className="absolute inset-0 -z-10"></div>
+          <div className="relative pt-0 md:pt-8">
+            <img
+              src="/favorite_visuals.png"
+              alt="Favorite Visuals"
+              className="w-full max-w-lg mx-auto rounded-[16px]"
+            />
+          </div>
         </div>
 
         {/* 右カラム：テキストなど */}
         <div className="lg:col-span-6 flex flex-col gap-6">
-          <h2 className="text-heading-m-120 md:text-heading-l-20">Vision Pro + Spotify</h2>
-          <p className="text-body-l-140">{t('visionProSpotifyDescription')}</p>
+          <h2 className="text-heading-2xl md:text-heading-3xl">{t('favoriteVisuals')}</h2>
+          <p className={`text-body-base md:text-body-lg ${getBodyFontClass()}`}>{t('favoriteVisualsDescription')}</p>
 
-          {/* 制作情報 */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div>
-              <h3 className="text-caption-m-120 font-jetbrains-mono text-gray-500 mb-2">Timeline</h3>
-              <p className="text-body-l-140 font-inter">{t('twoWeeksInJan2024')}</p>
-            </div>
-            <div>
-              <h3 className="text-caption-m-120 font-jetbrains-mono text-gray-500 mb-2">My Skills</h3>
-              <p className="text-body-l-140 font-inter">Spline</p>
-            </div>
-            <div>
-              <h3 className="text-caption-m-120 font-jetbrains-mono text-gray-500 mb-2">Type</h3>
-              <p className="text-body-l-140 font-inter">{t('solo')}</p>
-            </div>
-            <div>
-              <h3 className="text-caption-m-120 font-jetbrains-mono text-gray-500 mb-2">Deliverables</h3>
-              <p className="text-body-l-140 font-inter">{t('prototype')}</p>
-            </div>
-          </div>
-
-          <button
-            onClick={() => window.open('https://visionpro-spotify.netlify.app/', '_blank')}
-            aria-label="Vision Pro + Spotify"
-            className="w-fit all-[unset] box-border inline-flex flex-col items-start px-10 py-2 relative flex-[0_0_auto] border-2 border-black rounded-[40px]"
+          <blockquote
+            className={`border-l-4 border-gray-300 pl-4 italic text-body-sm md:text-body-base ${getBodyFontClass()} text-gray-600`}
           >
-            <div className="text-heading-xxs-120 py-1 z-10">{t('viewPrototype')}</div>
-          </button>
+            {t('favoriteVisualsNote')}
+          </blockquote>
+
+          <a
+            href="https://elite-kite-224.notion.site/Favorite-Visuals-2b233d06cce38096b428c41871d97102?pvs=73"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative flex items-center justify-center px-6 py-3 rounded-[100px] text-[#0000008f] hover:text-white cursor-pointer transition-[color] duration-300 whitespace-nowrap overflow-hidden group w-full md:w-auto md:self-start"
+            style={{
+              background:
+                'radial-gradient(75% 150% at 100% 114.2%, rgba(210, 210, 215, 0.4) 0%, rgba(180, 180, 185, 0.4) 100%)',
+              backdropFilter: 'blur(8px)',
+            }}
+          >
+            {/* Hover background overlay */}
+            <span
+              className="absolute inset-0 rounded-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+              style={{
+                background:
+                  'radial-gradient(75% 150% at 100% 114.2%, rgba(210, 210, 215, 0.8) 0%, rgba(180, 180, 185, 0.8) 100%)',
+                backdropFilter: 'blur(8px)',
+              }}
+            />
+            <span className="relative z-10 text-body-lg md:text-body-xl font-semibold">{t('goToPage')}</span>
+          </a>
         </div>
       </div>
     </section>
   );
 };
 
-export default SplineWork;
+export default FavoriteVisuals;

@@ -255,18 +255,23 @@ const GymSystemDiagram: React.FC = () => {
 
               {/* アイコン */}
               <foreignObject x={textPos.x - 12} y={textPos.y - 34} width="24" height="24">
-                <div className="text-gray-800 flex items-center justify-center w-full h-full text-sm">
+                <div className="text-gray-800 flex items-center justify-center w-full h-full text-body-xs">
                   {section.icon}
                 </div>
               </foreignObject>
 
               {/* タイトル */}
-              <text x={textPos.x} y={textPos.y + 6} textAnchor="middle" className="text-s font-semibold fill-gray-800">
+              <text
+                x={textPos.x}
+                y={textPos.y + 6}
+                textAnchor="middle"
+                className="text-body-sm font-semibold fill-gray-800"
+              >
                 {section.id}. {section.title}
               </text>
 
               {/* サブタイトル */}
-              <text x={textPos.x} y={textPos.y + 24} textAnchor="middle" className="text-[14px] fill-gray-600">
+              <text x={textPos.x} y={textPos.y + 24} textAnchor="middle" className="text-caption-sm fill-gray-600">
                 {section.subtitle}
               </text>
             </g>
@@ -290,14 +295,18 @@ const GymSystemDiagram: React.FC = () => {
                   clickedSection,
                 )} duration-200 ${
                   typeof window !== 'undefined' && window.innerWidth < 768
-                    ? 'max-w-[280px] break-words'
+                    ? 'break-words mx-4'
                     : clickedSection === 5 || clickedSection === 2
                     ? 'max-w-[220px] break-words'
                     : 'max-w-sm'
                 }`}
                 style={{
-                  left: `${(tooltipPos.x / 453) * 100}%`,
-                  top: `${(tooltipPos.y / 452) * 100}%`,
+                  left:
+                    typeof window !== 'undefined' && window.innerWidth < 768 ? '50%' : `${(tooltipPos.x / 453) * 100}%`,
+                  top:
+                    typeof window !== 'undefined' && window.innerWidth < 768 ? '20%' : `${(tooltipPos.y / 452) * 100}%`,
+                  width: typeof window !== 'undefined' && window.innerWidth < 768 ? '50vw' : 'auto',
+                  maxWidth: typeof window !== 'undefined' && window.innerWidth < 768 ? 'calc(100vw - 2rem)' : 'none',
                   transform:
                     typeof window !== 'undefined' && window.innerWidth < 768
                       ? 'translateX(-50%) translateY(-50%)'
@@ -313,7 +322,6 @@ const GymSystemDiagram: React.FC = () => {
           })()}
         </>
       )}
-      
 
       {/* 下部テキスト */}
       <div className="absolute bottom-3 left-1/2 transform translate-x-1/2">

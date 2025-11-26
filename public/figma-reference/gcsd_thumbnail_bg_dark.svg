@@ -1,0 +1,14 @@
+<svg width="1844" height="898" viewBox="0 0 1844 898" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <filter id="dark-mode-filter" color-interpolation-filters="sRGB">
+      <feComponentTransfer>
+        <feFuncR type="linear" slope="0.8"/>
+        <feFuncG type="linear" slope="0.8"/>
+        <feFuncB type="linear" slope="0.8"/>
+      </feComponentTransfer>
+      <feColorMatrix type="saturate" values="0.9"/>
+    </filter>
+  </defs>
+  <image xlink:href="/figma-reference/gcsd_thumbnail_bg.png" width="1844" height="898" preserveAspectRatio="xMidYMid slice" filter="url(#dark-mode-filter)"/>
+</svg>
+

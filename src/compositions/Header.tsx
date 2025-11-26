@@ -2,18 +2,32 @@
 
 'use client';
 import { useState } from 'react';
-import Link from 'next/link';
+import { Link, usePathname, useRouter } from '@/i18n/routing';
+import { useTransition } from 'react';
+import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import { useLanguage } from '@/src/lib/i18n';
+import { useMenu } from '@/src/contexts/MenuContext';
 
 export default function Header() {
+  const { isMenuOpen, setIsMenuOpen } = useMenu();
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-  const { language, setLanguage, t } = useLanguage();
+  const t = useTranslations('navigation');
+  const locale = useLocale();
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
-  const toggleMenu = () => setIsOpen(!isOpen);
-  const toggleLanguage = (lang: 'en' | 'jp') => setLanguage(lang);
+  const toggleMenu = () => {
+    const newState = !isOpen;
+    setIsOpen(newState);
+    setIsMenuOpen(newState);
+  };
+  
+  const toggleLanguage = (newLocale: 'en' | 'jp') => {
+    startTransition(() => {
+      router.replace(pathname, { locale: newLocale });
+    });
+  };
 
   const isActive = (path: string) => {
     return pathname === path;
@@ -27,25 +41,28 @@ export default function Header() {
   ];
 
   return (
-    <header className="fixed top-0 left-0 w-full z-40 mx-auto px-4 md:px-16 py-4 flex justify-between items-center">
+    <header className="fixed top-0 left-0 w-full z-40 mx-auto px-4 py-3 md:px-6 flex justify-between items-center">
+      {/* Background gradient */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={
+          {
+            // background:
+            //   'linear-gradient(180deg, rgba(255, 255, 255, .5) 0%, rgba(255, 255, 255, 0.55) 30%, rgba(255, 255, 255, 0.3) 60%, rgba(255, 255, 255, 0.1) 80%, rgba(255, 255, 255, 0) 100%)',
+          }
+        }
+      />
       {/* Progressive blur background */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          backdropFilter: 'blur(32px)',
-          maskImage: 'linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%)',
-          WebkitMaskImage: 'linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%)',
+          backdropFilter: 'blur(40px)',
+          // maskImage:
+          //   'linear-gradient(180deg, rgba(229, 229, 229, 10) 0%, rgba(229, 229, 229, 0.9) 25%, rgba(229, 229, 229, 0.7) 50%, rgba(229, 229, 229, .5) 70%, rgba(229, 229, 229, 0.1) 90%, rgba(229, 229, 229, 0) 100%)',
+          // WebkitMaskImage:
+          //   'linear-gradient(180deg, rgba(229, 229, 229, 10) 0%, rgba(229, 229, 229, 0.9) 25%, rgba(229, 229, 229, 0.7) 50%, rgba(229, 229, 229, .5) 70%, rgba(229, 229, 229, 0.1) 90%, rgba(229, 229, 229, 0) 100%)',
         }}
       />
-
-      {/* White gradient overlay */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%)',
-        }}
-      />
-
       {/* Content layer */}
       <div className="relative z-10 w-full flex justify-between items-center">
         {/* Logo */}
@@ -60,16 +77,14 @@ export default function Header() {
               <div key={item.path} className="relative flex flex-col items-center">
                 <Link
                   href={item.path}
-                  className="text-body-xl-140 font-merriweather"
-                  style={{
-                    fontWeight: isActive(item.path) ? 600 : 400,
-                    transition: 'font-weight 300ms ease',
-                  }}
+                  className={`font-helvetica-neue text-body-xl leading-[33.6px] transition-[font-weight] duration-300 ${
+                    isActive(item.path) ? 'font-bold' : 'font-normal'
+                  }`}
                 >
                   {item.name}
                 </Link>
                 {isActive(item.path) && (
-                  <div className="absolute top-full mt-1 w-2 h-2 rounded-full bg-[#1A1A1A]"></div>
+                  <div className="absolute top-full mt-0 w-2 h-2 rounded-full bg-[#1A1A1A]"></div>
                 )}
               </div>
             ))}
@@ -77,27 +92,25 @@ export default function Header() {
 
           {/* Language Switcher for Desktop */}
           <div className="flex items-center">
-            <button
-              onClick={() => toggleLanguage('en')}
-              className="text-body-xl-140 font-merriweather"
-              style={{
-                fontWeight: language === 'en' ? 600 : 400,
-                transition: 'font-weight 300ms ease',
-              }}
-            >
-              {t('languageEN')}
-            </button>
-            <span className="mx-2">|</span>
-            <button
-              onClick={() => toggleLanguage('jp')}
-              className="text-body-xl-140 font-merriweather"
-              style={{
-                fontWeight: language === 'jp' ? 600 : 400,
-                transition: 'font-weight 300ms ease',
-              }}
-            >
-              {t('languageJP')}
-            </button>
+              <button
+                onClick={() => toggleLanguage('en')}
+                disabled={isPending}
+                className={`font-helvetica-neue text-body-xl leading-[33.6px] text-center transition-[font-weight] duration-300 ${
+                  locale === 'en' ? 'font-bold' : 'font-light'
+                }`}
+              >
+                EN
+              </button>
+              <span className="mx-2 text-body-sm leading-6">|</span>
+              <button
+                onClick={() => toggleLanguage('jp')}
+                disabled={isPending}
+                className={`font-helvetica-neue text-body-xl leading-[33.6px] text-center transition-[font-weight] duration-300 ${
+                  locale === 'jp' ? 'font-bold' : 'font-light'
+                }`}
+              >
+                JP
+              </button>
           </div>
         </div>
 
@@ -128,85 +141,84 @@ export default function Header() {
         </button>
 
         {/* モバイルメニュー (フルスクリーン) */}
-        <div
-          className={`fixed top-0 left-0 w-full h-screen z-40 flex items-start pt-24 justify-start px-6 md:hidden`}
-          style={{
-            pointerEvents: isOpen ? 'auto' : 'none',
-            opacity: isOpen ? 1 : 0,
-            transform: isOpen ? 'translateY(0)' : 'translateY(-100%)',
-            background: 'linear-gradient(rgb(255, 255, 255) 33%, rgba(255, 255, 255, 0.5) 100%)',
-            backdropFilter: 'blur(16px)',
-            transition: isOpen ? 'all 0.8s ease' : 'all 2.0s ease',
-            visibility: isOpen ? 'visible' : 'hidden',
-            transitionProperty: 'opacity, transform, visibility',
-          }}
-        >
-          {/* Menu Content */}
-          <nav className="flex flex-col items-start justify-center gap-8 w-full">
-            {menuItems.map((item, index) => (
-              <div key={item.path} className="relative flex items-center gap-2">
-                <Link
-                  href={item.path}
-                  className="text-body-xxxl-140 font-merriweather"
-                  style={{
-                    opacity: isOpen ? 1 : 0,
-                    transform: isOpen ? 'translateY(0)' : 'translateY(-20px)',
-                    transition: isOpen ? 'all 0.8s ease' : 'all 0.2s ease',
-                    transitionDelay: isOpen ? `${index * 0.15 + 0.3}s` : '0s',
-                    fontWeight: isActive(item.path) ? 600 : 400,
-                  }}
-                  onClick={toggleMenu}
-                >
-                  {item.name}
-                </Link>
-                {isActive(item.path) && (
-                  <div
-                    className="w-2 h-2 rounded-full bg-[#1A1A1A]"
+        {isOpen && (
+          <div
+            className="fixed top-0 left-0 w-full h-screen z-40 flex items-start pt-24 justify-start px-6 md:hidden"
+            style={{
+              background: 'linear-gradient(rgb(255, 255, 255) 33%, rgba(255, 255, 255, 0.5) 100%)',
+              backdropFilter: 'blur(16px)',
+              transition: 'all 0.8s ease',
+            }}
+          >
+            {/* Menu Content */}
+            <nav className="flex flex-col items-start justify-center gap-8 w-full">
+              {menuItems.map((item, index) => (
+                <div key={item.path} className="relative flex items-center gap-2">
+                  <Link
+                    href={item.path}
+                    className="text-body-3xl font-merriweather"
                     style={{
-                      opacity: isOpen ? 1 : 0,
-                      transform: isOpen ? 'translateY(-10px)' : 'translateY(-30px)',
-                      transition: isOpen ? 'all 0.8s ease' : 'all 0.2s ease',
-                      transitionDelay: isOpen ? `${index * 0.15 + 0.3}s` : '0s',
+                      opacity: 1,
+                      transform: 'translateY(0)',
+                      transition: 'all 0.8s ease',
+                      transitionDelay: `${index * 0.15 + 0.3}s`,
+                      fontWeight: isActive(item.path) ? 600 : 400,
                     }}
-                  />
-                )}
-              </div>
-            ))}
+                    onClick={toggleMenu}
+                  >
+                    {item.name}
+                  </Link>
+                  {isActive(item.path) && (
+                    <div
+                      className="w-2 h-2 rounded-full bg-[#1A1A1A]"
+                      style={{
+                        opacity: 1,
+                        transform: 'translateY(-10px)',
+                        transition: 'all 0.8s ease',
+                        transitionDelay: `${index * 0.15 + 0.3}s`,
+                      }}
+                    />
+                  )}
+                </div>
+              ))}
 
-            {/* Language Switcher for Mobile */}
-            <div
-              className="flex items-center mt-4"
-              style={{
-                opacity: isOpen ? 1 : 0,
-                transform: isOpen ? 'translateY(0)' : 'translateY(-20px)',
-                transition: isOpen ? 'all 0.8s ease' : 'all 0.2s ease',
-                transitionDelay: isOpen ? '0.75s' : '0s',
-              }}
-            >
-              <button
-                onClick={() => toggleLanguage('en')}
-                className="text-body-xl-140 font-merriweather"
+              {/* Language Switcher for Mobile */}
+              <div
+                className="flex items-center mt-4"
                 style={{
-                  fontWeight: language === 'en' ? 600 : 400,
-                  transition: 'font-weight 300ms ease',
+                  opacity: isOpen ? 1 : 0,
+                  transform: isOpen ? 'translateY(0)' : 'translateY(-20px)',
+                  transition: isOpen ? 'all 0.8s ease' : 'all 0.2s ease',
+                  transitionDelay: isOpen ? '0.75s' : '0s',
                 }}
               >
-                {t('languageEN')}
-              </button>
-              <span className="mx-2">|</span>
-              <button
-                onClick={() => toggleLanguage('jp')}
-                className="text-body-xl-140 font-merriweather"
-                style={{
-                  fontWeight: language === 'jp' ? 600 : 400,
-                  transition: 'font-weight 300ms ease',
-                }}
-              >
-                {t('languageJP')}
-              </button>
-            </div>
-          </nav>
-        </div>
+                <button
+                  onClick={() => toggleLanguage('en')}
+                  disabled={isPending}
+                  className="text-body-xl font-merriweather"
+                  style={{
+                    fontWeight: locale === 'en' ? 600 : 400,
+                    transition: 'font-weight 300ms ease',
+                  }}
+                >
+                  EN
+                </button>
+                <span className="mx-2">|</span>
+                <button
+                  onClick={() => toggleLanguage('jp')}
+                  disabled={isPending}
+                  className="text-body-xl font-merriweather"
+                  style={{
+                    fontWeight: locale === 'jp' ? 600 : 400,
+                    transition: 'font-weight 300ms ease',
+                  }}
+                >
+                  JP
+                </button>
+              </div>
+            </nav>
+          </div>
+        )}
 
         {/* Overlay */}
         {isOpen && (

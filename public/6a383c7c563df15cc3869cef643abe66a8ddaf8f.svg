@@ -1,0 +1,12 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 8 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="dot bar">
+<path id="Vector" d="M3.76749 0.000644126L3.8688 29.8831" stroke="var(--stroke-0, #9CA3AF)" stroke-opacity="0.5" stroke-width="0.38" stroke-dasharray="0.38 0.38"/>
+<g id="Frame 427319451">
+<circle id="dot" cx="3.83404" cy="4.14534" r="2.28" transform="rotate(180 3.83404 4.14534)" fill="var(--fill-0, #A8A29E)"/>
+<circle id="dot_2" cx="3.83404" cy="10.2253" r="2.28" transform="rotate(180 3.83404 10.2253)" fill="var(--fill-0, #78716C)"/>
+<circle id="dot_3" cx="3.83404" cy="16.3053" r="2.28" transform="rotate(180 3.83404 16.3053)" fill="var(--fill-0, #78716C)"/>
+<circle id="dot_4" cx="3.83404" cy="22.3853" r="2.28" transform="rotate(180 3.83404 22.3853)" fill="var(--fill-0, #78716C)"/>
+<circle id="dot_5" cx="3.83404" cy="28.4653" r="2.28" transform="rotate(180 3.83404 28.4653)" fill="var(--fill-0, #A8A29E)"/>
+</g>
+</g>
+</svg>
