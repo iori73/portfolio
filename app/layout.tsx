@@ -2,6 +2,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Noto_Sans_JP, Space_Mono } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 
 // Define your fonts
 const notoSansJP = Noto_Sans_JP({
@@ -32,7 +33,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html className={`${notoSansJP.variable} ${spaceMono.variable}`}>
-      <body className="min-h-screen">{children}</body>
+      <body className="min-h-screen">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
