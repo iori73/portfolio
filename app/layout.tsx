@@ -2,7 +2,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Noto_Sans_JP, Space_Mono } from 'next/font/google';
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from '@vercel/analytics/next';
 
 // Define your fonts
 const notoSansJP = Noto_Sans_JP({
