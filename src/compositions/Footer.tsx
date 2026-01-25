@@ -132,7 +132,7 @@ const PLATFORM_DATA = [
   {
     id: 'medium',
     name: 'Medium',
-    href: 'https://medium.com/@iori730002204294',
+    href: 'https://medium.com/@iori73',
     Icon: MediumIcon,
     widthPercent: 10.5, // adjusted to ensure min 104px width (10.5% × 1024px = 107.52px)
     opacity: 0.3, // posting frequency

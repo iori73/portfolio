@@ -58,7 +58,7 @@ export default function BlogPage() {
 
   useEffect(() => {
     const fetchMedium = async () => {
-      const rssUrl = 'https://medium.com/feed/@iori730002204294'; // ←あなたの Medium RSS
+      const rssUrl = 'https://medium.com/feed/@iori73'; // ←あなたの Medium RSS
       const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}`;
       try {
         const response = await fetch(apiUrl);
@@ -251,7 +251,7 @@ export default function BlogPage() {
 
           <div className="flex w-full justify-center md:justify-center">
             <a
-              href="https://medium.com/@iori730002204294"
+              href="https://medium.com/@iori73"
               target="_blank"
               rel="noopener noreferrer"
               className="relative flex items-center justify-center px-6 py-3 rounded-[100px] text-[#0A0A0A] hover:text-[#0A0A0A] cursor-pointer transition-[color] duration-300 whitespace-nowrap overflow-hidden group w-full md:w-auto"
