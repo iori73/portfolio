@@ -1,0 +1,3784 @@
+{
+  "episodes": [
+    {
+      "id": "30e26482-6e0c-81e3-9206-f6baf0cd2f94",
+      "title": "#36 AIの劇的な進歩の前に広がるAI格差。あなたはこの激動の一ヶ月を体感していますか？",
+      "podcast": "SingularRadio - シンギュラーラジオ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f050c4c0269ff5d00f19aead3",
+      "category": null,
+      "tags": [],
+      "date": "2026-02-19",
+      "url": "https://open.spotify.com/episode/7I060UUT4ofWjBfqCrC0Re?si=db8f8ca2e80243e5",
+      "durationMinutes": 39.386633333333336,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.6102317820024834,
+        0.17751664591496374
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "30a26482-6e0c-81c4-b153-d47cc90d2215",
+      "title": "#58(s9-8)【近代の寿司】スシの定義って結局・・・。江戸の握り寿司がメジャーになるまで（たべものラジオ）",
+      "podcast": "たべものラジオ 〜食を面白く学ぶ〜",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f0f0a14d3508f0d1e920c9198",
+      "category": null,
+      "tags": [],
+      "date": "2022-02-15",
+      "url": "https://open.spotify.com/episode/5SM2YCrpfMpzmPIVTRr3js?si=735eb9274751428e",
+      "durationMinutes": 33.936733333333336,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.276734327389791,
+        0.11856666738396504
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "30526482-6e0c-8117-ba50-ee479f2de0ad",
+      "title": "緒方壽人(前半) - デジタルとコンヴィヴィアリティの実践",
+      "podcast": "デジタルと教育の庭",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fa6f60dfae62dacc6bdd6fe12",
+      "category": null,
+      "tags": [],
+      "date": "2026-01-06",
+      "url": "https://open.spotify.com/episode/5b38VDvaVE7KI3Vm4JEhtL?si=a62f0f2e93ff4641",
+      "durationMinutes": 45.77738333333333,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.4316785221113157,
+        -0.6093200791089084
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "30326482-6e0c-8125-aa09-fd34017e7a38",
+      "title": "198. もし複数の興味があるなら、次の2-3年を無駄に過ごすな",
+      "podcast": "Today I Learned -シリコンバレーの現場から-",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f66df42744157019b4156d323",
+      "category": null,
+      "tags": [],
+      "date": "2026-02-08",
+      "url": "https://open.spotify.com/episode/2eLadU8G7Sa9LPyMh9HMLG?si=d58111f380f34cb2",
+      "durationMinutes": 38.1478,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        2.920839443320852,
+        -0.7162308050055177
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "30126482-6e0c-8165-af09-f03ad4572cd1",
+      "title": "#4 なぜ日本人は「コミュ力」に呪われるのか？30年間のベストセラー全分析",
+      "podcast": "世界システムラジオ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f7fe52d481d797eabf6553145",
+      "category": null,
+      "tags": [],
+      "date": "2025-12-10",
+      "url": "https://open.spotify.com/episode/6xTwehzaVgsezRCgpuNCIY?si=09f11083b8e94d98",
+      "durationMinutes": 100.01315,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.8143423027884786,
+        -0.2572726143371494
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "30126482-6e0c-8149-86a3-f13fb7e34f51",
+      "title": "#5総集編 【保存版】言語化の全てがわかる110分｜歴史・権力・暗黙知まで",
+      "podcast": "世界システムラジオ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f7fe52d481d797eabf6553145",
+      "category": null,
+      "tags": [],
+      "date": "2026-01-21",
+      "url": "https://open.spotify.com/episode/5ZAfhfmEt07CgscFds5OzA?si=2bf6ccaaa5e040b3",
+      "durationMinutes": 112.00711666666666,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        2.8998077665817603,
+        0.11767308492192285
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "30126482-6e0c-8115-81db-f425d1fb5728",
+      "title": "【本音の100分間】絶望と希望の狭間を生きるビジネスパーソンの美学（深井龍之介/高木新平）",
+      "podcast": "起業家の思想と人生に迫る インサイドビジョン",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fd8799576dc9528317f863809",
+      "category": null,
+      "tags": [],
+      "date": "2026-02-07",
+      "url": "https://open.spotify.com/episode/7qpz8YW7alNaI7Wxv8OCgF?si=8f07b306c5134bed",
+      "durationMinutes": 101.27428333333333,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.445111880615049,
+        1.0875227103262046
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2ee26482-6e0c-8124-9b1f-d091f2ed97fa",
+      "title": "#95 【月イチ企画】グーグル流エンジニアの終焉？新人類「Cracked Engineer」がAIを操り、1人で世界をハックする | 伊藤穰一",
+      "podcast": "Joi Ito's Podcast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fe29175ad2623d601ede331e2",
+      "category": null,
+      "tags": [],
+      "date": "2026-01-20",
+      "url": "https://open.spotify.com/episode/1LscTUNYxfYdH75iNKKlEY?si=7b27e3e62bf844a1",
+      "durationMinutes": 28.560966666666666,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.648897673808216,
+        -1.2883011404512954
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2ff26482-6e0c-815f-802a-c075f27cf9c3",
+      "title": "データとデザイン：VisualAnalytics # 1",
+      "podcast": "Takram Cast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f9241ef44a40d011b964edf9d",
+      "category": null,
+      "tags": [],
+      "date": "2020-03-02",
+      "url": "https://open.spotify.com/episode/2KM80yYi1vpTN2z4ERjWTj?si=b22f333367a44096",
+      "durationMinutes": 26.866933333333332,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.702046949476156,
+        0.03752890025471173
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2e326482-6e0c-8188-b65b-e9247bbb12f9",
+      "title": "#24 毎日のご飯はオキアミ8トン！そして世知辛いオスクジラの社会〜クジラという森・その3【ミモリラジオ】",
+      "podcast": "ミモリラジオ-自然の面白さを聴く",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f486017c3b4fa84cdce151f64",
+      "category": null,
+      "tags": [],
+      "date": "2023-02-24",
+      "url": "https://open.spotify.com/episode/5LEfKUMflHgfrUqGutMepV?si=2dbcdd7e56944189",
+      "durationMinutes": 23.60495,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        2.7749753603874616,
+        -0.7519764190092262
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2e926482-6e0c-81fa-9c63-e7c3eb84a2a9",
+      "title": "【番外編＃133】仏教のこと、龍源さんに聞こう③｜世界は心に映っている（唯識）",
+      "podcast": "歴史を面白く学ぶコテンラジオ （COTEN RADIO）",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fb412cc05140e5eedc61ac87d",
+      "category": null,
+      "tags": [],
+      "date": "2026-01-14",
+      "url": "https://open.spotify.com/episode/2OrCpIYYnuXcER7vg7y52p?si=3104953ed3d74ff2",
+      "durationMinutes": 56.9092,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.663724761710743,
+        0.7538094410012728
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2e326482-6e0c-816f-a742-fbedb4294f9b",
+      "title": "第180回「私のAI活用術：Gemini,ChatGPT,Claude,Notebooklm,Obsideanで回すゴールデンワークフロー解説」",
+      "podcast": "デデデータ!!〜“あきない”データの話〜",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fa70c6596ad7f3b3a338d5f88",
+      "category": null,
+      "tags": [],
+      "date": "2026-01-08",
+      "url": "https://open.spotify.com/episode/3NLexhKAz54epfolqSIBCS?si=8be51a6dfbb04c4c",
+      "durationMinutes": 33.44795,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.5413437599450006,
+        1.3253861019700617
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2e326482-6e0c-81b8-8c98-d6f985063405",
+      "title": "#22 毎日90kgデカくなる...地球最大の動物のナゾ〜クジラという森・その1【ミモリラジオ】",
+      "podcast": "ミモリラジオ-自然の面白さを聴く",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fdd49a602baabfe12ead8ebab",
+      "category": "Biology & Nature",
+      "tags": [
+        "Biology & Nature"
+      ],
+      "date": "2023-02-17",
+      "url": "https://open.spotify.com/episode/4Qzcpl2Coud6rrubFLw6Ml?si=067e6e57314e4fc1",
+      "durationMinutes": 20.4786,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        2.492795008952823,
+        0.8168420003540426
+      ],
+      "cluster": 1
+    },
+    {
+      "id": "2e326482-6e0c-817c-86f7-fed74e33ab7a",
+      "title": "#23 海に適応せよ！無駄なき巨大なフォルム〜クジラという森・その2【ミモリラジオ】",
+      "podcast": "ミモリラジオ-自然の面白さを聴く",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fe51fed80b9bc527b61ef9611",
+      "category": null,
+      "tags": [],
+      "date": "2023-02-21",
+      "url": "https://open.spotify.com/episode/2inuyyYlKM3FmDyeYfdWmn?si=f5cd57724b0b43f5",
+      "durationMinutes": 22.86235,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.0874746468270464,
+        -1.0764414918849745
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "1db26482-6e0c-812b-9f77-cb5def1cd19d",
+      "title": " #65 鳴き声と歩き方を見よう！カラスに学ぶ「都市という森」〜カラス編・その2【ミモリラジオ】",
+      "podcast": "ミモリラジオ-自然の面白さを聴く",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f5cafcbaec09becfd7af1e038",
+      "category": "Biology & Nature",
+      "tags": [
+        "Biology & Nature"
+      ],
+      "date": "2023-08-25",
+      "url": "https://open.spotify.com/episode/5HCwR3d0HA5NrdEIcFziQQ?si=0af2283f93cc48ef",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        2.9020250289472433,
+        1.3119255477179508
+      ],
+      "cluster": 1
+    },
+    {
+      "id": "1db26482-6e0c-8170-87f5-c109276ddbfa",
+      "title": " #69 翼の生えた霊長類カラスの道具作りと神話のカラス〜カラス編・ラスト【ミモリラジオ】",
+      "podcast": "ミモリラジオ-自然の面白さを聴く",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f3e1abc4a991922681eb2c80f",
+      "category": "Biology & Nature",
+      "tags": [
+        "Biology & Nature"
+      ],
+      "date": "2023-09-08",
+      "url": "https://open.spotify.com/episode/3P027ZwgXsB3ETOGcARwJ5?si=a4f3f659a61a416f&nd=1&dlsi=d2359b42179640bb",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.276128849931007,
+        1.9952985436694028
+      ],
+      "cluster": 1
+    },
+    {
+      "id": "1db26482-6e0c-8181-831d-e10b7da8664e",
+      "title": "【9-4】卵という神秘のシステム。世界の見え方が変わる卵のあれこれ。鶏編その4",
+      "podcast": "ミモリラジオ-自然の面白さを聴く",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f97449186cce3950b9b6face3",
+      "category": "Biology & Nature",
+      "tags": [
+        "Biology & Nature"
+      ],
+      "date": "2025-01-28",
+      "url": "https://open.spotify.com/episode/6RYMVFDNMuhzMj8fHCQWMs?si=4a47a7c64d604f62",
+      "durationMinutes": 2127,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        2.586808136314108,
+        3.1289116127750853
+      ],
+      "cluster": 1
+    },
+    {
+      "id": "1db26482-6e0c-818e-a60e-fe9054b3fc55",
+      "title": " #68 トリ頭ですが何か？カラスの圧倒的な賢さと静かな最期〜カラス編・その5【ミモリラジオ】",
+      "podcast": "ミモリラジオ-自然の面白さを聴く",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f71b584065f8b3fa8efe92106",
+      "category": "Biology & Nature",
+      "tags": [
+        "Biology & Nature"
+      ],
+      "date": "2023-09-05",
+      "url": "https://open.spotify.com/episode/0uwLUUmE1ukUtnobkNm063?si=10e1293d73d04205",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.436485194471386,
+        2.5300993389724535
+      ],
+      "cluster": 1
+    },
+    {
+      "id": "1db26482-6e0c-8191-8c78-e7e4a391c0da",
+      "title": " #64 限界を超えて飛べ！カラスの軽量化と超視力〜カラス編・その1【ミモリラジオ】",
+      "podcast": "ミモリラジオ-自然の面白さを聴く",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1ff4eca1185767fdbb49ca48a4",
+      "category": "Biology & Nature",
+      "tags": [
+        "Biology & Nature"
+      ],
+      "date": "2023-08-22",
+      "url": "https://open.spotify.com/episode/1BdWP5JvDkmbSjjdj04z2J?si=b2f03ca09a884eb1",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        2.940666394922814,
+        2.301185619252191
+      ],
+      "cluster": 1
+    },
+    {
+      "id": "1db26482-6e0c-81c2-a6af-c08d9fa94b5f",
+      "title": " #66 カラスの性別どう分かる？黒さに隠れる輝きと、カラスのグルメな食生活〜カラス編・その3【ミモリラジオ】",
+      "podcast": "ミモリラジオ-自然の面白さを聴く",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fd1f00bdbeb141ba461ac2958",
+      "category": "Biology & Nature",
+      "tags": [
+        "Biology & Nature"
+      ],
+      "date": "2023-08-29",
+      "url": "https://open.spotify.com/episode/0BMdHBUiJMR4zg8UJJsGdc?si=0cfbba7a75214bcc",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.414436730733423,
+        1.924384654495818
+      ],
+      "cluster": 1
+    },
+    {
+      "id": "1db26482-6e0c-81cd-97fe-f4291488201e",
+      "title": " #67 ヒナの教育は大事！カラスの穏やか暮らしと年間スケジュール〜カラス編・その4【ミモリラジオ】",
+      "podcast": "ミモリラジオ-自然の面白さを聴く",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f62ded342afcb072f5350cd56",
+      "category": "Biology & Nature",
+      "tags": [
+        "Biology & Nature"
+      ],
+      "date": "2023-09-01",
+      "url": "https://open.spotify.com/episode/00PdTxtWodY9vGZQwswULK?si=7b0c3819a0ae45af",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.030954844345668,
+        2.6745489388705783
+      ],
+      "cluster": 1
+    },
+    {
+      "id": "2b526482-6e0c-8167-be46-ef38d493df13",
+      "title": "#1 花が咲いたら村が滅びる〜竹というナゾ植物・その1【ミモリラジオ】",
+      "podcast": "ミモリラジオ-自然の面白さを聴く",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f7ceb6d8095572244aaf7d050",
+      "category": "Biology & Nature",
+      "tags": [
+        "Biology & Nature"
+      ],
+      "date": "2022-11-16",
+      "url": "https://open.spotify.com/episode/38ihwh1cbFh7vgN8OU1HMO?si=932052a57d564068",
+      "durationMinutes": 1541,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.3193041080402557,
+        2.262699522108712
+      ],
+      "cluster": 1
+    },
+    {
+      "id": "2e226482-6e0c-81b4-9674-f89f1a0bd113",
+      "title": "191. 大企業でヒラ社員として20年たって大事にしていることリスト",
+      "podcast": "Today I Learned -シリコンバレーの現場から-",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f66df42744157019b4156d323",
+      "category": null,
+      "tags": [],
+      "date": "2025-12-21",
+      "url": "https://open.spotify.com/episode/0tBsELzZ1UBlXLT5Ggnx69?si=5fbf20d49f6a47c0",
+      "durationMinutes": 39.61525,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        2.927173444676964,
+        0.6197168753285067
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2df26482-6e0c-81c5-aa60-cb9310ac1abc",
+      "title": "異星人の目で街を見る【ゲスト：建築写真家 大山顕】",
+      "podcast": "神保町で会いましょう",
+      "podcastCover": "https://i.scdn.co/image/ab6765630000ba8aaa236d8db4e88c8c1ba6e7f4",
+      "category": null,
+      "tags": [],
+      "date": "2025-12-26",
+      "url": "https://open.spotify.com/episode/2S172M8HbxNbPAij4wUdwo",
+      "durationMinutes": 68.07,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.1094669501401873,
+        -0.08236275325317793
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2da26482-6e0c-81b4-b4fe-d86bce3162ef",
+      "title": "#56 ちとせグループ藤田さん (Part 2) / ポスト石油の世界ーバイオとAIが変える産業と都市のかたち",
+      "podcast": "Beat the Odds / ビート・ザ・オッズ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fa728af42359860f17440e328",
+      "category": null,
+      "tags": [],
+      "date": "2025-12-28",
+      "url": "https://open.spotify.com/episode/5wNv5XFnIoNGTgUaqJ8A23",
+      "durationMinutes": 32.29043333333333,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.557796270830239,
+        -0.37089343979421274
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2db26482-6e0c-81df-bee1-d6daf94164c6",
+      "title": "Jeremy Faludi: Sustainability professor on why most sustainable design fails before it starts",
+      "podcast": "Design Better",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fc6d0ab889c4e88fee0110f7f",
+      "category": null,
+      "tags": [],
+      "date": "2025-10-28",
+      "url": "https://open.spotify.com/episode/0Ck7DZGENeIsxtdZegjtm9",
+      "durationMinutes": 20.513083333333334,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.7410149232865924,
+        -0.7377525374225737
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2da26482-6e0c-81ba-b8b3-e94b9979652b",
+      "title": "データとデザイン：データの可視化と意思決定（後編）",
+      "podcast": "Takram Cast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fc3372f5be94942d29183d734",
+      "category": null,
+      "tags": [],
+      "date": "2019-09-24",
+      "url": "https://open.spotify.com/episode/3DZyeLVHj00m5Zc56jg3tZ",
+      "durationMinutes": 30,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.402439294265596,
+        -0.19265412675684057
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2d626482-6e0c-80c6-8e45-fa32b5861ae4",
+      "title": "(Untitled)",
+      "podcast": "Unknown",
+      "podcastCover": "",
+      "category": null,
+      "tags": [],
+      "date": "2025-12-27",
+      "url": "",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.867244213428006,
+        -0.6665845672421289
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2d526482-6e0c-81a7-ae86-f8f3b69a20eb",
+      "title": "コンサルと考える、新しいクリエイティブの考え方",
+      "podcast": "Takram Cast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fd20a840e8bfcf1ad5dd29a8b",
+      "category": null,
+      "tags": [],
+      "date": "2025-12-26",
+      "url": "https://open.spotify.com/episode/3r1VLJqEXFisQuPrMoqs0Z?si=a4adeebc165d45b7",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.232679746634209,
+        0.3098479931662721
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2d526482-6e0c-8160-b0b8-dfe58313f4fb",
+      "title": "データとデザイン第３回：分析と可視化の未来",
+      "podcast": "Takram Cast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f34b1aafd3c7f5761322679de",
+      "category": null,
+      "tags": [],
+      "date": "2025-12-26",
+      "url": "https://open.spotify.com/episode/2Z6cuiHJioCDn0QedMmRWS?si=papbm64UQWiSf0bCwoudrg",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.119562757819726,
+        0.2985394896303367
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2d426482-6e0c-81e0-91dc-dea5445a7b7f",
+      "title": "#170　\"検索しない\"AI時代と経営者のリアルな日常 - 仕事・読書・健康・エンタメを語り尽くす年末オフレコ対談会 ",
+      "podcast": "スタートアップ オフレコ対談 -Startup Off-the-Record Talk- Podcast（ポッドキャスト） #起業家 #ベンチャーキャピタル",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f17076c1022e78ca6fd78a61d",
+      "category": null,
+      "tags": [],
+      "date": "2025-12-25",
+      "url": "https://open.spotify.com/episode/3l3KRbrptzo3GIcBHy6MyI?si=99bd7e8130604d78",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.393689002838666,
+        -0.3365853286412846
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2d226482-6e0c-8165-b71e-c19876dba51a",
+      "title": "#15_3「山口周さんと「会社って何だ？」を話したら。」第３回　「書けない部分」に「豊かさ」がある。",
+      "podcast": "聞く、ほぼ日。",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f3d53ae02e05990f6b6a66f1f",
+      "category": null,
+      "tags": [],
+      "date": "2025-12-23",
+      "url": "https://open.spotify.com/episode/1d1JznZ9dB6M5lGfDSPJYn?si=ff48980f447940a3",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.3684937807912934,
+        0.08564109918059293
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2d226482-6e0c-8145-8b16-dd831c731136",
+      "title": "SF作家・津久井五月が描くモビリティの未来：『WIRED』日本版 ポッドキャスト",
+      "podcast": "『WIRED』日本版",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fb4dc4dbed59963b89fbacbb2",
+      "category": null,
+      "tags": [],
+      "date": "2025-12-23",
+      "url": "https://open.spotify.com/episode/0ebxhtMlvosW83V6iLnRsp?si=632f5656b5224588",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        2.89662591447951,
+        0.23329448273576198
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2d026482-6e0c-816f-aa49-fc308292c792",
+      "title": "リーダーの挑戦#53【安宅和人氏：慶應義塾大学環境情報学部教授／Zホールディングス株式会社 シニアストラテジスト】後編",
+      "podcast": "堀義人が聞く「リーダーの挑戦」",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1ff22c1cc28423c0269cd55f52",
+      "category": null,
+      "tags": [],
+      "date": "2025-12-21",
+      "url": "https://open.spotify.com/episode/1dus85Gg8BNkUnJYT609Eq?si=e61c92a378ab4f4b",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.901499042211638,
+        -1.1260559397555132
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2cf26482-6e0c-815f-be92-ffad538d23b0",
+      "title": "【地方創生の核心】「ドローカルこそグローバル」唯一無二の魅力が世界を呼ぶ！漫画・アニメ・観光地の秘訣を徹底議論",
+      "podcast": "GLOBIS学び放題×知見録Podcast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f35e8728855ac5066a01d0393",
+      "category": null,
+      "tags": [],
+      "date": "2025-12-17",
+      "url": "https://open.spotify.com/episode/47txLShMhtgGGJZz1PnMqC?si=a4e3d5eba21640a6",
+      "durationMinutes": 50.0123,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.1627511162726054,
+        0.21120415949006932
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2cf26482-6e0c-81b5-8cf5-cc2ac960d200",
+      "title": "リーダーの挑戦#53【安宅和人氏：慶應義塾大学環境情報学部教授／Zホールディングス株式会社 シニアストラテジスト】前編",
+      "podcast": "堀義人が聞く「リーダーの挑戦」",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f5eab0579bcd4ddb5cb305ceb",
+      "category": null,
+      "tags": [],
+      "date": "2025-12-01",
+      "url": "https://open.spotify.com/episode/1sTmDkaikwAhpworeahqQK?si=aac7e3b972a6479b",
+      "durationMinutes": 26.928166666666666,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.407277408066664,
+        -0.19289690835229512
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2b326482-6e0c-8162-b2cc-d07dacfb7480",
+      "title": "地方創生10年の成否とこれから―民間主導の今、地域を救う「官民連携」のリアルと成功事例【高橋靖×三宅卓×藻谷浩介×朝比奈一郎】",
+      "podcast": "GLOBIS学び放題×知見録Podcast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f7ab73dce6f05594e431276cc",
+      "category": null,
+      "tags": [],
+      "date": "2025-11-04",
+      "url": "https://open.spotify.com/episode/104wS35rObyEHPqz6alZhM?si=530d5ab8e76e43bc",
+      "durationMinutes": 3455,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.579338667884858,
+        0.8076195237378985
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2b026482-6e0c-8178-a8d3-ce3bd095174e",
+      "title": "The Godmother of AI on jobs, robots & why world models are next | Dr. Fei-Fei Li",
+      "podcast": "Lenny's Podcast: Product | Career | Growth",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f58f4c2b82849f837d4344894",
+      "category": null,
+      "tags": [],
+      "date": "2025-11-16",
+      "url": "https://open.spotify.com/episode/35Aa7R3adOXsRODqPv2gmb?si=-qi02myCTVmAo0uMCtyQIQ",
+      "durationMinutes": 4773,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.137914771651702,
+        0.9813664170145133
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2a926482-6e0c-8143-b6e3-f9943ddb0338",
+      "title": "ゲスト：鈴木麻実子さん、小松季弘さん、小崎真寛さん、キョウヘイさん、竹森郁さん、内田周輔さん、沖田知也さん、清水慶子さん、町田有也さん　オンラインサロン『鈴木Pファミリー』のメンバーによる『かぐや姫の物語』について（前編）",
+      "podcast": "鈴木敏夫のジブリ汗まみれ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f67e3f3d9b1e0bbbe01399ba5",
+      "category": null,
+      "tags": [],
+      "date": "2023-03-12",
+      "url": "https://open.spotify.com/episode/4ntgV1wkytm5dxqsug72Hi?si=6d9dca57d9e04d6d",
+      "durationMinutes": 1553,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.015228581012524,
+        -0.8701444293324545
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2a926482-6e0c-81bc-9a5a-eefcd1155c6e",
+      "title": "陽さんが実践している話し方の3つのレトリック",
+      "podcast": "START/FM",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f10bfd90aa0934995794d5bb4",
+      "category": null,
+      "tags": [],
+      "date": "2025-11-09",
+      "url": "https://open.spotify.com/episode/2AtqPWXLqw5J8iVhkWoXpi?si=6f6a0eca34d148f6",
+      "durationMinutes": 1358,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        2.9677398906496526,
+        -0.34750965938518674
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2a926482-6e0c-8188-bf0a-c1c826092fda",
+      "title": "Design EngineeringとAI",
+      "podcast": "Takram Cast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fd9d76fedb89cb524ff57b472",
+      "category": null,
+      "tags": [],
+      "date": "2025-11-12",
+      "url": "https://open.spotify.com/episode/6mLCbh2PJiiYnIyKSLI464?si=1e7b54d2c8d444b5",
+      "durationMinutes": 1727,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.3616679684936677,
+        -0.25726161480700843
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2a926482-6e0c-81d3-be8d-fe0a3cafc269",
+      "title": "Uncapped #31 | Dylan Field from Figma",
+      "podcast": "Unknown",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f761c22c2dd050412d2f0fca7",
+      "category": null,
+      "tags": [],
+      "date": "2025-11-05",
+      "url": "https://open.spotify.com/episode/7rOJExTdk6pRDZr7pFKAvp?si=f75c18b3293142f9",
+      "durationMinutes": 3399,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.728052004358388,
+        0.3064984456997717
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2a726482-6e0c-8141-8149-ce6bd63a7008",
+      "title": "179. 2025年の音声エージェント開発入門",
+      "podcast": "Today I learned",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f66df42744157019b4156d323",
+      "category": null,
+      "tags": [],
+      "date": "2025-09-28",
+      "url": "https://open.spotify.com/episode/31yLX95GkRdQInVsh21M3p?si=b6485a8544504541",
+      "durationMinutes": 2504,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.507426530706691,
+        1.3009086421255316
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2a726482-6e0c-81b7-8bc7-f92cf9211534",
+      "title": "177. GPT-5のプロンプトエンジニアリングガイドを読み解く",
+      "podcast": "Today I learned",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f66df42744157019b4156d323",
+      "category": null,
+      "tags": [],
+      "date": "2025-09-14",
+      "url": "https://open.spotify.com/episode/5R1YwPmhFBJ0Hku2QUx31i?si=18c8043166dc4791",
+      "durationMinutes": 2421,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        2.692602631836112,
+        0.4264756904576805
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2a026482-6e0c-81ea-8f70-e13ec27b4be7",
+      "title": "#12【Vision AI】CNNからViT・Diffusion・GPT-4oのマルチモーダルLLMまで。生成系AIの系譜を徹底解説",
+      "podcast": "SingularRadio - シンギュラーラジオ",
+      "podcastCover": "",
+      "category": null,
+      "tags": [],
+      "date": "2025-07-11",
+      "url": "https://open.spotify.com/episode/79o1KstPHjJPjrmJHgLgOX?si=8hjrSDrcQnexOECK8vX4iw&context=spotify%3Aplaylist%3A37i9dQZF1FgnTBfUlzkeKt",
+      "durationMinutes": 3439,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.9582539134745076,
+        0.9813571847917208
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "2a026482-6e0c-8101-b17c-fd2b3369a8ad",
+      "title": "138. 【前編】Vive Codingはもう終わり！不安定さを仕様駆動開発（SDD）でカバー【Spec Driven Development】【生成AI】【Claude Code】【Devin】",
+      "podcast": "となりのデータ分析屋さん",
+      "podcastCover": "https://image-cdn-ak.spotifycdn.com/image/ab6772ab000030aea64777660963e61b732a4815",
+      "category": null,
+      "tags": [],
+      "date": "2025-10-15",
+      "url": "https://open.spotify.com/episode/0uEIs0HtRnl6OG2KzAfGcF?si=9457e02689bd4078",
+      "durationMinutes": 1625,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        5.318676017553955,
+        0.9527276858712537
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "29f26482-6e0c-8040-8111-c6354c8bc1e2",
+      "title": "Elon Musk_ 3 Years of X, OpenAI Lawsuit, Bill Gates, Grokipedia & The Future of Everything",
+      "podcast": "All-In with Chamath Jason Sacks & Friedberg",
+      "podcastCover": "https://i.scdn.co/image/ab6765630000ba8a2d88d4e8813b2dd1e2e531dd",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-10-31",
+      "url": "https://open.spotify.com/episode/4M33TjLvsHFWo8FXKMUA5k?si=0e762c181b7a4671",
+      "durationMinutes": 9335,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        0.5279658890300001,
+        3.5863868300120996
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-81f2-97df-eba00317f6b1",
+      "title": "起承転結を忘れろ！TEDが起こしたプレゼンテーション革命【第79号音声版】#79",
+      "podcast": "STEAM.fm",
+      "podcastCover": "https://cdn-images-3.listennotes.com/podcasts/steamfm/%E8%B5%B7%E6%89%BF%E8%BB%A2%E7%B5%90%E3%82%92%E5%BF%98%E3%82%8C%E3%82%8Dted%E3%81%8C%E8%B5%B7%E3%81%93%E3%81%97%E3%81%9F%E3%83%97%E3%83%AC%E3%82%BC%E3%83%B3%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E9%9D%A9%E5%91%BD%E7%AC%AC79-f6GJoskqFn1-mo6pBIFjXen.300x300.jpg",
+      "category": "Science",
+      "tags": [
+        "Science"
+      ],
+      "date": "2022-05-19",
+      "url": "https://open.spotify.com/episode/31NbOUWJVJ2C4Tag84RPnH",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -0.8914301372482036,
+        4.511129769900618
+      ],
+      "cluster": 3
+    },
+    {
+      "id": "1db26482-6e0c-816e-ac23-df3bb362577d",
+      "title": "【再】夕陽はなぜ赤いの？【第78号音声版】 #78",
+      "podcast": "STEAM.fm",
+      "podcastCover": "https://cdn-images-3.listennotes.com/podcasts/steamfm/%E5%A4%95%E9%99%BD%E3%81%AF%E3%81%AA%E3%81%9C%E8%B5%A4%E3%81%84%E3%81%AE%E7%AC%AC78%E5%8F%B7%E9%9F%B3%E5%A3%B0%E7%89%88-76-9Npmox8vg-5-ZBuN34vqwCk.300x300.jpg",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2022-05-14",
+      "url": "https://open.spotify.com/episode/0Qgg3v4OWyyJaYUL43qqAG",
+      "durationMinutes": 2458,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        1.8028735809089595,
+        3.4945281565007646
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-8132-9578-ce63b1f3ee8c",
+      "title": "シュレーディンガー博士の異常な愛情【第23号（再）音声版】 #67.mp3",
+      "podcast": "STEAM.fm",
+      "podcastCover": "https://cdn-images-3.listennotes.com/podcasts/steamfm/%E3%82%B7%E3%83%A5%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%AC%E3%83%BC%E5%8D%9A%E5%A3%AB%E3%81%AE%E7%95%B0%E5%B8%B8%E3%81%AA%E6%84%9B%E6%83%85%E7%AC%AC23%E5%8F%B7%E5%86%8D%E9%9F%B3%E5%A3%B0%E7%89%88-67-8u0ESeUj46R-oZ98SaAgY_v.300x300.jpg",
+      "category": "Science",
+      "tags": [
+        "Science"
+      ],
+      "date": "2022-03-26",
+      "url": "https://open.spotify.com/episode/6NMBSzPPZHnSi8YKbtYJq0",
+      "durationMinutes": 2458,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        0.01336000805851989,
+        3.0714887212505597
+      ],
+      "cluster": 3
+    },
+    {
+      "id": "1db26482-6e0c-8121-995f-f78370ce8f4e",
+      "title": "ベータ(No.2)と呼ばれた数学者【第34号（再）音声版】#56.mp3",
+      "podcast": "STEAM.fm",
+      "podcastCover": "https://cdn-images-3.listennotes.com/podcasts/steamfm/%E3%83%99%E3%83%BC%E3%82%BFno2%E3%81%A8%E5%91%BC%E3%81%B0%E3%82%8C%E3%81%9F%E6%95%B0%E5%AD%A6%E8%80%85%E7%AC%AC34%E5%8F%B7%E5%86%8D%E9%9F%B3%E5%A3%B0%E7%89%8856-5BSTU1dm-a4-6V0CrG32dFv.300x300.jpg",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2022-02-28",
+      "url": "https://open.spotify.com/episode/6Xm31lWZb433uOE9DaSKBR",
+      "durationMinutes": 2458,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        0.7223471584232519,
+        3.7313868778441295
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1f226482-6e0c-80e9-99d5-fa495feb47bb",
+      "title": "デザインエンジニアリングのいまとこれから",
+      "podcast": "Takram Cast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fe4d3adee51b8697568a167f3",
+      "category": null,
+      "tags": [],
+      "date": "2025-05-13",
+      "url": "https://open.spotify.com/episode/7mRYyGdC8bDpqd4KMA6WKk?si=782a07392e1b4db3",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.1996847642787487,
+        0.06759024022606458
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "1db26482-6e0c-81d7-9334-c0e39b432007",
+      "title": "アンド（and）とオア（or）の区別ついてますか？【第127号音声版】#129",
+      "podcast": "STEAM.fm",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fd08ea93c841c8153031f3601",
+      "category": "Science",
+      "tags": [
+        "Science"
+      ],
+      "date": "2023-04-27",
+      "url": "https://open.spotify.com/episode/2ttPwOYrtDhVg50nRZLjYV?si=CNSYJlB2RhS8goTWW_OIFA&context=spotify%3Aepisode%3A2ttPwOYrtDhVg50nRZLjYV&t=6",
+      "durationMinutes": 2458,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -0.3020980412826095,
+        3.41024365163813
+      ],
+      "cluster": 3
+    },
+    {
+      "id": "1db26482-6e0c-81a7-8b8c-d2699ebb24d8",
+      "title": "データとデザイン第３回：分析と可視化の未来",
+      "podcast": "Takram Cast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f34b1aafd3c7f5761322679de",
+      "category": "Design & Art",
+      "tags": [
+        "Design & Art"
+      ],
+      "date": "2019-08-05",
+      "url": "https://open.spotify.com/episode/2Z6cuiHJioCDn0QedMmRWS?si=852e4d18802541a9",
+      "durationMinutes": 2745,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -3.8554049196354594,
+        1.7460265195822653
+      ],
+      "cluster": 4
+    },
+    {
+      "id": "1db26482-6e0c-818f-8106-dfa3dbbdef2a",
+      "title": "データとデザイン第２回：データ活用のための２つの頭の使い方",
+      "podcast": "Takram Cast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f1bc62229a6d9e9833518d085",
+      "category": "Design & Art",
+      "tags": [
+        "Design & Art"
+      ],
+      "date": "2019-07-29",
+      "url": "https://open.spotify.com/episode/2g9UjTfExhLIY5eHcFjEG7?si=fbee720411134a1a",
+      "durationMinutes": 2826,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -2.703197066338098,
+        3.047662793189689
+      ],
+      "cluster": 4
+    },
+    {
+      "id": "1db26482-6e0c-8164-a94d-c4fceda77e50",
+      "title": "第１回：データの可視化のメリットと限界",
+      "podcast": "Takram Cast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f593d0101d6c26388a56d883b",
+      "category": "Design & Art",
+      "tags": [
+        "Design & Art"
+      ],
+      "date": "2019-07-22",
+      "url": "https://open.spotify.com/episode/5iY0t5ZFjeZve2ifWhDo64?si=a5cec79880c44031",
+      "durationMinutes": 2745,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -3.6638586750555664,
+        1.5052996362599862
+      ],
+      "cluster": 4
+    },
+    {
+      "id": "1db26482-6e0c-8150-8691-e60a0ccd8b2b",
+      "title": "人と機械の境界【第204号音声版】#科学系ポッドキャストの日",
+      "podcast": "STEAM.fm",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f1bde3503bdee693c75a37bf8",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2024-11-06",
+      "url": "https://open.spotify.com/episode/6ih9Tox5iYkrlRBfpixYrD?si=38b472a22b99415a",
+      "durationMinutes": 2826,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        2.335875045271696,
+        3.6029201481337694
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-8118-a1d2-c5ea285ab857",
+      "title": "世界一短い論文【第129号音声版】\n＃131#科学系ポッドキャストの日",
+      "podcast": "STEAM.fm",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f9cec412b9ea03daed7216622",
+      "category": "Science",
+      "tags": [
+        "Science"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/0RF17eeKWKV3cOAe6Iw4UA?si=4bb142ac69b14126",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -0.4450668166111236,
+        3.945678074448313
+      ],
+      "cluster": 3
+    },
+    {
+      "id": "1db26482-6e0c-8040-b6fc-c120fed955ad",
+      "title": "データとデザイン：Data Humanisation #1",
+      "podcast": "Takram Cast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f6dcbcc5cf9858f3f090e483e",
+      "category": "Design & Art",
+      "tags": [
+        "Design & Art"
+      ],
+      "date": "2020-04-06",
+      "url": "https://open.spotify.com/episode/6dQaKaT6HYTFv8qyKX8P9o?si=c5cb6bd72a414d61",
+      "durationMinutes": 3042,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -3.243811757730247,
+        2.7680283093201328
+      ],
+      "cluster": 4
+    },
+    {
+      "id": "1db26482-6e0c-8102-9594-ec05ee52d2db",
+      "title": "【9-1】世界で最も繁栄している鳥類「ニワトリ」家畜化の真髄を観る　鶏編その1",
+      "podcast": "ノダ☆カズキの野良歩き〜自然の面白さを聴く",
+      "podcastCover": "https://i.scdn.co/image/ab6765630000ba8ad21f4722a5d0d3aebddac75c",
+      "category": "Science",
+      "tags": [
+        "Science"
+      ],
+      "date": "2025-01-10",
+      "url": "https://open.spotify.com/episode/3SO1dBFHK2mt2kQrPYRFVD?si=deb4cf1e67be487b",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -0.7119422277102843,
+        3.126136488702822
+      ],
+      "cluster": 3
+    },
+    {
+      "id": "20d26482-6e0c-801a-9940-ca4e4344e2f0",
+      "title": "「AIは、初速で劣後したら終わる」ログラスCEOがここまで本気で向き合う理由",
+      "podcast": "ALL AI PODCAST",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fa284ab5e7e9b80b6449c6b39",
+      "category": null,
+      "tags": [],
+      "date": "2025-06-09",
+      "url": "https://open.spotify.com/episode/2USAKqCNhHvg9cFzlotOk0?si=c4f65ed377344c27&nd=1&dlsi=93044a422bee4f33",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.331963648056982,
+        0.919974311003697
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "20c26482-6e0c-803b-b7de-f23717e12887",
+      "title": "Nuno Coelho Santos_ Designer,  DeepMind, Google, Meta",
+      "podcast": "Danielle Newnham Podcast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f9d4a0872b870130eadb7616c",
+      "category": null,
+      "tags": [],
+      "date": "2025-06-08",
+      "url": "https://open.spotify.com/episode/3JQjaaIn5wMUdC3IHeYg5y",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.096458306006078,
+        0.09305650972120055
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "20926482-6e0c-800a-8cee-ced059004b41",
+      "title": "Anthropic's CPO on what comes next | Mike Krieger (co-founder of Instagram)",
+      "podcast": "Lenny's Podcast: Product | Career | Growth",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1ff45f22d94c8aea326e8bf861",
+      "category": null,
+      "tags": [],
+      "date": "2025-06-05",
+      "url": "https://open.spotify.com/episode/5Bj39M7yc9fqBCzVtJKBnU",
+      "durationMinutes": 6621,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.172086423640704,
+        -0.39504308704240054
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "1db26482-6e0c-81fd-aaad-c5d03330516b",
+      "title": "#63紅葉狩り",
+      "podcast": "シドニーの猫",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fad05120e42f2a87771cefe4f",
+      "category": "Others",
+      "tags": [
+        "Others"
+      ],
+      "date": "2021-11-21",
+      "url": "https://open.spotify.com/episode/5V66Nk8so4599Mc0gRItso?si=WrsR2qOzQuyfNStkDx6r9Q",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        2.485493661098145,
+        -0.1309045358768929
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "1db26482-6e0c-81ee-bab4-f21fc7dabdb8",
+      "title": "インタビュアー：上野ちひろさん　『月刊住職』掲載「僕らの世代と仏教」をテーマにインタビュー（前編）",
+      "podcast": "鈴木敏夫のジブリ汗まみれ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f67e3f3d9b1e0bbbe01399ba5",
+      "category": "Others",
+      "tags": [
+        "Others"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/6ugefAMuB4MPxQdgzlsBAI?si=1b0bfa12e5464034",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.214139667454969,
+        0.008136077164923233
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "1db26482-6e0c-81ee-985a-f5141ca9c9d8",
+      "title": "The Hidden World of Electrostatic Ecology",
+      "podcast": "The Quanta Podcast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f277e30ac48cb67d6ff0b3aa3",
+      "category": "Biology & Nature",
+      "tags": [
+        "Biology & Nature"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/20zb7nilFPEUZ2d9fgStNY",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        2.978168971132888,
+        2.917208834069729
+      ],
+      "cluster": 1
+    },
+    {
+      "id": "1db26482-6e0c-81eb-8367-d664794d0cf0",
+      "title": "賢くなりすぎないこと。「とりあえずやってみる」が未来を創る ~ LayerX 松本勇気",
+      "podcast": "前田ヒロ Startup Podcast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f98406bc9af2a7b27396e9a52",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-03-17",
+      "url": "https://open.spotify.com/episode/1JM358q02vARoDGtSot6Pv?si=41868c263ecf420d&nd=1&dlsi=15d3005980944002",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        1.7803431936091698,
+        4.389501448557922
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-81df-958d-e8f8d02cdbd3",
+      "title": "What to know about TikTok’s uncertain future in the US",
+      "podcast": "TechCrunch Daily Crunch",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f1039206fc3d7552f35ada71f",
+      "category": "Business",
+      "tags": [
+        "Business"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/3pRi3ZRyfoh9xMpf8nFWc7",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -5.514695964053561,
+        -0.45513719960375737
+      ],
+      "cluster": 5
+    },
+    {
+      "id": "1db26482-6e0c-81de-a5c6-d4cbfa503fac",
+      "title": "Everything You Need for JTBD (Jobs to be Done) | Sera Tajima | Season 2 Most Popular ",
+      "podcast": "Conscious Tech",
+      "podcastCover": "https://i.scdn.co/image/ab6765630000ba8a0b6903dcd5c9089dae71a5f6",
+      "category": "Design & Art",
+      "tags": [
+        "Design & Art"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/7yvaglrG91dR2f5WKuUr7c?si=MmDrhnFpTQ2eDMTf8BTkMA",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -2.672672701535343,
+        1.3225193108012807
+      ],
+      "cluster": 4
+    },
+    {
+      "id": "1db26482-6e0c-81c0-8833-f420ab4b2d5e",
+      "title": "【宮田裕章 × SLM（小規模言語モデル）との連携】雑誌「THE WIRED WORLD IN 2025」インタビュー：『WIRED』日本版 ポッドキャスト",
+      "podcast": "『WIRED』日本版",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fb4dc4dbed59963b89fbacbb2",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/6GKrFu4MSVzl7VJEIZir5U",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        0.8742209547362036,
+        2.9284383866821546
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-81af-ae9c-f04ed0fc355c",
+      "title": "ゲストたちの海外移住のビザ・永住権の状況のまとめと分析：エピソード20回記念！",
+      "podcast": "海外で働くことについて知れる番組｜海外で働く人ラジオ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f1365eeda354cee74ebd45ef9",
+      "category": "Career",
+      "tags": [
+        "Career"
+      ],
+      "date": "2024-06-30",
+      "url": "https://open.spotify.com/episode/7vjCLKCNjqcsucjef7nrLt?si=maIe_3c9TBCU9LjUaCw1pg&nd=1&dlsi=5dc70b2bd0c74bf3",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -2.351643230285888,
+        -1.7603686501672313
+      ],
+      "cluster": 6
+    },
+    {
+      "id": "1db26482-6e0c-819a-bc93-c731deb13bde",
+      "title": "#303 私のAIユースケース",
+      "podcast": "Zero Topic - ゼロトピック - ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fd4ed3b005b75468bf3a405cd",
+      "category": "Al",
+      "tags": [
+        "Al"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/0eLEXjkSIMlmG49bSqBh1M",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -2.274528757705264,
+        -4.770948354309271
+      ],
+      "cluster": 7
+    },
+    {
+      "id": "1db26482-6e0c-8183-83e7-eff4cc298cae",
+      "title": "#34 【海外フリーランス】欧州スタートアップ最前線！日本とドイツを繋ぐ“グローカル”戦略とは？",
+      "podcast": "Day One Podcast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1ff257af1e3070b356e7822a74",
+      "category": "Career",
+      "tags": [
+        "Career"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/4fZoyypKW2ylRm4eBShchC?si=17b1fd4505ae4b85&nd=1&dlsi=ae6f40d3afb0463b",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -3.333113019584699,
+        -3.3026948514827463
+      ],
+      "cluster": 6
+    },
+    {
+      "id": "1db26482-6e0c-8169-bef6-df9bdb5ccd12",
+      "title": "If AI is so good, why are there still so many jobs for translators?",
+      "podcast": "Planet Money",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fba50e2aeaa4c75e693ad3617",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/7dwTuHAXIbdqkECuu0scAh",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        1.4209773992877939,
+        3.91478305949552
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-815c-ab2c-c7c85c93c05d",
+      "title": "Reconsidering_ Mastering change with Brad Stulberg",
+      "podcast": "Design Better",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1ff547ce27d763bf8f57984bb8",
+      "category": "Career",
+      "tags": [
+        "Career"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/61LIsdVixYMXkYXmoaNxCS?si=b90dbe43949b4dcf",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -3.693489795775,
+        -1.5298521689616282
+      ],
+      "cluster": 6
+    },
+    {
+      "id": "1db26482-6e0c-814d-9fbf-dbfa49e6719b",
+      "title": "AI Does 90% of My Work Now as a Product Leader | Yana Welinder (Kraftful)",
+      "podcast": "Behind the Craft",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f901734ebeaf629eb52954968",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/0INAjtBu5BiVfW2krMlpur",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        1.3158604146947335,
+        2.7705932942512534
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-8120-9944-eb4b381250c9",
+      "title": "Why do we push ourselves to be perfect? With Thomas Curran, PhD",
+      "podcast": "Speaking of Psychology",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f00b4cc88517ab6a308d726e2",
+      "category": "Education",
+      "tags": [
+        "Education"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/0PYNYUrGpQDuDuuTUDR6Mc?si=6edd805bda5a4fd0",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        2.282633878497288,
+        -4.2792124721985765
+      ],
+      "cluster": 8
+    },
+    {
+      "id": "1db26482-6e0c-8113-85b5-f88f42f0c888",
+      "title": "#125 A director's perspective on hiring UX designers in 2025 w/Chris Abad",
+      "podcast": "Honest UX Talks by Wix Studio",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f6c70c5d4babf840760bf57d5",
+      "category": "Design & Art",
+      "tags": [
+        "Design & Art"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/1xzgP5dtsaFOBebbLlLtWI",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -2.987179336676913,
+        3.3309001959473923
+      ],
+      "cluster": 4
+    },
+    {
+      "id": "1db26482-6e0c-80a8-a4b2-ef1821890581",
+      "title": "#63 CatGPTの新しい画像生成が無料プランでも！4o Image Generationを試す",
+      "podcast": "耳で学ぶAI、ロボシンク",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fc469addd65eda0e4d28383af",
+      "category": "Al",
+      "tags": [
+        "Al"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/1T3dA1FXNOaIDaSLHIwXLl",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -1.9640179006005611,
+        -4.412420887495139
+      ],
+      "cluster": 7
+    },
+    {
+      "id": "1db26482-6e0c-8096-94f2-e43c35e66fa9",
+      "title": "Informalising Information with Federica Fragapane and Sabba Khan",
+      "podcast": "architectures of planetary well-being Podcast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f6d2eca6cc0898a623eddb884",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2024-06-25",
+      "url": "https://open.spotify.com/episode/6v7TudTR7wVoGyzvP9AxYN?si=2437000a4ab9460d&nd=1&dlsi=a864a8a3a7b840ab",
+      "durationMinutes": 3936,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        0.9140869868031141,
+        3.9874195543324435
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1fd26482-6e0c-80ae-947f-faefeab055a6",
+      "title": "AI 2027",
+      "podcast": "AI 2027",
+      "podcastCover": "https://i.scdn.co/image/ab6765630000f68d2cc293af95639816222d5539",
+      "category": null,
+      "tags": [],
+      "date": "2025-05-24",
+      "url": "https://open.spotify.com/episode/4xO2ElEhpaq0nX2MLoYzmb?si=jqrEjiTwT2WXjt-hj-jvAw",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.840046019088926,
+        -1.1136693628710106
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "21826482-6e0c-8074-be49-d68fb12f00cf",
+      "title": "Zoë Schlanger_ Do plants think? Why eating a salad may never feel the same again",
+      "podcast": "The Wild with Chris Morgan",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f15e97d3df04b4b948b13f741",
+      "category": null,
+      "tags": [],
+      "date": "2025-06-20",
+      "url": "https://open.spotify.com/episode/6QoHx861YSSBWslHJRwcXV",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.539262528572545,
+        -0.7780274854442438
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "21926482-6e0c-8048-955d-cf0154f0a3a9",
+      "title": "48. What is Object-Oriented UX (feat. Sophia Prater, Rewired UX)",
+      "podcast": "NN/G UX Podcast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f295d488940a3febc5e9bd60d",
+      "category": null,
+      "tags": [],
+      "date": "2025-06-21",
+      "url": "https://open.spotify.com/episode/62JVirQOTxfyiytmuAGgoI",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.4675292880173805,
+        -1.283241230983918
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "29126482-6e0c-8000-925f-fb5861e2f20b",
+      "title": "Andrej Karpathy — AGI is still a decade away",
+      "podcast": "Dwarkesh Podcast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fec6420b46053b5d1786dbe05",
+      "category": null,
+      "tags": [],
+      "date": "2025-10-17",
+      "url": "https://open.spotify.com/episode/3iIYVmmhXwh3fOumypWVpC",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.19012188491324,
+        -0.8934872305048729
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "29b26482-6e0c-8057-a338-d8169f5bdcce",
+      "title": "#26 AI駆動開発の最前線｜Claude Code・Codexで実践する“コンテキスト管理”の極意【現役海外大CS生が解説】",
+      "podcast": "SingularRadio - シンギュラーラジオ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f050c4c0269ff5d00f19aead3",
+      "category": null,
+      "tags": [],
+      "date": "2025-10-29",
+      "url": "https://open.spotify.com/episode/10emmCgr2WLnKVfi34BCON?si=a6a0582d4e8641f0",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.2603957761962294,
+        0.9046893803340598
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "22e26482-6e0c-80df-bf53-fa65b647b4f0",
+      "title": "#12【Vision AI】CNNからViT・Diffusion・GPT-4oのマルチモーダルLLMまで。生成系AIの系譜を徹底解説",
+      "podcast": "SingularRadio - シンギュラーラジオ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f050c4c0269ff5d00f19aead3",
+      "category": null,
+      "tags": [],
+      "date": "2025-07-12",
+      "url": "https://open.spotify.com/episode/79o1KstPHjJPjrmJHgLgOX",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        2.8090927710201288,
+        0.3520905875840427
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "24926482-6e0c-80bd-aef5-e5f7df7100b4",
+      "title": "#379 生産性10倍!?本格的にAIエージェントでコーディングをやってみてどれくらいのアウトプットが出せたのか",
+      "podcast": "ひまじんプログラマーの週末エンジニアリングレッスン",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1ff651029d56a9b290470ebcba",
+      "category": null,
+      "tags": [],
+      "date": "2025-08-08",
+      "url": "https://open.spotify.com/episode/7x3d8KHQMnwDofjLpwV6jC",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.499749655061071,
+        0.5056300608999738
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "26726482-6e0c-8061-8309-ce0f81fbec6c",
+      "title": "【IoT×予約×ルール設計】世界が実践するオーバーツーリズム対策の今と行政の出番（ハワイ、バルセロナ、フィレンツェ） #230",
+      "podcast": "デジトラ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fe9af60910fb882eec7166831",
+      "category": null,
+      "tags": [],
+      "date": "2025-09-07",
+      "url": "https://open.spotify.com/episode/5ENZm2AU7PwUBRY1yxrv6P",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.963715450879249,
+        -0.10233243796432967
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "28126482-6e0c-80f6-8e03-ddff7d3820b9",
+      "title": "BtoBとBtoCの起業アプローチの違い",
+      "podcast": "START/FM",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f10bfd90aa0934995794d5bb4",
+      "category": "Startup & VC",
+      "tags": [
+        "Startup & VC"
+      ],
+      "date": "2025-10-03",
+      "url": "https://open.spotify.com/episode/0qbsUzkkL2XWIXpp0k6En0?context=spotify%3Aplaylist%3A37i9dQZF1FgnTBfUlzkeKt",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.1640572493750097,
+        -3.1111623032731153
+      ],
+      "cluster": 9
+    },
+    {
+      "id": "28b26482-6e0c-8005-ae70-d5895471affc",
+      "title": "傾聴と伝え方の本「まず、ちゃんと聴く。」を読んだ感想",
+      "podcast": "Today I learned",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f66df42744157019b4156d323",
+      "category": "Startup & VC",
+      "tags": [
+        "Startup & VC"
+      ],
+      "date": "2025-10-13",
+      "url": "https://open.spotify.com/episode/6sxdRO8uk6XWVbWzvPdNsu?si=aKJ-DKd1T8y45M7NU5ss-w",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        2.6509517747320084,
+        -2.579399296280121
+      ],
+      "cluster": 9
+    },
+    {
+      "id": "1db26482-6e0c-819d-b671-f7c0a9358788",
+      "title": "第32回「モンティーホール問題から考える「モダンな確率」の話：ベイズ統計の活用法",
+      "podcast": "デデデータ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fa70c6596ad7f3b3a338d5f88",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2024-08-05",
+      "url": "https://open.spotify.com/episode/1oU1xyQd2jvZAAp8gkL6IY?si=591f38c7dbe147a1",
+      "durationMinutes": 2708,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        1.3714999556371543,
+        4.020057890068088
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1f026482-6e0c-80b4-828a-d751ac434e98",
+      "title": "信じられるものこそ真実である 前編｜Talk with：守屋貴行（Aww_Nion 代表取締役）",
+      "podcast": "原研哉 Kenya HARA",
+      "podcastCover": "https://cdn-images-3.listennotes.com/podcasts/原研哉-kenya-hara/信じられるものこそ真実である-前編talk-A4cdDXFhQaH-q7RWFxmT0ON.300x300.jpg",
+      "category": null,
+      "tags": [],
+      "date": "2025-05-11",
+      "url": "https://open.spotify.com/episode/4AtaMZXbK5dPzKNRsFMLAt?si=2hkH0uT9TQ6-mH9df5LdhQ",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.23832067454858,
+        -0.27476524600348234
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "1f026482-6e0c-8061-9dcf-c48b41b3f54c",
+      "title": "信じられるものこそ真実である 後編｜Talk with：守屋貴行（Aww_Nion 代表取締役）",
+      "podcast": "原研哉 Kenya HARA",
+      "podcastCover": "https://cdn-images-3.listennotes.com/podcasts/原研哉-kenya-hara/信じられるものこそ真実である-後編talk-5RadW4UxqND-5iha2wW9fpx.300x300.jpg",
+      "category": null,
+      "tags": [],
+      "date": "2025-05-11",
+      "url": "https://open.spotify.com/episode/4UHVCh4YFfXql4iHld3Pzo?si=nvrZDKFtRNyGJynO60pZvw",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.114595360160153,
+        -0.9191668290192674
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "1ea26482-6e0c-80d2-85e7-ff131977409e",
+      "title": "感覚の根幹を震わせるもの 前編｜Talk with：西野 嘉章（東京大学名誉教授）",
+      "podcast": "原研哉 Kenya HARA",
+      "podcastCover": "https://cdn-images-3.listennotes.com/podcasts/原研哉-kenya-hara/感覚の根幹を震わせるもの-前編talk-with西野-m3RzZOcG4qb-idVEGkjM13C.300x300.jpg",
+      "category": "Design & Art",
+      "tags": [
+        "Design & Art"
+      ],
+      "date": "2022-10-19",
+      "url": "https://open.spotify.com/episode/5cFt3x66wezR5MsPboLSKB?si=be9da21c750e4b3d",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -3.199175059176276,
+        2.887703832182993
+      ],
+      "cluster": 4
+    },
+    {
+      "id": "27c26482-6e0c-8005-b05d-c8d671941888",
+      "title": "The ultimate guide to AEO_ How to get ChatGPT to recommend your product | Ethan Smith (Graphite)",
+      "podcast": "Lenny's Podcast: Product | Career | Growth",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1ff45f22d94c8aea326e8bf861",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-09-28",
+      "url": "https://open.spotify.com/episode/476MuKkkYRHKHbVeVDVwTW",
+      "durationMinutes": 11100,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        0.9760062815590284,
+        4.76289874972649
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "25026482-6e0c-80ce-9058-f71ed74a3f15",
+      "title": "How Nature & Other Physical Environments Impact Your Focus, Cognition & Health | Dr. Marc Berman",
+      "podcast": "Huberman Lab",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f66aed32f8066a72781b3b12a",
+      "category": null,
+      "tags": [],
+      "date": "2025-08-15",
+      "url": "https://open.spotify.com/episode/2apQeQ6OGH7Qc0QkDXCpRk",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.8205275372583336,
+        -0.5827290255504001
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "23226482-6e0c-8021-866a-d7c35b08f9b1",
+      "title": " 410_Hitting the Context Window Limit",
+      "podcast": "Rebuild",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fd7d4e27ba058d4cbdb31436a",
+      "category": null,
+      "tags": [],
+      "date": "2025-07-16",
+      "url": "https://open.spotify.com/episode/3stjhOzfg5ZJc6VsKcqEos",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.2218424157393817,
+        0.3478983079567735
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "22526482-6e0c-8094-a95d-fc30fb2ebde3",
+      "title": "123. AI時代に極めろプロンプトエンジニアリング！赤ずきんの原則に学びが詰まってた",
+      "podcast": "となりのデータ分析屋さん",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f28774a652198d35c558fbf2d",
+      "category": null,
+      "tags": [],
+      "date": "2025-07-03",
+      "url": "https://open.spotify.com/episode/1ic1jk7zQULWk8DAjJT3Rz",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.6074623630212272,
+        0.8056954129973697
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "22526482-6e0c-8022-a84f-e21645e28a0e",
+      "title": "Andrej Karpathy_ Software Is Changing (Again)",
+      "podcast": "Y Combinator Startup Podcast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f79fbc83dff3315e5a12e325d",
+      "category": null,
+      "tags": [],
+      "date": "2025-07-03",
+      "url": "https://open.spotify.com/episode/2RNZdfmqN01WXCQdt2d82h",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.3826809212346105,
+        0.15927136915184958
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "21726482-6e0c-80e1-b9f5-c1bedecb2865",
+      "title": "Corvid Thanatology (CROW FUNERALS) Encore with Kaeli Swift",
+      "podcast": "ologies",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fce54de8da4c5935c915c48a3",
+      "category": null,
+      "tags": [],
+      "date": "2025-06-19",
+      "url": "https://open.spotify.com/episode/21LpNp95ToImvEslYkgRjn",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        5.297585273825797,
+        0.26033875014900054
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "1db26482-6e0c-81e9-a9e3-c3b0e4e4d8d9",
+      "title": "139. 【Bookclub 第四弾】 \"Database Internals\" #2 振り返り",
+      "podcast": "London Tech Talk",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f28774a652198d35c558fbf2d",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/10ZE6EVYQT1GB7Ke1MZhRC",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        1.4953041444716895,
+        4.540847396411147
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-81d5-a549-c8405bb8ac8d",
+      "title": "142. AWS EBS (Elastic Block Store)の歴史",
+      "podcast": "Today I learned",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f66df42744157019b4156d323",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/6cxt8E0x254rML2t2t5MCp",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        1.9458729654744302,
+        3.3677368956627585
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-8171-9a14-ff3c983c1ecc",
+      "title": "105. AIエージェントDevinが全てのエンジニア業務を全て置き換える！？時代の転換点がとうとう来た",
+      "podcast": "となりのデータ分析屋さん",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f28774a652198d35c558fbf2d",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/7kLF8RBKfUACYwQrLo1l8y",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        1.718497399117029,
+        2.896087908189243
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-8160-abcf-ed1e0571d36e",
+      "title": "Thyroidology (THYROID GLAND) with Kepal Patel",
+      "podcast": "ologies",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fce54de8da4c5935c915c48a3",
+      "category": "Biology & Nature",
+      "tags": [
+        "Biology & Nature"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/2Fw1iwt31F6qLtyMz9vNZ2",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.1120034137556685,
+        3.250391800836235
+      ],
+      "cluster": 1
+    },
+    {
+      "id": "1db26482-6e0c-812c-adb9-df15d11e1e68",
+      "title": "起業における伸びる分野の選び方3ステップ【情報収集、一次情報調査、潜入】",
+      "podcast": "START/FM",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f10bfd90aa0934995794d5bb4",
+      "category": "Startup & VC",
+      "tags": [
+        "Startup & VC"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/309L427DqamRnrGiLGU791",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.20064565557816,
+        -2.294714464913587
+      ],
+      "cluster": 9
+    },
+    {
+      "id": "1db26482-6e0c-80e1-a2dc-d4691ebc10bf",
+      "title": "第101回「今こそ考えたい!!AIエージェント元年を制す“ラストワンマイル”の逆張りAI戦略：DATAFLUCTのバーティカルエージェントのサバイバル術」",
+      "podcast": "デデデータ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fa70c6596ad7f3b3a338d5f88",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/3z7h6v9brclKeZJBFsoURt",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        1.027148591364626,
+        4.8561661515175425
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-80ce-aaec-d1eb79eb61b9",
+      "title": "第102回「AIエージェント特集（1）AIエージェントとは何か？〜AIエージェント vs ただの自動化の『自律性レベル』で見える決定的な違い〜」",
+      "podcast": "デデデータ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fa70c6596ad7f3b3a338d5f88",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/4yFKTGoWRYBd1UMgVRAM0u",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        0.5769956651622312,
+        4.6862937915827665
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-80ae-abb4-f31ede0bb202",
+      "title": "154. この10年20年で廃れたアイディアやツールたち",
+      "podcast": "Today I learned",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f66df42744157019b4156d323",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/5jU5SFCXTyJXlKom6cLf2L",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        1.3335754568834177,
+        3.1449371000114303
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-80a4-a254-f087ee5eaa1e",
+      "title": "Functional Morphology (ANATOMY) Encore with Joy Reidenberg",
+      "podcast": "ologies",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fce54de8da4c5935c915c48a3",
+      "category": "Biology & Nature",
+      "tags": [
+        "Biology & Nature"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/3NUsKEpraIMJjkTUgCcsYN",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        2.731672996989063,
+        1.3546416010758486
+      ],
+      "cluster": 1
+    },
+    {
+      "id": "1db26482-6e0c-80a3-a34e-e00c0ba0e935",
+      "title": "#11-3 Facebook vs MySpace：SNS戦争の明暗を分けた“人間の本能”",
+      "podcast": "ハイパー起業ラジオ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f68dfc8493d27409c0869bc49",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/7IN3PEw11HL9zZYzsQkKwi",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        1.0054735682931157,
+        3.5341644133076215
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-8092-a9cf-c13cd27995cb",
+      "title": "Functional Morphology (ANATOMY) Encore with Joy Reidenberg",
+      "podcast": "ologies",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fce54de8da4c5935c915c48a3",
+      "category": "Science",
+      "tags": [
+        "Science"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/3NUsKEpraIMJjkTUgCcsYN",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -1.112440824362678,
+        2.662904652789816
+      ],
+      "cluster": 3
+    },
+    {
+      "id": "1db26482-6e0c-8057-9e38-ee76394fbccd",
+      "title": "第103回「AIエージェント特集（2）タスクから仕事へ：推論モデルが拓くAIエージェントの新時代」",
+      "podcast": "デデデータ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fa70c6596ad7f3b3a338d5f88",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/7MXV05Iaf18PqIkEbel2xP",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        0.42394164759333147,
+        3.3022316709080815
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-8047-b7f5-dd286feaf27c",
+      "title": "人気学部が一転して就活難に/過酷なアメリカの進路トレンド",
+      "podcast": "START/FM",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f10bfd90aa0934995794d5bb4",
+      "category": "Startup & VC",
+      "tags": [
+        "Startup & VC"
+      ],
+      "date": "2025-03-24",
+      "url": "https://open.spotify.com/episode/0RzqEkd2xAWmqm1i2Z0yKv",
+      "durationMinutes": 1951,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.1639071948264093,
+        -3.256788725982978
+      ],
+      "cluster": 9
+    },
+    {
+      "id": "1db26482-6e0c-8029-8979-ff261959c40e",
+      "title": "第104回「AIエージェント特集（3） AIエージェント開発フレームワークとAI開発の失敗回避術」",
+      "podcast": "デデデータ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fa70c6596ad7f3b3a338d5f88",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/2RgPoF0Ib1aO7wHoHZZKZ6",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        1.310535847058639,
+        3.008644665669231
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-8015-8fe2-dac59d3a5bc9",
+      "title": "152. Debugging - 問題解決のための9のルール",
+      "podcast": "Today I learned",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f66df42744157019b4156d323",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/6qAg4cc6P8tMbbGu8kNSz7",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        1.4281452247374387,
+        3.317973380760018
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "29c26482-6e0c-80b9-b63a-cdb00e7dca0a",
+      "title": "#402 エンジニアと非エンジニアのプロンプトの作り方の違い",
+      "podcast": "ひまじんプログラマーの週末エンジニアリングレッスン",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1ff651029d56a9b290470ebcba",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-10-26",
+      "url": "https://open.spotify.com/episode/2aISKPg60dnOOxaO2EaWmu?si=dfd21f65b576443a",
+      "durationMinutes": 4510,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        1.260358840611292,
+        3.7362462139705928
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1fd26482-6e0c-8051-8781-ef3ddc07ab57",
+      "title": "第115回「AIエージェント特集（14）：物理世界へようこそ！クラウドを飛び出したAI――“フィジカルAI（ Embodied AI）”が動かすリアル革命」",
+      "podcast": "デデデータ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fa70c6596ad7f3b3a338d5f88",
+      "category": null,
+      "tags": [],
+      "date": "2025-05-23",
+      "url": "https://open.spotify.com/episode/1hc0S8jinfsWQ2GbkXKTJn?si=iCgiDeCQTSGTOzzmt5Zz_w",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.8664745412583006,
+        -0.31530163129012306
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "29226482-6e0c-80b3-8fe2-d69a51480b98",
+      "title": "Figma’s CEO_ Why AI makes design, craft, and quality the new moat for startups | Dylan Field",
+      "podcast": "Lenny's Podcast: Product | Career | Growth",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1ff45f22d94c8aea326e8bf861",
+      "category": "Design & Art",
+      "tags": [
+        "Design & Art"
+      ],
+      "date": "2025-10-16",
+      "url": "https://open.spotify.com/episode/1FRMhkAKkAYIP33GFPDgqO",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -2.5740218674978945,
+        2.817745167924253
+      ],
+      "cluster": 4
+    },
+    {
+      "id": "1db26482-6e0c-81a0-b5c0-d4335a91b82d",
+      "title": "第73回「（保存版）データストーリーティングによるBIダッシュボード構築技法 - プロ仕様のデータ分析のリアル （Part2） - 」",
+      "podcast": "デデデータ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fa70c6596ad7f3b3a338d5f88",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/64drOn1Uov5ZZsRhgnxw4k?si=80be5515166a466f&nd=1&dlsi=b4e102296e7c483f",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        2.4273885130000834,
+        4.01353077690607
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-8179-8fa2-c3bfc45243f2",
+      "title": "138. 面接対策、面接官側の準備",
+      "podcast": "Today I learned",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f66df42744157019b4156d323",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2024-12-15",
+      "url": "https://open.spotify.com/episode/5ihTQkHOAdjqpdYkmV95rb",
+      "durationMinutes": 2947,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        0.19231794778277178,
+        5.101441818761363
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-8178-b3dd-ca0bac5c8ff5",
+      "title": " [番外編 #11] すげぇぜ！音声入力×ChatGPT チャチャッと作れるPodcast台本",
+      "podcast": "ハイパー起業ラジオ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f68dfc8493d27409c0869bc49",
+      "category": "Al",
+      "tags": [
+        "Al"
+      ],
+      "date": "2025-01-29",
+      "url": "https://open.spotify.com/episode/4RfFSK9q8tTXj4ODOJHgmo?si=WT4YnTKgQBqv6L4-9LTQQw&context=spotify%3Aplaylist%3A0KsEbsIeHdR4kv5yxzWqcw&nd=1&dlsi=a6863a02890d484b",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -1.1870227317380555,
+        -2.7916604668884073
+      ],
+      "cluster": 7
+    },
+    {
+      "id": "1db26482-6e0c-8126-b1f2-f71a1d8941fb",
+      "title": "「論理的」は、地域によって違う#372",
+      "podcast": "ゆる言語ラジオ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f634126cf1207437039a64aba",
+      "category": "Education",
+      "tags": [
+        "Education"
+      ],
+      "date": "2024-10-04",
+      "url": "https://open.spotify.com/episode/2fmAczpUOcxlYfHMyPNSs9?si=d854fa93f4a14bc6&nd=1&dlsi=a0a76c725c904eef",
+      "durationMinutes": 45,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        1.3241264125855747,
+        -3.485174852239619
+      ],
+      "cluster": 8
+    },
+    {
+      "id": "1db26482-6e0c-810b-9ff4-fe0c211e9afe",
+      "title": "#15 仏教を知れば、「悩み」にうまく向き合える（松波龍源さん編③）",
+      "podcast": "a scope〜リベラルアーツで世界を視る目が変わる〜",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f52e441830f592a251fbeea46",
+      "category": "Education",
+      "tags": [
+        "Education"
+      ],
+      "date": "2021-10-13",
+      "url": "https://open.spotify.com/episode/0yb7OOCDQW0Crh7xFn0I1X",
+      "durationMinutes": 2800,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        1.4230645124818053,
+        -3.697800499100605
+      ],
+      "cluster": 8
+    },
+    {
+      "id": "1db26482-6e0c-8082-bee1-da6d618801f0",
+      "title": "第97回「需要を支配する：Prophet×S&OPで実現する予測から創造へのパラダイムシフト」",
+      "podcast": "デデデータ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fa70c6596ad7f3b3a338d5f88",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-03-20",
+      "url": "https://open.spotify.com/episode/4HOm4C38IcqOxsYQuoT9Sn?si=ecf195f075a847eb&nd=1&dlsi=cbed3772ebf14458",
+      "durationMinutes": 2750,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        0.8267312943773211,
+        5.518395644278722
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "28e26482-6e0c-80e5-8573-cd383b20f73a",
+      "title": "#163 ユニコーンを生むAIエコシステム -YC✕マルチステージVCが変えるスタートアップ投資の最新セオリー",
+      "podcast": "スタートアップオフレコ対談",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f17076c1022e78ca6fd78a61d",
+      "category": "Startup & VC",
+      "tags": [
+        "Startup & VC"
+      ],
+      "date": "2025-10-16",
+      "url": "https://open.spotify.com/episode/4dFhYCPEGV9qG3JOKOlgJ6?si=46919e9b1bea4834",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.6506972555330437,
+        -3.1525394918868512
+      ],
+      "cluster": 9
+    },
+    {
+      "id": "27e26482-6e0c-80a0-808e-f0b7af530741",
+      "title": "スタートアップにおけるプレゼン巧者とは？",
+      "podcast": "START/FM",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f10bfd90aa0934995794d5bb4",
+      "category": "Startup & VC",
+      "tags": [
+        "Startup & VC"
+      ],
+      "date": "2021-09-05",
+      "url": "https://open.spotify.com/episode/0ifubDcMBj8ni5e14yXx8b?si=26f6adbf9a54430d",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.358689864772062,
+        -3.038392491388264
+      ],
+      "cluster": 9
+    },
+    {
+      "id": "23126482-6e0c-8001-89c4-fea0d96ac2c6",
+      "title": "131. AIコーディングの現在地 w_ twada",
+      "podcast": "fukabori.fm",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fda32eb13c28d6215f3419b2a",
+      "category": null,
+      "tags": [],
+      "date": "2025-07-14",
+      "url": "https://open.spotify.com/episode/55tFUFAplGpyzOA2FOtQCO?si=d926688b4de74f80",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.4777959377457908,
+        -0.17599961565230465
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "20826482-6e0c-80d6-8761-ffd52e6e9d39",
+      "title": "非エンジニアがAIを武器にする方法──スマートバンク赤池さんと語る、Cursor活用術とチームへのAI浸透",
+      "podcast": "GCP House",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f63ee1843b9859252a3244102",
+      "category": null,
+      "tags": [],
+      "date": "2025-05-30",
+      "url": "https://open.spotify.com/episode/5eniNbSdZnyJxKpAxIpmuE?si=6d7137a21f664d53",
+      "durationMinutes": 3722,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.924908126936371,
+        0.3276028803039712
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "20726482-6e0c-8077-9c89-c2b83287de5d",
+      "title": "第118回「プロンプトエンジニアリング最前線と明日から人生変わる神ワザ大公開」",
+      "podcast": "デデデータ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fa70c6596ad7f3b3a338d5f88",
+      "category": "Al",
+      "tags": [
+        "Al"
+      ],
+      "date": "2025-06-02",
+      "url": "https://open.spotify.com/episode/2c7GW0R0Wn0OBO7J13o902?si=7f713ea7ca4d41c7",
+      "durationMinutes": 4225,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -0.8699872191153399,
+        -4.240773897017882
+      ],
+      "cluster": 7
+    },
+    {
+      "id": "1f926482-6e0c-8040-8d09-f709c14bbbad",
+      "title": "AI時代も変わらない、デザインの本質とは【ゲスト：田川放哉】",
+      "podcast": "深津貴之のGUILD TALK",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f8e621d4ed1fdfcb9f0325087",
+      "category": "Design & Art",
+      "tags": [
+        "Design & Art"
+      ],
+      "date": "2025-05-19",
+      "url": "https://open.spotify.com/episode/1yspYIt0JMYpxH3r7DesOB?si=0e81198b429d4b49",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -2.7599784420228812,
+        1.7856883066661755
+      ],
+      "cluster": 4
+    },
+    {
+      "id": "1f926482-6e0c-8028-8afc-f53a236c1407",
+      "title": "価値を生む人材になる「半歩越境」のすめ【ゲスト：田川哉】",
+      "podcast": "深津貴之のGUILD TALK",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f8e621d4ed1fdfcb9f0325087",
+      "category": "Design & Art",
+      "tags": [
+        "Design & Art"
+      ],
+      "date": "2025-05-12",
+      "url": "https://open.spotify.com/episode/0ttELAXtN0XZSFj2HB9euY?si=b2ihJzJfRVC05hr6VMl4yg",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -2.784264870009887,
+        1.8670848978760246
+      ],
+      "cluster": 4
+    },
+    {
+      "id": "1e926482-6e0c-8026-b976-f0ba287ffa6a",
+      "title": "The Evolution of Feathers",
+      "podcast": "The Science of Birds",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f0f601a11713d0ec1badaa1f8",
+      "category": "Science",
+      "tags": [
+        "Science"
+      ],
+      "date": "2025-05-04",
+      "url": "https://open.spotify.com/episode/4CZLghwyRfJFJFFaA19y92?si=c107e79e217c434a",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -2.055985831561056,
+        4.669572366590519
+      ],
+      "cluster": 3
+    },
+    {
+      "id": "1db26482-6e0c-81fa-b59b-e675d8785598",
+      "title": "#03ヨーグルトは乳酸菌のウンチ？化学的から考える発酵作用そもそも発酵とは何か？ <3>",
+      "podcast": "ラジオただいま発酵中",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f58bbe60d69bea0fcb026496c",
+      "category": "Science",
+      "tags": [
+        "Science"
+      ],
+      "date": "2021-12-08",
+      "url": "https://open.spotify.com/episode/0ZvIAVvce65ZDtNFmfCaYV?si=F5Q2mjBiSPq0y0zk9oPwNg&t=1333",
+      "durationMinutes": 3612,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -1.0993555842859428,
+        2.9583002448487123
+      ],
+      "cluster": 3
+    },
+    {
+      "id": "1db26482-6e0c-81fa-b174-f85ad5549b01",
+      "title": "第42回「猫ちゃん探しと魔法の数字-婚活、採用、家探しにも使える最適停止問題-」",
+      "podcast": "デデデータ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fa70c6596ad7f3b3a338d5f88",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2024-09-09",
+      "url": "https://open.spotify.com/episode/3CAaxE5MgB1QRqocLzeHpl?si=61021299efec4b62",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        0.2915446996250748,
+        2.508534964507713
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-81f1-a4e3-d7865f023a75",
+      "title": "ムーアの法則は誤解だらけ。元論文を読んだら全然違う主張だった。 #122",
+      "podcast": "ゆるコンピュータ科学ラジオ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f1c55b34ea6dbda5b66e22968",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2024-04-27",
+      "url": "https://open.spotify.com/episode/2TIzRezRoAqsaDErOsULZB?si=ozmKZvBiR1qRDD53PVP2sg",
+      "durationMinutes": 2826,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        0.7724875721967324,
+        2.39990025128916
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-81e7-9bf1-ef713ce22c02",
+      "title": "110. Day 1 から活躍してもらうためのオンボーディング",
+      "podcast": "Today I learned",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f66df42744157019b4156d323",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/1WSjZU4AZnpClM3N1TP4Xx?si=_HVMVHSBRSmM6iJCphCVjA",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        1.616851220167618,
+        3.9180307144299475
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-81e6-a6e2-ea9d6ef3a97d",
+      "title": "Tetsuya Asanoさんゲスト回",
+      "podcast": "Today I learned",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f911d153014b800d050006fa4",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/53kVOB4sMOz3FtqFKUq0Vn?si=fba729335ed049f7",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        0.8022615125619097,
+        2.7894419786384113
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-81ca-91f9-d0070de33da7",
+      "title": "相手と話が噛み合わないのは抽象度のレベルが合っていないから？読んでよかった本「具体と抽象」",
+      "podcast": "START/FM",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f10bfd90aa0934995794d5bb4",
+      "category": "Science",
+      "tags": [
+        "Science"
+      ],
+      "date": "2025-02-09",
+      "url": "https://open.spotify.com/episode/0YIfdfNxGbGnDEzM017W5x?si=2980fe9815e4496b",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -1.366283657377144,
+        2.3354018138827044
+      ],
+      "cluster": 3
+    },
+    {
+      "id": "1db26482-6e0c-81c8-864b-caf4a26f1ea3",
+      "title": "#04　多国籍×女性ボスが当たり前の北欧企業/日本人の海外就職は今が狙い目!?",
+      "podcast": "海外で働く私たち20's",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1ff257af1e3070b356e7822a74",
+      "category": "Career",
+      "tags": [
+        "Career"
+      ],
+      "date": "2024-02-04",
+      "url": "https://open.spotify.com/episode/1xbQhe5qok8Wmnm7LjL7e4?si=3da54362355d4aee",
+      "durationMinutes": 2800,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -3.5288890212152166,
+        -2.8188338274082043
+      ],
+      "cluster": 6
+    },
+    {
+      "id": "1db26482-6e0c-81c7-a43b-c06b2a0e0571",
+      "title": "#29 脳科学で理解。私たちは「何を」見ているのか（ゲスト：乾敏郎さん）",
+      "podcast": "a scope〜リベラルアーツで世界を視る目が変わる〜",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f52e441830f592a251fbeea46",
+      "category": "Education",
+      "tags": [
+        "Education"
+      ],
+      "date": "2021-12-15",
+      "url": "https://open.spotify.com/episode/3DRXyxMuWaVsBXFFZ5YqTh?si=06ad524eb21d413c",
+      "durationMinutes": 2036,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        1.58164188000524,
+        -2.4966226504405507
+      ],
+      "cluster": 8
+    },
+    {
+      "id": "1db26482-6e0c-81bb-9c73-d71bd188b97e",
+      "title": "82.システム設計に銀の弾丸は存在しない",
+      "podcast": "Today I learned",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f66df42744157019b4156d323",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2023-08-23",
+      "url": "https://open.spotify.com/episode/6ibx9wzZ9faATF9WlqSA0v?si=c9e3c858c56848a8",
+      "durationMinutes": 1714,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        0.29342997426840045,
+        3.84847725359129
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-81b5-98dd-c7ea5f8636c2",
+      "title": "Part 2: Dendrology (TREES) with Casey Clapp -- UPDATES + NEW\nINTERVIEW",
+      "podcast": "ologies",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fce54de8da4c5935c915c48a3",
+      "category": "Biology & Nature",
+      "tags": [
+        "Biology & Nature"
+      ],
+      "date": "2020-12-29",
+      "url": "https://open.spotify.com/episode/2AJj8HbYLbvCbmPwDQ6biL?si=p-q7OIlFQGygBZyL_iwQWw",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.2466995710323703,
+        2.3756239314395025
+      ],
+      "cluster": 1
+    },
+    {
+      "id": "1db26482-6e0c-81b5-8be5-e0dc3e5f281f",
+      "title": "専門家にカッコいい量子物理学用語を解説してもらったら謎が深まった【量子4】#59",
+      "podcast": "ゆるコンピュータ科学ラジオ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f1c55b34ea6dbda5b66e22968",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2023-02-11",
+      "url": "https://open.spotify.com/episode/0v9x7cN6r35YvCg9EdkMsz?si=804ea0b15be446fe",
+      "durationMinutes": 12215,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        1.4315017965575116,
+        4.814983102547048
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-81b2-b0ec-e7fa554dfe1e",
+      "title": "83. A career cold start algorithm",
+      "podcast": "Today I learned",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f66df42744157019b4156d323",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2023-09-15",
+      "url": "https://open.spotify.com/episode/032SlfpABpGjt6Ql6Dwvki?si=Ssi_QqedQdS8rJSrKUooCg",
+      "durationMinutes": 1639,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        0.6524534654751555,
+        3.296807102603374
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-81ac-a5df-e722f9a6a446",
+      "title": "Surgical Angiology (VEINS & ARTERIES) with Sheila Blumberg",
+      "podcast": "ologies",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fce54de8da4c5935c915c48a3",
+      "category": "Biology & Nature",
+      "tags": [
+        "Biology & Nature"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/4RuyhppriYs4iOIDDYVH7g?si=edcc37420d614258",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        2.7275128303882563,
+        2.865279084841507
+      ],
+      "cluster": 1
+    },
+    {
+      "id": "1db26482-6e0c-81a1-9fb8-c28bb6c8de7e",
+      "title": "#1-2 MOATを構築せよ！で抜け落ちるネットワーク効果の良さとは？",
+      "podcast": "ハイパー起業ラジオ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f68dfc8493d27409c0869bc49",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2023-11-28",
+      "url": "https://open.spotify.com/episode/3av0E2LqqicwgGyBLlYOcz?si=eVIR5BWkSEiiTKZyYFvQfg",
+      "durationMinutes": 2844,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        0.649670621394473,
+        3.8046663903939675
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-817e-ba79-c6fd14c493ed",
+      "title": "99.米国でのキャリアアップのヒント-儒教的価値観をアンラーニングする",
+      "podcast": "Today I learned",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f66df42744157019b4156d323",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2023-03-17",
+      "url": "https://open.spotify.com/episode/0s1ZbpGttI6T8SnrzULjc3?si=37bf377feeae41e3",
+      "durationMinutes": 3842,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        0.6777008876496826,
+        4.153466061925964
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-817a-bcc5-dc0e6a9e56ac",
+      "title": "A mouse with two dads — and a new frontier for biology | Katsuhiko Hayashi",
+      "podcast": "TED Talks Daily",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f1eef8dcabec3dca77ace07c8",
+      "category": "Education",
+      "tags": [
+        "Education"
+      ],
+      "date": "2024-11-19",
+      "url": "https://open.spotify.com/episode/5ypGCauanmvwtmovTyp8sf?si=7d47d5a92e724b70",
+      "durationMinutes": 810,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        2.2572833082885637,
+        -2.6729968341224355
+      ],
+      "cluster": 8
+    },
+    {
+      "id": "1db26482-6e0c-8171-a8a7-f5f0fdb04958",
+      "title": "第35回「分布を制するものはビジネスを制す！-正規分布・二項分布・ポアソン分布・パレート分布-」",
+      "podcast": "デデデータ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fa70c6596ad7f3b3a338d5f88",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2024-08-15",
+      "url": "https://open.spotify.com/episode/1JfWOsUJJqn5woDxDiWkib?si=96682cc0fea9428f",
+      "durationMinutes": 3133,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        0.5720144146152027,
+        3.374721504542512
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-816f-bf98-fa7afc06f42e",
+      "title": "【Bookclub 第四弾】 \"Database Internals\" #1 振り返り",
+      "podcast": "London Tech Talk",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f911d153014b800d050006fa4",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/5t8CNshfrjpwAFjGLAuYQF?si=BFAEYusKTfWz8JJJQhVwaw",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        1.8362810616146812,
+        2.4693921793938
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-8168-b55b-c424f947856b",
+      "title": "2. 世界誕生を逆算して妄想！これが銀河と地球のレシピ",
+      "podcast": "サイエントーク",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f170b03747f4237999b29f0f5",
+      "category": "Science",
+      "tags": [
+        "Science"
+      ],
+      "date": "2022-06-09",
+      "url": "https://open.spotify.com/episode/3te3rGLDMvKlnVqdoXERgm?si=i7yHSBlpTmGaeFB1vWy8KA",
+      "durationMinutes": 3906,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -1.2782209982314239,
+        3.0475990284602332
+      ],
+      "cluster": 3
+    },
+    {
+      "id": "1db26482-6e0c-8157-b02e-c24fe6a71d12",
+      "title": "Part 1: Dendrology (TREES) with Casey Clapp -- Encore",
+      "podcast": "ologies",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fce54de8da4c5935c915c48a3",
+      "category": "Biology & Nature",
+      "tags": [
+        "Biology & Nature"
+      ],
+      "date": "2020-12-29",
+      "url": "https://open.spotify.com/episode/0CYtE1GISff2epRsPTuXUV?si=_s5FgnvtRvi4piS8TT4NFA",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.760585765783938,
+        1.4187723888975388
+      ],
+      "cluster": 1
+    },
+    {
+      "id": "1db26482-6e0c-8153-b173-da2157ed5c6e",
+      "title": "141.お金で幸せになれるか論争に結論はでている",
+      "podcast": "Today I learned",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f66df42744157019b4156d323",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/6ZLKDGpinRHBnfXbSsSiQ1?si=f409a732e6634bba",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -0.22244524061006832,
+        4.608813845877015
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-814b-86c6-e53de13f971b",
+      "title": "第34回「ベンフォードの法則による嘘発見器！？-理論分布を活用した不正検出方法-」",
+      "podcast": "デデデータ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fa70c6596ad7f3b3a338d5f88",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/6B55r3KJqP87OsOD1IeF8s?si=83eb1c8143374a84",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        0.7783713319101719,
+        4.463691696683926
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-8148-ba57-ca15fd4d46d7",
+      "title": "#03 【北欧×新卒】スウェーデン留学から現地就職!? H&M本社で働いて分かった“北欧流の働き方”",
+      "podcast": "海外で働く私たち20's",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1ff257af1e3070b356e7822a74",
+      "category": "Career",
+      "tags": [
+        "Career"
+      ],
+      "date": "2024-02-03",
+      "url": "https://open.spotify.com/episode/0lPoVQe917GabHSFiT7d63?si=00a516f94c6f4e9b",
+      "durationMinutes": 2410,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        -4.069944032666102,
+        -3.2989859757301607
+      ],
+      "cluster": 6
+    },
+    {
+      "id": "1db26482-6e0c-8142-b8fc-ed117771d493",
+      "title": "第74回「人生戦略の数理モデル化 - トレードオフ問題と決断モデル-」",
+      "podcast": "デデデータ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fa70c6596ad7f3b3a338d5f88",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-04-20",
+      "url": "https://open.spotify.com/episode/7t7C93Gm08CmPpJvs3N7CR?si=3e617953673747d5",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        1.3059218804872375,
+        2.908550149203596
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-8140-a1b4-de631e6903f7",
+      "title": "『脳の本質』中公新書(2024)",
+      "podcast": "LISTEN to books",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f92aa44e7f2bd968e5bd73e95",
+      "category": "Education",
+      "tags": [
+        "Education"
+      ],
+      "date": "2024-11-23",
+      "url": "https://open.spotify.com/episode/7KJ2tKDGu1axI59r5RT3rq?si=55b94798b7a143ba",
+      "durationMinutes": 1126,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        2.2530419769235146,
+        -3.8066558058128677
+      ],
+      "cluster": 8
+    },
+    {
+      "id": "1db26482-6e0c-813d-ba43-d7941834086c",
+      "title": "130. 失敗百選",
+      "podcast": "Today I learned",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f66df42744157019b4156d323",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2024-10-20",
+      "url": "https://open.spotify.com/episode/6sxdRO8uk6XWVbWzvPdNsu?si=aKJ-DKd1T8y45M7NU5ss-w",
+      "durationMinutes": 3256,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        2.099824732138896,
+        3.0359200215003233
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-8131-9c30-c7c5fbd7c7d8",
+      "title": "103. 決済システムStripe専用エンジニアの需要が急増？分析データ収集の幅も広い【起業物語】",
+      "podcast": "となりのデータ分析屋さん",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f28774a652198d35c558fbf2d",
+      "category": "Technology",
+      "tags": [
+        "Technology"
+      ],
+      "date": "2025-02-12",
+      "url": "https://open.spotify.com/episode/1ghtJDt7wURadOQmzHGbpD?si=66c59f63f5394e8a",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        1.3430410110749769,
+        4.586786995619601
+      ],
+      "cluster": 2
+    },
+    {
+      "id": "1db26482-6e0c-80fc-b1e9-df1e5a92af1c",
+      "title": "Showy Shoebills",
+      "podcast": "All Creatures Podcast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f2f17e243a3d974197a1697a0",
+      "category": "Biology & Nature",
+      "tags": [
+        "Biology & Nature"
+      ],
+      "date": "2025-02-10",
+      "url": "https://open.spotify.com/episode/41JjxjqXm6NxfiwQcKYoUu?si=PRwyBULqSn-tGVADAimT1A",
+      "durationMinutes": 10409,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.1782616908836605,
+        0.8512145046236744
+      ],
+      "cluster": 1
+    },
+    {
+      "id": "1db26482-6e0c-80c4-a12b-f0fc0bcce0bb",
+      "title": "The Future Of Design With Figma's Dylan Field",
+      "podcast": "Y Combinator Startup Podcast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f79fbc83dff3315e5a12e325d",
+      "category": "Startup & VC",
+      "tags": [
+        "Startup & VC"
+      ],
+      "date": "2025-03-13",
+      "url": "https://open.spotify.com/episode/2nDgfIpg8q4HeHbc2sGAy4?si=360113e2cf0f4a01",
+      "durationMinutes": 3741,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.3151098801241674,
+        -3.281220612058841
+      ],
+      "cluster": 9
+    },
+    {
+      "id": "29c26482-6e0c-8040-b005-d931c053ef5a",
+      "title": "DesignByte_ The Infinite Usability Test",
+      "podcast": "Beyond UX Design",
+      "podcastCover": "https://i.scdn.co/image/ab6765630000ba8a231e0174175a72575a3aacae",
+      "category": null,
+      "tags": [],
+      "date": "2025-10-30",
+      "url": "https://open.spotify.com/episode/3yvAS5sQAVmdIcIslWWhs1?si=ec2e32bdd9294085",
+      "durationMinutes": 0,
+      "summary": "",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.103806712721423,
+        0.11126548659742747
+      ],
+      "cluster": 0
+    }
+  ],
+  "podcasts": [
+    {
+      "name": "Today I learned",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f66df42744157019b4156d323",
+      "episodeCount": 14,
+      "primaryTags": [
+        "Startup & VC",
+        "Technology"
+      ]
+    },
+    {
+      "name": "デデデータ",
+      "cover": "https://i.scdn.co/image/ab67656300005f1fa70c6596ad7f3b3a338d5f88",
+      "episodeCount": 13,
+      "primaryTags": [
+        "Technology",
+        "Al"
+      ]
+    },
+    {
+      "name": "ミモリラジオ-自然の面白さを聴く",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f486017c3b4fa84cdce151f64",
+      "episodeCount": 11,
+      "primaryTags": [
+        "Biology & Nature"
+      ]
+    },
+    {
+      "name": "Takram Cast",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f9241ef44a40d011b964edf9d",
+      "episodeCount": 10,
+      "primaryTags": [
+        "Design & Art"
+      ]
+    },
+    {
+      "name": "STEAM.fm",
+      "cover": "https://cdn-images-3.listennotes.com/podcasts/steamfm/%E8%B5%B7%E6%89%BF%E8%BB%A2%E7%B5%90%E3%82%92%E5%BF%98%E3%82%8C%E3%82%8Dted%E3%81%8C%E8%B5%B7%E3%81%93%E3%81%97%E3%81%9F%E3%83%97%E3%83%AC%E3%82%BC%E3%83%B3%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E9%9D%A9%E5%91%BD%E7%AC%AC79-f6GJoskqFn1-mo6pBIFjXen.300x300.jpg",
+      "episodeCount": 7,
+      "primaryTags": [
+        "Science",
+        "Technology"
+      ]
+    },
+    {
+      "name": "ologies",
+      "cover": "https://i.scdn.co/image/ab67656300005f1fce54de8da4c5935c915c48a3",
+      "episodeCount": 7,
+      "primaryTags": [
+        "Biology & Nature",
+        "Science"
+      ]
+    },
+    {
+      "name": "START/FM",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f10bfd90aa0934995794d5bb4",
+      "episodeCount": 6,
+      "primaryTags": [
+        "Startup & VC",
+        "Science"
+      ]
+    },
+    {
+      "name": "SingularRadio - シンギュラーラジオ",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f050c4c0269ff5d00f19aead3",
+      "episodeCount": 4,
+      "primaryTags": []
+    },
+    {
+      "name": "Lenny's Podcast: Product | Career | Growth",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f58f4c2b82849f837d4344894",
+      "episodeCount": 4,
+      "primaryTags": [
+        "Technology",
+        "Design & Art"
+      ]
+    },
+    {
+      "name": "となりのデータ分析屋さん",
+      "cover": "https://image-cdn-ak.spotifycdn.com/image/ab6772ab000030aea64777660963e61b732a4815",
+      "episodeCount": 4,
+      "primaryTags": [
+        "Technology"
+      ]
+    },
+    {
+      "name": "原研哉 Kenya HARA",
+      "cover": "https://cdn-images-3.listennotes.com/podcasts/原研哉-kenya-hara/信じられるものこそ真実である-前編talk-A4cdDXFhQaH-q7RWFxmT0ON.300x300.jpg",
+      "episodeCount": 3,
+      "primaryTags": [
+        "Design & Art"
+      ]
+    },
+    {
+      "name": "ハイパー起業ラジオ",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f68dfc8493d27409c0869bc49",
+      "episodeCount": 3,
+      "primaryTags": [
+        "Technology",
+        "Al"
+      ]
+    },
+    {
+      "name": "Today I Learned -シリコンバレーの現場から-",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f66df42744157019b4156d323",
+      "episodeCount": 2,
+      "primaryTags": []
+    },
+    {
+      "name": "世界システムラジオ",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f7fe52d481d797eabf6553145",
+      "episodeCount": 2,
+      "primaryTags": []
+    },
+    {
+      "name": "Design Better",
+      "cover": "https://i.scdn.co/image/ab67656300005f1fc6d0ab889c4e88fee0110f7f",
+      "episodeCount": 2,
+      "primaryTags": [
+        "Career"
+      ]
+    },
+    {
+      "name": "Unknown",
+      "cover": "",
+      "episodeCount": 2,
+      "primaryTags": []
+    },
+    {
+      "name": "『WIRED』日本版",
+      "cover": "https://i.scdn.co/image/ab67656300005f1fb4dc4dbed59963b89fbacbb2",
+      "episodeCount": 2,
+      "primaryTags": [
+        "Technology"
+      ]
+    },
+    {
+      "name": "堀義人が聞く「リーダーの挑戦」",
+      "cover": "https://i.scdn.co/image/ab67656300005f1ff22c1cc28423c0269cd55f52",
+      "episodeCount": 2,
+      "primaryTags": []
+    },
+    {
+      "name": "GLOBIS学び放題×知見録Podcast",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f35e8728855ac5066a01d0393",
+      "episodeCount": 2,
+      "primaryTags": []
+    },
+    {
+      "name": "鈴木敏夫のジブリ汗まみれ",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f67e3f3d9b1e0bbbe01399ba5",
+      "episodeCount": 2,
+      "primaryTags": [
+        "Others"
+      ]
+    },
+    {
+      "name": "ひまじんプログラマーの週末エンジニアリングレッスン",
+      "cover": "https://i.scdn.co/image/ab67656300005f1ff651029d56a9b290470ebcba",
+      "episodeCount": 2,
+      "primaryTags": [
+        "Technology"
+      ]
+    },
+    {
+      "name": "Y Combinator Startup Podcast",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f79fbc83dff3315e5a12e325d",
+      "episodeCount": 2,
+      "primaryTags": [
+        "Startup & VC"
+      ]
+    },
+    {
+      "name": "London Tech Talk",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f28774a652198d35c558fbf2d",
+      "episodeCount": 2,
+      "primaryTags": [
+        "Technology"
+      ]
+    },
+    {
+      "name": "a scope〜リベラルアーツで世界を視る目が変わる〜",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f52e441830f592a251fbeea46",
+      "episodeCount": 2,
+      "primaryTags": [
+        "Education"
+      ]
+    },
+    {
+      "name": "深津貴之のGUILD TALK",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f8e621d4ed1fdfcb9f0325087",
+      "episodeCount": 2,
+      "primaryTags": [
+        "Design & Art"
+      ]
+    },
+    {
+      "name": "ゆるコンピュータ科学ラジオ",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f1c55b34ea6dbda5b66e22968",
+      "episodeCount": 2,
+      "primaryTags": [
+        "Technology"
+      ]
+    },
+    {
+      "name": "海外で働く私たち20's",
+      "cover": "https://i.scdn.co/image/ab67656300005f1ff257af1e3070b356e7822a74",
+      "episodeCount": 2,
+      "primaryTags": [
+        "Career"
+      ]
+    },
+    {
+      "name": "たべものラジオ 〜食を面白く学ぶ〜",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f0f0a14d3508f0d1e920c9198",
+      "episodeCount": 1,
+      "primaryTags": []
+    },
+    {
+      "name": "デジタルと教育の庭",
+      "cover": "https://i.scdn.co/image/ab67656300005f1fa6f60dfae62dacc6bdd6fe12",
+      "episodeCount": 1,
+      "primaryTags": []
+    },
+    {
+      "name": "起業家の思想と人生に迫る インサイドビジョン",
+      "cover": "https://i.scdn.co/image/ab67656300005f1fd8799576dc9528317f863809",
+      "episodeCount": 1,
+      "primaryTags": []
+    },
+    {
+      "name": "Joi Ito's Podcast",
+      "cover": "https://i.scdn.co/image/ab67656300005f1fe29175ad2623d601ede331e2",
+      "episodeCount": 1,
+      "primaryTags": []
+    },
+    {
+      "name": "歴史を面白く学ぶコテンラジオ （COTEN RADIO）",
+      "cover": "https://i.scdn.co/image/ab67656300005f1fb412cc05140e5eedc61ac87d",
+      "episodeCount": 1,
+      "primaryTags": []
+    },
+    {
+      "name": "デデデータ!!〜“あきない”データの話〜",
+      "cover": "https://i.scdn.co/image/ab67656300005f1fa70c6596ad7f3b3a338d5f88",
+      "episodeCount": 1,
+      "primaryTags": []
+    },
+    {
+      "name": "神保町で会いましょう",
+      "cover": "https://i.scdn.co/image/ab6765630000ba8aaa236d8db4e88c8c1ba6e7f4",
+      "episodeCount": 1,
+      "primaryTags": []
+    },
+    {
+      "name": "Beat the Odds / ビート・ザ・オッズ",
+      "cover": "https://i.scdn.co/image/ab67656300005f1fa728af42359860f17440e328",
+      "episodeCount": 1,
+      "primaryTags": []
+    },
+    {
+      "name": "スタートアップ オフレコ対談 -Startup Off-the-Record Talk- Podcast（ポッドキャスト） #起業家 #ベンチャーキャピタル",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f17076c1022e78ca6fd78a61d",
+      "episodeCount": 1,
+      "primaryTags": []
+    },
+    {
+      "name": "聞く、ほぼ日。",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f3d53ae02e05990f6b6a66f1f",
+      "episodeCount": 1,
+      "primaryTags": []
+    },
+    {
+      "name": "All-In with Chamath Jason Sacks & Friedberg",
+      "cover": "https://i.scdn.co/image/ab6765630000ba8a2d88d4e8813b2dd1e2e531dd",
+      "episodeCount": 1,
+      "primaryTags": [
+        "Technology"
+      ]
+    },
+    {
+      "name": "ノダ☆カズキの野良歩き〜自然の面白さを聴く",
+      "cover": "https://i.scdn.co/image/ab6765630000ba8ad21f4722a5d0d3aebddac75c",
+      "episodeCount": 1,
+      "primaryTags": [
+        "Science"
+      ]
+    },
+    {
+      "name": "ALL AI PODCAST",
+      "cover": "https://i.scdn.co/image/ab67656300005f1fa284ab5e7e9b80b6449c6b39",
+      "episodeCount": 1,
+      "primaryTags": []
+    },
+    {
+      "name": "Danielle Newnham Podcast",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f9d4a0872b870130eadb7616c",
+      "episodeCount": 1,
+      "primaryTags": []
+    },
+    {
+      "name": "シドニーの猫",
+      "cover": "https://i.scdn.co/image/ab67656300005f1fad05120e42f2a87771cefe4f",
+      "episodeCount": 1,
+      "primaryTags": [
+        "Others"
+      ]
+    },
+    {
+      "name": "The Quanta Podcast",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f277e30ac48cb67d6ff0b3aa3",
+      "episodeCount": 1,
+      "primaryTags": [
+        "Biology & Nature"
+      ]
+    },
+    {
+      "name": "前田ヒロ Startup Podcast",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f98406bc9af2a7b27396e9a52",
+      "episodeCount": 1,
+      "primaryTags": [
+        "Technology"
+      ]
+    },
+    {
+      "name": "TechCrunch Daily Crunch",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f1039206fc3d7552f35ada71f",
+      "episodeCount": 1,
+      "primaryTags": [
+        "Business"
+      ]
+    },
+    {
+      "name": "Conscious Tech",
+      "cover": "https://i.scdn.co/image/ab6765630000ba8a0b6903dcd5c9089dae71a5f6",
+      "episodeCount": 1,
+      "primaryTags": [
+        "Design & Art"
+      ]
+    },
+    {
+      "name": "海外で働くことについて知れる番組｜海外で働く人ラジオ",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f1365eeda354cee74ebd45ef9",
+      "episodeCount": 1,
+      "primaryTags": [
+        "Career"
+      ]
+    },
+    {
+      "name": "Zero Topic - ゼロトピック - ",
+      "cover": "https://i.scdn.co/image/ab67656300005f1fd4ed3b005b75468bf3a405cd",
+      "episodeCount": 1,
+      "primaryTags": [
+        "Al"
+      ]
+    },
+    {
+      "name": "Day One Podcast",
+      "cover": "https://i.scdn.co/image/ab67656300005f1ff257af1e3070b356e7822a74",
+      "episodeCount": 1,
+      "primaryTags": [
+        "Career"
+      ]
+    },
+    {
+      "name": "Planet Money",
+      "cover": "https://i.scdn.co/image/ab67656300005f1fba50e2aeaa4c75e693ad3617",
+      "episodeCount": 1,
+      "primaryTags": [
+        "Technology"
+      ]
+    },
+    {
+      "name": "Behind the Craft",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f901734ebeaf629eb52954968",
+      "episodeCount": 1,
+      "primaryTags": [
+        "Technology"
+      ]
+    },
+    {
+      "name": "Speaking of Psychology",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f00b4cc88517ab6a308d726e2",
+      "episodeCount": 1,
+      "primaryTags": [
+        "Education"
+      ]
+    },
+    {
+      "name": "Honest UX Talks by Wix Studio",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f6c70c5d4babf840760bf57d5",
+      "episodeCount": 1,
+      "primaryTags": [
+        "Design & Art"
+      ]
+    },
+    {
+      "name": "耳で学ぶAI、ロボシンク",
+      "cover": "https://i.scdn.co/image/ab67656300005f1fc469addd65eda0e4d28383af",
+      "episodeCount": 1,
+      "primaryTags": [
+        "Al"
+      ]
+    },
+    {
+      "name": "architectures of planetary well-being Podcast",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f6d2eca6cc0898a623eddb884",
+      "episodeCount": 1,
+      "primaryTags": [
+        "Technology"
+      ]
+    },
+    {
+      "name": "AI 2027",
+      "cover": "https://i.scdn.co/image/ab6765630000f68d2cc293af95639816222d5539",
+      "episodeCount": 1,
+      "primaryTags": []
+    },
+    {
+      "name": "The Wild with Chris Morgan",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f15e97d3df04b4b948b13f741",
+      "episodeCount": 1,
+      "primaryTags": []
+    },
+    {
+      "name": "NN/G UX Podcast",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f295d488940a3febc5e9bd60d",
+      "episodeCount": 1,
+      "primaryTags": []
+    },
+    {
+      "name": "Dwarkesh Podcast",
+      "cover": "https://i.scdn.co/image/ab67656300005f1fec6420b46053b5d1786dbe05",
+      "episodeCount": 1,
+      "primaryTags": []
+    },
+    {
+      "name": "デジトラ",
+      "cover": "https://i.scdn.co/image/ab67656300005f1fe9af60910fb882eec7166831",
+      "episodeCount": 1,
+      "primaryTags": []
+    },
+    {
+      "name": "Huberman Lab",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f66aed32f8066a72781b3b12a",
+      "episodeCount": 1,
+      "primaryTags": []
+    },
+    {
+      "name": "Rebuild",
+      "cover": "https://i.scdn.co/image/ab67656300005f1fd7d4e27ba058d4cbdb31436a",
+      "episodeCount": 1,
+      "primaryTags": []
+    },
+    {
+      "name": "ゆる言語ラジオ",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f634126cf1207437039a64aba",
+      "episodeCount": 1,
+      "primaryTags": [
+        "Education"
+      ]
+    },
+    {
+      "name": "スタートアップオフレコ対談",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f17076c1022e78ca6fd78a61d",
+      "episodeCount": 1,
+      "primaryTags": [
+        "Startup & VC"
+      ]
+    },
+    {
+      "name": "fukabori.fm",
+      "cover": "https://i.scdn.co/image/ab67656300005f1fda32eb13c28d6215f3419b2a",
+      "episodeCount": 1,
+      "primaryTags": []
+    },
+    {
+      "name": "GCP House",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f63ee1843b9859252a3244102",
+      "episodeCount": 1,
+      "primaryTags": []
+    },
+    {
+      "name": "The Science of Birds",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f0f601a11713d0ec1badaa1f8",
+      "episodeCount": 1,
+      "primaryTags": [
+        "Science"
+      ]
+    },
+    {
+      "name": "ラジオただいま発酵中",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f58bbe60d69bea0fcb026496c",
+      "episodeCount": 1,
+      "primaryTags": [
+        "Science"
+      ]
+    },
+    {
+      "name": "TED Talks Daily",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f1eef8dcabec3dca77ace07c8",
+      "episodeCount": 1,
+      "primaryTags": [
+        "Education"
+      ]
+    },
+    {
+      "name": "サイエントーク",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f170b03747f4237999b29f0f5",
+      "episodeCount": 1,
+      "primaryTags": [
+        "Science"
+      ]
+    },
+    {
+      "name": "LISTEN to books",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f92aa44e7f2bd968e5bd73e95",
+      "episodeCount": 1,
+      "primaryTags": [
+        "Education"
+      ]
+    },
+    {
+      "name": "All Creatures Podcast",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f2f17e243a3d974197a1697a0",
+      "episodeCount": 1,
+      "primaryTags": [
+        "Biology & Nature"
+      ]
+    },
+    {
+      "name": "Beyond UX Design",
+      "cover": "https://i.scdn.co/image/ab6765630000ba8a231e0174175a72575a3aacae",
+      "episodeCount": 1,
+      "primaryTags": []
+    }
+  ],
+  "clusters": [
+    {
+      "id": 0,
+      "label": "Others",
+      "center": [
+        3,
+        0
+      ],
+      "color": "#636E72",
+      "episodeCount": 62
+    },
+    {
+      "id": 1,
+      "label": "Biology & Nature",
+      "center": [
+        2.4270509831248424,
+        1.7633557568774194
+      ],
+      "color": "#00B894",
+      "episodeCount": 16
+    },
+    {
+      "id": 2,
+      "label": "Technology",
+      "center": [
+        0.9270509831248424,
+        2.8531695488854605
+      ],
+      "color": "#6C5CE7",
+      "episodeCount": 41
+    },
+    {
+      "id": 3,
+      "label": "Science",
+      "center": [
+        -0.927050983124842,
+        2.853169548885461
+      ],
+      "color": "#0984E3",
+      "episodeCount": 10
+    },
+    {
+      "id": 4,
+      "label": "Design & Art",
+      "center": [
+        -2.427050983124842,
+        1.7633557568774196
+      ],
+      "color": "#FD79A8",
+      "episodeCount": 10
+    },
+    {
+      "id": 5,
+      "label": "Business",
+      "center": [
+        -3,
+        3.6739403974420594e-16
+      ],
+      "color": "#FDCB6E",
+      "episodeCount": 1
+    },
+    {
+      "id": 6,
+      "label": "Career",
+      "center": [
+        -2.4270509831248424,
+        -1.7633557568774192
+      ],
+      "color": "#F39C12",
+      "episodeCount": 5
+    },
+    {
+      "id": 7,
+      "label": "Al",
+      "center": [
+        -0.9270509831248427,
+        -2.8531695488854605
+      ],
+      "color": "#6C5CE7",
+      "episodeCount": 4
+    },
+    {
+      "id": 8,
+      "label": "Education",
+      "center": [
+        0.9270509831248417,
+        -2.853169548885461
+      ],
+      "color": "#74B9FF",
+      "episodeCount": 6
+    },
+    {
+      "id": 9,
+      "label": "Startup & VC",
+      "center": [
+        2.427050983124842,
+        -1.76335575687742
+      ],
+      "color": "#E17055",
+      "episodeCount": 7
+    }
+  ],
+  "stats": {
+    "totalEpisodes": 162,
+    "totalPodcasts": 73,
+    "totalCategories": 10,
+    "tagDistribution": {
+      "Biology & Nature": 16,
+      "Technology": 41,
+      "Science": 10,
+      "Design & Art": 10,
+      "Others": 2,
+      "Business": 1,
+      "Career": 5,
+      "Al": 4,
+      "Education": 6,
+      "Startup & VC": 7
+    }
+  },
+  "meta": {
+    "generatedAt": "2026-02-26T10:29:25.292Z",
+    "hasEmbeddings": false
+  }
+}
