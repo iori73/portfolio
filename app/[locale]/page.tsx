@@ -1,11 +1,12 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { useJPFontSize, useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
 
 export default function Home() {
   const t = useTranslations();
+  const locale = useLocale();
   const { jpFontSize } = useJPFontSize();
   const { getBodyFontClass, getBodyFontStyle } = useBodyFont();
   const { getHeadingFontClass, getHeadingFontStyle } = useHeadingFont();
@@ -37,6 +38,50 @@ export default function Home() {
         {/* h2: Heading/L_M_120 - 常に英語 */}
         <h2 className="text-heading-2xl md:text-heading-3xl mb-16">Work</h2>
 
+        {/* Project 0 - Ukiyoe */}
+        <Link href="/work/ukiyoe" className="block mb-16 hover:opacity-80">
+          <div className="mb-20">
+            <div className="mb-6">
+              <Image
+                src={locale === 'jp' ? '/work/ukiyoe/thumbnail-jp.png' : '/work/ukiyoe/thumbnail-en.png'}
+                alt="Ukiyoe: Interactive Cultural Exhibition"
+                width={600}
+                height={300}
+                className="w-full object-cover rounded-lg"
+              />
+            </div>
+
+            <div className="flex items-center gap-6 mb-4 flex-wrap md:flex-nowrap">
+              <h3 className={`text-heading-xl md:text-heading-2xl ${getHeadingFontClass()}`}>
+                {t('projects.ukiyoe.title')}
+              </h3>
+              <div className="flex gap-2">
+                <span className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                  UI
+                </span>
+                <span className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                  Interaction Design
+                </span>
+                <span className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                  Cultural Research
+                </span>
+              </div>
+            </div>
+
+            <p className={`mb-2 text-body-lg md:text-body-xl ${getBodyFontClass()}`}>{t('projects.ukiyoe.description1')}</p>
+            <p
+              className={`${getBodyFontClass()} ${jpFontSize(
+                'text-body-base',
+                'text-body-lg',
+                'text-body-sm',
+                'text-body-base',
+              )}`}
+            >
+              {t('projects.ukiyoe.description2')}
+            </p>
+          </div>
+        </Link>
+
         {/* Project 1 - Gym Crowd Status Dashboard */}
         <Link href="/work/gym_crowd_status_dashboard" className="block mb-16 hover:opacity-80">
           <div className="mb-20">
@@ -55,10 +100,10 @@ export default function Home() {
                 {t('projects.gymDashboard.title')}
               </h3>
               <div className="flex gap-2">
-                <span className="font-space-mono text-body-base md:text-body-lg px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                <span className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
                   UI
                 </span>
-                <span className="font-space-mono text-body-base md:text-body-lg px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                <span className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
                   Context Engineering
                 </span>
               </div>
@@ -95,13 +140,13 @@ export default function Home() {
                 Google UX Design Certificate Project
               </h3>
               <div className="flex gap-2">
-                <span className="font-space-mono text-body-base md:text-body-lg px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                <span className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
                   Research
                 </span>
-                <span className="font-space-mono text-body-base md:text-body-lg px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                <span className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
                   UI
                 </span>
-                <span className="font-space-mono text-body-base md:text-body-lg px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                <span className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
                   UX
                 </span>
               </div>
