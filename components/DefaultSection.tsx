@@ -17,13 +17,13 @@
 // }: DefaultSectionProps) {
 //   return (
 //     <section className="py-8 bg-white text-[#002a38]">
-//       <h2 className="text-heading-xl md:text-heading-2xl font-helvetica-neue mb-6">
+//       <h2 className="text-heading-xl md:text-heading-2xl font-switzer mb-6">
 //         {heading}
 //       </h2>
 
 //       {/* Description */}
 //       {description && (
-//         <p className="text-body-lg font-helvetica-neue mb-4">{description}</p>
+//         <p className="text-body-lg font-switzer mb-4">{description}</p>
 //       )}
 
 //       {/* 画像があれば複数並べる */}
@@ -54,12 +54,12 @@ export function DefaultSection({ heading, description, images = [], headingLevel
   const headingClassName =
     headingLevel === 'h3'
       ? 'text-heading-base font-merriweather font-semibold mb-4'
-      : 'text-heading-xl md:text-heading-2xl font-helvetica-neue mb-6';
+      : 'text-heading-xl md:text-heading-2xl font-switzer mb-6';
 
   return (
     <section className="py-8 bg-white text-[#002a38] scroll-mt-32">
       <HeadingTag className={headingClassName}>{heading}</HeadingTag>
-      {description && <p className="text-body-lg font-helvetica-neue mb-6">{description}</p>}
+      {description && <p className="text-body-lg font-switzer mb-6">{description}</p>}
       {images.length > 0 && (
         <div className="grid grid-cols-1 gap-4 mt-6">
           {images.map((img, idx) => (

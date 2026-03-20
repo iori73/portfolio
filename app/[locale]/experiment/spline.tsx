@@ -6,6 +6,7 @@ import { useBodyFont } from '@/src/hooks/useFonts';
 
 const FavoriteVisuals: React.FC = () => {
   const t = useTranslations('experiment');
+  const tCommon = useTranslations('common');
   const { getBodyFontClass } = useBodyFont();
 
   return (
@@ -55,7 +56,7 @@ const FavoriteVisuals: React.FC = () => {
                 backdropFilter: 'blur(8px)',
               }}
             />
-            <span className="relative z-10 text-body-lg md:text-body-xl font-semibold">{t('goToPage')}</span>
+            <span className="relative z-10 text-body-lg md:text-body-xl font-semibold">{tCommon('goToPage')}</span>
           </a>
         </div>
       </div>

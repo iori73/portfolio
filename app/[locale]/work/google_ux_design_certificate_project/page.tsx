@@ -93,13 +93,13 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
             {/* モバイルでは text-heading-2xl, md以上では text-heading-3xl */}
             <h1 className="text-heading-2xl md:text-heading-3xl text-black">Google UX Design Certificate Project</h1>
             <div className="flex gap-2">
-              <span className="font-space-mono text-body-base md:text-body-lg px-2 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+              <span className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-2 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
                 Research
               </span>
-              <span className="font-space-mono text-body-base md:text-body-lg px-2 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+              <span className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-2 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
                 UI
               </span>
-              <span className="font-space-mono text-body-base md:text-body-lg px-2 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+              <span className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-2 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
                 UX
               </span>
             </div>
@@ -112,19 +112,19 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div>
-              <span className="text-caption-lg font-space-mono font-semibold text-gray-500 mb-2 block">Timeline</span>
+              <span className="text-caption-lg font-space-grotesk font-semibold text-gray-500 mb-2 block">Timeline</span>
               <p className="text-body-base md:text-body-lg tracking-[0.2px]">{t('googleUXTimeline')}</p>
             </div>
             <div>
-              <span className="text-caption-lg font-space-mono font-semibold text-gray-500 mb-2 block">My Role</span>
+              <span className="text-caption-lg font-space-grotesk font-semibold text-gray-500 mb-2 block">My Role</span>
               <p className="text-body-base md:text-body-lg tracking-[0.2px]">{t('uxRole')}</p>
             </div>
             <div>
-              <span className="text-caption-lg font-space-mono font-semibold text-gray-500 mb-2 block">Team</span>
+              <span className="text-caption-lg font-space-grotesk font-semibold text-gray-500 mb-2 block">Team</span>
               <p className="text-body-base md:text-body-lg tracking-[0.2px]">{t('solo')}</p>
             </div>
             <div>
-              <span className="text-caption-lg font-space-mono font-semibold text-gray-500 mb-2 block">
+              <span className="text-caption-lg font-space-grotesk font-semibold text-gray-500 mb-2 block">
                 Deliverables
               </span>
               <p className="text-body-base md:text-body-lg tracking-[0.2px]">
@@ -607,8 +607,8 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('overview')}
                     className={
                       activeSection === 'overview'
-                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110'
-                        : 'text-left text-heading-sm font-helvetica-neue transition-transform duration-900 scale-100 opacity-50'
+                        ? 'text-left text-heading-base font-switzer transition-transform duration-900 scale-110'
+                        : 'text-left text-heading-sm font-switzer transition-transform duration-900 scale-100 opacity-50'
                     }
                   >
                     Project overview
@@ -621,8 +621,8 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('understanding-the-user')}
                     className={
                       activeSection === 'understanding-the-user'
-                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110'
-                        : 'text-left text-heading-sm font-helvetica-neue transition-transform duration-900 scale-100 opacity-50'
+                        ? 'text-left text-heading-base font-switzer transition-transform duration-900 scale-110'
+                        : 'text-left text-heading-sm font-switzer transition-transform duration-900 scale-100 opacity-50'
                     }
                   >
                     Understanding the User
@@ -636,8 +636,8 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('secondary-research')}
                     className={
                       activeSection === 'secondary-research'
-                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110 ml-4'
-                        : 'text-left text-heading-sm font-helvetica-neue transition-transform duration-900 scale-100 opacity-50 ml-4'
+                        ? 'text-left text-body-xl font-switzer transition-transform duration-900 scale-110 ml-4'
+                        : 'text-left text-heading-sm font-switzer transition-transform duration-900 scale-100 opacity-50 ml-4'
                     }
                   >
                     Secondary research
@@ -647,8 +647,8 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('personas')}
                     className={
                       activeSection === 'personas'
-                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110 ml-4'
-                        : 'text-left text-heading-sm font-helvetica-neue transition-transform duration-900 scale-100 opacity-50 ml-4'
+                        ? 'text-left text-body-xl font-switzer transition-transform duration-900 scale-110 ml-4'
+                        : 'text-left text-heading-sm font-switzer transition-transform duration-900 scale-100 opacity-50 ml-4'
                     }
                   >
                     Personas
@@ -658,8 +658,8 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('empathy-map')}
                     className={
                       activeSection === 'empathy-map'
-                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110 ml-4'
-                        : 'text-left text-heading-sm font-helvetica-neue transition-transform duration-900 scale-100 opacity-50 ml-4'
+                        ? 'text-left text-body-xl font-switzer transition-transform duration-900 scale-110 ml-4'
+                        : 'text-left text-heading-sm font-switzer transition-transform duration-900 scale-100 opacity-50 ml-4'
                     }
                   >
                     Empathy map
@@ -669,8 +669,8 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('pain-points')}
                     className={
                       activeSection === 'pain-points'
-                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110 ml-4'
-                        : 'text-left text-heading-sm font-helvetica-neue transition-transform duration-900 scale-100 opacity-50 ml-4'
+                        ? 'text-left text-body-xl font-switzer transition-transform duration-900 scale-110 ml-4'
+                        : 'text-left text-heading-sm font-switzer transition-transform duration-900 scale-100 opacity-50 ml-4'
                     }
                   >
                     Pain points
@@ -680,8 +680,8 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('user-journey-map')}
                     className={
                       activeSection === 'user-journey-map'
-                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110 ml-4'
-                        : 'text-left text-heading-sm font-helvetica-neue transition-transform duration-900 scale-100 opacity-50 ml-4'
+                        ? 'text-left text-body-xl font-switzer transition-transform duration-900 scale-110 ml-4'
+                        : 'text-left text-heading-sm font-switzer transition-transform duration-900 scale-100 opacity-50 ml-4'
                     }
                   >
                     User journey map
@@ -691,8 +691,8 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('value-proposition-canvas')}
                     className={
                       activeSection === 'value-proposition-canvas'
-                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110 ml-4'
-                        : 'text-left text-heading-sm font-helvetica-neue transition-transform duration-900 scale-100 opacity-50 ml-4'
+                        ? 'text-left text-body-xl font-switzer transition-transform duration-900 scale-110 ml-4'
+                        : 'text-left text-heading-sm font-switzer transition-transform duration-900 scale-100 opacity-50 ml-4'
                     }
                   >
                     Value proposition canvas
@@ -702,8 +702,8 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('feature-ideas')}
                     className={
                       activeSection === 'feature-ideas'
-                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110 ml-4'
-                        : 'text-left text-heading-sm font-helvetica-neue transition-transform duration-900 scale-100 opacity-50 ml-4'
+                        ? 'text-left text-body-xl font-switzer transition-transform duration-900 scale-110 ml-4'
+                        : 'text-left text-heading-sm font-switzer transition-transform duration-900 scale-100 opacity-50 ml-4'
                     }
                   >
                     Feature ideas
@@ -713,8 +713,8 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('competitive-audit')}
                     className={
                       activeSection === 'competitive-audit'
-                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110 ml-4'
-                        : 'text-left text-heading-sm font-helvetica-neue transition-transform duration-900 scale-100 opacity-50 ml-4'
+                        ? 'text-left text-body-xl font-switzer transition-transform duration-900 scale-110 ml-4'
+                        : 'text-left text-heading-sm font-switzer transition-transform duration-900 scale-100 opacity-50 ml-4'
                     }
                   >
                     Competitive audit
@@ -727,8 +727,8 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('starting-the-design')}
                     className={
                       activeSection === 'starting-the-design'
-                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110'
-                        : 'text-left text-heading-sm font-helvetica-neue transition-transform duration-900 scale-100 opacity-50'
+                        ? 'text-left text-heading-base font-switzer transition-transform duration-900 scale-110'
+                        : 'text-left text-heading-sm font-switzer transition-transform duration-900 scale-100 opacity-50'
                     }
                   >
                     Starting the design
@@ -742,8 +742,8 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('user-flow')}
                     className={
                       activeSection === 'user-flow'
-                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110 ml-4'
-                        : 'text-left text-heading-sm font-helvetica-neue transition-transform duration-900 scale-100 opacity-50 ml-4'
+                        ? 'text-left text-body-xl font-switzer transition-transform duration-900 scale-110 ml-4'
+                        : 'text-left text-heading-sm font-switzer transition-transform duration-900 scale-100 opacity-50 ml-4'
                     }
                   >
                     User flow
@@ -753,8 +753,8 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('storyboard')}
                     className={
                       activeSection === 'storyboard'
-                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110 ml-4'
-                        : 'text-left text-heading-sm font-helvetica-neue transition-transform duration-900 scale-100 opacity-50 ml-4'
+                        ? 'text-left text-body-xl font-switzer transition-transform duration-900 scale-110 ml-4'
+                        : 'text-left text-heading-sm font-switzer transition-transform duration-900 scale-100 opacity-50 ml-4'
                     }
                   >
                     Storyboard
@@ -764,8 +764,8 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('paper-wireframes')}
                     className={
                       activeSection === 'paper-wireframes'
-                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110 ml-4'
-                        : 'text-left text-heading-sm font-helvetica-neue transition-transform duration-900 scale-100 opacity-50 ml-4'
+                        ? 'text-left text-body-xl font-switzer transition-transform duration-900 scale-110 ml-4'
+                        : 'text-left text-heading-sm font-switzer transition-transform duration-900 scale-100 opacity-50 ml-4'
                     }
                   >
                     Paper wireframes
@@ -775,8 +775,8 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('low-fidelity-prototypes')}
                     className={
                       activeSection === 'low-fidelity-prototypes'
-                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110 ml-4'
-                        : 'text-left text-heading-sm font-helvetica-neue transition-transform duration-900 scale-100 opacity-50 ml-4'
+                        ? 'text-left text-body-xl font-switzer transition-transform duration-900 scale-110 ml-4'
+                        : 'text-left text-heading-sm font-switzer transition-transform duration-900 scale-100 opacity-50 ml-4'
                     }
                   >
                     Low-fidelity prototypes
@@ -789,8 +789,8 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('refining-the-design')}
                     className={
                       activeSection === 'refining-the-design'
-                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110'
-                        : 'text-left text-heading-sm font-helvetica-neue transition-transform duration-900 scale-100 opacity-50'
+                        ? 'text-left text-heading-base font-switzer transition-transform duration-900 scale-110'
+                        : 'text-left text-heading-sm font-switzer transition-transform duration-900 scale-100 opacity-50'
                     }
                   >
                     Refining the design
@@ -804,8 +804,8 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('mockups')}
                     className={
                       activeSection === 'mockups'
-                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110 ml-4'
-                        : 'text-left text-heading-sm font-helvetica-neue transition-transform duration-900 scale-100 opacity-50 ml-4'
+                        ? 'text-left text-body-xl font-switzer transition-transform duration-900 scale-110 ml-4'
+                        : 'text-left text-heading-sm font-switzer transition-transform duration-900 scale-100 opacity-50 ml-4'
                     }
                   >
                     Mockups
@@ -818,8 +818,8 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                     onClick={() => scrollToSection('going-forward')}
                     className={
                       activeSection === 'going-forward'
-                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110'
-                        : 'text-left text-heading-sm font-helvetica-neue transition-transform duration-900 scale-100 opacity-50'
+                        ? 'text-left text-heading-base font-switzer transition-transform duration-900 scale-110'
+                        : 'text-left text-heading-sm font-switzer transition-transform duration-900 scale-100 opacity-50'
                     }
                   >
                     Going forward

@@ -47,7 +47,7 @@ const WorkExperienceItem: React.FC<{ work: WorkExperience; lang: 'en' | 'jp' }> 
           <p className={jpFontSize('text-body-lg', 'text-body-xl') + ' font-roboto'}>{work.company[lang]}</p>
           <p className={jpFontSize('text-body-base', 'text-body-lg') + ' font-roboto'}>{work.location[lang]}</p>
         </div>
-        <p className={jpFontSize('text-caption-lg', 'text-caption-xl') + ' font-space-mono'}>
+        <p className={jpFontSize('text-caption-lg', 'text-caption-xl') + ' font-space-grotesk'}>
           {formatDateRange(work.startDate, work.endDate, lang)}
         </p>
       </div>
@@ -65,7 +65,7 @@ const WorkExperienceItem: React.FC<{ work: WorkExperience; lang: 'en' | 'jp' }> 
           {work.technologies.map((tech) => (
             <span
               key={tech}
-              className="font-space-mono text-body-base md:text-body-lg px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]"
+              className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]"
             >
               {tech}
             </span>
@@ -96,7 +96,7 @@ const EducationItem: React.FC<{ education: Education; lang: 'en' | 'jp' }> = ({ 
             </p>
           )}
         </div>
-        <p className={jpFontSize('text-caption-lg', 'text-caption-xl') + ' font-space-mono'}>
+        <p className={jpFontSize('text-caption-lg', 'text-caption-xl') + ' font-space-grotesk'}>
           {formatDateRange(education.startDate, education.endDate, lang)}
         </p>
       </div>
@@ -115,7 +115,7 @@ const SkillCategoryItem: React.FC<{ category: SkillCategory; lang: 'en' | 'jp' }
         {category.items.map((item) => (
           <span
             key={item}
-            className="font-space-mono text-body-base md:text-body-lg px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]"
+            className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]"
           >
             {item}
           </span>
@@ -134,7 +134,7 @@ const ProjectItem: React.FC<{ project: Project; lang: 'en' | 'jp' }> = ({ projec
     <div className="flex flex-col gap-4">
       <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-2">
         <h3 className={jpFontSize('text-heading-xl', 'text-heading-2xl')}>{project.title[lang]}</h3>
-        <p className={jpFontSize('text-caption-lg', 'text-caption-xl') + ' font-space-mono'}>
+        <p className={jpFontSize('text-caption-lg', 'text-caption-xl') + ' font-space-grotesk'}>
           {project.period[lang]}
         </p>
       </div>
@@ -146,7 +146,7 @@ const ProjectItem: React.FC<{ project: Project; lang: 'en' | 'jp' }> = ({ projec
           {project.technologies.map((tech) => (
             <span
               key={tech}
-              className="font-space-mono text-body-base md:text-body-lg px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]"
+              className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]"
             >
               {tech}
             </span>

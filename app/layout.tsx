@@ -1,10 +1,10 @@
 // app/layout.tsx - Root layout (minimal)
 import type { Metadata } from 'next';
 import './globals.css';
-import { Noto_Sans_JP, Space_Mono } from 'next/font/google';
+import { Noto_Sans_JP, Space_Grotesk } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
+import { getLocale } from 'next-intl/server';
 
-// Define your fonts
 const notoSansJP = Noto_Sans_JP({
   subsets: ['latin'],
   variable: '--font-noto-sans-jp',
@@ -12,11 +12,10 @@ const notoSansJP = Noto_Sans_JP({
   display: 'swap',
 });
 
-const spaceMono = Space_Mono({
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  variable: '--font-space-mono',
-  weight: ['400', '700'],
-  style: ['normal', 'italic'],
+  variable: '--font-space-grotesk',
+  weight: ['400', '500', '600', '700'],
   display: 'swap',
 });
 
@@ -29,10 +28,11 @@ export const metadata: Metadata = {
   },
 };
 
-// Root layout - minimal setup
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const locale = await getLocale();
+
   return (
-    <html className={`${notoSansJP.variable} ${spaceMono.variable}`}>
+    <html lang={locale} className={`${notoSansJP.variable} ${spaceGrotesk.variable}`}>
       <body className="min-h-screen">
         {children}
         <Analytics />

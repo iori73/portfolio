@@ -3,33 +3,58 @@
 @tailwind utilities;
 
 /* Google Fonts Import */
-@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Noto+Sans+JP:wght@100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Noto+Sans+JP:wght@100..900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+/* Switzer - Neo-grotesk heading font from Fontshare (OFL license) */
+@font-face {
+  font-family: 'Switzer';
+  src: url('/fonts/Switzer/Switzer-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Switzer';
+  src: url('/fonts/Switzer/Switzer-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Switzer';
+  src: url('/fonts/Switzer/Switzer-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* Local Fonts - SF fonts removed due to licensing */
 
-/* SPACE MONO */
-.space-mono-regular {
-  font-family: 'Space Mono', monospace;
+/* SPACE GROTESK */
+.space-grotesk-regular {
+  font-family: 'Space Grotesk', sans-serif;
   font-weight: 400;
   font-style: normal;
 }
 
-.space-mono-bold {
-  font-family: 'Space Mono', monospace;
-  font-weight: 700;
+.space-grotesk-medium {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
   font-style: normal;
 }
 
-.space-mono-regular-italic {
-  font-family: 'Space Mono', monospace;
-  font-weight: 400;
-  font-style: italic;
+.space-grotesk-semibold {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-style: normal;
 }
 
-.space-mono-bold-italic {
-  font-family: 'Space Mono', monospace;
+.space-grotesk-bold {
+  font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
-  font-style: italic;
+  font-style: normal;
 }
 
 /* Merriweather Sans */
@@ -128,8 +153,41 @@ p {
     --sidebar-ring: 217.2 91.2% 59.8%;
 
     /* Font family variables */
-    --font-space-mono: 'Space Mono', monospace;
+    --font-space-grotesk: 'Space Grotesk', sans-serif;
     --font-noto-sans-jp: 'Noto Sans JP', sans-serif;
+
+    /* Typography size tokens — mobile-first, overridden at 768px */
+    --text-size-xs: 12px;
+    --text-size-sm: 13px;
+    --text-size-base: 16px;
+    --text-size-lg: 18px;
+    --text-size-xl: 20px;
+    --text-size-2xl: 24px;
+    --text-size-3xl: 32px;
+    --text-size-4xl: 40px;
+
+    /* Semantic color tokens */
+    --ink: #0A0A0A;
+    --ink-secondary: #333333;
+    --ink-tertiary: #71717a;
+    --ink-muted: rgba(0, 0, 0, 0.56);
+    --surface: #fcfbfc;
+    --surface-muted: #f5f5f7;
+    --line-subtle: #e4e4e7;
+    --line-section: #d4d4d8;
+  }
+
+  @media (min-width: 768px) {
+    :root {
+      --text-size-xs: 12px;
+      --text-size-sm: 14px;
+      --text-size-base: 16px;
+      --text-size-lg: 20px;
+      --text-size-xl: 24px;
+      --text-size-2xl: 32px;
+      --text-size-3xl: 48px;
+      --text-size-4xl: 56px;
+    }
   }
 
   .dark {
@@ -184,12 +242,12 @@ p {
   h4,
   h5,
   h6 {
-    @apply font-helvetica-neue font-medium;
+    @apply font-switzer font-medium;
   }
 
   /* Apply font families using CSS variables */
-  .font-space-mono {
-    font-family: var(--font-space-mono);
+  .font-space-grotesk {
+    font-family: var(--font-space-grotesk);
   }
 
   .font-noto-sans-jp {

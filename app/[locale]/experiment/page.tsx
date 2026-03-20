@@ -104,16 +104,17 @@
 
 // /app/experiment/page.tsx
 'use client';
-import { Link, MoveUpRight } from 'lucide-react';
+import { MoveUpRight } from 'lucide-react';
+import NextLink from 'next/link';
 import React, { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
 
-// /Users/i_kawano/Documents/portfolio/app/experiment/FavoriteVisuals.tsxをimportする
 import FavoriteVisuals from './spline';
 
 const ExperimentPage: React.FC = () => {
   const t = useTranslations('experiment');
+  const tCommon = useTranslations('common');
   const locale = useLocale();
   const { getBodyFontClass, getBodyFontStyle } = useBodyFont();
   const { getHeadingFontClass, getHeadingFontStyle } = useHeadingFont();
@@ -156,7 +157,7 @@ const ExperimentPage: React.FC = () => {
       {/* Hero Section */}
       <section className="pt-4 md:pt-16 pb-4 md:pb-16">
         <h1 className="text-heading-3xl md:text-heading-4xl mb-2">Experiment</h1>
-        <p className={`max-w-full text-body-lg md:text-body-xl ${getBodyFontClass()}`}>{t('experimentDescription')}</p>
+        <p className={`max-w-full text-body-lg md:text-body-xl ${getBodyFontClass()}`}>{t('description')}</p>
       </section>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-12">
         <div className="lg:col-span-6 relative">
@@ -178,31 +179,31 @@ const ExperimentPage: React.FC = () => {
               </div>
 
               <div className="flex gap-2 items-start flex-wrap">
-                <span className="font-space-mono text-body-base px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                <span className="font-space-grotesk text-body-base leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
                   Al
                 </span>
-                <span className="font-space-mono text-body-base px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                <span className="font-space-grotesk text-body-base leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
                   Biology/Nature
                 </span>
-                <span className="font-space-mono text-body-base px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                <span className="font-space-grotesk text-body-base leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
                   Business
                 </span>
-                <span className="font-space-mono text-body-base px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                <span className="font-space-grotesk text-body-base leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
                   Career
                 </span>
-                <span className="font-space-mono text-body-base px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                <span className="font-space-grotesk text-body-base leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
                   Design & Art
                 </span>
-                <span className="font-space-mono text-body-base px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                <span className="font-space-grotesk text-body-base leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
                   Liberal Arts
                 </span>
-                <span className="font-space-mono text-body-base px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                <span className="font-space-grotesk text-body-base leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
                   Science
                 </span>
-                <span className="font-space-mono text-body-base px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                <span className="font-space-grotesk text-body-base leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
                   Startup/VC
                 </span>
-                <span className="font-space-mono text-body-base px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                <span className="font-space-grotesk text-body-base leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
                   Technology
                 </span>
               </div>
@@ -263,18 +264,15 @@ const ExperimentPage: React.FC = () => {
               <div className="relative text-body-base">and more!</div>
             </div>
 
-            <a
-              href="https://paint-foam-7ff.notion.site/Podcast-notes-1bc264826e0c8009bf10ee284f3cc5b4?pvs=4"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative flex items-center justify-center px-6 py-3 rounded-[100px] text-[#0000008f] hover:text-white cursor-pointer transition-[color] duration-300 whitespace-nowrap overflow-hidden group w-full md:w-auto"
+            <NextLink
+              href={`/${locale}/experiment/podcast-notes`}
+              className="relative flex items-center justify-center px-6 py-3 rounded-[100px] text-ink-muted hover:text-white cursor-pointer transition-[color] duration-300 whitespace-nowrap overflow-hidden group w-full md:w-auto"
               style={{
                 background:
                   'radial-gradient(75% 150% at 100% 114.2%, rgba(210, 210, 215, 0.4) 0%, rgba(180, 180, 185, 0.4) 100%)',
                 backdropFilter: 'blur(8px)',
               }}
             >
-              {/* Hover background overlay */}
               <span
                 className="absolute inset-0 rounded-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                 style={{
@@ -283,8 +281,8 @@ const ExperimentPage: React.FC = () => {
                   backdropFilter: 'blur(8px)',
                 }}
               />
-              <span className="relative z-10 text-body-lg md:text-body-xl font-medium">{t('goToPage')}</span>
-            </a>
+              <span className="relative z-10 text-body-lg md:text-body-xl font-medium">{tCommon('goToPage')}</span>
+            </NextLink>
           </div>
         </div>
       </div>

@@ -13,11 +13,13 @@ export function generateStaticParams() {
 
 export default async function LocaleLayout({
   children,
-  params: { locale },
+  params,
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
+
   // Ensure that the incoming `locale` is valid
   if (!routing.locales.includes(locale as any)) {
     notFound();
@@ -28,17 +30,13 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
-      <body>
-        <NextIntlClientProvider messages={messages}>
-          <MenuProvider>
-            <Header />
-            <main className="max-w-6xl mx-auto px-6">{children}</main>
-            <Footer />
-          </MenuProvider>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider messages={messages}>
+      <MenuProvider>
+        <Header />
+        <main className="max-w-6xl mx-auto px-6">{children}</main>
+        <Footer />
+      </MenuProvider>
+    </NextIntlClientProvider>
   );
 }
 

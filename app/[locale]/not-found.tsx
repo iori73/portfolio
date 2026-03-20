@@ -12,10 +12,6 @@ export default function NotFound() {
       <div className="text-center">
         <h1
           className="text-heading-4xl md:text-heading-5xl mb-4"
-          style={{
-            fontFamily: 'Helvetica Neue, Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-            fontWeight: 500,
-          }}
         >
           404
         </h1>
@@ -25,11 +21,7 @@ export default function NotFound() {
         </div>
         <Link
           href="/"
-          className={`inline-block px-8 py-3 border-2 border-black rounded-[40px] hover:border-transparent hover:bg-black hover:text-white transition-all duration-300 text-body-lg`}
-          style={{
-            fontFamily: 'Helvetica Neue, Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-            fontWeight: 500,
-          }}
+          className="inline-block px-8 py-3 border-2 border-black rounded-[40px] hover:border-transparent hover:bg-black hover:text-white transition-all duration-300 text-body-lg font-helvetica-neue font-medium"
         >
           {t('backToHome')}
         </Link>

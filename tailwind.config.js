@@ -25,6 +25,20 @@ module.exports = {
           800: '#27272a',
           900: '#18181b',
         },
+        ink: {
+          DEFAULT: 'var(--ink)',
+          secondary: 'var(--ink-secondary)',
+          tertiary: 'var(--ink-tertiary)',
+          muted: 'var(--ink-muted)',
+        },
+        surface: {
+          DEFAULT: 'var(--surface)',
+          muted: 'var(--surface-muted)',
+        },
+        line: {
+          subtle: 'var(--line-subtle)',
+          section: 'var(--line-section)',
+        },
         accent: {
           DEFAULT: '#007aff', // Appleブルー
         },
@@ -67,6 +81,13 @@ module.exports = {
       },
       // フォントファミリーとフォントサイズの拡張
       fontFamily: {
+        switzer: [
+          'Switzer',
+          'Helvetica Neue',
+          'Helvetica',
+          '-apple-system',
+          'sans-serif',
+        ],
         'helvetica-neue': [
           'Helvetica Neue',
           'Helvetica',
@@ -76,39 +97,50 @@ module.exports = {
           'sans-serif',
         ],
         merriweather: ['Merriweather Sans', 'system-ui', 'sans-serif'],
-        'space-mono': ['Space Mono', 'ui-monospace', 'monospace'],
+        'space-grotesk': ['Space Grotesk', 'system-ui', 'sans-serif'],
         'noto-sans-jp': ['Noto Sans JP', 'sans-serif'],
       },
       fontSize: {
-        // shadcn/ui準拠: fontWeightは含めず、fontSizeとlineHeightのみ定義
-        // fontWeightは別クラス（font-normal, font-medium, font-semibold, font-bold）で制御
+        /* ═══ New semantic scale (Spotify Encore-inspired) ═══ */
+        /* Responsive sizes via CSS variables — no md: prefix needed */
+        'display': ['var(--text-size-4xl)', { lineHeight: '1.1' }],
+        'headline': ['var(--text-size-3xl)', { lineHeight: '1.2' }],
+        'title-lg': ['var(--text-size-2xl)', { lineHeight: '1.2' }],
+        'title': ['var(--text-size-xl)', { lineHeight: '1.25' }],
+        'title-sm': ['var(--text-size-lg)', { lineHeight: '1.3' }],
+        'body-lg': ['var(--text-size-lg)', { lineHeight: '1.6' }],
+        'body': ['var(--text-size-base)', { lineHeight: '1.6' }],
+        'body-sm': ['var(--text-size-sm)', { lineHeight: '1.5' }],
+        'label': ['var(--text-size-sm)', { lineHeight: '1.3' }],
+        'caption': ['var(--text-size-xs)', { lineHeight: '1.3' }],
 
-        /* Body Scale (line-height: 1.4 = 140%) */
-        'body-xs': ['14px', { lineHeight: '1.4' }],
-        'body-sm': ['16px', { lineHeight: '1.4' }], // 旧: body-s-140
-        'body-base': ['18px', { lineHeight: '1.4' }], // 旧: body-m-140
-        'body-lg': ['21px', { lineHeight: '1.4' }], // 旧: body-l-140
-        'body-xl': ['24px', { lineHeight: '1.4' }], // 旧: body-xl-140
-        'body-2xl': ['28px', { lineHeight: '1.4' }], // 旧: body-xxl-140
-        'body-3xl': ['32px', { lineHeight: '1.4' }], // 旧: body-xxxl-140
-        'body-4xl': ['40px', { lineHeight: '1.4' }], // 旧: body-xxxxl-140
+        /* ═══ Legacy scale (kept for backward compatibility) ═══ */
 
-        /* Heading Scale (line-height: 1.2 = 120%) */
-        'heading-sm': ['21px', { lineHeight: '1.2' }], // 旧: heading-xxxs-120
-        'heading-base': ['24px', { lineHeight: '1.2' }], // 旧: heading-xxs-120
-        'heading-lg': ['28px', { lineHeight: '1.2' }], // 旧: heading-xs-120
-        'heading-xl': ['32px', { lineHeight: '1.2' }], // 旧: heading-s-120
-        'heading-2xl': ['40px', { lineHeight: '1.2' }], // 旧: heading-m-120
-        'heading-3xl': ['48px', { lineHeight: '1.2' }], // 旧: heading-l-120
-        'heading-4xl': ['56px', { lineHeight: '1.2' }], // 旧: heading-xl-m-120
+        /* Body Scale — 本文・説明文 */
+        /* NOTE: body-sm and body-lg are defined in the new semantic scale above */
+        'body-xs': ['13px', { lineHeight: '1.5' }],
+        'body-base': ['16px', { lineHeight: '1.6' }],
+        'body-xl': ['20px', { lineHeight: '1.5' }],
+        'body-2xl': ['24px', { lineHeight: '1.4' }],
+        'body-3xl': ['28px', { lineHeight: '1.4' }],
+        'body-4xl': ['32px', { lineHeight: '1.3' }],
 
-        /* Caption Scale (line-height: 1.2 = 120%) - 必要最小限のみ */
-        'caption-xs': ['12px', { lineHeight: '1.2' }], // 旧: caption-xxs-120
-        'caption-sm': ['14px', { lineHeight: '1.2' }], // 旧: caption-xs-120
-        'caption-base': ['16px', { lineHeight: '1.2' }], // 旧: caption-s-120
-        'caption-lg': ['18px', { lineHeight: '1.2' }], // 旧: caption-m-120
-        'caption-xl': ['21px', { lineHeight: '1.2' }], // 旧: caption-l-120
-        'caption-2xl': ['24px', { lineHeight: '1.2' }], // 旧: caption-xl-120
+        /* Heading Scale — 見出し（変更なし） */
+        'heading-sm': ['21px', { lineHeight: '1.2' }],
+        'heading-base': ['24px', { lineHeight: '1.2' }],
+        'heading-lg': ['28px', { lineHeight: '1.2' }],
+        'heading-xl': ['32px', { lineHeight: '1.2' }],
+        'heading-2xl': ['40px', { lineHeight: '1.2' }],
+        'heading-3xl': ['48px', { lineHeight: '1.2' }],
+        'heading-4xl': ['56px', { lineHeight: '1.2' }],
+
+        /* Caption Scale — ラベル・タグ・メタ */
+        'caption-xs': ['11px', { lineHeight: '1.3' }],
+        'caption-sm': ['12px', { lineHeight: '1.3' }],
+        'caption-base': ['14px', { lineHeight: '1.3' }],
+        'caption-lg': ['16px', { lineHeight: '1.3' }],
+        'caption-xl': ['18px', { lineHeight: '1.3' }],
+        'caption-2xl': ['20px', { lineHeight: '1.3' }],
       },
     },
   },

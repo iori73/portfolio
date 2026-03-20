@@ -67,7 +67,7 @@ export function SplitImageSection({
   const headingClassName =
     headingLevel === 'h3'
       ? 'text-heading-base font-merriweather font-semibold mb-4'
-      : 'text-heading-xl md:text-heading-2xl font-helvetica-neue mb-6';
+      : 'text-heading-xl md:text-heading-2xl font-switzer mb-6';
 
   return (
     <section className="py-8 bg-white text-[#002a38] scroll-mt-32">

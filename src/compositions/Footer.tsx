@@ -198,7 +198,7 @@ export default function Footer() {
                 <div className="w-9 h-3 bg-black/70" />
               </div>
               <span
-                className="tracking-[-0.4px] font-space-mono text-caption-sm md:text-caption-base text-[#0A0A0A]"
+                className="tracking-[-0.4px] font-space-grotesk text-caption-sm md:text-caption-base text-[#0A0A0A]"
                 style={{ lineHeight: '1.164' }}
               >
                 {t('legendSize')}
@@ -214,7 +214,7 @@ export default function Footer() {
                 <div className="w-3 h-3 bg-black/10" />
               </div>
               <span
-                className="tracking-[-0.4px] font-space-mono text-caption-sm md:text-caption-base text-[#0A0A0A]"
+                className="tracking-[-0.4px] font-space-grotesk text-caption-sm md:text-caption-base text-[#0A0A0A]"
                 style={{ lineHeight: '1.164' }}
               >
                 {t('legendColor')}
@@ -333,7 +333,7 @@ export default function Footer() {
         {/* Copyright */}
         {/* <div className="w-full text-center py-2 px-6">
           <span
-            className="font-space-mono text-caption-sm md:text-caption-base text-[#0A0A0A] tracking-[-0.4px]"
+            className="font-space-grotesk text-caption-sm md:text-caption-base text-[#0A0A0A] tracking-[-0.4px]"
             style={{ lineHeight: '1.164' }}
           >
             @ 2025 Iori Kawano

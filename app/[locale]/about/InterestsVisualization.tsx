@@ -184,7 +184,7 @@ const InterestsVisualization: React.FC = () => {
       >
         <img src="/about/drag_icon.svg" alt="Drag icon" width={32} height={32} className="flex-shrink-0" />
         <p
-          className={`font-space-mono ${jpFontSize(
+          className={`font-space-grotesk ${jpFontSize(
             'text-caption-xs',
             'text-caption-base',
             'text-caption-xs',

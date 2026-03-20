@@ -77,7 +77,7 @@ export default function Header() {
               <div key={item.path} className="relative flex flex-col items-center">
                 <Link
                   href={item.path}
-                  className={`font-helvetica-neue text-body-xl leading-[33.6px] transition-[font-weight] duration-300 ${
+                  className={`font-helvetica-neue text-body-xl transition-[font-weight] duration-300 ${
                     isActive(item.path) ? 'font-bold' : 'font-normal'
                   }`}
                 >
@@ -95,7 +95,7 @@ export default function Header() {
               <button
                 onClick={() => toggleLanguage('en')}
                 disabled={isPending}
-                className={`font-helvetica-neue text-body-xl leading-[33.6px] text-center transition-[font-weight] duration-300 ${
+                className={`font-helvetica-neue text-body-xl text-center transition-[font-weight] duration-300 ${
                   locale === 'en' ? 'font-bold' : 'font-light'
                 }`}
               >
@@ -105,7 +105,7 @@ export default function Header() {
               <button
                 onClick={() => toggleLanguage('jp')}
                 disabled={isPending}
-                className={`font-helvetica-neue text-body-xl leading-[33.6px] text-center transition-[font-weight] duration-300 ${
+                className={`font-helvetica-neue text-body-xl text-center transition-[font-weight] duration-300 ${
                   locale === 'jp' ? 'font-bold' : 'font-light'
                 }`}
               >

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect x="10" y="10" width="180" height="180" rx="8" fill="#1A1A1A"/>
+  <g transform="translate(100,100)">
+    <ellipse cx="0" cy="-32" rx="10" ry="22" fill="white" transform="rotate(0)"/>
+    <ellipse cx="0" cy="-32" rx="10" ry="22" fill="white" transform="rotate(30)"/>
+    <ellipse cx="0" cy="-32" rx="10" ry="22" fill="white" transform="rotate(60)"/>
+    <ellipse cx="0" cy="-32" rx="10" ry="22" fill="white" transform="rotate(90)"/>
+    <ellipse cx="0" cy="-32" rx="10" ry="22" fill="white" transform="rotate(120)"/>
+    <ellipse cx="0" cy="-32" rx="10" ry="22" fill="white" transform="rotate(150)"/>
+    <ellipse cx="0" cy="-32" rx="10" ry="22" fill="white" transform="rotate(180)"/>
+    <ellipse cx="0" cy="-32" rx="10" ry="22" fill="white" transform="rotate(210)"/>
+    <ellipse cx="0" cy="-32" rx="10" ry="22" fill="white" transform="rotate(240)"/>
+    <ellipse cx="0" cy="-32" rx="10" ry="22" fill="white" transform="rotate(270)"/>
+    <ellipse cx="0" cy="-32" rx="10" ry="22" fill="white" transform="rotate(300)"/>
+    <ellipse cx="0" cy="-32" rx="10" ry="22" fill="white" transform="rotate(330)"/>
+    <circle cx="0" cy="0" r="10" fill="white"/>
+  </g>
+</svg>

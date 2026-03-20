@@ -1,195 +1,365 @@
-# Design System Architecture
+# Design System
 
-## Overview
+> このドキュメントはポートフォリオサイトのデザインシステムの**唯一の真実**です。
+> コードの現状を正確に反映します。理想や過去の計画は記載しません。
+>
+> **最終更新: 2026-03-13**
 
-このドキュメントは、ポートフォリオサイトのデザインシステムの全体像を記述します。
+---
 
-## Typography System
+## 1. Typography
 
-### Design Principles
+### 1.1 Font Families
 
-このプロジェクトのタイポグラフィシステムは、**shadcn/uiのベストプラクティスに準拠**しています：
+| フォント | Tailwind クラス | 用途 | 読み込み |
+|---|---|---|---|
+| Switzer | `font-switzer` | 見出し（EN）、サイドバーナビ | セルフホスト (WOFF2, Fontshare) |
+| Helvetica Neue | `font-helvetica-neue` | 本文（EN）、UI 要素 | システムフォント |
+| Noto Sans JP | `font-noto-sans-jp` | 見出し（JP）、本文（JP） | Google Fonts |
+| Space Grotesk | `font-space-grotesk` | タグ、キャプション、メタラベル | Google Fonts |
+| Merriweather Sans | `font-merriweather` | GymDashboardHero 内見出し、モバイルナビ | Google Fonts / ローカル |
 
-1. **Font SizeとFont Weightの分離**: `fontSize`定義には`fontWeight`を含めず、`fontSize`と`lineHeight`のみを定義
-2. **Font Weightの独立制御**: `font-normal`, `font-medium`, `font-semibold`, `font-bold`などの標準Tailwindクラスで制御
-3. **セマンティックな命名**: `text-body-sm`, `text-heading-xl`など、直感的で拡張しやすい命名規則
+### 1.2 Font Weight
 
-### Font Families
+| Weight | クラス | 用途 |
+|---|---|---|
+| 300 | `font-light` | 日本語本文、言語切替の非アクティブ |
+| 400 | `font-normal`（デフォルト） | 英語本文、タグ、キャプション |
+| 500 | `font-medium` | 見出し（h1-h6）— `@layer base` で自動適用 |
+| 700 | `font-bold` | ナビゲーション・言語切替のアクティブ |
 
-- **Merriweather Sans**: 見出し（Heading）用
-- **Inter**: 本文（Body）とインターフェース用
-- **Space Mono**: タグやコード表示用
-- **JetBrains Mono**: キャプション用
+### 1.3 言語別フォント適用
 
-### Font Size Scale
+`src/hooks/useFonts.ts` の3つのフックで制御:
 
-#### Heading Scale (line-height: 1.2 = 120%)
+**`useBodyFont()` → `getBodyFontClass()`**
+- EN: `font-helvetica-neue`
+- JP: `font-noto-sans-jp font-light`
 
-| クラス名 | サイズ | 旧クラス名 |
-|---------|--------|-----------|
-| `text-heading-sm` | 21px | `text-heading-xxxs-120` |
-| `text-heading-base` | 24px | `text-heading-xxs-120` |
-| `text-heading-lg` | 28px | `text-heading-xs-120` |
-| `text-heading-xl` | 32px | `text-heading-s-120` |
-| `text-heading-2xl` | 40px | `text-heading-m-120` |
-| `text-heading-3xl` | 48px | `text-heading-l-120` |
-| `text-heading-4xl` | 56px | `text-heading-xl-m-120` |
+**`useHeadingFont()` → `getHeadingFontClass()`**
+- EN: `''`（空文字 — `@layer base` の `font-switzer font-medium` が適用）
+- JP: `font-noto-sans-jp font-medium`
 
-#### Body Scale (line-height: 1.4 = 140%)
+**`useJPFontSize()` → `jpFontSize(mobile, desktop, mobileJP?, desktopJP?)`**
+- 言語ごとに異なるレスポンシブサイズを適用
 
-| クラス名 | サイズ | 旧クラス名 |
-|---------|--------|-----------|
-| `text-body-xs` | 14px | `text-body-xs-140` |
-| `text-body-sm` | 16px | `text-body-s-140` |
-| `text-body-base` | 18px | `text-body-m-140` |
-| `text-body-lg` | 21px | `text-body-l-140` |
-| `text-body-xl` | 24px | `text-body-xl-140` |
-| `text-body-2xl` | 28px | `text-body-xxl-140` |
-| `text-body-3xl` | 32px | `text-body-xxxl-140` |
-| `text-body-4xl` | 40px | `text-body-xxxxl-140` |
+### 1.4 Font Size Scale — New Semantic Scale (推奨)
 
-#### Caption Scale (line-height: 1.2 = 120%)
+**定義場所**: `app/globals.css` (CSS変数) + `tailwind.config.js` (セマンティッククラス)
 
-| クラス名 | サイズ | 旧クラス名 |
-|---------|--------|-----------|
-| `text-caption-xs` | 12px | `text-caption-xxs-120` |
-| `text-caption-sm` | 14px | `text-caption-xs-120` |
-| `text-caption-base` | 16px | `text-caption-s-120` |
-| `text-caption-lg` | 18px | `text-caption-m-120` |
-| `text-caption-xl` | 21px | `text-caption-l-120` |
-| `text-caption-2xl` | 24px | `text-caption-xl-120` |
+**設計原則** (Spotify Encore inspired):
+- **単一スケール**: heading / body / caption の3系統を統合し、10クラスの単一スケールに
+- **レスポンシブ内蔵**: CSS変数が `@media (min-width: 768px)` で自動切替 — `md:` プレフィックス不要
+- **大サイズほど伸縮が大きい**: body は固定 (16px)、headline は 1.5x (32→48px)
 
-### Font Weight
+#### Size Tokens (CSS変数)
 
-Font Weightは`fontSize`定義から分離され、標準のTailwindクラスで制御します：
+| トークン | Mobile (<768) | Desktop (≥768) |
+|---|---|---|
+| `--text-size-xs` | 12px | 12px |
+| `--text-size-sm` | 13px | 14px |
+| `--text-size-base` | 16px | 16px |
+| `--text-size-lg` | 18px | 20px |
+| `--text-size-xl` | 20px | 24px |
+| `--text-size-2xl` | 24px | 32px |
+| `--text-size-3xl` | 32px | 48px |
+| `--text-size-4xl` | 40px | 56px |
 
-- `font-normal` (400)
-- `font-medium` (500)
-- `font-semibold` (600)
-- `font-bold` (700)
+#### Semantic Classes
 
-#### セマンティックなHTMLタグのデフォルトFont Weight
+| クラス | CSS変数 | line-height | 用途 |
+|---|---|---|---|
+| `text-display` | `--text-size-4xl` | 1.1 | Home Hero のみ |
+| `text-headline` | `--text-size-3xl` | 1.2 | h1 ページタイトル |
+| `text-title-lg` | `--text-size-2xl` | 1.2 | h2 セクション見出し |
+| `text-title` | `--text-size-xl` | 1.25 | h3 サブセクション |
+| `text-title-sm` | `--text-size-lg` | 1.3 | h4, カード見出し |
+| `text-body-lg` | `--text-size-lg` | 1.6 | リード文、Hero subtitle |
+| `text-body` | `--text-size-base` | 1.6 | デフォルト本文 |
+| `text-body-sm` | `--text-size-sm` | 1.5 | 補助テキスト、カードメタ |
+| `text-label` | `--text-size-sm` | 1.3 | タグ、フィルター、ボタンラベル |
+| `text-caption` | `--text-size-xs` | 1.3 | 微小テキスト、footnote |
 
-shadcn/ui準拠のアプローチとして、セマンティックなHTMLタグにデフォルトのfont-weightを設定しています（`app/globals.css`の`@layer base`）：
+### 1.5 ページタイプ別見出し階層（新スケール）
 
-- **h1**: `font-bold` (700)
-- **h2, h3, h4, h5, h6**: `font-semibold` (600)
+`md:` プレフィックスが不要。CSS変数が自動的にレスポンシブ対応する。
 
-これにより、見出しタグを使用する際に明示的に`font-bold`や`font-semibold`を指定しなくても、適切な太さが適用されます。必要に応じて、個別にオーバーライドも可能です。
+#### ランディングページ（Home, About, Experiment, Blog）
 
-使用例：
+| 要素 | Mobile | Desktop | クラス |
+|---|---|---|---|
+| h1 (Hero) | 40px | 56px | `text-display` |
+| h1 (通常) | 32px | 48px | `text-headline` |
+| h2 | 24px | 32px | `text-title-lg` |
+| h3 | 20px | 24px | `text-title` |
+
+#### Work 詳細ページ
+
+| 要素 | Mobile | Desktop | クラス |
+|---|---|---|---|
+| h1 | 32px | 48px | `text-headline` |
+| h2 | 24px | 32px | `text-title-lg` |
+| h3 | 20px | 24px | `text-title` |
+
+### 1.6 本文サイズ（新スケール）
+
+| 用途 | クラス | Mobile → Desktop |
+|---|---|---|
+| メイン本文 | `text-body` + `getBodyFontClass()` | 16px (固定) |
+| リード文・サブタイトル | `text-body-lg` + `getBodyFontClass()` | 18px → 20px |
+| 補助テキスト | `text-body-sm` + `getBodyFontClass()` | 13px → 14px |
+| タグ・ラベル | `text-label font-space-grotesk` | 13px → 14px |
+| 微小テキスト | `text-caption` | 12px (固定) |
+
+### 1.7 見出しのスタイル適用方法
+
+`@layer base` で全 h1-h6 に `font-switzer font-medium` が自動適用される。
+
 ```tsx
-{/* デフォルトスタイルが適用される */}
-<h1 className="text-heading-3xl font-merriweather">Main Title</h1>
-<h2 className="text-heading-2xl font-inter">Section Title</h2>
+// 新スケール（推奨）— md: プレフィックス不要
+<h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
 
-{/* 必要に応じてオーバーライド可能 */}
-<h3 className="text-heading-xl font-normal">Light Weight Heading</h3>
+// ラベル・タグ
+<span className="text-label font-space-grotesk text-ink-tertiary">
 ```
 
-## Responsive Strategy
+**禁止**: インライン `style={{ fontFamily: '...', fontWeight: 500 }}` は使わない。
 
-### Breakpoints
+### 1.8 Legacy Scale (後方互換)
 
-- Mobile: default (< 768px)
-- Desktop: `md:` prefix (≥ 768px)
+旧クラス（`text-heading-*`, `text-body-*`, `text-caption-*`）は `tailwind.config.js` に残存。
+未移行ページで引き続き使用可能。新規コードには新スケールを使うこと。
 
-### Font Sizing Strategy
+---
 
-#### ホームページ（`app/page.tsx`）
+## 2. Color
 
-言語の特性に応じて異なるサイズを使用：
+### 2.1 セマンティックカラートークン
 
-- 日本語: 視認性を考慮して小さめのサイズ
-- 英語: より大きいサイズで可読性を確保
+**定義場所**: `app/globals.css` の `:root` + `tailwind.config.js`
 
-#### ワーク詳細ページ（`app/work/*`）
+| CSS 変数 | 値 | Tailwind クラス | 用途 |
+|---|---|---|---|
+| `--ink` | `#0A0A0A` | `text-ink` | 見出し、主要テキスト |
+| `--ink-secondary` | `#333333` | `text-ink-secondary` | サブタイトル、副次テキスト |
+| `--ink-tertiary` | `#71717a` | `text-ink-tertiary` | ラベル、キャプション |
+| `--ink-muted` | `rgba(0,0,0,0.56)` | `text-ink-muted` | CTA ボタンテキスト等 |
+| `--surface` | `#fcfbfc` | `bg-surface` | ページ背景 |
+| `--surface-muted` | `#f5f5f7` | `bg-surface-muted` | タグ背景、TL;DR セクション |
+| `--line-subtle` | `#e4e4e7` | `border-line-subtle` | コンテンツ内区切り |
+| `--line-section` | `#d4d4d8` | `border-line-section` | セクション区切り |
 
-両言語で統一されたサイズ：
+### 2.2 既存カラー（維持）
 
-- モバイル: `text-body-sm` (16px)
-- デスクトップ: `text-body-lg` (21px)
-- 比率: 約 76% (21px → 16px)
+- **Tailwind gray scale** (gray-50 ~ gray-900): コンポーネント内で使用
+- **shadcn/ui HSL tokens** (`--foreground`, `--muted`, `--primary` 等): UI コンポーネントで使用
+- **accent**: `#007aff` (Apple Blue)
 
-詳細は [ADR-003: モバイルフォントサイズの標準化](../decisions/003-mobile-font-size-standardization.md) を参照。
+### 2.3 置換マッピング（段階的に適用）
 
-## Internationalization (i18n)
+| 旧（hardcoded） | 新（セマンティック） |
+|---|---|
+| `text-black`, `text-[#0A0A0A]`, `text-[#171717]`, `text-[#101828]` | `text-ink` |
+| `text-[#333333]`, `text-[#002a38]` | `text-ink-secondary` |
+| `text-gray-500`, `text-[#696969]`, `text-[#656d76]` | `text-ink-tertiary` |
+| `text-[#0000008f]` | `text-ink-muted` |
+| `bg-[#f5f5f7]`, `bg-[#eeedee]` | `bg-surface-muted` |
+| `border-gray-400` | `border-line-section` |
 
-### Language Support
+---
 
-- 英語 (en)
-- 日本語 (jp)
+## 3. Spacing
 
-### Font Size Adjustment Hook
+Tailwind デフォルトスペーシングを使用。カスタム変数は定義しない。
 
-`useJPFontSize` フックを使用して、言語ごとに異なるフォントサイズを適用可能：
+### 3.1 ページレベル
 
-```typescript
-const { jpFontSize } = useJPFontSize();
+| 用途 | クラス | 値 |
+|---|---|---|
+| ページ上下余白 | `my-24 md:mt-28 md:mb-16` | 96px / md: 112px top, 64px bottom |
+| ヒーローセクション後 | `mb-0 md:mb-8` | 0 / md: 32px |
+| ヒーローのモバイル全幅 | `-mx-6 md:mx-0` | -24px / md: 0 |
 
-// 両言語で同じサイズ
-jpFontSize('text-body-sm', 'text-body-lg');
+### 3.2 セクションレベル
 
-// 言語ごとに異なるサイズ
-jpFontSize(
-  'text-body-xl',   // モバイル英語
-  'text-body-2xl',  // デスクトップ英語
-  'text-body-lg',   // モバイル日本語
-  'text-body-xl',  // デスクトップ日本語
-);
+| 用途 | クラス | 値 |
+|---|---|---|
+| セクション間パディング | `py-8` | 32px top & bottom |
+| プロジェクト情報セクション | `pt-4 pb-8` | 16px top, 32px bottom |
+
+### 3.3 要素レベル
+
+| 用途 | クラス | 値 |
+|---|---|---|
+| h2 下マージン | `mb-6` | 24px |
+| h3 下マージン | `mb-4` | 16px |
+| h3 下マージン（Reflection 等） | `mb-3` | 12px |
+| 本文段落間 | `mb-4` | 16px |
+| 本文段落間（長文・画像前後） | `mb-6` | 24px |
+| サブセクション間 | `mb-8` | 32px |
+| 大ブロック間 | `mb-12` | 48px |
+| メタラベルとキャプション | `mb-2` | 8px |
+
+### 3.4 コンポーネントレベル
+
+| 用途 | クラス | 値 |
+|---|---|---|
+| タグピル | `px-3 py-1` | 12px / 4px |
+| CTA ボタン | `px-6 py-3` | 24px / 12px |
+| メタグリッド | `gap-6` | 24px |
+| サイドバーナビ間隔 | `space-y-3` | 12px |
+
+---
+
+## 4. Layout
+
+### 4.1 最大幅
+
+| 用途 | クラス | 値 |
+|---|---|---|
+| メインレイアウト | `max-w-6xl mx-auto px-6` | 1152px |
+| Work ページ本文 + サイドバー | `max-w-7xl` | 1280px |
+| プロジェクト情報 | `max-w-[1028px]` | 1028px |
+| Google UX ページ | `max-w-[896px]` | 896px |
+
+### 4.2 Work ページレイアウト
+
+```
+┌──────────────────────────────────────────┐
+│ Hero (max-w-7xl or full-width)           │
+├──────────────────────────────────────────┤
+│ Project Info (max-w-[1028px])            │
+├──────────────────────────────────────────┤
+│ Main Content (80%)  │ Sidebar (20%)      │
+│ (max-w-7xl)         │ sticky top-24      │
+└──────────────────────────────────────────┘
 ```
 
-**注意**: `useJPFontSize`は柔軟な実装のため、新旧どちらのクラス名でも動作しますが、新クラス名の使用を推奨します。
+### 4.3 レスポンシブブレークポイント
 
-## Color System
+- **Mobile**: default (< 768px)
+- **Desktop**: `md:` prefix (>= 768px)
 
-### Gray Scale
+---
 
-- gray-50 to gray-900: システム全体で使用
+## 5. Components
 
-### Accent Colors
+### 5.1 タグ
 
-- Primary accent: `#007aff` (Apple Blue)
+```tsx
+<span className="font-space-grotesk text-label px-3 py-1.5 rounded-lg bg-surface-muted text-ink-tertiary">
+  Tag Name
+</span>
+```
 
-## Spacing System
+### 5.2 メタラベル（Timeline, My Skills 等）
 
-Tailwind のデフォルトスケールを使用：
+```tsx
+<span className="text-label font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
+  Label
+</span>
+<p className="text-body-lg tracking-[0.2px]">
+  Value
+</p>
+```
 
-- `mb-2`: 0.5rem (8px)
-- `mb-4`: 1rem (16px)
-- `mb-6`: 1.5rem (24px)
-- `mb-8`: 2rem (32px)
+### 5.3 CTA ボタン（サイトを見る）
 
-注意: 過去にカスタムスケール（`6: 48px`）を使用していましたが、公開サイトとの不一致を避けるため、デフォルトに戻しました。
-詳細は [ADR-002: Tailwind Spacing 設定の修正](../decisions/002-tailwind-spacing-fix.md) を参照。
+```tsx
+<a className="relative flex items-center justify-center px-6 py-3 rounded-[100px] text-ink-muted hover:text-white cursor-pointer transition-[color] duration-300 whitespace-nowrap overflow-hidden group">
+  <span className="relative z-10 text-body-lg font-medium">
+    {t('common.goToSite')}
+  </span>
+</a>
+```
 
-## Layout
+### 5.4 GitHub リポジトリリンク
 
-### Maximum Widths
+```tsx
+<a className="inline-flex items-center gap-2">
+  {/* GitHub SVG icon */}
+  <span className="text-body-sm md:text-body-lg leading-[1.25] font-normal text-ink-tertiary">owner</span>
+  <span className="text-body-sm md:text-body-lg leading-[1.25] font-normal text-ink-tertiary">/</span>
+  <span className="text-body-sm md:text-body-lg leading-[1.25] font-semibold text-ink">repo</span>
+</a>
+```
 
-- Main content: `max-w-6xl` (1152px)
-- Article content: `max-w-[896px]`
+### 5.5 サイドバーナビ
 
-### Page Margins
+```tsx
+// Active（heading-base: 24px — inactive の heading-sm: 21px より大きい）
+className="text-left text-heading-base font-switzer transition-transform duration-900 scale-110"
 
-各ページの最上位コンテナに個別適用：
+// Inactive
+className="text-left text-heading-sm font-switzer transition-transform duration-900 scale-100 opacity-50"
+```
 
-- Mobile: `my-24`
-- Desktop: `md:mt-28 md:mb-16`
+### 5.6 画像スタイル
 
-## Migration Notes
+```tsx
+<Image
+  style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.1)', borderRadius: '8px' }}
+  className="w-full h-auto"
+/>
+```
 
-### 旧クラス名からの移行
+---
 
-2025年1月に、タイポグラフィシステムをshadcn/ui準拠に再構築しました。旧クラス名（例: `text-body-s-140`）から新クラス名（例: `text-body-sm`）への移行が完了しています。
+## 6. Base Styles
 
-主な変更点：
-- `fontSize`定義から`fontWeight`を削除
-- セマンティックな命名規則に統一（`-sm`, `-base`, `-lg`, `-xl`, `-2xl`など）
-- `font-semibold`などの標準Tailwindクラスが正しく動作するように修正
+**定義場所**: `app/globals.css`
 
-詳細は [Typography Refactor Plan](../typography-refactor-plan.md) を参照。
+```css
+/* @layer base で適用 */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-switzer font-medium;
+}
 
-## Last Updated
+body {
+  font-family: 'Helvetica Neue', 'Helvetica', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: #fcfbfc;
+}
 
-2025-01-17 (Typography System Refactored)
+/* モバイル可読性 */
+@media (max-width: 640px) {
+  p, li { line-height: 160%; }
+}
+```
+
+---
+
+## 7. Dead Code（削除候補）
+
+以下のファイルはどこからも import されておらず、削除可能:
+
+- `src/lib/fonts.tsx` — `src/hooks/useFonts.ts` と重複する未使用ファイル
+- `styles/globals.css` — 全行コメントアウト済み。8pt スペーシングスケールの残骸
+
+---
+
+## 8. Migration Notes
+
+### hardcoded hex → セマンティックトークンへの移行
+
+各ページで段階的に以下を置換する:
+
+1. `text-black` / `text-[#0A0A0A]` / `text-[#171717]` → `text-ink`
+2. `text-[#333333]` / `text-[#002a38]` → `text-ink-secondary`
+3. `text-gray-500` / `text-[#696969]` → `text-ink-tertiary`
+4. `text-[#0000008f]` → `text-ink-muted`
+5. `bg-[#f5f5f7]` / `bg-[#eeedee]` → `bg-surface-muted`
+6. `border-gray-400` → `border-line-section`
+
+### インライン style の排除
+
+全ての heading で `style={{ fontFamily: '...', fontWeight: 500 }}` を削除し、`getHeadingFontClass()` を className に追加する。
+
+---
+
+## 関連ファイル
+
+| ファイル | 内容 |
+|---|---|
+| `tailwind.config.js` | フォントサイズ、カラー、フォントファミリーの定義 |
+| `app/globals.css` | CSS 変数、base layer、フォント読み込み |
+| `src/hooks/useFonts.ts` | 言語別フォント適用フック |

@@ -1,0 +1,65 @@
+# Portfolio - Progress
+
+## 現在のステータス: 運用中 + フォント移行完了 + デザインシステム整理中
+
+---
+
+## 完了済み
+
+### プロジェクト基盤
+- [x] Next.js 15 + React 19 へアップグレード（セキュリティ修正）
+- [x] next-intl による i18n 導入（en/jp バイリンガル対応）
+- [x] Vercel デプロイ + Analytics 導入
+- [x] shadcn/ui コンポーネント基盤
+
+### ページ
+- [x] Home ページ
+- [x] About ページ（InterestsVisualization 含む）
+- [x] Blog ページ（Medium RSS 連携）
+- [x] CV ページ
+- [x] Experiment ページ（Spline 3D）
+- [x] Work: Ukiyoe ケーススタディ
+- [x] Work: Gym Crowd Status Dashboard ケーススタディ
+- [x] Work: Google UX Design Certificate Project ケーススタディ
+- [x] 404 ページ
+
+### デザインシステム整理（2026-02-23）
+- [x] セマンティックカラー CSS 変数を globals.css に定義（ink, surface, line）
+- [x] tailwind.config.js にセマンティックカラーを接続
+- [x] useFonts.ts の font-regular バグを font-light に修正
+- [x] Ukiyoe ページからインライン fontFamily/fontWeight を除去 → getHeadingFontClass() に統一
+- [x] Gym Dashboard ページから同様にインライン style を除去
+- [x] not-found.tsx から同様にインライン style を除去
+- [x] Ukiyoe ページにセマンティックカラートークンを適用（パイロット）
+- [x] docs/architecture/design-system.md を全面書き換え（コード現状と一致）
+- [x] 開発プロトコル導入（CLAUDE.md, progress.txt, lessons.md, canonical docs）
+
+### フォントシステム移行（2026-03-01）
+- [x] 見出しフォントを Helvetica Neue → Switzer (Fontshare, OFL) に変更
+- [x] Switzer WOFF2 (Regular/Medium/SemiBold) を public/fonts/Switzer/ に配置しセルフホスト
+- [x] @font-face 宣言を globals.css に追加、tailwind.config.js に font-switzer を登録
+- [x] @layer base の h1-h6 ルールを font-switzer font-medium に変更
+- [x] サイドバーナビ等の明示的 font-helvetica-neue を font-switzer に更新
+- [x] タグ/キャプションフォントを Space Mono → Space Grotesk (Google Fonts) に変更
+- [x] layout.tsx の next/font/google を Space_Grotesk に変更
+- [x] 全ファイルで font-space-mono → font-space-grotesk を一括置換 (~20ファイル)
+- [x] design-system.md, CLAUDE.md を新フォント設定で更新
+- [x] npm run build 成功確認
+
+---
+
+## 進行中
+
+### デザインシステム段階適用
+- [ ] Gym Dashboard ページにセマンティックカラートークンを適用
+- [ ] Google UX ページにセマンティックカラートークンを適用
+- [ ] Home / About / Blog 等のランディングページに適用
+- [ ] 古いドキュメントの整理（_archive/ への移動）
+- [ ] dead code の削除（src/lib/fonts.tsx, styles/globals.css）
+
+---
+
+## 次のタスク
+1. 残りページへのセマンティックカラー適用
+2. README.md の更新（Next.js 14 → 15 の記載修正等）
+3. dead code の削除（ユーザー確認後）

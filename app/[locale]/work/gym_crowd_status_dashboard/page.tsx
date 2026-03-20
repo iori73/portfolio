@@ -166,29 +166,29 @@ const GymDashboardPage: React.FC = () => {
 
           {/* Tags */}
           {/* <div className="flex gap-2 mb-8">
-            <span className="text-body-sm md:text-body-lg font-space-mono px-2 py-1 rounded-[16px] bg-[#f5f5f7] text-[#696969] whitespace-nowrap">
+            <span className="text-body-sm md:text-body-lg leading-[1.3] font-space-grotesk px-2 py-1 rounded-[16px] bg-[#f5f5f7] text-[#696969] whitespace-nowrap">
               UI
             </span>
-            <span className="text-body-sm md:text-body-lg font-space-mono px-2 py-1 rounded-[16px] bg-[#f5f5f7] text-[#696969] whitespace-nowrap">
+            <span className="text-body-sm md:text-body-lg leading-[1.3] font-space-grotesk px-2 py-1 rounded-[16px] bg-[#f5f5f7] text-[#696969] whitespace-nowrap">
               Context Engineering
             </span>
           </div> */}
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div>
-              <span className="text-caption-lg font-space-mono font-semibold text-gray-500 mb-2 block">Timeline</span>
+              <span className="text-caption-lg font-space-grotesk font-semibold text-gray-500 mb-2 block">Timeline</span>
               <p className="text-body-base md:text-body-lg tracking-[0.2px]">{t('projects.gymDashboard.timeline')}</p>
             </div>
             <div>
-              <span className="text-caption-lg font-space-mono font-semibold text-gray-500 mb-2 block">My Skills</span>
+              <span className="text-caption-lg font-space-grotesk font-semibold text-gray-500 mb-2 block">My Skills</span>
               <p className="text-body-base md:text-body-lg tracking-[0.2px]">{t('projects.gymDashboard.skills')}</p>
             </div>
             <div>
-              <span className="text-caption-lg font-space-mono font-semibold text-gray-500 mb-2 block">Type</span>
+              <span className="text-caption-lg font-space-grotesk font-semibold text-gray-500 mb-2 block">Type</span>
               <p className="text-body-base md:text-body-lg tracking-[0.2px]">{t('common.personalProject')}</p>
             </div>
             <div>
-              <span className="text-caption-lg font-space-mono font-semibold text-gray-500 mb-2 block">
+              <span className="text-caption-lg font-space-grotesk font-semibold text-gray-500 mb-2 block">
                 Deliverables
               </span>
               <p className="text-body-base md:text-body-lg tracking-[0.2px]">
@@ -204,11 +204,7 @@ const GymDashboardPage: React.FC = () => {
         <div className="max-w-[1028px] w-full mx-auto px-0 md:px-6">
           <div className="bg-[#eeedee] rounded-lg px-4 py-6 md:p-6 flex flex-col gap-6">
             <h2
-              className="text-heading-xl md:text-heading-2xl text-[#0A0A0A]"
-              style={{
-                fontFamily: 'Helvetica Neue, Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-                fontWeight: 500,
-              }}
+              className={`text-heading-xl md:text-heading-2xl text-[#0A0A0A] ${getHeadingFontClass()}`}
             >
               TL;DR
             </h2>
@@ -228,12 +224,7 @@ const GymDashboardPage: React.FC = () => {
                   </div>
                   <div className="flex flex-col gap-1">
                     <h3
-                      className="text-heading-base md:text-heading-xl text-[#171717]"
-                      style={{
-                        fontFamily:
-                          'Helvetica Neue, Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-                        fontWeight: 500,
-                      }}
+                      className={`text-heading-base md:text-heading-xl text-[#171717] ${getHeadingFontClass()}`}
                     >
                       Problem
                     </h3>
@@ -259,12 +250,7 @@ const GymDashboardPage: React.FC = () => {
                   </div>
                   <div className="flex flex-col gap-1">
                     <h3
-                      className="text-heading-base md:text-heading-xl text-[#171717]"
-                      style={{
-                        fontFamily:
-                          'Helvetica Neue, Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-                        fontWeight: 500,
-                      }}
+                      className={`text-heading-base md:text-heading-xl text-[#171717] ${getHeadingFontClass()}`}
                     >
                       Solution
                     </h3>
@@ -281,11 +267,7 @@ const GymDashboardPage: React.FC = () => {
               {/* Key Results */}
               <div className="flex flex-col gap-2">
                 <h3
-                  className="text-heading-base md:text-heading-xl text-[#171717]"
-                  style={{
-                    fontFamily: 'Helvetica Neue, Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-                    fontWeight: 500,
-                  }}
+                  className={`text-heading-base md:text-heading-xl text-[#171717] ${getHeadingFontClass()}`}
                 >
                   Key Results
                 </h3>
@@ -383,23 +365,19 @@ const GymDashboardPage: React.FC = () => {
             {/* Overview Section */}
             <section id="overview" className="w-full mx-auto py-8   text-[#002a38]">
               <h2
-                className="text-heading-xl md:text-heading-2xl mb-6"
-                style={{
-                  fontFamily: 'Helvetica Neue, Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-                  fontWeight: 500,
-                }}
+                className={`text-heading-xl md:text-heading-2xl mb-6 ${getHeadingFontClass()}`}
               >
                 Overview
               </h2>
 
               <p
-                className={`mb-6 ${getBodyFontClass()} tracking-[0.2px] ${jpFontSize('text-body-sm', 'text-body-lg')}`}
+                className={`mb-6 ${getBodyFontClass()} tracking-[0.2px] ${jpFontSize('text-body-base', 'text-body-lg')}`}
               >
                 {t('gymDashboard.overviewText')}
               </p>
 
               <p
-                className={`mb-6 ${getBodyFontClass()} tracking-[0.2px] ${jpFontSize('text-body-sm', 'text-body-lg')}`}
+                className={`mb-6 ${getBodyFontClass()} tracking-[0.2px] ${jpFontSize('text-body-base', 'text-body-lg')}`}
               >
                 {t('gymDashboard.roleDescription')}
               </p>
@@ -450,17 +428,13 @@ const GymDashboardPage: React.FC = () => {
                 {t('systemFlow')}
               </h2> */}
               <h3
-                className="text-heading-base md:text-heading-xl mb-4"
-                style={{
-                  fontFamily: 'Helvetica Neue, Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-                  fontWeight: 500,
-                }}
+                className={`text-heading-base md:text-heading-xl mb-4 ${getHeadingFontClass()}`}
               >
                 System flow
               </h3>
               <div id="system-flow" className="mb-6">
                 {/* <h3 className="text-2xl font-semibold text-gray-900 mb-2">{t('systemFlow')}</h3> */}
-                <p className="text-body-sm md:text-body-lg text-gray-600">{t('gymDashboard.systemFlowDescription')}</p>
+                <p className="text-body-base md:text-body-lg text-gray-600">{t('gymDashboard.systemFlowDescription')}</p>
               </div>
               {/* System Architecture Diagram */}
               <div className="mb-12">
@@ -469,7 +443,7 @@ const GymDashboardPage: React.FC = () => {
 
               <ul
                 className={`list-disc pl-5 space-y-2 ${getBodyFontClass()} ${jpFontSize(
-                  'text-body-sm',
+                  'text-body-base',
                   'text-body-lg',
                 )}`}
               >
@@ -494,41 +468,37 @@ const GymDashboardPage: React.FC = () => {
             {/* Design Process Section */}
             <section id="design-process" className="py-8">
               <h2
-                className="text-heading-xl md:text-heading-2xl mb-6"
-                style={{
-                  fontFamily: 'Helvetica Neue, Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-                  fontWeight: 500,
-                }}
+                className={`text-heading-xl md:text-heading-2xl mb-6 ${getHeadingFontClass()}`}
               >
                 Design Process
               </h2>
               <p
-                className={`mb-4 ${getBodyFontClass()} tracking-[0.2px] ${jpFontSize('text-body-sm', 'text-body-lg')}`}
+                className={`mb-4 ${getBodyFontClass()} tracking-[0.2px] ${jpFontSize('text-body-base', 'text-body-lg')}`}
               >
                 {t('gymDashboard.designProcessText')}
               </p>
               <div className="space-y-6 mb-4">
                 <div>
-                  <p className="font-helvetica-neue text-body-sm md:text-body-lg font-medium mb-2">
+                  <p className="font-switzer text-body-base md:text-body-lg font-medium mb-2">
                     1. {t('gymDashboard.designStep1Title')}
                   </p>
-                  <p className={`${getBodyFontClass()} tracking-[0.2px] ${jpFontSize('text-body-sm', 'text-body-lg')}`}>
+                  <p className={`${getBodyFontClass()} tracking-[0.2px] ${jpFontSize('text-body-base', 'text-body-lg')}`}>
                     {t('gymDashboard.designStep1Body')}
                   </p>
                 </div>
                 <div>
-                  <p className="font-helvetica-neue text-body-sm md:text-body-lg font-medium mb-2">
+                  <p className="font-switzer text-body-base md:text-body-lg font-medium mb-2">
                     2. {t('gymDashboard.designStep2Title')}
                   </p>
-                  <p className={`${getBodyFontClass()} tracking-[0.2px] ${jpFontSize('text-body-sm', 'text-body-lg')}`}>
+                  <p className={`${getBodyFontClass()} tracking-[0.2px] ${jpFontSize('text-body-base', 'text-body-lg')}`}>
                     {t('gymDashboard.designStep2Body')}
                   </p>
                 </div>
                 <div>
-                  <p className="font-helvetica-neue text-body-sm md:text-body-lg font-medium mb-2">
+                  <p className="font-switzer text-body-base md:text-body-lg font-medium mb-2">
                     3. {t('gymDashboard.designStep3Title')}
                   </p>
-                  <p className={`${getBodyFontClass()} tracking-[0.2px] ${jpFontSize('text-body-sm', 'text-body-lg')}`}>
+                  <p className={`${getBodyFontClass()} tracking-[0.2px] ${jpFontSize('text-body-base', 'text-body-lg')}`}>
                     {t('gymDashboard.designStep3Body')}
                   </p>
                 </div>
@@ -538,28 +508,20 @@ const GymDashboardPage: React.FC = () => {
             {/* Solution Section */}
             <section id="solution" className="py-8">
               <h2
-                className="text-heading-xl md:text-heading-2xl mb-6"
-                style={{
-                  fontFamily: 'Helvetica Neue, Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-                  fontWeight: 500,
-                }}
+                className={`text-heading-xl md:text-heading-2xl mb-6 ${getHeadingFontClass()}`}
               >
                 Solution
               </h2>
 
               <div className="mb-8">
                 <h3
-                  className="text-heading-base md:text-heading-xl mb-4"
-                  style={{
-                    fontFamily: 'Helvetica Neue, Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-                    fontWeight: 500,
-                  }}
+                  className={`text-heading-base md:text-heading-xl mb-4 ${getHeadingFontClass()}`}
                 >
                   Smart Data Collection System
                 </h3>
                 <p
                   className={`mb-4 ${getBodyFontClass()} tracking-[0.2px] ${jpFontSize(
-                    'text-body-sm',
+                    'text-body-base',
                     'text-body-lg',
                   )}`}
                 >
@@ -567,7 +529,7 @@ const GymDashboardPage: React.FC = () => {
                 </p>
                 <p
                   className={`mb-4 ${getBodyFontClass()} tracking-[0.2px] ${jpFontSize(
-                    'text-body-sm',
+                    'text-body-base',
                     'text-body-lg',
                   )}`}
                 >
@@ -640,17 +602,13 @@ const GymDashboardPage: React.FC = () => {
 
               <div className="mb-8">
                 <h3
-                  className="text-heading-base md:text-heading-xl mb-4"
-                  style={{
-                    fontFamily: 'Helvetica Neue, Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-                    fontWeight: 500,
-                  }}
+                  className={`text-heading-base md:text-heading-xl mb-4 ${getHeadingFontClass()}`}
                 >
                   High-Accuracy OCR Processing Engine
                 </h3>
                 <p
                   className={`mb-4 ${getBodyFontClass()} tracking-[0.2px] ${jpFontSize(
-                    'text-body-sm',
+                    'text-body-base',
                     'text-body-lg',
                   )}`}
                 >
@@ -661,7 +619,7 @@ const GymDashboardPage: React.FC = () => {
                 </p>
                 <ol
                   className={`list-decimal pl-5 mb-4 space-y-2 font-helvetica-neue ${jpFontSize(
-                    'text-body-sm',
+                    'text-body-base',
                     'text-body-lg',
                   )}`}
                 >
@@ -686,7 +644,7 @@ const GymDashboardPage: React.FC = () => {
                 </ol>
                 <p
                   className={`mb-4 ${getBodyFontClass()} tracking-[0.2px] ${jpFontSize(
-                    'text-body-sm',
+                    'text-body-base',
                     'text-body-lg',
                   )}`}
                 >
@@ -704,29 +662,25 @@ const GymDashboardPage: React.FC = () => {
 
               <div className="mb-8">
                 <h3
-                  className="text-heading-base md:text-heading-xl mb-4"
-                  style={{
-                    fontFamily: 'Helvetica Neue, Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-                    fontWeight: 500,
-                  }}
+                  className={`text-heading-base md:text-heading-xl mb-4 ${getHeadingFontClass()}`}
                 >
                   CI/CD Infrastructure
                 </h3>
                 <p
                   className={`mb-4 ${getBodyFontClass()} tracking-[0.2px] ${jpFontSize(
-                    'text-body-sm',
+                    'text-body-base',
                     'text-body-lg',
                   )}`}
                 >
                   {t('gymDashboard.githubActionsSuccess')} {t('gymDashboard.failureCausesProcess')}
                 </p>
                 <div className="mb-4">
-                  <p className={`${getBodyFontClass()} ${jpFontSize('text-body-sm', 'text-body-lg')} font-medium`}>
+                  <p className={`${getBodyFontClass()} ${jpFontSize('text-body-base', 'text-body-lg')} font-medium`}>
                     {t('gymDashboard.failureHistory')}
                   </p>
                   <ul
                     className={`list-disc pl-5 space-y-1 ${getBodyFontClass()} ${jpFontSize(
-                      'text-body-sm',
+                      'text-body-base',
                       'text-body-lg',
                     )}`}
                   >
@@ -751,12 +705,12 @@ const GymDashboardPage: React.FC = () => {
                   </ul>
                 </div>
                 <div className="mb-4">
-                  <p className={`${getBodyFontClass()} ${jpFontSize('text-body-sm', 'text-body-lg')} font-medium`}>
+                  <p className={`${getBodyFontClass()} ${jpFontSize('text-body-base', 'text-body-lg')} font-medium`}>
                     {t('gymDashboard.decisiveFix')}
                   </p>
                   <p
                     className={`mb-2 ${getBodyFontClass()} tracking-[0.2px] ${jpFontSize(
-                      'text-body-sm',
+                      'text-body-base',
                       'text-body-lg',
                     )}`}
                   >
@@ -772,12 +726,12 @@ const GymDashboardPage: React.FC = () => {
                   </p>
                 </div>
                 <div className="mb-4">
-                  <p className={`${getBodyFontClass()} ${jpFontSize('text-body-sm', 'text-body-lg')} font-medium`}>
+                  <p className={`${getBodyFontClass()} ${jpFontSize('text-body-base', 'text-body-lg')} font-medium`}>
                     {t('gymDashboard.twoStageSync')}
                   </p>
                   <ol
                     className={`list-decimal pl-5 space-y-1 ${getBodyFontClass()} ${jpFontSize(
-                      'text-body-sm',
+                      'text-body-base',
                       'text-body-lg',
                     )}`}
                   >
@@ -798,7 +752,7 @@ const GymDashboardPage: React.FC = () => {
                 </div>
                 <p
                   className={`mb-4 ${getBodyFontClass()} tracking-[0.2px] ${jpFontSize(
-                    'text-body-sm',
+                    'text-body-base',
                     'text-body-lg',
                   )}`}
                 >
@@ -810,28 +764,20 @@ const GymDashboardPage: React.FC = () => {
             {/* Impact & Reflection Section */}
             <section id="impact-reflection" className="py-8">
               <h2
-                className="text-heading-xl md:text-heading-2xl mb-6"
-                style={{
-                  fontFamily: 'Helvetica Neue, Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-                  fontWeight: 500,
-                }}
+                className={`text-heading-xl md:text-heading-2xl mb-6 ${getHeadingFontClass()}`}
               >
                 Impact & Reflection
               </h2>
 
               <div className="mb-6">
                 <h3
-                  className="text-heading-base md:text-heading-xl mb-3"
-                  style={{
-                    fontFamily: 'Helvetica Neue, Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-                    fontWeight: 500,
-                  }}
+                  className={`text-heading-base md:text-heading-xl mb-3 ${getHeadingFontClass()}`}
                 >
                   Learnings Through the Project
                 </h3>
                 <p
                   className={`mb-4 ${getBodyFontClass()} tracking-[0.2px] ${jpFontSize(
-                    'text-body-sm',
+                    'text-body-base',
                     'text-body-lg',
                   )}`}
                 >
@@ -839,7 +785,7 @@ const GymDashboardPage: React.FC = () => {
                 </p>
                 <p
                   className={`mb-4 ${getBodyFontClass()} tracking-[0.2px] ${jpFontSize(
-                    'text-body-sm',
+                    'text-body-base',
                     'text-body-lg',
                   )}`}
                 >
@@ -849,17 +795,13 @@ const GymDashboardPage: React.FC = () => {
 
               <div className="mb-6">
                 <h3
-                  className="text-heading-base md:text-heading-xl mb-3"
-                  style={{
-                    fontFamily: 'Helvetica Neue, Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-                    fontWeight: 500,
-                  }}
+                  className={`text-heading-base md:text-heading-xl mb-3 ${getHeadingFontClass()}`}
                 >
                   Future Prospects
                 </h3>
                 <p
                   className={`mb-4 ${getBodyFontClass()} tracking-[0.2px] ${jpFontSize(
-                    'text-body-sm',
+                    'text-body-base',
                     'text-body-lg',
                   )}`}
                 >
@@ -878,8 +820,8 @@ const GymDashboardPage: React.FC = () => {
                     onClick={() => scrollToSection('overview')}
                     className={
                       activeSection === 'overview'
-                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110'
-                        : 'text-left text-heading-sm font-helvetica-neue transition-transform duration-900 scale-100 opacity-50'
+                        ? 'text-left text-heading-base font-switzer transition-transform duration-900 scale-110'
+                        : 'text-left text-heading-sm font-switzer transition-transform duration-900 scale-100 opacity-50'
                     }
                   >
                     Overview
@@ -890,8 +832,8 @@ const GymDashboardPage: React.FC = () => {
                     onClick={() => scrollToSection('design-process')}
                     className={
                       activeSection === 'design-process'
-                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110'
-                        : 'text-left text-heading-sm font-helvetica-neue transition-transform duration-900 scale-100 opacity-50'
+                        ? 'text-left text-heading-base font-switzer transition-transform duration-900 scale-110'
+                        : 'text-left text-heading-sm font-switzer transition-transform duration-900 scale-100 opacity-50'
                     }
                   >
                     Design Process
@@ -902,8 +844,8 @@ const GymDashboardPage: React.FC = () => {
                     onClick={() => scrollToSection('solution')}
                     className={
                       activeSection === 'solution'
-                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110'
-                        : 'text-left text-heading-sm font-helvetica-neue transition-transform duration-900 scale-100 opacity-50'
+                        ? 'text-left text-heading-base font-switzer transition-transform duration-900 scale-110'
+                        : 'text-left text-heading-sm font-switzer transition-transform duration-900 scale-100 opacity-50'
                     }
                   >
                     Solution
@@ -914,8 +856,8 @@ const GymDashboardPage: React.FC = () => {
                     onClick={() => scrollToSection('impact-reflection')}
                     className={
                       activeSection === 'impact-reflection'
-                        ? 'text-left text-body-xl font-helvetica-neue transition-transform duration-900 scale-110'
-                        : 'text-left text-heading-sm font-helvetica-neue transition-transform duration-900 scale-100 opacity-50'
+                        ? 'text-left text-heading-base font-switzer transition-transform duration-900 scale-110'
+                        : 'text-left text-heading-sm font-switzer transition-transform duration-900 scale-100 opacity-50'
                     }
                   >
                     Impact & Reflection

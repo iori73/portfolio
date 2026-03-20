@@ -37,10 +37,10 @@ export const useJPFontSize = () => {
 export const useBodyFont = () => {
   const locale = useLocale();
 
-  // Body font class based on language (English: Helvetica Neue, Japanese: Noto Sans JP Regular)
+  // Body font class based on language (English: Helvetica Neue, Japanese: Noto Sans JP Light)
   const getBodyFontClass = () => {
     if (locale === 'jp') {
-      return 'font-noto-sans-jp font-regular';
+      return 'font-noto-sans-jp font-light';
     }
     return 'font-helvetica-neue';
   };

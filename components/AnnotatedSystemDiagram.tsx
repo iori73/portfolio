@@ -33,7 +33,7 @@ const AnnotatedSystemDiagram: React.FC = () => {
           {/* Top Left: The system flow explanation - Text on left, Figure on right */}
           <div className="flex flex-col md:flex-row items-center md:items-start gap-2 md:gap-6 bg-[#eeedee] p-4 rounded-lg">
             <div className="flex-1 text-left">
-              <h4 className="text-body-sm md:text-body-lg mb-1">The system flow</h4>
+              <h4 className="text-body-base md:text-body-lg mb-1">The system flow</h4>
               <p className="text-body-sm font-helvetica-neue text-gray-600">{t('eachComponentRepresents')}</p>
             </div>
             <div className="flex-shrink-0 flex justify-center md:justify-end bg-white p-1 rounded">
@@ -46,7 +46,7 @@ const AnnotatedSystemDiagram: React.FC = () => {
           {/* Top Right: User Action ↔ Weekly Process: Text on left, Figure on right */}
           <div className="flex flex-col md:flex-row items-center md:items-start gap-2 md:gap-6 bg-[#eeedee] p-4 rounded-lg">
             <div className="flex-1 text-left">
-              <h4 className="text-body-sm md:text-body-lg mb-1">User Action ↔ Weekly Process</h4>
+              <h4 className="text-body-base md:text-body-lg mb-1">User Action ↔ Weekly Process</h4>
               <p className="text-body-sm font-helvetica-neue text-gray-600 ">
                 {t('sevenBarsSevenDots')} {t('weeklyAutomaticUpdate')}
               </p>
@@ -61,7 +61,7 @@ const AnnotatedSystemDiagram: React.FC = () => {
           {/* Bottom Left: How many people: Text on left, Figure on right */}
           <div className="flex flex-col md:flex-row items-center md:items-start gap-2 md:gap-6 bg-[#eeedee] p-4 rounded-lg">
             <div className="flex-1 text-left">
-              <h4 className="text-body-sm md:text-body-lg mb-1">Number of people</h4>
+              <h4 className="text-body-base md:text-body-lg mb-1">Number of people</h4>
               <p className="text-body-sm font-helvetica-neue text-gray-600">{t('dotSizeRepresentsPeople')}</p>
             </div>
             <div className="flex-shrink-0 flex justify-center md:justify-end bg-white p-1 rounded">
@@ -78,7 +78,7 @@ const AnnotatedSystemDiagram: React.FC = () => {
           {/* Bottom Right: How many screenshots: Text on left, Figure on right */}
           <div className="flex flex-col md:flex-row items-center md:items-start gap-2 md:gap-6 bg-[#eeedee] p-4 rounded-lg">
             <div className="flex-1 min-w-0 text-left">
-              <h4 className="text-body-sm md:text-body-lg mb-1">Number of data points</h4>
+              <h4 className="text-body-base md:text-body-lg mb-1">Number of data points</h4>
               <p className="text-body-sm font-helvetica-neue text-gray-600">{t('dotColorRepresentsScreenshots')}</p>
             </div>
             <div className="flex-shrink-0 flex justify-center md:justify-end bg-white p-1 rounded">
