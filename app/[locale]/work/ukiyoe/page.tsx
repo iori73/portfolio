@@ -107,7 +107,7 @@ const UkiyoePage: React.FC = () => {
               </div>
               <div className="flex-shrink-0 w-full md:w-auto">
                 <a
-                  href="https://ukiyoe.vercel.app"
+                  href="https://ukiyoe-timeline.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="relative flex items-center justify-center px-6 py-3 rounded-[100px] text-ink-muted hover:text-white cursor-pointer transition-[color] duration-300 whitespace-nowrap overflow-hidden group w-full md:w-auto"
