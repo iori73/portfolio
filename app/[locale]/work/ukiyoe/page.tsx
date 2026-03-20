@@ -80,6 +80,7 @@ const UkiyoePage: React.FC = () => {
               src={language === 'jp' ? '/work/ukiyoe/hero-jp.png' : '/work/ukiyoe/hero-en.png'}
               alt="Ukiyoe - Interactive Cultural Exhibition"
               fill
+              sizes="(min-width: 768px) 1280px, 100vw"
               className="object-cover"
               priority
             />
