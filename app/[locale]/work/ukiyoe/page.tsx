@@ -75,7 +75,7 @@ const UkiyoePage: React.FC = () => {
       {/* Hero */}
       <section className="mb-0 md:mb-12 -mx-6 md:mx-0">
         <div className="w-full md:max-w-7xl md:mx-auto px-0">
-          <div className="w-full aspect-[16/9] md:aspect-[3/2] bg-[#F8F5F0] rounded-none md:rounded-xl overflow-hidden relative">
+          <div className="w-full aspect-[8/5] bg-[#F8F5F0] rounded-none md:rounded-xl overflow-hidden relative">
             {/* High-res 2560×1600 — same files as home thumbnails; legacy hero-*.png were 1024px */}
             <Image
               src={
