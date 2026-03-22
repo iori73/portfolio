@@ -1,8 +1,9 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import PluginCard from './PluginCard';
-import { samplePlugins } from './pluginData';
+import { plugins } from './pluginData';
 
 function HeroGraphicSVG() {
   return (
@@ -172,7 +173,24 @@ function HeroGraphicSVG() {
   );
 }
 
+function formatUsers(n: number): string {
+  if (n >= 1000) return `${(n / 1000).toFixed(1).replace(/\.0$/, '')}k`;
+  return String(n);
+}
+
 export default function ConceptC() {
+  const t = useTranslations('figmaPlugins');
+
+  const personalPlugins = plugins.filter((p) => p.category === 'personal');
+  const dsPlugins = plugins.filter((p) => p.category === 'client-ds');
+  const totalUsers = plugins.reduce((sum, p) => sum + (p.users ?? 0), 0);
+
+  const stats = [
+    { value: String(plugins.length), label: 'Total tools', color: '#A259FF' },
+    { value: `${formatUsers(totalUsers)}+`, label: 'Users', color: '#1ABCFE' },
+    { value: String(dsPlugins.length), label: 'DS Suite', color: '#0ACF83' },
+  ];
+
   return (
     <section>
       {/* Hero area */}
@@ -181,24 +199,17 @@ export default function ConceptC() {
 
         <div className="relative z-10 max-w-xl">
           <p className="font-space-grotesk text-label tracking-wider uppercase" style={{ color: '#A259FF' }}>
-            Figma Plugins & Widgets
+            {t('heroTagline')}
           </p>
           <h2 className="text-display font-bold text-ink mt-3">
-            Tools born from<br />dialogue with AI
+            {t('heroTitle')}
           </h2>
           <p className="text-body-lg text-ink-secondary mt-4 leading-relaxed max-w-md">
-            An ecosystem of interconnected tools — personal utilities
-            and enterprise design system infrastructure, all cultivated
-            through AI collaboration.
+            {t('heroDescription')}
           </p>
 
-          {/* Stats row */}
           <div className="mt-8 flex flex-wrap gap-6">
-            {[
-              { value: '18', label: 'Total tools', color: '#A259FF' },
-              { value: '2.7k+', label: 'Users', color: '#1ABCFE' },
-              { value: '13', label: 'DS Suite', color: '#0ACF83' },
-            ].map((stat) => (
+            {stats.map((stat) => (
               <div key={stat.label} className="flex items-baseline gap-2">
                 <span
                   className="text-title-lg font-bold"
@@ -215,11 +226,28 @@ export default function ConceptC() {
         </div>
       </div>
 
-      {/* Plugin cards grid */}
-      <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-        {samplePlugins.map((plugin) => (
-          <PluginCard key={plugin.id} plugin={plugin} />
-        ))}
+      {/* Personal plugins */}
+      <div className="mt-12">
+        <h3 className="font-space-grotesk text-label tracking-wider uppercase text-ink-tertiary mb-6">
+          Personal — {personalPlugins.length} tools
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {personalPlugins.map((plugin) => (
+            <PluginCard key={plugin.id} plugin={plugin} />
+          ))}
+        </div>
+      </div>
+
+      {/* Enterprise DS plugins */}
+      <div className="mt-16">
+        <h3 className="font-space-grotesk text-label tracking-wider uppercase text-ink-tertiary mb-6">
+          {t('enterpriseDS')} — {dsPlugins.length} tools
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {dsPlugins.map((plugin) => (
+            <PluginCard key={plugin.id} plugin={plugin} />
+          ))}
+        </div>
       </div>
     </section>
   );

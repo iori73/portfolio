@@ -9,24 +9,24 @@ interface ColorLayer {
 
 const COLOR_LAYERS: ColorLayer[] = [
   {
-    image: '/work/ukiyoe/printing-process-study/printing-process-study01.webp',
-    swatchColor: '#7c8b65',
+    image: '/work/ukiyoe/printing-process-study/printing-process-study05.webp',
+    swatchColor: '#fbc546',
   },
   {
     image: '/work/ukiyoe/printing-process-study/printing-process-study02.webp',
     swatchColor: '#dfa69a',
   },
   {
-    image: '/work/ukiyoe/printing-process-study/printing-process-study03.webp',
-    swatchColor: '#1b3e5b',
-  },
-  {
     image: '/work/ukiyoe/printing-process-study/printing-process-study04.webp',
     swatchColor: '#cdbfb1',
   },
   {
-    image: '/work/ukiyoe/printing-process-study/printing-process-study05.webp',
-    swatchColor: '#fbc546',
+    image: '/work/ukiyoe/printing-process-study/printing-process-study01.webp',
+    swatchColor: '#7c8b65',
+  },
+  {
+    image: '/work/ukiyoe/printing-process-study/printing-process-study03.webp',
+    swatchColor: '#1b3e5b',
   },
 ];
 

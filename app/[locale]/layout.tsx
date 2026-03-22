@@ -2,6 +2,8 @@
 import Header from '@/src/compositions/Header';
 import Footer from '@/src/compositions/Footer';
 import { MenuProvider } from '@/src/contexts/MenuContext';
+import { TransitionProvider } from '@/src/contexts/TransitionContext';
+import TransitionOverlay from '@/src/components/TransitionOverlay';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -20,22 +22,22 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
 
-  // Ensure that the incoming `locale` is valid
   if (!routing.locales.includes(locale as any)) {
     notFound();
   }
 
-  // Providing all messages to the client
-  // side is the easiest way to get started
   const messages = await getMessages();
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <MenuProvider>
-        <Header />
-        <main className="max-w-6xl mx-auto px-6">{children}</main>
-        <Footer />
-      </MenuProvider>
+      <TransitionProvider>
+        <MenuProvider>
+          <Header />
+          <main className="max-w-6xl mx-auto px-6">{children}</main>
+          <Footer />
+          <TransitionOverlay />
+        </MenuProvider>
+      </TransitionProvider>
     </NextIntlClientProvider>
   );
 }

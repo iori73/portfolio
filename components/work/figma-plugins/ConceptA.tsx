@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PluginCard from './PluginCard';
-import { samplePlugins } from './pluginData';
+import { plugins } from './pluginData';
 
 function OrganicStemsSVG() {
   return (
@@ -149,7 +149,7 @@ export default function ConceptA() {
 
       {/* Plugin cards grid */}
       <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-        {samplePlugins.map((plugin) => (
+        {plugins.map((plugin) => (
           <PluginCard key={plugin.id} plugin={plugin} variant="conceptA" />
         ))}
       </div>

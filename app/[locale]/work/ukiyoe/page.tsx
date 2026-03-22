@@ -10,6 +10,7 @@ import ColorAnalysisGrid from '@/components/work/ukiyoe/ColorAnalysisGrid';
 import KushiDangoShowcase from '@/components/work/ukiyoe/KushiDangoShowcase';
 import PrintingProcessStudy from '@/components/work/ukiyoe/PrintingProcessStudy';
 import TopPageProcessShowcase from '@/components/work/ukiyoe/TopPageProcessShowcase';
+import { usePageTransition } from '@/src/contexts/TransitionContext';
 
 const SECTIONS = [
   'overview',
@@ -28,6 +29,15 @@ const UkiyoePage: React.FC = () => {
   const { jpFontSize } = useJPFontSize();
   const { getBodyFontClass } = useBodyFont();
   const { getHeadingFontClass } = useHeadingFont();
+
+  const { state: transitionState, endTransition } = usePageTransition();
+
+  useEffect(() => {
+    if (transitionState.phase === 'navigating') {
+      const timeout = setTimeout(() => endTransition(), 100);
+      return () => clearTimeout(timeout);
+    }
+  }, [transitionState.phase, endTransition]);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -73,12 +83,13 @@ const UkiyoePage: React.FC = () => {
       <BackToTopButton />
 
       {/* Hero */}
-      <section className="mb-0 md:mb-12 -mx-6 md:mx-0">
-        <div className="w-full md:max-w-7xl md:mx-auto px-0">
-          <div className="w-full aspect-[8/5] bg-[#F8F5F0] rounded-none md:rounded-xl overflow-hidden relative">
+      <section className="mb-0 md:mb-12 full-bleed">
+        <div className="w-full">
+          <div className="w-full aspect-[8/5] bg-[#F8F5F0] overflow-hidden relative">
             <Image
-              src={language === 'jp' ? '/work/ukiyoe/hero-jp.png' : '/work/ukiyoe/hero-en.png'}
-              alt="Ukiyoe - Interactive Cultural Exhibition"
+              key={language}
+              src={language === 'jp' ? '/work/ukiyoe/thumbnail-jp.png' : '/work/ukiyoe/thumbnail-en.png'}
+              alt="Ukiyoe - Layer by Layer"
               fill
               sizes="(min-width: 768px) 1280px, 100vw"
               className="object-cover"
@@ -186,7 +197,7 @@ const UkiyoePage: React.FC = () => {
 
               <div className="mt-8">
                 <a
-                  href="https://github.com/iori73/ukiyoe"
+                  href="https://github.com/iori73/ukiyoe-timeline"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2"
@@ -207,7 +218,7 @@ const UkiyoePage: React.FC = () => {
                       /
                     </span>
                     <span className="text-body-sm md:text-body-lg leading-[1.25] font-semibold text-ink">
-                      ukiyoe
+                      ukiyoe-timeline
                     </span>
                   </div>
                   <MoveUpRight className="w-4 h-4 md:w-5 md:h-5 text-ink-tertiary flex-shrink-0" />
@@ -234,7 +245,7 @@ const UkiyoePage: React.FC = () => {
                 </p>
                 <figure>
                   <Image
-                    src="/work/ukiyoe/research-sites.png"
+                    src="/work/ukiyoe/research-site.png"
                     alt="Cultural research across 25+ reference sites"
                     width={1200}
                     height={675}
@@ -294,13 +305,29 @@ const UkiyoePage: React.FC = () => {
                 </h3>
                 <div className={`mb-6 text-ink-secondary ${bodyTextClass} space-y-4`}>
                   <p>{t('ukiyoe.topPageDesignText1')}</p>
+                </div>
+                <figure className="mb-6 md:mb-8">
+                  <TopPageProcessShowcase />
+                  <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
+                    {t('ukiyoe.captionTopPage')}
+                  </figcaption>
+                </figure>
+                <div className={`mb-6 md:mb-8 text-ink-secondary ${bodyTextClass} space-y-4`}>
                   <p>{t('ukiyoe.topPageDesignText2')}</p>
                   <p>{t('ukiyoe.topPageDesignText3')}</p>
                 </div>
                 <figure>
-                  <TopPageProcessShowcase />
+                  <div className="w-full overflow-hidden rounded-lg">
+                    <Image
+                      src="/work/ukiyoe/process-toppage/process-toppage-hero.png"
+                      alt={t('ukiyoe.topPageDesignHeroAlt')}
+                      width={1766}
+                      height={1294}
+                      className="w-full h-auto"
+                    />
+                  </div>
                   <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
-                    {t('ukiyoe.captionTopPage')}
+                    {t('ukiyoe.topPageDesignHeroCaption')}
                   </figcaption>
                 </figure>
               </div>
@@ -436,10 +463,10 @@ const UkiyoePage: React.FC = () => {
                 {t('ukiyoe.technicalIntro')}
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                 <div className="p-5 md:p-6 rounded-xl bg-surface-muted flex flex-col">
                   <Layers className="size-8 md:size-9 shrink-0 text-ink mb-3" aria-hidden strokeWidth={1.75} />
-                  <h4 className="text-heading-base md:text-heading-lg font-semibold text-ink mb-3">
+                  <h4 className={`text-heading-base md:text-heading-lg text-ink mb-4 ${getHeadingFontClass()}`}>
                     {t('ukiyoe.techFeature1Title')}
                   </h4>
                   <p className={`text-ink-secondary ${getBodyFontClass()} text-body-sm md:text-body-base tracking-[0.2px]`}>
@@ -448,7 +475,7 @@ const UkiyoePage: React.FC = () => {
                 </div>
                 <div className="p-5 md:p-6 rounded-xl bg-surface-muted flex flex-col">
                   <Images className="size-8 md:size-9 shrink-0 text-ink mb-3" aria-hidden strokeWidth={1.75} />
-                  <h4 className="text-heading-base md:text-heading-lg font-semibold text-ink mb-3">
+                  <h4 className={`text-heading-base md:text-heading-lg text-ink mb-4 ${getHeadingFontClass()}`}>
                     {t('ukiyoe.techFeature2Title')}
                   </h4>
                   <p className={`text-ink-secondary ${getBodyFontClass()} text-body-sm md:text-body-base tracking-[0.2px]`}>
@@ -457,7 +484,7 @@ const UkiyoePage: React.FC = () => {
                 </div>
                 <div className="p-5 md:p-6 rounded-xl bg-surface-muted flex flex-col">
                   <Palette className="size-8 md:size-9 shrink-0 text-ink mb-3" aria-hidden strokeWidth={1.75} />
-                  <h4 className="text-heading-base md:text-heading-lg font-semibold text-ink mb-3">
+                  <h4 className={`text-heading-base md:text-heading-lg text-ink mb-4 ${getHeadingFontClass()}`}>
                     {t('ukiyoe.techFeature3Title')}
                   </h4>
                   <p className={`text-ink-secondary ${getBodyFontClass()} text-body-sm md:text-body-base tracking-[0.2px]`}>
@@ -466,7 +493,7 @@ const UkiyoePage: React.FC = () => {
                 </div>
                 <div className="p-5 md:p-6 rounded-xl bg-surface-muted flex flex-col">
                   <BarChart2 className="size-8 md:size-9 shrink-0 text-ink mb-3" aria-hidden strokeWidth={1.75} />
-                  <h4 className="text-heading-base md:text-heading-lg font-semibold text-ink mb-3">
+                  <h4 className={`text-heading-base md:text-heading-lg text-ink mb-4 ${getHeadingFontClass()}`}>
                     {t('ukiyoe.techFeature4Title')}
                   </h4>
                   <p className={`text-ink-secondary ${getBodyFontClass()} text-body-sm md:text-body-base tracking-[0.2px]`}>

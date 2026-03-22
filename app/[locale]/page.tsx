@@ -1,8 +1,10 @@
 'use client';
+import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
 import { useJPFontSize, useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
+import { usePageTransition } from '@/src/contexts/TransitionContext';
 
 export default function Home() {
   const t = useTranslations();
@@ -10,6 +12,8 @@ export default function Home() {
   const { jpFontSize } = useJPFontSize();
   const { getBodyFontClass, getBodyFontStyle } = useBodyFont();
   const { getHeadingFontClass, getHeadingFontStyle } = useHeadingFont();
+  const { startTransition } = usePageTransition();
+  const ukiyoeImageRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className="mt-24 md:mt-28 md:mb-16">
@@ -39,12 +43,31 @@ export default function Home() {
         <h2 className="text-heading-2xl md:text-heading-3xl mb-16">Work</h2>
 
         {/* Project 0 - Ukiyoe */}
-        <Link href="/work/ukiyoe" className="block mb-16 hover:opacity-80">
+        <div
+          className="block mb-16 cursor-pointer hover:opacity-80"
+          role="link"
+          tabIndex={0}
+          onClick={() => {
+            const rect = ukiyoeImageRef.current?.getBoundingClientRect();
+            if (!rect) return;
+            const imageSrc = locale === 'jp' ? '/work/ukiyoe/thumbnail-jp.png' : '/work/ukiyoe/thumbnail-en.png';
+            startTransition(imageSrc, rect, '/work/ukiyoe');
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              const rect = ukiyoeImageRef.current?.getBoundingClientRect();
+              if (!rect) return;
+              const imageSrc = locale === 'jp' ? '/work/ukiyoe/thumbnail-jp.png' : '/work/ukiyoe/thumbnail-en.png';
+              startTransition(imageSrc, rect, '/work/ukiyoe');
+            }
+          }}
+        >
           <div className="mb-20">
-            <div className="mb-6">
+            <div className="mb-6" ref={ukiyoeImageRef}>
               <Image
                 src={locale === 'jp' ? '/work/ukiyoe/thumbnail-jp.png' : '/work/ukiyoe/thumbnail-en.png'}
-                alt="Ukiyoe: Interactive Cultural Exhibition"
+                alt="Ukiyoe: Layer by Layer"
                 width={600}
                 height={300}
                 className="w-full object-cover rounded-lg"
@@ -60,10 +83,7 @@ export default function Home() {
                   UI
                 </span>
                 <span className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
-                  Interaction Design
-                </span>
-                <span className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
-                  Cultural Research
+                  Context Engineering
                 </span>
               </div>
             </div>
@@ -80,36 +100,35 @@ export default function Home() {
               {t('projects.ukiyoe.description2')}
             </p>
           </div>
-        </Link>
+        </div>
 
-        {/* Project 1 - Gym Crowd Status Dashboard */}
-        <Link href="/work/gym_crowd_status_dashboard" className="block mb-16 hover:opacity-80">
+        {/* Project 1 - Figma Plugins */}
+        <Link href="/work/figma-plugins" className="block mb-16 hover:opacity-80">
           <div className="mb-20">
-            <div className="mb-6">
-              <Image
-                src="/figma-reference/gcsd_thumbnail_top.png"
-                alt="Gym Crowd Status Dashboard"
-                width={600}
-                height={300}
-                className="w-full object-cover rounded-lg"
-              />
+            <div className="mb-6 w-full aspect-[2/1] rounded-lg bg-surface-muted flex items-center justify-center overflow-hidden">
+              <div className="flex items-center gap-3 text-ink-tertiary">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <span className="font-space-grotesk text-body-lg">Thumbnail coming soon</span>
+              </div>
             </div>
 
             <div className="flex items-center gap-6 mb-4 flex-wrap md:flex-nowrap">
               <h3 className={`text-heading-xl md:text-heading-2xl ${getHeadingFontClass()}`}>
-                {t('projects.gymDashboard.title')}
+                {t('projects.figmaPlugins.title')}
               </h3>
               <div className="flex gap-2">
                 <span className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
-                  UI
+                  Figma Plugin
                 </span>
                 <span className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
-                  Context Engineering
+                  AI Vibe Coding
                 </span>
               </div>
             </div>
 
-            <p className={`mb-2 text-body-lg md:text-body-xl ${getBodyFontClass()}`}>{t('projects.gymDashboard.description1')}</p>
+            <p className={`mb-2 text-body-lg md:text-body-xl ${getBodyFontClass()}`}>{t('projects.figmaPlugins.description1')}</p>
             <p
               className={`${getBodyFontClass()} ${jpFontSize(
                 'text-body-base',
@@ -118,53 +137,11 @@ export default function Home() {
                 'text-body-base',
               )}`}
             >
-              {t('projects.gymDashboard.description2')}
+              {t('projects.figmaPlugins.description2')}
             </p>
           </div>
         </Link>
 
-        {/* Project 2 */}
-        <Link href="/work/google_ux_design_certificate_project" className="block mb-16 hover:opacity-80">
-          <div className="mb-20">
-            <div className="mb-6">
-              <Image
-                src="/work/image2.png"
-                alt="Google UX Design Certificate Project"
-                width={600}
-                height={300}
-                className="w-full object-cover"
-              />
-            </div>
-            <div className="flex items-center gap-6 mb-4 flex-wrap md:flex-nowrap">
-              <h3 className={`text-heading-xl md:text-heading-2xl ${getHeadingFontClass()}`}>
-                Google UX Design Certificate Project
-              </h3>
-              <div className="flex gap-2">
-                <span className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
-                  Research
-                </span>
-                <span className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
-                  UI
-                </span>
-                <span className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
-                  UX
-                </span>
-              </div>
-            </div>
-            {/* Project 2の説明: 言語切り替え対応 */}
-            <p className={`mb-2 text-body-lg md:text-body-xl ${getBodyFontClass()}`}>{t('projects.googleUX.description1')}</p>
-            <p
-              className={`${getBodyFontClass()} ${jpFontSize(
-                'text-body-base',
-                'text-body-lg',
-                'text-body-sm',
-                'text-body-base',
-              )}`}
-            >
-              {t('projects.googleUX.description2')}
-            </p>
-          </div>
-        </Link>
       </section>
     </div>
   );

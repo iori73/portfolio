@@ -2,8 +2,14 @@
 
 import React from 'react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { PluginData } from './pluginData';
 import { MoveUpRight } from 'lucide-react';
+
+function formatUsers(n: number): string {
+  if (n >= 1000) return `${(n / 1000).toFixed(1).replace(/\.0$/, '')}k`;
+  return String(n);
+}
 
 interface PluginCardProps {
   plugin: PluginData;
@@ -42,6 +48,7 @@ function PluginIcon({ plugin }: { plugin: PluginData }) {
 }
 
 export default function PluginCard({ plugin }: PluginCardProps) {
+  const t = useTranslations('figmaPlugins');
   const accent = plugin.accentColor;
   const Wrapper = plugin.link ? 'a' : 'div';
   const wrapperProps = plugin.link
@@ -74,10 +81,10 @@ export default function PluginCard({ plugin }: PluginCardProps) {
             </div>
             <div className="mt-0.5 flex items-center gap-1.5 font-space-grotesk text-caption text-ink-tertiary">
               <span>{plugin.type}</span>
-              {plugin.users && (
+              {plugin.users != null && (
                 <>
                   <span>·</span>
-                  <span>{plugin.users} users</span>
+                  <span>{formatUsers(plugin.users)} users</span>
                 </>
               )}
               {plugin.likes != null && (
@@ -113,7 +120,7 @@ export default function PluginCard({ plugin }: PluginCardProps) {
           <div className="mt-3 flex items-center gap-1.5">
             <div className="h-px flex-1" style={{ backgroundColor: `${accent}30` }} />
             <span className="font-space-grotesk text-caption text-ink-tertiary">
-              Enterprise DS
+              {t('enterpriseDS')}
             </span>
             <div className="h-px flex-1" style={{ backgroundColor: `${accent}30` }} />
           </div>

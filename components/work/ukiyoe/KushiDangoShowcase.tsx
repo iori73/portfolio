@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useState, useEffect } from 'react';
+import { useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
 
 const TIMELINE_ERAS = [
   { year: '1670', opacity: 0.9, height: 116 },
@@ -103,6 +104,8 @@ function ArtworkCardComponent({
   locale: string;
   isVisible: boolean;
 }) {
+  const { getHeadingFontClass } = useHeadingFont();
+  const { getBodyFontClass } = useBodyFont();
   const [loaded, setLoaded] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
 
@@ -146,19 +149,16 @@ function ArtworkCardComponent({
           />
         ))}
       </div>
-      <div
-        className="flex flex-col gap-1 tracking-wider"
-        style={{ color: '#1e3a5f' }}
-      >
+      <div className="flex flex-col gap-1 tracking-wider">
         <span
-          className="text-sm md:text-lg leading-tight"
-          style={{ fontFamily: "'Shippori Mincho', serif", fontWeight: 600 }}
+          className={`text-sm md:text-lg leading-tight text-ink ${
+            locale === 'jp' ? getHeadingFontClass() : 'font-switzer font-medium'
+          }`}
         >
           {locale === 'jp' ? card.title.ja : card.title.en}
         </span>
         <span
-          className="text-xs md:text-base leading-tight"
-          style={{ fontFamily: "'Shippori Mincho', serif", fontWeight: 500 }}
+          className={`text-xs md:text-base leading-tight text-ink-secondary ${getBodyFontClass()}`}
         >
           {locale === 'jp' ? card.artist.ja : card.artist.en}
         </span>
