@@ -1,110 +1,164 @@
 {
   "episodes": [
     {
-      "id": "30e26482-6e0c-81e3-9206-f6baf0cd2f94",
-      "title": "#36 AIの劇的な進歩の前に広がるAI格差。あなたはこの激動の一ヶ月を体感していますか？",
-      "podcast": "SingularRadio - シンギュラーラジオ",
-      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f050c4c0269ff5d00f19aead3",
-      "category": null,
-      "tags": [],
-      "date": "2026-02-19",
-      "url": "https://open.spotify.com/episode/7I060UUT4ofWjBfqCrC0Re?si=db8f8ca2e80243e5",
-      "durationMinutes": 39.386633333333336,
-      "summary": "",
-      "keyLearnings": [],
-      "embedding2d": [
-        3.6102317820024834,
-        0.17751664591496374
-      ],
-      "cluster": 0
-    },
-    {
-      "id": "30a26482-6e0c-81c4-b153-d47cc90d2215",
-      "title": "#58(s9-8)【近代の寿司】スシの定義って結局・・・。江戸の握り寿司がメジャーになるまで（たべものラジオ）",
-      "podcast": "たべものラジオ 〜食を面白く学ぶ〜",
-      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f0f0a14d3508f0d1e920c9198",
-      "category": null,
-      "tags": [],
-      "date": "2022-02-15",
-      "url": "https://open.spotify.com/episode/5SM2YCrpfMpzmPIVTRr3js?si=735eb9274751428e",
-      "durationMinutes": 33.936733333333336,
-      "summary": "",
-      "keyLearnings": [],
-      "embedding2d": [
-        3.276734327389791,
-        0.11856666738396504
-      ],
-      "cluster": 0
-    },
-    {
-      "id": "30526482-6e0c-8117-ba50-ee479f2de0ad",
-      "title": "緒方壽人(前半) - デジタルとコンヴィヴィアリティの実践",
-      "podcast": "デジタルと教育の庭",
-      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fa6f60dfae62dacc6bdd6fe12",
-      "category": null,
-      "tags": [],
-      "date": "2026-01-06",
-      "url": "https://open.spotify.com/episode/5b38VDvaVE7KI3Vm4JEhtL?si=a62f0f2e93ff4641",
-      "durationMinutes": 45.77738333333333,
-      "summary": "",
-      "keyLearnings": [],
-      "embedding2d": [
-        3.4316785221113157,
-        -0.6093200791089084
-      ],
-      "cluster": 0
-    },
-    {
-      "id": "30326482-6e0c-8125-aa09-fd34017e7a38",
-      "title": "198. もし複数の興味があるなら、次の2-3年を無駄に過ごすな",
+      "id": "32d26482-6e0c-8141-b0d4-eb7c71c3ef9b",
+      "title": "204.「測りすぎ――なぜパフォーマンス評価は失敗するのか?」",
       "podcast": "Today I Learned -シリコンバレーの現場から-",
       "podcastCover": "https://i.scdn.co/image/ab67656300005f1f66df42744157019b4156d323",
       "category": null,
       "tags": [],
-      "date": "2026-02-08",
-      "url": "https://open.spotify.com/episode/2eLadU8G7Sa9LPyMh9HMLG?si=d58111f380f34cb2",
-      "durationMinutes": 38.1478,
-      "summary": "",
+      "date": "2026-03-22",
+      "url": "https://open.spotify.com/episode/3tBXaRL03nZzp9S8uKVcjQ?si=3LrCBmxXQGijwPVQFxGReg&t=455",
+      "durationMinutes": 39.0062,
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: Today I Learned -シリコンバレーの現場から- Release Date: 2026-03-22 Duration: 39:00 Summary 要約: このエピソードでは「204.「測りすぎ――なぜパフォーマンス評価は失敗するのか?」」というテーマについて話されています。 番組...",
       "keyLearnings": [],
       "embedding2d": [
-        2.920839443320852,
-        -0.7162308050055177
+        4.4589548603965286,
+        -0.4531493628031077
       ],
       "cluster": 0
     },
     {
-      "id": "30126482-6e0c-8165-af09-f03ad4572cd1",
-      "title": "#4 なぜ日本人は「コミュ力」に呪われるのか？30年間のベストセラー全分析",
-      "podcast": "世界システムラジオ",
-      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f7fe52d481d797eabf6553145",
+      "id": "32626482-6e0c-81d6-8f0e-c78c895824bd",
+      "title": "#380 綺麗じゃないから作り続けています（シンギュラリティさん）",
+      "podcast": "Automagic Podcast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fada74e03424e5f8ccb034f2c",
       "category": null,
       "tags": [],
-      "date": "2025-12-10",
-      "url": "https://open.spotify.com/episode/6xTwehzaVgsezRCgpuNCIY?si=09f11083b8e94d98",
-      "durationMinutes": 100.01315,
-      "summary": "",
+      "date": "2026-03-16",
+      "url": "https://open.spotify.com/episode/0HX0Ym0Y2RsDUOlTdxIMPc?si=10a0388c33194511",
+      "durationMinutes": 47.5778,
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: Automagic Podcast Release Date: 2026-03-16 Duration: 47:34 Summary オートマジックポトキャストのホストをしているデザイナーの長谷川康久です。今回のゲストはCypioでプロダクトデザイナーをしているSingularityさんですが...",
       "keyLearnings": [],
       "embedding2d": [
-        3.8143423027884786,
-        -0.2572726143371494
+        2.664670439949735,
+        -0.8802669009008861
       ],
       "cluster": 0
     },
     {
-      "id": "30126482-6e0c-8149-86a3-f13fb7e34f51",
-      "title": "#5総集編 【保存版】言語化の全てがわかる110分｜歴史・権力・暗黙知まで",
-      "podcast": "世界システムラジオ",
-      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f7fe52d481d797eabf6553145",
+      "id": "32526482-6e0c-8184-abeb-ea944ad8e126",
+      "title": "デッサンと観察",
+      "podcast": "Takram Cast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f86fc314da217ec0631299824",
       "category": null,
       "tags": [],
-      "date": "2026-01-21",
-      "url": "https://open.spotify.com/episode/5ZAfhfmEt07CgscFds5OzA?si=2bf6ccaaa5e040b3",
-      "durationMinutes": 112.00711666666666,
-      "summary": "",
+      "date": "2018-04-16",
+      "url": "https://open.spotify.com/episode/6Wc04PkwpxrretPgfZhMoU?si=cf08e31b0fc74f17",
+      "durationMinutes": 29.82675,
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: Takram Cast Release Date: 2018-04-16 Duration: 29:49 Summary はいはい 今週のポトキャスト始まりましたはいはい今日はあの 新しく始まったタクラムのリードxという制度でこの 2月3月ぐらいからタクラムのリードのメンバーになった3人でお届...",
       "keyLearnings": [],
       "embedding2d": [
-        2.8998077665817603,
-        0.11767308492192285
+        5.308632260432329,
+        1.009547622797121
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "32126482-6e0c-817e-9e4a-dcfc362c04ba",
+      "title": "#309 雑談回：SpaceXが上場した時の二次効果、エル・セグンドのカルチャー ft. Miho Onuki Beal",
+      "podcast": "Off Topic // オフトピック",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f2332b679810aa74a364db7fd",
+      "category": null,
+      "tags": [],
+      "date": "2026-03-11",
+      "url": "https://open.spotify.com/episode/0awWLSVBZvjLNM1bNbqjF7?si=479e54dc37f54755",
+      "durationMinutes": 55.283166666666666,
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: Off Topic // オフトピック Release Date: 2026-03-11 Duration: 55:16 Summary みなさんこんにちは 三重武哲郎ですオフトピックはアメリカ中心に 最新テクニックやスタートアップビジネス情報を広く深掘りしながら 紹介する番組です今回のトピッ...",
+      "keyLearnings": [],
+      "embedding2d": [
+        5.567909028646382,
+        1.3256843616424705
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "31f26482-6e0c-81f8-a641-d351b8536e56",
+      "title": "AXIS BTC トークジャム #7 : 鈴木健さん",
+      "podcast": "Takram Cast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fb8974db5ee420780061618a3",
+      "category": null,
+      "tags": [],
+      "date": "2018-04-23",
+      "url": "https://open.spotify.com/episode/5hebEqUs5SH1ZnrPURHEgA?si=7eeb2eb9e1a84cca",
+      "durationMinutes": 54.51575,
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: Takram Cast Release Date: 2018-04-23 Duration: 54:30 Summary はい よろしくお願いしますもう昔から知ってるので ちょっと小恥ずかしい感じもありますけど今日はですね BTC Talk Jam第7回目のゲストスマートニュースの鈴木健さんに...",
+      "keyLearnings": [],
+      "embedding2d": [
+        2.3790250199468472,
+        -0.8973550411580198
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "31f26482-6e0c-81e1-ab57-d70859124bf5",
+      "title": "Takram Hidden Library 09: 櫻井稔",
+      "podcast": "Takram Cast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f11f3ecbb0b91c6750d69a2c4",
+      "category": null,
+      "tags": [],
+      "date": "2018-05-28",
+      "url": "https://open.spotify.com/episode/4iiFKO2ZnVxIl8f4MQjQef?si=183adec04fb94f2d",
+      "durationMinutes": 31.694183333333335,
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: Takram Cast Release Date: 2018-05-28 Duration: 31:41 Summary 今週のタクラムキャストはシリーズのタクラムヒドゥンライブラリーの桜井美奈るさんの会になります。よろしくお願いします。- よろしくお願いします。- タクラムの尾田です。- 桜...",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.136528489127928,
+        -0.6655871440247366
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "31926482-6e0c-8194-ad64-d6d241d13698",
+      "title": "デザインクオリティ",
+      "podcast": "Takram Cast",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fe328b6c09387fdc7e70d449e",
+      "category": null,
+      "tags": [],
+      "date": "2020-11-02",
+      "url": "https://open.spotify.com/episode/76udwjBBaJhj6U7IKkyzjY?si=400f79b4a0a14ab8",
+      "durationMinutes": 31.97735,
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: Takram Cast Release Date: 2020-11-02 Duration: 31:58 Summary 【音楽】はい、皆さんこんにちは。今週のタクラムキャストですけれども、タクラムの田川と、あと…タクラムの松田です。今日は二人でお送りしていきたいと思います。よろしくお願いしま...",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.60149126585654,
+        0.7368944033835501
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "31826482-6e0c-810c-967d-d6c1f1e5bac4",
+      "title": "The design process is dead. Here’s what’s replacing it. | Jenny Wen (head of design at Claude)",
+      "podcast": "Lenny's Podcast: Product | Career | Growth",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f94a4aecb5f11a26f0890e7db",
+      "category": null,
+      "tags": [],
+      "date": "2026-03-01",
+      "url": "https://open.spotify.com/episode/7qfstjR4jP5bLExJTjM3tu?si=9140acf6794e4347",
+      "durationMinutes": 77.41455,
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: Lenny's Podcast: Product | Career | Growth Release Date: 2026-03-01 Duration: 01:17:24 Summary This design process that designers have been taught,...",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.481594937675095,
+        0.5090032342907093
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "31726482-6e0c-8111-a7c3-ed0e297f6cdc",
+      "title": "201. Googleに14年勤めてる技術者が語る21の教訓",
+      "podcast": "Today I Learned -シリコンバレーの現場から-",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f66df42744157019b4156d323",
+      "category": null,
+      "tags": [],
+      "date": "2026-03-01",
+      "url": "https://open.spotify.com/episode/5iDaeumN2oMCVIZTiNzuLL?si=dbdab53078164b82",
+      "durationMinutes": 39.15678333333334,
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: Today I Learned -シリコンバレーの現場から- Release Date: 2026-03-01 Duration: 39:09 Summary 【音楽】【りょう一】こんにちはToday I Learnedではカリフォルニア ベイエリアで働くソフトワイアエンジニアが気になったトピ...",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.808433000604215,
+        0.2423542860066823
       ],
       "cluster": 0
     },
@@ -118,11 +172,155 @@
       "date": "2026-02-07",
       "url": "https://open.spotify.com/episode/7qpz8YW7alNaI7Wxv8OCgF?si=8f07b306c5134bed",
       "durationMinutes": 101.27428333333333,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: 起業家の思想と人生に迫る インサイドビジョン Release Date: 2026-02-07 Duration: 01:41:16 Summary 要約: 深井龍之介氏は、「生きるのがめんどくさい」という根源的な人生観から、「自分にしか起こせない新しい現象」の創出に価値を見出す。その行動原理...",
       "keyLearnings": [],
       "embedding2d": [
-        3.445111880615049,
-        1.0875227103262046
+        5.081542274185926,
+        -0.6066427600552816
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "31526482-6e0c-8181-a90c-f827be767bdd",
+      "title": "#415 インタビュー「無印良品が家をつくる理由。変えられる家、住み継がれる家—— 陽の家と未来の住まい　～神奈川大学講義より～」（第3回／全4回）",
+      "podcast": "無印良品 くらしのラジオ【毎週金曜更新】",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f42e5af808a286f6266a9697e",
+      "category": null,
+      "tags": [],
+      "date": "2026-02-27",
+      "url": "https://open.spotify.com/episode/04ubycatzChjF7ANTdBa6X?si=5011330e20054e1f",
+      "durationMinutes": 16.71255,
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: 無印良品 くらしのラジオ【毎週金曜更新】 Release Date: 2026-02-27 Duration: 16:42 Summary 暮らしのラジオの清水です。今回も無事ハウスで長年居造りに携わられてきた、 河内孝二さんによる講義の続きをお届けします。前回は日本の住宅問題と一室空間という...",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.758967016537097,
+        -0.839612191015615
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "31426482-6e0c-81f4-945f-df3a71402ffb",
+      "title": "急がば回れ！会社の危機に生きた対話と文学　ゲスト：丸井グループ 代表取締役社長 代表執行役員 CEO 青井浩 氏",
+      "podcast": "歴史を面白く学ぶコテンラジオ （COTEN RADIO）",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fb412cc05140e5eedc61ac87d",
+      "category": null,
+      "tags": [],
+      "date": "2026-02-25",
+      "url": "https://open.spotify.com/episode/0Wwa43pkbKrleBmmZdAgGC?si=d52dcc680c7944c1",
+      "durationMinutes": 54.0412,
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: 歴史を面白く学ぶコテンラジオ （COTEN RADIO） Release Date: 2026-02-25 Duration: 54:02 Summary 本日の番外編も引き続き、丸いグループ代表取締役社長青井博士さんをゲストにお待ちしてお話をしていきたいと思います。お願いします。お願いします...",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.0621118423346547,
+        0.5596391737383135
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "30e26482-6e0c-81e3-9206-f6baf0cd2f94",
+      "title": "#36 AIの劇的な進歩の前に広がるAI格差。あなたはこの激動の一ヶ月を体感していますか？",
+      "podcast": "SingularRadio - シンギュラーラジオ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f050c4c0269ff5d00f19aead3",
+      "category": null,
+      "tags": [],
+      "date": "2026-02-19",
+      "url": "https://open.spotify.com/episode/7I060UUT4ofWjBfqCrC0Re?si=db8f8ca2e80243e5",
+      "durationMinutes": 39.386633333333336,
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: SingularRadio - シンギュラーラジオ Release Date: 2026-02-19 Duration: 39:23 Summary 【音楽】さあ始まりましたシンギュララジオということで今回はちょっと雑談会ということでジャックバランに話していこうと思います普段結構調べてね俺らも...",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.323117783377677,
+        -0.1370407021018465
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "30a26482-6e0c-81c4-b153-d47cc90d2215",
+      "title": "#58(s9-8)【近代の寿司】スシの定義って結局・・・。江戸の握り寿司がメジャーになるまで（たべものラジオ）",
+      "podcast": "たべものラジオ 〜食を面白く学ぶ〜",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f0f0a14d3508f0d1e920c9198",
+      "category": null,
+      "tags": [],
+      "date": "2022-02-15",
+      "url": "https://open.spotify.com/episode/5SM2YCrpfMpzmPIVTRr3js?si=735eb9274751428e",
+      "durationMinutes": 33.936733333333336,
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: たべものラジオ 〜食を面白く学ぶ〜 Release Date: 2022-02-15 Duration: 33:56 Summary 要約: ポッドキャスト「たべものラジオ」は、近代における握り寿司の変遷と、その定義の進化を紐解く。明治初期の握り寿司は、現代よりもはるかに大きく、ネタにしっかり...",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.0819189915302854,
+        -0.21321666704404407
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "30526482-6e0c-8117-ba50-ee479f2de0ad",
+      "title": "緒方壽人(前半) - デジタルとコンヴィヴィアリティの実践",
+      "podcast": "デジタルと教育の庭",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1fa6f60dfae62dacc6bdd6fe12",
+      "category": null,
+      "tags": [],
+      "date": "2026-01-06",
+      "url": "https://open.spotify.com/episode/5b38VDvaVE7KI3Vm4JEhtL?si=a62f0f2e93ff4641",
+      "durationMinutes": 45.77738333333333,
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: デジタルと教育の庭 Release Date: 2026-01-06 Duration: 45:46 Summary 要約: デザインエンジニアの緒方壽人氏は、機械工学、メディアアート、プロダクトデザインを横断し、インターネット黎明期からUI/UXとインターフェースの可能性を追求してきました。...",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.951642319518618,
+        0.7961587218200266
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "30326482-6e0c-8125-aa09-fd34017e7a38",
+      "title": "198. もし複数の興味があるなら、次の2-3年を無駄に過ごすな",
+      "podcast": "Today I Learned -シリコンバレーの現場から-",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f66df42744157019b4156d323",
+      "category": null,
+      "tags": [],
+      "date": "2026-02-08",
+      "url": "https://open.spotify.com/episode/2eLadU8G7Sa9LPyMh9HMLG?si=d58111f380f34cb2",
+      "durationMinutes": 38.1478,
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: Today I Learned -シリコンバレーの現場から- Release Date: 2026-02-08 Duration: 38:08 Summary 要約: ポッドキャスト「Today I Learned -シリコンバレーの現場から-」第198回は、Xで1200万ビューを記録した記事...",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.342349195340651,
+        -0.2041039093003555
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "30126482-6e0c-8165-af09-f03ad4572cd1",
+      "title": "#4 なぜ日本人は「コミュ力」に呪われるのか？30年間のベストセラー全分析",
+      "podcast": "世界システムラジオ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f7fe52d481d797eabf6553145",
+      "category": null,
+      "tags": [],
+      "date": "2025-12-10",
+      "url": "https://open.spotify.com/episode/6xTwehzaVgsezRCgpuNCIY?si=09f11083b8e94d98",
+      "durationMinutes": 100.01315,
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: 世界システムラジオ Release Date: 2025-12-10 Duration: 01:40:00 Summary 要約: 世界システムラジオ第4回は、過去30年間のベストセラーを分析し、日本人が「コミュ力」に呪われる背景を紐解いた。日本のコミュニケーションは、中根知恵の「縦社会」や山...",
+      "keyLearnings": [],
+      "embedding2d": [
+        4.3466911019043355,
+        1.1983270519519094
+      ],
+      "cluster": 0
+    },
+    {
+      "id": "30126482-6e0c-8149-86a3-f13fb7e34f51",
+      "title": "#5総集編 【保存版】言語化の全てがわかる110分｜歴史・権力・暗黙知まで",
+      "podcast": "世界システムラジオ",
+      "podcastCover": "https://i.scdn.co/image/ab67656300005f1f7fe52d481d797eabf6553145",
+      "category": null,
+      "tags": [],
+      "date": "2026-01-21",
+      "url": "https://open.spotify.com/episode/5ZAfhfmEt07CgscFds5OzA?si=2bf6ccaaa5e040b3",
+      "durationMinutes": 112.00711666666666,
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: 世界システムラジオ Release Date: 2026-01-21 Duration: 01:52:00 Summary 要約: ポッドキャスト「世界システムラジオ #5」は、「言語化」を「対象物」「目的」「行為」の3軸と6つのタイプ（思考整理、自己理解、伝達技術、世界再定義、哲学的探究など...",
+      "keyLearnings": [],
+      "embedding2d": [
+        3.5622522563016004,
+        1.0316195525626477
       ],
       "cluster": 0
     },
@@ -136,11 +334,11 @@
       "date": "2026-01-20",
       "url": "https://open.spotify.com/episode/1LscTUNYxfYdH75iNKKlEY?si=7b27e3e62bf844a1",
       "durationMinutes": 28.560966666666666,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: Joi Ito's Podcast Release Date: 2026-01-20 Duration: 28:33 Summary シリコンバレーの巨大テック企業の「エリートエンジニア」モデルが崩壊し、AIを自律的なエージェントとして使いこなす新人類「Cracked Engineer」が台頭...",
       "keyLearnings": [],
       "embedding2d": [
-        4.648897673808216,
-        -1.2883011404512954
+        3.9008921125079628,
+        -0.048810728199224274
       ],
       "cluster": 0
     },
@@ -154,11 +352,11 @@
       "date": "2020-03-02",
       "url": "https://open.spotify.com/episode/2KM80yYi1vpTN2z4ERjWTj?si=b22f333367a44096",
       "durationMinutes": 26.866933333333332,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: Takram Cast Release Date: 2020-03-02 Duration: 26:52 Summary テーマはデータとデザイン ビジュアル・アナリティクス本日のTakramCastはデータとデザイン ビジュアル・アナリティクスというテーマでTakramのサクライと日本大学の...",
       "keyLearnings": [],
       "embedding2d": [
-        3.702046949476156,
-        0.03752890025471173
+        3.1330498297753837,
+        0.02823004916548988
       ],
       "cluster": 0
     },
@@ -172,11 +370,11 @@
       "date": "2023-02-24",
       "url": "https://open.spotify.com/episode/5LEfKUMflHgfrUqGutMepV?si=2dbcdd7e56944189",
       "durationMinutes": 23.60495,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: ミモリラジオ-自然の面白さを聴く Release Date: 2023-02-24 Duration: 23:36 Summary 深井 ミモリラジオこのポッドキャストは自然界の中から一つのテーマをピックアップしてその面白さを深掘るトーク番組ですパーソナリティを募えますミモリのアンディですヤン...",
       "keyLearnings": [],
       "embedding2d": [
-        2.7749753603874616,
-        -0.7519764190092262
+        4.042745651655845,
+        0.6834558920401306
       ],
       "cluster": 0
     },
@@ -190,11 +388,11 @@
       "date": "2026-01-14",
       "url": "https://open.spotify.com/episode/2OrCpIYYnuXcER7vg7y52p?si=3104953ed3d74ff2",
       "durationMinutes": 56.9092,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: 歴史を面白く学ぶコテンラジオ （COTEN RADIO） Release Date: 2026-01-14 Duration: 56:54 Summary さて今日も引き続き竜外さんですねお呼びしますはいよろしくお願いしますさあさあさあ竜意識ここにさらに有意識が絡んでくるんではいはいはいだいぶ...",
       "keyLearnings": [],
       "embedding2d": [
-        4.663724761710743,
-        0.7538094410012728
+        2.838358637085441,
+        -0.6947725705043257
       ],
       "cluster": 0
     },
@@ -208,11 +406,11 @@
       "date": "2026-01-08",
       "url": "https://open.spotify.com/episode/3NLexhKAz54epfolqSIBCS?si=8be51a6dfbb04c4c",
       "durationMinutes": 33.44795,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: デデデータ!!〜“あきない”データの話〜 Release Date: 2026-01-08 Duration: 33:26 Summary デデデータデデデータ飽きないデータの話この番組はデータデジタルそしてDXデジタルトランスフォーメーションを軸に世の中のデータ活用、デジタル推進、そしてDX...",
       "keyLearnings": [],
       "embedding2d": [
-        3.5413437599450006,
-        1.3253861019700617
+        3.7069791943651462,
+        0.11614509334545496
       ],
       "cluster": 0
     },
@@ -228,11 +426,11 @@
       "date": "2023-02-17",
       "url": "https://open.spotify.com/episode/4Qzcpl2Coud6rrubFLw6Ml?si=067e6e57314e4fc1",
       "durationMinutes": 20.4786,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: ミモリラジオ-自然の面白さを聴く Release Date: 2023-02-17 Duration: 20:28 Summary ミモリラジオこのポッドキャストは自然界から一つのテーマをピックアップして、その面白さを深掘るトーク番組です。パーソナリティを務めます。ミモリのアンディです。ミモリ...",
       "keyLearnings": [],
       "embedding2d": [
-        2.492795008952823,
-        0.8168420003540426
+        2.8776657025555936,
+        4.047459653198039
       ],
       "cluster": 1
     },
@@ -246,11 +444,11 @@
       "date": "2023-02-21",
       "url": "https://open.spotify.com/episode/2inuyyYlKM3FmDyeYfdWmn?si=f5cd57724b0b43f5",
       "durationMinutes": 22.86235,
-      "summary": "",
+      "summary": "へー。 だからへばりついてるってよりも、あなんかなんていうのかな。 しがみついてるみたいな水の中で。 しがみついてるみたいな認識が多分近いと思う。 シラミっていう名前が入ってるけどシラミの仲間ではないよね。 これね甲殻類。 あーそうなんだ。 でね小さなマジでカニみたいな感じのやつで。 へー。 でこれがね強制なのか規制なのか分かってないんだけど、僕は読んだ論文っていうか説によると、このクジラジラミ、...",
       "keyLearnings": [],
       "embedding2d": [
-        3.0874746468270464,
-        -1.0764414918849745
+        4.102403318455173,
+        -0.2352747586324465
       ],
       "cluster": 0
     },
@@ -266,11 +464,11 @@
       "date": "2023-08-25",
       "url": "https://open.spotify.com/episode/5HCwR3d0HA5NrdEIcFziQQ?si=0af2283f93cc48ef",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2023年08月25日 長さ：26:38 要約 樋口、深井、そしてやんやんの会話では、カラスに関する面白い情報が紹介されています。カラスが黒い理由や、日本に生息する5種類のカラスについて詳しく議論されました。彼らは特にハシブトガラスとハシボソガラスに焦点を当て、それぞれの歩き方や習性の違いについて説明しました。このエピソードでは、カラスが...",
       "keyLearnings": [],
       "embedding2d": [
-        2.9020250289472433,
-        1.3119255477179508
+        2.1032843508524772,
+        1.671559005885413
       ],
       "cluster": 1
     },
@@ -286,11 +484,11 @@
       "date": "2023-09-08",
       "url": "https://open.spotify.com/episode/3P027ZwgXsB3ETOGcARwJ5?si=a4f3f659a61a416f&nd=1&dlsi=d2359b42179640bb",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2023年09月08日 長さ：20:42 要約 番組は「カラス」を取り上げていて、カラスの知能や信じられない道具作成能力について興味深い話題が掘り下げられています。カラスは環境により道具の形が異なることや、神話において知性として描かれたり、日本の神社で象徴として祀られていることが紹介されました。また、カラスに関する面白いエピソードや珍しい...",
       "keyLearnings": [],
       "embedding2d": [
-        3.276128849931007,
-        1.9952985436694028
+        2.997403182363839,
+        1.254362394926733
       ],
       "cluster": 1
     },
@@ -306,11 +504,11 @@
       "date": "2025-01-28",
       "url": "https://open.spotify.com/episode/6RYMVFDNMuhzMj8fHCQWMs?si=4a47a7c64d604f62",
       "durationMinutes": 2127,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2025年01月28日 長さ：21:27 LISTEN URL： 要約 今回の会話は、卵の形成プロセスや卵白の重要性について議論されています。卵の構造や性質が、爬虫類と鳥類で異なることから、卵の中の要素がどのように形成されるかについて話が展開されます。特に、卵白が最強の防御壁としての役割を果たしていることが強調されています。また、卵の形成...",
       "keyLearnings": [],
       "embedding2d": [
-        2.586808136314108,
-        3.1289116127750853
+        1.6997047770178928,
+        2.47010116330183
       ],
       "cluster": 1
     },
@@ -326,11 +524,11 @@
       "date": "2023-09-05",
       "url": "https://open.spotify.com/episode/0uwLUUmE1ukUtnobkNm063?si=10e1293d73d04205",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2023年09月05日 長さ：21:25 要約 今回のトーク番組は、鳥の脳に焦点を当てて興味深い話題が展開されています。鳥の脳における大脳神秘室に相当する部分があることや、カラスが知的な行動を示すことが取り上げられています。最新の科学によると、カラスの脳は他の鳥よりも大きく、特に大脳の役割を担う部分が他の鳥よりも大きいことが明かされました...",
       "keyLearnings": [],
       "embedding2d": [
-        3.436485194471386,
-        2.5300993389724535
+        3.4420207452590086,
+        2.0712000179208774
       ],
       "cluster": 1
     },
@@ -346,11 +544,11 @@
       "date": "2023-08-22",
       "url": "https://open.spotify.com/episode/1BdWP5JvDkmbSjjdj04z2J?si=b2f03ca09a884eb1",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2023年08月22日 長さ：22:23 要約 今回は、三森アンディと野田和樹がカラスの目の特徴について興味深い議論を交わしています。鳥の目の機能や視界の優位性、色覚など、鳥たちが持つ高度な視覚能力について探求しています。また、カラスが紫外線を活用して物を認識する能力を利用したゴミ袋の話題も取り上げられています。鳥の目の驚くべき機能や特異...",
       "keyLearnings": [],
       "embedding2d": [
-        2.940666394922814,
-        2.301185619252191
+        4.221366761671335,
+        2.624008086757562
       ],
       "cluster": 1
     },
@@ -366,11 +564,11 @@
       "date": "2023-08-29",
       "url": "https://open.spotify.com/episode/0BMdHBUiJMR4zg8UJJsGdc?si=0cfbba7a75214bcc",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2023年08月29日 長さ：24:31 要約 このトーク番組では、カラスの生態や行動について詳しく議論されています。カラスが冬に食べるものが減少するため、人間が出すゴミを漁る姿や石鹸やロウソクを盗む出来事について話題になります。実際の調査データを元に、カラスが主に植物性食品を食べる一方で、特定の種子や脂肪分を好んで摂取していることも明ら...",
       "keyLearnings": [],
       "embedding2d": [
-        4.414436730733423,
-        1.924384654495818
+        4.3474778254045265,
+        2.7778564055227317
       ],
       "cluster": 1
     },
@@ -386,11 +584,11 @@
       "date": "2023-09-01",
       "url": "https://open.spotify.com/episode/00PdTxtWodY9vGZQwswULK?si=7b0c3819a0ae45af",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2023年09月01日 長さ：20:44 要約 今回のトークは、カラスの巣作りと子育てに関する興味深い話題が取り上げられています。都市部や自然豊かな地域での巣材の違いや子育ての時期の分け方、順次肺卵と一斉放卵などの特徴について触れられています。カラスの繁殖行動や雛の衛生管理に関する情報も共有され、親子の関係や環境の影響が考察されました。こ...",
       "keyLearnings": [],
       "embedding2d": [
-        3.030954844345668,
-        2.6745489388705783
+        4.2540313207080915,
+        2.2281638995529867
       ],
       "cluster": 1
     },
@@ -406,11 +604,11 @@
       "date": "2022-11-16",
       "url": "https://open.spotify.com/episode/38ihwh1cbFh7vgN8OU1HMO?si=932052a57d564068",
       "durationMinutes": 1541,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 11/16/2022 Duration: 25:41 Summary このトランスクリプトは、「三森ラジオ」の会話内容を取り上げています。話の内容は、竹の特性や増殖方法、竹林が1個体であること、竹の花が120年に1度しか咲かないという珍しい性質について議論しています。さらに、竹の増殖...",
       "keyLearnings": [],
       "embedding2d": [
-        3.3193041080402557,
-        2.262699522108712
+        3.5156681197956634,
+        3.1183851993774274
       ],
       "cluster": 1
     },
@@ -424,11 +622,11 @@
       "date": "2025-12-21",
       "url": "https://open.spotify.com/episode/0tBsELzZ1UBlXLT5Ggnx69?si=5fbf20d49f6a47c0",
       "durationMinutes": 39.61525,
-      "summary": "",
+      "summary": "Chapters 0:00 【音楽】 3:00 【真木】すみません見過ごしてますね自分は 6:07 【真木】システムとシステムのインタラクションというのは、簡単に言うと数学的にモデリングできて、そのモ 9:25 実はそれはもうエンタープライズでそういうシステムが実装されてます 12:01 だから歴史に学ぶと、それもなるべく広範囲の歴史を学んで自分の分野に活かせないかっていうのを考え... 15:0...",
       "keyLearnings": [],
       "embedding2d": [
-        2.927173444676964,
-        0.6197168753285067
+        5.173186370343256,
+        0.3562876121425221
       ],
       "cluster": 0
     },
@@ -442,11 +640,11 @@
       "date": "2025-12-26",
       "url": "https://open.spotify.com/episode/2S172M8HbxNbPAij4wUdwo",
       "durationMinutes": 68.07,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: 神保町で会いましょう Release Date: 2025-12-26 Duration: 01:08:04 Summary 写真家・大山顕さんをゲストに迎えた「神保町で会いましょう」の後編。前回の竹橋ジャンクションの話から続き、桜やイチョウといった植物への「プロジェクション」（対象に意味を投...",
       "keyLearnings": [],
       "embedding2d": [
-        3.1094669501401873,
-        -0.08236275325317793
+        2.338261884979426,
+        -0.4412771729076353
       ],
       "cluster": 0
     },
@@ -460,11 +658,11 @@
       "date": "2025-12-28",
       "url": "https://open.spotify.com/episode/5wNv5XFnIoNGTgUaqJ8A23",
       "durationMinutes": 32.29043333333333,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Podcast: Beat the Odds / ビート・ザ・オッズ Release Date: 2025-12-28 Duration: 32:17 Summary 本編はパート二です。 まだパート一をご覧になっていない方は、是非そちらからご視聴ください。 それでは本編へどうぞ。 それがあのえっと、C4000...",
       "keyLearnings": [],
       "embedding2d": [
-        3.557796270830239,
-        -0.37089343979421274
+        4.384577146973436,
+        -0.1840067802828299
       ],
       "cluster": 0
     },
@@ -478,11 +676,11 @@
       "date": "2025-10-28",
       "url": "https://open.spotify.com/episode/0Ck7DZGENeIsxtdZegjtm9",
       "durationMinutes": 20.513083333333334,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 10/28/2025 Duration: 20:00 Summary Design Better podcast discusses the intersection of design and technology with sustainable design expert Je...",
       "keyLearnings": [],
       "embedding2d": [
-        3.7410149232865924,
-        -0.7377525374225737
+        3.571379172831508,
+        -0.3110297000599216
       ],
       "cluster": 0
     },
@@ -496,11 +694,11 @@
       "date": "2019-09-24",
       "url": "https://open.spotify.com/episode/3DZyeLVHj00m5Zc56jg3tZ",
       "durationMinutes": 30,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: Duration: 30:00 Summary Takram Castの「データとデザイン」後編では、noteのCXOである安藤さんをゲストに迎え、データビジュアライゼーションと意思決定の関係について深く議論している。安藤さんは、データ可視化を扱う際に「次のアクションにつなげられるか...",
       "keyLearnings": [],
       "embedding2d": [
-        4.402439294265596,
-        -0.19265412675684057
+        4.031036785145173,
+        -1.5504841105563005
       ],
       "cluster": 0
     },
@@ -517,8 +715,8 @@
       "summary": "",
       "keyLearnings": [],
       "embedding2d": [
-        4.867244213428006,
-        -0.6665845672421289
+        4.2866733553022005,
+        -0.7482387407819603
       ],
       "cluster": 0
     },
@@ -532,11 +730,11 @@
       "date": "2025-12-26",
       "url": "https://open.spotify.com/episode/3r1VLJqEXFisQuPrMoqs0Z?si=a4adeebc165d45b7",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 09/17/2019 Duration: 44:37 Summary このエピソードではTakramのメンバーが、組織内での個々の活動と組織全体との関係について議論しています。経験値の高い人から低い人まで、誰もが異なる役割を果たすことで組織内でのダイナミクスが生まれています。経験値が...",
       "keyLearnings": [],
       "embedding2d": [
-        4.232679746634209,
-        0.3098479931662721
+        3.45173920877763,
+        -0.08120763768872888
       ],
       "cluster": 0
     },
@@ -550,11 +748,11 @@
       "date": "2025-12-26",
       "url": "https://open.spotify.com/episode/2Z6cuiHJioCDn0QedMmRWS?si=papbm64UQWiSf0bCwoudrg",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 08/05/2019 Duration: 27:45 Summary 今回のポッドキャストは1週間分の活動が記録されており、AIを利用した実験や地域教育、コミュニケーション、最終的にはアニメや特撮作品について取り上げられています。登場人物は、プログラミングの知識を普及させる必要性やデ...",
       "keyLearnings": [],
       "embedding2d": [
-        4.119562757819726,
-        0.2985394896303367
+        4.523091872275562,
+        -0.34257940864537134
       ],
       "cluster": 0
     },
@@ -568,11 +766,11 @@
       "date": "2025-12-25",
       "url": "https://open.spotify.com/episode/3l3KRbrptzo3GIcBHy6MyI?si=99bd7e8130604d78",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 12/24/2025 Duration: 39:44 Summary この会話では、リアリティーショー「ライヤーゲーム」について話し合われています。参加者たちは番組の興味深さや頭脳戦を楽しんでいること、人気キャラクターの登場について言及しています。また、ソフトバンクグループがAI分野...",
       "keyLearnings": [],
       "embedding2d": [
-        4.393689002838666,
-        -0.3365853286412846
+        2.5614700292080936,
+        0.4979632997512324
       ],
       "cluster": 0
     },
@@ -586,11 +784,11 @@
       "date": "2025-12-23",
       "url": "https://open.spotify.com/episode/1d1JznZ9dB6M5lGfDSPJYn?si=ff48980f447940a3",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 12/28/2023 Duration: 8:50 Summary このエピソードでは、ダビデの生涯に焦点を当てて、彼が貧しい環境で苦難に直面しながらも信仰生活を送った様子が語られています。ダビデは羊飼いとして貧しい状況で孤独な生活を送り、神に対する信仰を深めていきました。彼は神を求...",
       "keyLearnings": [],
       "embedding2d": [
-        3.3684937807912934,
-        0.08564109918059293
+        3.0613802520412934,
+        -0.590191310626908
       ],
       "cluster": 0
     },
@@ -604,11 +802,11 @@
       "date": "2025-12-23",
       "url": "https://open.spotify.com/episode/0ebxhtMlvosW83V6iLnRsp?si=632f5656b5224588",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 12/19/2025 Duration: 51:14 Summary 今回の議論では、東京の都市計画やモビリティに関する興味深いテーマが取り上げられました。議論の中では、人が移動することによって道が形成されるようなモデルや、モビリティが都市の基盤となる重要性について考察されました。ま...",
       "keyLearnings": [],
       "embedding2d": [
-        2.89662591447951,
-        0.23329448273576198
+        4.574794846263976,
+        0.7829400164305731
       ],
       "cluster": 0
     },
@@ -622,11 +820,11 @@
       "date": "2025-12-21",
       "url": "https://open.spotify.com/episode/1dus85Gg8BNkUnJYT609Eq?si=e61c92a378ab4f4b",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 12/03/2025 Duration: 26:50 Summary この会話は、20歳の現在と20歳の過去を比較しつつ、将来について思索する様子を描いています。話の中で、自己の進むべき道や希望、家族への期待、抵抗力への対処などが語られ、多様性や挑戦に対する理解と受容の重要性が強調さ...",
       "keyLearnings": [],
       "embedding2d": [
-        4.901499042211638,
-        -1.1260559397555132
+        2.9007144104308944,
+        0.6412700227503108
       ],
       "cluster": 0
     },
@@ -640,11 +838,11 @@
       "date": "2025-12-17",
       "url": "https://open.spotify.com/episode/47txLShMhtgGGJZz1PnMqC?si=a4e3d5eba21640a6",
       "durationMinutes": 50.0123,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 12/17/2025 Duration: 50:00 Summary 今回の議論は、日本の漫画やアニメ業界に着目しつつ、作品がどのように生まれ、育てられていくかについて探求していました。漫画やアニメのストーリーテリングにおける日本独自の要素や、海外との違いも話題に挙がりました。また、...",
       "keyLearnings": [],
       "embedding2d": [
-        3.1627511162726054,
-        0.21120415949006932
+        4.382786125922914,
+        0.5486933250207858
       ],
       "cluster": 0
     },
@@ -658,11 +856,11 @@
       "date": "2025-12-01",
       "url": "https://open.spotify.com/episode/1sTmDkaikwAhpworeahqQK?si=aac7e3b972a6479b",
       "durationMinutes": 26.928166666666666,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 12/01/2025 Duration: 26:55 Summary 今回は、講師の渡川さんが、ヤフーへの転職やアカデミックな世界への復帰についてのエピソードを共有しています。東京都の副知事から社長やCSOとして活躍し、データサイエンティストの重要性を認識し、データサイエンティスト協...",
       "keyLearnings": [],
       "embedding2d": [
-        4.407277408066664,
-        -0.19289690835229512
+        5.002825115462553,
+        -0.6716694615778982
       ],
       "cluster": 0
     },
@@ -676,11 +874,11 @@
       "date": "2025-11-04",
       "url": "https://open.spotify.com/episode/104wS35rObyEHPqz6alZhM?si=530d5ab8e76e43bc",
       "durationMinutes": 3455,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 11/04/2025 Duration: 57:35 Summary 今回の対話では、地方創生や地域活性化について議論が行われています。異なるバックグラウンドを持つ4人が登場し、地方の課題や取り組みについて意見交換を行っています。具体的には、地域の人材育成や経済的支援、企業や行政の協...",
       "keyLearnings": [],
       "embedding2d": [
-        4.579338667884858,
-        0.8076195237378985
+        4.332643540047556,
+        -0.9855058073003801
       ],
       "cluster": 0
     },
@@ -694,11 +892,11 @@
       "date": "2025-11-16",
       "url": "https://open.spotify.com/episode/35Aa7R3adOXsRODqPv2gmb?si=-qi02myCTVmAo0uMCtyQIQ",
       "durationMinutes": 4773,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 11/16/2025 Duration: 79:33 Summary In this episode, the speaker is discussing the importance of a human-centered approach to AI development an...",
       "keyLearnings": [],
       "embedding2d": [
-        3.137914771651702,
-        0.9813664170145133
+        4.225052399303939,
+        0.4793649763688481
       ],
       "cluster": 0
     },
@@ -712,11 +910,11 @@
       "date": "2023-03-12",
       "url": "https://open.spotify.com/episode/4ntgV1wkytm5dxqsug72Hi?si=6d9dca57d9e04d6d",
       "durationMinutes": 1553,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 03/12/2023 Duration: 25:53 Summary 要約の生成に失敗しました Timestamps タイムスタンプの生成に失敗しました Transcript 文字起こしに失敗しました English Summary *Translation unavailable*...",
       "keyLearnings": [],
       "embedding2d": [
-        3.015228581012524,
-        -0.8701444293324545
+        4.810641873094707,
+        -0.11246639324415342
       ],
       "cluster": 0
     },
@@ -730,11 +928,11 @@
       "date": "2025-11-09",
       "url": "https://open.spotify.com/episode/2AtqPWXLqw5J8iVhkWoXpi?si=6f6a0eca34d148f6",
       "durationMinutes": 1358,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 11/09/2025 Duration: 22:38 Summary この会話は、ビジネスにおいて売り手と買い手の相性やアプローチについて議論しています。未来からのバックキャスティングや自己認識の重要性が強調され、売りやすいタイプやその逆のタイプについても言及されています。さらに、営...",
       "keyLearnings": [],
       "embedding2d": [
-        2.9677398906496526,
-        -0.34750965938518674
+        4.230753445331844,
+        -0.04127924026724261
       ],
       "cluster": 0
     },
@@ -748,11 +946,11 @@
       "date": "2025-11-12",
       "url": "https://open.spotify.com/episode/6mLCbh2PJiiYnIyKSLI464?si=1e7b54d2c8d444b5",
       "durationMinutes": 1727,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 11/12/2025 Duration: 28:47 Summary In a conversation about design thinking and the evolving landscape of design engineering, the speakers disc...",
       "keyLearnings": [],
       "embedding2d": [
-        3.3616679684936677,
-        -0.25726161480700843
+        3.6508346164569843,
+        0.056245543491800554
       ],
       "cluster": 0
     },
@@ -766,11 +964,11 @@
       "date": "2025-11-05",
       "url": "https://open.spotify.com/episode/7rOJExTdk6pRDZr7pFKAvp?si=f75c18b3293142f9",
       "durationMinutes": 3399,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 11/05/2025 Duration: 56:39 Summary The speaker discusses the role of designers in balancing aesthetics and usability through the example of Br...",
       "keyLearnings": [],
       "embedding2d": [
-        4.728052004358388,
-        0.3064984456997717
+        4.189489733608924,
+        0.700725624479235
       ],
       "cluster": 0
     },
@@ -784,11 +982,11 @@
       "date": "2025-09-28",
       "url": "https://open.spotify.com/episode/31yLX95GkRdQInVsh21M3p?si=b6485a8544504541",
       "durationMinutes": 2504,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 09/28/2025 Duration: 41:44 Summary このエピソードでは、会話を続けるために必要なコンテキスト理解技術について議論されました。人間とAIの違いや、AIを使用した会話の流れの検出、GPT-5やLLMモデルの性能、音声エージェントの課題などが取り上げられま...",
       "keyLearnings": [],
       "embedding2d": [
-        3.507426530706691,
-        1.3009086421255316
+        4.133895734927034,
+        -0.024382354920099256
       ],
       "cluster": 0
     },
@@ -802,11 +1000,11 @@
       "date": "2025-09-14",
       "url": "https://open.spotify.com/episode/5R1YwPmhFBJ0Hku2QUx31i?si=18c8043166dc4791",
       "durationMinutes": 2421,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 09/14/2025 Duration: 40:21 Summary このポッドキャストの会話では、コーディングにおいてコーディングガイドブックや書籍の影響、指示の効果、GPT-5の特性、そして最適化の重要性が話題に上がっています。特に、GPT-5のリーズニングエフォートやコード改善...",
       "keyLearnings": [],
       "embedding2d": [
-        2.692602631836112,
-        0.4264756904576805
+        4.671141421155083,
+        -0.25054154285300284
       ],
       "cluster": 0
     },
@@ -820,11 +1018,11 @@
       "date": "2025-07-11",
       "url": "https://open.spotify.com/episode/79o1KstPHjJPjrmJHgLgOX?si=8hjrSDrcQnexOECK8vX4iw&context=spotify%3Aplaylist%3A37i9dQZF1FgnTBfUlzkeKt",
       "durationMinutes": 3439,
-      "summary": "",
+      "summary": "**Basic Information** Spotify URL: [Episode Link](https://open.spotify.com/episode/79o1KstPHjJPjrmJHgLgOX?si=8hjrSDrcQnexOECK8vX4iw&context=spotify%3Aplaylist%3A37i9dQZF1FgnTBfUlzkeKt) Release Date: 0...",
       "keyLearnings": [],
       "embedding2d": [
-        3.9582539134745076,
-        0.9813571847917208
+        4.569322049452363,
+        0.7485581340094709
       ],
       "cluster": 0
     },
@@ -838,11 +1036,11 @@
       "date": "2025-10-15",
       "url": "https://open.spotify.com/episode/0uEIs0HtRnl6OG2KzAfGcF?si=9457e02689bd4078",
       "durationMinutes": 1625,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 10/15/2025 Duration: 27:05 Summary 今回のポッドキャストでは、AIを活用した開発手法であるSDD（スペックドリブンディベロップメント）について、なくねさんと深井さんがディスカッションをしています。SDDは、AIを使用して仕様を明確に定義し、開発プロセ...",
       "keyLearnings": [],
       "embedding2d": [
-        5.318676017553955,
-        0.9527276858712537
+        2.9565981670514168,
+        -0.12702888581728788
       ],
       "cluster": 0
     },
@@ -858,11 +1056,11 @@
       "date": "2025-10-31",
       "url": "https://open.spotify.com/episode/4M33TjLvsHFWo8FXKMUA5k?si=0e762c181b7a4671",
       "durationMinutes": 9335,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 10/31/2025 Duration: 93:35 Summary In this segment of the conversation, the speaker delves into the concept of scaling up fusion reactors like...",
       "keyLearnings": [],
       "embedding2d": [
-        0.5279658890300001,
-        3.5863868300120996
+        1.7785994460499122,
+        3.8046060667781574
       ],
       "cluster": 2
     },
@@ -878,11 +1076,11 @@
       "date": "2022-05-19",
       "url": "https://open.spotify.com/episode/31NbOUWJVJ2C4Tag84RPnH",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL： 公開日：2022-05-19 長さ：24:58 LISTEN URL：：エピソードリンク 要約 このエピソードでは、スティームニュースからの情報を提供する音声が紹介されています。話の内容には、テッドカンファレンスや日本語での文章構成に関する興味深い考察が含まれています。スティームアンカンファレンスやテッドXなど、異なるスタイルのカンファレンスも言及されています。...",
       "keyLearnings": [],
       "embedding2d": [
-        -0.8914301372482036,
-        4.511129769900618
+        -1.267207308801387,
+        4.5434843003811745
       ],
       "cluster": 3
     },
@@ -898,11 +1096,11 @@
       "date": "2022-05-14",
       "url": "https://open.spotify.com/episode/0Qgg3v4OWyyJaYUL43qqAG",
       "durationMinutes": 2458,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：なし 公開日：2022年05月14日 長さ：24:58 LISTEN URL：エピソードリンク 要約 スティームニュースのポッドキャストでは、科学、技術、工学、アート、数学に関する興味深い話題を紹介しています。このエピソードでは、アイルランド王国の貴族であるジェームズ・フィッツジェラルドの娘であるシャーロット・メアリー・ガートルード・フィッツジェラルドに焦点を当て...",
       "keyLearnings": [],
       "embedding2d": [
-        1.8028735809089595,
-        3.4945281565007646
+        1.3232416920720556,
+        4.14341536885414
       ],
       "cluster": 2
     },
@@ -918,11 +1116,11 @@
       "date": "2022-03-26",
       "url": "https://open.spotify.com/episode/6NMBSzPPZHnSi8YKbtYJq0",
       "durationMinutes": 2458,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2022年03月26日 長さ：24:58 LISTEN URL： 要約 シュレディンガー博士の波動力学や「シュレディンガーの猫」という有名な実験に焦点を当てたエピソードが紹介されます。シュレディンガー博士は独創的な研究者であり、物理学に多大な貢献をしました。彼の物理学上の苦悩や私生活の複雑な人間関係に触れられています。1933年にナチスの...",
       "keyLearnings": [],
       "embedding2d": [
-        0.01336000805851989,
-        3.0714887212505597
+        -1.310699349707908,
+        4.1779590486026175
       ],
       "cluster": 3
     },
@@ -938,11 +1136,11 @@
       "date": "2022-02-28",
       "url": "https://open.spotify.com/episode/6Xm31lWZb433uOE9DaSKBR",
       "durationMinutes": 2458,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：なし 公開日：2022年02月28日 長さ：24:58 LISTEN URL：エピソードリンク 要約 スティームニュースのポッドキャストでは、古代ギリシャの数学者エラトステネスと工学者アルキメデスに焦点を当てています。エラトステネスは地球の周囲を正確に計算する方法を編み出し、その結果は現代の地球の周長とほぼ一致していました。彼の知識と直感力を示す素晴らしい業績です...",
       "keyLearnings": [],
       "embedding2d": [
-        0.7223471584232519,
-        3.7313868778441295
+        2.3589676210904256,
+        4.809709136402453
       ],
       "cluster": 2
     },
@@ -956,11 +1154,11 @@
       "date": "2025-05-13",
       "url": "https://open.spotify.com/episode/7mRYyGdC8bDpqd4KMA6WKk?si=782a07392e1b4db3",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "社会課題に対するVisionから考え行動する人が次の人材 要約 このテクストでは、デザインエンジニアリングという独自の視点で、テクノロジー、デザイン、ビジネスの関係について議論されています。デザインエンジニアリングは、テクノロジーの進化と変化において重要な役割を果たす可能性があり、新たな学問分野や職種の可能性が広がっています。デザインエンジニアリングには、デザイン、工学、ビジネスの要素が組み合わさ...",
       "keyLearnings": [],
       "embedding2d": [
-        3.1996847642787487,
-        0.06759024022606458
+        3.1444335994948527,
+        0.8628328982124228
       ],
       "cluster": 0
     },
@@ -976,11 +1174,11 @@
       "date": "2023-04-27",
       "url": "https://open.spotify.com/episode/2ttPwOYrtDhVg50nRZLjYV?si=CNSYJlB2RhS8goTWW_OIFA&context=spotify%3Aepisode%3A2ttPwOYrtDhVg50nRZLjYV&t=6",
       "durationMinutes": 2458,
-      "summary": "",
+      "summary": "🙋‍♀️ 6:38 エピソード内でいちさんは犬も猫も嫌い「I do not like dogs and cats」と仰っていましたが、ChatGPT話してみたところ以下の4つが同じ意味だそうです。ややこしい。 I do not like dogs and cats. I do not like both dogs and cats. I do not like either dogs or ca...",
       "keyLearnings": [],
       "embedding2d": [
-        -0.3020980412826095,
-        3.41024365163813
+        -0.9517744697107049,
+        4.092772093813946
       ],
       "cluster": 3
     },
@@ -996,11 +1194,11 @@
       "date": "2019-08-05",
       "url": "https://open.spotify.com/episode/2Z6cuiHJioCDn0QedMmRWS?si=852e4d18802541a9",
       "durationMinutes": 2745,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2019年08月05日 長さ：27:45 要約 In this episode of the Takram podcast, Sakurai from Takram and Nishiuchi from Data Vehikuru delve into the challenges of BI tools and the importan...",
       "keyLearnings": [],
       "embedding2d": [
-        -3.8554049196354594,
-        1.7460265195822653
+        -2.3981545364753045,
+        3.4650934490138967
       ],
       "cluster": 4
     },
@@ -1016,11 +1214,11 @@
       "date": "2019-07-29",
       "url": "https://open.spotify.com/episode/2g9UjTfExhLIY5eHcFjEG7?si=fbee720411134a1a",
       "durationMinutes": 2826,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2019年07月29日 長さ：28:03 要約 このポッドキャストでは、リーサスプロジェクトにおいてデータの可視化とデータ活用についてデザイナーが取り組んでいる過程が探求されています。特許の蓄積や地域経済の成長とデータの可視化の関係、トップダウンとボトムアップのアプローチの重要性に焦点が当てられています。デザイナーがデータを理解し、視覚化...",
       "keyLearnings": [],
       "embedding2d": [
-        -2.703197066338098,
-        3.047662793189689
+        -3.474761650734455,
+        2.2760326692176474
       ],
       "cluster": 4
     },
@@ -1036,11 +1234,11 @@
       "date": "2019-07-22",
       "url": "https://open.spotify.com/episode/5iY0t5ZFjeZve2ifWhDo64?si=a5cec79880c44031",
       "durationMinutes": 2745,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2019年07月22日 長さ：27:45 要約 グラフやデータ可視化において、多くの人が最初は興奮するものの、探索的データ分析を続けるとどこまで掘り下げていいかわからなくなるという問題があります。データビジュアライゼーションにおける課題と発展に焦点を当てた桜井氏とデータビークルの西内氏の議論では、BIツールの普及や位置情報を活用したデータ...",
       "keyLearnings": [],
       "embedding2d": [
-        -3.6638586750555664,
-        1.5052996362599862
+        -3.746202757821789,
+        1.7192465030563189
       ],
       "cluster": 4
     },
@@ -1056,11 +1254,11 @@
       "date": "2024-11-06",
       "url": "https://open.spotify.com/episode/6ih9Tox5iYkrlRBfpixYrD?si=38b472a22b99415a",
       "durationMinutes": 2826,
-      "summary": "",
+      "summary": "いちさんが取り上げていらっしゃった記事",
       "keyLearnings": [],
       "embedding2d": [
-        2.335875045271696,
-        3.6029201481337694
+        0.2975207657674518,
+        3.852709973633875
       ],
       "cluster": 2
     },
@@ -1079,8 +1277,8 @@
       "summary": "",
       "keyLearnings": [],
       "embedding2d": [
-        -0.4450668166111236,
-        3.945678074448313
+        -0.9699393523875645,
+        3.6940078587011502
       ],
       "cluster": 3
     },
@@ -1096,11 +1294,11 @@
       "date": "2020-04-06",
       "url": "https://open.spotify.com/episode/6dQaKaT6HYTFv8qyKX8P9o?si=c5cb6bd72a414d61",
       "durationMinutes": 3042,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 04/06/2020 Duration: 30:42 Summary The team discusses the concept of humanizing data interactions through projects like \"OTO,\" which aims to p...",
       "keyLearnings": [],
       "embedding2d": [
-        -3.243811757730247,
-        2.7680283093201328
+        -3.6679783995696305,
+        2.5598944128329437
       ],
       "cluster": 4
     },
@@ -1116,11 +1314,11 @@
       "date": "2025-01-10",
       "url": "https://open.spotify.com/episode/3SO1dBFHK2mt2kQrPYRFVD?si=deb4cf1e67be487b",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2025年01月10日 長さ：23:47 LISTEN URL： 要約 今回のトークでは、渡り鳥のウズラや、ウズラについての興味深い会話が展開されました。また、鶏や鳥類について、身体の軽量化や進化に関する話題が取り上げられました。特に、鳥が進化の過程で歯を失い、代わりに石を消化に利用する「スナギモ」を持つ理由や、飛行中に腸を失う渡り鳥の振...",
       "keyLearnings": [],
       "embedding2d": [
-        -0.7119422277102843,
-        3.126136488702822
+        -0.03463957959725111,
+        4.592684958428201
       ],
       "cluster": 3
     },
@@ -1134,11 +1332,11 @@
       "date": "2025-06-09",
       "url": "https://open.spotify.com/episode/2USAKqCNhHvg9cFzlotOk0?si=c4f65ed377344c27&nd=1&dlsi=93044a422bee4f33",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 06/01/2025 Duration: 63:43 Summary この会話では、AI技術を活用した経営管理や業務効率化について議論が展開されています。参加者たちは、AIを用いた自動化やデータ分析によって、将来の予測や業務効率を向上させる方法について話し合っています。特に、AIを活...",
       "keyLearnings": [],
       "embedding2d": [
-        4.331963648056982,
-        0.919974311003697
+        4.635121835618616,
+        0.16907108405331017
       ],
       "cluster": 0
     },
@@ -1152,11 +1350,11 @@
       "date": "2025-06-08",
       "url": "https://open.spotify.com/episode/3JQjaaIn5wMUdC3IHeYg5y",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 10/24/2024 Duration: 49:38 Summary The speaker in this conversation reflects on the impact of artificial intelligence (AI) on creativity, part...",
       "keyLearnings": [],
       "embedding2d": [
-        3.096458306006078,
-        0.09305650972120055
+        2.9863099636742034,
+        -0.47216844726238927
       ],
       "cluster": 0
     },
@@ -1173,8 +1371,8 @@
       "summary": "",
       "keyLearnings": [],
       "embedding2d": [
-        3.172086423640704,
-        -0.39504308704240054
+        4.613224875265855,
+        -0.09654697942150067
       ],
       "cluster": 0
     },
@@ -1193,8 +1391,8 @@
       "summary": "",
       "keyLearnings": [],
       "embedding2d": [
-        2.485493661098145,
-        -0.1309045358768929
+        4.037307178233526,
+        -0.687689371847372
       ],
       "cluster": 0
     },
@@ -1210,11 +1408,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/6ugefAMuB4MPxQdgzlsBAI?si=1b0bfa12e5464034",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2024年12月22日 長さ：26:00 要約 目次 文字起こし GTA VOL.2 主題 住職 僕のね、憧れの仕事って住職だった。 そうなんですか? 憧れの仕事の一つが住職。 はい、どうして? 良さそうだ。 いや、本当に別にあなたがいらっしゃったから、あれじゃなくて、 僕ね、憧れてたのは仕事が二つあったよね。 一つが学校の先生で、 もう...",
       "keyLearnings": [],
       "embedding2d": [
-        4.214139667454969,
-        0.008136077164923233
+        3.006003697913823,
+        -0.588909514632743
       ],
       "cluster": 0
     },
@@ -1230,11 +1428,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/20zb7nilFPEUZ2d9fgStNY",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2025年02月19日 長さ：24:10 要約 In this podcast episode, evolutionary ecologist Benito Wainwright sheds light on the significance of electrostatic forces in ecological interactio...",
       "keyLearnings": [],
       "embedding2d": [
-        2.978168971132888,
-        2.917208834069729
+        3.2574321658487553,
+        0.8920789066237719
       ],
       "cluster": 1
     },
@@ -1250,11 +1448,11 @@
       "date": "2025-03-17",
       "url": "https://open.spotify.com/episode/1JM358q02vARoDGtSot6Pv?si=41868c263ecf420d&nd=1&dlsi=15d3005980944002",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "ytから文字起こし 文字起こし ではよろしくお願いします。よろしくお願いします。今日はもちろん生成AIについてもそうなんですけど、経営についてとか組織についてもちょっと幅広く色々伺いたいと思います。 はい。今日の日付は3月11日で、もしかするとこれ配信するタイミングでは、またバージョンアップしてるかもしれないんですけど、ちょうどソネットの3.7とチャットgpdの4.5ですかねが出てきて松本さんはそ...",
       "keyLearnings": [],
       "embedding2d": [
-        1.7803431936091698,
-        4.389501448557922
+        0.6141722924438362,
+        2.4319537524082704
       ],
       "cluster": 2
     },
@@ -1270,11 +1468,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/3pRi3ZRyfoh9xMpf8nFWc7",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2025年02月18日 長さ：9:06 要約 In this episode, the ongoing saga surrounding TikTok's presence in the US is discussed. Initially, TikTok faced challenges with the US government o...",
       "keyLearnings": [],
       "embedding2d": [
-        -5.514695964053561,
-        -0.45513719960375737
+        -4.040760525946419,
+        0.7209682839024595
       ],
       "cluster": 5
     },
@@ -1290,11 +1488,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/7yvaglrG91dR2f5WKuUr7c?si=MmDrhnFpTQ2eDMTf8BTkMA",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2025年01月10日 長さ：35:05 要約 The speaker in this podcast is discussing the importance of refining and measuring the impact of product solutions in the context of Jobs-to-be-Do...",
       "keyLearnings": [],
       "embedding2d": [
-        -2.672672701535343,
-        1.3225193108012807
+        -3.0382695541010394,
+        1.2479900000467525
       ],
       "cluster": 4
     },
@@ -1310,11 +1508,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/6GKrFu4MSVzl7VJEIZir5U",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2024年12月27日 長さ：41:51 LISTEN URL：なし 要約 この対話は、歴史的な革命から現代のデジタル革命に至るまでの技術革新について議論しています。農業革命や産業革命がどのように社会を変え、新たなリーダーシップを生み出したかに加えて、デジタル革命が次のステップとして多様な豊かさを提唱する可能性に焦点を当てています。経済合...",
       "keyLearnings": [],
       "embedding2d": [
-        0.8742209547362036,
-        2.9284383866821546
+        0.9178993322123323,
+        3.77382445297314
       ],
       "cluster": 2
     },
@@ -1330,11 +1528,11 @@
       "date": "2024-06-30",
       "url": "https://open.spotify.com/episode/7vjCLKCNjqcsucjef7nrLt?si=maIe_3c9TBCU9LjUaCw1pg&nd=1&dlsi=5dc70b2bd0c74bf3",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2024年06月30日 長さ：33:34 LISTEN URL： 要約 「海外で働く人ラジオ」のエピソードでは、日本人が海外での就労経験や海外移住で学んだことについて語られています。今回のエピソードでは、TOEICスコアや英語力の重要性、外資系企業での就職、ビザや永住権取得に関するデータなどについて話されています。インタビューや統計データ...",
       "keyLearnings": [],
       "embedding2d": [
-        -2.351643230285888,
-        -1.7603686501672313
+        -2.815617662571555,
+        -1.1963756156408916
       ],
       "cluster": 6
     },
@@ -1343,18 +1541,18 @@
       "title": "#303 私のAIユースケース",
       "podcast": "Zero Topic - ゼロトピック - ",
       "podcastCover": "https://i.scdn.co/image/ab67656300005f1fd4ed3b005b75468bf3a405cd",
-      "category": "Al",
+      "category": "AI",
       "tags": [
-        "Al"
+        "AI"
       ],
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/0eLEXjkSIMlmG49bSqBh1M",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2025年02月26日 長さ：17:27 要約 今回の会話は、ゼロトピックさんが最近利用しているAIツールについて詳しく説明しています。彼はクロードを活用してグラフや図を作成し、PowerPlayを使って市場調査や事業アイデアを探求しています。また、Notebook LMを使って社内プロジェクトの進捗管理や議事録作成を行っている様子が伝え...",
       "keyLearnings": [],
       "embedding2d": [
-        -2.274528757705264,
-        -4.770948354309271
+        -1.1452124370877714,
+        -5.175156395890278
       ],
       "cluster": 7
     },
@@ -1370,11 +1568,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/4fZoyypKW2ylRm4eBShchC?si=17b1fd4505ae4b85&nd=1&dlsi=ae6f40d3afb0463b",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2025年01月13日 長さ：36:40 LISTEN URL： 要約 目次 文字起こし リスナーの皆さんこんにちは、ホストの田岡環奈です。 このポッドキャストは日本社会の固定観念を覆す、海外で働く20代の日本人女性をゲストに招き、海外進出を決めた背景や異国で働くことのリアル、将来のキャリアプラなどをお伺いしていく番組です。 それでは早速...",
       "keyLearnings": [],
       "embedding2d": [
-        -3.333113019584699,
-        -3.3026948514827463
+        -2.654853621440086,
+        -3.516503480810139
       ],
       "cluster": 6
     },
@@ -1390,11 +1588,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/7dwTuHAXIbdqkECuu0scAh",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "AIによって翻訳者が完全にリプレイスされない理由として、以下の重要な点が挙げられます： 重要性の高い翻訳では人間の確認が必須です： 一貫性とトーンの維持が必要： ハイブリッドアプローチの採用： 翻訳需要の増加： 基本情報 Spotify URL：エピソードリンク 公開日：2024年12月30日 長さ：19:33 LISTEN URL： 要約 In this conversation about A...",
       "keyLearnings": [],
       "embedding2d": [
-        1.4209773992877939,
-        3.91478305949552
+        0.3343840228319166,
+        4.517038362696309
       ],
       "cluster": 2
     },
@@ -1413,8 +1611,8 @@
       "summary": "",
       "keyLearnings": [],
       "embedding2d": [
-        -3.693489795775,
-        -1.5298521689616282
+        -1.9999729818992078,
+        -1.8518500761420569
       ],
       "cluster": 6
     },
@@ -1430,11 +1628,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/0INAjtBu5BiVfW2krMlpur",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2025年03月02日 長さ：36:56 要約 目次 文字起こし At this point, I'm not actually doing anything without AI. The first thing that happens is I have social posts going out on LinkedIn, Twi...",
       "keyLearnings": [],
       "embedding2d": [
-        1.3158604146947335,
-        2.7705932942512534
+        2.057485065170367,
+        3.415633632899083
       ],
       "cluster": 2
     },
@@ -1450,11 +1648,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/0PYNYUrGpQDuDuuTUDR6Mc?si=6edd805bda5a4fd0",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2024年12月11日 長さ：32:52 LISTEN URL： 要約 In this segment of the podcast, the speaker discusses the detrimental effects of conditional acceptance on the development of perfecti...",
       "keyLearnings": [],
       "embedding2d": [
-        2.282633878497288,
-        -4.2792124721985765
+        0.6786566275506688,
+        -4.2450410267745715
       ],
       "cluster": 8
     },
@@ -1470,11 +1668,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/1xzgP5dtsaFOBebbLlLtWI",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Takeaway By 4o https://chatgpt.com/c/67e93cbd-d2a4-8011-a238-205f6704648e 基本情報 Spotify URL：エピソードリンク 公開日：2025年02月26日 長さ：61:20 要約 The speakers in the conversation emphasize the importance of tailoring p...",
       "keyLearnings": [],
       "embedding2d": [
-        -2.987179336676913,
-        3.3309001959473923
+        -3.916235754953468,
+        2.4511775430139924
       ],
       "cluster": 4
     },
@@ -1483,18 +1681,18 @@
       "title": "#63 CatGPTの新しい画像生成が無料プランでも！4o Image Generationを試す",
       "podcast": "耳で学ぶAI、ロボシンク",
       "podcastCover": "https://i.scdn.co/image/ab67656300005f1fc469addd65eda0e4d28383af",
-      "category": "Al",
+      "category": "AI",
       "tags": [
-        "Al"
+        "AI"
       ],
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/1T3dA1FXNOaIDaSLHIwXLl",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 04/01/2025 Duration: 21:46 Summary 今回のトランスクリプトでは、イメージ生成技術について話題になっています。アニメにおけるジブリスタイルなどを生成する際の著作権や利用に関する変化が述べられています。特に「4イメージジェネレーション」の進化により、過去...",
       "keyLearnings": [],
       "embedding2d": [
-        -1.9640179006005611,
-        -4.412420887495139
+        -0.7899210837596947,
+        -3.3987983473118883
       ],
       "cluster": 7
     },
@@ -1510,11 +1708,11 @@
       "date": "2024-06-25",
       "url": "https://open.spotify.com/episode/6v7TudTR7wVoGyzvP9AxYN?si=2437000a4ab9460d&nd=1&dlsi=a864a8a3a7b840ab",
       "durationMinutes": 3936,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 06/25/2024 Duration: 39:36 Summary In this episode, two speakers discuss the importance of using one's own voice and perspective in creative w...",
       "keyLearnings": [],
       "embedding2d": [
-        0.9140869868031141,
-        3.9874195543324435
+        1.2866696787240617,
+        4.0645853890344945
       ],
       "cluster": 2
     },
@@ -1528,11 +1726,11 @@
       "date": "2025-05-24",
       "url": "https://open.spotify.com/episode/4xO2ElEhpaq0nX2MLoYzmb?si=jqrEjiTwT2WXjt-hj-jvAw",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Images Chapters 00:00 AI 2027 00:26 Mid 2025: Stumbling Agents 02:07 Late 2025: The World's Most Expensive AI 07:31 Early 2026: Coding Automation 10:25 Mid 2026: China Wakes Up 13:28 Late 2026: AI Tak...",
       "keyLearnings": [],
       "embedding2d": [
-        3.840046019088926,
-        -1.1136693628710106
+        3.631588935663865,
+        0.4345859093692176
       ],
       "cluster": 0
     },
@@ -1546,11 +1744,11 @@
       "date": "2025-06-20",
       "url": "https://open.spotify.com/episode/6QoHx861YSSBWslHJRwcXV",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 01/14/2025 Duration: 52:38 Summary In this conversation, the speaker explores the concept of plants and their intelligence, challenging the tr...",
       "keyLearnings": [],
       "embedding2d": [
-        4.539262528572545,
-        -0.7780274854442438
+        2.4690409587366204,
+        -0.8944375138605354
       ],
       "cluster": 0
     },
@@ -1564,11 +1762,11 @@
       "date": "2025-06-21",
       "url": "https://open.spotify.com/episode/62JVirQOTxfyiytmuAGgoI",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "https://chatgpt.com/c/685694c6-21f0-8002-8b5f-118725f1db0f Basic Information Spotify URL: Episode Link Release Date: 03/21/2025 Duration: 41:31 Summary In this insightful discussion, the speakers delv...",
       "keyLearnings": [],
       "embedding2d": [
-        4.4675292880173805,
-        -1.283241230983918
+        2.879954570453668,
+        1.2641144579047072
       ],
       "cluster": 0
     },
@@ -1582,11 +1780,11 @@
       "date": "2025-10-17",
       "url": "https://open.spotify.com/episode/3iIYVmmhXwh3fOumypWVpC",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 10/17/2025 Duration: 145:19 Summary The speaker reflects on the importance of breaking down complex concepts for better understanding and effe...",
       "keyLearnings": [],
       "embedding2d": [
-        4.19012188491324,
-        -0.8934872305048729
+        4.883499507338472,
+        -0.48490084603112593
       ],
       "cluster": 0
     },
@@ -1600,11 +1798,11 @@
       "date": "2025-10-29",
       "url": "https://open.spotify.com/episode/10emmCgr2WLnKVfi34BCON?si=a6a0582d4e8641f0",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 10/27/2025 Duration: 59:09 Summary この会話は、エージェントスキルとMCP（Metaprogramming Control Program）についての議論が行われています。エージェントスキルは、メタ情報を使って必要なスキルを呼び出すための機能であり、...",
       "keyLearnings": [],
       "embedding2d": [
-        3.2603957761962294,
-        0.9046893803340598
+        4.890649742947075,
+        -0.9457179296758426
       ],
       "cluster": 0
     },
@@ -1618,11 +1816,11 @@
       "date": "2025-07-12",
       "url": "https://open.spotify.com/episode/79o1KstPHjJPjrmJHgLgOX",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 07/11/2025 Duration: 57:19 Summary このトランスクリプトでは、AIの学習方法について熱心に議論されています。会話の中で、4-Oと呼ばれるAIの機能やマルチモーダルな学習に焦点が当てられ、画像生成における機械学習アルゴリズムが探求されています。さらに、...",
       "keyLearnings": [],
       "embedding2d": [
-        2.8090927710201288,
-        0.3520905875840427
+        2.916281405891139,
+        -0.24210546190264126
       ],
       "cluster": 0
     },
@@ -1636,11 +1834,11 @@
       "date": "2025-08-08",
       "url": "https://open.spotify.com/episode/7x3d8KHQMnwDofjLpwV6jC",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 08/06/2025 Duration: 29:27 Summary この会話では、AIや新しいテクノロジーが徐々に人間の側に情報を提供する可能性や、開発業界での新しい取り組みについて話し合われています。デザインやバージョン管理などの課題について言及され、適切なドキュメント整備や進め...",
       "keyLearnings": [],
       "embedding2d": [
-        4.499749655061071,
-        0.5056300608999738
+        4.16626898117836,
+        0.07961650600845749
       ],
       "cluster": 0
     },
@@ -1654,11 +1852,11 @@
       "date": "2025-09-07",
       "url": "https://open.spotify.com/episode/5ENZm2AU7PwUBRY1yxrv6P",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 05/01/2025 Duration: 12:22 Summary このトランスクリプションでは、外国人が日本の観光地を訪れる際のルールや経験について議論されています。日本の観光地では、チケットの取得方法や観光客の流れを管理するシステムが重要だと述べられています。海外と日本の文化や...",
       "keyLearnings": [],
       "embedding2d": [
-        3.963715450879249,
-        -0.10233243796432967
+        4.199867361070908,
+        0.12894421619475305
       ],
       "cluster": 0
     },
@@ -1674,11 +1872,11 @@
       "date": "2025-10-03",
       "url": "https://open.spotify.com/episode/0qbsUzkkL2XWIXpp0k6En0?context=spotify%3Aplaylist%3A37i9dQZF1FgnTBfUlzkeKt",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 11/07/2021 Duration: 23:18 Summary 今回のエピソードでは、ハードウェアのビジネスモデルをサブスクリプション形式に転換する際の考え方や、ベンチャーキャピタルから資金調達をする場合の4つのビジネスモデルタイプなどについて話が展開されました。更に、マーケテ...",
       "keyLearnings": [],
       "embedding2d": [
-        3.1640572493750097,
-        -3.1111623032731153
+        3.8009276332807556,
+        -1.9758107155838274
       ],
       "cluster": 9
     },
@@ -1694,11 +1892,11 @@
       "date": "2025-10-13",
       "url": "https://open.spotify.com/episode/6sxdRO8uk6XWVbWzvPdNsu?si=aKJ-DKd1T8y45M7NU5ss-w",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2023年6月4日 長さ：24:11 LISTEN URL： 要約 今回のエピソードでは、コミュニケーションにおける「聞く」技術の重要性について深掘りします。話はOpenAIのCEOサム・アルトマンの弟、ジャック・アルトマンがVCとして短期間で巨額の資金調達に成功した話題から始まります。そこから、言葉の裏にある「意図」を汲み取ることの難し...",
       "keyLearnings": [],
       "embedding2d": [
-        2.6509517747320084,
-        -2.579399296280121
+        3.170409111989926,
+        -1.4508839558164217
       ],
       "cluster": 9
     },
@@ -1714,11 +1912,11 @@
       "date": "2024-08-05",
       "url": "https://open.spotify.com/episode/1oU1xyQd2jvZAAp8gkL6IY?si=591f38c7dbe147a1",
       "durationMinutes": 2708,
-      "summary": "",
+      "summary": "33も https://open.spotify.com/episode/63td3AjkhrUarGI9VOE4hr?si=89073746d966461d うまたん　https://m.youtube.com/watch?v=I7jiPkYUjGo&list=WL&index=6&pp=gAQBiAQB このエピソードは、確率とベイズの定理について語られています。話の主人公は、インフルエンザの...",
       "keyLearnings": [],
       "embedding2d": [
-        1.3714999556371543,
-        4.020057890068088
+        0.3332907879177577,
+        3.762880775402696
       ],
       "cluster": 2
     },
@@ -1732,11 +1930,11 @@
       "date": "2025-05-11",
       "url": "https://open.spotify.com/episode/4AtaMZXbK5dPzKNRsFMLAt?si=2hkH0uT9TQ6-mH9df5LdhQ",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 06/21/2022 Duration: 30:39 Summary このエピソードでは、バーチャルヒューマンのプロデューサーである森谷隆之さんがバーチャルキャラクターやアバターの個性、日本人の思考や自然信仰について語っています。森谷さんは、バーチャルヒューマンやCGの完成度に注目し...",
       "keyLearnings": [],
       "embedding2d": [
-        4.23832067454858,
-        -0.27476524600348234
+        2.6698624965156386,
+        -0.7617691284258195
       ],
       "cluster": 0
     },
@@ -1750,11 +1948,11 @@
       "date": "2025-05-11",
       "url": "https://open.spotify.com/episode/4UHVCh4YFfXql4iHld3Pzo?si=nvrZDKFtRNyGJynO60pZvw",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 06/21/2022 Duration: 35:00 Summary 今回の会話では、バーチャルヒューマンとして知られる森屋さんがバーチャルとネイチャーの関係、バーチャル空間とリアルな体験のバランス、バーチャル世界の感動点やプロデュースについて議論しています。彼は、バーチャル空間とリ...",
       "keyLearnings": [],
       "embedding2d": [
-        4.114595360160153,
-        -0.9191668290192674
+        4.303721706194036,
+        -0.3111167405050882
       ],
       "cluster": 0
     },
@@ -1770,11 +1968,11 @@
       "date": "2022-10-19",
       "url": "https://open.spotify.com/episode/5cFt3x66wezR5MsPboLSKB?si=be9da21c750e4b3d",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 10/19/2022 Duration: 33:29 Summary このエピソードは、孤独な岩から出現するコブや、火山の噴火と共に地表から飛び出してくる珍しい自然の造形物について議論しています。教材や道具などの廃棄物を美術館のような空間に配置し、人間の感覚に訴える魅力を持つ西野由悠...",
       "keyLearnings": [],
       "embedding2d": [
-        -3.199175059176276,
-        2.887703832182993
+        -4.231473448129956,
+        1.7745904903663248
       ],
       "cluster": 4
     },
@@ -1790,11 +1988,11 @@
       "date": "2025-09-28",
       "url": "https://open.spotify.com/episode/476MuKkkYRHKHbVeVDVwTW",
       "durationMinutes": 11100,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 09/14/2025 Duration: 71:54 Summary Timestamps Transcript There's this term everyone's hearing about, AEO. Answer engine optimizations. How do...",
       "keyLearnings": [],
       "embedding2d": [
-        0.9760062815590284,
-        4.76289874972649
+        0.6124118459023092,
+        4.914601228082497
       ],
       "cluster": 2
     },
@@ -1808,11 +2006,11 @@
       "date": "2025-08-15",
       "url": "https://open.spotify.com/episode/2apQeQ6OGH7Qc0QkDXCpRk",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 07/14/2025 Duration: 131:45 Summary In this podcast episode, Dr. Mark Berman discusses the benefits of incorporating nature into urban environ...",
       "keyLearnings": [],
       "embedding2d": [
-        3.8205275372583336,
-        -0.5827290255504001
+        4.842437250850984,
+        -0.22726851884136567
       ],
       "cluster": 0
     },
@@ -1826,11 +2024,11 @@
       "date": "2025-07-16",
       "url": "https://open.spotify.com/episode/3stjhOzfg5ZJc6VsKcqEos",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 07/16/2025 Duration: 116:26 要約 ニューヨークでワーケーション中のエンジニアを迎えて、AI開発ツール「Claude Code」を中心とした技術トークが展開されるエピソード。リモートワーク文化の変化から始まり、Claude Codeの実践的な活用方法、プログ...",
       "keyLearnings": [],
       "embedding2d": [
-        3.2218424157393817,
-        0.3478983079567735
+        4.6430908346586035,
+        0.7810566157386256
       ],
       "cluster": 0
     },
@@ -1844,11 +2042,11 @@
       "date": "2025-07-03",
       "url": "https://open.spotify.com/episode/1ic1jk7zQULWk8DAjJT3Rz",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 07/02/2025 Duration: 26:31 Summary 今回の会話では、リョッチさんとたっちゃんさんが、AIとの対話やプロンプトの作成について議論しています。彼らは、AIエージェントやルールファイルの整備などについて具体的な例を挙げながら、プロンプト作成の重要性や課題に...",
       "keyLearnings": [],
       "embedding2d": [
-        3.6074623630212272,
-        0.8056954129973697
+        3.5930883426826683,
+        -0.05798185086310795
       ],
       "cluster": 0
     },
@@ -1862,11 +2060,11 @@
       "date": "2025-07-03",
       "url": "https://open.spotify.com/episode/2RNZdfmqN01WXCQdt2d82h",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "要約 画像たち Basic Information Spotify URL: Episode Link Release Date: 06/19/2025 Duration: 39:31 Summary In this episode, the speaker discusses the concept of agents, which are human-like computers that i...",
       "keyLearnings": [],
       "embedding2d": [
-        3.3826809212346105,
-        0.15927136915184958
+        2.998963529316239,
+        -0.27749921282602774
       ],
       "cluster": 0
     },
@@ -1880,11 +2078,11 @@
       "date": "2025-06-19",
       "url": "https://open.spotify.com/episode/21LpNp95ToImvEslYkgRjn",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 10/05/2021 Duration: 72:33 Summary In this podcast episode, Dr. Kaylee Swift shares her experiences and challenges working with crows in urban...",
       "keyLearnings": [],
       "embedding2d": [
-        5.297585273825797,
-        0.26033875014900054
+        3.947640179209918,
+        1.0731531164207948
       ],
       "cluster": 0
     },
@@ -1900,11 +2098,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/10ZE6EVYQT1GB7Ke1MZhRC",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2025年02月08日 長さ：23:38 要約 ロンドンテクトクの桂馬勝馬がDatabase Internals Book Clubの第2回を振り返り、B3（B-木）について詳しく説明しています。エピソードでは、データベースにおけるB3の重要性や動作原理に焦点が当てられ、効率的なデータ管理のためにB3が果たす役割が強調されています。また、...",
       "keyLearnings": [],
       "embedding2d": [
-        1.4953041444716895,
-        4.540847396411147
+        1.4172904603507779,
+        2.309139148297457
       ],
       "cluster": 2
     },
@@ -1920,11 +2118,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/6cxt8E0x254rML2t2t5MCp",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "❌ Google AI Studioの英訳 基本情報 Spotify URL：エピソードリンク 公開日：2025年01月12日 長さ：36:41 LISTEN URL： 要約 このエピソードは、ある人物がAWSのハードウェアオフローディングについて話しています。彼は、AWSが新技術を取り入れる中で起きる変化を強調し、特にハードウェアオフローディングに焦点を当てています。AWSはそれに伴い、従来のソ...",
       "keyLearnings": [],
       "embedding2d": [
-        1.9458729654744302,
-        3.3677368956627585
+        1.659375208458584,
+        4.158032790533643
       ],
       "cluster": 2
     },
@@ -1940,11 +2138,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/7kLF8RBKfUACYwQrLo1l8y",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2025年02月26日 長さ：29:15 要約 デビンというエージェントについての議論が行われています。デビンは、仕事の効率化や個人開発者にとって有用なツールであり、エンジニアリング業務やプロダクトマネージャーの役割に変化をもたらす可能性があります。デビンを利用することで、作業の自動化や情報整理が可能となり、新しいサービスの展開が容易にな...",
       "keyLearnings": [],
       "embedding2d": [
-        1.718497399117029,
-        2.896087908189243
+        1.7724449864999927,
+        2.542464901069904
       ],
       "cluster": 2
     },
@@ -1960,11 +2158,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/2Fw1iwt31F6qLtyMz9vNZ2",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2025年01月29日 長さ：77:45 要約 目次 文字起こし Oh, hey, it's the guy at the library with that stack of survival books. Allie Ward, let's talk about your thyroid. Do you still have one?...",
       "keyLearnings": [],
       "embedding2d": [
-        3.1120034137556685,
-        3.250391800836235
+        3.059184445829904,
+        2.482902315361347
       ],
       "cluster": 1
     },
@@ -1980,11 +2178,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/309L427DqamRnrGiLGU791",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2025年02月02日 長さ：20:51 LISTEN URL： 要約 このエピソードでは、アメリカを拠点にする連続起業家の柴田陽さんと、ラジオパーソナリティーの関口舞さんが起業や独立を考えるリスナー向けに有益な情報を共有しています。話題は、新しい情報やトレンドを見つけることの重要性や、自分で一次情報を集めていく必要性についてです。陽さん...",
       "keyLearnings": [],
       "embedding2d": [
-        3.20064565557816,
-        -2.294714464913587
+        4.004083640425248,
+        -1.3063978607706836
       ],
       "cluster": 9
     },
@@ -2000,11 +2198,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/3z7h6v9brclKeZJBFsoURt",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "00:00 [Music intro] 00:01 デデデータ！ 00:02 [Music intro] 00:07 デデデータ、あきないデータの話。 00:09 この番組はデータ、デジタルそしてDX、デジタルトランスフォーメーションを軸に世の中のデータ活用、デジタル推進、そしてDXに取り組む全ての人に新しい気づきをお届けします。 00:19 メインパーソナリティのデータフラクトの久保村です。 0...",
       "keyLearnings": [],
       "embedding2d": [
-        1.027148591364626,
-        4.8561661515175425
+        0.32140157297949024,
+        2.753510034708226
       ],
       "cluster": 2
     },
@@ -2020,11 +2218,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/4yFKTGoWRYBd1UMgVRAM0u",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "0:00 デデデータ 0:01 デデデータ 0:07 デデデータ 空きないデータの話し 0:09 この番組は、データ、デジタルそしてDX 0:12 デジタルトランスフォーメーションを軸に世の中のデータ活用、デジタル推進そしてDXに取り組む全ての人に新しい気づきをお届けします。 0:20 ペンパーサーイットのデータフラクトのく村はです。 0:22 この番組で相方を担当しますラジオパーソナリティのDJ...",
       "keyLearnings": [],
       "embedding2d": [
-        0.5769956651622312,
-        4.6862937915827665
+        1.6328233015956246,
+        2.4720983562872707
       ],
       "cluster": 2
     },
@@ -2040,11 +2238,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/5jU5SFCXTyJXlKom6cLf2L",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 04/06/2025 Duration: 40:40 Summary この会話は、プログラム言語や設定ファイル形式の進化について議論されています。PerlやSnow Editorの衰退、そしてYAMLとJSONの将来性について話が及んでいます。また、GRPCやTOMLなど、新しい技術...",
       "keyLearnings": [],
       "embedding2d": [
-        1.3335754568834177,
-        3.1449371000114303
+        1.4139009516787815,
+        5.062632241549345
       ],
       "cluster": 2
     },
@@ -2060,11 +2258,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/3NUsKEpraIMJjkTUgCcsYN",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Oh hey, up top. So this is an encore version of one of my favorite recordings I've ever done. This was such an experience. やあ、冒頭でお知らせです。これは私が今までやった中で一番好きな録音の一つ、アンコール版です。これは本当にすごい体験でした。 I'm going to ta...",
       "keyLearnings": [],
       "embedding2d": [
-        2.731672996989063,
-        1.3546416010758486
+        4.2865161433599015,
+        2.9701027097280157
       ],
       "cluster": 1
     },
@@ -2080,11 +2278,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/7IN3PEw11HL9zZYzsQkKwi",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "00:00 [Music intro] 00:05 はい、というわけでメタ編も第3本目ですね。 00:08 そうですね。はい。よろしくお願いします。 00:10 今日はどんな話から行きますかね。 00:12 そうなんですけど、ちょっと最初にね、あの、ケンスにクレーム言いたいこと1個だけあって。 00:17 おお、クレーム。ほう。 00:18 はい。 00:19 あの、番外編の収録の時に、あの、Yo...",
       "keyLearnings": [],
       "embedding2d": [
-        1.0054735682931157,
-        3.5341644133076215
+        1.7415441470126296,
+        4.696904131934363
       ],
       "cluster": 2
     },
@@ -2100,11 +2298,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/3NUsKEpraIMJjkTUgCcsYN",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Oh hey, up top. So this is an encore version of one of my favorite recordings I've ever done. This was such an experience. やあ、冒頭でお知らせです。これは私が今までやった中で一番好きな録音の一つ、アンコール版です。これは本当にすごい体験でした。 I'm going to ta...",
       "keyLearnings": [],
       "embedding2d": [
-        -1.112440824362678,
-        2.662904652789816
+        -1.1272245861858359,
+        2.666012253902022
       ],
       "cluster": 3
     },
@@ -2120,11 +2318,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/7MXV05Iaf18PqIkEbel2xP",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "0:00 デデデータ 0:01 デデデータ 0:07 デデデータ 空きないデータの話 0:09 この番組はデータ、デジタルそしてDX、デジタルトランスフォーメーションを軸に世の中のデータ活用、デジタル推進そしてDXに取り組む全ての人に新しい気づきをお届けします。 0:19 メインパーソナリティのデータフラクトのく村はです。 0:21 この番組では相方を担当しますラジオパーソナリティのDJのびです。...",
       "keyLearnings": [],
       "embedding2d": [
-        0.42394164759333147,
-        3.3022316709080815
+        0.4631648696992954,
+        4.584158672816078
       ],
       "cluster": 2
     },
@@ -2140,11 +2338,11 @@
       "date": "2025-03-24",
       "url": "https://open.spotify.com/episode/0RzqEkd2xAWmqm1i2Z0yKv",
       "durationMinutes": 1951,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 03/23/2025 Duration: 19:51 Summary この会話は、日本の医者や弁護士のような安定した職業に就くことが食べていける手段として考えられる一方で、自分が本当にやりたいことや好きなことを追求することの重要性が強調されています。アメリカとは異なり、日本では大学へ...",
       "keyLearnings": [],
       "embedding2d": [
-        3.1639071948264093,
-        -3.256788725982978
+        2.7203980397137517,
+        -2.3728826280924866
       ],
       "cluster": 9
     },
@@ -2160,11 +2358,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/2RgPoF0Ib1aO7wHoHZZKZ6",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "0:00 デデデータ 0:01 デデデータ 0:06 [音楽] 0:07 デデデータ 空きないデータの話 0:09 この番組はデータ、デジタルそしてDX、デジタルトランスフォーメーションを軸に世の中のデータ活用、デジタル推進そしてDXに取り組む全ての人に新しい気づきをお届けします。 0:19 メインパーソナリティのデータフラクトのく村はです。 0:21 この番組では相方を担当しますラジオパーソナリ...",
       "keyLearnings": [],
       "embedding2d": [
-        1.310535847058639,
-        3.008644665669231
+        2.421266207105038,
+        4.02194259717576
       ],
       "cluster": 2
     },
@@ -2180,11 +2378,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/6qAg4cc6P8tMbbGu8kNSz7",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "以下のporomptで作成 1回目の方が精度が良いのでそっちの日本語文字起こしから英語文字起こし作成 [00:00] (Intro Music) [00:05] Hello. On Today I Learned, software engineers working in the California Bay Area introduce topics that caught their int...",
       "keyLearnings": [],
       "embedding2d": [
-        1.4281452247374387,
-        3.317973380760018
+        1.3848634769143287,
+        3.91135768491596
       ],
       "cluster": 2
     },
@@ -2200,11 +2398,11 @@
       "date": "2025-10-26",
       "url": "https://open.spotify.com/episode/2aISKPg60dnOOxaO2EaWmu?si=dfd21f65b576443a",
       "durationMinutes": 4510,
-      "summary": "",
+      "summary": "これのtakeawayは？ただ、単にエラーメッセージをAIに投げるのではなく、どのようにプロンプトを作ることで根本的に問題を解決することができるのですか？ Cursor Autoの回答 Basic Information Spotify URL: Episode Link Release Date: 10/26/2025 Duration: 45:10 Summary この会話は、コンピューターエ...",
       "keyLearnings": [],
       "embedding2d": [
-        1.260358840611292,
-        3.7362462139705928
+        0.7263165676200702,
+        3.9443377241762443
       ],
       "cluster": 2
     },
@@ -2218,11 +2416,11 @@
       "date": "2025-05-23",
       "url": "https://open.spotify.com/episode/1hc0S8jinfsWQ2GbkXKTJn?si=iCgiDeCQTSGTOzzmt5Zz_w",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "ポッドキャストで取り上げられた会社一覧 文字起こし",
       "keyLearnings": [],
       "embedding2d": [
-        3.8664745412583006,
-        -0.31530163129012306
+        2.888734816319719,
+        0.7231144053131797
       ],
       "cluster": 0
     },
@@ -2238,11 +2436,11 @@
       "date": "2025-10-16",
       "url": "https://open.spotify.com/episode/1FRMhkAKkAYIP33GFPDgqO",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 10/16/2025 Duration: 86:49 Summary In this conversation, the speaker shares their unique perspective on not liking chocolate, attributing it p...",
       "keyLearnings": [],
       "embedding2d": [
-        -2.5740218674978945,
-        2.817745167924253
+        -4.097970015059324,
+        1.3718346277371198
       ],
       "cluster": 4
     },
@@ -2258,11 +2456,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/64drOn1Uov5ZZsRhgnxw4k?si=80be5515166a466f&nd=1&dlsi=b4e102296e7c483f",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "学び： 福岡伸一先生 スター・ウォーズ エピソード4-6のストーリーを5つの要素で分析すると： 基本情報 Spotify URL：エピソードリンク 公開日：2024年12月26日 長さ：29:01 LISTEN URL： 要約 目次 文字起こし デデデータ デデデータ 飽きないデータの話 この番組はデータ デジタル そしてDX デジタルトランスフォーメーションを軸に 世の中のデータ活用 デジタル推...",
       "keyLearnings": [],
       "embedding2d": [
-        2.4273885130000834,
-        4.01353077690607
+        0.9969597147001918,
+        3.2681435806036188
       ],
       "cluster": 2
     },
@@ -2278,11 +2476,11 @@
       "date": "2024-12-15",
       "url": "https://open.spotify.com/episode/5ihTQkHOAdjqpdYkmV95rb",
       "durationMinutes": 2947,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2024年12月15日 長さ：29:47 LISTEN URL：エピソードリンク 要約 このエピソードでは、面接対策について議論されています。話者は、実際の面接時に必要なスキルや準備方法について詳しく語っています。面接時のメンタルリソースやコーディング面接の準備、質問の重要性、面接官の経歴をリサーチする方法などが取り上げられています。リア...",
       "keyLearnings": [],
       "embedding2d": [
-        0.19231794778277178,
-        5.101441818761363
+        1.0543213216993443,
+        3.067834286517597
       ],
       "cluster": 2
     },
@@ -2291,18 +2489,18 @@
       "title": " [番外編 #11] すげぇぜ！音声入力×ChatGPT チャチャッと作れるPodcast台本",
       "podcast": "ハイパー起業ラジオ",
       "podcastCover": "https://i.scdn.co/image/ab67656300005f1f68dfc8493d27409c0869bc49",
-      "category": "Al",
+      "category": "AI",
       "tags": [
-        "Al"
+        "AI"
       ],
       "date": "2025-01-29",
       "url": "https://open.spotify.com/episode/4RfFSK9q8tTXj4ODOJHgmo?si=WT4YnTKgQBqv6L4-9LTQQw&context=spotify%3Aplaylist%3A0KsEbsIeHdR4kv5yxzWqcw&nd=1&dlsi=a6863a02890d484b",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2025年01月28日 長さ：22:25 LISTEN URL： 要約 ハイパー企業ラジオ番外編では、ケンスやその他の参加者がAIを使った文章生成に関する個人的な経験や考えについて議論しています。ケンスはMacの音声入力の質が向上し、特定の単語を発音しやすくなったことに気付き、音声入力を通じてアイデアの整理や発展を進める際の重要性について...",
       "keyLearnings": [],
       "embedding2d": [
-        -1.1870227317380555,
-        -2.7916604668884073
+        -0.5076960665605089,
+        -3.528955501526452
       ],
       "cluster": 7
     },
@@ -2318,11 +2516,11 @@
       "date": "2024-10-04",
       "url": "https://open.spotify.com/episode/2fmAczpUOcxlYfHMyPNSs9?si=d854fa93f4a14bc6&nd=1&dlsi=a0a76c725c904eef",
       "durationMinutes": 45,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日： 長さ： LISTEN URL： 要約 会話では、日本、アメリカ、フランスの歴史教育や作文教育の違いについて議論されています。日本の作文教育は結論よりも先に内容を述べる「結論ファースト」が一般的であり、アメリカのような結果重視のスタイルとは異なることが指摘されています。作文教育の影響を受けて、個人のスタイルや考え方も異なる傾向があるようで...",
       "keyLearnings": [],
       "embedding2d": [
-        1.3241264125855747,
-        -3.485174852239619
+        0.9038239461463689,
+        -3.740714253116979
       ],
       "cluster": 8
     },
@@ -2338,11 +2536,11 @@
       "date": "2021-10-13",
       "url": "https://open.spotify.com/episode/0yb7OOCDQW0Crh7xFn0I1X",
       "durationMinutes": 2800,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2021年10月13日 長さ：27:47 LISTEN URL： 要約 今回のポッドキャストでは、松並龍弦さんが自己認識や苦しみについて議論しています。この議論から、念仏を唱えることが自己認識を高め、自我を超えた境地を目指す精神行為であることが示唆されています。また、自我を崩壊させることによってメタ認知が促され、結果的にエゴの影響を受けず...",
       "keyLearnings": [],
       "embedding2d": [
-        1.4230645124818053,
-        -3.697800499100605
+        0.9831862923580497,
+        -4.922603171348115
       ],
       "cluster": 8
     },
@@ -2358,11 +2556,11 @@
       "date": "2025-03-20",
       "url": "https://open.spotify.com/episode/4HOm4C38IcqOxsYQuoT9Sn?si=ecf195f075a847eb&nd=1&dlsi=cbed3772ebf14458",
       "durationMinutes": 2750,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 03/20/2025 Duration: 27:50 Summary Timestamps Transcript デデデータ デデデータ 飽きないデータの話 この番組はデータ デジタル そしてDX デジタルトランスフォーメーションを軸に 世の中のデータ活用 デジタル推進 そしてDXに...",
       "keyLearnings": [],
       "embedding2d": [
-        0.8267312943773211,
-        5.518395644278722
+        1.6887023284492053,
+        3.59764972610738
       ],
       "cluster": 2
     },
@@ -2378,11 +2576,11 @@
       "date": "2025-10-16",
       "url": "https://open.spotify.com/episode/4dFhYCPEGV9qG3JOKOlgJ6?si=46919e9b1bea4834",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク  公開日：2025年10月16日 長さ：49:54 要約 このエピソードでは、クロスセックベンチャーズの財団氏がホストとなり、ライズキャピタルの福山氏をゲストに迎え、Y Combinatorの直近のバッチ（Summer 2023）について深掘りします。福山氏が、参加企業数の変化、マルチステージVCの参入によるバリュエーションの高騰、そしてAIスタ...",
       "keyLearnings": [],
       "embedding2d": [
-        3.6506972555330437,
-        -3.1525394918868512
+        3.3110307554405143,
+        -1.809713820801711
       ],
       "cluster": 9
     },
@@ -2398,11 +2596,11 @@
       "date": "2021-09-05",
       "url": "https://open.spotify.com/episode/0ifubDcMBj8ni5e14yXx8b?si=26f6adbf9a54430d",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 09/05/2021 Duration: 27:21 Summary この会話は、プレゼンテーションに関する話題を取り上げています。二人は、プレゼンテーションのポイントや成功の秘訣について意見交換をしています。特に、相手の期待や準備、情報の伝え方について詳しく語っています。一方で、過...",
       "keyLearnings": [],
       "embedding2d": [
-        4.358689864772062,
-        -3.038392491388264
+        2.6238866406495243,
+        -1.4066704973586606
       ],
       "cluster": 9
     },
@@ -2416,11 +2614,11 @@
       "date": "2025-07-14",
       "url": "https://open.spotify.com/episode/55tFUFAplGpyzOA2FOtQCO?si=d926688b4de74f80",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 07/14/2025 Duration: 78:11 Summary このトランスクリプトでは、ディスカッションの中で、シニアエンジニアとジュニアエンジニアの設計判断力やAIとの共同作業について言及されています。エピソードでは、過去の経験を基にした設計判断力を持つシニアエンジニアと、...",
       "keyLearnings": [],
       "embedding2d": [
-        3.4777959377457908,
-        -0.17599961565230465
+        3.599017513694589,
+        0.2970181363322576
       ],
       "cluster": 0
     },
@@ -2437,8 +2635,8 @@
       "summary": "",
       "keyLearnings": [],
       "embedding2d": [
-        4.924908126936371,
-        0.3276028803039712
+        3.432140982281273,
+        -0.8932041446559866
       ],
       "cluster": 0
     },
@@ -2447,18 +2645,18 @@
       "title": "第118回「プロンプトエンジニアリング最前線と明日から人生変わる神ワザ大公開」",
       "podcast": "デデデータ",
       "podcastCover": "https://i.scdn.co/image/ab67656300005f1fa70c6596ad7f3b3a338d5f88",
-      "category": "Al",
+      "category": "AI",
       "tags": [
-        "Al"
+        "AI"
       ],
       "date": "2025-06-02",
       "url": "https://open.spotify.com/episode/2c7GW0R0Wn0OBO7J13o902?si=7f713ea7ca4d41c7",
       "durationMinutes": 4225,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 06/02/2025 Duration: 42:25 Summary このエピソードでは、AIを活用して新しいアイデアを生み出すための方法について紹介されています。例えば、AIにバイアスをかけて特異な回答を得る方法や、TOT（ツリーオブソート）を使って論理的に情報を整理する方法などが...",
       "keyLearnings": [],
       "embedding2d": [
-        -0.8699872191153399,
-        -4.240773897017882
+        -1.9626658657097928,
+        -3.463693756347993
       ],
       "cluster": 7
     },
@@ -2474,11 +2672,11 @@
       "date": "2025-05-19",
       "url": "https://open.spotify.com/episode/1yspYIt0JMYpxH3r7DesOB?si=0e81198b429d4b49",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 05/18/2025 Duration: 26:11 Summary This episode explores the fundamental essence of design in the AI era with guest Takayoshi Tagawa. The conv...",
       "keyLearnings": [],
       "embedding2d": [
-        -2.7599784420228812,
-        1.7856883066661755
+        -4.378916420100346,
+        1.7389973112212043
       ],
       "cluster": 4
     },
@@ -2497,8 +2695,8 @@
       "summary": "",
       "keyLearnings": [],
       "embedding2d": [
-        -2.784264870009887,
-        1.8670848978760246
+        -3.4722771739197125,
+        3.379391228329629
       ],
       "cluster": 4
     },
@@ -2514,11 +2712,11 @@
       "date": "2025-05-04",
       "url": "https://open.spotify.com/episode/4CZLghwyRfJFJFFaA19y92?si=c107e79e217c434a",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "バイリンガル はい、承知いたしました。音声ファイルの文字起こしを、英語と日本語のバイリンガル形式（英語 → 日本語の順）で、いくつかのセンテンスごとに交互に表示します。 --- In the summer of 2015, Dr. Lida Xing, a Chinese paleontologist from the China University of Geosciences, went t...",
       "keyLearnings": [],
       "embedding2d": [
-        -2.055985831561056,
-        4.669572366590519
+        -1.952940081097288,
+        4.565163926961018
       ],
       "cluster": 3
     },
@@ -2534,11 +2732,11 @@
       "date": "2021-12-08",
       "url": "https://open.spotify.com/episode/0ZvIAVvce65ZDtNFmfCaYV?si=F5Q2mjBiSPq0y0zk9oPwNg&t=1333",
       "durationMinutes": 3612,
-      "summary": "",
+      "summary": "文字起こし BGM ラジオ、ただいま発行中 BGM 前回の続き 前回、じゃあそもそも微生物って何なのか 生物って何なのかっていうところから そもそも地球誕生のイノベーションだったりとか こんなことが起こって酸素が生まれていく みたいな話をちょっと回路を高めに聞いたわけですけど ちょっと発行の話から さらに発行に戻って じゃあ微生物は実際どんな発行をしているのかって話を聞いていければいいのかなと思っ...",
       "keyLearnings": [],
       "embedding2d": [
-        -1.0993555842859428,
-        2.9583002448487123
+        -1.212031160844425,
+        3.2580206214037384
       ],
       "cluster": 3
     },
@@ -2554,11 +2752,11 @@
       "date": "2024-09-09",
       "url": "https://open.spotify.com/episode/3CAaxE5MgB1QRqocLzeHpl?si=61021299efec4b62",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "目次 00:10 デジタル・トランスフォーメーションを軸に 01:19 オンラインイベントとアルゴリズム総選挙 03:02 内容に関する改善 03:53 ウェビナーの開催とアーキテクチャについて 08:11 一般的に起きる介入 10:05 モンティフォルム問題と確率介入 10:32 介入 12:23 突っ込みのある質問や尖った質問に興奮 12:37 猫ちゃんの選び方や猫ちゃんについて 14:22...",
       "keyLearnings": [],
       "embedding2d": [
-        0.2915446996250748,
-        2.508534964507713
+        0.64110214126222,
+        2.901799308312769
       ],
       "cluster": 2
     },
@@ -2574,11 +2772,11 @@
       "date": "2024-04-27",
       "url": "https://open.spotify.com/episode/2TIzRezRoAqsaDErOsULZB?si=ozmKZvBiR1qRDD53PVP2sg",
       "durationMinutes": 2826,
-      "summary": "",
+      "summary": "【目次】 0:00 信じるか信じないかはあなた次第 0:26 なぜか説明が曖昧になってしまう法則 2:36 知ると怖い一次資料と存在しない数字 8:57 知られていないよく知られた法則の真相 14:55 カッコよくイキれる形で拡散されていく 16:32 半導体の集積密度はそろそろ限界？ 19:20 都市伝説みたいな法則は思い出の逸話 この会話は、「ムーアの法則」と呼ばれる半導体の集積密度に関する都...",
       "keyLearnings": [],
       "embedding2d": [
-        0.7724875721967324,
-        2.39990025128916
+        0.4225842215796667,
+        3.9014047338565776
       ],
       "cluster": 2
     },
@@ -2594,11 +2792,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/1WSjZU4AZnpClM3N1TP4Xx?si=_HVMVHSBRSmM6iJCphCVjA",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2024年06月02日 長さ：32:35 LISTEN URL： 要約 CTOの今井智明氏と新入社員のエンジニア、領一氏が、用語集やオンボーディングについて話しています。彼らは、用語の意味ずれによる混乱や、新入社員向けの教育手法について共有しています。エンジニアの視点から日常の職場事情やチーム活動に関するリアルな話が興味深い内容です。オン...",
       "keyLearnings": [],
       "embedding2d": [
-        1.616851220167618,
-        3.9180307144299475
+        0.25046409327928815,
+        3.2149125240818686
       ],
       "cluster": 2
     },
@@ -2617,8 +2815,8 @@
       "summary": "",
       "keyLearnings": [],
       "embedding2d": [
-        0.8022615125619097,
-        2.7894419786384113
+        0.9142733278351595,
+        3.205085730026654
       ],
       "cluster": 2
     },
@@ -2634,11 +2832,11 @@
       "date": "2025-02-09",
       "url": "https://open.spotify.com/episode/0YIfdfNxGbGnDEzM017W5x?si=2980fe9815e4496b",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2025年02月09日 長さ：28:19 要約 田江勉さんと関口舞さんの会話では、目的の抽象化に関する興味深いディスカッションが展開されています。具体的な行動や指示とその背後にある抽象的な目的との関係に焦点が当てられ、目的の抽象さや具体さがコミュニケーションやビジネスに影響を与えることが探求されています。結びつけ方がズレることが仕事上のハ...",
       "keyLearnings": [],
       "embedding2d": [
-        -1.366283657377144,
-        2.3354018138827044
+        -1.5431823951928365,
+        4.811073564796745
       ],
       "cluster": 3
     },
@@ -2654,11 +2852,11 @@
       "date": "2024-02-04",
       "url": "https://open.spotify.com/episode/1xbQhe5qok8Wmnm7LjL7e4?si=3da54362355d4aee",
       "durationMinutes": 2800,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2024年02月04日 長さ：28:00 LISTEN URL： 要約 この会話は、スウェーデン在住でH&Mグループ本社のIT部門で働くレミさんが、日本の職場文化との違いや将来のキャリアプランについて語っている内容です。日本の企業ではキャリアマップが明確で昇進に関心が高い一方、スウェーデンでは給与が保障されているため、昇進への意欲が低いと...",
       "keyLearnings": [],
       "embedding2d": [
-        -3.5288890212152166,
-        -2.8188338274082043
+        -2.944920403286085,
+        -3.101235952173217
       ],
       "cluster": 6
     },
@@ -2674,11 +2872,11 @@
       "date": "2021-12-15",
       "url": "https://open.spotify.com/episode/3DRXyxMuWaVsBXFFZ5YqTh?si=06ad524eb21d413c",
       "durationMinutes": 2036,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2021年12月15日 長さ：20:35 LISTEN URL： 要約 京都大学名誉教授の井上俊夫さんが「ア スコープ」ポッドキャストで社会認知神経科学を専門とした話をしています。手話や話すことなど、言語の本質を運動と関連づけ、脳が物事を認識するプロセスに焦点を当てています。また、脳の機能に障害がある場合、認識の変化や発達障害などが起こる...",
       "keyLearnings": [],
       "embedding2d": [
-        1.58164188000524,
-        -2.4966226504405507
+        1.5479901826500013,
+        -3.4729023328557203
       ],
       "cluster": 8
     },
@@ -2694,11 +2892,11 @@
       "date": "2023-08-23",
       "url": "https://open.spotify.com/episode/6ibx9wzZ9faATF9WlqSA0v?si=c9e3c858c56848a8",
       "durationMinutes": 1714,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2023年08月23日 長さ：17:13 LISTEN URL：エピソードリンク 要約 このエピソードでは、Amazon Prime Videoのストリーミング監視システムをモノレスに改修したカリフォルニアベイエリアのソフトウェアエンジニアたちの事例が取り上げられています。彼らはマイクロサービスからモノレスに移行することで90%のコスト削...",
       "keyLearnings": [],
       "embedding2d": [
-        0.29342997426840045,
-        3.84847725359129
+        0.11196340595812082,
+        2.77657279841879
       ],
       "cluster": 2
     },
@@ -2714,11 +2912,11 @@
       "date": "2020-12-29",
       "url": "https://open.spotify.com/episode/2AJj8HbYLbvCbmPwDQ6biL?si=p-q7OIlFQGygBZyL_iwQWw",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2020年12月29日 長さ：23:41 LISTEN URL： 要約 In this snippet, there is a lively conversation between Casey and Alex discussing the idea that spending time in nature, particularly...",
       "keyLearnings": [],
       "embedding2d": [
-        3.2466995710323703,
-        2.3756239314395025
+        2.4301972877474385,
+        1.417126554515955
       ],
       "cluster": 1
     },
@@ -2734,11 +2932,11 @@
       "date": "2023-02-11",
       "url": "https://open.spotify.com/episode/0v9x7cN6r35YvCg9EdkMsz?si=804ea0b15be446fe",
       "durationMinutes": 12215,
-      "summary": "",
+      "summary": "【目次】 0:00 素敵な物理学用語やナイト 2:36 「蛇に睨まれた蛙」 は量子ゼノン効果 10:12 卵パックで原子を絶対零度に！？ 21:16 オシャレ命名するならギリシャ神話は必須 27:57 電子はチェシャネコと同じようにふるまう 36:28 物理学者の苦しみは自分を信じられないこと 58:04 ものを忘れたければ電磁波で 1:07:31 これでマクスウェルの悪魔が分かる 1:13:39...",
       "keyLearnings": [],
       "embedding2d": [
-        1.4315017965575116,
-        4.814983102547048
+        1.8085428206705685,
+        2.9139164319135484
       ],
       "cluster": 2
     },
@@ -2754,11 +2952,11 @@
       "date": "2023-09-15",
       "url": "https://open.spotify.com/episode/032SlfpABpGjt6Ql6Dwvki?si=Ssi_QqedQdS8rJSrKUooCg",
       "durationMinutes": 1639,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2023年09月15日 長さ：16:39 LISTEN URL：エピソードリンク 要約 今回のポッドキャストでは、カリフォルニア・ベイエリアで働くソフトウェアエンジニアがA Career Cold Start Algorithmというトピックについて語っています。このアルゴリズムは、新しいチームに加わった際の取り組み方を指すものであり、効...",
       "keyLearnings": [],
       "embedding2d": [
-        0.6524534654751555,
-        3.296807102603374
+        1.5398498022665819,
+        4.573187030618415
       ],
       "cluster": 2
     },
@@ -2777,8 +2975,8 @@
       "summary": "",
       "keyLearnings": [],
       "embedding2d": [
-        2.7275128303882563,
-        2.865279084841507
+        2.9947470820828723,
+        2.396805127893912
       ],
       "cluster": 1
     },
@@ -2794,11 +2992,11 @@
       "date": "2023-11-28",
       "url": "https://open.spotify.com/episode/3av0E2LqqicwgGyBLlYOcz?si=eVIR5BWkSEiiTKZyYFvQfg",
       "durationMinutes": 2844,
-      "summary": "",
+      "summary": "要約 エピソードの内容とテーマ このエピソードでは、企業戦略としての「MOAT（競争優位性の堀）」とネットワーク効果について解説しています。特に、ネットワーク効果がMOATとして捉えられがちであり、その結果、重要な面が見落とされてしまうことを指摘しています。具体的な事例として、メルカリやヤフオクの戦略とネットワーク効果が取り上げられ、競争優位性を築く仕組みづくりの工夫が語られます。 主要なトピック...",
       "keyLearnings": [],
       "embedding2d": [
-        0.649670621394473,
-        3.8046663903939675
+        1.2727250589989039,
+        5.031422406476531
       ],
       "cluster": 2
     },
@@ -2814,11 +3012,11 @@
       "date": "2023-03-17",
       "url": "https://open.spotify.com/episode/0s1ZbpGttI6T8SnrzULjc3?si=37bf377feeae41e3",
       "durationMinutes": 3842,
-      "summary": "",
+      "summary": "下書き 基本情報 Spotify URL：エピソードリンク 公開日：2024年03月17日 長さ：38:42 LISTEN URL：エピソードリンク 要約 このエピソードでは、アメリカでのビジネス環境における成功へのアプローチと、異なる文化・バックグラウンドを持つ人々が直面する課題について話されています。登場人物たちは、自己アピールやコミュニケーションの重要性、上司やチームとの関係性、アメリカの企...",
       "keyLearnings": [],
       "embedding2d": [
-        0.6777008876496826,
-        4.153466061925964
+        0.6986122868330806,
+        4.2220257040752305
       ],
       "cluster": 2
     },
@@ -2834,11 +3032,11 @@
       "date": "2024-11-19",
       "url": "https://open.spotify.com/episode/5ypGCauanmvwtmovTyp8sf?si=7d47d5a92e724b70",
       "durationMinutes": 810,
-      "summary": "",
+      "summary": "大阪大学の研究チームによる画期的な研究成果についてご説明します。 研究の概要 大阪大学の林克彦教授率いる研究チームは、世界で初めて2匹のオスのマウスから子孫を作ることに成功しました[1]。この研究では、オスのマウスのiPS細胞から卵子を作り出し、別のオスのマウスの精子と受精させることで、健康な子マウスを誕生させました[1]。 技術的な詳細 細胞学的プロセス オスのiPS細胞培養の過程でY染色体を失...",
       "keyLearnings": [],
       "embedding2d": [
-        2.2572833082885637,
-        -2.6729968341224355
+        1.2620005350502015,
+        -4.402194767251534
       ],
       "cluster": 8
     },
@@ -2854,11 +3052,11 @@
       "date": "2024-08-15",
       "url": "https://open.spotify.com/episode/1JfWOsUJJqn5woDxDiWkib?si=96682cc0fea9428f",
       "durationMinutes": 3133,
-      "summary": "",
+      "summary": "以下は、あるpodcastについての情報です。以下のテキストの中の要約だと読みにくいし、わかりにくいので、読みやすくわかりやすくしてください。 \"\"\" 基本情報 Spotify URL：https://open.spotify.com/episode/1JfWOsUJJqn5woDxDiWkib?si=71ecf6f876544012 公開日：2023年11月28日 長さ：28:44 LISTEN...",
       "keyLearnings": [],
       "embedding2d": [
-        0.5720144146152027,
-        3.374721504542512
+        0.4429880034089886,
+        4.448996659111212
       ],
       "cluster": 2
     },
@@ -2874,11 +3072,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/5t8CNshfrjpwAFjGLAuYQF?si=BFAEYusKTfWz8JJJQhVwaw",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2025年01月25日 長さ：23:03 要約 Rondo Tech Talkのけんわが妻が2025年の新しいエピソードについて話しています。今回はBook Clubの一環でDatabase Internalsを取り上げ、第1回のチャプター1 Introduction and Overviewに焦点を当てる内容です。振り返り収録を通じて、...",
       "keyLearnings": [],
       "embedding2d": [
-        1.8362810616146812,
-        2.4693921793938
+        1.6927133665704677,
+        4.33690677058586
       ],
       "cluster": 2
     },
@@ -2894,11 +3092,11 @@
       "date": "2022-06-09",
       "url": "https://open.spotify.com/episode/3te3rGLDMvKlnVqdoXERgm?si=i7yHSBlpTmGaeFB1vWy8KA",
       "durationMinutes": 3906,
-      "summary": "",
+      "summary": "この会話では、地球や太陽系の形成に関する興味深い考察が行われています。宇宙空間に散在する物質が地球や他の惑星の成長に与える影響、地球の質量が時間とともに減少する理由、そして生命の誕生から人間の出現までの時間スケールについて話されています。また、ヘリウムの需要とその影響についても議論が交わされています。このようなテーマを通じて、地球や宇宙の不思議さや進化の過程に興味を持つことができます。ぜひこのエピ...",
       "keyLearnings": [],
       "embedding2d": [
-        -1.2782209982314239,
-        3.0475990284602332
+        -1.1524773656101663,
+        4.096595388520717
       ],
       "cluster": 3
     },
@@ -2914,11 +3112,11 @@
       "date": "2020-12-29",
       "url": "https://open.spotify.com/episode/0CYtE1GISff2epRsPTuXUV?si=_s5FgnvtRvi4piS8TT4NFA",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2020年12月29日 長さ：90:11 LISTEN URL： 要約 Casey, a passionate tree enthusiast, shares his desire for a natural burial where he can contribute to the circle of life by becoming...",
       "keyLearnings": [],
       "embedding2d": [
-        4.760585765783938,
-        1.4187723888975388
+        3.2283418937873902,
+        1.4835415737024311
       ],
       "cluster": 1
     },
@@ -2934,11 +3132,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/6ZLKDGpinRHBnfXbSsSiQ1?si=f409a732e6634bba",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2025年01月05日 長さ：27:30 LISTEN URL： 要約 このポッドキャストは、2010年と2021年の研究を比較しながら、お金と幸せの関係について議論しています。2010年の研究では、幸福度の計測方法に課題があり、幸せの上限が設定されていたことが指摘されました。しかし、2021年の研究では、高収入ほど幸せにつながるという結...",
       "keyLearnings": [],
       "embedding2d": [
-        -0.22244524061006832,
-        4.608813845877015
+        0.812435703736563,
+        3.6027107340943827
       ],
       "cluster": 2
     },
@@ -2957,8 +3155,8 @@
       "summary": "",
       "keyLearnings": [],
       "embedding2d": [
-        0.7783713319101719,
-        4.463691696683926
+        1.290302954030433,
+        4.0007213693165316
       ],
       "cluster": 2
     },
@@ -2974,11 +3172,11 @@
       "date": "2024-02-03",
       "url": "https://open.spotify.com/episode/0lPoVQe917GabHSFiT7d63?si=00a516f94c6f4e9b",
       "durationMinutes": 2410,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2024年02月03日 長さ：24:10 LISTEN URL： 要約 このエピソードでは、スウェーデンで新卒・グラジュエートプログラムに参加する樋口レミさんが登場します。彼女がH&Mグループ本社のIT部門に就くまでの経験や、スウェーデンと日本の就職活動の違い、そしてエンジニアとしてのキャリアについて議論されます。樋口さんはローテーション...",
       "keyLearnings": [],
       "embedding2d": [
-        -4.069944032666102,
-        -3.2989859757301607
+        -4.942643575588759,
+        -1.4688984512144074
       ],
       "cluster": 6
     },
@@ -2994,11 +3192,11 @@
       "date": "2025-04-20",
       "url": "https://open.spotify.com/episode/7t7C93Gm08CmPpJvs3N7CR?si=3e617953673747d5",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2024年12月30日 長さ：38:11 LISTEN URL：なし 要約 目次 文字起こし デデデータ デデデータ 飽きないデータの話 この番組はデータ デジタル そしてDX デジタルトランスフォーメーションを軸に 世の中のデータ活用 デジタル推進 そしてDXに取り組む全ての人に 新しい気づきをお届けします メインパーソナリティのデータ...",
       "keyLearnings": [],
       "embedding2d": [
-        1.3059218804872375,
-        2.908550149203596
+        1.520750236569025,
+        3.4884731568037703
       ],
       "cluster": 2
     },
@@ -3014,11 +3212,11 @@
       "date": "2024-11-23",
       "url": "https://open.spotify.com/episode/7KJ2tKDGu1axI59r5RT3rq?si=55b94798b7a143ba",
       "durationMinutes": 1126,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2024年11月23日 長さ：11:25 LISTEN URL： 要約 このエピソードは、脳の最新刊を読んだリスナーが書いた感想を紹介しています。話題は、脳科学と神経科学の進化に焦点を当てており、特に脳の予測と修正について解説されています。脳の活動について、知覚と運動の神経系の連動や世界モデルの構築方法なども触れられています。また、著者は...",
       "keyLearnings": [],
       "embedding2d": [
-        2.2530419769235146,
-        -3.8066558058128677
+        0.7994421161222631,
+        -4.786297981177674
       ],
       "cluster": 8
     },
@@ -3034,11 +3232,11 @@
       "date": "2024-10-20",
       "url": "https://open.spotify.com/episode/6sxdRO8uk6XWVbWzvPdNsu?si=aKJ-DKd1T8y45M7NU5ss-w",
       "durationMinutes": 3256,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2024年10月20日 長さ：32:56 LISTEN URL：エピソードリンク 要約 本ポッドキャストは、イマイトマーキさんが過去の大規模事故について語る内容です。話の中では、ホテルハイアットリージェンシーの建物崩落事故や桜木町駅の列車火災などの事例が紹介され、これらの事故から得られた改善策や専門家の重要性について触れられています。事故...",
       "keyLearnings": [],
       "embedding2d": [
-        2.099824732138896,
-        3.0359200215003233
+        0.6837607967594699,
+        4.9245975046324215
       ],
       "cluster": 2
     },
@@ -3054,11 +3252,11 @@
       "date": "2025-02-12",
       "url": "https://open.spotify.com/episode/1ghtJDt7wURadOQmzHGbpD?si=66c59f63f5394e8a",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "基本情報 Spotify URL：エピソードリンク 公開日：2025年02月12日 長さ：23:30 LISTEN URL： 要約 この会話は、決済サービスであるストライプに関する技術的な話が展開されています。話者たちはストライプが持つ柔軟性や機能性、そして実装の容易さなどについて議論しています。彼らは顧客情報やデータ取得の効率化、さまざまな課金モデルの選択肢など、ストライプの利点について話し合っ...",
       "keyLearnings": [],
       "embedding2d": [
-        1.3430410110749769,
-        4.586786995619601
+        1.4467591797830703,
+        3.3839139039870703
       ],
       "cluster": 2
     },
@@ -3074,11 +3272,11 @@
       "date": "2025-02-10",
       "url": "https://open.spotify.com/episode/41JjxjqXm6NxfiwQcKYoUu?si=PRwyBULqSn-tGVADAimT1A",
       "durationMinutes": 10409,
-      "summary": "",
+      "summary": "Science education is key to creating a successful future, but the challenges have never been greater. I'm Matt Kaplan, host of Safeguarding Sound Science, climate change edition. Join us for outstandi...",
       "keyLearnings": [],
       "embedding2d": [
-        3.1782616908836605,
-        0.8512145046236744
+        2.358042792461075,
+        2.1289341892759195
       ],
       "cluster": 1
     },
@@ -3094,11 +3292,11 @@
       "date": "2025-03-13",
       "url": "https://open.spotify.com/episode/2nDgfIpg8q4HeHbc2sGAy4?si=360113e2cf0f4a01",
       "durationMinutes": 3741,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 03/13/2025 Duration: 37:41 Summary In this conversation, the co-founders of Figma share insights on building a successful team and scaling a p...",
       "keyLearnings": [],
       "embedding2d": [
-        3.3151098801241674,
-        -3.281220612058841
+        2.462372886259388,
+        -2.798506321974151
       ],
       "cluster": 9
     },
@@ -3112,16 +3310,24 @@
       "date": "2025-10-30",
       "url": "https://open.spotify.com/episode/3yvAS5sQAVmdIcIslWWhs1?si=ec2e32bdd9294085",
       "durationMinutes": 0,
-      "summary": "",
+      "summary": "Basic Information Spotify URL: Episode Link Release Date: 10/30/2025 Duration: 15:39 Summary In this episode, we follow Evelyn, who is under pressure to improve a visibility feature on a file upload l...",
       "keyLearnings": [],
       "embedding2d": [
-        3.103806712721423,
-        0.11126548659742747
+        4.847811724882311,
+        0.6182430340101062
       ],
       "cluster": 0
     }
   ],
   "podcasts": [
+    {
+      "name": "Takram Cast",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f86fc314da217ec0631299824",
+      "episodeCount": 14,
+      "primaryTags": [
+        "Design & Art"
+      ]
+    },
     {
       "name": "Today I learned",
       "cover": "https://i.scdn.co/image/ab67656300005f1f66df42744157019b4156d323",
@@ -3137,7 +3343,7 @@
       "episodeCount": 13,
       "primaryTags": [
         "Technology",
-        "Al"
+        "AI"
       ]
     },
     {
@@ -3146,14 +3352,6 @@
       "episodeCount": 11,
       "primaryTags": [
         "Biology & Nature"
-      ]
-    },
-    {
-      "name": "Takram Cast",
-      "cover": "https://i.scdn.co/image/ab67656300005f1f9241ef44a40d011b964edf9d",
-      "episodeCount": 10,
-      "primaryTags": [
-        "Design & Art"
       ]
     },
     {
@@ -3184,19 +3382,25 @@
       ]
     },
     {
-      "name": "SingularRadio - シンギュラーラジオ",
-      "cover": "https://i.scdn.co/image/ab67656300005f1f050c4c0269ff5d00f19aead3",
-      "episodeCount": 4,
-      "primaryTags": []
-    },
-    {
       "name": "Lenny's Podcast: Product | Career | Growth",
-      "cover": "https://i.scdn.co/image/ab67656300005f1f58f4c2b82849f837d4344894",
-      "episodeCount": 4,
+      "cover": "https://i.scdn.co/image/ab67656300005f1f94a4aecb5f11a26f0890e7db",
+      "episodeCount": 5,
       "primaryTags": [
         "Technology",
         "Design & Art"
       ]
+    },
+    {
+      "name": "Today I Learned -シリコンバレーの現場から-",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f66df42744157019b4156d323",
+      "episodeCount": 4,
+      "primaryTags": []
+    },
+    {
+      "name": "SingularRadio - シンギュラーラジオ",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f050c4c0269ff5d00f19aead3",
+      "episodeCount": 4,
+      "primaryTags": []
     },
     {
       "name": "となりのデータ分析屋さん",
@@ -3220,12 +3424,12 @@
       "episodeCount": 3,
       "primaryTags": [
         "Technology",
-        "Al"
+        "AI"
       ]
     },
     {
-      "name": "Today I Learned -シリコンバレーの現場から-",
-      "cover": "https://i.scdn.co/image/ab67656300005f1f66df42744157019b4156d323",
+      "name": "歴史を面白く学ぶコテンラジオ （COTEN RADIO）",
+      "cover": "https://i.scdn.co/image/ab67656300005f1fb412cc05140e5eedc61ac87d",
       "episodeCount": 2,
       "primaryTags": []
     },
@@ -3334,6 +3538,30 @@
       ]
     },
     {
+      "name": "Automagic Podcast",
+      "cover": "https://i.scdn.co/image/ab67656300005f1fada74e03424e5f8ccb034f2c",
+      "episodeCount": 1,
+      "primaryTags": []
+    },
+    {
+      "name": "Off Topic // オフトピック",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f2332b679810aa74a364db7fd",
+      "episodeCount": 1,
+      "primaryTags": []
+    },
+    {
+      "name": "起業家の思想と人生に迫る インサイドビジョン",
+      "cover": "https://i.scdn.co/image/ab67656300005f1fd8799576dc9528317f863809",
+      "episodeCount": 1,
+      "primaryTags": []
+    },
+    {
+      "name": "無印良品 くらしのラジオ【毎週金曜更新】",
+      "cover": "https://i.scdn.co/image/ab67656300005f1f42e5af808a286f6266a9697e",
+      "episodeCount": 1,
+      "primaryTags": []
+    },
+    {
       "name": "たべものラジオ 〜食を面白く学ぶ〜",
       "cover": "https://i.scdn.co/image/ab67656300005f1f0f0a14d3508f0d1e920c9198",
       "episodeCount": 1,
@@ -3346,20 +3574,8 @@
       "primaryTags": []
     },
     {
-      "name": "起業家の思想と人生に迫る インサイドビジョン",
-      "cover": "https://i.scdn.co/image/ab67656300005f1fd8799576dc9528317f863809",
-      "episodeCount": 1,
-      "primaryTags": []
-    },
-    {
       "name": "Joi Ito's Podcast",
       "cover": "https://i.scdn.co/image/ab67656300005f1fe29175ad2623d601ede331e2",
-      "episodeCount": 1,
-      "primaryTags": []
-    },
-    {
-      "name": "歴史を面白く学ぶコテンラジオ （COTEN RADIO）",
-      "cover": "https://i.scdn.co/image/ab67656300005f1fb412cc05140e5eedc61ac87d",
       "episodeCount": 1,
       "primaryTags": []
     },
@@ -3474,7 +3690,7 @@
       "cover": "https://i.scdn.co/image/ab67656300005f1fd4ed3b005b75468bf3a405cd",
       "episodeCount": 1,
       "primaryTags": [
-        "Al"
+        "AI"
       ]
     },
     {
@@ -3522,7 +3738,7 @@
       "cover": "https://i.scdn.co/image/ab67656300005f1fc469addd65eda0e4d28383af",
       "episodeCount": 1,
       "primaryTags": [
-        "Al"
+        "AI"
       ]
     },
     {
@@ -3667,7 +3883,7 @@
         0
       ],
       "color": "#636E72",
-      "episodeCount": 62
+      "episodeCount": 73
     },
     {
       "id": 1,
@@ -3731,7 +3947,7 @@
     },
     {
       "id": 7,
-      "label": "Al",
+      "label": "AI",
       "center": [
         -0.9270509831248427,
         -2.8531695488854605
@@ -3761,8 +3977,8 @@
     }
   ],
   "stats": {
-    "totalEpisodes": 162,
-    "totalPodcasts": 73,
+    "totalEpisodes": 173,
+    "totalPodcasts": 76,
     "totalCategories": 10,
     "tagDistribution": {
       "Biology & Nature": 16,
@@ -3772,13 +3988,13 @@
       "Others": 2,
       "Business": 1,
       "Career": 5,
-      "Al": 4,
+      "AI": 4,
       "Education": 6,
       "Startup & VC": 7
     }
   },
   "meta": {
-    "generatedAt": "2026-02-26T10:29:25.292Z",
+    "generatedAt": "2026-03-25T06:53:06.199Z",
     "hasEmbeddings": false
   }
 }
