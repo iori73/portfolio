@@ -205,6 +205,7 @@ portfolio/
 | [APP_FLOW.md](docs/APP_FLOW.md) | どう体験するか（画面遷移） |
 | [TECH_STACK.md](docs/TECH_STACK.md) | 何で作るか（技術スタック詳細） |
 | [design-system.md](docs/architecture/design-system.md) | どう見せるか（デザインシステム） |
+| [design-commands-guide.md](docs/design-commands-guide.md) | カスタムコマンドの使い方ガイド |
 | [IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) | 改善ロードマップ |
 | [progress.txt](progress.txt) | 現在地の記録 |
 | [lessons.md](lessons.md) | 学びの蓄積 |
