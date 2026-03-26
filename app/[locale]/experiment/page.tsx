@@ -179,31 +179,31 @@ const ExperimentPage: React.FC = () => {
               </div>
 
               <div className="flex gap-2 items-start flex-wrap">
-                <span className="font-space-grotesk text-body-base leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                <span className="font-space-grotesk text-label leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
                   Al
                 </span>
-                <span className="font-space-grotesk text-body-base leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                <span className="font-space-grotesk text-label leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
                   Biology/Nature
                 </span>
-                <span className="font-space-grotesk text-body-base leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                <span className="font-space-grotesk text-label leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
                   Business
                 </span>
-                <span className="font-space-grotesk text-body-base leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                <span className="font-space-grotesk text-label leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
                   Career
                 </span>
-                <span className="font-space-grotesk text-body-base leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                <span className="font-space-grotesk text-label leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
                   Design & Art
                 </span>
-                <span className="font-space-grotesk text-body-base leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                <span className="font-space-grotesk text-label leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
                   Liberal Arts
                 </span>
-                <span className="font-space-grotesk text-body-base leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                <span className="font-space-grotesk text-label leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
                   Science
                 </span>
-                <span className="font-space-grotesk text-body-base leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                <span className="font-space-grotesk text-label leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
                   Startup/VC
                 </span>
-                <span className="font-space-grotesk text-body-base leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+                <span className="font-space-grotesk text-label leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
                   Technology
                 </span>
               </div>

@@ -29,7 +29,7 @@ export function LanguageSwitcher({ className = '', activeClassName = '', inactiv
       <button
         onClick={() => switchLocale('en')}
         disabled={isPending}
-        className={`font-helvetica-neue text-body-xl leading-[33.6px] text-center transition-[font-weight] duration-300 ${
+        className={`font-helvetica-neue text-title text-center transition-[font-weight] duration-300 ${
           locale === 'en' ? activeClassName || 'font-bold' : inactiveClassName || 'font-light'
         }`}
       >
@@ -39,7 +39,7 @@ export function LanguageSwitcher({ className = '', activeClassName = '', inactiv
       <button
         onClick={() => switchLocale('jp')}
         disabled={isPending}
-        className={`font-helvetica-neue text-body-xl leading-[33.6px] text-center transition-[font-weight] duration-300 ${
+        className={`font-helvetica-neue text-title text-center transition-[font-weight] duration-300 ${
           locale === 'jp' ? activeClassName || 'font-bold' : inactiveClassName || 'font-light'
         }`}
       >

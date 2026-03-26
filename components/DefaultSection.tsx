@@ -53,11 +53,11 @@ export function DefaultSection({ heading, description, images = [], headingLevel
   const HeadingTag = headingLevel === 'h3' ? 'h3' : 'h2';
   const headingClassName =
     headingLevel === 'h3'
-      ? 'text-heading-base font-merriweather font-semibold mb-4'
-      : 'text-heading-xl md:text-heading-2xl font-switzer mb-6';
+      ? 'text-title font-merriweather font-semibold mb-4'
+      : 'text-title-lg font-switzer mb-6';
 
   return (
-    <section className="py-8 bg-white text-[#002a38] scroll-mt-32">
+    <section className="py-8 bg-surface text-ink-secondary scroll-mt-32">
       <HeadingTag className={headingClassName}>{heading}</HeadingTag>
       {description && <p className="text-body-lg font-switzer mb-6">{description}</p>}
       {images.length > 0 && (

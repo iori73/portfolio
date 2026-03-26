@@ -90,23 +90,22 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
       <section id="project-info" className="  pt-4 pb-8 scroll-mt-32">
         <div className="max-w-[896px] w-full mx-auto">
           <div className="flex items-center gap-6 mb-4 flex-wrap md:flex-nowrap">
-            {/* モバイルでは text-heading-2xl, md以上では text-heading-3xl */}
-            <h1 className="text-heading-2xl md:text-heading-3xl text-black">Google UX Design Certificate Project</h1>
+            <h1 className="text-headline text-ink">Google UX Design Certificate Project</h1>
             <div className="flex gap-2">
-              <span className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-2 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+              <span className="font-space-grotesk text-label px-2 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
                 Research
               </span>
-              <span className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-2 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+              <span className="font-space-grotesk text-label px-2 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
                 UI
               </span>
-              <span className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-2 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]">
+              <span className="font-space-grotesk text-label px-2 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
                 UX
               </span>
             </div>
           </div>
 
           {/* 説明文: Body/XL_140 */}
-          <p className={`text-body-lg md:text-body-xl ${getBodyFontClass()} text-[#333333] tracking-[0.2px] mb-8`}>
+          <p className={`text-body-lg ${getBodyFontClass()} text-ink-secondary tracking-[0.2px] mb-8`}>
             {t('googleUXDescription')}
           </p>
 

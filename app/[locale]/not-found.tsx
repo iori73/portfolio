@@ -11,17 +11,17 @@ export default function NotFound() {
     <div className="flex flex-col items-center justify-center min-h-[60vh] mt-24 md:mt-28">
       <div className="text-center">
         <h1
-          className="text-heading-4xl md:text-heading-5xl mb-4"
+          className="text-display mb-4"
         >
           404
         </h1>
         <div className="flex items-center justify-center gap-4 mb-8">
-          <div className="w-px h-12 bg-black"></div>
-          <p className={`text-body-xl md:text-body-2xl ${getBodyFontClass()}`}>{t('message')}</p>
+          <div className="w-px h-12 bg-ink"></div>
+          <p className={`text-title-lg ${getBodyFontClass()}`}>{t('message')}</p>
         </div>
         <Link
           href="/"
-          className="inline-block px-8 py-3 border-2 border-black rounded-[40px] hover:border-transparent hover:bg-black hover:text-white transition-all duration-300 text-body-lg font-helvetica-neue font-medium"
+          className="inline-block px-8 py-3 border-2 border-ink rounded-[40px] hover:border-transparent hover:bg-ink hover:text-white transition-all duration-300 text-body-lg font-helvetica-neue font-medium"
         >
           {t('backToHome')}
         </Link>

@@ -77,14 +77,14 @@ export default function Header() {
               <div key={item.path} className="relative flex flex-col items-center">
                 <Link
                   href={item.path}
-                  className={`font-helvetica-neue text-body-xl transition-[font-weight] duration-300 ${
+                  className={`font-helvetica-neue text-title transition-[font-weight] duration-300 ${
                     isActive(item.path) ? 'font-bold' : 'font-normal'
                   }`}
                 >
                   {item.name}
                 </Link>
                 {isActive(item.path) && (
-                  <div className="absolute top-full mt-0 w-2 h-2 rounded-full bg-[#1A1A1A]"></div>
+                  <div className="absolute top-full mt-0 w-2 h-2 rounded-full bg-ink"></div>
                 )}
               </div>
             ))}
@@ -95,7 +95,7 @@ export default function Header() {
               <button
                 onClick={() => toggleLanguage('en')}
                 disabled={isPending}
-                className={`font-helvetica-neue text-body-xl text-center transition-[font-weight] duration-300 ${
+                className={`font-helvetica-neue text-title text-center transition-[font-weight] duration-300 ${
                   locale === 'en' ? 'font-bold' : 'font-light'
                 }`}
               >
@@ -105,7 +105,7 @@ export default function Header() {
               <button
                 onClick={() => toggleLanguage('jp')}
                 disabled={isPending}
-                className={`font-helvetica-neue text-body-xl text-center transition-[font-weight] duration-300 ${
+                className={`font-helvetica-neue text-title text-center transition-[font-weight] duration-300 ${
                   locale === 'jp' ? 'font-bold' : 'font-light'
                 }`}
               >
@@ -170,7 +170,7 @@ export default function Header() {
                   </Link>
                   {isActive(item.path) && (
                     <div
-                      className="w-2 h-2 rounded-full bg-[#1A1A1A]"
+                      className="w-2 h-2 rounded-full bg-ink"
                       style={{
                         opacity: 1,
                         transform: 'translateY(-10px)',
@@ -195,7 +195,7 @@ export default function Header() {
                 <button
                   onClick={() => toggleLanguage('en')}
                   disabled={isPending}
-                  className="text-body-xl font-merriweather"
+                  className="text-title font-merriweather"
                   style={{
                     fontWeight: locale === 'en' ? 600 : 400,
                     transition: 'font-weight 300ms ease',
@@ -207,7 +207,7 @@ export default function Header() {
                 <button
                   onClick={() => toggleLanguage('jp')}
                   disabled={isPending}
-                  className="text-body-xl font-merriweather"
+                  className="text-title font-merriweather"
                   style={{
                     fontWeight: locale === 'jp' ? 600 : 400,
                     transition: 'font-weight 300ms ease',

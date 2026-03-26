@@ -65,7 +65,7 @@ const WorkExperienceItem: React.FC<{ work: WorkExperience; lang: 'en' | 'jp' }> 
           {work.technologies.map((tech) => (
             <span
               key={tech}
-              className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]"
+              className="font-space-grotesk text-label md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary"
             >
               {tech}
             </span>
@@ -115,7 +115,7 @@ const SkillCategoryItem: React.FC<{ category: SkillCategory; lang: 'en' | 'jp' }
         {category.items.map((item) => (
           <span
             key={item}
-            className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]"
+            className="font-space-grotesk text-label md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary"
           >
             {item}
           </span>
@@ -146,7 +146,7 @@ const ProjectItem: React.FC<{ project: Project; lang: 'en' | 'jp' }> = ({ projec
           {project.technologies.map((tech) => (
             <span
               key={tech}
-              className="font-space-grotesk text-body-base md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-[#f5f5f7] text-[#696969]"
+              className="font-space-grotesk text-label md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary"
             >
               {tech}
             </span>

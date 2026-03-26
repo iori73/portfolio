@@ -496,20 +496,20 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
       </section>
 
       {/* Project Info Section */}
-      <section id="project-info" className="bg-white pt-4 pb-8 scroll-mt-32">
+      <section id="project-info" className="bg-surface pt-4 pb-8 scroll-mt-32">
         <div className="max-w-[896px] w-full mx-auto">
           <div className="flex items-center gap-6 mb-4 flex-wrap md:flex-nowrap">
-            <h1 className="text-heading-xl md:text-heading-2xl font-switzer">{data.projectTitle}</h1>
+            <h1 className="text-title-lg font-switzer">{data.projectTitle}</h1>
             <div className="flex gap-2">
               {data.tags.map((tag, index) => (
-                <span key={index} className="text-body-lg font-switzer px-4 py-1 rounded-full bg-[#e3e3e3]">
+                <span key={index} className="text-label font-switzer px-4 py-1 rounded-full bg-surface-muted text-ink-tertiary">
                   {tag}
                 </span>
               ))}
             </div>
           </div>
 
-          <p className="text-body-xl font-switzer text-gray-600 mb-8">{data.projectDescription}</p>
+          <p className="text-body-lg font-switzer text-ink-tertiary mb-8">{data.projectDescription}</p>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div>

@@ -166,10 +166,10 @@ const GymDashboardPage: React.FC = () => {
 
           {/* Tags */}
           {/* <div className="flex gap-2 mb-8">
-            <span className="text-body-sm md:text-body-lg leading-[1.3] font-space-grotesk px-2 py-1 rounded-[16px] bg-[#f5f5f7] text-[#696969] whitespace-nowrap">
+            <span className="text-body-sm md:text-body-lg leading-[1.3] font-space-grotesk px-2 py-1 rounded-[16px] bg-surface-muted text-ink-tertiary whitespace-nowrap">
               UI
             </span>
-            <span className="text-body-sm md:text-body-lg leading-[1.3] font-space-grotesk px-2 py-1 rounded-[16px] bg-[#f5f5f7] text-[#696969] whitespace-nowrap">
+            <span className="text-body-sm md:text-body-lg leading-[1.3] font-space-grotesk px-2 py-1 rounded-[16px] bg-surface-muted text-ink-tertiary whitespace-nowrap">
               Context Engineering
             </span>
           </div> */}

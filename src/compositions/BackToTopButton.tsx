@@ -7,11 +7,11 @@ import { useMenu } from '@/src/contexts/MenuContext';
  * BackToTopButton:
  * - On mobile (below md):
  *    - 48×48 circle (w-12 h-12)
- *    - position: bottom-44 right-4 (adjusted to avoid footer overlap)
+ *    - position: bottom-8 right-8
  *    - when scrolled: 50% opacity
  * - On md+:
  *    - 64×64 circle (w-16 h-16)
- *    - position: bottom-28 right-12 (adjusted to avoid footer overlap)
+ *    - position: bottom-8 right-8
  *    - when scrolled: 100% opacity
  * - Uses a blur background
  * - Only visible when user has scrolled down a bit
@@ -41,8 +41,8 @@ export default function BackToTopButton() {
       aria-label="Back to top"
       className={`
         fixed
-        bottom-44 md:bottom-28
-        right-4 md:right-12
+        bottom-8
+        right-8
         w-12 h-12 md:w-16 md:h-16
         flex items-center justify-center
         rounded-full

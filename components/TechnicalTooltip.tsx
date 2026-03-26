@@ -86,7 +86,7 @@ const TechnicalTooltip: React.FC<TechnicalTooltipProps> = ({ children, content }
       <div ref={tooltipRef} className="relative inline-block">
         <span
           ref={triggerRef}
-          className="px-2 py-0.5 rounded-md bg-[#f5f5f7] text-[#1d1d1f] font-medium cursor-pointer inline-flex items-center mr-1"
+          className="px-2 py-0.5 rounded-md bg-surface-muted text-ink font-medium cursor-pointer inline-flex items-center mr-1"
           onClick={handleMobileClick}
         >
           {children}
@@ -112,7 +112,7 @@ const TechnicalTooltip: React.FC<TechnicalTooltipProps> = ({ children, content }
     <TooltipProvider delayDuration={300}>
       <Tooltip>
         <TooltipTrigger asChild>
-          <span className="px-2 py-0.5 rounded-md bg-[#f5f5f7] text-[#1d1d1f] font-medium cursor-help inline-flex items-center mr-1">
+          <span className="px-2 py-0.5 rounded-md bg-surface-muted text-ink font-medium cursor-help inline-flex items-center mr-1">
             {children}
           </span>
         </TooltipTrigger>

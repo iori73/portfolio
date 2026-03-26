@@ -176,7 +176,7 @@ const InterestsVisualization: React.FC = () => {
   return (
     <div className="w-full h-full flex flex-col items-center py-4 gap-8 md:gap-4">
       <div
-        className="flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-[#f5f5f7] text-[#696969]"
+        className="flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-surface-muted text-ink-tertiary"
         // style={{
         //   backgroundColor: '#646464',
         //   borderRadius: '100px',

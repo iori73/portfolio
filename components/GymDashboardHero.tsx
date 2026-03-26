@@ -388,7 +388,7 @@ const GymDashboardHero: React.FC<GymDashboardHeroProps> = ({ gymStats: propGymSt
                   </h4>
                   <p
                     className={`text-body-3xl font-semibold leading-[1.2] tracking-[-0.4px] transition-colors duration-500 ease-in-out ${
-                      animationState.darkMode ? 'text-white' : 'text-[#101828]'
+                      animationState.darkMode ? 'text-white' : 'text-ink'
                     }`}
                   >
                     {card.value}

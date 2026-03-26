@@ -226,7 +226,7 @@ export default function BlogPage() {
       <div className="relative mt-16 md:mb-16">
         {/* 画面幅いっぱいの背景 */}
         <div
-          className="absolute inset-0 bg-[#0A0A0A]/10"
+          className="absolute inset-0 bg-ink/10"
           style={{
             left: '50%',
             right: '50%',
