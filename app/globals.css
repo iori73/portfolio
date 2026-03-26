@@ -182,6 +182,23 @@ p {
     --surface-muted: #f5f5f7;
     --line-subtle: #e4e4e7;
     --line-section: #d4d4d8;
+
+    /* Podcast Notes — category color tokens */
+    --podcast-category-technology: #6C5CE7;
+    --podcast-category-ai: #6C5CE7;
+    --podcast-category-science: #0984E3;
+    --podcast-category-biology: #00B894;
+    --podcast-category-design-art: #FD79A8;
+    --podcast-category-business: #FDCB6E;
+    --podcast-category-career: #F39C12;
+    --podcast-category-startup-vc: #E17055;
+    --podcast-category-education: #74B9FF;
+    --podcast-category-liberal-arts: #A29BFE;
+    --podcast-category-others: #636E72;
+    --podcast-category-default: #B2BEC3;
+
+    /* Fixed site header: py-3 + 48px logo row — keep sticky `top` in sync (was top-20/80px vs ~72px). */
+    --site-header-height: 4.5rem;
   }
 
   @media (min-width: 768px) {

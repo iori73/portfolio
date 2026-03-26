@@ -332,7 +332,10 @@
     "browseNotes": "ノートを閲覧",
     "episodesShown": "エピソード",
     "noResults": "現在のフィルターに一致するエピソードがありません。",
-    "showAll": "全 {count} エピソードを表示"
+    "showAll": "全 {count} エピソードを表示",
+    "showLess": "先頭 {count} 件に戻す",
+    "allEpisodesTitle": "全エピソード",
+    "backToOverview": "← Knowledge Constellation"
   },
   "figmaPlugins": {
     "title": "Figma Plugins & Widgets",

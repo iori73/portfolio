@@ -41,7 +41,7 @@ export default function Header() {
   ];
 
   return (
-    <header className="fixed top-0 left-0 w-full z-40 mx-auto px-4 py-3 md:px-6 flex justify-between items-center">
+    <header className="fixed top-0 left-0 z-40 mx-auto flex h-[var(--site-header-height)] w-full items-center justify-between px-4 py-3 md:px-6 box-border">
       {/* Background gradient */}
       <div
         className="absolute inset-0 pointer-events-none"

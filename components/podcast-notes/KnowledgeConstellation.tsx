@@ -8,8 +8,10 @@ interface Props {
   episodes: Episode[];
   clusters: Cluster[];
   activeCluster: number | null;
+  activeTag: string | null;
   hoveredEpisode: string | null;
   onClusterClick: (clusterId: number | null) => void;
+  onTagChange: (tag: string | null) => void;
   onEpisodeHover: (episodeId: string | null) => void;
   onEpisodeClick: (episodeId: string) => void;
 }
@@ -18,8 +20,10 @@ export default function KnowledgeConstellation({
   episodes,
   clusters,
   activeCluster,
+  activeTag,
   hoveredEpisode,
   onClusterClick,
+  onTagChange,
   onEpisodeHover,
   onEpisodeClick,
 }: Props) {
@@ -115,7 +119,10 @@ export default function KnowledgeConstellation({
       const x = t.applyX(xScale(ep.embedding2d[0]));
       const y = t.applyY(yScale(ep.embedding2d[1]));
       const color = getColor(ep);
-      const isActive = activeCluster === null || ep.cluster === activeCluster;
+      const isActive =
+        (activeCluster === null && activeTag === null) ||
+        (activeCluster !== null && ep.cluster === activeCluster) ||
+        (activeTag !== null && ep.category === activeTag);
       const isHovered = hoveredEpisode === ep.id;
 
       const baseRadius = 4 * t.k;
@@ -158,13 +165,16 @@ export default function KnowledgeConstellation({
     for (const cluster of clusters) {
       const cx = t.applyX(xScale(cluster.center[0]));
       const cy = t.applyY(yScale(cluster.center[1])) - 20 * t.k;
-      const isActiveCluster = activeCluster === null || activeCluster === cluster.id;
+      const isActiveCluster =
+        (activeCluster === null && activeTag === null) ||
+        activeCluster === cluster.id ||
+        (activeTag !== null && cluster.label === activeTag);
       ctx.globalAlpha = isActiveCluster ? 0.6 : 0.15;
       ctx.fillText(cluster.label, cx, cy);
     }
 
     ctx.globalAlpha = 1;
-  }, [episodes, clusters, dimensions, activeCluster, hoveredEpisode, getColor, getScale]);
+  }, [episodes, clusters, dimensions, activeCluster, activeTag, hoveredEpisode, getColor, getScale]);
 
   useEffect(() => {
     draw();
@@ -267,44 +277,48 @@ export default function KnowledgeConstellation({
             backdropFilter: 'blur(8px)',
           }}
         >
-          <p className="text-white text-body-sm font-medium leading-tight mb-1">
+          <p className="text-white text-body font-medium leading-tight mb-1">
             {tooltip.episode.title}
           </p>
-          <p className="text-caption" style={{ color: getColor(tooltip.episode) }}>
+          <p className="text-label" style={{ color: getColor(tooltip.episode) }}>
             {tooltip.episode.podcast}
           </p>
         </div>
       )}
 
-      {/* Cluster filter pills */}
-      <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2 justify-center">
+      {/* Category filter pills */}
+      <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-1.5 justify-center">
         <button
-          onClick={() => onClusterClick(null)}
-          className={`px-3 py-1.5 rounded-full text-label font-space-grotesk transition-all ${
-            activeCluster === null
+          onClick={() => { onClusterClick(null); onTagChange(null); }}
+          className={`px-3 py-1.5 rounded-full text-body font-space-grotesk transition-all ${
+            activeCluster === null && activeTag === null
               ? 'bg-white/20 text-white'
               : 'bg-white/5 text-white/40 hover:bg-white/10 hover:text-white/70'
           }`}
         >
           All
         </button>
-        {clusters.map((c) => (
-          <button
-            key={c.id}
-            onClick={() => onClusterClick(activeCluster === c.id ? null : c.id)}
-            className={`px-3 py-1.5 rounded-full text-label font-space-grotesk transition-all ${
-              activeCluster === c.id
-                ? 'text-white'
-                : 'text-white/40 hover:text-white/70'
-            }`}
-            style={{
-              backgroundColor:
-                activeCluster === c.id ? c.color + '40' : 'rgba(255,255,255,0.05)',
-            }}
-          >
-            {c.label}
-          </button>
-        ))}
+        {clusters.map((c) => {
+          const isActive = activeTag === c.label || activeCluster === c.id;
+          return (
+            <button
+              key={c.id}
+              onClick={() => onTagChange(isActive ? null : c.label)}
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-body font-space-grotesk transition-all ${
+                isActive ? 'text-white' : 'text-white/40 hover:text-white/70'
+              }`}
+              style={{
+                backgroundColor: isActive ? c.color + '40' : 'rgba(255,255,255,0.05)',
+              }}
+            >
+              <span
+                className="w-1.5 h-1.5 rounded-full shrink-0"
+                style={{ backgroundColor: isActive ? '#fff' : c.color }}
+              />
+              {c.label}
+            </button>
+          );
+        })}
       </div>
     </div>
   );

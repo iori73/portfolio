@@ -1,40 +1,53 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import {
+  Bot,
+  BrainCircuit,
+  ChartScatter,
+  Database,
+  Headphones,
+  Sparkles,
+  type LucideIcon,
+} from 'lucide-react';
 
 interface Props {
   bodyFontClass: string;
   headingFontClass: string;
 }
 
-const STEPS = [
+const STEPS: Array<{
+  Icon: LucideIcon;
+  label: string;
+  description: string;
+}> = [
   {
-    icon: '🎧',
+    Icon: Headphones,
     label: 'Spotify',
     description: 'Share episode URL',
   },
   {
-    icon: '🤖',
+    Icon: Bot,
     label: 'Cursor LLM',
     description: 'Process & structure notes',
   },
   {
-    icon: '📝',
+    Icon: Database,
     label: 'Notion DB',
     description: 'Store structured data',
   },
   {
-    icon: '🧮',
+    Icon: BrainCircuit,
     label: 'Embeddings',
     description: 'Vectorize with OpenAI',
   },
   {
-    icon: '🗺️',
+    Icon: ChartScatter,
     label: 'UMAP',
     description: 'Reduce to 2D map',
   },
   {
-    icon: '✨',
+    Icon: Sparkles,
     label: 'This Page',
     description: 'Visualize & explore',
   },
@@ -79,13 +92,17 @@ export default function PipelineSection({ bodyFontClass, headingFontClass }: Pro
               }`}
               style={{ transitionDelay: `${i * 100}ms` }}
             >
-              <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-surface-muted flex items-center justify-center text-2xl mb-3">
-                {step.icon}
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-surface-muted flex items-center justify-center mb-3 text-ink-secondary">
+                <step.Icon
+                  className="size-7 md:size-8 shrink-0"
+                  strokeWidth={1.5}
+                  aria-hidden
+                />
               </div>
-              <span className="font-space-grotesk text-label font-semibold text-ink mb-1">
+              <span className="font-space-grotesk text-title-sm font-semibold text-ink mb-1">
                 {step.label}
               </span>
-              <span className={`text-caption text-ink-tertiary ${bodyFontClass}`}>
+              <span className={`text-body text-ink-tertiary ${bodyFontClass}`}>
                 {step.description}
               </span>
             </div>

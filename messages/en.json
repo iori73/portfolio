@@ -332,7 +332,10 @@
     "browseNotes": "Browse Notes",
     "episodesShown": "episodes",
     "noResults": "No episodes match the current filters.",
-    "showAll": "Show all {count} episodes"
+    "showAll": "Show all {count} episodes",
+    "showLess": "Show first {count} episodes",
+    "allEpisodesTitle": "All Episodes",
+    "backToOverview": "← Knowledge Constellation"
   },
   "cv": {
     "workExperience": "Work Experience",

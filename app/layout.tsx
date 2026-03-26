@@ -34,7 +34,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang={locale} className={`${notoSansJP.variable} ${spaceGrotesk.variable}`}>
       <body className="min-h-screen">
-        {children}
+{children}
         <Analytics />
       </body>
     </html>
