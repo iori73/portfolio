@@ -41,6 +41,29 @@
 
 ---
 
+## 2026-03-26: NoteCard デザインレビューで発覚したパターン
+
+### 見出し要素に bodyFontClass が使われていた
+**状況**: NoteCard の h4 に `bodyFontClass`（Helvetica Neue / Noto Sans JP Light）が渡されていた。見出しには `headingFontClass`（Switzer / Noto Sans JP Medium）を使うべき。
+
+**原因**: コンポーネント作成時に bodyFontClass しか props に含めず、見出しにも同じクラスを流用していた。
+
+**教訓**:
+- 見出し要素 (h1-h6) には必ず `headingFontClass` を使う
+- コンポーネントが見出しと本文の両方を含む場合、両方の font class を props で受け取る
+- `/design-review` コマンドでチェック可能
+
+### メタテキストのサイズが本文と同じだった
+**状況**: ポッドキャスト名、日付、duration 等のメタ情報に `text-body` (16px) が使われ、見出しとの階層が不明瞭だった。
+
+**教訓**:
+- メタ情報・補助テキスト → `text-body-sm` (13-14px)
+- タグ・ラベル → `text-label` (13-14px) + `font-space-grotesk`
+- 本文 → `text-body` (16px)
+- design-system.md §1.6 の本文サイズ表を必ず参照する
+
+---
+
 ## 2025-01-17: Tailwind spacing のローカル vs 本番不一致
 
 > ADR: docs/decisions/002-tailwind-spacing-fix.md

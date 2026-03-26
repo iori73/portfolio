@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
-import { ChevronDown } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import {
   Breadcrumb,
@@ -19,13 +19,12 @@ import InsightsSection from '@/components/podcast-notes/InsightsSection';
 import FilterBar from '@/components/podcast-notes/FilterBar';
 import NoteCard from '@/components/podcast-notes/NoteCard';
 import PipelineSection from '@/components/podcast-notes/PipelineSection';
-import type { PodcastData, Episode } from '@/components/podcast-notes/types';
+import type { PodcastData } from '@/components/podcast-notes/types';
 
 const INITIAL_DISPLAY_COUNT = 8;
 
 export default function PodcastNotesPage() {
   const t = useTranslations('podcastNotesPage');
-  const tCommon = useTranslations('common');
   const locale = useLocale();
   const { getBodyFontClass } = useBodyFont();
   const { getHeadingFontClass } = useHeadingFont();
@@ -37,7 +36,6 @@ export default function PodcastNotesPage() {
   const [activePodcast, setActivePodcast] = useState<string | null>(null);
   const [hoveredEpisode, setHoveredEpisode] = useState<string | null>(null);
   const [highlightedEpisode, setHighlightedEpisode] = useState<string | null>(null);
-  const [showAllEpisodes, setShowAllEpisodes] = useState(false);
 
   useEffect(() => {
     // API（Notion 直参照）を優先し、未設定・エラー時は static JSON にフォールバック
@@ -91,7 +89,6 @@ export default function PodcastNotesPage() {
   }, [data, activeCluster, activeTag, activePodcast]);
 
   const handleEpisodeClick = useCallback((episodeId: string) => {
-    setShowAllEpisodes(true);
     setHighlightedEpisode(episodeId);
     requestAnimationFrame(() => {
       const el = document.getElementById(`note-${episodeId}`);
@@ -105,18 +102,15 @@ export default function PodcastNotesPage() {
     setActiveCluster(clusterId);
     setActiveTag(null);
     setActivePodcast(null);
-    setShowAllEpisodes(false);
   }, []);
 
   const handleTagChange = useCallback((tag: string | null) => {
     setActiveTag(tag);
     setActiveCluster(null);
-    setShowAllEpisodes(false);
   }, []);
 
   const handlePodcastChange = useCallback((podcast: string | null) => {
     setActivePodcast(podcast);
-    setShowAllEpisodes(false);
   }, []);
 
   if (loading) {
@@ -124,7 +118,7 @@ export default function PodcastNotesPage() {
       <div className="font-sans my-24 md:mt-28 md:mb-16 flex items-center justify-center min-h-[60vh]">
         <div className="text-center">
           <div className="w-8 h-8 border-2 border-ink-tertiary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className={`text-body text-ink-tertiary ${getBodyFontClass()}`}>
+          <p className={`text-body-lg text-ink-tertiary ${getBodyFontClass()}`}>
             Loading podcast data...
           </p>
         </div>
@@ -138,7 +132,7 @@ export default function PodcastNotesPage() {
         <p className={`text-body-lg text-ink-secondary ${getBodyFontClass()}`}>
           No data available. Run the data pipeline first.
         </p>
-        <code className="font-space-grotesk text-label text-ink-tertiary mt-2 block">
+        <code className="font-space-grotesk text-body text-ink-tertiary mt-2 block">
           node scripts/generate-podcast-data.js
         </code>
       </div>
@@ -149,7 +143,7 @@ export default function PodcastNotesPage() {
     <div className="font-sans my-24 md:mt-28 md:mb-16">
       {/* Breadcrumb */}
       <Breadcrumb className="mb-8">
-        <BreadcrumbList className="text-label font-space-grotesk">
+        <BreadcrumbList className="text-body font-space-grotesk">
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
               <Link href={`/${locale}/experiment`} className="text-ink-tertiary hover:text-ink-secondary transition-colors">
@@ -186,8 +180,10 @@ export default function PodcastNotesPage() {
             episodes={data.episodes}
             clusters={data.clusters}
             activeCluster={activeCluster}
+            activeTag={activeTag}
             hoveredEpisode={hoveredEpisode}
             onClusterClick={handleClusterClick}
+            onTagChange={handleTagChange}
             onEpisodeHover={setHoveredEpisode}
             onEpisodeClick={handleEpisodeClick}
           />
@@ -203,56 +199,57 @@ export default function PodcastNotesPage() {
       />
 
       {/* ─── Section 3: Browse Notes ─── */}
-      <section className="py-8">
-        <h3 className={`text-title-lg mb-2 ${getHeadingFontClass()}`}>
+      <section id="podcast-notes-browse" className="py-8 scroll-mt-24 md:scroll-mt-28">
+        <h3 className={`text-title-lg mb-1 ${getHeadingFontClass()}`}>
           {t('browseNotes')}
         </h3>
-        <p className={`text-body text-ink-tertiary mb-6 ${getBodyFontClass()}`}>
+        <p className={`text-body-lg text-ink-tertiary mb-6 ${getBodyFontClass()}`}>
           {filteredEpisodes.length} {t('episodesShown')}
         </p>
 
-        <FilterBar
-          clusters={data.clusters}
-          allTags={allTags}
-          allPodcasts={allPodcasts}
-          activeCluster={activeCluster}
-          activeTag={activeTag}
-          activePodcast={activePodcast}
-          onClusterChange={handleClusterClick}
-          onTagChange={handleTagChange}
-          onPodcastChange={handlePodcastChange}
-        />
+        {/* two-column layout: sidebar (desktop) + card list */}
+        <div className="flex flex-col md:flex-row gap-8">
+          <FilterBar
+            clusters={data.clusters}
+            allTags={allTags}
+            allPodcasts={allPodcasts}
+            activeCluster={activeCluster}
+            activeTag={activeTag}
+            activePodcast={activePodcast}
+            onClusterChange={handleClusterClick}
+            onTagChange={handleTagChange}
+            onPodcastChange={handlePodcastChange}
+          />
 
-        <div className="space-y-3 mt-6">
-          {(showAllEpisodes
-            ? filteredEpisodes
-            : filteredEpisodes.slice(0, INITIAL_DISPLAY_COUNT)
-          ).map((ep) => (
-            <NoteCard
-              key={ep.id}
-              episode={ep}
-              isHighlighted={highlightedEpisode === ep.id}
-              bodyFontClass={getBodyFontClass()}
-            />
-          ))}
+          <div className="flex-1 min-w-0 space-y-3">
+            {filteredEpisodes.slice(0, INITIAL_DISPLAY_COUNT).map((ep) => (
+              <NoteCard
+                key={ep.id}
+                episode={ep}
+                isHighlighted={highlightedEpisode === ep.id}
+                bodyFontClass={getBodyFontClass()}
+                headingFontClass={getHeadingFontClass()}
+              />
+            ))}
 
-          {!showAllEpisodes && filteredEpisodes.length > INITIAL_DISPLAY_COUNT && (
-            <button
-              onClick={() => setShowAllEpisodes(true)}
-              className={`w-full py-3 rounded-xl border border-line-subtle hover:border-line-section text-body text-ink-tertiary hover:text-ink-secondary transition-colors flex items-center justify-center gap-1.5 ${getBodyFontClass()}`}
-            >
-              {t('showAll', { count: filteredEpisodes.length })}
-              <ChevronDown className="w-4 h-4" />
-            </button>
-          )}
+            {filteredEpisodes.length > INITIAL_DISPLAY_COUNT && (
+              <Link
+                href={`/${locale}/experiment/podcast-notes/all`}
+                className={`w-full py-3 rounded-xl border border-line-subtle hover:border-line-section text-body-lg text-ink-tertiary hover:text-ink-secondary transition-colors flex items-center justify-center gap-1.5 ${getBodyFontClass()}`}
+              >
+                {t('showAll', { count: filteredEpisodes.length })}
+                <ArrowRight className="w-4 h-4 shrink-0" />
+              </Link>
+            )}
 
-          {filteredEpisodes.length === 0 && (
-            <div className="text-center py-12">
-              <p className={`text-body text-ink-tertiary ${getBodyFontClass()}`}>
-                {t('noResults')}
-              </p>
-            </div>
-          )}
+            {filteredEpisodes.length === 0 && (
+              <div className="text-center py-12">
+                <p className={`text-body-lg text-ink-tertiary ${getBodyFontClass()}`}>
+                  {t('noResults')}
+                </p>
+              </div>
+            )}
+          </div>
         </div>
       </section>
 

@@ -1,16 +1,30 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ChevronDown, ExternalLink } from 'lucide-react';
+import { ChevronDown, ExternalLink, Clock } from 'lucide-react';
 import { Episode, CATEGORY_COLORS, DEFAULT_CATEGORY_COLOR } from './types';
+
+function extractSummary(raw: string): string {
+  const match = raw.match(/\bSummary\s+([\s\S]+)$/);
+  return match ? match[1].trim() : raw.trim();
+}
+
+function formatDuration(minutes: number): string {
+  const m = Math.round(minutes);
+  if (m < 60) return `${m} min`;
+  const h = Math.floor(m / 60);
+  const rem = m % 60;
+  return rem > 0 ? `${h}h ${rem}m` : `${h}h`;
+}
 
 interface Props {
   episode: Episode;
   isHighlighted: boolean;
   bodyFontClass: string;
+  headingFontClass: string;
 }
 
-export default function NoteCard({ episode, isHighlighted, bodyFontClass }: Props) {
+export default function NoteCard({ episode, isHighlighted, bodyFontClass, headingFontClass }: Props) {
   const [isExpanded, setIsExpanded] = useState(false);
   const color = CATEGORY_COLORS[episode.category || 'Others'] || DEFAULT_CATEGORY_COLOR;
 
@@ -49,26 +63,26 @@ export default function NoteCard({ episode, isHighlighted, bodyFontClass }: Prop
 
           <div className="flex-1 min-w-0">
             {/* Title */}
-            <h4 className={`text-title-sm text-ink leading-snug line-clamp-2 ${bodyFontClass}`}>
+            <h4 className={`text-title-sm text-ink line-clamp-2 ${headingFontClass}`}>
               {episode.title}
             </h4>
 
             {/* Meta */}
             <div className="flex items-center gap-2 mt-1.5 flex-wrap">
-              <span className="font-space-grotesk text-label text-ink-tertiary">
+              <span className="font-space-grotesk text-body-sm text-ink-tertiary">
                 {episode.podcast}
               </span>
               {episode.date && (
                 <>
                   <span className="text-ink-tertiary">·</span>
-                  <span className="font-space-grotesk text-label text-ink-tertiary">
+                  <span className="font-space-grotesk text-body-sm text-ink-tertiary">
                     {episode.date}
                   </span>
                 </>
               )}
               {episode.category && (
                 <span
-                  className="font-space-grotesk text-label px-2 py-0.5 rounded-md"
+                  className="font-space-grotesk text-label px-3 py-1 rounded-lg"
                   style={{ backgroundColor: color + '15', color }}
                 >
                   {episode.category}
@@ -89,10 +103,37 @@ export default function NoteCard({ episode, isHighlighted, bodyFontClass }: Prop
       {/* Expanded content */}
       {isExpanded && (
         <div className="px-4 md:px-5 pb-4 md:pb-5 border-t border-line-subtle pt-4">
+          {/* Meta row: duration + tags */}
+          {(episode.durationMinutes > 0 || episode.tags.length > 0) && (
+            <div className="flex items-center gap-2 flex-wrap mb-4">
+              {episode.durationMinutes > 0 && (
+                <span className="inline-flex items-center gap-1 font-space-grotesk text-body-sm text-ink-tertiary">
+                  <Clock className="w-3.5 h-3.5" />
+                  {formatDuration(episode.durationMinutes)}
+                </span>
+              )}
+              {episode.durationMinutes > 0 && episode.tags.length > 0 && (
+                <span className="text-ink-tertiary">·</span>
+              )}
+              {episode.tags.map((tag) => {
+                const tagColor = CATEGORY_COLORS[tag] || DEFAULT_CATEGORY_COLOR;
+                return (
+                  <span
+                    key={tag}
+                    className="font-space-grotesk text-label px-3 py-1 rounded-lg"
+                    style={{ backgroundColor: tagColor + '15', color: tagColor }}
+                  >
+                    {tag}
+                  </span>
+                );
+              })}
+            </div>
+          )}
+
           {/* Summary */}
           {episode.summary && (
-            <p className={`text-body text-ink-secondary mb-4 leading-relaxed ${bodyFontClass}`}>
-              {episode.summary}
+            <p className={`text-body-lg text-ink-secondary mb-4 leading-relaxed ${bodyFontClass}`}>
+              {extractSummary(episode.summary)}
             </p>
           )}
 
@@ -106,7 +147,7 @@ export default function NoteCard({ episode, isHighlighted, bodyFontClass }: Prop
                 {episode.keyLearnings.map((learning, i) => (
                   <li
                     key={i}
-                    className={`text-body text-ink-secondary pl-4 relative ${bodyFontClass}`}
+                    className={`text-body-lg text-ink-secondary pl-4 relative ${bodyFontClass}`}
                   >
                     <span
                       className="absolute left-0 top-[9px] w-1.5 h-1.5 rounded-full"
@@ -125,7 +166,7 @@ export default function NoteCard({ episode, isHighlighted, bodyFontClass }: Prop
               href={episode.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-label font-space-grotesk text-ink-tertiary hover:text-ink-secondary transition-colors"
+              className="inline-flex items-center gap-1.5 py-2 text-body-sm font-space-grotesk text-ink-tertiary hover:text-ink-secondary transition-colors"
             >
               <ExternalLink className="w-3.5 h-3.5" />
               Listen on Spotify

@@ -48,6 +48,29 @@
 
 ---
 
+### デザインシステム知識ベース構築（2026-03-26）
+- [x] メモリファイル 8つ作成（HIG/MD3/Encore原則をトピック別に統合）
+  - typography-principles.md, color-principles.md, spacing-layout-principles.md
+  - component-patterns.md, interaction-motion.md, accessibility-principles.md
+  - data-visualization.md（データ可視化の基本が全部わかる本より抽出）
+  - design-system-governance.md（Design That Scalesより抽出）
+- [x] MEMORY.md インデックス作成
+- [x] カスタムスラッシュコマンド 4つ作成
+  - /design-review — ファイル単位のデザインシステム準拠チェック
+  - /design-audit — コードベース全体の違反検出
+  - /design-ref — 3層検索（メモリ → docs → 書籍OCR）
+  - /component-scaffold — 規約準拠コンポーネント生成
+- [x] CLAUDE.md にデザイン原則参照セクション追加
+- [x] NoteCard.tsx デザインレビュー実施 → 違反修正
+  - h4 に headingFontClass 適用（bodyFontClass → headingFontClass）
+  - メタテキスト text-body → text-body-sm に縮小
+  - タグを text-label px-3 py-1 rounded-lg に統一
+  - リンクに py-2 追加（タッチターゲット確保）
+  - leading-snug 削除（セマンティッククラスの line-height に委任）
+  - 呼び出し元 2箇所に headingFontClass prop 追加
+
+---
+
 ## 進行中
 
 ### デザインシステム段階適用
@@ -56,10 +79,12 @@
 - [ ] Home / About / Blog 等のランディングページに適用
 - [ ] 古いドキュメントの整理（_archive/ への移動）
 - [ ] dead code の削除（src/lib/fonts.tsx, styles/globals.css）
+- [ ] 他コンポーネントに /design-review を実施して順次修正
 
 ---
 
 ## 次のタスク
 1. 残りページへのセマンティックカラー適用
-2. README.md の更新（Next.js 14 → 15 の記載修正等）
+2. /design-audit でコードベース全体の違反数を把握
 3. dead code の削除（ユーザー確認後）
+4. README.md の更新（Next.js 14 → 15 の記載修正等）

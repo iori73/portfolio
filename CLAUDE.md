@@ -216,6 +216,27 @@ portfolio/
 
 ---
 
+## デザイン原則参照
+
+### 参照ガイドライン
+- **Apple Human Interface Guidelines (HIG)** — タッチターゲット、光学サイズ調整、spring animation
+- **Google Material Design 3** — Type roles、tonal palette、state layer、duration tokens
+- **Spotify Encore Design System** — 単一タイプスケール、レスポンシブ CSS 変数、ミニマルパレット
+- **書籍**: Design That Scales, The Elements of UX, データ可視化の基本が全部わかる本
+
+### カスタムコマンド
+| コマンド | 用途 |
+|---|---|
+| `/design-review [file]` | 特定ファイルのデザインシステム準拠チェック |
+| `/design-audit` | コードベース全体の違反検出 |
+| `/design-ref [topic]` | デザイン原則の深掘り検索（メモリ + docs + 書籍） |
+| `/component-scaffold [name]` | 規約準拠の新コンポーネント生成 |
+
+### メモリファイル（自動ロード）
+トピック別のデザイン原則がプロジェクトメモリに保存されている。HIG/MD3/Encore の原則をプロジェクトのトークンにマッピングした知識ベース。コード生成時に自動参照される。
+
+---
+
 ## 過去の学び
 
 > 詳細は [lessons.md](lessons.md) を参照。
