@@ -156,8 +156,8 @@ const ExperimentPage: React.FC = () => {
     <div className="font-sans my-24 md:mt-28 md:mb-16">
       {/* Hero Section */}
       <section className="pt-4 md:pt-16 pb-4 md:pb-16">
-        <h1 className="text-heading-3xl md:text-heading-4xl mb-2">Experiment</h1>
-        <p className={`max-w-full text-body-lg md:text-body-xl ${getBodyFontClass()}`}>{t('description')}</p>
+        <h1 className="text-display mb-2">Experiment</h1>
+        <p className={`max-w-full text-body-lg ${getBodyFontClass()}`}>{t('description')}</p>
       </section>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-12">
         <div className="lg:col-span-6 relative">
@@ -175,7 +175,7 @@ const ExperimentPage: React.FC = () => {
             <div className="flex flex-col items-start gap-4 relative self-stretch w-full flex-[0_0_auto]">
               <div className="inline-flex items-center gap-2 relative flex-[0_0_auto]">
                 {/* <img className="relative w-14 h-14" alt="S" src="/experiment/podcast_notes_icon.svg" /> */}
-                <h2 className="text-heading-2xl md:text-heading-3xl">Podcast Notes</h2>
+                <h2 className="text-headline">Podcast Notes</h2>
               </div>
 
               <div className="flex gap-2 items-start flex-wrap">
@@ -281,7 +281,7 @@ const ExperimentPage: React.FC = () => {
                   backdropFilter: 'blur(8px)',
                 }}
               />
-              <span className="relative z-10 text-body-lg md:text-body-xl font-medium">{tCommon('goToPage')}</span>
+              <span className="relative z-10 text-body-lg font-medium">{tCommon('goToPage')}</span>
             </NextLink>
           </div>
         </div>

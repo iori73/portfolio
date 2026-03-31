@@ -52,12 +52,12 @@ const AboutPage: React.FC = () => {
         <div className="lg:col-span-6">
           <div className="flex flex-col items-start gap-10 relative">
             <div className="flex flex-col items-start gap-4 relative self-stretch w-full flex-[0_0_auto]">
-              <h1 className="mb-2 text-heading-3xl md:text-heading-4xl">Iori Kawano</h1>
-              <p className={`max-w-full text-body-lg md:text-body-xl ${getBodyFontClass()}`}>
+              <h1 className="mb-2 text-display">Iori Kawano</h1>
+              <p className={`max-w-full text-body-lg ${getBodyFontClass()}`}>
                 {t('description1')}
               </p>
               {/* Idiomatic means (here: 71. 直観的より慣用的に)[https://www.sociomedia.co.jp/9752] */}
-              <p className={`max-w-full text-body-lg md:text-body-xl ${getBodyFontClass()}`}>
+              <p className={`max-w-full text-body-lg ${getBodyFontClass()}`}>
                 {t('description2')}
               </p>
             </div>
@@ -72,8 +72,8 @@ const AboutPage: React.FC = () => {
       </div>
 
       <section className="pt-4 md:pt-0 pb-4 md:pb-0 flex flex-col gap-4">
-        <h2 className={`text-heading-2xl md:text-heading-3xl ${getHeadingFontClass()}`}>{t('myInterests')}</h2>
-        <p className={`max-w-full text-body-lg md:text-body-xl ${getBodyFontClass()}`}>{t('interestsDescription')}</p>
+        <h2 className={`text-headline ${getHeadingFontClass()}`}>{t('myInterests')}</h2>
+        <p className={`max-w-full text-body-lg ${getBodyFontClass()}`}>{t('interestsDescription')}</p>
         <InterestsVisualization />
       </section>
 

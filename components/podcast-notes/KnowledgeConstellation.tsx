@@ -64,7 +64,8 @@ export default function KnowledgeConstellation({
     const xExtent = d3.extent(episodes, (e) => e.embedding2d[0]) as [number, number];
     const yExtent = d3.extent(episodes, (e) => e.embedding2d[1]) as [number, number];
 
-    const padding = 60;
+    const isMobile = dimensions.width < 768;
+    const padding = isMobile ? 30 : 60;
     const xScale = d3
       .scaleLinear()
       .domain([xExtent[0] - 0.5, xExtent[1] + 0.5])
@@ -160,7 +161,8 @@ export default function KnowledgeConstellation({
     // Draw cluster labels
     ctx.globalAlpha = 0.5;
     ctx.fillStyle = '#ffffff';
-    ctx.font = '12px "Space Grotesk", sans-serif';
+    const labelSize = dimensions.width < 768 ? 10 : 12;
+    ctx.font = `${labelSize}px "Space Grotesk", sans-serif`;
     ctx.textAlign = 'center';
     for (const cluster of clusters) {
       const cx = t.applyX(xScale(cluster.center[0]));
@@ -252,7 +254,7 @@ export default function KnowledgeConstellation({
   );
 
   return (
-    <div ref={containerRef} className="relative w-full h-full min-h-[400px] md:min-h-[600px]">
+    <div ref={containerRef} className="relative w-full h-full min-h-[450px] md:min-h-[600px]">
       <canvas
         ref={canvasRef}
         className="w-full h-full"
@@ -287,10 +289,10 @@ export default function KnowledgeConstellation({
       )}
 
       {/* Category filter pills */}
-      <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-1.5 justify-center">
+      <div className="absolute bottom-4 left-4 right-4 flex flex-nowrap overflow-x-auto md:flex-wrap md:overflow-visible gap-1 md:gap-1.5 justify-start md:justify-center scrollbar-hide">
         <button
           onClick={() => { onClusterClick(null); onTagChange(null); }}
-          className={`px-3 py-1.5 rounded-full text-body font-space-grotesk transition-all ${
+          className={`px-2 py-1 md:px-3 md:py-1.5 rounded-full text-caption md:text-body font-space-grotesk transition-all shrink-0 ${
             activeCluster === null && activeTag === null
               ? 'bg-white/20 text-white'
               : 'bg-white/5 text-white/40 hover:bg-white/10 hover:text-white/70'
@@ -304,7 +306,7 @@ export default function KnowledgeConstellation({
             <button
               key={c.id}
               onClick={() => onTagChange(isActive ? null : c.label)}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-body font-space-grotesk transition-all ${
+              className={`inline-flex items-center gap-1.5 px-2 py-1 md:px-3 md:py-1.5 rounded-full text-caption md:text-body font-space-grotesk transition-all shrink-0 ${
                 isActive ? 'text-white' : 'text-white/40 hover:text-white/70'
               }`}
               style={{

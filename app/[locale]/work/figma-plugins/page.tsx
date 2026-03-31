@@ -25,17 +25,17 @@ export default function FigmaPluginsPage() {
           <span className="font-space-grotesk text-label text-ink-tertiary">
             Work
           </span>
-          <h1 className={`text-heading-2xl md:text-heading-3xl text-ink mt-2 ${getHeadingFontClass()}`}>
+          <h1 className={`text-headline text-ink mt-2 ${getHeadingFontClass()}`}>
             {t('title')}
           </h1>
-          <p className={`text-body-lg md:text-body-xl text-ink-secondary mt-3 max-w-2xl ${getBodyFontClass()} tracking-[0.2px]`}>
+          <p className={`text-body-lg text-ink-secondary mt-3 max-w-2xl ${getBodyFontClass()} tracking-[0.2px]`}>
             {t('subtitle')}
           </p>
         </div>
 
         {/* Overview */}
         <section className="max-w-[1028px] mx-auto mb-16">
-          <h2 className={`text-heading-xl md:text-heading-2xl mb-6 ${getHeadingFontClass()}`}>
+          <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
             {tWork('overview')}
           </h2>
           <p className={`mb-4 text-ink-secondary ${bodyTextClass}`}>

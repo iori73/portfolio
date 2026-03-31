@@ -36,6 +36,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className="min-h-screen">
 {children}
         <Analytics />
+        {/* figma capture - remove after use */}
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
       </body>
     </html>
   );

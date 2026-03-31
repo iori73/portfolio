@@ -55,7 +55,7 @@ const ARTWORK_CARDS: ArtworkCard[] = [
 
 function TimelineIndicators() {
   return (
-    <div className="flex flex-col items-end gap-2.5">
+    <div className="flex flex-col items-end gap-2.5 scale-[0.8] md:scale-100 origin-center">
       <div className="flex flex-col items-start gap-2.5">
         {TIMELINE_ERAS.map((era) => (
           <div
@@ -117,7 +117,7 @@ function ArtworkCardComponent({
   }, []);
 
   return (
-    <div className="flex-1 min-w-0 flex flex-col gap-2 overflow-hidden">
+    <div className="flex-1 min-w-[60vw] snap-center md:min-w-0 flex flex-col gap-2 overflow-hidden">
       <div className="relative aspect-[274/163] bg-white overflow-hidden">
         {!loaded && (
           <div className="absolute inset-0 bg-[#f5f0e6] animate-pulse" />
@@ -151,14 +151,14 @@ function ArtworkCardComponent({
       </div>
       <div className="flex flex-col gap-1 tracking-wider">
         <span
-          className={`text-sm md:text-lg leading-tight text-ink ${
+          className={`text-caption md:text-lg leading-tight text-ink ${
             locale === 'jp' ? getHeadingFontClass() : 'font-switzer font-medium'
           }`}
         >
           {locale === 'jp' ? card.title.ja : card.title.en}
         </span>
         <span
-          className={`text-xs md:text-base leading-tight text-ink-secondary ${getBodyFontClass()}`}
+          className={`text-[11px] md:text-base leading-tight text-ink-secondary ${getBodyFontClass()}`}
         >
           {locale === 'jp' ? card.artist.ja : card.artist.en}
         </span>
@@ -214,13 +214,13 @@ export default function KushiDangoShowcase({ locale }: { locale: string }) {
         </div>
 
         {/* Timeline indicators overlay */}
-        <div className="absolute right-[56%] top-0 bottom-0 flex items-center z-10 pointer-events-none">
+        <div className="absolute right-[50%] top-0 bottom-0 flex items-center z-10 pointer-events-none">
           <TimelineIndicators />
         </div>
       </div>
 
       {/* Bottom: 3 artwork source cards */}
-      <div className="flex gap-4">
+      <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory -mx-4 px-4 md:mx-0 md:px-0 md:overflow-visible scrollbar-hide">
         {ARTWORK_CARDS.map((card) => (
           <ArtworkCardComponent
             key={card.title.en}

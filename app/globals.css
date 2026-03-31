@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Scrollbar hide utility */
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /* Google Fonts Import */
 @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Noto+Sans+JP:wght@100..900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
@@ -94,9 +105,6 @@ body {
   background-color: #fcfbfc;
 }
 
-p {
-  font-size: 1rem;
-}
 
 /* モバイルでの本文要素の可読性向上 */
 @media (max-width: 640px) {

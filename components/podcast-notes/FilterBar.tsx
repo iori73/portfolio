@@ -84,10 +84,10 @@ export default function FilterBar({
           <SelectTrigger className="w-full h-auto px-2 py-1.5 rounded-lg text-body font-space-grotesk bg-surface-muted text-ink-secondary border-none shadow-none focus:ring-0 focus:ring-offset-0">
             <SelectValue placeholder="All Podcasts" />
           </SelectTrigger>
-          <SelectContent className="font-space-grotesk text-body border-line-subtle bg-surface shadow-sm">
-            <SelectItem value="__all__" className="text-ink-secondary focus:bg-surface-muted focus:text-ink">All Podcasts</SelectItem>
+          <SelectContent className="font-space-grotesk text-body border-line-subtle bg-surface shadow-sm max-w-[360px]">
+            <SelectItem value="__all__" className="text-ink-secondary focus:bg-surface-muted focus:text-ink whitespace-normal">All Podcasts</SelectItem>
             {allPodcasts.map((pod) => (
-              <SelectItem key={pod} value={pod} className="text-ink-secondary focus:bg-surface-muted focus:text-ink">
+              <SelectItem key={pod} value={pod} className="text-ink-secondary focus:bg-surface-muted focus:text-ink whitespace-normal">
                 {pod}
               </SelectItem>
             ))}
@@ -99,7 +99,7 @@ export default function FilterBar({
       {/* ── Mobile horizontal bar ── */}
       <div className="md:hidden sticky top-[var(--site-header-height)] z-20 bg-surface border-b border-line-subtle py-3 -mx-6 px-6">
         <div className="flex items-center gap-2 mb-2">
-          <div className="overflow-x-auto whitespace-nowrap flex gap-1.5 flex-1">
+          <div className="flex flex-wrap gap-1.5 flex-1">
             <button
               onClick={() => { onTagChange(null); onClusterChange(null); }}
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-body font-space-grotesk transition-colors shrink-0 ${

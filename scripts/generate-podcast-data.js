@@ -12,6 +12,9 @@ const { Client } = require('@notionhq/client');
 const fs = require('fs');
 const path = require('path');
 
+// Load .env.local if running locally
+try { require('dotenv').config({ path: path.join(__dirname, '..', '.env.local') }); } catch {}
+
 const NOTION_API_KEY = process.env.NOTION_API_KEY;
 const NOTION_DB_ID = process.env.NOTION_PODCAST_DB_ID;
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
@@ -114,7 +117,7 @@ function extractPageMetadata(page) {
   };
 }
 
-async function fetchPageContent(pageId) {
+async function fetchPageBlocks(pageId) {
   const blocks = [];
   let cursor = undefined;
   let hasMore = true;
@@ -132,47 +135,127 @@ async function fetchPageContent(pageId) {
     cursor = response.next_cursor;
   }
 
-  const textParts = [];
+  return blocks;
+}
+
+/**
+ * Section-aware parser: walks Notion blocks and extracts structured content.
+ *
+ * Notion page structure (confirmed via Playwright):
+ *   heading_3 "Basic Information"  → skip (redundant metadata)
+ *   heading_3 "Summary"            → summary text + key points
+ *   heading_3 "Chapters"           → timestamped chapter list
+ *   heading_3 "Transcript"         → full transcript (flag only)
+ *
+ * Some pages use heading_2 instead of heading_3 for section headers.
+ */
+function parsePageContent(blocks) {
+  let currentSection = null;
+  let currentSubSection = null;
+  const summaryParts = [];
+  const keyLearnings = [];
+  const chapters = [];
+  let hasTranscript = false;
+  // Fallback: collect all text for embedding generation
+  const allText = [];
+
+  const SECTION_NAMES = ['basic information', 'summary', 'chapters', 'timestamps', 'transcript'];
+  const SKIP_SECTIONS = ['basic information'];
+  const SUMMARY_SECTIONS = ['summary'];
+  const CHAPTER_SECTIONS = ['chapters', 'timestamps'];
+  const TRANSCRIPT_SECTIONS = ['transcript'];
+  // Sub-sections within Summary that should be skipped or treated differently
+  const KEY_POINT_LABELS = ['主要ポイント', 'key points', 'key learnings'];
+
   for (const block of blocks) {
     const type = block.type;
     const content = block[type];
-    if (content?.rich_text) {
-      const text = extractRichText(content.rich_text);
-      if (text) textParts.push(text);
-    }
-  }
+    const text = content?.rich_text ? extractRichText(content.rich_text) : '';
 
-  return textParts.join('\n');
-}
-
-function createSummary(content, maxLen = 200) {
-  if (!content) return '';
-  const cleaned = content.replace(/\n+/g, ' ').trim();
-  if (cleaned.length <= maxLen) return cleaned;
-  return cleaned.substring(0, maxLen).trim() + '...';
-}
-
-function extractKeyLearnings(content) {
-  if (!content) return [];
-  const lines = content.split('\n').filter((l) => l.trim());
-  const learnings = [];
-
-  for (const line of lines) {
-    const trimmed = line.trim();
-    if (
-      trimmed.startsWith('•') ||
-      trimmed.startsWith('-') ||
-      trimmed.startsWith('・') ||
-      trimmed.startsWith('→')
-    ) {
-      const cleaned = trimmed.replace(/^[•\-・→]\s*/, '').trim();
-      if (cleaned.length > 10 && cleaned.length < 300) {
-        learnings.push(cleaned);
+    // Detect section headers (heading_2 or heading_3)
+    if (type === 'heading_2' || type === 'heading_3') {
+      const headerLower = text.toLowerCase().trim();
+      if (SECTION_NAMES.some((s) => headerLower.includes(s))) {
+        if (SKIP_SECTIONS.some((s) => headerLower.includes(s))) {
+          currentSection = 'skip';
+        } else if (SUMMARY_SECTIONS.some((s) => headerLower.includes(s))) {
+          currentSection = 'summary';
+        } else if (CHAPTER_SECTIONS.some((s) => headerLower.includes(s))) {
+          currentSection = 'chapters';
+        } else if (TRANSCRIPT_SECTIONS.some((s) => headerLower.includes(s))) {
+          currentSection = 'transcript';
+          hasTranscript = true;
+        }
+        currentSubSection = null;
+        continue;
+      }
+      // Check for sub-section within summary (e.g., "主要ポイント:")
+      if (currentSection === 'summary') {
+        const subLower = text.toLowerCase().trim();
+        if (KEY_POINT_LABELS.some((kp) => subLower.includes(kp))) {
+          currentSubSection = 'keypoints';
+        } else {
+          currentSubSection = 'text';
+        }
+        continue;
       }
     }
+
+    if (!text) continue;
+
+    // Collect all text for embeddings
+    if (currentSection !== 'transcript') {
+      allText.push(text);
+    }
+
+    // Route text based on current section
+    if (currentSection === 'skip') {
+      continue;
+    } else if (currentSection === 'summary') {
+      // Bulleted list items in key points sub-section
+      if (currentSubSection === 'keypoints' || type === 'bulleted_list_item') {
+        const cleaned = text.replace(/^[•\-・→]\s*/, '').trim();
+        if (cleaned.length > 5 && cleaned.length < 500) {
+          keyLearnings.push(cleaned);
+        }
+      } else {
+        // Strip common prefixes like "要約:" or "冒頭の内容:" etc.
+        const stripped = text.replace(/^(要約|冒頭の内容|中盤の内容)\s*[:：]\s*/, '').trim();
+        if (stripped) {
+          summaryParts.push(stripped);
+        }
+      }
+    } else if (currentSection === 'chapters') {
+      // Parse timestamp lines: "00:00 Title..." or "0:00:00 Title..."
+      const match = text.match(/^(\d{1,2}:\d{2}(?::\d{2})?)\s+(.+)/);
+      if (match) {
+        chapters.push({
+          timestamp: match[1],
+          title: match[2].substring(0, 100), // cap chapter title length
+        });
+      }
+    } else if (currentSection === 'transcript') {
+      // Don't store transcript text, just flag
+      hasTranscript = true;
+    } else if (currentSection === null) {
+      // Before any section header, text might still be useful
+      allText.push(text);
+    }
   }
 
-  return learnings.slice(0, 5);
+  // Build summary: join paragraphs, cap at 500 chars
+  let summary = summaryParts.join(' ').trim();
+  if (summary.length > 500) {
+    summary = summary.substring(0, 497).trim() + '...';
+  }
+
+  return {
+    summary,
+    keyLearnings: keyLearnings.slice(0, 8),
+    chapters,
+    hasTranscript,
+    contentText: allText.join('\n'),
+  };
 }
 
 // ─── OpenAI Embeddings ───────────────────────────────────
@@ -352,10 +435,13 @@ async function main() {
   if (!METADATA_ONLY) {
     console.log('Fetching page content...');
     for (let i = 0; i < episodes.length; i++) {
-      const content = await fetchPageContent(episodes[i].id);
-      episodes[i].contentText = content;
-      episodes[i].summary = createSummary(content);
-      episodes[i].keyLearnings = extractKeyLearnings(content);
+      const blocks = await fetchPageBlocks(episodes[i].id);
+      const parsed = parsePageContent(blocks);
+      episodes[i].contentText = parsed.contentText;
+      episodes[i].summary = parsed.summary;
+      episodes[i].keyLearnings = parsed.keyLearnings;
+      episodes[i].chapters = parsed.chapters;
+      episodes[i].hasTranscript = parsed.hasTranscript;
 
       await sleep(350);
 
@@ -370,6 +456,8 @@ async function main() {
       ep.contentText = '';
       ep.summary = '';
       ep.keyLearnings = [];
+      ep.chapters = [];
+      ep.hasTranscript = false;
     }
   }
 
@@ -447,6 +535,8 @@ async function main() {
       durationMinutes: ep.durationMinutes,
       summary: ep.summary,
       keyLearnings: ep.keyLearnings,
+      chapters: ep.chapters || [],
+      hasTranscript: ep.hasTranscript || false,
       embedding2d: positions[i],
       cluster: assignments[i],
     })),

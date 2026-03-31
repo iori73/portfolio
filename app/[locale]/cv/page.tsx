@@ -196,7 +196,7 @@ export default function CVPage() {
       {/* ========== 基本情報セクション ========== */}
       <section className="pt-4 md:pt-16 pb-4 md:pb-16">
         <div className="flex flex-col gap-4">
-          <h1 className="text-heading-3xl md:text-heading-4xl font-semibold">
+          <h1 className="text-display font-semibold">
             {cvData.personalInfo.name[lang]}
           </h1>
           <p className={jpFontSize('text-body-lg', 'text-body-xl') + ' font-roboto'}>
@@ -213,7 +213,7 @@ export default function CVPage() {
 
       {/* ========== 職歴セクション ========== */}
       <section className="pt-4 md:pt-16 pb-4 md:pb-16">
-        <h2 className="text-heading-2xl md:text-heading-3xl mb-8">{t('workExperience')}</h2>
+        <h2 className="text-headline mb-8">{t('workExperience')}</h2>
         <div className="flex flex-col gap-12">
           {cvData.workExperience.map((work) => (
             <WorkExperienceItem key={work.id} work={work} lang={lang} />
@@ -223,7 +223,7 @@ export default function CVPage() {
 
       {/* ========== 学歴セクション ========== */}
       <section className="pt-4 md:pt-16 pb-4 md:pb-16">
-        <h2 className="text-heading-2xl md:text-heading-3xl mb-8">{t('education')}</h2>
+        <h2 className="text-headline mb-8">{t('education')}</h2>
         <div className="flex flex-col gap-12">
           {cvData.education.map((edu) => (
             <EducationItem key={edu.id} education={edu} lang={lang} />
@@ -233,7 +233,7 @@ export default function CVPage() {
 
       {/* ========== スキルセクション ========== */}
       <section className="pt-4 md:pt-16 pb-4 md:pb-16">
-        <h2 className="text-heading-2xl md:text-heading-3xl mb-8">{t('skills')}</h2>
+        <h2 className="text-headline mb-8">{t('skills')}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {cvData.skills.map((skillCategory, index) => (
             <SkillCategoryItem key={index} category={skillCategory} lang={lang} />
@@ -243,7 +243,7 @@ export default function CVPage() {
 
       {/* ========== プロジェクトセクション ========== */}
       <section className="pt-4 md:pt-16 pb-4 md:pb-16">
-        <h2 className="text-heading-2xl md:text-heading-3xl mb-8">{t('projects')}</h2>
+        <h2 className="text-headline mb-8">{t('projects')}</h2>
         <div className="flex flex-col gap-12">
           {cvData.projects.map((project) => (
             <ProjectItem key={project.id} project={project} lang={lang} />
@@ -254,7 +254,7 @@ export default function CVPage() {
       {/* ========== LinkedInセクション（オプション） ========== */}
       {linkedInData && (
         <section className="pt-4 md:pt-16 pb-4 md:pb-16">
-          <h2 className="text-heading-2xl md:text-heading-3xl mb-8">{t('linkedIn')}</h2>
+          <h2 className="text-headline mb-8">{t('linkedIn')}</h2>
           <a
             href={linkedInData.profileUrl}
             target="_blank"

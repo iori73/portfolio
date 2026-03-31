@@ -31,10 +31,10 @@ function TimelineControls({ className = '' }: { className?: string }) {
               className={`flex ${period.active ? 'items-start' : 'items-center'} justify-end`}
             >
               <span
-                className={`mr-2 tracking-wider whitespace-nowrap transition-none ${
+                className={`mr-1.5 md:mr-2 tracking-wider whitespace-nowrap transition-none ${
                   period.active
-                    ? 'text-lg text-white font-serif'
-                    : 'text-xs text-white/35 font-serif'
+                    ? 'text-sm md:text-lg text-white font-serif'
+                    : 'text-[10px] md:text-xs text-white/35 font-serif'
                 }`}
               >
                 {period.year}
@@ -42,8 +42,8 @@ function TimelineControls({ className = '' }: { className?: string }) {
               <div
                 className={`rounded-full ${
                   period.active
-                    ? 'w-4 h-[103px] bg-white'
-                    : 'w-4 h-4 bg-white'
+                    ? 'w-2.5 h-16 md:w-4 md:h-[103px] bg-white'
+                    : 'w-2.5 h-2.5 md:w-4 md:h-4 bg-white'
                 }`}
                 style={!period.active ? { opacity } : undefined}
               />
@@ -53,10 +53,10 @@ function TimelineControls({ className = '' }: { className?: string }) {
       </div>
 
       {/* Separator */}
-      <div className="w-4 h-px bg-white/30" />
+      <div className="w-2.5 md:w-4 h-px bg-white/30" />
 
       {/* Gallery icon */}
-      <div className="grid grid-cols-2 grid-rows-2 gap-px w-4 h-4 opacity-50">
+      <div className="grid grid-cols-2 grid-rows-2 gap-px w-2.5 h-2.5 md:w-4 md:h-4 opacity-50">
         <span className="border-2 border-white" />
         <span className="border-2 border-white" />
         <span className="border-2 border-white" />

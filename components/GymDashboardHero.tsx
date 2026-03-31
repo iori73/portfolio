@@ -409,7 +409,7 @@ const GymDashboardHero: React.FC<GymDashboardHeroProps> = ({ gymStats: propGymSt
                       : card.iconBgColor?.light || '#f7fee7',
                   }}
                 >
-                  <div className="transition-colors duration-500 ease-in-out text-[#65a30d]">{card.icon}</div>
+                  <div className="transition-colors duration-500 ease-in-out text-lime-600">{card.icon}</div>
                 </div>
               </div>
             </div>

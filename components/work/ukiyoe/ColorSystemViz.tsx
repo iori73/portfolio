@@ -107,17 +107,18 @@ function PeriodRow({ period, locale }: {
       </span>
 
       {/* Year range */}
-      <span className="text-[#ffffff80] text-[11px] md:text-xs font-mono w-[76px] md:w-[84px] shrink-0 tabular-nums">
+      <span className="text-[#ffffff80] text-[10px] md:text-xs font-mono w-[62px] md:w-[84px] shrink-0 tabular-nums">
         {period.years}
       </span>
 
-      {/* Period label */}
-      <span className="text-[#ffffffc0] text-xs md:text-sm w-[130px] md:w-[190px] shrink-0 truncate leading-tight">
+      {/* Period label — hidden on mobile, shown below bar instead */}
+      <span className="text-[#ffffffc0] text-xs md:text-sm w-[130px] md:w-[190px] shrink-0 truncate leading-tight hidden md:inline">
         {locale === 'jp' ? period.ja : period.en}
       </span>
 
-      {/* Proportion bar */}
-      <div className="flex h-5 md:h-6 flex-1 overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.5)' }}>
+      {/* Proportion bar + mobile label */}
+      <div className="flex flex-col flex-1 gap-0.5">
+        <div className="flex h-5 md:h-6 overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.5)' }}>
         {segments.map(({ slot, proportion }) => {
           const pct = Math.round(proportion * 100);
           return (
@@ -138,6 +139,10 @@ function PeriodRow({ period, locale }: {
             </div>
           );
         })}
+        </div>
+        <span className="text-[#ffffffa0] text-[10px] leading-none truncate md:hidden">
+          {locale === 'jp' ? period.ja : period.en}
+        </span>
       </div>
     </div>
   );

@@ -127,7 +127,7 @@ export default function ConceptA() {
         <OrganicStemsSVG />
 
         <div className="relative z-10 max-w-xl">
-          <p className="font-space-grotesk text-label tracking-wider uppercase" style={{ color: '#A259FF' }}>
+          <p className="font-space-grotesk text-label tracking-wider uppercase text-[#A259FF]">
             Figma Plugins & Widgets
           </p>
           <h3 className="text-headline text-ink mt-3">

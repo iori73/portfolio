@@ -198,7 +198,7 @@ export default function ConceptC() {
         <HeroGraphicSVG />
 
         <div className="relative z-10 max-w-xl">
-          <p className="font-space-grotesk text-label tracking-wider uppercase" style={{ color: '#A259FF' }}>
+          <p className="font-space-grotesk text-label tracking-wider uppercase text-[#A259FF]">
             {t('heroTagline')}
           </p>
           <h2 className="text-display font-bold text-ink mt-3">

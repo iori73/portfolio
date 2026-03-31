@@ -65,7 +65,7 @@ function CategoryBar({ name, count, total }: { name: string; count: number; tota
 
   return (
     <div ref={barRef} className="flex items-center gap-3">
-      <span className="font-space-grotesk text-body text-ink-tertiary w-[120px] md:w-[140px] text-right shrink-0">
+      <span className="font-space-grotesk text-body-lg text-ink-tertiary w-[120px] md:w-[140px] text-right shrink-0">
         {name}
       </span>
       <div className="flex-1 h-3 bg-surface-muted rounded-full overflow-hidden">
@@ -77,7 +77,7 @@ function CategoryBar({ name, count, total }: { name: string; count: number; tota
           }}
         />
       </div>
-      <span className="font-space-grotesk text-body text-ink-tertiary w-8 tabular-nums">
+      <span className="font-space-grotesk text-body-lg text-ink-tertiary w-8 tabular-nums">
         {count}
       </span>
     </div>
@@ -97,28 +97,28 @@ export default function InsightsSection({ stats, podcasts, bodyFontClass, headin
   return (
     <section className="py-16 md:py-24">
       {/* Stats counters */}
-      <div className="grid grid-cols-3 gap-6 md:gap-12 mb-16 md:mb-24">
+      <div className="grid grid-cols-3 gap-3 md:gap-12 mb-16 md:mb-24">
         <div ref={episodeCounter.ref} className="text-center">
-          <div className="text-display text-ink tabular-nums">
+          <div className="text-headline md:text-display text-ink tabular-nums">
             {episodeCounter.count}
           </div>
-          <div className="font-space-grotesk text-body-lg text-ink-tertiary mt-1">
+          <div className="font-space-grotesk text-body-sm md:text-body-lg text-ink-tertiary mt-1">
             episodes
           </div>
         </div>
         <div ref={podcastCounter.ref} className="text-center">
-          <div className="text-display text-ink tabular-nums">
+          <div className="text-headline md:text-display text-ink tabular-nums">
             {podcastCounter.count}
           </div>
-          <div className="font-space-grotesk text-body-lg text-ink-tertiary mt-1">
+          <div className="font-space-grotesk text-body-sm md:text-body-lg text-ink-tertiary mt-1">
             podcasts
           </div>
         </div>
         <div ref={categoryCounter.ref} className="text-center">
-          <div className="text-display text-ink tabular-nums">
+          <div className="text-headline md:text-display text-ink tabular-nums">
             {categoryCounter.count}
           </div>
-          <div className="font-space-grotesk text-body-lg text-ink-tertiary mt-1">
+          <div className="font-space-grotesk text-body-sm md:text-body-lg text-ink-tertiary mt-1">
             categories
           </div>
         </div>
@@ -148,17 +148,17 @@ export default function InsightsSection({ stats, podcasts, bodyFontClass, headin
                 <img
                   src={pod.cover}
                   alt={pod.name}
-                  className="w-20 h-20 md:w-24 md:h-24 rounded-lg object-cover shadow-sm group-hover:shadow-md transition-shadow"
+                  className="w-32 h-32 md:w-32 md:h-32 rounded-lg object-cover shadow-sm group-hover:shadow-md transition-shadow"
                 />
               ) : (
-                <div className="w-20 h-20 md:w-24 md:h-24 rounded-lg bg-surface-muted flex items-center justify-center">
+                <div className="w-32 h-32 md:w-32 md:h-32 rounded-lg bg-surface-muted flex items-center justify-center">
                   <span className="text-title text-ink-tertiary">
                     {pod.name.charAt(0)}
                   </span>
                 </div>
               )}
               <div className="text-center">
-                <p className={`text-body leading-tight text-ink-secondary line-clamp-2 ${bodyFontClass}`}>
+                <p className={`text-body-lg leading-tight text-ink-secondary line-clamp-2 ${bodyFontClass}`}>
                   {pod.name}
                 </p>
                 <p className="font-space-grotesk text-body text-ink-tertiary mt-1">

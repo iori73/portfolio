@@ -272,6 +272,7 @@
     "topPagePhaseNishiki": "錦絵",
     "topPageDesignTitle": "トップページ：レイヤーアニメーション",
     "topPageDesignHeroAlt": "トップページのデザインのヒストリーをコラージュ風にまとめたビジュアル",
+    "topPageDesignStepAlt": "トップページデザインプロセス ステップ{step}",
     "topPageDesignHeroCaption": "トップページのデザインのヒストリーを集め、コラージュ風にまとめたビジュアル。",
     "topPageDesignText1": "核となるコンセプトは、木版画がレイヤーごとにどのように組み上がるかをユーザー、つまり皆さんに体験してもらうことでした。Adobe Frescoを使用して実際の浮世絵作品を個々の色レイヤーに分離し、オリジナルの顔料色に合わせて各レイヤーを手作業でペイントしました。これはプロジェクトの中で最も労力を要した部分の一つです。当時のAIツールでは、必要な精度でこれらのレイヤーを生成することができませんでした。",
     "topPageDesignText2": "これらのレイヤーをSVG形式に変換し、サイトのトップページでは、日本画に特徴的な平面的な空間構成にインスピレーションを得たアイソメトリックの視点で配置しました。シンプルな縦積みからメディアプレーヤースタイルのタイムラインコントロールまで、複数のアプローチを探索した後、スクロール連動のアイソメトリックアニメーションに落ち着きました。",
@@ -335,7 +336,15 @@
     "showAll": "全 {count} エピソードを表示",
     "showLess": "先頭 {count} 件に戻す",
     "allEpisodesTitle": "全エピソード",
-    "backToOverview": "← Knowledge Constellation"
+    "backToOverview": "← Knowledge Constellation",
+    "summarySection": "サマリー",
+    "keyPointsSection": "主要ポイント",
+    "chaptersSection": "チャプター",
+    "relatedEpisodesSection": "関連エピソード",
+    "viewFullEpisode": "詳細を見る",
+    "backToAllEpisodes": "全エピソード",
+    "loadingEpisode": "エピソードを読み込み中...",
+    "episodeNotFound": "エピソードが見つかりません。"
   },
   "figmaPlugins": {
     "title": "Figma Plugins & Widgets",

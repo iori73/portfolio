@@ -74,8 +74,8 @@
 | `text-title-lg` | `--text-size-2xl` | 1.2 | h2 セクション見出し |
 | `text-title` | `--text-size-xl` | 1.25 | h3 サブセクション |
 | `text-title-sm` | `--text-size-lg` | 1.3 | h4, カード見出し |
-| `text-body-lg` | `--text-size-lg` | 1.6 | リード文、Hero subtitle |
-| `text-body` | `--text-size-base` | 1.6 | デフォルト本文 |
+| `text-body-lg` | `--text-size-lg` | 1.6 | リード文、Hero subtitle、ケーススタディ本文 |
+| `text-body` | `--text-size-base` | 1.6 | UI要素、ラベル、短いテキスト |
 | `text-body-sm` | `--text-size-sm` | 1.5 | 補助テキスト、カードメタ |
 | `text-label` | `--text-size-sm` | 1.3 | タグ、フィルター、ボタンラベル |
 | `text-caption` | `--text-size-xs` | 1.3 | 微小テキスト、footnote |
@@ -105,8 +105,8 @@
 
 | 用途 | クラス | Mobile → Desktop |
 |---|---|---|
-| メイン本文 | `text-body` + `getBodyFontClass()` | 16px (固定) |
-| リード文・サブタイトル | `text-body-lg` + `getBodyFontClass()` | 18px → 20px |
+| 短いテキスト・UI要素 | `text-body` + `getBodyFontClass()` | 16px (固定) |
+| ケーススタディ本文・リード文 | `text-body-lg` + `getBodyFontClass()` | 18px → 20px |
 | 補助テキスト | `text-body-sm` + `getBodyFontClass()` | 13px → 14px |
 | タグ・ラベル | `text-label font-space-grotesk` | 13px → 14px |
 | 微小テキスト | `text-caption` | 12px (固定) |

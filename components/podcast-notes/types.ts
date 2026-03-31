@@ -1,3 +1,8 @@
+export interface Chapter {
+  timestamp: string;     // e.g. "05:00", "01:23:45"
+  title: string;
+}
+
 export interface Episode {
   id: string;
   title: string;
@@ -10,6 +15,8 @@ export interface Episode {
   durationMinutes: number;
   summary: string;
   keyLearnings: string[];
+  chapters?: Chapter[];
+  hasTranscript?: boolean;
   embedding2d: [number, number];
   cluster: number;
 }

@@ -3,13 +3,14 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import BackToTopButton from '@/src/compositions/BackToTopButton';
 import { useTranslations, useLocale } from 'next-intl';
-import { useJPFontSize, useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
-import { MoveUpRight, Layers, Images, Palette, BarChart2 } from 'lucide-react';
+import { useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
+import { MoveUpRight } from 'lucide-react';
 import ColorSystemViz from '@/components/work/ukiyoe/ColorSystemViz';
 import ColorAnalysisGrid from '@/components/work/ukiyoe/ColorAnalysisGrid';
 import KushiDangoShowcase from '@/components/work/ukiyoe/KushiDangoShowcase';
 import PrintingProcessStudy from '@/components/work/ukiyoe/PrintingProcessStudy';
 import TopPageProcessShowcase from '@/components/work/ukiyoe/TopPageProcessShowcase';
+import TopPageEvolutionGrid from '@/components/work/ukiyoe/TopPageEvolutionGrid';
 import { usePageTransition } from '@/src/contexts/TransitionContext';
 
 const SECTIONS = [
@@ -26,7 +27,6 @@ const UkiyoePage: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('overview');
   const t = useTranslations();
   const language = useLocale();
-  const { jpFontSize } = useJPFontSize();
   const { getBodyFontClass } = useBodyFont();
   const { getHeadingFontClass } = useHeadingFont();
 
@@ -73,10 +73,10 @@ const UkiyoePage: React.FC = () => {
 
   const sidebarButtonClass = (sectionId: string) =>
     activeSection === sectionId
-      ? 'text-left text-heading-base font-switzer transition-transform duration-900 scale-110'
-      : 'text-left text-heading-sm font-switzer transition-transform duration-900 scale-100 opacity-50';
+      ? 'text-left text-title font-switzer transition-transform duration-900 scale-110'
+      : 'text-left text-title-sm font-switzer transition-transform duration-900 scale-100 opacity-50';
 
-  const bodyTextClass = `${getBodyFontClass()} tracking-[0.2px] ${jpFontSize('text-body-base', 'text-body-lg')}`;
+  const bodyTextClass = `${getBodyFontClass()} tracking-[0.2px] text-body-lg`;
 
   return (
     <div className="font-sans my-24 md:mt-28 md:mb-16">
@@ -106,12 +106,12 @@ const UkiyoePage: React.FC = () => {
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6">
               <div className="flex-1">
                 <h1
-                  className={`text-heading-2xl md:text-heading-3xl text-ink mb-3 md:mb-2 ${getHeadingFontClass()}`}
+                  className={`text-headline text-ink mb-3 md:mb-2 ${getHeadingFontClass()}`}
                 >
                   {t('ukiyoe.title')}
                 </h1>
                 <p
-                  className={`text-body-lg md:text-body-xl ${getBodyFontClass()} text-ink-secondary tracking-[0.2px]`}
+                  className={`text-body-lg ${getBodyFontClass()} text-ink-secondary tracking-[0.2px]`}
                 >
                   {t('ukiyoe.subtitle')}
                 </p>
@@ -136,7 +136,7 @@ const UkiyoePage: React.FC = () => {
                       backdropFilter: 'blur(8px)',
                     }}
                   />
-                  <span className="relative z-10 text-body-lg md:text-body-xl font-medium">
+                  <span className="relative z-10 text-body-lg font-medium">
                     {t('common.goToSite')}
                   </span>
                 </a>
@@ -149,7 +149,7 @@ const UkiyoePage: React.FC = () => {
               <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
                 Timeline
               </span>
-              <p className="text-body-base md:text-body-lg tracking-[0.2px]">
+              <p className="text-body-lg tracking-[0.2px]">
                 {t('projects.ukiyoe.timeline')}
               </p>
             </div>
@@ -157,7 +157,7 @@ const UkiyoePage: React.FC = () => {
               <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
                 My Skills
               </span>
-              <p className="text-body-base md:text-body-lg tracking-[0.2px]">
+              <p className="text-body-lg tracking-[0.2px]">
                 {t('projects.ukiyoe.skills')}
               </p>
             </div>
@@ -165,7 +165,7 @@ const UkiyoePage: React.FC = () => {
               <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
                 Type
               </span>
-              <p className="text-body-base md:text-body-lg tracking-[0.2px]">
+              <p className="text-body-lg tracking-[0.2px]">
                 {t('common.personalProject')}
               </p>
             </div>
@@ -173,7 +173,7 @@ const UkiyoePage: React.FC = () => {
               <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
                 Deliverables
               </span>
-              <p className="text-body-base md:text-body-lg tracking-[0.2px]">
+              <p className="text-body-lg tracking-[0.2px]">
                 {t('projects.ukiyoe.deliverables')}
               </p>
             </div>
@@ -189,7 +189,7 @@ const UkiyoePage: React.FC = () => {
 
             {/* 1. Overview */}
             <section id="overview" className="w-full mx-auto py-12 md:py-16 text-ink-secondary scroll-mt-32">
-              <h2 className={`text-heading-xl md:text-heading-2xl mb-6 ${getHeadingFontClass()}`}>
+              <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
                 Overview
               </h2>
               <p className={`mb-4 ${bodyTextClass}`}>{t('ukiyoe.overviewText1')}</p>
@@ -211,13 +211,13 @@ const UkiyoePage: React.FC = () => {
                     </svg>
                   </div>
                   <div className="flex items-center gap-1">
-                    <span className="text-body-sm md:text-body-lg leading-[1.25] font-normal text-ink-tertiary">
+                    <span className="text-body leading-[1.25] font-normal text-ink-tertiary">
                       iori73
                     </span>
-                    <span className="text-body-sm md:text-body-lg leading-[1.25] font-normal text-ink-tertiary">
+                    <span className="text-body leading-[1.25] font-normal text-ink-tertiary">
                       /
                     </span>
-                    <span className="text-body-sm md:text-body-lg leading-[1.25] font-semibold text-ink">
+                    <span className="text-body leading-[1.25] font-semibold text-ink">
                       ukiyoe-timeline
                     </span>
                   </div>
@@ -228,7 +228,7 @@ const UkiyoePage: React.FC = () => {
 
             {/* 2. Research & Discovery */}
             <section id="research" className="py-12 md:py-20 scroll-mt-32">
-              <h2 className={`text-heading-xl md:text-heading-2xl mb-6 ${getHeadingFontClass()}`}>
+              <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
                 Research &amp; Discovery
               </h2>
               <p className={`mb-10 md:mb-14 text-ink-secondary ${bodyTextClass}`}>
@@ -237,7 +237,7 @@ const UkiyoePage: React.FC = () => {
 
               {/* Cultural Immersion */}
               <div className="mb-10 md:mb-14">
-                <h3 className={`text-heading-base md:text-heading-xl mb-4 ${getHeadingFontClass()}`}>
+                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.culturalResearchTitle')}
                 </h3>
                 <p className={`mb-6 text-ink-secondary ${bodyTextClass}`}>
@@ -259,7 +259,7 @@ const UkiyoePage: React.FC = () => {
 
               {/* Color Extraction & Analysis */}
               <div className="mb-10 md:mb-14">
-                <h3 className={`text-heading-base md:text-heading-xl mb-4 ${getHeadingFontClass()}`}>
+                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.colorAnalysisTitle')}
                 </h3>
                 <p className={`mb-6 text-ink-secondary ${bodyTextClass}`}>
@@ -277,7 +277,7 @@ const UkiyoePage: React.FC = () => {
 
               {/* Printing Process Study */}
               <div>
-                <h3 className={`text-heading-base md:text-heading-xl mb-4 ${getHeadingFontClass()}`}>
+                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.printingProcessTitle')}
                 </h3>
                 <p className={`mb-6 text-ink-secondary ${bodyTextClass}`}>
@@ -291,7 +291,7 @@ const UkiyoePage: React.FC = () => {
 
             {/* 3. Design Process */}
             <section id="design-process" className="py-12 md:py-20 scroll-mt-32">
-              <h2 className={`text-heading-xl md:text-heading-2xl mb-6 ${getHeadingFontClass()}`}>
+              <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
                 Design Process
               </h2>
               <p className={`mb-10 md:mb-14 text-ink-secondary ${bodyTextClass}`}>
@@ -300,7 +300,7 @@ const UkiyoePage: React.FC = () => {
 
               {/* Top Page: Layer Animation */}
               <div className="mb-12 md:mb-20">
-                <h3 className={`text-heading-base md:text-heading-xl mb-4 ${getHeadingFontClass()}`}>
+                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.topPageDesignTitle')}
                 </h3>
                 <div className={`mb-6 text-ink-secondary ${bodyTextClass} space-y-4`}>
@@ -317,15 +317,7 @@ const UkiyoePage: React.FC = () => {
                   <p>{t('ukiyoe.topPageDesignText3')}</p>
                 </div>
                 <figure>
-                  <div className="w-full overflow-hidden rounded-lg">
-                    <Image
-                      src="/work/ukiyoe/process-toppage/process-toppage-hero.png"
-                      alt={t('ukiyoe.topPageDesignHeroAlt')}
-                      width={1766}
-                      height={1294}
-                      className="w-full h-auto"
-                    />
-                  </div>
+                  <TopPageEvolutionGrid />
                   <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
                     {t('ukiyoe.topPageDesignHeroCaption')}
                   </figcaption>
@@ -334,7 +326,7 @@ const UkiyoePage: React.FC = () => {
 
               {/* Timeline: Artwork Gallery */}
               <div className="mb-12 md:mb-20">
-                <h3 className={`text-heading-base md:text-heading-xl mb-4 ${getHeadingFontClass()}`}>
+                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.timelineDesignTitle')}
                 </h3>
                 <div className={`mb-6 text-ink-secondary ${bodyTextClass} space-y-4`}>
@@ -357,7 +349,7 @@ const UkiyoePage: React.FC = () => {
 
               {/* Design Motifs: Kushi-Dango */}
               <div className="mb-12 md:mb-20">
-                <h3 className={`text-heading-base md:text-heading-xl mb-4 ${getHeadingFontClass()}`}>
+                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.motifsTitle')}
                 </h3>
                 <div className={`mb-6 text-ink-secondary ${bodyTextClass} space-y-4`}>
@@ -375,7 +367,7 @@ const UkiyoePage: React.FC = () => {
 
               {/* Color System & Period Ratios */}
               <div className="mb-12 md:mb-20">
-                <h3 className={`text-heading-base md:text-heading-xl mb-4 ${getHeadingFontClass()}`}>
+                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.colorSystemTitle')}
                 </h3>
                 <div className={`mb-6 text-ink-secondary ${bodyTextClass} space-y-4`}>
@@ -393,7 +385,7 @@ const UkiyoePage: React.FC = () => {
 
               {/* Logo Design */}
               <div>
-                <h3 className={`text-heading-base md:text-heading-xl mb-4 ${getHeadingFontClass()}`}>
+                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.logoDesignTitle')}
                 </h3>
                 <p className={`mb-6 text-ink-secondary ${bodyTextClass}`}>
@@ -419,7 +411,7 @@ const UkiyoePage: React.FC = () => {
 
             {/* 4. Hand-Coloring the Layers */}
             <section id="hand-coloring" className="py-12 md:py-20 scroll-mt-32">
-              <h2 className={`text-heading-xl md:text-heading-2xl mb-6 ${getHeadingFontClass()}`}>
+              <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
                 {t('ukiyoe.handColoringTitle')}
               </h2>
               <div className={`mb-10 md:mb-14 text-ink-secondary ${bodyTextClass} space-y-4`}>
@@ -444,7 +436,7 @@ const UkiyoePage: React.FC = () => {
 
             {/* 5. AI Can Create, But It Can't Craft */}
             <section id="ai-craft" className="py-12 md:py-20 scroll-mt-32">
-              <h2 className={`text-heading-xl md:text-heading-2xl mb-6 ${getHeadingFontClass()}`}>
+              <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
                 {t('ukiyoe.aiCraftTitle')}
               </h2>
               <div className={`text-ink-secondary ${bodyTextClass} space-y-4`}>
@@ -456,7 +448,7 @@ const UkiyoePage: React.FC = () => {
 
             {/* 6. Technical Highlights */}
             <section id="technical" className="py-12 md:py-20 scroll-mt-32">
-              <h2 className={`text-heading-xl md:text-heading-2xl mb-6 ${getHeadingFontClass()}`}>
+              <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
                 Technical Highlights
               </h2>
               <p className={`mb-10 md:mb-14 text-ink-secondary ${bodyTextClass}`}>
@@ -465,8 +457,7 @@ const UkiyoePage: React.FC = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                 <div className="p-5 md:p-6 rounded-xl bg-surface-muted flex flex-col">
-                  <Layers className="size-8 md:size-9 shrink-0 text-ink mb-3" aria-hidden strokeWidth={1.75} />
-                  <h4 className={`text-heading-base md:text-heading-lg text-ink mb-4 ${getHeadingFontClass()}`}>
+                  <h4 className={`text-title text-ink mb-4 ${getHeadingFontClass()}`}>
                     {t('ukiyoe.techFeature1Title')}
                   </h4>
                   <p className={`text-ink-secondary ${getBodyFontClass()} text-body-sm md:text-body-base tracking-[0.2px]`}>
@@ -474,8 +465,7 @@ const UkiyoePage: React.FC = () => {
                   </p>
                 </div>
                 <div className="p-5 md:p-6 rounded-xl bg-surface-muted flex flex-col">
-                  <Images className="size-8 md:size-9 shrink-0 text-ink mb-3" aria-hidden strokeWidth={1.75} />
-                  <h4 className={`text-heading-base md:text-heading-lg text-ink mb-4 ${getHeadingFontClass()}`}>
+                  <h4 className={`text-title text-ink mb-4 ${getHeadingFontClass()}`}>
                     {t('ukiyoe.techFeature2Title')}
                   </h4>
                   <p className={`text-ink-secondary ${getBodyFontClass()} text-body-sm md:text-body-base tracking-[0.2px]`}>
@@ -483,8 +473,7 @@ const UkiyoePage: React.FC = () => {
                   </p>
                 </div>
                 <div className="p-5 md:p-6 rounded-xl bg-surface-muted flex flex-col">
-                  <Palette className="size-8 md:size-9 shrink-0 text-ink mb-3" aria-hidden strokeWidth={1.75} />
-                  <h4 className={`text-heading-base md:text-heading-lg text-ink mb-4 ${getHeadingFontClass()}`}>
+                  <h4 className={`text-title text-ink mb-4 ${getHeadingFontClass()}`}>
                     {t('ukiyoe.techFeature3Title')}
                   </h4>
                   <p className={`text-ink-secondary ${getBodyFontClass()} text-body-sm md:text-body-base tracking-[0.2px]`}>
@@ -492,8 +481,7 @@ const UkiyoePage: React.FC = () => {
                   </p>
                 </div>
                 <div className="p-5 md:p-6 rounded-xl bg-surface-muted flex flex-col">
-                  <BarChart2 className="size-8 md:size-9 shrink-0 text-ink mb-3" aria-hidden strokeWidth={1.75} />
-                  <h4 className={`text-heading-base md:text-heading-lg text-ink mb-4 ${getHeadingFontClass()}`}>
+                  <h4 className={`text-title text-ink mb-4 ${getHeadingFontClass()}`}>
                     {t('ukiyoe.techFeature4Title')}
                   </h4>
                   <p className={`text-ink-secondary ${getBodyFontClass()} text-body-sm md:text-body-base tracking-[0.2px]`}>
@@ -505,11 +493,11 @@ const UkiyoePage: React.FC = () => {
 
             {/* 7. Reflection */}
             <section id="reflection" className="py-12 md:py-20 scroll-mt-32">
-              <h2 className={`text-heading-xl md:text-heading-2xl mb-6 ${getHeadingFontClass()}`}>
+              <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
                 Reflection
               </h2>
               <div className="mb-10 md:mb-14">
-                <h3 className={`text-heading-base md:text-heading-xl mb-4 ${getHeadingFontClass()}`}>
+                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.learningsTitle')}
                 </h3>
                 <div className={`text-ink-secondary ${bodyTextClass} space-y-4`}>
@@ -519,7 +507,7 @@ const UkiyoePage: React.FC = () => {
                 </div>
               </div>
               <div>
-                <h3 className={`text-heading-base md:text-heading-xl mb-4 ${getHeadingFontClass()}`}>
+                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.futureTitle')}
                 </h3>
                 <p className={`text-ink-secondary ${bodyTextClass}`}>

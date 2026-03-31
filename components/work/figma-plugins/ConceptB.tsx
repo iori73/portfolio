@@ -171,7 +171,7 @@ export default function ConceptB() {
         <MeltingBarsSVG />
 
         <div className="relative z-10 max-w-xl">
-          <p className="font-space-grotesk text-label tracking-wider uppercase" style={{ color: '#FF7262' }}>
+          <p className="font-space-grotesk text-label tracking-wider uppercase text-[#FF7262]">
             Figma Plugins & Widgets
           </p>
           <h3 className="text-headline text-ink mt-3">

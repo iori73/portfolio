@@ -117,7 +117,7 @@ export default function BlogPage() {
         <div className="article-text flex flex-col gap-1.5 md:gap-2 py-1">
           <p className={`article-date ${jpFontSize('text-caption-lg', 'text-caption-xl')}`}>{formatDate(pubDate)}</p>
           <h3
-            className={`article-title text-body-lg md:text-body-xl ${getHeadingFontClass()} line-clamp-4 md:line-clamp-none`}
+            className={`article-title text-body-lg ${getHeadingFontClass()} line-clamp-4 md:line-clamp-none`}
           >
             {title}
           </h3>
@@ -163,10 +163,10 @@ export default function BlogPage() {
         )}
         {/* テキスト */}
         <div className="flex flex-col md:flex-1 gap-2 md:gap-4">
-          <p className={`text-[#0A0A0A] ${jpFontSize('text-caption-xl', 'text-caption-2xl')}`}>{formatDate(pubDate)}</p>
-          <h3 className={`article-title text-[#0A0A0A] text-heading-base ${getHeadingFontClass()}`}>{title}</h3>
+          <p className={`text-ink ${jpFontSize('text-caption-xl', 'text-caption-2xl')}`}>{formatDate(pubDate)}</p>
+          <h3 className={`article-title text-ink text-title-sm ${getHeadingFontClass()}`}>{title}</h3>
           <p
-            className={`text-[#0A0A0A] ${getBodyFontClass()} tracking-[0.2px] ${jpFontSize(
+            className={`text-ink ${getBodyFontClass()} tracking-[0.2px] ${jpFontSize(
               'text-body-sm',
               'text-body-base',
             )}`}
@@ -186,7 +186,7 @@ export default function BlogPage() {
       {/* -------------- noteセクション -------------- */}
       <div className="note__container">
         <section className="pt-4 md:pt-16 pb-4 md:pb-16">
-          <h2 className="text-heading-2xl md:text-heading-3xl mb-2">note</h2>
+          <h2 className="text-headline mb-2">note</h2>
         </section>
 
         {/* 記事一覧 */}
@@ -201,7 +201,7 @@ export default function BlogPage() {
             href="https://note.com/io_73"
             target="_blank"
             rel="noopener noreferrer"
-            className="relative flex items-center justify-center px-6 py-3 rounded-[100px] text-[#0000008f] hover:text-white cursor-pointer transition-[color] duration-300 whitespace-nowrap overflow-hidden group w-full md:w-auto"
+            className="relative flex items-center justify-center px-6 py-3 rounded-[100px] text-ink-muted hover:text-white cursor-pointer transition-[color] duration-300 whitespace-nowrap overflow-hidden group w-full md:w-auto"
             style={{
               background:
                 'radial-gradient(75% 150% at 100% 114.2%, rgba(210, 210, 215, 0.4) 0%, rgba(180, 180, 185, 0.4) 100%)',
@@ -217,7 +217,7 @@ export default function BlogPage() {
                 backdropFilter: 'blur(8px)',
               }}
             />
-            <span className="relative z-10 text-body-lg md:text-body-xl font-medium">{t('goToNote')}</span>
+            <span className="relative z-10 text-body-lg font-medium">{t('goToNote')}</span>
           </a>
         </div>
       </div>
@@ -239,7 +239,7 @@ export default function BlogPage() {
         {/* コンテンツ */}
         <div className="medium__container relative pb-4 md:pb-16">
           <section className="pt-4 md:pt-16 pb-4 md:pb-16">
-            <h2 className="text-[#0A0A0A] text-heading-2xl md:text-heading-3xl mb-2">Medium</h2>
+            <h2 className="text-ink text-headline mb-2">Medium</h2>
           </section>
 
           {/* medium記事一覧 */}
@@ -254,7 +254,7 @@ export default function BlogPage() {
               href="https://medium.com/@iori73"
               target="_blank"
               rel="noopener noreferrer"
-              className="relative flex items-center justify-center px-6 py-3 rounded-[100px] text-[#0A0A0A] hover:text-[#0A0A0A] cursor-pointer transition-[color] duration-300 whitespace-nowrap overflow-hidden group w-full md:w-auto"
+              className="relative flex items-center justify-center px-6 py-3 rounded-[100px] text-ink hover:text-ink cursor-pointer transition-[color] duration-300 whitespace-nowrap overflow-hidden group w-full md:w-auto"
               style={{
                 background:
                   'radial-gradient(75% 150% at 100% 114.2%, rgba(210, 210, 215, 0.4) 0%, rgba(180, 180, 185, 0.4) 100%)',
@@ -270,7 +270,7 @@ export default function BlogPage() {
                   backdropFilter: 'blur(8px)',
                 }}
               />
-              <span className="relative z-10 text-body-lg md:text-body-xl font-medium">{t('goToMedium')}</span>
+              <span className="relative z-10 text-body-lg font-medium">{t('goToMedium')}</span>
             </a>
           </div>
         </div>

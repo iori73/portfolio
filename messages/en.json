@@ -272,6 +272,7 @@
     "topPagePhaseNishiki": "Nishiki-e",
     "topPageDesignTitle": "Top Page: Layer Animation",
     "topPageDesignHeroAlt": "Collage of the top page design history",
+    "topPageDesignStepAlt": "Top page design process step {step}",
     "topPageDesignHeroCaption": "A collage-style visual bringing together the design history of the top page.",
     "topPageDesignText1": "The core concept was to let you — the user — experience how a woodblock print comes together, layer by layer. I began by separating actual ukiyoe prints into individual color layers using Adobe Fresco, hand-painting each layer to match the original pigment colors. This was one of the most labor-intensive parts of the project; AI tools at the time could not generate these layers with the necessary precision.",
     "topPageDesignText2": "I then converted these layers into SVG format. On the site's top page, I arranged them in an isometric perspective inspired by the flattened spatial composition characteristic of Japanese painting. I explored multiple approaches, from simple vertical stacking to a media-player-style timeline control, before settling on scroll-driven isometric animation.",
@@ -335,7 +336,15 @@
     "showAll": "Show all {count} episodes",
     "showLess": "Show first {count} episodes",
     "allEpisodesTitle": "All Episodes",
-    "backToOverview": "← Knowledge Constellation"
+    "backToOverview": "← Knowledge Constellation",
+    "summarySection": "Summary",
+    "keyPointsSection": "Key Points",
+    "chaptersSection": "Chapters",
+    "relatedEpisodesSection": "Related Episodes",
+    "viewFullEpisode": "View details",
+    "backToAllEpisodes": "All Episodes",
+    "loadingEpisode": "Loading episode...",
+    "episodeNotFound": "Episode not found."
   },
   "cv": {
     "workExperience": "Work Experience",

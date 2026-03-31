@@ -1,13 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ChevronDown, ExternalLink, Clock } from 'lucide-react';
+import { ChevronDown, ExternalLink, Clock, ArrowRight } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
+import Link from 'next/link';
 import { Episode, CATEGORY_COLORS, DEFAULT_CATEGORY_COLOR } from './types';
-
-function extractSummary(raw: string): string {
-  const match = raw.match(/\bSummary\s+([\s\S]+)$/);
-  return match ? match[1].trim() : raw.trim();
-}
 
 function formatDuration(minutes: number): string {
   const m = Math.round(minutes);
@@ -26,7 +23,12 @@ interface Props {
 
 export default function NoteCard({ episode, isHighlighted, bodyFontClass, headingFontClass }: Props) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [showChapters, setShowChapters] = useState(false);
   const color = CATEGORY_COLORS[episode.category || 'Others'] || DEFAULT_CATEGORY_COLOR;
+  const locale = useLocale();
+  const t = useTranslations('podcastNotesPage');
+
+  const chapters = episode.chapters || [];
 
   return (
     <div
@@ -69,7 +71,7 @@ export default function NoteCard({ episode, isHighlighted, bodyFontClass, headin
 
             {/* Meta */}
             <div className="flex items-center gap-2 mt-1.5 flex-wrap">
-              <span className="font-space-grotesk text-body-sm text-ink-tertiary">
+              <span className="font-space-grotesk text-body text-ink-tertiary">
                 {episode.podcast}
               </span>
               {episode.date && (
@@ -102,7 +104,7 @@ export default function NoteCard({ episode, isHighlighted, bodyFontClass, headin
 
       {/* Expanded content */}
       {isExpanded && (
-        <div className="px-4 md:px-5 pb-4 md:pb-5 border-t border-line-subtle pt-4">
+        <div className="px-4 md:px-5 pb-4 md:pb-5 border-t border-line-subtle pt-4 max-h-[600px] overflow-y-auto">
           {/* Meta row: duration + tags */}
           {(episode.durationMinutes > 0 || episode.tags.length > 0) && (
             <div className="flex items-center gap-2 flex-wrap mb-4">
@@ -133,7 +135,7 @@ export default function NoteCard({ episode, isHighlighted, bodyFontClass, headin
           {/* Summary */}
           {episode.summary && (
             <p className={`text-body-lg text-ink-secondary mb-4 leading-relaxed ${bodyFontClass}`}>
-              {extractSummary(episode.summary)}
+              {episode.summary}
             </p>
           )}
 
@@ -147,7 +149,7 @@ export default function NoteCard({ episode, isHighlighted, bodyFontClass, headin
                 {episode.keyLearnings.map((learning, i) => (
                   <li
                     key={i}
-                    className={`text-body-lg text-ink-secondary pl-4 relative ${bodyFontClass}`}
+                    className={`text-body text-ink-secondary pl-4 relative ${bodyFontClass}`}
                   >
                     <span
                       className="absolute left-0 top-[9px] w-1.5 h-1.5 rounded-full"
@@ -160,18 +162,68 @@ export default function NoteCard({ episode, isHighlighted, bodyFontClass, headin
             </div>
           )}
 
-          {/* External link */}
-          {episode.url && (
-            <a
-              href={episode.url}
-              target="_blank"
-              rel="noopener noreferrer"
+          {/* Chapters */}
+          {chapters.length > 0 && (
+            <div className="mb-4">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowChapters(!showChapters);
+                }}
+                className="flex items-center gap-1.5 mb-2"
+              >
+                <h5 className="font-space-grotesk text-label text-ink-tertiary font-semibold uppercase tracking-wider">
+                  {chapters.length} Chapters
+                </h5>
+                <ChevronDown
+                  className={`w-3.5 h-3.5 text-ink-tertiary transition-transform duration-200 ${
+                    showChapters ? 'rotate-180' : ''
+                  }`}
+                />
+              </button>
+              {showChapters && (
+                <div className="space-y-0">
+                  {chapters.map((chapter, i) => (
+                    <div
+                      key={i}
+                      className={`flex items-baseline gap-3 py-2 ${
+                        i < chapters.length - 1 ? 'border-b border-line-subtle' : ''
+                      }`}
+                    >
+                      <span className="font-space-grotesk text-body-sm text-ink-tertiary shrink-0 w-12 tabular-nums">
+                        {chapter.timestamp}
+                      </span>
+                      <span className={`text-body-sm text-ink-secondary ${bodyFontClass}`}>
+                        {chapter.title}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Action links */}
+          <div className="flex items-center gap-4 flex-wrap">
+            <Link
+              href={`/${locale}/experiment/podcast-notes/${episode.id}`}
               className="inline-flex items-center gap-1.5 py-2 text-body-sm font-space-grotesk text-ink-tertiary hover:text-ink-secondary transition-colors"
             >
-              <ExternalLink className="w-3.5 h-3.5" />
-              Listen on Spotify
-            </a>
-          )}
+              <ArrowRight className="w-3.5 h-3.5" />
+              {t('viewFullEpisode')}
+            </Link>
+            {episode.url && (
+              <a
+                href={episode.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 py-2 text-body-sm font-space-grotesk text-ink-tertiary hover:text-ink-secondary transition-colors"
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+                Listen on Spotify
+              </a>
+            )}
+          </div>
         </div>
       )}
     </div>

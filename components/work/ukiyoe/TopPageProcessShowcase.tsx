@@ -27,7 +27,7 @@ export default function TopPageProcessShowcase() {
         <figure key={phase.key} className="flex flex-col gap-3 w-full">
           <div className="flex flex-wrap items-center gap-3">
             <h4
-              className={`text-heading-base md:text-heading-lg text-ink shrink-0 ${getHeadingFontClass()}`}
+              className={`text-title text-ink shrink-0 ${getHeadingFontClass()}`}
             >
               {t(phase.key)}
             </h4>
