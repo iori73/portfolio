@@ -1,6 +1,5 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { useJPFontSize } from '@/src/hooks/useFonts';
 import { cvData, WorkExperience, Education, SkillCategory, Project } from '@/src/data/cvData';
 import { useLocale, useTranslations } from 'next-intl';
 
@@ -37,24 +36,22 @@ function formatDateRange(startDate: string, endDate: string | 'Present', lang: '
 
 // 職歴アイテムコンポーネント
 const WorkExperienceItem: React.FC<{ work: WorkExperience; lang: 'en' | 'jp' }> = ({ work, lang }) => {
-  const { jpFontSize } = useJPFontSize();
-
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-2">
         <div className="flex-1">
-          <h3 className={jpFontSize('text-heading-xl', 'text-heading-2xl')}>{work.position[lang]}</h3>
-          <p className={jpFontSize('text-body-lg', 'text-body-xl') + ' font-roboto'}>{work.company[lang]}</p>
-          <p className={jpFontSize('text-body-base', 'text-body-lg') + ' font-roboto'}>{work.location[lang]}</p>
+          <h3 className="text-title-lg">{work.position[lang]}</h3>
+          <p className="text-body-lg font-roboto">{work.company[lang]}</p>
+          <p className="text-body font-roboto">{work.location[lang]}</p>
         </div>
-        <p className={jpFontSize('text-caption-lg', 'text-caption-xl') + ' font-space-grotesk'}>
+        <p className="text-body-sm font-space-grotesk">
           {formatDateRange(work.startDate, work.endDate, lang)}
         </p>
       </div>
 
       <ul className="list-disc list-inside space-y-2">
         {work.description[lang].map((item, index) => (
-          <li key={index} className={jpFontSize('text-body-base', 'text-body-lg') + ' font-roboto'}>
+          <li key={index} className="text-body font-roboto">
             {item}
           </li>
         ))}
@@ -78,25 +75,23 @@ const WorkExperienceItem: React.FC<{ work: WorkExperience; lang: 'en' | 'jp' }> 
 
 // 学歴アイテムコンポーネント
 const EducationItem: React.FC<{ education: Education; lang: 'en' | 'jp' }> = ({ education, lang }) => {
-  const { jpFontSize } = useJPFontSize();
-
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-2">
         <div className="flex-1">
-          <h3 className={jpFontSize('text-heading-xl', 'text-heading-2xl')}>
+          <h3 className="text-title-lg">
             {education.degree[lang]} in {education.field[lang]}
           </h3>
-          <p className={jpFontSize('text-body-lg', 'text-body-xl') + ' font-roboto'}>
+          <p className="text-body-lg font-roboto">
             {education.institution[lang]}
           </p>
           {education.description && (
-            <p className={jpFontSize('text-body-base', 'text-body-lg') + ' font-roboto'}>
+            <p className="text-body font-roboto">
               {education.description[lang]}
             </p>
           )}
         </div>
-        <p className={jpFontSize('text-caption-lg', 'text-caption-xl') + ' font-space-grotesk'}>
+        <p className="text-body-sm font-space-grotesk">
           {formatDateRange(education.startDate, education.endDate, lang)}
         </p>
       </div>
@@ -106,11 +101,9 @@ const EducationItem: React.FC<{ education: Education; lang: 'en' | 'jp' }> = ({ 
 
 // スキルカテゴリアイテムコンポーネント
 const SkillCategoryItem: React.FC<{ category: SkillCategory; lang: 'en' | 'jp' }> = ({ category, lang }) => {
-  const { jpFontSize } = useJPFontSize();
-
   return (
     <div className="flex flex-col gap-4">
-      <h3 className={jpFontSize('text-heading-base', 'text-heading-xl')}>{category.category[lang]}</h3>
+      <h3 className="text-title-lg">{category.category[lang]}</h3>
       <div className="flex flex-wrap gap-2">
         {category.items.map((item) => (
           <span
@@ -127,18 +120,17 @@ const SkillCategoryItem: React.FC<{ category: SkillCategory; lang: 'en' | 'jp' }
 
 // プロジェクトアイテムコンポーネント
 const ProjectItem: React.FC<{ project: Project; lang: 'en' | 'jp' }> = ({ project, lang }) => {
-  const { jpFontSize } = useJPFontSize();
   const t = useTranslations('cv');
 
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-2">
-        <h3 className={jpFontSize('text-heading-xl', 'text-heading-2xl')}>{project.title[lang]}</h3>
-        <p className={jpFontSize('text-caption-lg', 'text-caption-xl') + ' font-space-grotesk'}>
+        <h3 className="text-title-lg">{project.title[lang]}</h3>
+        <p className="text-body-sm font-space-grotesk">
           {project.period[lang]}
         </p>
       </div>
-      <p className={jpFontSize('text-body-base', 'text-body-lg') + ' font-roboto'}>
+      <p className="text-body font-roboto">
         {project.description[lang]}
       </p>
       {project.technologies && (
@@ -158,7 +150,7 @@ const ProjectItem: React.FC<{ project: Project; lang: 'en' | 'jp' }> = ({ projec
           href={project.link}
           target="_blank"
           rel="noopener noreferrer"
-          className={jpFontSize('text-body-base', 'text-body-lg') + ' font-roboto hover:opacity-80'}
+          className="text-body font-roboto hover:opacity-80"
         >
           {t('viewProject')} →
         </a>
@@ -170,7 +162,6 @@ const ProjectItem: React.FC<{ project: Project; lang: 'en' | 'jp' }> = ({ projec
 export default function CVPage() {
   const locale = useLocale();
   const t = useTranslations('cv');
-  const { jpFontSize } = useJPFontSize();
   const [linkedInData, setLinkedInData] = useState<any>(null);
 
   // LinkedInデータ取得
@@ -189,7 +180,7 @@ export default function CVPage() {
     fetchLinkedIn();
   }, []);
 
-  const lang = locale as 'en' | 'jp'; // 'en' | 'jp'
+  const lang = locale as 'en' | 'jp';
 
   return (
     <div className="w-full flex flex-col gap-16 my-24 md:mt-28 md:mb-16">
@@ -199,13 +190,13 @@ export default function CVPage() {
           <h1 className="text-display font-semibold">
             {cvData.personalInfo.name[lang]}
           </h1>
-          <p className={jpFontSize('text-body-lg', 'text-body-xl') + ' font-roboto'}>
+          <p className="text-body-lg font-roboto">
             {cvData.personalInfo.title[lang]}
           </p>
-          <p className={jpFontSize('text-body-base', 'text-body-lg') + ' font-roboto'}>
+          <p className="text-body font-roboto">
             {cvData.personalInfo.location[lang]} • {cvData.personalInfo.email}
           </p>
-          <p className={jpFontSize('text-body-base', 'text-body-lg') + ' font-roboto'}>
+          <p className="text-body font-roboto">
             {cvData.personalInfo.summary[lang]}
           </p>
         </div>
@@ -259,7 +250,7 @@ export default function CVPage() {
             href={linkedInData.profileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className={jpFontSize('text-body-base', 'text-body-lg') + ' font-roboto hover:opacity-80'}
+            className="text-body font-roboto hover:opacity-80"
           >
             {linkedInData.profileUrl} →
           </a>
@@ -268,4 +259,3 @@ export default function CVPage() {
     </div>
   );
 }
-

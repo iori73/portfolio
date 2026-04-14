@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
 import { useJPFontSize, useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
 import { usePageTransition } from '@/src/contexts/TransitionContext';
+import PluginCardDeckThumb from '@/components/work/figma-plugins/PluginCardDeckThumb';
 
 export default function Home() {
   const t = useTranslations();
@@ -103,15 +104,10 @@ export default function Home() {
         </div>
 
         {/* Project 1 - Figma Plugins */}
-        <Link href="/work/figma-plugins" className="block mb-16 hover:opacity-80">
+        <Link href="/work/figma-plugins" className="block mb-16">
           <div className="mb-20">
-            <div className="mb-6 w-full aspect-[2/1] rounded-lg bg-surface-muted flex items-center justify-center overflow-hidden">
-              <div className="flex items-center gap-3 text-ink-tertiary">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                <span className="font-space-grotesk text-body-lg">Thumbnail coming soon</span>
-              </div>
+            <div className="mb-6 w-full aspect-[2/1] rounded-lg bg-[#F5F5F7] overflow-hidden">
+              <PluginCardDeckThumb />
             </div>
 
             <div className="flex items-center gap-6 mb-4 flex-wrap md:flex-nowrap">
