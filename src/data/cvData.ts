@@ -180,8 +180,8 @@ export const cvData: CVData = {
     {
       id: 'work-nextstage',
       company: {
-        en: 'YUMEMI Inc. (Client: Video Service Company)',
-        jp: '株式会社ゆめみ（クライアント: 動画サービス企業）',
+        en: 'YUMEMI Inc. (Client: Construction Tech & Consulting Company)',
+        jp: '株式会社ゆめみ（クライアント: 建築テック・コンサルティング企業）',
       },
       position: { en: 'UI Designer', jp: 'UIデザイナー' },
       location: { en: 'Tokyo, Japan', jp: '東京都' },
@@ -189,14 +189,14 @@ export const cvData: CVData = {
       endDate: '2025-08',
       description: {
         en: [
-          'Led the complete UI renewal of an online video learning platform for skilled trade workers, applying Object-Oriented UI (OOUI) methodology for unified information architecture',
+          'Led the complete UI renewal of a cloud-based video learning platform for the residential construction industry, applying Object-Oriented UI (OOUI) methodology for unified information architecture',
           'Designed gamification and emotional feedback systems inspired by Duolingo: badges, level/rank progression, avatars that grow with learning progress, and mascot encouragement',
           'Delivered wireframes for 11+ screens in 15 business days, followed by visual design with Material Design 3 component integration',
           'Conducted 3 client review sessions with iterative feedback incorporation, from wireframes through final visual design',
           'Conceptualized design around 3 pillars: growth awareness, learner autonomy, and real-world speed — enabling both individual progress tracking and organization-wide learning oversight',
         ],
         jp: [
-          '職人向けオンライン動画学習プラットフォームのUI全面リニューアルを主導。OOUI（オブジェクト指向UI）手法で統一的な情報設計を実現',
+          '住宅建築業界向けクラウド動画学習プラットフォームのUI全面リニューアルを主導。OOUI（オブジェクト指向UI）手法で統一的な情報設計を実現',
           'Duolingoに着想を得たゲーミフィケーションと感情的フィードバックシステムを設計: バッジ、レベル/ランク、学習進捗に応じて成長するアバター、マスコットキャラクターによる励まし',
           '15営業日で11画面以上のワイヤーフレームを完成。その後Material Design 3コンポーネント統合によるビジュアルデザインを実施',
           'ワイヤーフレームから最終ビジュアルデザインまで、3回のクライアントレビュー会を通じたフィードバック反映を実施',
@@ -321,8 +321,8 @@ export const cvData: CVData = {
         jp: '動画学習プラットフォームUIリニューアル',
       },
       description: {
-        en: 'Complete UI redesign of an online learning platform for skilled trade workers. Applied OOUI methodology combined with Duolingo-inspired gamification — badges, avatars, and emotional feedback — to reduce navigation complexity and boost learner engagement.',
-        jp: '職人向けオンライン学習プラットフォームのUI全面リデザイン。OOUI手法とDuolingoに着想を得たゲーミフィケーション（バッジ、アバター、感情的フィードバック）を組み合わせ、ナビゲーション複雑性の軽減と学習者エンゲージメントの向上を実現。',
+        en: 'Complete UI redesign of a cloud-based video learning platform for the residential construction industry. Applied OOUI methodology combined with Duolingo-inspired gamification — badges, avatars, and emotional feedback — to reduce navigation complexity and boost learner engagement.',
+        jp: '住宅建築業界向けクラウド動画学習プラットフォームのUI全面リデザイン。OOUI手法とDuolingoに着想を得たゲーミフィケーション（バッジ、アバター、感情的フィードバック）を組み合わせ、ナビゲーション複雑性の軽減と学習者エンゲージメントの向上を実現。',
       },
       period: { en: 'Apr - Aug 2025', jp: '2025年4月 - 8月' },
       technologies: ['Figma', 'FigJam', 'Material Design 3'],
