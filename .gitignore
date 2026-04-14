@@ -28,3 +28,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# temporary screenshots
+*.png
+!public/**/*.png
+
+# playwright
+.playwright-mcp/
+
+# font previews
+font-previews/
