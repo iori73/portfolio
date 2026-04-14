@@ -6,8 +6,9 @@
  * 未設定の場合は 503 を返し、フロントは static JSON にフォールバックする。
  */
 
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { Client } from '@notionhq/client';
+import { rateLimit } from '@/src/lib/rate-limit';
 import type { PodcastData, Episode, Cluster } from '@/components/podcast-notes/types';
 import {
   CATEGORY_COLORS,
@@ -116,7 +117,13 @@ function buildClusters(
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0] ?? 'unknown';
+  const { success } = rateLimit(ip, { limit: 20, windowMs: 60_000 });
+  if (!success) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+  }
+
   if (!NOTION_API_KEY || !NOTION_DB_ID) {
     return NextResponse.json(
       { error: 'Podcast notes API not configured (missing NOTION_API_KEY or NOTION_PODCAST_DB_ID)' },

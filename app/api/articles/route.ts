@@ -47,8 +47,9 @@
 // }
 
 // /app/api/articles/route.ts (例)
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import xml2js from 'xml2js';
+import { rateLimit } from '@/src/lib/rate-limit';
 
 interface Article {
   title: string;
@@ -60,9 +61,14 @@ interface Article {
 
 export const revalidate = 3600; // 1時間キャッシュ
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0] ?? 'unknown';
+  const { success } = rateLimit(ip, { limit: 30, windowMs: 60_000 });
+  if (!success) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+  }
+
   try {
-    console.log('Starting RSS fetch...');
     const rssUrl = 'https://note.com/io_73/rss';
     const response = await fetch(rssUrl, {
       next: { revalidate: 3600 }, // 1時間キャッシュ
@@ -77,23 +83,13 @@ export async function GET() {
     }
 
     const text = await response.text();
-    console.log('RSS text length:', text.length);
-    console.log('RSS first 500 chars:', text.substring(0, 500));
 
     const parser = new xml2js.Parser();
     const result = await parser.parseStringPromise(text);
 
-    console.log('Total items found:', result.rss.channel[0].item.length);
-
     const items = result.rss.channel[0].item.slice(0, 6); // 最新6件
-    console.log('Processing items:', items.length);
 
-    const articles: Article[] = items.map((item: any, index: number) => {
-      console.log(`Processing item ${index}:`, {
-        title: item.title?.[0],
-        pubDate: item.pubDate?.[0],
-        link: item.link?.[0],
-      });
+    const articles: Article[] = items.map((item: any) => {
 
       // 取得した raw HTML
       let rawDescription = item.description?.[0] ?? '';
@@ -109,11 +105,6 @@ export async function GET() {
         pubDate: item.pubDate?.[0] ?? '',
       };
     });
-
-    console.log(
-      'Final articles:',
-      articles.map((a: Article) => ({ title: a.title, pubDate: a.pubDate })),
-    );
 
     return NextResponse.json(articles, {
       status: 200,

@@ -121,16 +121,14 @@ export default function BlogPage() {
           >
             {title}
           </h3>
-          {/* description に「続きを見る」などが含まれていれば、置換や削除など工夫 */}
-          <div
-            dangerouslySetInnerHTML={{
-              __html: description.replace('続きをみる', ''), // 例: "続きをみる" を消す
-            }}
+          <p
             className={`article-desc ${getBodyFontClass()} tracking-[0.2px] ${jpFontSize(
               'text-body-sm',
               'text-body-base',
             )} line-clamp-4`}
-          />
+          >
+            {description.replace(/<[^>]*>/g, '').replace('続きをみる', '').trim()}
+          </p>
         </div>
       </div>
     );

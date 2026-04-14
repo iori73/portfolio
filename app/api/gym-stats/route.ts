@@ -1,7 +1,8 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 import { parse } from 'csv-parse/sync';
+import { rateLimit } from '@/src/lib/rate-limit';
 
 interface CrowdData {
   datetime: string;
@@ -21,10 +22,19 @@ interface PeakQuietTime {
   count: number;
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0] ?? 'unknown';
+  const { success } = rateLimit(ip, { limit: 20, windowMs: 60_000 });
+  if (!success) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+  }
+
   try {
-    // Read CSV file from the external directory
-    const csvPath = '/Users/i_kawano/Documents/crowd_data_dashboard_v2/public/fit_place24_data.csv';
+    // Read CSV file path from environment variable
+    const csvPath = process.env.GYM_CSV_PATH;
+    if (!csvPath) {
+      return NextResponse.json({ error: 'GYM_CSV_PATH not configured' }, { status: 500 });
+    }
 
     if (!fs.existsSync(csvPath)) {
       return NextResponse.json({ error: 'Data file not found' }, { status: 404 });
