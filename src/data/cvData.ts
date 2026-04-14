@@ -180,8 +180,8 @@ export const cvData: CVData = {
     {
       id: 'work-nextstage',
       company: {
-        en: 'YUMEMI Inc. (Client: EdTech Startup)',
-        jp: '株式会社ゆめみ（クライアント: EdTechスタートアップ）',
+        en: 'YUMEMI Inc. (Client: Video Service Company)',
+        jp: '株式会社ゆめみ（クライアント: 動画サービス企業）',
       },
       position: { en: 'UI Designer', jp: 'UIデザイナー' },
       location: { en: 'Tokyo, Japan', jp: '東京都' },
