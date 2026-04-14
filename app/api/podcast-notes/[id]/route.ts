@@ -7,12 +7,13 @@
  * Environment: NOTION_API_KEY
  */
 
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { Client } from '@notionhq/client';
 import {
   normalizeCategoryName,
 } from '@/components/podcast-notes/types';
 import type { Chapter } from '@/components/podcast-notes/types';
+import { rateLimit } from '@/src/lib/rate-limit';
 
 const NOTION_API_KEY = process.env.NOTION_API_KEY;
 
@@ -116,10 +117,22 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export async function GET(
-  _request: Request,
+  request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0] ?? 'unknown';
+  const { success } = rateLimit(ip, { limit: 20, windowMs: 60_000 });
+  if (!success) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+  }
+
   const { id } = await params;
+
+  // Validate ID format (Notion page IDs are UUIDs with or without dashes)
+  const uuidPattern = /^[0-9a-f]{8}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{12}$/i;
+  if (!id || !uuidPattern.test(id)) {
+    return NextResponse.json({ error: 'Invalid episode ID' }, { status: 400 });
+  }
 
   if (!NOTION_API_KEY) {
     return NextResponse.json(

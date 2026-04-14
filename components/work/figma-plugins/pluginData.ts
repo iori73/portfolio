@@ -1,10 +1,12 @@
 export type PluginCategory = 'personal' | 'client-ds';
+export type PluginStatus = 'published' | 'coming-soon';
 
 export interface PluginData {
   id: string;
   name: string;
   type: 'Plugin' | 'Widget';
   category: PluginCategory;
+  status?: PluginStatus;
   description: string;
   tags: string[];
   link?: string;
@@ -54,10 +56,10 @@ export const plugins: PluginData[] = [
     description:
       'Imports screenshots into Figma with folder structure preserved as Sections. Smart Import mode uses AI to detect scroll sequences and group app screenshots by section.',
     tags: ['Plugin', 'Import', 'AI'],
-    link: 'https://www.figma.com/community/plugin/1609935194251849962',
+    link: 'https://www.figma.com/community/plugin/1617503809683781303',
     accentColor: '#0ACF83',
-    iconImage: '/work/figma-plugins/si-icon.png',
-    thumbnail: '/work/figma-plugins/si-cover-cropped.png',
+    iconImage: '/work/figma-plugins/bsi-icon.png',
+    thumbnail: '/work/figma-plugins/bsi-cover.png',
     users: 4,
     likes: 0,
   },
@@ -66,6 +68,7 @@ export const plugins: PluginData[] = [
     name: 'Screenshot Reorganizer',
     type: 'Plugin',
     category: 'personal',
+    status: 'coming-soon',
     description:
       'Reorganizes imported screenshot frames on the Figma canvas — sorting, aligning, and grouping them into a clean grid layout for efficient design review.',
     tags: ['Plugin', 'Organization', 'Layout'],
@@ -76,6 +79,7 @@ export const plugins: PluginData[] = [
     name: 'Arrow Connect',
     type: 'Plugin',
     category: 'personal',
+    status: 'coming-soon',
     description:
       'Draws directional connector arrows between selected frames or components. Useful for flow diagrams, user journeys, and architecture visualizations.',
     tags: ['Plugin', 'Diagram', 'Flow'],
@@ -86,6 +90,7 @@ export const plugins: PluginData[] = [
     name: 'Variable Migrator',
     type: 'Plugin',
     category: 'client-ds',
+    status: 'coming-soon',
     description:
       'Migrates legacy and external library variable references to the target design system. Uses RGBA color matching with tolerance scoring and scope validation.',
     tags: ['Plugin', 'Design System', 'Migration'],
@@ -96,6 +101,7 @@ export const plugins: PluginData[] = [
     name: 'Design Study Generator',
     type: 'Plugin',
     category: 'client-ds',
+    status: 'coming-soon',
     description:
       'Auto-generates brand study screen variations across multiple layout patterns. Produces PC and SP variants with design tokens applied.',
     tags: ['Plugin', 'Design System', 'Prototyping'],

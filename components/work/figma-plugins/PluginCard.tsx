@@ -50,6 +50,7 @@ function PluginIcon({ plugin }: { plugin: PluginData }) {
 export default function PluginCard({ plugin }: PluginCardProps) {
   const t = useTranslations('figmaPlugins');
   const accent = plugin.accentColor;
+  const isComingSoon = plugin.status === 'coming-soon';
   const Wrapper = plugin.link ? 'a' : 'div';
   const wrapperProps = plugin.link
     ? { href: plugin.link, target: '_blank' as const, rel: 'noopener noreferrer' }
@@ -57,8 +58,8 @@ export default function PluginCard({ plugin }: PluginCardProps) {
 
   return (
     <Wrapper {...wrapperProps} className={`group ${plugin.link ? 'block cursor-pointer' : 'block'}`}>
-      {plugin.thumbnail && (
-        <div className="relative w-full aspect-[16/9] rounded-xl bg-surface-muted overflow-hidden">
+      <div className="relative w-full aspect-[16/9] rounded-xl bg-surface-muted overflow-hidden flex items-center justify-center">
+        {plugin.thumbnail ? (
           <Image
             src={plugin.thumbnail}
             alt={`${plugin.name} preview`}
@@ -66,8 +67,20 @@ export default function PluginCard({ plugin }: PluginCardProps) {
             className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
             sizes="(max-width: 768px) 100vw, 50vw"
           />
-        </div>
-      )}
+        ) : (
+          <div
+            className="w-full h-full"
+            style={{ backgroundColor: `${accent}12` }}
+          />
+        )}
+        {isComingSoon && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="font-space-grotesk text-caption tracking-wider uppercase px-3 py-1 rounded-full bg-white/80 text-ink-tertiary backdrop-blur-sm">
+              Coming Soon
+            </span>
+          </div>
+        )}
+      </div>
 
       <div className="pt-4">
         <div className="flex items-start gap-3">
