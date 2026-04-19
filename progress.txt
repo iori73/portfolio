@@ -83,6 +83,26 @@
 
 ---
 
+### リモート同期（2026-04-19）
+- [x] 別 PC での CV 作業（PR #8, #9, #10）をローカルに取り込む
+  - stash → git pull（fast-forward, 6コミット）→ stash pop で競合なし解決
+  - 取り込み内容: CV 実データ, CV リライト, Airline Design System ケーススタディ
+- 複数PC環境での作業を継続的に行うことが確定（lessons.md 参照）
+
+---
+
+### Figma Plugins サムネイル リデザイン（2026-04-19）
+- [x] ConceptC.tsx: ヒーロー部分に ThumbnailScatter コンポーネント追加（3枚の散らばったカバー画像）
+- [x] PluginCardDeckThumb.tsx: カードパイルを pure CSS hover-to-front インタラクションに全面リライト
+  - 3枚実カード + 2枚ダミー → 5枚すべてホバー可能に拡張
+  - アクティブカードが前面に飛び出す spring easing アニメーション
+  - 水平アーチ軸 + 有機的な間隔・rotationでFigmaデザインと同期
+- [x] Figma (AZSWqj8JkpK3J4ZU9ezmLo) nakahatsuページ node 976:13194:
+  - 3フレーム（左/中央/右アクティブ）に放物線アーチ配置を適用
+  - 水平軸 Y 差 10px、有機的 X 間隔・rotation でコード実装と視覚的整合性を確保
+
+---
+
 ## 次のタスク
 1. 残りページへのセマンティックカラー適用
 2. /design-audit でコードベース全体の違反数を把握

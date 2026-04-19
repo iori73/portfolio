@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import PluginCard from './PluginCard';
 import { plugins } from './pluginData';
@@ -173,6 +174,63 @@ function HeroGraphicSVG() {
   );
 }
 
+const SCATTER_CARDS = [
+  {
+    src: '/work/figma-plugins/bsi-cover.png',
+    alt: 'Bulk Screenshot Importer',
+    rotate: -11,
+    tx: -50,
+    ty: 18,
+    z: 1,
+  },
+  {
+    src: '/work/figma-plugins/pm-cover.png',
+    alt: 'Perfect Markdown',
+    rotate: 7,
+    tx: 48,
+    ty: 22,
+    z: 2,
+  },
+  {
+    src: '/work/figma-plugins/pptx-cover.png',
+    alt: 'PPTX to Figma',
+    rotate: -2,
+    tx: 0,
+    ty: 0,
+    z: 3,
+  },
+];
+
+function ThumbnailScatter() {
+  return (
+    <div className="relative w-[260px] h-[200px] flex-shrink-0 hidden md:block">
+      {SCATTER_CARDS.map((card) => (
+        <div
+          key={card.alt}
+          className="absolute rounded-xl overflow-hidden"
+          style={{
+            width: 180,
+            height: 112,
+            left: `calc(50% - 90px + ${card.tx}px)`,
+            top: `calc(50% - 56px + ${card.ty}px)`,
+            transform: `rotate(${card.rotate}deg)`,
+            zIndex: card.z,
+            boxShadow: '0 4px 20px rgba(0,0,0,0.18), 0 1px 4px rgba(0,0,0,0.10)',
+          }}
+        >
+          <Image
+            src={card.src}
+            alt={card.alt}
+            fill
+            sizes="180px"
+            className="object-cover"
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function formatUsers(n: number): string {
   if (n >= 1000) return `${(n / 1000).toFixed(1).replace(/\.0$/, '')}k`;
   return String(n);
@@ -197,32 +255,36 @@ export default function ConceptC() {
       <div className="relative rounded-2xl overflow-hidden px-8 py-16 md:px-16 md:py-24 bg-surface-muted">
         <HeroGraphicSVG />
 
-        <div className="relative z-10 max-w-xl">
-          <p className="font-space-grotesk text-label tracking-wider uppercase text-[#A259FF]">
-            {t('heroTagline')}
-          </p>
-          <h2 className="text-display font-bold text-ink mt-3">
-            {t('heroTitle')}
-          </h2>
-          <p className="text-body-lg text-ink-secondary mt-4 leading-relaxed max-w-md">
-            {t('heroDescription')}
-          </p>
+        <div className="relative z-10 flex items-center justify-between gap-8">
+          <div className="max-w-xl">
+            <p className="font-space-grotesk text-label tracking-wider uppercase text-[#A259FF]">
+              {t('heroTagline')}
+            </p>
+            <h2 className="text-display font-bold text-ink mt-3">
+              {t('heroTitle')}
+            </h2>
+            <p className="text-body-lg text-ink-secondary mt-4 leading-relaxed max-w-md">
+              {t('heroDescription')}
+            </p>
 
-          <div className="mt-8 flex flex-wrap gap-6">
-            {stats.map((stat) => (
-              <div key={stat.label} className="flex items-baseline gap-2">
-                <span
-                  className="text-title-lg font-bold"
-                  style={{ color: stat.color }}
-                >
-                  {stat.value}
-                </span>
-                <span className="font-space-grotesk text-caption text-ink-tertiary">
-                  {stat.label}
-                </span>
-              </div>
-            ))}
+            <div className="mt-8 flex flex-wrap gap-6">
+              {stats.map((stat) => (
+                <div key={stat.label} className="flex items-baseline gap-2">
+                  <span
+                    className="text-title-lg font-bold"
+                    style={{ color: stat.color }}
+                  >
+                    {stat.value}
+                  </span>
+                  <span className="font-space-grotesk text-caption text-ink-tertiary">
+                    {stat.label}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
+
+          <ThumbnailScatter />
         </div>
       </div>
 
