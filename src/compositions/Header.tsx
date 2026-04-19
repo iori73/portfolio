@@ -57,6 +57,7 @@ export default function Header() {
         className="absolute inset-0 pointer-events-none"
         style={{
           backdropFilter: 'blur(40px)',
+          background: 'rgba(252,251,252,0.6)',
           // maskImage:
           //   'linear-gradient(180deg, rgba(229, 229, 229, 10) 0%, rgba(229, 229, 229, 0.9) 25%, rgba(229, 229, 229, 0.7) 50%, rgba(229, 229, 229, .5) 70%, rgba(229, 229, 229, 0.1) 90%, rgba(229, 229, 229, 0) 100%)',
           // WebkitMaskImage:
@@ -84,7 +85,7 @@ export default function Header() {
                   {item.name}
                 </Link>
                 {isActive(item.path) && (
-                  <div className="absolute top-full mt-0 w-2 h-2 rounded-full bg-ink"></div>
+                  <div className="absolute top-full mt-0 w-2 h-2 rounded-full bg-accent"></div>
                 )}
               </div>
             ))}
@@ -170,7 +171,7 @@ export default function Header() {
                   </Link>
                   {isActive(item.path) && (
                     <div
-                      className="w-2 h-2 rounded-full bg-ink"
+                      className="w-2 h-2 rounded-full bg-accent"
                       style={{
                         opacity: 1,
                         transform: 'translateY(-10px)',

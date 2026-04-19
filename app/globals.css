@@ -205,6 +205,12 @@ body {
     --podcast-category-others: #636E72;
     --podcast-category-default: #B2BEC3;
 
+    /* Motion tokens — site-wide easing + duration scale */
+    --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+    --duration-fast: 300ms;
+    --duration-med: 400ms;
+    --duration-slow: 700ms;
+
     /* Fixed site header: py-3 + 48px logo row — keep sticky `top` in sync (was top-20/80px vs ~72px). */
     --site-header-height: 4.5rem;
   }
