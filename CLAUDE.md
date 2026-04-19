@@ -196,11 +196,23 @@ portfolio/
 
 ---
 
+## プロジェクト情報データソース
+
+CV・ケーススタディの編集時は **`src/data/projects.json`** を参照すること。このファイルには川野が参加した全プロジェクト（ANA, 早稲田, パナソニック, ネクストステージ, WbT 等）の詳細情報が構造化されている。
+
+- 各プロジェクトの概要（日英）、クライアント、期間、役割、技術スタック、成果物（定量）、ハイライト、方法論、リンク
+- `confidentiality: "nda"` のプロジェクトは公開可否に注意
+- `metadata.featured: true` のプロジェクトがポートフォリオの主要コンテンツ
+- このファイルは `Documents/work/projects.json` のコピー。マスターデータの更新は仕事PC側で行い、こちらにコピーする
+
+---
+
 ## 参照ドキュメント
 
 | ドキュメント | 役割 |
 |---|---|
 | **CLAUDE.md**（このファイル） | すべてのルールと参照を集約 |
+| [projects.json](src/data/projects.json) | プロジェクト情報データソース（CV・ケーススタディ用） |
 | [SCOPE.md](docs/SCOPE.md) | 何を作るか（プロジェクト範囲） |
 | [APP_FLOW.md](docs/APP_FLOW.md) | どう体験するか（画面遷移） |
 | [TECH_STACK.md](docs/TECH_STACK.md) | 何で作るか（技術スタック詳細） |
