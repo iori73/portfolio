@@ -64,6 +64,23 @@
 
 ---
 
+## 2026-04-19: 複数 PC 環境での Git ワークフロー
+
+### ローカルが remote より遅れていた
+**状況**: 別 PC で CV 作業（PR #8, #9, #10）を行い push したが、このマシンの `main` が6コミット遅れていた。ローカルには未コミットの figma-plugins 変更もあった。
+
+**解決策**: `stash → git pull → stash pop`
+- remote 変更（CV/airline ページ）とローカル変更（figma-plugins）は別ファイルなので競合なし
+- fast-forward だったのでマージコミットも不要でクリーンに完了
+
+**今後の再発防止（複数 PC 運用の鉄則）**:
+- **作業開始前**: 必ず `git pull` を実行してから作業を始める
+- **作業終了後**: 必ず `git add` → `git commit` → `git push` して他 PC に渡す
+- **未コミット変更がある状態で pull が必要な場合**: `git stash → git pull → git stash pop`
+- この環境は複数 PC で継続的に作業するため、毎回このフローを意識する
+
+---
+
 ## 2025-01-17: Tailwind spacing のローカル vs 本番不一致
 
 > ADR: docs/decisions/002-tailwind-spacing-fix.md
