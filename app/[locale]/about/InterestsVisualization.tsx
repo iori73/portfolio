@@ -174,7 +174,7 @@ const InterestsVisualization: React.FC = () => {
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-center py-4 gap-8 md:gap-4">
+    <div className="w-4/5 mx-auto flex flex-col items-center py-4 gap-8 md:gap-4">
       <div
         className="flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-surface-muted text-ink-tertiary"
         // style={{
@@ -197,7 +197,7 @@ const InterestsVisualization: React.FC = () => {
           You can drag me
         </p>
       </div>
-      <svg ref={svgRef} className="w-full h-full" />
+      <svg ref={svgRef} className="w-full" />
     </div>
   );
 };

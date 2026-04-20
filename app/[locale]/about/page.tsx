@@ -38,7 +38,8 @@ const AboutPage: React.FC = () => {
               alt="Iori Kawano"
               width={160}
               height={160}
-              className="rounded-full object-cover object-top w-[120px] h-[120px] md:w-[160px] md:h-[160px]"
+              className="rounded-full object-cover object-top"
+              style={{ width: '20vw', height: '20vw', minWidth: 80, minHeight: 80, maxWidth: 240, maxHeight: 240 }}
               priority
             />
           </div>
@@ -57,7 +58,7 @@ const AboutPage: React.FC = () => {
       {/* ── Career ── */}
       <SectionLabel>Career</SectionLabel>
       <h2 className={`text-title-lg mb-8 ${getHeadingFontClass()}`}>
-        {locale === 'jp' ? '略歴' : 'A short list, in reverse order.'}
+        {locale === 'jp' ? 'システムで考え、細部にこだわる。' : 'Thinks in systems. Details in design.'}
       </h2>
 
       <div>
@@ -75,9 +76,7 @@ const AboutPage: React.FC = () => {
                 {job.position[locale]} — {job.company[locale]}
               </p>
               <p className={`text-body ${getBodyFontClass()} text-ink-secondary leading-[1.6]`}>
-                {locale === 'jp'
-                  ? '航空・電機・フィンテック・大学のクライアント向け、デザインシステム・Figmaプラグイン・プロダクトUI。'
-                  : 'Design systems, Figma plugins, and product UI across airline, electronics, fintech, and university clients.'}
+                {job.description[locale][0]}
               </p>
             </div>
           </div>
