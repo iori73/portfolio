@@ -22,7 +22,8 @@ export interface WorkExperience {
   location: { en: string; jp: string };
   startDate: string; // "2024-01"
   endDate: string | 'Present'; // "2024-12" or "Present"
-  description: { en: string[]; jp: string[] }; // 箇条書き
+  description: { en: string[]; jp: string[] }; // 箇条書き [0]=summary, [1+]=project bullets
+  projectPeriods?: { start: string; end: string | 'Present' }[]; // description[1+] に対応する期間
   technologies?: string[];
 }
 
@@ -99,6 +100,10 @@ export const cvData: CVData = {
           '[航空] モバイルアプリとWebにまたがるデザインシステムを担当。2層トークンアーキテクチャ（399変数、3カラーモード、3タイポグラフィモード）を構築し、トークン設定・移行を自動化する12個のカスタムFigmaプラグインを開発。',
         ],
       },
+      projectPeriods: [
+        { start: '2026-04', end: '2026-04' },
+        { start: '2025-12', end: '2026-03' },
+      ],
       technologies: ['Figma', 'TypeScript', 'Next.js', 'React', 'Tailwind CSS', 'shadcn/ui'],
     },
     {
@@ -126,6 +131,10 @@ export const cvData: CVData = {
           '[建築テック] 住宅建築業界向け動画学習プラットフォームのUI全面リニューアルを主導。OOUI手法を習得し、Duolingo着想のゲーミフィケーションで11画面以上を再設計。15営業日でワイヤーフレームを完成、3回のクライアントレビューを経て納品。',
         ],
       },
+      projectPeriods: [
+        { start: '2025-07', end: '2025-12' },
+        { start: '2025-04', end: '2025-08' },
+      ],
       technologies: [
         'Figma',
         'TypeScript',

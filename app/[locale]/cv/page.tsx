@@ -68,13 +68,26 @@ const WorkExperienceItem: React.FC<{ work: WorkExperience; lang: 'en' | 'jp' }> 
         <div className="flex flex-col gap-3">
           {projects.map((item, index) => {
             const { label, body } = parseProjectBullet(item);
+            const period = work.projectPeriods?.[index];
+            const periodStr = period
+              ? period.start === period.end
+                ? formatDateRange(period.start, period.end, lang).split(' - ')[0]
+                : formatDateRange(period.start, period.end, lang)
+              : null;
             return (
               <div key={index} className="border-l-2 border-line-subtle pl-4 flex flex-col gap-1">
-                {label && (
-                  <span className="font-space-grotesk text-label font-semibold text-ink-tertiary uppercase tracking-[0.06em]">
-                    {label}
-                  </span>
-                )}
+                <div className="flex items-baseline gap-3">
+                  {label && (
+                    <span className="font-space-grotesk text-label font-semibold text-ink-tertiary uppercase tracking-[0.06em]">
+                      {label}
+                    </span>
+                  )}
+                  {periodStr && (
+                    <span className="font-space-grotesk text-label text-ink-tertiary">
+                      {periodStr}
+                    </span>
+                  )}
+                </div>
                 <p className="text-body font-roboto text-ink-secondary leading-[1.6]">{body}</p>
               </div>
             );
