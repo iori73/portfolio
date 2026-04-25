@@ -91,12 +91,12 @@ export const cvData: CVData = {
       description: {
         en: [
           'Design system for a major airline across mobile apps and web, and a university alumni donation app.',
-          '[University] Led Figma prototype design for a university alumni donation app. Coordinated across 4 organizations; designed a non-coercive donation UX.',
+          '[University] Led Figma prototype design for a university alumni donation app. Designed a non-coercive donation UX.',
           '[Airline] Owned the design system spanning mobile apps and web. Built a two-layer token architecture (399 variables, 3 color modes, 3 typography modes) and developed 12 custom Figma plugins to automate token setup and migration.',
         ],
         jp: [
           '大手航空会社向けデザインシステム（モバイルアプリ・Web）と、大学OB・OG向け寄付アプリ。',
-          '[大学] 大学OB・OG向け寄付アプリのFigmaプロトタイプ設計を主導。4組織を調整し、非強制的な寄付UXを設計。',
+          '[大学] 大学OB・OG向け寄付アプリのFigmaプロトタイプ設計を主導。非強制的な寄付UXを設計。',
           '[航空] モバイルアプリとWebにまたがるデザインシステムを担当。2層トークンアーキテクチャ（399変数、3カラーモード、3タイポグラフィモード）を構築し、トークン設定・移行を自動化する12個のカスタムFigmaプラグインを開発。',
         ],
       },
