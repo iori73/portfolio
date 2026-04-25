@@ -75,6 +75,37 @@ export const cvData: CVData = {
   },
   workExperience: [
     {
+      id: 'work-accenture-song',
+      company: {
+        en: 'Accenture Song',
+        jp: 'アクセンチュア・ソング',
+      },
+      position: {
+        en: 'UI/UX Designer',
+        jp: 'UI/UXデザイナー',
+      },
+      location: { en: 'Tokyo, Japan', jp: '東京都' },
+      startDate: '2025-12',
+      endDate: 'Present',
+      description: {
+        en: [
+          'Design systems for a major airline (9 platforms), smart home UI for a consumer electronics leader, a university alumni donation app, and a talent management system for an automotive company.',
+          '[Airline — ANA] Continued and shipped the ANA design system spanning 9 digital platforms. Owned full delivery from token system to component library.',
+          '[Consumer Electronics — Panasonic] Continued smart home voice notification UI. Shipped responsive text system and loader animations.',
+          '[University — Waseda] Led Figma prototype design for Waseda\'s 150th anniversary alumni donation app. Coordinated across 4 organizations; designed a non-coercive donation UX based on 118-person survey insights.',
+          '[Automotive — Woven by Toyota] UI design for talent management and learning system. First Japanese designer on a multinational team.',
+        ],
+        jp: [
+          '大手航空会社向けデザインシステム（9プラットフォーム）、大手電機メーカーのスマートホームUI、大学OB・OG向け寄付アプリ、大手自動車会社のタレントシステム。',
+          '[航空 — ANA] 9つのデジタルプラットフォームにわたるANAデザインシステムを継続・納品。トークンシステムからコンポーネントライブラリまで一貫して担当。',
+          '[大手電機 — パナソニック] スマートホーム音声通知UIを継続。レスポンシブテキストシステムとローダーアニメーションを納品。',
+          '[大学 — 早稲田] 早稲田大学150周年記念OB・OG寄付アプリのFigmaプロトタイプ設計を主導。4組織を調整し、118名のアンケートに基づく非強制的な寄付UXを設計。',
+          '[自動車 — Woven by Toyota] タレントマネジメント・学習システムのUI設計。多国籍チームに参加した初の日本人デザイナー。',
+        ],
+      },
+      technologies: ['Figma', 'TypeScript', 'Next.js', 'React', 'Tailwind CSS'],
+    },
+    {
       id: 'work-yumemi',
       company: {
         en: 'YUMEMI Inc.',
@@ -86,19 +117,19 @@ export const cvData: CVData = {
       },
       location: { en: 'Tokyo, Japan', jp: '東京都' },
       startDate: '2025-04',
-      endDate: 'Present',
+      endDate: '2025-12',
       description: {
         en: [
-          '[Construction Tech] First project as a new grad: led full UI renewal of a cloud-based video learning platform for the residential construction industry. Learned OOUI methodology under a senior mentor and applied it to redesign 11+ screens with Duolingo-inspired gamification. Delivered wireframes in 15 business days, iterated through 3 client review sessions.',
-          '[Consumer Electronics] Designed smart home voice notification UI for a major electronics company, managing two parallel design tracks. Built interactive HTML prototypes to validate a character-count-aware responsive text system, and created frame-perfect infinite-loop loader animations.',
-          '[Airline] Architected a design system spanning 9 digital platforms for a major airline. Built a two-layer token system (399 variables, 3 color modes, 3 typography modes), developed 12 custom Figma plugins to automate token setup and migration, and implemented a Next.js component prototype extending shadcn/ui.',
-          '[University] Led Figma prototype design for a 670,000-alumni donation app, coordinating across 4 organizations (strategy, visual design, service design, UI/UX). Integrated 118-person survey insights — finding only 4% donate due to channel unawareness — to design a non-coercive donation UX.',
+          'Learning platform UI renewal for a construction tech company and smart home voice notification UI for a consumer electronics leader — first two projects out of university.',
+          '[Construction Tech — ネクストステージ] Led full UI renewal of ACRO5, a cloud-based video learning platform for the residential construction industry. Applied OOUI methodology to redesign 11+ screens with Duolingo-inspired gamification. Delivered wireframes in 15 business days through 3 client review sessions.',
+          '[Consumer Electronics — Panasonic] Designed smart home voice push notification UI. Managed two parallel design tracks, built interactive HTML prototypes to validate a character-count-aware responsive text system, and created frame-perfect infinite-loop loader animations.',
+          '[Airline — ANA] Architected a design system spanning 9 digital platforms. Built a two-layer token system (399 variables, 3 color modes, 3 typography modes) and developed 12 custom Figma plugins to automate token setup and migration.',
         ],
         jp: [
-          '[建築テック] 新卒最初のプロジェクト: 住宅建築業界向けクラウド動画学習プラットフォームのUI全面リニューアルを主導。シニアメンターのもとOOUI手法を習得し、Duolingo着想のゲーミフィケーションで11画面以上を再設計。15営業日でワイヤーフレームを完成、3回のクライアントレビューを経て納品。',
-          '[大手電機メーカー] スマートホーム音声プッシュ通知のUI設計を担当。2つの並行デザイントラックを管理。文字数対応レスポンシブテキストシステムをインタラクティブHTMLプロトタイプで検証し、フレームパーフェクトな無限ループローダーアニメーションを制作。',
-          '[大手航空会社] 9つのデジタルプラットフォームを横断するデザインシステムを設計。2層トークンシステム（399変数、3カラーモード、3タイポグラフィモード）を構築し、トークン設定・移行を自動化する12個のカスタムFigmaプラグインを開発。shadcn/uiを拡張したNext.jsコンポーネントプロトタイプも実装。',
-          '[大手大学] 67万人の校友を対象とした寄付アプリのFigmaプロトタイプ設計を主導。戦略・ビジュアルデザイン・サービスデザイン・UI/UXの4組織を調整。118名のアンケートから「寄付率4%、障壁は認知不足」を特定し、非強制的な寄付UXを設計。',
+          '建築業界向け学習プラットフォームのUIリニューアルと、大手電機メーカーのスマートホーム音声通知UI — 新卒最初の2案件。',
+          '[建築テック — ネクストステージ] 住宅建築業界向け動画学習プラットフォーム「ACRO5」のUI全面リニューアルを主導。OOUI手法を習得し、Duolingo着想のゲーミフィケーションで11画面以上を再設計。15営業日でワイヤーフレームを完成、3回のクライアントレビューを経て納品。',
+          '[大手電機 — パナソニック] スマートホーム音声プッシュ通知のUI設計を担当。2つの並行デザイントラックを管理。文字数対応レスポンシブテキストシステムをHTMLプロトタイプで検証し、フレームパーフェクトな無限ループローダーアニメーションを制作。',
+          '[航空 — ANA] 9つのデジタルプラットフォームにわたるデザインシステムを設計。2層トークンシステム（399変数、3カラーモード、3タイポグラフィモード）を構築し、トークン設定・移行を自動化する12個のカスタムFigmaプラグインを開発。',
         ],
       },
       technologies: [
