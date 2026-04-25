@@ -69,8 +69,8 @@ export const cvData: CVData = {
     email: 'iori730002204294@gmail.com',
     website: 'https://iori-kawano.vercel.app',
     summary: {
-      en: 'Designer who thinks in systems and ships in code. Sociology background turned professional asset: I read group behavior and organizational dynamics the way others read user flows. At YUMEMI, I redesigned a learning platform for skilled trade workers and designed smart home IoT interfaces. At Accenture Song, I owned a 9-platform airline design system (with 12 custom Figma plugins) and led the UI for a university alumni donation app built on 118-person research.',
-      jp: '社会学を学び、システムで考え、コードで実装するデザイナー。集団行動と組織のダイナミクスを読む力が、ユーザー行動の分析と組織への定着設計に直結しています。ゆめみでは職人向け学習プラットフォームのUIリニューアルとスマートホームIoTインターフェースを担当。アクセンチュア・ソングでは、大手航空会社の9プラットフォームにわたるデザインシステム（カスタムFigmaプラグイン12本）と、118名のリサーチに基づく大学OB・OG向け寄付アプリのUIを担当。',
+      en: 'Designer who thinks in systems and ships in code. Sociology background turned professional asset: I read group behavior and organizational dynamics the way others read user flows. At YUMEMI, I redesigned a learning platform for skilled trade workers and designed smart home IoT interfaces. At Accenture Song, I owned an airline design system across mobile and web (with 12 custom Figma plugins) and led the UI for a university alumni donation app.',
+      jp: '社会学を学び、システムで考え、コードで実装するデザイナー。集団行動と組織のダイナミクスを読む力が、ユーザー行動の分析と組織への定着設計に直結しています。ゆめみでは職人向け学習プラットフォームのUIリニューアルとスマートホームIoTインターフェースを担当。アクセンチュア・ソングでは、大手航空会社のモバイル・Web横断デザインシステム（カスタムFigmaプラグイン12本）と大学OB・OG向け寄付アプリのUIを担当。',
     },
   },
   workExperience: [
@@ -89,14 +89,14 @@ export const cvData: CVData = {
       endDate: 'Present',
       description: {
         en: [
-          'Design system for a major airline across 9 platforms, and a university alumni donation app grounded in 118-person research.',
-          '[University] Led Figma prototype design for a university alumni donation app. Coordinated across 4 organizations; designed a non-coercive donation UX based on 118-person survey insights.',
-          '[Airline] Owned the design system spanning 9 digital platforms. Built a two-layer token architecture (399 variables, 3 color modes, 3 typography modes) and developed 12 custom Figma plugins to automate token setup and migration.',
+          'Design system for a major airline across mobile apps and web, and a university alumni donation app.',
+          '[University] Led Figma prototype design for a university alumni donation app. Coordinated across 4 organizations; designed a non-coercive donation UX.',
+          '[Airline] Owned the design system spanning mobile apps and web. Built a two-layer token architecture (399 variables, 3 color modes, 3 typography modes) and developed 12 custom Figma plugins to automate token setup and migration.',
         ],
         jp: [
-          '大手航空会社向けデザインシステム（9プラットフォーム）と、118名のリサーチに基づく大学OB・OG向け寄付アプリ。',
-          '[大学] 大学OB・OG向け寄付アプリのFigmaプロトタイプ設計を主導。4組織を調整し、118名のアンケートに基づく非強制的な寄付UXを設計。',
-          '[航空] 9つのデジタルプラットフォームにわたるデザインシステムを担当。2層トークンアーキテクチャ（399変数、3カラーモード、3タイポグラフィモード）を構築し、トークン設定・移行を自動化する12個のカスタムFigmaプラグインを開発。',
+          '大手航空会社向けデザインシステム（モバイルアプリ・Web）と、大学OB・OG向け寄付アプリ。',
+          '[大学] 大学OB・OG向け寄付アプリのFigmaプロトタイプ設計を主導。4組織を調整し、非強制的な寄付UXを設計。',
+          '[航空] モバイルアプリとWebにまたがるデザインシステムを担当。2層トークンアーキテクチャ（399変数、3カラーモード、3タイポグラフィモード）を構築し、トークン設定・移行を自動化する12個のカスタムFigmaプラグインを開発。',
         ],
       },
       technologies: ['Figma', 'TypeScript', 'Next.js', 'React', 'Tailwind CSS', 'shadcn/ui'],
