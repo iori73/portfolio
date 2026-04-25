@@ -69,8 +69,8 @@ export const cvData: CVData = {
     email: 'iori730002204294@gmail.com',
     website: 'https://iori-kawano.vercel.app',
     summary: {
-      en: 'Self-taught designer with a sociology background who thinks in systems and builds with code. I believe great design scales through tools, tokens, and shared language — not documentation alone. In my first year at YUMEMI, I have shipped design systems for a major airline, prototyped a donation app grounded in 118-person research, and designed IoT interfaces for a consumer electronics leader. My sociological training gives me a structural lens on both user behavior and organizational adoption.',
-      jp: '社会学を学んだバックグラウンドを持つ独学デザイナー。システムで考え、コードでも形にします。優れたデザインはドキュメントだけでなく、ツール・トークン・共通言語によってスケールすると信じています。ゆめみでの1年目で、大手航空会社のデザインシステム構築、118名のリサーチに基づく寄付アプリのプロトタイプ、大手電機メーカーのIoTインターフェース設計を経験。社会学のバックグラウンドが、ユーザー行動と組織への定着の両面に構造的な視点をもたらしています。',
+      en: 'Designer who thinks in systems and ships in code. Sociology background turned professional asset: I read group behavior and organizational dynamics the way others read user flows. At YUMEMI, I redesigned a learning platform for skilled trade workers and designed smart home IoT interfaces. At Accenture Song, I owned a 9-platform airline design system (with 12 custom Figma plugins) and led the UI for a university alumni donation app built on 118-person research.',
+      jp: '社会学を学び、システムで考え、コードで実装するデザイナー。集団行動と組織のダイナミクスを読む力が、ユーザー行動の分析と組織への定着設計に直結しています。ゆめみでは職人向け学習プラットフォームのUIリニューアルとスマートホームIoTインターフェースを担当。アクセンチュア・ソングでは、大手航空会社の9プラットフォームにわたるデザインシステム（カスタムFigmaプラグイン12本）と、118名のリサーチに基づく大学OB・OG向け寄付アプリのUIを担当。',
     },
   },
   workExperience: [
@@ -89,21 +89,17 @@ export const cvData: CVData = {
       endDate: 'Present',
       description: {
         en: [
-          'Design systems for a major airline (9 platforms), smart home UI for a consumer electronics leader, a university alumni donation app, and a talent management system for an automotive company.',
-          '[Airline — ANA] Continued and shipped the ANA design system spanning 9 digital platforms. Owned full delivery from token system to component library.',
-          '[Consumer Electronics — Panasonic] Continued smart home voice notification UI. Shipped responsive text system and loader animations.',
-          '[University — Waseda] Led Figma prototype design for Waseda\'s 150th anniversary alumni donation app. Coordinated across 4 organizations; designed a non-coercive donation UX based on 118-person survey insights.',
-          '[Automotive — Woven by Toyota] UI design for talent management and learning system. First Japanese designer on a multinational team.',
+          'Design system for a major airline across 9 platforms, and a university alumni donation app grounded in 118-person research.',
+          '[Airline] Owned the design system spanning 9 digital platforms. Built a two-layer token architecture (399 variables, 3 color modes, 3 typography modes) and developed 12 custom Figma plugins to automate token setup and migration.',
+          '[University] Led Figma prototype design for a university alumni donation app. Coordinated across 4 organizations; designed a non-coercive donation UX based on 118-person survey insights.',
         ],
         jp: [
-          '大手航空会社向けデザインシステム（9プラットフォーム）、大手電機メーカーのスマートホームUI、大学OB・OG向け寄付アプリ、大手自動車会社のタレントシステム。',
-          '[航空 — ANA] 9つのデジタルプラットフォームにわたるANAデザインシステムを継続・納品。トークンシステムからコンポーネントライブラリまで一貫して担当。',
-          '[大手電機 — パナソニック] スマートホーム音声通知UIを継続。レスポンシブテキストシステムとローダーアニメーションを納品。',
-          '[大学 — 早稲田] 早稲田大学150周年記念OB・OG寄付アプリのFigmaプロトタイプ設計を主導。4組織を調整し、118名のアンケートに基づく非強制的な寄付UXを設計。',
-          '[自動車 — Woven by Toyota] タレントマネジメント・学習システムのUI設計。多国籍チームに参加した初の日本人デザイナー。',
+          '大手航空会社向けデザインシステム（9プラットフォーム）と、118名のリサーチに基づく大学OB・OG向け寄付アプリ。',
+          '[航空] 9つのデジタルプラットフォームにわたるデザインシステムを担当。2層トークンアーキテクチャ（399変数、3カラーモード、3タイポグラフィモード）を構築し、トークン設定・移行を自動化する12個のカスタムFigmaプラグインを開発。',
+          '[大学] 大学OB・OG向け寄付アプリのFigmaプロトタイプ設計を主導。4組織を調整し、118名のアンケートに基づく非強制的な寄付UXを設計。',
         ],
       },
-      technologies: ['Figma', 'TypeScript', 'Next.js', 'React', 'Tailwind CSS'],
+      technologies: ['Figma', 'TypeScript', 'Next.js', 'React', 'Tailwind CSS', 'shadcn/ui'],
     },
     {
       id: 'work-yumemi',
@@ -120,16 +116,14 @@ export const cvData: CVData = {
       endDate: '2025-12',
       description: {
         en: [
-          'Learning platform UI renewal for a construction tech company and smart home voice notification UI for a consumer electronics leader — first two projects out of university.',
-          '[Construction Tech — ネクストステージ] Led full UI renewal of ACRO5, a cloud-based video learning platform for the residential construction industry. Applied OOUI methodology to redesign 11+ screens with Duolingo-inspired gamification. Delivered wireframes in 15 business days through 3 client review sessions.',
-          '[Consumer Electronics — Panasonic] Designed smart home voice push notification UI. Managed two parallel design tracks, built interactive HTML prototypes to validate a character-count-aware responsive text system, and created frame-perfect infinite-loop loader animations.',
-          '[Airline — ANA] Architected a design system spanning 9 digital platforms. Built a two-layer token system (399 variables, 3 color modes, 3 typography modes) and developed 12 custom Figma plugins to automate token setup and migration.',
+          'Learning platform UI renewal for a construction tech company and smart home voice notification UI for a consumer electronics leader. First two projects out of university.',
+          '[Construction Tech] Led full UI renewal of a cloud-based video learning platform for the residential construction industry. Applied OOUI methodology to redesign 11+ screens with Duolingo-inspired gamification. Delivered wireframes in 15 business days through 3 client review sessions.',
+          '[Consumer Electronics] Designed smart home voice push notification UI. Managed two parallel design tracks, built interactive HTML prototypes to validate a character-count-aware responsive text system, and created frame-perfect infinite-loop loader animations.',
         ],
         jp: [
-          '建築業界向け学習プラットフォームのUIリニューアルと、大手電機メーカーのスマートホーム音声通知UI — 新卒最初の2案件。',
-          '[建築テック — ネクストステージ] 住宅建築業界向け動画学習プラットフォーム「ACRO5」のUI全面リニューアルを主導。OOUI手法を習得し、Duolingo着想のゲーミフィケーションで11画面以上を再設計。15営業日でワイヤーフレームを完成、3回のクライアントレビューを経て納品。',
-          '[大手電機 — パナソニック] スマートホーム音声プッシュ通知のUI設計を担当。2つの並行デザイントラックを管理。文字数対応レスポンシブテキストシステムをHTMLプロトタイプで検証し、フレームパーフェクトな無限ループローダーアニメーションを制作。',
-          '[航空 — ANA] 9つのデジタルプラットフォームにわたるデザインシステムを設計。2層トークンシステム（399変数、3カラーモード、3タイポグラフィモード）を構築し、トークン設定・移行を自動化する12個のカスタムFigmaプラグインを開発。',
+          '建築業界向け学習プラットフォームのUIリニューアルと、大手電機メーカーのスマートホーム音声通知UI。新卒最初の2案件。',
+          '[建築テック] 住宅建築業界向け動画学習プラットフォームのUI全面リニューアルを主導。OOUI手法を習得し、Duolingo着想のゲーミフィケーションで11画面以上を再設計。15営業日でワイヤーフレームを完成、3回のクライアントレビューを経て納品。',
+          '[大手電機] スマートホーム音声プッシュ通知のUI設計を担当。2つの並行デザイントラックを管理。文字数対応レスポンシブテキストシステムをHTMLプロトタイプで検証し、フレームパーフェクトな無限ループローダーアニメーションを制作。',
         ],
       },
       technologies: [
@@ -226,7 +220,7 @@ export const cvData: CVData = {
         jp: 'ジム混雑状況ダッシュボード',
       },
       description: {
-        en: 'End-to-end system for real-time gym crowd monitoring — from automated screenshot capture via Apple Shortcuts to OCR processing with GitHub Actions and a live dashboard.',
+        en: 'End-to-end system for real-time gym crowd monitoring: automated screenshot capture via Apple Shortcuts, OCR processing with GitHub Actions, and a live dashboard.',
         jp: 'Apple Shortcutsによる自動スクリーンショット取得からGitHub ActionsでのOCR処理、リアルタイムダッシュボードまで、ジム混雑状況をモニタリングするEnd-to-Endシステム。',
       },
       period: { en: '2024', jp: '2024年' },
@@ -254,7 +248,7 @@ export const cvData: CVData = {
         jp: 'Figmaプラグイン & ウィジェット',
       },
       description: {
-        en: 'A collection of custom Figma plugins and widgets built to automate design workflows — from token setup and component organization to legacy migration tools.',
+        en: 'A collection of custom Figma plugins and widgets built to automate design workflows: token setup, component organization, and legacy migration tools.',
         jp: 'デザインワークフローを自動化するためのカスタムFigmaプラグイン & ウィジェット集。トークン設定、コンポーネント整理、レガシー移行ツールなど。',
       },
       period: { en: '2025 - 2026', jp: '2025年 - 2026年' },
