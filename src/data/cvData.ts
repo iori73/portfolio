@@ -90,13 +90,13 @@ export const cvData: CVData = {
       description: {
         en: [
           'Design system for a major airline across 9 platforms, and a university alumni donation app grounded in 118-person research.',
-          '[Airline] Owned the design system spanning 9 digital platforms. Built a two-layer token architecture (399 variables, 3 color modes, 3 typography modes) and developed 12 custom Figma plugins to automate token setup and migration.',
           '[University] Led Figma prototype design for a university alumni donation app. Coordinated across 4 organizations; designed a non-coercive donation UX based on 118-person survey insights.',
+          '[Airline] Owned the design system spanning 9 digital platforms. Built a two-layer token architecture (399 variables, 3 color modes, 3 typography modes) and developed 12 custom Figma plugins to automate token setup and migration.',
         ],
         jp: [
           '大手航空会社向けデザインシステム（9プラットフォーム）と、118名のリサーチに基づく大学OB・OG向け寄付アプリ。',
-          '[航空] 9つのデジタルプラットフォームにわたるデザインシステムを担当。2層トークンアーキテクチャ（399変数、3カラーモード、3タイポグラフィモード）を構築し、トークン設定・移行を自動化する12個のカスタムFigmaプラグインを開発。',
           '[大学] 大学OB・OG向け寄付アプリのFigmaプロトタイプ設計を主導。4組織を調整し、118名のアンケートに基づく非強制的な寄付UXを設計。',
+          '[航空] 9つのデジタルプラットフォームにわたるデザインシステムを担当。2層トークンアーキテクチャ（399変数、3カラーモード、3タイポグラフィモード）を構築し、トークン設定・移行を自動化する12個のカスタムFigmaプラグインを開発。',
         ],
       },
       technologies: ['Figma', 'TypeScript', 'Next.js', 'React', 'Tailwind CSS', 'shadcn/ui'],
@@ -117,13 +117,13 @@ export const cvData: CVData = {
       description: {
         en: [
           'Learning platform UI renewal for a construction tech company and smart home voice notification UI for a consumer electronics leader. First two projects out of university.',
-          '[Construction Tech] Led full UI renewal of a cloud-based video learning platform for the residential construction industry. Applied OOUI methodology to redesign 11+ screens with Duolingo-inspired gamification. Delivered wireframes in 15 business days through 3 client review sessions.',
           '[Consumer Electronics] Designed smart home voice push notification UI. Managed two parallel design tracks, built interactive HTML prototypes to validate a character-count-aware responsive text system, and created frame-perfect infinite-loop loader animations.',
+          '[Construction Tech] Led full UI renewal of a cloud-based video learning platform for the residential construction industry. Applied OOUI methodology to redesign 11+ screens with Duolingo-inspired gamification. Delivered wireframes in 15 business days through 3 client review sessions.',
         ],
         jp: [
           '建築業界向け学習プラットフォームのUIリニューアルと、大手電機メーカーのスマートホーム音声通知UI。新卒最初の2案件。',
-          '[建築テック] 住宅建築業界向け動画学習プラットフォームのUI全面リニューアルを主導。OOUI手法を習得し、Duolingo着想のゲーミフィケーションで11画面以上を再設計。15営業日でワイヤーフレームを完成、3回のクライアントレビューを経て納品。',
           '[大手電機] スマートホーム音声プッシュ通知のUI設計を担当。2つの並行デザイントラックを管理。文字数対応レスポンシブテキストシステムをHTMLプロトタイプで検証し、フレームパーフェクトな無限ループローダーアニメーションを制作。',
+          '[建築テック] 住宅建築業界向け動画学習プラットフォームのUI全面リニューアルを主導。OOUI手法を習得し、Duolingo着想のゲーミフィケーションで11画面以上を再設計。15営業日でワイヤーフレームを完成、3回のクライアントレビューを経て納品。',
         ],
       },
       technologies: [

@@ -34,35 +34,61 @@ function formatDateRange(startDate: string, endDate: string | 'Present', lang: '
   return `${start} - ${end}`;
 }
 
+// [Industry] テキストをラベルと本文に分割
+function parseProjectBullet(text: string): { label: string | null; body: string } {
+  const match = text.match(/^\[([^\]]+)\]\s(.+)$/s);
+  if (match) return { label: match[1], body: match[2] };
+  return { label: null, body: text };
+}
+
 // 職歴アイテムコンポーネント
 const WorkExperienceItem: React.FC<{ work: WorkExperience; lang: 'en' | 'jp' }> = ({ work, lang }) => {
+  const summary = work.description[lang][0];
+  const projects = work.description[lang].slice(1);
+
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-2">
+    <div className="flex flex-col gap-6">
+      {/* 会社ヘッダー */}
+      <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-1">
         <div className="flex-1">
           <h3 className="text-title-lg">{work.position[lang]}</h3>
-          <p className="text-body-lg font-roboto">{work.company[lang]}</p>
-          <p className="text-body font-roboto">{work.location[lang]}</p>
+          <p className="text-body-lg font-roboto text-ink-secondary">{work.company[lang]}</p>
+          <p className="text-body font-roboto text-ink-tertiary">{work.location[lang]}</p>
         </div>
-        <p className="text-body-sm font-space-grotesk">
+        <p className="text-body-sm font-space-grotesk text-ink-tertiary shrink-0 pt-1">
           {formatDateRange(work.startDate, work.endDate, lang)}
         </p>
       </div>
 
-      <ul className="list-disc list-inside space-y-2">
-        {work.description[lang].map((item, index) => (
-          <li key={index} className="text-body font-roboto">
-            {item}
-          </li>
-        ))}
-      </ul>
+      {/* サマリー */}
+      <p className="text-body font-roboto text-ink-secondary leading-[1.6]">{summary}</p>
 
+      {/* プロジェクトカード一覧 */}
+      {projects.length > 0 && (
+        <div className="flex flex-col gap-3">
+          {projects.map((item, index) => {
+            const { label, body } = parseProjectBullet(item);
+            return (
+              <div key={index} className="border-l-2 border-line-subtle pl-4 flex flex-col gap-1">
+                {label && (
+                  <span className="font-space-grotesk text-label font-semibold text-ink-tertiary uppercase tracking-[0.06em]">
+                    {label}
+                  </span>
+                )}
+                <p className="text-body font-roboto text-ink-secondary leading-[1.6]">{body}</p>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* テクノロジータグ */}
       {work.technologies && work.technologies.length > 0 && (
         <div className="flex flex-wrap gap-2">
           {work.technologies.map((tech) => (
             <span
               key={tech}
-              className="font-space-grotesk text-label md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary"
+              className="font-space-grotesk text-label leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary"
             >
               {tech}
             </span>
