@@ -30,7 +30,7 @@ export function LanguageSwitcher({ className = '', activeClassName = '', inactiv
         onClick={() => switchLocale('en')}
         disabled={isPending}
         className={`font-helvetica-neue text-title text-center transition-[font-weight] duration-300 ${
-          locale === 'en' ? activeClassName || 'font-bold' : inactiveClassName || 'font-light'
+          locale === 'en' ? activeClassName || 'font-bold' : inactiveClassName || 'font-normal'
         }`}
       >
         EN
@@ -40,7 +40,7 @@ export function LanguageSwitcher({ className = '', activeClassName = '', inactiv
         onClick={() => switchLocale('jp')}
         disabled={isPending}
         className={`font-helvetica-neue text-title text-center transition-[font-weight] duration-300 ${
-          locale === 'jp' ? activeClassName || 'font-bold' : inactiveClassName || 'font-light'
+          locale === 'jp' ? activeClassName || 'font-bold' : inactiveClassName || 'font-normal'
         }`}
       >
         JP

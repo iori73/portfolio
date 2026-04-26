@@ -61,7 +61,7 @@ export interface Certification {
 
 export const cvData: CVData = {
   personalInfo: {
-    name: { en: 'Iori Kawano', jp: '川野 イオリ' },
+    name: { en: 'Iori Kawano', jp: '河野いおり' },
     title: {
       en: 'UI/UX Designer',
       jp: 'UI/UXデザイナー',
@@ -70,8 +70,8 @@ export const cvData: CVData = {
     email: 'iori730002204294@gmail.com',
     website: 'https://iori-kawano.vercel.app',
     summary: {
-      en: 'Designer who thinks in systems and ships in code. Sociology background turned professional asset: I read group behavior and organizational dynamics the way others read user flows. At YUMEMI, I redesigned a learning platform for skilled trade workers and designed smart home IoT interfaces. At Accenture Song, I owned an airline design system across mobile and web (with 12 custom Figma plugins) and led the UI for a university alumni donation app.',
-      jp: '社会学を学び、システムで考え、コードで実装するデザイナー。集団行動と組織のダイナミクスを読む力が、ユーザー行動の分析と組織への定着設計に直結しています。ゆめみでは職人向け学習プラットフォームのUIリニューアルとスマートホームIoTインターフェースを担当。アクセンチュア・ソングでは、大手航空会社のモバイル・Web横断デザインシステム（カスタムFigmaプラグイン12本）と大学OB・OG向け寄付アプリのUIを担当。',
+      en: 'Designer who thinks in systems and ships in code. Sociology background turned professional asset: I read group behavior and organizational dynamics the way others read user flows. At YUMEMI, I redesigned a learning platform for skilled trade workers and designed smart home IoT interfaces. At Accenture Song, I owned an airline design system across mobile and web (with 12 custom Figma plugins) and led the UI for a university alumni app.',
+      jp: '社会学を学び、システムで考え、コードで実装するデザイナー。集団行動と組織のダイナミクスを読む力が、ユーザー行動の分析と組織への定着設計に直結しています。ゆめみでは職人向け学習プラットフォームのUIリニューアルとスマートホームIoTインターフェースを担当。アクセンチュア・ソングでは、大手航空会社のモバイル・Web横断デザインシステム（カスタムFigmaプラグイン12本）と大学OB・OG向け校友アプリのUIを担当。',
     },
   },
   workExperience: [
@@ -90,14 +90,14 @@ export const cvData: CVData = {
       endDate: 'Present',
       description: {
         en: [
-          'Design system for a major airline across mobile apps and web, and a university alumni donation app.',
-          '[University] Led Figma prototype design for a university alumni donation app. Designed a non-coercive donation UX.',
-          '[Airline] Owned the design system spanning mobile apps and web. Built a two-layer token architecture (399 variables, 3 color modes, 3 typography modes) and developed 12 custom Figma plugins to automate token setup and migration.',
+          'Design system for a major airline across mobile apps and web, and a university alumni app.',
+          '[University] Led Figma prototype design for a university alumni app. Designed full-screen flows from LINE-integrated onboarding through donation program participation and completion.',
+          '[Airline] Owned the design system spanning mobile apps and web. Built a two-layer token architecture (346 variables, 3 color modes, 3 typography modes) and developed 12 custom Figma plugins to automate token setup and migration.',
         ],
         jp: [
-          '大手航空会社向けデザインシステム（モバイルアプリ・Web）と、大学OB・OG向け寄付アプリ。',
-          '[大学] 大学OB・OG向け寄付アプリのFigmaプロトタイプ設計を主導。非強制的な寄付UXを設計。',
-          '[航空] モバイルアプリとWebにまたがるデザインシステムを担当。2層トークンアーキテクチャ（399変数、3カラーモード、3タイポグラフィモード）を構築し、トークン設定・移行を自動化する12個のカスタムFigmaプラグインを開発。',
+          '大手航空会社向けデザインシステム（モバイルアプリ・Web）と、大学OB・OG向け校友アプリ。',
+          '[大学] 大学OB・OG向け校友アプリのFigmaプロトタイプ設計を主導。LINE連携オンボーディングから寄付プログラム参加・完了まで全画面フローを設計。',
+          '[航空] モバイルアプリとWebにまたがるデザインシステムを担当。2層トークンアーキテクチャ（346変数、3カラーモード、3タイポグラフィモード）を構築し、トークン設定・移行を自動化する12個のカスタムFigmaプラグインを開発。',
         ],
       },
       projectPeriods: [
@@ -123,12 +123,12 @@ export const cvData: CVData = {
         en: [
           'Learning platform UI renewal for a construction tech company and smart home voice notification UI for a consumer electronics leader. First two projects out of university.',
           '[Consumer Electronics] Designed smart home voice push notification UI. Managed two parallel design tracks, built interactive HTML prototypes to validate a character-count-aware responsive text system, and created frame-perfect infinite-loop loader animations.',
-          '[Construction Tech] Led full UI renewal of a cloud-based video learning platform for the residential construction industry. Applied OOUI methodology to redesign 11+ screens with Duolingo-inspired gamification. Delivered wireframes in 15 business days through 3 client review sessions.',
+          '[Construction Tech] Led full UI renewal of a cloud-based video learning platform for the residential construction industry. Applied OOUI methodology to redesign 11+ screens with gamification mechanics. Delivered wireframes in 15 business days through 3 client review sessions.',
         ],
         jp: [
           '建築業界向け学習プラットフォームのUIリニューアルと、大手電機メーカーのスマートホーム音声通知UI。新卒最初の2案件。',
           '[大手電機] スマートホーム音声プッシュ通知のUI設計を担当。2つの並行デザイントラックを管理。文字数対応レスポンシブテキストシステムをHTMLプロトタイプで検証し、フレームパーフェクトな無限ループローダーアニメーションを制作。',
-          '[建築テック] 住宅建築業界向け動画学習プラットフォームのUI全面リニューアルを主導。OOUI手法を習得し、Duolingo着想のゲーミフィケーションで11画面以上を再設計。15営業日でワイヤーフレームを完成、3回のクライアントレビューを経て納品。',
+          '[建築テック] 住宅建築業界向け動画学習プラットフォームのUI全面リニューアルを主導。OOUI手法を習得し、ゲーミフィケーション設計で11画面以上を再設計。15営業日でワイヤーフレームを完成、3回のクライアントレビューを経て納品。',
         ],
       },
       projectPeriods: [
