@@ -197,8 +197,8 @@ export async function GET(
   } catch (err) {
     console.error('Podcast detail API error:', err);
     return NextResponse.json(
-      { error: 'Failed to fetch episode' },
-      { status: 502 }
+      { error: 'Not found' },
+      { status: 404 }
     );
   }
 }
