@@ -29,6 +29,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# NDA-sensitive project data (keep local only)
+src/data/projects.json
+
 # temporary screenshots
 *.png
 !public/**/*.png

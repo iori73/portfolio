@@ -233,7 +233,7 @@ export default function CVPage() {
             {cvData.personalInfo.title[lang]}
           </p>
           <p className="text-body font-roboto">
-            {cvData.personalInfo.location[lang]} • {cvData.personalInfo.email}
+            {cvData.personalInfo.location[lang]}
           </p>
           <p className="text-body font-roboto">
             {cvData.personalInfo.summary[lang]}
