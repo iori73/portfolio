@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 
 const DECK = [
@@ -63,15 +63,26 @@ const IMG_MARGIN = Math.round(16 * (CARD_W / 432));
 const IMG_W = CARD_W - IMG_MARGIN * 2;
 const IMG_H = Math.round(IMG_W / 2);
 
-// Default organic positions: [rotDeg, tx, ty] for each card
-// Intentionally asymmetric — uneven gaps, rotation flips, noisy y
+// Card spacing (center-to-center). Cards are CARD_W wide, so a STEP of 150
+// leaves a ~150px un-overlapped strip per card — wide and even enough that
+// the cursor target for each card is easy to predict.
+const STEP = 150;
+
+// Default fan positions: [rotDeg, tx, ty] for each card.
+// Symmetric, evenly spaced fan — outer cards lean + sit slightly lower so the
+// arc reads naturally, but gaps are uniform so hover targets stay predictable.
 const BASE: [number, number, number][] = [
-  [-11, -118,  7],  // Screenshot Reorganizer — far left, wider gap
-  [  8,  -56,  3],  // Perfect Markdown — rotation flips vs neighbour
-  [  2,    0,  0],  // PPTX to Figma — center (hero)
-  [ -9,   46,  5],  // Bulk Screenshot Importer — tighter gap, lean opposite
-  [ 16,  106,  6],  // Arrow Connect — wider again, big lean
+  [-10, -2 * STEP, 12],  // Screenshot Reorganizer — far left
+  [ -5, -1 * STEP,  4],  // Perfect Markdown
+  [  0,        0,   0],  // PPTX to Figma — center (hero)
+  [  5,  1 * STEP,  4],  // Bulk Screenshot Importer
+  [ 10,  2 * STEP, 12],  // Arrow Connect — far right
 ];
+
+// Design size of the fixed-layout cluster. The widest card centers sit at
+// ±2*STEP, plus half a card and breathing room for rotation / hover scale.
+const CLUSTER_W = 2 * (2 * STEP + CARD_W / 2) + 80; // 880
+const CLUSTER_H = CARD_H + 90;
 
 function CardContent({ plugin }: { plugin: (typeof DECK)[number] }) {
   return (
@@ -155,14 +166,38 @@ function CardContent({ plugin }: { plugin: (typeof DECK)[number] }) {
 
 export default function PluginCardDeckThumb() {
   const [active, setActive] = useState<number | null>(null);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
+
+  // The cluster is laid out at a fixed design width (CLUSTER_W). On viewports
+  // narrower than that (smaller desktops, tablets, mobile) we scale the whole
+  // cluster down to fit instead of clipping the outer cards.
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const update = () => setScale(Math.min(1, el.clientWidth / CLUSTER_W));
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   return (
     <div
-      className="w-full h-full flex items-center justify-center"
+      ref={wrapRef}
+      className="w-full h-full flex items-center justify-center overflow-hidden"
       onMouseLeave={() => setActive(null)}
     >
-      {/* Fixed-size cluster container */}
-      <div className="relative" style={{ width: CARD_W + 260, height: CARD_H + 40 }}>
+      {/* Fixed-size cluster container, scaled to fit narrow viewports */}
+      <div
+        className="relative"
+        style={{
+          width: CLUSTER_W,
+          height: CLUSTER_H,
+          transform: `scale(${scale})`,
+          transformOrigin: 'center',
+        }}
+      >
 
         {/* All 5 cards */}
         {DECK.map((plugin, i) => {
