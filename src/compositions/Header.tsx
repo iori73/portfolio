@@ -98,7 +98,7 @@ export default function Header() {
                 onClick={() => toggleLanguage('en')}
                 disabled={isPending}
                 className={`font-helvetica-neue text-title text-center transition-[font-weight] duration-300 ${
-                  locale === 'en' ? 'font-bold' : 'font-light'
+                  locale === 'en' ? 'font-bold' : 'font-normal'
                 }`}
               >
                 EN
@@ -108,7 +108,7 @@ export default function Header() {
                 onClick={() => toggleLanguage('jp')}
                 disabled={isPending}
                 className={`font-helvetica-neue text-title text-center transition-[font-weight] duration-300 ${
-                  locale === 'jp' ? 'font-bold' : 'font-light'
+                  locale === 'jp' ? 'font-bold' : 'font-normal'
                 }`}
               >
                 JP
