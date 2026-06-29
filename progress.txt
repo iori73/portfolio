@@ -103,6 +103,67 @@
 
 ---
 
+---
+
+### About ページ リデザイン + CV データ整理（2026-04-25〜26）
+- [x] About ページをClaudeDesignバンドルのプロトタイプを参考にリデザイン
+  - SectionLabel コンポーネント追加（Space Grotesk uppercase + border-top）
+  - ヒーロー: 円形アバター（20vw）+ locale切り替えdescription
+  - キャリアセクション: cvData から動的生成、formatYear() ヘルパー
+  - スキルセクション: 3カラムグリッド
+  - My Interests（D3ビジュアライゼーション）を最下部に移動
+  - InterestsVisualization: w-4/5 mx-auto に縮小、h-full 削除で余白解消
+- [x] cvData.ts 職歴データの正確性修正
+  - 正しい案件帰属: ANA・早稲田 → Accenture Song、ネクストステージ・Panasonic → YUMEMI
+  - 各案件バレットから NDA クライアント固有名詞を匿名化（[Airline][University]等）
+  - YUMEMI description から Airline バレット削除
+  - Accenture Song description から Consumer Electronics・Automotive バレット削除
+  - WbT（2026-07開始予定・未参画）を掲載から除外
+  - 案件を時系列順（新しい順）に並び替え
+  - projects.json の一次資料（Notionエクスポート）を参照して内容修正
+- [x] CV ページ WorkExperienceItem ビジュアル改善
+  - フラットな箇条書き → industry label チップ + 左ボーダーカード形式
+  - projectPeriods フィールドを WorkExperience インターフェースに追加
+  - 各案件に期間（start/end）を付与して表示
+- [x] ヘッダーナビに CV リンクを追加
+- [x] em dash をポートフォリオ全体から除去（summary・description）
+
+### セキュリティ・プライバシー対応（2026-04-26）
+- [x] セキュリティ監査実施（コンテンツ・コード・依存関係・API・設定）
+- [x] projects.json を git 追跡から除外（NDA クライアント実名・内部コード含むため）
+- [x] Content Security Policy ヘッダーを next.config.mjs に追加
+- [x] CV ページからメールアドレスの平文表示を削除
+- [x] Podcast Notes API のエラーレスポンスを 404 に統一（Notion ページ列挙攻撃対策）
+
+### Figma Plugins デッキ ホバー改善 + 公開状況調査（2026-06-24）
+- [x] PluginCardDeckThumb.tsx: ホバーのユーザビリティ改善（本番反映済み / PR #21）
+  - 問題: カード幅200pxに対し間隔が約46〜62pxで意図的に不揃い → 各カードの「触れる帯」が細くバラバラで、どのカードに当たるか予測困難だった
+  - 修正: 中心間隔 STEP=150px の均等・対称な扇形に変更（各カード約150pxの重ならない帯を確保）
+  - レスポンシブ縮小を追加（ResizeObserver でコンテナ幅を測り CLUSTER_W=880px に収まらなければ等比縮小）→ 狭い画面で外側カードが見切れる問題を解消
+  - ホバー時に中央へ集まる fly-to-center 演出は維持
+- [x] 本番反映: PR #21 を main にマージ（マージコミット 327c6d1）→ Vercel 自動デプロイ
+  - このブランチ（fix/cv-project-attribution-and-visual）は PR #14〜#21 で繰り返し main にマージする運用
+- [x] 「Coming Soon」プラグインの公開状況を調査（このPC内 ~/Documents/figma-plugin/ のソースで判定）
+  - 判定基準: 公開済みは manifest.json に数値の Figma community ID、未公開はローカル用スラッグ ID
+  - 公開済み3件: PPTX to Figma (1579722656902401183) / Perfect Markdown (1594023679858160179) / Bulk Screenshot Importer (1609935194251849962)
+  - 未公開4件（表示は正しい）: Screenshot Reorganizer / Arrow Connect / Variable Migrator / Design Study Generator（いずれもスラッグ ID・公開URL記録なし）
+  - ⚠️ 要確認だった BSI の ID 食い違い → 下記で解決済み
+
+### Figma Plugins デッキを公開済み3枚に絞る + BSI URL 修正（2026-06-29 / PR #22）
+- [x] ユーザー確認の結果、公開済みは3つ（PPTX / Perfect Markdown / Bulk Screenshot Importer）のみと確定
+  - Coming Soon の Screenshot Reorganizer / Arrow Connect は未公開（このPCの manifest もローカル用スラッグID）
+- [x] PluginCardDeckThumb.tsx: DECK を 5枚 → 公開済み3枚に（Coming Soon プレースホルダー2枚を削除）
+  - 並び: 左 Perfect Markdown / 中央 PPTX to Figma（hero）/ 右 Bulk Screenshot Importer
+  - BASE を3要素の対称ファンに（±1*STEP, STEP=150）、CLUSTER_W 880 → 580 に再計算
+  - hero 判定 i===2 → i===1、z-index ロジックを3枚用に簡素化
+  - ホバー挙動・ResizeObserver のレスポンシブ縮小はそのまま維持
+- [x] pluginData.ts: Bulk Screenshot Importer の link を修正
+  - 1617503809683781303（誤）→ 1609935194251849962（正・ユーザー確認のCommunity URL）
+- [x] 本番反映: PR #22 を main にマージ（マージコミット f9ae6eb）→ Vercel 自動デプロイ
+- 補足: ConceptA/ConceptB.tsx の型エラー（variant prop）は今回変更前から存在する未使用コンポーネントのもので無関係
+
+---
+
 ## 次のタスク
 1. 残りページへのセマンティックカラー適用
 2. /design-audit でコードベース全体の違反数を把握
