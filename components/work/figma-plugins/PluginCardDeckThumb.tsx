@@ -3,17 +3,8 @@
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 
+// Published plugins only, ordered left → center → right (center is the hero).
 const DECK = [
-  {
-    name: 'Screenshot Reorganizer',
-    type: 'Plugin',
-    cover: null,
-    accentColor: '#FF7262',
-    likes: '—',
-    users: '—',
-    description:
-      'Reorganizes imported screenshot frames on the Figma canvas — sorting, aligning, and grouping them into a clean grid layout.',
-  },
   {
     name: 'Perfect Markdown',
     type: 'Widget',
@@ -44,16 +35,6 @@ const DECK = [
     description:
       'Imports screenshots with folder structure preserved as Sections. Smart Import uses AI to detect scroll sequences.',
   },
-  {
-    name: 'Arrow Connect',
-    type: 'Plugin',
-    cover: null,
-    accentColor: '#F24E1E',
-    likes: '—',
-    users: '—',
-    description:
-      'Draws directional connector arrows between selected frames or components. Useful for flow diagrams and user journeys.',
-  },
 ];
 
 const CARD_W = 200;
@@ -72,16 +53,14 @@ const STEP = 150;
 // Symmetric, evenly spaced fan — outer cards lean + sit slightly lower so the
 // arc reads naturally, but gaps are uniform so hover targets stay predictable.
 const BASE: [number, number, number][] = [
-  [-10, -2 * STEP, 12],  // Screenshot Reorganizer — far left
-  [ -5, -1 * STEP,  4],  // Perfect Markdown
-  [  0,        0,   0],  // PPTX to Figma — center (hero)
-  [  5,  1 * STEP,  4],  // Bulk Screenshot Importer
-  [ 10,  2 * STEP, 12],  // Arrow Connect — far right
+  [-7, -1 * STEP, 6],  // Perfect Markdown — left
+  [ 0,        0,  0],  // PPTX to Figma — center (hero)
+  [ 7,  1 * STEP, 6],  // Bulk Screenshot Importer — right
 ];
 
-// Design size of the fixed-layout cluster. The widest card centers sit at
-// ±2*STEP, plus half a card and breathing room for rotation / hover scale.
-const CLUSTER_W = 2 * (2 * STEP + CARD_W / 2) + 80; // 880
+// Design size of the fixed-layout cluster. The outer card centers sit at
+// ±1*STEP, plus half a card and breathing room for rotation / hover scale.
+const CLUSTER_W = 2 * (STEP + CARD_W / 2) + 80; // 580
 const CLUSTER_H = CARD_H + 90;
 
 function CardContent({ plugin }: { plugin: (typeof DECK)[number] }) {
@@ -199,19 +178,19 @@ export default function PluginCardDeckThumb() {
         }}
       >
 
-        {/* All 5 cards */}
+        {/* All 3 cards */}
         {DECK.map((plugin, i) => {
           const [baseR, baseTx, baseTy] = BASE[i];
           const isActive = active === i;
           const anyActive = active !== null;
 
-          // i=2 (PPTX) is the hero card — elevated by default even without hover
-          const isHero = i === 2;
+          // i=1 (PPTX) is the hero card — elevated by default even without hover
+          const isHero = i === 1;
           const r = isActive ? 0 : baseR;
           const tx = isActive ? 0 : baseTx;
           const ty = isActive ? -14 : isHero && !anyActive ? baseTy - 10 : baseTy;
           const scale = isActive ? 1.08 : isHero && !anyActive ? 1.04 : anyActive ? 0.93 : 1;
-          const z = isActive ? 10 : (isHero ? 5 : i === 1 || i === 3 ? 3 : 1);
+          const z = isActive ? 10 : isHero ? 5 : 1;
 
           return (
             <div
