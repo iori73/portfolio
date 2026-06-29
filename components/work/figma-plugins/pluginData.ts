@@ -56,7 +56,7 @@ export const plugins: PluginData[] = [
     description:
       'Imports screenshots into Figma with folder structure preserved as Sections. Smart Import mode uses AI to detect scroll sequences and group app screenshots by section.',
     tags: ['Plugin', 'Import', 'AI'],
-    link: 'https://www.figma.com/community/plugin/1617503809683781303',
+    link: 'https://www.figma.com/community/plugin/1609935194251849962',
     accentColor: '#0ACF83',
     iconImage: '/work/figma-plugins/bsi-icon.png',
     thumbnail: '/work/figma-plugins/bsi-cover.png',
