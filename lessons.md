@@ -180,6 +180,19 @@
 
 ---
 
+## 2026-07-01: Figma 署名付きS3画像は Referer ヘッダーで取得できる
+
+**状況**: BSI のカバー画像（Figma の署名付き S3 URL `s3-figma-plugin-images-production-sig.figma.com/...?Signature=...`）を取得しようとしたら、素の `fetch` で **403**（CloudFront/署名付きURLなのに）。
+
+**解決**: リクエストヘッダーに `Referer: https://www.figma.com/` を付けたら **200 / image/png** で取得成功。`User-Agent` だけでは不十分で Referer が効いた。
+
+**教訓**:
+- Figma の画像CDN（署名付きS3）はホットリンク対策で Referer を見ることがある。画像取得が 403 になったら **`Referer: https://www.figma.com/` を付けて再試行**する。
+- なお Community の **ページ/メタAPI** は Cloudflare で 202空（[[別記録参照]]）。**画像アセットの直リンクは Referer 付きで取得可能**、という区別が重要。
+- この環境では `curl` がブロックされるが、`node` の `fetch`+`writeFile` で画像ダウンロード＆保存はできた（`cp` でローカルファイルのコピーも可）。
+
+---
+
 ## 2025-01-17: Tailwind spacing のローカル vs 本番不一致
 
 > ADR: docs/decisions/002-tailwind-spacing-fix.md
