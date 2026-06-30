@@ -72,7 +72,7 @@ const basePlugins: PluginData[] = [
     tags: ['Plugin', 'Import', 'AI'],
     link: 'https://www.figma.com/community/plugin/1609935194251849962',
     accentColor: '#0ACF83',
-    iconImage: '/work/figma-plugins/si-icon.png',
+    iconImage: '/work/figma-plugins/bsi-icon.png',
     thumbnail: '/work/figma-plugins/bsi-cover.png',
     users: 36,
     likes: 0,
