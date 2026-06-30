@@ -37,7 +37,7 @@
     },
     "figmaPlugins": {
       "title": "Figma Plugins & Widgets",
-      "description1": "18 plugins and widgets born from real workflow problems — built through dialogue with AI.",
+      "description1": "Plugins and widgets born from real workflow problems — built through dialogue with AI.",
       "description2": "Personal utilities and enterprise design system infrastructure, all cultivated through vibe-coding."
     },
     "ukiyoe": {
@@ -366,11 +366,11 @@
     "title": "Figma Plugins & Widgets",
     "subtitle": "Tools born from dialogue with AI",
     "overviewText1": "As a designer embedded in a large-scale design system project, I kept encountering repetitive tasks and workflow gaps that no existing plugin addressed. Rather than waiting for someone else to solve them, I started building my own — using AI as a coding partner through vibe-coding sessions with Claude and Cursor.",
-    "overviewText2": "What began as quick personal utilities grew into an ecosystem of 18 plugins and widgets spanning personal tools and enterprise design system infrastructure. Each one was born from a real problem, shaped through iterative dialogue with AI, and refined against actual daily use.",
+    "overviewText2": "What began as quick personal utilities grew into an ecosystem of plugins and widgets spanning personal tools and enterprise design system infrastructure. Each one was born from a real problem, shaped through iterative dialogue with AI, and refined against actual daily use.",
     "heroTagline": "Figma Plugins & Widgets",
     "heroTitle": "Tools born from dialogue with AI",
     "heroDescription": "An ecosystem of interconnected tools — personal utilities and enterprise design system infrastructure, all cultivated through AI collaboration.",
-    "stats": "5 Personal · 13 Enterprise DS",
+    "stats": "Published tools",
     "enterpriseDS": "Enterprise DS Project"
   },
   "airlineDesignSystem": {

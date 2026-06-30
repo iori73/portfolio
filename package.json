@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "stats": "node scripts/fetch-figma-stats.mjs",
     "lint": "next lint",
     "generate:podcast-data": "node scripts/generate-podcast-data.js",
     "generate:podcast-data:quick": "node scripts/generate-podcast-data.js --skip-embeddings --metadata-only"
