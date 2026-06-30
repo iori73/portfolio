@@ -162,6 +162,20 @@
 - [x] 本番反映: PR #22 を main にマージ（マージコミット f9ae6eb）→ Vercel 自動デプロイ
 - 補足: ConceptA/ConceptB.tsx の型エラー（variant prop）は今回変更前から存在する未使用コンポーネントのもので無関係
 
+### Figma Plugins 詳細ページも公開済み3つに + likes/users 単一ソース化（2026-06-30 / PR #23）
+- [x] 詳細ページ /work/figma-plugins を公開済み3つだけに
+  - pluginData.ts: Coming Soon 4件（screenshot-reorganizer / arrow-connect / variable-migrator / design-study-generator）を削除
+  - ConceptC.tsx: Enterprise DS セクション削除、統計タイルを Total tools(3)＋Users の2つに、見出し「Published — 3 tools」
+  - messages en/jp: 本文の「18 plugins / 18個」を削除（一人称ボイスは保持し数値のみ最小修正）、未使用の stats 文字列も整理
+- [x] likes/users を単一ソース化（pluginStats.json）
+  - デッキ・詳細カード・統計タイルが全て pluginStats.json を参照。formatUsers を pluginData.ts に集約（重複3箇所→1）
+  - 実数を投入: PPTX 10.2k/♡100、Perfect Markdown 707/♡13、Bulk Screenshot Importer 36/♡0
+  - プラグインは2アカウントに分散: @io_73（PPTX, Bulk Screenshot Importer）/ @iorikawano2（Perfect Markdown）
+- [x] Figma 自動取得は不可と確認（Cloudflare が 202+空ボディを返す。/api/hub_files 等はルート存在も bot ゲートで取得不可）→ 自動 fetch(prebuild) は撤去
+- [x] 週次更新は手動運用。scripts/fetch-figma-stats.mjs を手動ヘルパーに転用（`npm run stats` で2プロフィールURL＋現在値を表示 → pluginStats.json を編集）
+- [x] 本番反映: PR #23 を main にマージ（マージコミット 9b526d8）→ Vercel 自動デプロイ
+- 運用メモ: git commit/push/gh はこの環境の権限設定でアシスタント実行不可。ユーザーが `!` で実行（5手順は && で1コマンドに集約可能）
+
 ---
 
 ## 次のタスク
