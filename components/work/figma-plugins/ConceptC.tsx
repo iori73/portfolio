@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import PluginCard from './PluginCard';
-import { plugins } from './pluginData';
+import { plugins, formatUsers } from './pluginData';
 
 function HeroGraphicSVG() {
   return (
@@ -231,22 +231,14 @@ function ThumbnailScatter() {
   );
 }
 
-function formatUsers(n: number): string {
-  if (n >= 1000) return `${(n / 1000).toFixed(1).replace(/\.0$/, '')}k`;
-  return String(n);
-}
-
 export default function ConceptC() {
   const t = useTranslations('figmaPlugins');
 
-  const personalPlugins = plugins.filter((p) => p.category === 'personal');
-  const dsPlugins = plugins.filter((p) => p.category === 'client-ds');
   const totalUsers = plugins.reduce((sum, p) => sum + (p.users ?? 0), 0);
 
   const stats = [
     { value: String(plugins.length), label: 'Total tools', color: '#A259FF' },
     { value: `${formatUsers(totalUsers)}+`, label: 'Users', color: '#1ABCFE' },
-    { value: String(dsPlugins.length), label: 'DS Suite', color: '#0ACF83' },
   ];
 
   return (
@@ -288,25 +280,13 @@ export default function ConceptC() {
         </div>
       </div>
 
-      {/* Personal plugins */}
+      {/* Published plugins */}
       <div className="mt-12">
         <h3 className="font-space-grotesk text-label tracking-wider uppercase text-ink-tertiary mb-6">
-          Personal — {personalPlugins.length} tools
+          Published — {plugins.length} tools
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {personalPlugins.map((plugin) => (
-            <PluginCard key={plugin.id} plugin={plugin} />
-          ))}
-        </div>
-      </div>
-
-      {/* Enterprise DS plugins */}
-      <div className="mt-16">
-        <h3 className="font-space-grotesk text-label tracking-wider uppercase text-ink-tertiary mb-6">
-          {t('enterpriseDS')} — {dsPlugins.length} tools
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {dsPlugins.map((plugin) => (
+          {plugins.map((plugin) => (
             <PluginCard key={plugin.id} plugin={plugin} />
           ))}
         </div>

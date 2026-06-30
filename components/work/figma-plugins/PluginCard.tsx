@@ -3,13 +3,8 @@
 import React from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { PluginData } from './pluginData';
+import { PluginData, formatUsers } from './pluginData';
 import { MoveUpRight } from 'lucide-react';
-
-function formatUsers(n: number): string {
-  if (n >= 1000) return `${(n / 1000).toFixed(1).replace(/\.0$/, '')}k`;
-  return String(n);
-}
 
 interface PluginCardProps {
   plugin: PluginData;

@@ -1,3 +1,5 @@
+import statsData from './pluginStats.json';
+
 export type PluginCategory = 'personal' | 'client-ds';
 export type PluginStatus = 'published' | 'coming-soon';
 
@@ -17,7 +19,19 @@ export interface PluginData {
   likes?: number;
 }
 
-export const plugins: PluginData[] = [
+/** Formats an install/user count, e.g. 3600 -> "3.6k". Shared across cards. */
+export function formatUsers(n: number): string {
+  if (n >= 1000) return `${(n / 1000).toFixed(1).replace(/\.0$/, '')}k`;
+  return String(n);
+}
+
+// Live stats fetched at build time from Figma (scripts/fetch-figma-stats.mjs),
+// keyed by plugin id. Missing/failed entries fall back to the inline values below.
+const liveStats: Record<string, { users?: number; likes?: number }> = statsData;
+
+// Only published plugins are listed. users/likes are the last-known fallback;
+// the build-time fetch overrides them with real numbers when available.
+const basePlugins: PluginData[] = [
   {
     id: 'pptx-to-figma',
     name: 'PPTX to Figma',
@@ -30,8 +44,8 @@ export const plugins: PluginData[] = [
     accentColor: '#1ABCFE',
     iconImage: '/work/figma-plugins/pptx-icon.png',
     thumbnail: '/work/figma-plugins/pptx-cover.png',
-    users: 2900,
-    likes: 28,
+    users: 10200,
+    likes: 100,
   },
   {
     id: 'perfect-markdown',
@@ -45,8 +59,8 @@ export const plugins: PluginData[] = [
     accentColor: '#A259FF',
     iconImage: '/work/figma-plugins/pm-icon.png',
     thumbnail: '/work/figma-plugins/pm-cover.png',
-    users: 279,
-    likes: 3,
+    users: 707,
+    likes: 13,
   },
   {
     id: 'bulk-screenshot-importer',
@@ -60,51 +74,14 @@ export const plugins: PluginData[] = [
     accentColor: '#0ACF83',
     iconImage: '/work/figma-plugins/bsi-icon.png',
     thumbnail: '/work/figma-plugins/bsi-cover.png',
-    users: 4,
+    users: 36,
     likes: 0,
   },
-  {
-    id: 'screenshot-reorganizer',
-    name: 'Screenshot Reorganizer',
-    type: 'Plugin',
-    category: 'personal',
-    status: 'coming-soon',
-    description:
-      'Reorganizes imported screenshot frames on the Figma canvas — sorting, aligning, and grouping them into a clean grid layout for efficient design review.',
-    tags: ['Plugin', 'Organization', 'Layout'],
-    accentColor: '#FF7262',
-  },
-  {
-    id: 'arrow-connect',
-    name: 'Arrow Connect',
-    type: 'Plugin',
-    category: 'personal',
-    status: 'coming-soon',
-    description:
-      'Draws directional connector arrows between selected frames or components. Useful for flow diagrams, user journeys, and architecture visualizations.',
-    tags: ['Plugin', 'Diagram', 'Flow'],
-    accentColor: '#F24E1E',
-  },
-  {
-    id: 'variable-migrator',
-    name: 'Variable Migrator',
-    type: 'Plugin',
-    category: 'client-ds',
-    status: 'coming-soon',
-    description:
-      'Migrates legacy and external library variable references to the target design system. Uses RGBA color matching with tolerance scoring and scope validation.',
-    tags: ['Plugin', 'Design System', 'Migration'],
-    accentColor: '#0ACF83',
-  },
-  {
-    id: 'design-study-generator',
-    name: 'Design Study Generator',
-    type: 'Plugin',
-    category: 'client-ds',
-    status: 'coming-soon',
-    description:
-      'Auto-generates brand study screen variations across multiple layout patterns. Produces PC and SP variants with design tokens applied.',
-    tags: ['Plugin', 'Design System', 'Prototyping'],
-    accentColor: '#FF7262',
-  },
 ];
+
+// Merge live (fetched) stats over the inline fallbacks.
+export const plugins: PluginData[] = basePlugins.map((p) => ({
+  ...p,
+  users: liveStats[p.id]?.users ?? p.users,
+  likes: liveStats[p.id]?.likes ?? p.likes,
+}));

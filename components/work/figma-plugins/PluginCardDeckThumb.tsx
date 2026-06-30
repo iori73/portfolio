@@ -2,40 +2,43 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
+import { plugins, formatUsers } from './pluginData';
 
 // Published plugins only, ordered left → center → right (center is the hero).
+// likes/users are NOT stored here — they are pulled from pluginData (the single
+// source, refreshed by the build-time Figma fetch) via `id`.
 const DECK = [
   {
+    id: 'perfect-markdown',
     name: 'Perfect Markdown',
     type: 'Widget',
     cover: '/work/figma-plugins/pm-cover.png',
     accentColor: '#A259FF',
-    likes: '3',
-    users: '279',
     description:
       'Renders Markdown inside Figma and FigJam with full syntax support — tables, code blocks, task lists, and light/dark themes.',
   },
   {
+    id: 'pptx-to-figma',
     name: 'PPTX to Figma',
     type: 'Plugin',
     cover: '/work/figma-plugins/pptx-cover.png',
     accentColor: '#1ABCFE',
-    likes: '34',
-    users: '3.6k',
     description:
       'Converts PowerPoint (.pptx) files into fully editable Figma designs, preserving your layout, styles, and structure.',
   },
   {
+    id: 'bulk-screenshot-importer',
     name: 'Bulk Screenshot Importer',
     type: 'Plugin',
     cover: '/work/figma-plugins/si-cover-cropped.png',
     accentColor: '#0ACF83',
-    likes: '0',
-    users: '9',
     description:
       'Imports screenshots with folder structure preserved as Sections. Smart Import uses AI to detect scroll sequences.',
   },
 ];
+
+// Lookup of real likes/users by plugin id (from pluginData / build-time fetch).
+const STATS_BY_ID = Object.fromEntries(plugins.map((p) => [p.id, p]));
 
 const CARD_W = 200;
 const CARD_H = Math.round(CARD_W * (537 / 432)); // 249
@@ -64,6 +67,9 @@ const CLUSTER_W = 2 * (STEP + CARD_W / 2) + 80; // 580
 const CLUSTER_H = CARD_H + 90;
 
 function CardContent({ plugin }: { plugin: (typeof DECK)[number] }) {
+  const stat = STATS_BY_ID[plugin.id];
+  const likes = stat?.likes != null ? String(stat.likes) : '—';
+  const users = stat?.users != null ? formatUsers(stat.users) : '—';
   return (
     <>
       <div
@@ -125,8 +131,8 @@ function CardContent({ plugin }: { plugin: (typeof DECK)[number] }) {
             {plugin.name}
           </p>
           <div className="flex items-center gap-2 flex-shrink-0 pt-0.5">
-            <span className="font-space-grotesk text-[9px] text-ink-tertiary whitespace-nowrap">♡ {plugin.likes}</span>
-            <span className="font-space-grotesk text-[9px] text-ink-tertiary whitespace-nowrap">↓ {plugin.users}</span>
+            <span className="font-space-grotesk text-[9px] text-ink-tertiary whitespace-nowrap">♡ {likes}</span>
+            <span className="font-space-grotesk text-[9px] text-ink-tertiary whitespace-nowrap">↓ {users}</span>
           </div>
         </div>
         <div className="flex items-center gap-1.5 mb-2">
