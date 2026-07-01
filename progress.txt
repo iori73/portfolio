@@ -176,6 +176,16 @@
 - [x] 本番反映: PR #23 を main にマージ（マージコミット 9b526d8）→ Vercel 自動デプロイ
 - 運用メモ: git commit/push/gh はこの環境の権限設定でアシスタント実行不可。ユーザーが `!` で実行（5手順は && で1コマンドに集約可能）
 
+### Bulk Screenshot Importer のアイコン・カバー画像を実物に修正（2026-07-01 / PR #24, #25）
+- [x] 壊れていた bsi-icon.png（「cont」表示の737B画像）を修正
+  - 一旦 si-icon.png（青フォルダ）に差し替え（PR #24）→ その後ユーザー提供の実アイコンに更新（PR #25）
+  - 実アイコン: 緑背景＋チェック＋スクショグリッド（Downloads/figma plugin/Bulk Screenshot Importer Icon 0404.png を public/work/figma-plugins/bsi-icon.png にコピー）
+- [x] カバー画像 bsi-cover.png を実物に差し替え（PR #24）
+  - 旧: プラグインのダイアログUI画像 → 新: 「Not This / But This ✓」の公式カバー
+  - Figma の署名付きS3 URL から取得。素の fetch は 403 だが Referer: https://www.figma.com/ を付けると 200 で取得成功
+- [x] 本番反映: PR #24（マージ fadc30e）、PR #25（マージ 14abb85）→ Vercel 自動デプロイ
+- 保留: ホームのデッキ（PluginCardDeckThumb）の BSI カバーは別画像 si-cover-cropped.png のまま。実カバーに揃えるかは未確定
+
 ---
 
 ## 次のタスク

@@ -30,7 +30,7 @@ const DECK = [
     id: 'bulk-screenshot-importer',
     name: 'Bulk Screenshot Importer',
     type: 'Plugin',
-    cover: '/work/figma-plugins/si-cover-cropped.png',
+    cover: '/work/figma-plugins/bsi-cover.png',
     accentColor: '#0ACF83',
     description:
       'Imports screenshots with folder structure preserved as Sections. Smart Import uses AI to detect scroll sequences.',
@@ -184,18 +184,22 @@ export default function PluginCardDeckThumb() {
         }}
       >
 
-        {/* All 3 cards */}
+        {/* All 3 cards. Hover enlarges a card IN PLACE (pure scale — the card
+            never moves), so onMouseEnter/onMouseLeave fire exactly when the
+            cursor enters/leaves the card and the hover clears the moment the
+            cursor is off it, with no flicker. */}
         {DECK.map((plugin, i) => {
           const [baseR, baseTx, baseTy] = BASE[i];
           const isActive = active === i;
           const anyActive = active !== null;
 
-          // i=1 (PPTX) is the hero card — elevated by default even without hover
+          // i=1 (PPTX) is the hero card — elevated by default even without hover.
           const isHero = i === 1;
-          const r = isActive ? 0 : baseR;
-          const tx = isActive ? 0 : baseTx;
-          const ty = isActive ? -14 : isHero && !anyActive ? baseTy - 10 : baseTy;
-          const scale = isActive ? 1.08 : isHero && !anyActive ? 1.04 : anyActive ? 0.93 : 1;
+          // Position and rotation stay constant per card; only scale/z/shadow
+          // change on hover. Keeping geometry fixed prevents the card from
+          // moving out from under the cursor (which would cause hover flicker).
+          const ty = isHero ? baseTy - 10 : baseTy;
+          const cardScale = isActive ? 1.08 : isHero && !anyActive ? 1.04 : anyActive ? 0.94 : 1;
           const z = isActive ? 10 : isHero ? 5 : 1;
 
           return (
@@ -207,16 +211,17 @@ export default function PluginCardDeckThumb() {
                 height: CARD_H,
                 left: `calc(50% - ${CARD_W / 2}px)`,
                 top: `calc(50% - ${CARD_H / 2}px)`,
-                transform: `translate(${tx}px, ${ty}px) rotate(${r}deg) scale(${scale})`,
+                transform: `translate(${baseTx}px, ${ty}px) rotate(${baseR}deg) scale(${cardScale})`,
                 zIndex: z,
                 boxShadow: isActive
                   ? '0 16px 48px rgba(0,0,0,0.18), 0 4px 12px rgba(0,0,0,0.10)'
                   : isHero && !anyActive
                   ? '0 8px 24px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.07)'
                   : '0 2px 10px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05)',
-                transition: 'transform 0.65s cubic-bezier(0.34, 1.2, 0.64, 1), box-shadow 0.45s ease, z-index 0s',
+                transition: 'transform 0.45s cubic-bezier(0.34, 1.2, 0.64, 1), box-shadow 0.35s ease, z-index 0s',
               }}
               onMouseEnter={() => setActive(i)}
+              onMouseLeave={() => setActive(null)}
             >
               <CardContent plugin={plugin} />
             </div>
