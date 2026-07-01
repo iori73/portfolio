@@ -184,7 +184,20 @@
   - 旧: プラグインのダイアログUI画像 → 新: 「Not This / But This ✓」の公式カバー
   - Figma の署名付きS3 URL から取得。素の fetch は 403 だが Referer: https://www.figma.com/ を付けると 200 で取得成功
 - [x] 本番反映: PR #24（マージ fadc30e）、PR #25（マージ 14abb85）→ Vercel 自動デプロイ
-- 保留: ホームのデッキ（PluginCardDeckThumb）の BSI カバーは別画像 si-cover-cropped.png のまま。実カバーに揃えるかは未確定
+- 保留だった「デッキの BSI カバー」は下記 #26 で実カバーに統一済み
+
+### デッキ BSI カバー統一 + ホバー解除修正 + ポップ装飾非表示（2026-07-01 / PR #26, #27）
+- [x] PluginCardDeckThumb.tsx: ホームのデッキ BSI カバーを si-cover-cropped.png → 実カバー bsi-cover.png に統一（PR #26）
+- [x] ホバーの解除バグ修正（PR #26）
+  - 症状: onMouseLeave が外側フレーム(620×310)に付いており、カードから外れてもフレーム内なら解除されなかった
+  - 修正: ホバーを「中央へ飛ぶ」→「その場で拡大（位置・回転固定、scale/z/影のみ変化）」に変更し、各カードに onMouseEnter/onMouseLeave を付与。カードが動かない＝振動せず、カードから外れたら即解除
+- [x] ConceptC.tsx: ポップな装飾 HeroGraphicSVG（ブロブ・花・チェッカー・同心円・ドット）を非表示（PR #27）
+  - SHOW_HERO_GRAPHIC=false フラグで描画停止。コードは残置し、true で復活可能（人物像との整合のため一旦オフ）
+- [x] 本番反映: PR #26（マージ 079767a）、PR #27（マージ cdcae33）→ Vercel 自動デプロイ
+
+### 運用改善: 進捗/学びファイルの自動メンテ（2026-07-01）
+- [x] グローバル ~/.claude/CLAUDE.md に「progress/lessons は確認を求めず自動更新」ルールを追記（全プロジェクト共通）
+- [x] ~/.claude/settings.json に autoMode.allow を追加（ユーザー操作）: feature ブランチへの git add/commit/push をオートモードで自動許可（main マージ・PR マージ・force-push・本番デプロイは引き続き確認）
 
 ---
 

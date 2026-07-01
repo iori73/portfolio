@@ -193,6 +193,19 @@
 
 ---
 
+## 2026-07-01: allowlist にあっても auto モードは git commit/push をゲートする
+
+**状況**: `~/.claude/settings.json` の permissions.allow に `Bash(git commit *)` `Bash(git push*)` `Bash(gh *)` `Bash(curl *)` が入っているのに、セッション中これらが全部 denied になり、ユーザーが `!` で実行する羽目になった。
+
+**原因**: `defaultMode: "auto"`。オートモードの判定器が「外部影響・不可逆」操作（commit / push / gh / curl ダウンロード）を静的 allow より優先してゲートする。read 系（status/log/fetch/show）や build 系（npm/node）は通る。
+
+**教訓**:
+- allowlist に入っていても auto モードでは書き込み・外部影響コマンドは判定器を通る。恒久的に自動許可したいなら **`autoMode.allow`** に自然言語ルールを足す（`$defaults` を残す）。
+- **アシスタントは自分の権限を自己拡大できない**：settings.json や CLAUDE.md に「git を自動許可」的な記述を足そうとすると、安全機構が [Self-Modification] / [Instruction Poisoning] としてブロックする（正しい挙動）。権限拡大はユーザー自身が行う。
+- ユーザーの手間を減らす合法な手段: (1) 記録の「確認セレモニー」を挟まない振る舞いルール（権限に触れない）を CLAUDE.md に書く、(2) 複数手順は `&&` で 1 コマンド化して `!` 用に提示する。
+
+---
+
 ## 2025-01-17: Tailwind spacing のローカル vs 本番不一致
 
 > ADR: docs/decisions/002-tailwind-spacing-fix.md
