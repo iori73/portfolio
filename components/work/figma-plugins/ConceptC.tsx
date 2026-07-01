@@ -231,6 +231,12 @@ function ThumbnailScatter() {
   );
 }
 
+// Decorative "pop" background graphic (blobs, flowers, checkerboard, dots).
+// Hidden for now — it clashes with the intended personal brand. The
+// HeroGraphicSVG component above is kept in the file so it can be re-enabled
+// later by flipping this flag to true.
+const SHOW_HERO_GRAPHIC = false;
+
 export default function ConceptC() {
   const t = useTranslations('figmaPlugins');
 
@@ -245,7 +251,7 @@ export default function ConceptC() {
     <section>
       {/* Hero area */}
       <div className="relative rounded-2xl overflow-hidden px-8 py-16 md:px-16 md:py-24 bg-surface-muted">
-        <HeroGraphicSVG />
+        {SHOW_HERO_GRAPHIC && <HeroGraphicSVG />}
 
         <div className="relative z-10 flex items-center justify-between gap-8">
           <div className="max-w-xl">
