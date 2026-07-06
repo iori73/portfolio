@@ -113,7 +113,15 @@ export default function BlogPage() {
 
     return (
       <div className="article flex flex-col gap-1.5 relative cursor-pointer" onClick={handleArticleClick}>
-        <img src={thumbnail} alt={title} className="w-full aspect-video object-cover" />
+        {thumbnail ? (
+          <img src={thumbnail} alt={title} className="w-full aspect-video object-cover" />
+        ) : (
+          <div className="w-full aspect-video bg-surface-muted flex items-center justify-center rounded-sm">
+            <span className="font-space-grotesk text-caption-lg text-ink-tertiary px-4 text-center line-clamp-3">
+              {title}
+            </span>
+          </div>
+        )}
         <div className="article-text flex flex-col gap-1.5 md:gap-2 py-1">
           <p className={`article-date ${jpFontSize('text-caption-lg', 'text-caption-xl')}`}>{formatDate(pubDate)}</p>
           <h3

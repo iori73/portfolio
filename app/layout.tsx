@@ -20,11 +20,29 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
+  metadataBase: new URL('https://iori-kawano.vercel.app'),
+  title: {
+    default: 'Iori Kawano — UI/UX Designer',
+    template: '%s — Iori Kawano',
+  },
+  description:
+    'Portfolio of Iori Kawano, a UI/UX designer who thinks in systems and ships in code. Bilingual (EN/JP) design and development case studies.',
   icons: {
     icon: '/icon.svg',
+  },
+  openGraph: {
+    title: 'Iori Kawano — UI/UX Designer',
+    description:
+      'Portfolio of Iori Kawano, a UI/UX designer who thinks in systems and ships in code.',
+    url: 'https://iori-kawano.vercel.app',
+    siteName: 'Iori Kawano',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Iori Kawano — UI/UX Designer',
+    description:
+      'Portfolio of Iori Kawano, a UI/UX designer who thinks in systems and ships in code.',
   },
 };
 

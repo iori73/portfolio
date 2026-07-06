@@ -62,7 +62,7 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: https:",
-              "connect-src 'self' https://api.notion.com https://rss2json.com https://note.com",
+              "connect-src 'self' https://api.notion.com https://rss2json.com https://api.rss2json.com https://note.com",
               "frame-ancestors 'none'",
             ].join('; '),
           },

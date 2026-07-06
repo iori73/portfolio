@@ -35,6 +35,7 @@ src/data/projects.json
 # temporary screenshots
 *.png
 !public/**/*.png
+!docs/**/*.png
 
 # playwright
 .playwright-mcp/

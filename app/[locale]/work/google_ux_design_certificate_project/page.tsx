@@ -106,32 +106,32 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
 
           {/* 説明文: Body/XL_140 */}
           <p className={`text-body-lg ${getBodyFontClass()} text-ink-secondary tracking-[0.2px] mb-8`}>
-            {t('googleUXDescription')}
+            {t('googleUXProject.description')}
           </p>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div>
               <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">Timeline</span>
-              <p className="text-body-lg tracking-[0.2px]">{t('googleUXTimeline')}</p>
+              <p className="text-body-lg tracking-[0.2px]">{t('projects.googleUX.timeline')}</p>
             </div>
             <div>
               <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">My Role</span>
-              <p className="text-body-lg tracking-[0.2px]">{t('uxRole')}</p>
+              <p className="text-body-lg tracking-[0.2px]">{t('googleUXProject.role')}</p>
             </div>
             <div>
               <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">Team</span>
-              <p className="text-body-lg tracking-[0.2px]">{t('solo')}</p>
+              <p className="text-body-lg tracking-[0.2px]">{t('common.solo')}</p>
             </div>
             <div>
               <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
                 Deliverables
               </span>
               <p className="text-body-lg tracking-[0.2px]">
-                {t('secondaryResearch')}
+                {t('googleUXProject.secondaryResearch')}
                 <br />
-                {t('storyboard')}
+                {t('googleUXProject.storyboard')}
                 <br />
-                {t('prototype')}
+                {t('common.prototype')}
               </p>
             </div>
           </div>

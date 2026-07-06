@@ -74,3 +74,31 @@
 2. **デザインシステムの一貫性** → Phase 1
 3. **ドキュメントの正確性** → Phase 2
 4. **新機能・最適化** → Phase 3
+
+---
+
+## QA 由来バックログ（2026-07-03 本番レビュー）
+
+> 全問題の詳細・証拠スクショ: [docs/qa-2026-07-03/report.md](qa-2026-07-03/report.md)。優先度ガイドラインの「1. ユーザーに見える問題」に該当。修正推奨順:
+
+### 🔴 機能欠陥（最優先）
+- [x] 全ページ title「v0 App」→ 実名 metadata + OGP（`app/layout.tsx`）
+- [x] google-ux の生 i18n キー7個（名前空間修正 + `googleUXProject.role` 追加）
+- [x] Blog Medium が空（CSP に `api.rss2json.com` 追加）
+- [x] Blog note サムネ破損（空 src のフォールバック）
+- [x] podcast 一覧 API 502（真因は @notionhq/client v5 の `databases.query` 廃止 → `dataSources.query` 移行。env 問題ではなかった）
+- [x] podcast サマリー「…」切れ（静的 JSON 全文再生成 211件 + parseBlocks の toggle/Key Takeaways 対応）
+- [x] カスタム 404 未使用（`[locale]/[...rest]/page.tsx` + `app/not-found.tsx` 追加）
+- [x] About 可視化が SP で極小（フォント/径拡大 + `height="auto"` 除去、4-5px→15px）
+- [~] gym API 常時 500 → コード側は 200 フォールバック化済み。本番の実データ供給（CSV をリポジトリ相対 or 静的統計化）は残
+
+### 🟠 UX・挙動
+- [x] モバイルメニュー背景タップで閉じない + 背面スクロールロック（`Header.tsx`）
+- [ ] 回遊導線欠如（Home Work 一覧 or Next Project ナビ、**airline 最優先**）※デザイン判断待ち
+
+### 🟡 軽微
+- [x] CV(JP) h1 に `getHeadingFontClass()` 適用
+- [ ] API レートリミットの共有バケット改善
+- [ ] podcast ヒーロー文言と実装（embeddings 無し）の整合
+- [ ] Blog に h1 追加
+- [ ] podcast-notes-all の scdn 期限切れ画像（静的JSON再生成で更新された可能性あり、要確認）

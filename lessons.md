@@ -5,6 +5,61 @@
 
 ---
 
+## 2026-07-05: 「自動同期」は CI が緑であることを実際に確認する / 埋め込みは無料でできる
+
+**状況**: 「podcast note automation はきちんと同期されているか」の確認依頼。調べると (1) 週次 GitHub Action が pnpm 移行後 `npm ci` のまま3ヶ月毎回失敗、(2) ライブ API 修正が未マージ、(3) ライブ API が静的 JSON の埋め込みを無視、(4) OpenAI がそもそもワークフロー未接続、が重なっていた。
+
+**教訓**:
+- **「自動化がある」≠「動いている」**。ワークフローファイルの存在で満足せず、`gh run list --workflow=...` で直近の実行結果（緑/赤）と最終成功日時を必ず確認する。cron の scheduled 失敗はサイレント（PRチェックのように目立たない）。
+- **パッケージマネージャ移行時はCIも移行する**。pnpm 化したら `package-lock.json` は消えるので `npm ci` は必ず落ちる。lockfile とワークフローの install コマンドは常にセットで変える。`packageManager` フィールド + `pnpm/action-setup` を使う。
+- **埋め込み（ベクトル化）は有料APIでなくてよい**。`@huggingface/transformers` の多言語 MiniLM を CPU 実行すれば無料・キー不要・日本語対応。同期そのもの（Notion→JSON）は最初から OpenAI 不要で、OpenAI が効くのは可視化の意味的レイアウトだけ、という切り分けを最初に行う。
+- **サーバーレスで毎リクエスト重い計算はしない代わりに、事前計算をIDでマージする**。埋め込み/UMAP はビルド時（週次）に計算し `public/data/*.json` に焼く。ランタイム API はライブ内容＋事前計算レイアウトを ID で結合し、新着だけカテゴリ centroid にフォールバック。→ 内容は常時最新・レイアウトは意味的、を両立。
+- 検証は `pnpm build` 通過だけで終えず、本番サーバーを起動して `/api/...` を実際に叩き `hasEmbeddings:true`・件数・座標を目視確認した（/verify の精神）。
+- 環境メモ: auto モードでは `curl` がゲートされる（2026-07-01 の学び）。localhost API の疎通確認は node の `fetch` スクリプトで代替できる。
+
+---
+
+## 2026-07-03: 本番 QA 全ページレビューで得た再発防止の教訓
+
+> 詳細は docs/qa-2026-07-03/report.md
+
+### v0 スキャフォールドの `title: 'v0 App'` が本番まで残存
+**状況**: `app/layout.tsx` のルート metadata が v0 生成時の `title:'v0 App' / description:'Created with v0' / generator:'v0.dev'` のまま公開されていた。全 26 ページのタブ・検索結果・SNS カードに影響。
+**教訓**: v0/スキャフォールド由来の metadata はデプロイ前チェックリストで必ず実名に差し替える。`metadataBase`・OGP も同時に設定。
+
+### `useTranslations()` を名前空間なしで使うとキーがそのまま画面表示される
+**状況**: google-ux ページが `const t = useTranslations()`（引数なし）で `t('googleUXDescription')` 等を呼び、存在しない/名前空間違いのキー 7 個が本文に「googleUXDescription」の文字列として露出。next-intl は MISSING_MESSAGE を投げるが本番ビルドは `typescript.ignoreBuildErrors` で素通り。
+**教訓**: `useTranslations('名前空間')` を明示し、キーは名前空間付きで参照する。ビルド/CI で MISSING_MESSAGE を検知する仕組みがあると安全。
+
+### CSP `connect-src` はサブドメイン厳密一致
+**状況**: Blog の Medium 取得が `api.rss2json.com` へ fetch するのに、CSP には `rss2json.com` しか無く全ブロック → Medium セクションが常に空。
+**教訓**: CSP のホスト指定はサブドメインまで厳密。外部 API を足したら `next.config.mjs` の `connect-src` に正確なホストを追加。ワイルドカードが必要なら `*.rss2json.com`。
+
+### ローカルパス依存の API は本番で必ず落ちる
+**状況**: `app/api/gym-stats/route.ts` が `process.env.GYM_CSV_PATH`（開発機のローカル絶対パス）を前提にしており、Vercel 上では恒久的に 500。UI はハードコードのフォールバックで“動いているように見える”ため気づきにくい。
+**教訓**: 本番で動かすデータはリポジトリ内（相対パス）かデータストアに置く。フォールバックで握り潰すとデータが古いまま気づけない — フォールバック時はログ/表示で明示する。
+
+### 静的フォールバックの機械的切り詰めが UI 欠陥として露出
+**状況**: `public/data/podcast-notes.json` の summary が生成段階で 203 文字に切られ「…」付き。ライブ API（一覧）が 502 のため常にこの切れたデータが表示され、ユーザーに「サマリーが途切れる」と映った。
+**教訓**: フォールバックデータは本番データと同等品質で用意する。API 障害時にフォールバックが“劣化版”だとユーザーには区別がつかず不具合に見える。
+
+### next-intl 構成ではカスタム 404 にキャッチオールが要る
+**状況**: デザイン済み `app/[locale]/not-found.tsx` があるのに、未知 URL では Next.js デフォルトの素の 404 が出ていた（到達導線が無くデッドコード化）。
+**教訓**: `localePrefix:'as-needed'` の next-intl では `app/[locale]/[...rest]/page.tsx` で `notFound()` を呼んで初めてカスタム not-found が発火する。
+
+### 「env 問題っぽい」500/502 が実はライブラリ破壊的変更だった（@notionhq/client v5）
+**状況**: podcast 一覧 API が本番で常時 502。当初は Notion の DB ID / 共有権限 / env の問題と推定していた。ローカル本番サーバーで再現したところ、真因は `TypeError: e.databases.query is not a function` — **`@notionhq/client` v5 で `databases.query` が廃止**され、Notion 2025-09 API の「データソース」モデルに移行していた（`databases.retrieve` で `data_sources[0].id` を取り、`dataSources.query({ data_source_id })`）。詳細 API（`pages.retrieve` / `blocks.children.list`）は v5 でも不変なので“詳細だけ動く”状態になり、env 問題に見えていた。
+**教訓**:
+- 「一部だけ動く」症状は env より**ライブラリ API の部分的破壊的変更**を疑う。同じ Client の別メソッドが動くなら認証・権限は生きている。
+- 推測で「env の問題」と切り分ける前に、**ローカル本番ビルド（`npm start`）で再現**すればサーバーログに真のスタックが出る（本番の 502 ボディは握り潰されて見えない）。
+- メジャーバージョン更新時は破壊的変更（メソッド廃止・リネーム）を CHANGELOG で確認する。
+
+### Notion の「セクション」はheadingとは限らない（toggle）
+**状況**: podcast サマリー末尾に「Transcript」が混入。heading だと決め打ちしてパースしていたが、実際の "Transcript" は **`toggle` ブロック**だった（折りたたみセクション）。同様に "Key Takeaways" は heading_2 だが KEY_POINT_LABELS 未登録で本文扱いされていた。
+**教訓**: Notion のセクション境界は heading_1/2/3 だけでなく `toggle` も対象にする。ラベルの表記ゆれ（key points / key takeaways / takeaways / 主要ポイント）も列挙する。パーサは実データのブロック型を `blocks.children.list` でダンプして確認してから書く。
+
+---
+
 ## 2026-02-23: デザインシステム整理
 
 ### インライン fontFamily style の乱立

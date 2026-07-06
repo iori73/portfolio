@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { cvData, WorkExperience, Education, SkillCategory, Project } from '@/src/data/cvData';
 import { useLocale, useTranslations } from 'next-intl';
+import { useHeadingFont } from '@/src/hooks/useFonts';
 
 // 日付範囲フォーマット関数
 function formatDateRange(startDate: string, endDate: string | 'Present', lang: 'en' | 'jp'): string {
@@ -220,13 +221,14 @@ export default function CVPage() {
   }, []);
 
   const lang = locale as 'en' | 'jp';
+  const { getHeadingFontClass } = useHeadingFont();
 
   return (
     <div className="w-full flex flex-col gap-16 my-24 md:mt-28 md:mb-16">
       {/* ========== 基本情報セクション ========== */}
       <section className="pt-4 md:pt-16 pb-4 md:pb-16">
         <div className="flex flex-col gap-4">
-          <h1 className="text-display font-semibold">
+          <h1 className={`text-display font-semibold ${getHeadingFontClass()}`}>
             {cvData.personalInfo.name[lang]}
           </h1>
           <p className="text-body-lg font-roboto">

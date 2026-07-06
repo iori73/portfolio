@@ -22,13 +22,16 @@ const InterestsVisualization: React.FC = () => {
 
   // ✅ useState を useEffect の前に配置
   const [scaleFactor, setScaleFactor] = useState(1.2); // 初期値: デスクトップ
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const updateScaleFactor = () => {
       if (window.innerWidth < 768) {
         setScaleFactor(1.7); // モバイル
+        setIsMobile(true);
       } else {
         setScaleFactor(1.5); // デスクトップ
+        setIsMobile(false);
       }
     };
 
@@ -54,7 +57,7 @@ const InterestsVisualization: React.FC = () => {
     };
 
     loadData();
-  }, [scaleFactor]); // ✅ `scaleFactor` が変わったら再レンダリング
+  }, [scaleFactor, isMobile]); // ✅ `scaleFactor` / `isMobile` が変わったら再レンダリング
 
   const createVisualization = (data: InterestData) => {
     if (!svgRef.current) return;
@@ -62,13 +65,17 @@ const InterestsVisualization: React.FC = () => {
     const svg = d3.select(svgRef.current);
     svg.selectAll('*').remove();
 
+    // viewBox はデスクトップと同じにしてノード配置がはみ出さない（＝端のラベルが
+    // クリップされない）ようにする。モバイルの可読性はフォント/ノード径の拡大で担保する。
     const width = 800;
     const height = 1000;
 
+    // intrinsic な width/height を数値で与え、CSS(w-full h-auto)で
+    // アスペクト比を保ったままレスポンシブに拡縮する（height:'auto' 属性は不正なので使わない）。
     svg
       .attr('viewBox', [-width / 2, -height / 3, width, height])
-      .attr('width', '100%')
-      .attr('height', 'auto')
+      .attr('width', width)
+      .attr('height', height)
       .style('overflow', 'hidden')
       .style('display', 'block');
 
@@ -112,7 +119,11 @@ const InterestsVisualization: React.FC = () => {
 
     node
       .append('circle')
-      .attr('r', (d) => (d.depth === 0 ? 30 : d.depth === 1 ? 20 : 8))
+      .attr('r', (d) =>
+        isMobile
+          ? d.depth === 0 ? 34 : d.depth === 1 ? 24 : 11
+          : d.depth === 0 ? 30 : d.depth === 1 ? 20 : 8,
+      )
       .attr('fill', (d) => d.data.color || (d.depth === 0 ? '#fff' : '#ccc'))
       .attr('stroke', '#333')
       .attr('stroke-width', 1.5);
@@ -121,14 +132,18 @@ const InterestsVisualization: React.FC = () => {
       .append('text')
       .attr('dy', (d) => (d.depth === 0 ? -35 : -25))
       .attr('text-anchor', 'middle')
-      .attr('font-size', (d) => (d.depth === 0 ? '18px' : d.depth === 1 ? '16px' : '12px'))
+      .attr('font-size', (d) =>
+        isMobile
+          ? d.depth === 0 ? '24px' : d.depth === 1 ? '21px' : '17px'
+          : d.depth === 0 ? '18px' : d.depth === 1 ? '16px' : '12px',
+      )
       .text((d) => d.data.name);
 
     mainCategories.forEach((n, i) => {
       g.append('text')
         .attr('class', `curved-text-${i}`)
         .attr('dy', -5)
-        .attr('font-size', '12px')
+        .attr('font-size', isMobile ? '16px' : '12px')
         .attr('fill', n.data.color || '#333')
         .append('textPath')
         .attr('href', `#arcPath-${i}`)
@@ -174,7 +189,7 @@ const InterestsVisualization: React.FC = () => {
   };
 
   return (
-    <div className="w-4/5 mx-auto flex flex-col items-center py-4 gap-8 md:gap-4">
+    <div className="w-full md:w-4/5 mx-auto flex flex-col items-center py-4 gap-8 md:gap-4">
       <div
         className="flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-surface-muted text-ink-tertiary"
         // style={{
@@ -197,7 +212,7 @@ const InterestsVisualization: React.FC = () => {
           You can drag me
         </p>
       </div>
-      <svg ref={svgRef} className="w-full" />
+      <svg ref={svgRef} className="w-full h-auto" />
     </div>
   );
 };

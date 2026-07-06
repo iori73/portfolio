@@ -1,7 +1,7 @@
 // /components/Header.tsx
 
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, usePathname, useRouter } from '@/i18n/routing';
 import { useTransition } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
@@ -22,6 +22,17 @@ export default function Header() {
     setIsOpen(newState);
     setIsMenuOpen(newState);
   };
+
+  // メニュー展開中は背面ページのスクロールをロックする
+  useEffect(() => {
+    if (isOpen) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = prev;
+      };
+    }
+  }, [isOpen]);
   
   const toggleLanguage = (newLocale: 'en' | 'jp') => {
     startTransition(() => {
@@ -145,15 +156,17 @@ export default function Header() {
         {/* モバイルメニュー (フルスクリーン) */}
         {isOpen && (
           <div
-            className="fixed top-0 left-0 w-full h-screen z-40 flex items-start pt-24 justify-start px-6 md:hidden"
+            className="fixed top-0 left-0 w-full h-screen z-40 flex items-start pt-24 justify-start px-6 md:hidden pointer-events-none"
             style={{
               background: 'linear-gradient(rgb(255, 255, 255) 33%, rgba(255, 255, 255, 0.5) 100%)',
               backdropFilter: 'blur(16px)',
               transition: 'all 0.8s ease',
             }}
           >
-            {/* Menu Content */}
-            <nav className="flex flex-col items-start justify-center gap-8 w-full">
+            {/* Menu Content — パネル自体は pointer-events-none にして、
+                空白部分のタップは下層の閉じるオーバーレイ(z-30)へ通す。
+                nav とその子（リンク・言語切替）だけがクリックを受ける。 */}
+            <nav className="flex flex-col items-start justify-center gap-8 w-auto pointer-events-auto">
               {menuItems.map((item, index) => (
                 <div key={item.path} className="relative flex items-center gap-2">
                   <Link
