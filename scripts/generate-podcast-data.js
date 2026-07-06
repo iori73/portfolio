@@ -1,11 +1,14 @@
 /**
  * Podcast Notes データパイプライン
  *
- * Notion DB → OpenAI Embeddings → UMAP 次元削減 → JSON 出力
+ * Notion DB → ローカル埋め込み（transformers.js）→ UMAP 次元削減 → JSON 出力
+ *
+ * 埋め込みは @huggingface/transformers（多言語 MiniLM）を CPU 上でローカル実行する。
+ * OpenAI API キーもネットワーク課金も不要。日本語コンテンツにも対応。
  *
  * Usage:
  *   node scripts/generate-podcast-data.js
- *   node scripts/generate-podcast-data.js --skip-embeddings  (OpenAI APIキーなしで実行)
+ *   node scripts/generate-podcast-data.js --skip-embeddings  (埋め込みを省略しカテゴリ配置)
  */
 
 const { Client } = require('@notionhq/client');
@@ -17,9 +20,11 @@ try { require('dotenv').config({ path: path.join(__dirname, '..', '.env.local') 
 
 const NOTION_API_KEY = process.env.NOTION_API_KEY;
 const NOTION_DB_ID = process.env.NOTION_PODCAST_DB_ID;
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-const SKIP_EMBEDDINGS = process.argv.includes('--skip-embeddings') || !OPENAI_API_KEY;
+const SKIP_EMBEDDINGS = process.argv.includes('--skip-embeddings');
 const METADATA_ONLY = process.argv.includes('--metadata-only');
+
+// 埋め込みモデル: 多言語 MiniLM（384 次元, max 128 tokens, 50+ 言語）。
+const EMBEDDING_MODEL = 'Xenova/paraphrase-multilingual-MiniLM-L12-v2';
 
 const CATEGORY_COLORS = {
   'Technology': '#6C5CE7',
@@ -165,15 +170,17 @@ function parsePageContent(blocks) {
   const CHAPTER_SECTIONS = ['chapters', 'timestamps'];
   const TRANSCRIPT_SECTIONS = ['transcript'];
   // Sub-sections within Summary that should be skipped or treated differently
-  const KEY_POINT_LABELS = ['主要ポイント', 'key points', 'key learnings'];
+  const KEY_POINT_LABELS = ['主要ポイント', 'key points', 'key learnings', 'key takeaways', 'takeaways'];
 
   for (const block of blocks) {
     const type = block.type;
     const content = block[type];
     const text = content?.rich_text ? extractRichText(content.rich_text) : '';
 
-    // Detect section headers (heading_2 or heading_3)
-    if (type === 'heading_2' || type === 'heading_3') {
+    // Detect section headers: headings OR toggle blocks. The "Transcript"
+    // section is a collapsible toggle, whose label would otherwise leak into
+    // the summary text if only headings were treated as boundaries.
+    if (type === 'heading_1' || type === 'heading_2' || type === 'heading_3' || type === 'toggle') {
       const headerLower = text.toLowerCase().trim();
       if (SECTION_NAMES.some((s) => headerLower.includes(s))) {
         if (SKIP_SECTIONS.some((s) => headerLower.includes(s))) {
@@ -258,31 +265,32 @@ function parsePageContent(blocks) {
   };
 }
 
-// ─── OpenAI Embeddings ───────────────────────────────────
+// ─── Local Embeddings (transformers.js) ──────────────────
 
 async function generateEmbeddings(texts) {
   if (SKIP_EMBEDDINGS) {
-    console.log('Skipping embeddings (--skip-embeddings or no OPENAI_API_KEY)');
+    console.log('Skipping embeddings (--skip-embeddings)');
     return null;
   }
 
-  const OpenAI = require('openai');
-  const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
+  // ESM-only package — import dynamically from this CommonJS script.
+  const { pipeline } = await import('@huggingface/transformers');
 
-  console.log(`Generating embeddings for ${texts.length} texts...`);
+  console.log(`Loading local embedding model (${EMBEDDING_MODEL})...`);
+  const extractor = await pipeline('feature-extraction', EMBEDDING_MODEL);
+
+  console.log(`Generating embeddings for ${texts.length} texts (local, no API)...`);
   const embeddings = [];
-  const batchSize = 20;
+  const batchSize = 16;
 
   for (let i = 0; i < texts.length; i += batchSize) {
-    const batch = texts.slice(i, i + batchSize);
-    const truncated = batch.map((t) => t.substring(0, 8000));
+    // Model caps at 128 tokens; the tokenizer truncates. Cap chars to bound work.
+    const batch = texts.slice(i, i + batchSize).map((t) => t.substring(0, 4000));
 
-    const response = await openai.embeddings.create({
-      model: 'text-embedding-3-small',
-      input: truncated,
-    });
+    // Mean-pool token embeddings + L2-normalize → cosine-ready sentence vectors.
+    const output = await extractor(batch, { pooling: 'mean', normalize: true });
 
-    embeddings.push(...response.data.map((d) => d.embedding));
+    embeddings.push(...output.tolist());
     console.log(`  Embedded ${Math.min(i + batchSize, texts.length)}/${texts.length}`);
   }
 

@@ -29,15 +29,28 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
   }
 
+  // Static fallback used when the live CSV is unavailable (e.g. on Vercel,
+  // where GYM_CSV_PATH — a local absolute path — is not set). Returning 200
+  // with this snapshot instead of a 500/404 lets the dashboard render the
+  // last-known numbers without console errors. Keep in sync with the
+  // defaultStats in components/GymDashboardHero.tsx.
+  const FALLBACK_STATS = {
+    totalRecords: 466,
+    dateRange: '2025-06-29 - 2025-11-09',
+    averageCrowd: 20,
+    peakTime: { time: 'Wednesday 19:00', count: 45 },
+    quietTime: { time: 'Monday 9:00', count: 4 },
+    systemUptime: 99.1,
+    operationDurationMonths: 3.5,
+    crowdednessComparison: { time: 'Tuesday 21:00', multiplier: 1.7 },
+    source: 'fallback' as const,
+  };
+
   try {
     // Read CSV file path from environment variable
     const csvPath = process.env.GYM_CSV_PATH;
-    if (!csvPath) {
-      return NextResponse.json({ error: 'GYM_CSV_PATH not configured' }, { status: 500 });
-    }
-
-    if (!fs.existsSync(csvPath)) {
-      return NextResponse.json({ error: 'Data file not found' }, { status: 404 });
+    if (!csvPath || !fs.existsSync(csvPath)) {
+      return NextResponse.json(FALLBACK_STATS, { status: 200 });
     }
 
     const fileContent = fs.readFileSync(csvPath, 'utf-8');

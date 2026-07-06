@@ -184,12 +184,66 @@
   - 旧: プラグインのダイアログUI画像 → 新: 「Not This / But This ✓」の公式カバー
   - Figma の署名付きS3 URL から取得。素の fetch は 403 だが Referer: https://www.figma.com/ を付けると 200 で取得成功
 - [x] 本番反映: PR #24（マージ fadc30e）、PR #25（マージ 14abb85）→ Vercel 自動デプロイ
-- 保留: ホームのデッキ（PluginCardDeckThumb）の BSI カバーは別画像 si-cover-cropped.png のまま。実カバーに揃えるかは未確定
+- 保留だった「デッキの BSI カバー」は下記 #26 で実カバーに統一済み
+
+### デッキ BSI カバー統一 + ホバー解除修正 + ポップ装飾非表示（2026-07-01 / PR #26, #27）
+- [x] PluginCardDeckThumb.tsx: ホームのデッキ BSI カバーを si-cover-cropped.png → 実カバー bsi-cover.png に統一（PR #26）
+- [x] ホバーの解除バグ修正（PR #26）
+  - 症状: onMouseLeave が外側フレーム(620×310)に付いており、カードから外れてもフレーム内なら解除されなかった
+  - 修正: ホバーを「中央へ飛ぶ」→「その場で拡大（位置・回転固定、scale/z/影のみ変化）」に変更し、各カードに onMouseEnter/onMouseLeave を付与。カードが動かない＝振動せず、カードから外れたら即解除
+- [x] ConceptC.tsx: ポップな装飾 HeroGraphicSVG（ブロブ・花・チェッカー・同心円・ドット）を非表示（PR #27）
+  - SHOW_HERO_GRAPHIC=false フラグで描画停止。コードは残置し、true で復活可能（人物像との整合のため一旦オフ）
+- [x] 本番反映: PR #26（マージ 079767a）、PR #27（マージ cdcae33）→ Vercel 自動デプロイ
+
+### 運用改善: 進捗/学びファイルの自動メンテ（2026-07-01）
+- [x] グローバル ~/.claude/CLAUDE.md に「progress/lessons は確認を求めず自動更新」ルールを追記（全プロジェクト共通）
+- [x] ~/.claude/settings.json に autoMode.allow を追加（ユーザー操作）: feature ブランチへの git add/commit/push をオートモードで自動許可（main マージ・PR マージ・force-push・本番デプロイは引き続き確認）
 
 ---
 
+### 本番 QA 全ページレビュー（2026-07-03）
+- [x] 本番 https://iori-kawano.vercel.app を全13ルート×EN/JP×PC/モバイル=52ビューで実操作レビュー（Playwright）
+- [x] 検出: 🔴機能欠陥9件 / 🟠UX・挙動3件 / 🟡軽微5件
+  - 🔴 主要: 全ページ title「v0 App」/ google-ux に生i18nキー7個表示 / Blog Medium が CSP で空 / note サムネ3件破損 / podcast一覧API 502 / サマリー「…」切れ(静的JSON 161/173切詰) / カスタム404未使用 / gym API常時500 / About可視化がSPで極小
+  - ✅ 水平オーバーフローは全52ビューでゼロ。figma-plugins デッキ/BSI画像/ホバー、FLIP遷移、言語切替は正常
+- [x] レポート永続化: docs/qa-2026-07-03/report.md + screenshots/（.gitignore に !docs/**/*.png 例外追加）
+- [x] コード修正実施（推奨順）+ `npm run build` 通過 + ローカル本番サーバーで実検証:
+  - [x] C1 ルート metadata（v0 App → 実名 + OGP）app/layout.tsx
+  - [x] C2 google-ux の生 i18n キー7個（名前空間修正 + googleUXProject.role 追加）
+  - [x] C3 CSP に api.rss2json.com 追加（Medium 取得ブロック解消）
+  - [x] C4 blog note サムネ空 src のフォールバック
+  - [x] C5 404 キャッチオール（app/[locale]/[...rest]/page.tsx + app/not-found.tsx）
+  - [x] C6 About 可視化のモバイル可読性（viewBox 800 維持 + フォント/径拡大、height="auto" 除去、w-full 化）4-5px → 15px
+  - [x] C7 モバイルメニュー: 背景タップで閉じない（pointer-events 構造修正）+ 背面スクロールロック
+  - [x] C8 **podcast 502 の根本修正**: @notionhq/client v5 で databases.query 廃止 → dataSources.query へ移行（DB→data source 解決）。ローカルで 200/210件確認。さらに "Transcript" は toggle ブロックだったためパーサに toggle 検出を追加、"Key Takeaways" を KEY_POINT_LABELS に追加。静的 JSON を 211件で再生成（切り詰め0・Transcript混入0）
+  - [x] C9 CV(JP) h1 に getHeadingFontClass 適用
+  - [x] C12 gym-stats: CSV 未設定時に 500 → 200 フォールバック（コンソールエラー解消）
+- [ ] 未着手（別途）: C10 回遊導線（デザイン判断待ち、airline 孤立が最優先）/ 🟡軽微4件 / gym 本番 CSV データ供給（env）/ ページ別 title（クライアントコンポーネント改修）
+- [ ] デプロイ後: `node scripts/generate-podcast-data.js --skip-embeddings` は実施済み（この作業内で再生成）。本番反映は main マージ時
+
+## Podcast 同期の「無料・完全自動」化（2026-07-05 実装完了）
+
+### 調査で判明した実態
+- 配線自体は正常: リンク Notion ページ = `NOTION_PODCAST_DB_ID`（1db26482…80b9…6ec）、唯一の data source（…8160-ad77…）= generate スクリプトのハードコード ID と一致。
+- **週次自動更新は約3ヶ月死んでいた**: `gh run list` で 5月以降の scheduled 実行が**毎回失敗**（今朝 07-05 も）。原因は 4月の pnpm 移行で `package-lock.json` が消えたのにワークフローが `npm ci` のままだったこと（`npm error … can only install with an existing package-lock.json`）。bot 最終成功コミットは 2026-03-29。
+- ライブ API は毎回 `categoryBasedPositioning`＋`hasEmbeddings:false` で、静的 JSON の埋め込みを無視する設計だった。
+- OpenAI はワークフローに繋がっておらず、埋め込みは元々一度も生成されていなかった（ヒーロー文言「AI embeddings」は当初から不正確）。
+
+### 実装した修正（すべて無料・APIキー不要）
+1. **ローカル埋め込みに置換**: OpenAI → `@huggingface/transformers`（`Xenova/paraphrase-multilingual-MiniLM-L12-v2`, 384次元, 多言語）を CPU 実行。`scripts/generate-podcast-data.js` の `generateEmbeddings` を書き換え、`SKIP_EMBEDDINGS` を `--skip-embeddings` フラグのみに。`openai` 依存を削除。
+2. **ワークフロー修復**: `.github/workflows/update-podcast-data.yml` を pnpm 化（`pnpm/action-setup@v4` + `pnpm install --frozen-lockfile` + `pnpm generate:podcast-data`）。`package.json` に `"packageManager": "pnpm@10.27.0"` を追加。OPENAI_API_KEY は不要に。
+3. **ライブ API に埋め込み統合**: `app/api/podcast-notes/route.ts` が、バンドル済み静的 JSON からエピソード ID ごとに事前計算 `embedding2d`/`cluster` を引く（`import precomputed from '@/public/data/podcast-notes.json'`）。内容は常にライブ最新、レイアウトは意味的。未登録の新着はカテゴリ centroid 付近に仮配置。`hasEmbeddings` を動的化。
+4. `components/podcast-notes/PipelineSection.tsx` の "Vectorize with OpenAI" → "Vectorize locally (multilingual)"。
+5. **静的 JSON 再生成・検証**: 215件・`hasEmbeddings:true`・8意味クラスタ。Transcript 混入 0、以前欠落の4件を含む。`pnpm build` 通過。ローカル本番サーバーで `/api/podcast-notes` = HTTP200 / hasEmbeddings:true / 214件 / 意味的座標を実確認。
+
+### 残タスク
+- [ ] `scripts/_test-embed.js`（スモークテスト用の一時ファイル）を削除（削除許可待ち）。
+- [ ] 本ブランチを main にマージ → 本番のライブ API 502 解消 + 週次自動更新が3ヶ月ぶりに復活。
+- [ ] （任意）ヒーロー文言 en.json:339 は hasEmbeddings:true になったため実態と一致。変更不要。
+
 ## 次のタスク
-1. 残りページへのセマンティックカラー適用
-2. /design-audit でコードベース全体の違反数を把握
-3. dead code の削除（ユーザー確認後）
-4. README.md の更新（Next.js 14 → 15 の記載修正等）
+1. QA 検出問題の修正（推奨順: title/metadata → google-ux i18n → CSP → 404 → About SP → モバイルメニュー → podcast/gym/blog データ）※ docs/qa-2026-07-03/report.md 参照
+2. 残りページへのセマンティックカラー適用
+3. /design-audit でコードベース全体の違反数を把握
+4. dead code の削除（ユーザー確認後）
+5. README.md の更新（Next.js 14 → 15 の記載修正等）

@@ -39,7 +39,7 @@ const STEPS: Array<{
   {
     Icon: BrainCircuit,
     label: 'Embeddings',
-    description: 'Vectorize with OpenAI',
+    description: 'Vectorize locally (multilingual)',
   },
   {
     Icon: ChartScatter,

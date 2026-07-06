@@ -397,7 +397,7 @@ const UkiyoePage: React.FC = () => {
                 <figure>
                   <Image
                     src="/work/ukiyoe/process-logo.png"
-                    alt="Logo design — from hanko to modern typography"
+                    alt="Logo design — a kamon-style seal mark for ukiyo-e"
                     width={1200}
                     height={675}
                     className="w-full h-auto rounded-lg"

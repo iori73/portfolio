@@ -42,14 +42,17 @@ function parseBlocks(blocks: Record<string, unknown>[]): ParsedContent {
   const SUMMARY_SECTIONS = ['summary'];
   const CHAPTER_SECTIONS = ['chapters', 'timestamps'];
   const TRANSCRIPT_SECTIONS = ['transcript'];
-  const KEY_POINT_LABELS = ['主要ポイント', 'key points', 'key learnings'];
+  const KEY_POINT_LABELS = ['主要ポイント', 'key points', 'key learnings', 'key takeaways', 'takeaways'];
 
   for (const block of blocks) {
     const type = block.type as string;
     const content = block[type] as { rich_text?: { plain_text?: string }[] } | undefined;
     const text = content?.rich_text ? extractRichText(content.rich_text) : '';
 
-    if (type === 'heading_2' || type === 'heading_3') {
+    // Section boundaries can be headings OR toggle blocks (the "Transcript"
+    // section is a collapsible toggle, whose label would otherwise leak into
+    // the summary text).
+    if (type === 'heading_1' || type === 'heading_2' || type === 'heading_3' || type === 'toggle') {
       const headerLower = text.toLowerCase().trim();
       if (SECTION_NAMES.some((s) => headerLower.includes(s))) {
         if (SKIP_SECTIONS.some((s) => headerLower.includes(s))) {
