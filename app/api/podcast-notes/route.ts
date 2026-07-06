@@ -15,9 +15,25 @@ import {
   DEFAULT_CATEGORY_COLOR,
   normalizeCategoryName,
 } from '@/components/podcast-notes/types';
+// Precomputed layout (bundled at build time). Embeddings can't run per-request in
+// a serverless function, so the weekly pipeline computes semantic 2D positions +
+// clusters offline; here we serve LIVE content from Notion but reuse those
+// precomputed positions by episode id. Brand-new episodes not yet in this file
+// fall back to a category-based position until the next regen.
+import precomputed from '@/public/data/podcast-notes.json';
 
 const NOTION_DB_ID = process.env.NOTION_PODCAST_DB_ID;
 const NOTION_API_KEY = process.env.NOTION_API_KEY;
+
+const PRE = precomputed as unknown as PodcastData;
+const HAS_PRE_EMBEDDINGS = PRE?.meta?.hasEmbeddings === true;
+const normId = (id: string) => id.replace(/-/g, '');
+const PRE_POS = new Map<string, [number, number]>(
+  (PRE?.episodes ?? []).map((e) => [normId(e.id), e.embedding2d])
+);
+const PRE_CLUSTER = new Map<string, number>(
+  (PRE?.episodes ?? []).map((e) => [normId(e.id), e.cluster])
+);
 
 // Notion の property 型（簡易）
 function extractRichText(richText: { plain_text?: string }[] | undefined): string {
@@ -136,12 +152,25 @@ export async function GET(request: NextRequest) {
   let cursor: string | undefined;
 
   try {
+    // Notion API 2025-09 / @notionhq/client v5: `databases.query` was removed.
+    // A database now contains one or more "data sources"; querying happens on a
+    // data source. Resolve the DB's first data source, then query it.
+    // (This was the real cause of the 502 — `databases.query is not a function`.)
+    const db = (await notion.databases.retrieve({
+      database_id: NOTION_DB_ID,
+    })) as { data_sources?: { id: string }[] };
+    const dataSourceId = db.data_sources?.[0]?.id;
+    if (!dataSourceId) {
+      throw new Error('No data source found for the configured Notion database');
+    }
+
     do {
-      const response = await notion.databases.query({
-        database_id: NOTION_DB_ID,
+      // No server-side `sorts` — a mismatched property name would throw. Fetch
+      // unsorted and sort in JS below.
+      const response = await notion.dataSources.query({
+        data_source_id: dataSourceId,
         start_cursor: cursor,
         page_size: 100,
-        sorts: [{ property: 'Release Date', direction: 'descending' }],
       });
 
       const pages = response.results as Parameters<typeof extractPageMetadata>[0][];
@@ -151,15 +180,56 @@ export async function GET(request: NextRequest) {
       cursor = response.next_cursor ?? undefined;
     } while (cursor);
 
-    const positions = categoryBasedPositioning(episodesMeta);
-    const categories = [...new Set(episodesMeta.map((e) => e.category || 'Others'))].sort();
-    const episodesWithCluster: Episode[] = episodesMeta.map((ep, i) => ({
-      ...ep,
-      embedding2d: positions[i],
-      cluster: categories.indexOf(ep.category || 'Others'),
-    }));
+    // Sort by date descending in JS (was previously done server-side).
+    episodesMeta.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 
-    const clusters = buildClusters(episodesWithCluster, positions);
+    let episodesWithCluster: Episode[];
+    let clusters: Cluster[];
+    let hasEmbeddings: boolean;
+
+    if (HAS_PRE_EMBEDDINGS && PRE_POS.size > 0) {
+      // Semantic layout: reuse precomputed 2D positions + clusters by episode id.
+      const preClusters = PRE.clusters;
+      const centerByCluster = new Map(preClusters.map((c) => [c.id, c.center]));
+      const clusterByCategory = new Map(preClusters.map((c) => [c.label, c.id]));
+      const fallbackCluster = preClusters[0]?.id ?? 0;
+
+      episodesWithCluster = episodesMeta.map((ep) => {
+        const key = normId(ep.id);
+        const pos = PRE_POS.get(key);
+        if (pos) {
+          return { ...ep, embedding2d: pos, cluster: PRE_CLUSTER.get(key) ?? fallbackCluster };
+        }
+        // New episode not yet embedded: place near its category's cluster centroid.
+        const clusterId = clusterByCategory.get(ep.category || 'Others') ?? fallbackCluster;
+        const center = centerByCluster.get(clusterId) ?? [0, 0];
+        const jx = (deterministicJitter(ep.id, 1) - 0.5) * 1.2;
+        const jy = (deterministicJitter(ep.id, 2) - 0.5) * 1.2;
+        return {
+          ...ep,
+          embedding2d: [center[0] + jx, center[1] + jy] as [number, number],
+          cluster: clusterId,
+        };
+      });
+
+      // Keep label/center/color from the precomputed clusters; refresh counts for the live set.
+      clusters = preClusters.map((c) => ({
+        ...c,
+        episodeCount: episodesWithCluster.filter((e) => e.cluster === c.id).length,
+      }));
+      hasEmbeddings = true;
+    } else {
+      // Fallback: category-based ring layout (no precomputed embeddings available).
+      const positions = categoryBasedPositioning(episodesMeta);
+      const categories = [...new Set(episodesMeta.map((e) => e.category || 'Others'))];
+      episodesWithCluster = episodesMeta.map((ep, i) => ({
+        ...ep,
+        embedding2d: positions[i],
+        cluster: categories.indexOf(ep.category || 'Others'),
+      }));
+      clusters = buildClusters(episodesWithCluster, positions);
+      hasEmbeddings = false;
+    }
 
     const podcastMap = new Map<
       string,
@@ -204,7 +274,7 @@ export async function GET(request: NextRequest) {
       },
       meta: {
         generatedAt: new Date().toISOString(),
-        hasEmbeddings: false,
+        hasEmbeddings,
       },
     };
 
