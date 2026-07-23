@@ -6,6 +6,37 @@ import { useTranslations, useLocale } from 'next-intl';
 import { useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
 import { usePageTransition } from '@/src/contexts/TransitionContext';
 
+/**
+ * 縦長スクリーンショット/図版を一定の高さで「切り目」を付けて表示する。
+ * 上部を object-top で見せ、下端のフェードで「続きがある」ことを示す。
+ * 画像全体はクリックで原寸（別タブ）表示できる。
+ */
+function ClampedImage({
+  src,
+  alt,
+  heightClass = 'h-[300px] md:h-[360px]',
+}: {
+  src: string;
+  alt: string;
+  heightClass?: string;
+}) {
+  return (
+    <a
+      href={src}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`group relative block w-full ${heightClass} overflow-hidden rounded-lg`}
+    >
+      <Image src={src} alt={alt} fill sizes="(max-width: 768px) 100vw, 600px" className="object-cover object-top" />
+      {/* 下端フェード（続きがあることの合図） */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent to-surface" />
+      <span className="pointer-events-none absolute bottom-2 right-3 font-space-grotesk text-body-sm text-ink-tertiary opacity-0 transition-opacity group-hover:opacity-100">
+        View full ↗
+      </span>
+    </a>
+  );
+}
+
 const SECTIONS = [
   'overview',
   'design-process',
@@ -222,34 +253,10 @@ const AirlineDesignSystemPage: React.FC = () => {
                 </p>
                 <figure>
                   <div className="grid grid-cols-2 gap-4">
-                    <Image
-                      src="/work/airline-design-system/competitive-1.png"
-                      alt="Competitive analysis - Airline 1"
-                      width={600}
-                      height={400}
-                      className="w-full h-auto rounded-lg"
-                    />
-                    <Image
-                      src="/work/airline-design-system/competitive-2.png"
-                      alt="Competitive analysis - Airline 2"
-                      width={600}
-                      height={400}
-                      className="w-full h-auto rounded-lg"
-                    />
-                    <Image
-                      src="/work/airline-design-system/competitive-3.png"
-                      alt="Competitive analysis - Airline 3"
-                      width={600}
-                      height={400}
-                      className="w-full h-auto rounded-lg"
-                    />
-                    <Image
-                      src="/work/airline-design-system/competitive-4.png"
-                      alt="Competitive analysis - Airline 4"
-                      width={600}
-                      height={400}
-                      className="w-full h-auto rounded-lg"
-                    />
+                    <ClampedImage src="/work/airline-design-system/competitive-1.png" alt="Competitive analysis - Airline 1" />
+                    <ClampedImage src="/work/airline-design-system/competitive-2.png" alt="Competitive analysis - Airline 2" />
+                    <ClampedImage src="/work/airline-design-system/competitive-3.png" alt="Competitive analysis - Airline 3" />
+                    <ClampedImage src="/work/airline-design-system/competitive-4.png" alt="Competitive analysis - Airline 4" />
                   </div>
                   <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
                     {t('airlineDesignSystem.captionCompetitive')}
@@ -276,12 +283,10 @@ const AirlineDesignSystemPage: React.FC = () => {
                   {t('airlineDesignSystem.tokenText')}
                 </p>
                 <figure>
-                  <Image
+                  <ClampedImage
                     src="/work/airline-design-system/token-architecture.png"
                     alt="Two-layer token architecture: Primitive and Semantic layers"
-                    width={1200}
-                    height={675}
-                    className="w-full h-auto rounded-lg"
+                    heightClass="h-[420px] md:h-[560px]"
                   />
                   <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
                     {t('airlineDesignSystem.captionToken')}

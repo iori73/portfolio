@@ -120,6 +120,65 @@ const ExperimentPage: React.FC = () => {
   const { getHeadingFontClass, getHeadingFontStyle } = useHeadingFont();
   const [activeSection, setActiveSection] = useState<string>('overview');
 
+  // 5 most-recent podcast episodes — dynamic (covers are Spotify URLs already
+  // embedded in the notes data). Resilient fetch: live API first, static bundled
+  // JSON as fallback (the API rate-limits from datacenter IPs).
+  type RecentEpisode = { title: string; cover: string; podcast: string };
+  const [recentEpisodes, setRecentEpisodes] = useState<RecentEpisode[]>([]);
+  const [hasMoreEpisodes, setHasMoreEpisodes] = useState<boolean>(false);
+  const [episodesLoading, setEpisodesLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    const pick = (data: any) => {
+      const episodes: any[] = data?.episodes ?? (Array.isArray(data) ? data : []);
+      // Official show covers (resolved offline via iTunes), keyed by podcast name.
+      const coverByShow = new Map<string, string>(
+        (data?.podcasts ?? []).filter((p: any) => p?.cover).map((p: any) => [p.name, p.cover]),
+      );
+      const usable = episodes.filter((e) => e?.podcast && e.podcast !== 'Unknown');
+      const byRecent = [...usable].sort((a, b) =>
+        String(b?.date ?? '').localeCompare(String(a?.date ?? '')),
+      );
+      // Dedupe by show: keep the most-recent episode per podcast, so no cover repeats.
+      const seen = new Set<string>();
+      const uniqueShows: RecentEpisode[] = [];
+      for (const e of byRecent) {
+        if (seen.has(e.podcast)) continue;
+        const cover = coverByShow.get(e.podcast) || e.podcastCover;
+        if (!cover) continue;
+        seen.add(e.podcast);
+        uniqueShows.push({ title: e?.title ?? e?.podcast ?? '', cover, podcast: e.podcast });
+      }
+      if (!cancelled) {
+        setRecentEpisodes(uniqueShows.slice(0, 5));
+        setHasMoreEpisodes(uniqueShows.length > 5);
+      }
+    };
+    // Static JSON first — it's a fast bundled file with official covers, and this
+    // decorative row doesn't need Notion-live freshness (the live API can take ~8s).
+    const load = async () => {
+      try {
+        const res = await fetch('/data/podcast-notes.json');
+        if (!res.ok) throw new Error('static');
+        pick(await res.json());
+      } catch {
+        try {
+          const res = await fetch('/api/podcast-notes');
+          pick(await res.json());
+        } catch {
+          /* leave empty */
+        }
+      } finally {
+        if (!cancelled) setEpisodesLoading(false);
+      }
+    };
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -211,57 +270,26 @@ const ExperimentPage: React.FC = () => {
             </div>
 
             <div className="flex flex-wrap items-end gap-[16px_24px] relative self-stretch w-full flex-[0_0_auto]">
-              <img
-                className="relative w-[72px] h-[72px] object-cover"
-                alt="Today_I_Learned"
-                // If Japanese is included, it will not be loaded on the site.
-                src="https://i.scdn.co/image/ab6765630000ba8a66df42744157019b4156d323"
-              />
-
-              <img
-                className="relative w-[72px] h-[72px] object-cover"
-                alt="デデデータ"
-                src="https://i.scdn.co/image/ab6765630000ba8a8cf1ff631fdba63c7a354fff"
-              />
-
-              <img
-                className="relative w-[72px] h-[72px] object-cover"
-                alt="ミモリラジオ-自然の面白さを聴く"
-                src="https://i.scdn.co/image/ab6765630000ba8ae29175ad2623d601ede331e2"
-              />
-
-              <img
-                className="relative w-[72px] h-[72px] object-cover"
-                alt="Ologies with Alie Ward"
-                src="https://i.scdn.co/image/ab6765630000ba8a44e9ed06f94f5391dbd73049"
-              />
-
-              <img
-                className="relative w-[72px] h-[72px] object-cover"
-                alt="Off Topic"
-                src="https://i.scdn.co/image/ab6765630000ba8a2332b679810aa74a364db7fd"
-              />
-
-              <img
-                className="relative w-[72px] h-[72px] object-cover"
-                alt="バイリンガルニュース (Bilingual News)"
-                src="https://i.scdn.co/image/ab6765630000ba8aea2b4558f98bd78edd90beb8"
-              />
-
-              <img
-                className="relative w-[72px] h-[72px] object-cover"
-                alt="START/FM"
-                src="https://i.scdn.co/image/ab6765630000ba8a10bfd90aa0934995794d5bb4"
-              />
-
-              <img
-                className="relative w-[72px] h-[72px] object-cover"
-                alt="Design Better"
-                src="https://i.scdn.co/image/ab6765630000ba8a5383d40bcd6e695ff40eed19"
-              />
-
-              {/* <div className="relative text-body-base">{t('andMore')}</div> */}
-              <div className="relative text-body-base">and more!</div>
+              {episodesLoading
+                ? Array.from({ length: 5 }).map((_, i) => (
+                    <div
+                      key={`skeleton-${i}`}
+                      className="w-[72px] h-[72px] rounded-media bg-surface-muted animate-pulse"
+                    />
+                  ))
+                : recentEpisodes.map((e, i) => (
+                    <img
+                      key={`${e.cover}-${i}`}
+                      className="w-[72px] h-[72px] object-cover rounded-media"
+                      alt={e.title}
+                      title={e.title}
+                      src={e.cover}
+                      loading="lazy"
+                    />
+                  ))}
+              {!episodesLoading && hasMoreEpisodes && (
+                <div className="relative self-center text-body-base text-ink-tertiary">and more!</div>
+              )}
             </div>
 
             <NextLink

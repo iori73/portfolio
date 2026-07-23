@@ -20,7 +20,7 @@ export default function Home() {
     <div className="mt-24 md:mt-28 md:mb-16">
       {/* Hero Section - Bilingual Layout */}
       <section className="py-16 md:py-24">
-        <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-end">
+        <div className="flex flex-col md:flex-row gap-8 md:gap-16 md:items-end">
           {/* Left Column - English */}
           <div className="flex-1">
             <h1 className="text-display mb-2">{t('hero.name')}</h1>

@@ -53,7 +53,7 @@
       "description1": "Enterprise-scale design system spanning 9 digital platforms",
       "timeline": "Nov 2025 — Mar 2026",
       "skills": "Design Systems, Figma, TypeScript, Next.js",
-      "deliverables": "Token System, 12 Figma Plugins, Component Prototype, 51+ Docs"
+      "deliverables": "Token System, Custom Figma Plugins, Component Prototype, 51+ Docs"
     }
   },
   "about": {
@@ -297,8 +297,8 @@
     "colorSystemMethod": "Rather than pixel-level analysis of artworks, the proportions are estimated from art historical knowledge. The technique descriptions for each era guided the weighting. For sumizuri-e (ink-only prints), black ink dominates at 50-60%. For benizuri-e, red and green emerge as the technique's defining colors. By the nishiki-e era, colors distribute more evenly as multi-block printing allowed a full spectrum. The values are hand-curated estimates, documented with their reasoning and limitations.",
     "colorSystemViz": "In the timeline gallery, each era displays a horizontal bar where the width of each color segment equals its estimated proportion. Nine canonical color slots, from sumi (ink black) to bero (Prussian blue), are normalized so that active colors are prominent while unused slots appear as ghost elements. This visualization communicates at a glance how printmaking evolved from monochrome to polychrome.",
     "logoDesignTitle": "Logo Design",
-    "logoDesignText1": "The logo began by articulating what actually makes ukiyo-e look like ukiyo-e — layered, repeatable color printing; flat, anonymous figures; faces turned at an angle; the gentle lines of a kimono; and the soft gradations of bokashi. Rather than illustrate a scene, I set out to distill these traits into a single graphic mark, studying Edo-period family crests (kamon) and publishers' seals (hanmoto marks) as models for how much a small, flat, black-and-white emblem can carry.",
-    "logoDesignText2": "The final mark takes the form of a kamon: a circular crest enclosed in a double-square seal frame, echoing the hanmoto marks once stamped into the margins of ukiyo-e prints. Inside the circle, brush-like strokes abstract the qualities drawn out in research — the overlapping passes of the press, the flowing lines of a kimono, the anonymity of the figures — resolved into one flat, repeatable emblem. Rendered in a single ink tone on a dark ground, it stays legible from favicon to full page, carrying the graphic spirit of Edo crest design rather than depicting any one print.",
+    "logoDesignText1": "The first version — a kaleidoscope of repeated faces — looked decorative but didn't actually capture what makes ukiyo-e ukiyo-e, so I went back to research. Asking an AI model to summarize ukiyo-e's compositional grammar, then checking the answer against real prints, turned up four traits that kept recurring: bold foreground cropping, diagonal dynamism, an unconventional mixed-perspective deformation, and a deliberate awareness of the frame and negative space — the same visual logic later inherited by the Impressionists.",
+    "logoDesignText2": "The mark applies the first of those traits directly: instead of centering the main shape, it's cropped in close and pushed off-axis, the way a print crops a bridge or a branch until it runs off the frame. Inside a hanko-style double-square seal, a circle, a diagonal cut, and a small offset window interlock without ever overlapping — one line, one pass, one impression. It isn't a portrait of any single print; it's the printing logic itself, reduced to a mark small enough for a favicon and legible enough for a full page.",
     "handColoringTitle": "Hand-Coloring the Layers",
     "handColoringText1": "The core animation on this site shows color layers stacking to form a complete print, just as a real Edo-period printer would have pressed each woodblock in sequence. To build this, I needed images of each individual color layer: the red pigment areas on one layer, green foliage on another, gold accents on a third.",
     "handColoringText2": "These assets do not exist in any dataset. I tried AI image generation, but it could not produce layers with the color accuracy and edge precision required to align and stack convincingly. So I did what a printer would have done: I separated the colors by hand.",
@@ -332,7 +332,7 @@
     "captionTimeline": "Rebuilt from horizontal scroll to native vertical scroll with parallax, inspired by how ukiyoe was consumed as everyday mass-produced prints, not museum pieces.",
     "captionMotifs": "Left to right: Timeline UI navigation with dango-inspired indicators; AI-generated photorealistic kushi-dango; ukiyoe depicting dango in everyday Edo life. Artworks: Utagawa Kuniyoshi, Dango Shop at the Rabbit Festival (卯のだんごや); Suzuki Harunobu, Kasamori Osen Holding Dango (団子を持つ笠森お仙); Kachōrō Kunisada, Famous Places of the Eastern Capital: Takanawa in the Eighth Month (東都名所遊覧 葉月高輪).",
     "captionColorSystem": "Color proportions estimated from art historical knowledge, showing how the printmaking palette expanded from monochrome to polychrome across centuries.",
-    "captionLogo": "From articulating ukiyo-e's visual traits, through studies of Edo family crests (kamon) and publishers' seals, to a single circular mark."
+    "captionLogo": "From a kaleidoscope that looked pretty but said nothing, through researching ukiyo-e's actual compositional grammar, to a seal mark built on bold cropping and off-center placement."
   },
   "podcastNotesPage": {
     "title": "Knowledge Constellation",
@@ -404,17 +404,17 @@
     "stat1": "Design variables across 6 collections",
     "stat2": "Figma Variable collections",
     "stat3": "Color modes + Typography modes",
-    "pluginsTitle": "12 Custom Figma Plugins",
-    "pluginsText": "To make the design system practical rather than theoretical, I built 12 custom Figma plugins that automate the most tedious parts of design system work. Each plugin solves a specific workflow bottleneck — from initial token setup to ongoing production support.",
+    "pluginsTitle": "Custom Figma Plugins",
+    "pluginsText": "To make the design system practical rather than theoretical, I built custom Figma plugins that automate the most tedious parts of design system work. Each plugin solves a specific workflow bottleneck — from initial token setup to ongoing production support.",
     "prototypeTitle": "Component Prototype",
     "prototypeText": "I built a living prototype using Next.js 15, React 19, Tailwind CSS v4, and shadcn/ui as the component base. The prototype serves as both a reference implementation and a testing ground for token values. It includes 11 page variants demonstrating Button, TextField, Assist Chip, Header, Navigation, and Loading components — all themed with the airline's brand tokens.",
     "docsTitle": "Documentation System",
     "docsText": "I authored 51+ markdown documents organized into 5 categories: reference materials, analysis (UI audits, gap analysis, brand investigation), design specifications (component specs, typography, color), implementation guides, and planning documents. This documentation ensures the system can be maintained and extended by future designers and developers.",
     "impactTitle": "Impact",
-    "impactText": "The design system established a unified visual foundation across 9 digital platforms for the first time. Developers can now reference a single token source for colors, typography, and spacing — eliminating the per-platform style drift that had accumulated over years. The 12 Figma plugins reduced what had been manual, error-prone token setup to automated, repeatable workflows.",
+    "impactText": "The design system established a unified visual foundation across 9 digital platforms for the first time. Developers can now reference a single token source for colors, typography, and spacing — eliminating the per-platform style drift that had accumulated over years. The custom Figma plugins reduced what had been manual, error-prone token setup to automated, repeatable workflows.",
     "learningTitle": "Key Learning",
     "learningText": "The most important lesson came from Dan Mall's framework: \"Build it and they will come\" doesn't work for design systems. Adoption requires making the system the path of least resistance. The Figma plugins were crucial here — they didn't just automate tasks, they made following the design system easier than not following it. The Variable Migrator plugin, for example, let designers update legacy files to the new token system in minutes rather than days.",
     "technicalTitle": "Technical Reflection",
-    "technicalText": "Building 12 Figma plugins taught me that the gap between design and development is often a tooling problem, not a communication problem. When designers have plugins that enforce token usage and developers have a Next.js prototype showing exactly how components should render, alignment happens naturally. I'd like to explore deeper Code Connect integration and automated design-to-code pipelines in future projects."
+    "technicalText": "Building custom Figma plugins taught me that the gap between design and development is often a tooling problem, not a communication problem. When designers have plugins that enforce token usage and developers have a Next.js prototype showing exactly how components should render, alignment happens naturally. I'd like to explore deeper Code Connect integration and automated design-to-code pipelines in future projects."
   }
 }

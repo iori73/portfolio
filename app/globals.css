@@ -171,13 +171,14 @@ body {
     --font-space-grotesk: 'Space Grotesk', sans-serif;
     --font-noto-sans-jp: 'Noto Sans JP', sans-serif;
 
-    /* Typography size tokens — mobile-first, overridden at 768px */
-    --text-size-xs: 12px;
-    --text-size-sm: 13px;
-    --text-size-base: 16px;
-    --text-size-lg: 18px;
-    --text-size-xl: 20px;
-    --text-size-2xl: 24px;
+    /* Typography size tokens — mobile-first, overridden at 768px.
+       Raised to align with Apple HIG (Body 17 / Callout 16 / Subheadline 15 / Caption 12–13). */
+    --text-size-xs: 13px;
+    --text-size-sm: 14px;
+    --text-size-base: 17px;
+    --text-size-lg: 19px;
+    --text-size-xl: 21px;
+    --text-size-2xl: 26px;
     --text-size-3xl: 32px;
     --text-size-4xl: 40px;
 
@@ -205,6 +206,19 @@ body {
     --podcast-category-others: #636E72;
     --podcast-category-default: #B2BEC3;
 
+    /* Radius tokens — semantic scale (see tailwind borderRadius) */
+    --radius-media: 8px;
+    --radius-card: 16px;
+    --radius-pill: 9999px;
+
+    /* Interactive accent (Apple Blue) — links, active state */
+    --accent-interactive: #007aff;
+
+    /* Focus ring — Apple system green (matches HIG "Purpose" target icon).
+       Two-tone: crisp inner ring + soft halo for a concentric/gradient feel. */
+    --focus-ring: #30d158;
+    --focus-ring-halo: rgba(48, 209, 88, 0.28);
+
     /* Motion tokens — site-wide easing + duration scale */
     --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
     --duration-fast: 300ms;
@@ -217,10 +231,10 @@ body {
 
   @media (min-width: 768px) {
     :root {
-      --text-size-xs: 12px;
-      --text-size-sm: 14px;
-      --text-size-base: 16px;
-      --text-size-lg: 20px;
+      --text-size-xs: 13px;
+      --text-size-sm: 15px;
+      --text-size-base: 18px;
+      --text-size-lg: 21px;
       --text-size-xl: 24px;
       --text-size-2xl: 32px;
       --text-size-3xl: 48px;
@@ -283,6 +297,21 @@ body {
     @apply font-switzer font-medium;
   }
 
+  /* Global focus-visible ring — keyboard-only, Apple-green two-tone ring.
+     Solid outline (never clipped) + soft halo (gradient/concentric feel).
+     Applies to all focusable elements incl. custom role="link" cards. */
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 5px var(--focus-ring-halo);
+    border-radius: 4px;
+  }
+  /* Suppress the ring for pointer/mouse focus (browsers already scope
+     :focus-visible, but keep default outline off for :focus w/o -visible). */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
   /* Apply font families using CSS variables */
   .font-space-grotesk {
     font-family: var(--font-space-grotesk);
@@ -290,6 +319,19 @@ body {
 
   .font-noto-sans-jp {
     font-family: var(--font-noto-sans-jp);
+  }
+}
+
+/* Global reduced-motion — honor OS preference across all animations/transitions.
+   Scoped page-transition rules above still apply; this is the site-wide backstop. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 

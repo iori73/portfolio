@@ -14,6 +14,7 @@
 const { Client } = require('@notionhq/client');
 const fs = require('fs');
 const path = require('path');
+const { resolveOfficialCovers } = require('./lib/itunes-cover');
 
 // Load .env.local if running locally
 try { require('dotenv').config({ path: path.join(__dirname, '..', '.env.local') }); } catch {}
@@ -520,6 +521,9 @@ async function main() {
   const podcasts = [...podcastMap.values()]
     .map((p) => ({ ...p, primaryTags: [...p.primaryTags] }))
     .sort((a, b) => b.episodeCount - a.episodeCount);
+
+  // 7b. Replace per-episode artwork with official show covers (iTunes, cached).
+  await resolveOfficialCovers(podcasts);
 
   // 8. Build tag distribution
   const tagDistribution = {};
