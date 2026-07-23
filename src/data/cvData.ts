@@ -172,39 +172,11 @@ export const cvData: CVData = {
   skills: [
     {
       category: { en: 'Design', jp: 'デザイン' },
-      items: [
-        'Figma',
-        'Design Systems',
-        'UI/UX Design',
-        'User Research',
-        'Information Architecture',
-        'Interaction Design',
-        'Material Design 3',
-      ],
-    },
-    {
-      category: { en: 'Development', jp: '開発' },
-      items: [
-        'TypeScript',
-        'Next.js',
-        'React',
-        'Tailwind CSS',
-        'shadcn/ui',
-        'HTML/CSS/JavaScript',
-        'Node.js',
-        'Python',
-      ],
+      items: ['Design Systems', 'UI/UX Design'],
     },
     {
       category: { en: 'Tools & Methods', jp: 'ツール & 手法' },
-      items: [
-        'Figma Plugin Development',
-        'Tokens Studio',
-        'Design Token Management',
-        'Lottie Animation',
-        'Git/GitHub',
-        'Notion',
-      ],
+      items: ['Figma Plugin Development', 'Claude Code', 'Cursor'],
     },
   ],
   projects: [
