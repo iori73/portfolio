@@ -185,7 +185,7 @@ body {
     /* Semantic color tokens */
     --ink: #0A0A0A;
     --ink-secondary: #333333;
-    --ink-tertiary: #71717a;
+    --ink-tertiary: #6b6b73; /* darkened from #71717a to meet WCAG AA 4.5:1 on surface-muted */
     --ink-muted: rgba(0, 0, 0, 0.56);
     --surface: #fcfbfc;
     --surface-muted: #f5f5f7;

@@ -1,0 +1,19 @@
+{
+  "ci": {
+    "collect": {
+      "url": ["http://localhost:3000/"],
+      "numberOfRuns": 1,
+      "startServerCommand": "pnpm start",
+      "startServerReadyPattern": "Ready in|Local:",
+      "startServerReadyTimeout": 60000
+    },
+    "assert": {
+      "assertions": {
+        "categories:accessibility": ["error", { "minScore": 0.95 }]
+      }
+    },
+    "upload": {
+      "target": "temporary-public-storage"
+    }
+  }
+}
