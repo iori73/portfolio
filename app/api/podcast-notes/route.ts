@@ -34,6 +34,12 @@ const PRE_POS = new Map<string, [number, number]>(
 const PRE_CLUSTER = new Map<string, number>(
   (PRE?.episodes ?? []).map((e) => [normId(e.id), e.cluster])
 );
+// Official show covers (resolved offline via iTunes) keyed by podcast name.
+// Live content comes from Notion, but covers reuse these so the grid shows the
+// canonical show artwork instead of arbitrary per-episode images.
+const PRE_COVER = new Map<string, string>(
+  (PRE?.podcasts ?? []).filter((p) => p.cover).map((p) => [p.name, p.cover])
+);
 
 // Notion の property 型（簡易）
 function extractRichText(richText: { plain_text?: string }[] | undefined): string {
@@ -250,7 +256,7 @@ export async function GET(request: NextRequest) {
     }
     const podcasts = [...podcastMap.values()].map((p) => ({
       name: p.name,
-      cover: p.cover,
+      cover: PRE_COVER.get(p.name) || p.cover, // prefer official show cover
       episodeCount: p.episodeCount,
       primaryTags: [...p.primaryTags],
     })).sort((a, b) => b.episodeCount - a.episodeCount);

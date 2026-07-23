@@ -78,6 +78,23 @@ module.exports = {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+        /* ═══ Semantic radius scale — replaces arbitrary rounded-[…] values ═══ */
+        media: 'var(--radius-media)', // images / figures (was inline 8px)
+        card: 'var(--radius-card)', // cards / large surfaces (was rounded-[16px])
+        pill: 'var(--radius-pill)', // tags / CTAs (was rounded-full / rounded-[100px])
+      },
+      /* ═══ Letter-spacing — Apple HIG optical tracking (tight large, wide small) ═══ */
+      letterSpacing: {
+        display: '-0.021em', // Large Title / display headings
+        heading: '-0.014em', // Headline / title
+        label: '0.02em', // labels / meta (≈ the ad-hoc tracking-[0.2px])
+        caps: '0.06em', // uppercase tags / captions
+      },
+      /* ═══ Elevation — soft, low-contrast shadows (Depth) ═══ */
+      boxShadow: {
+        'elevation-1': '0 2px 8px rgba(0, 0, 0, 0.10)', // media default (was inline)
+        'elevation-2': '0 4px 16px rgba(0, 0, 0, 0.08)', // raised cards
+        'elevation-3': '0 8px 32px rgba(0, 0, 0, 0.12)', // overlays / popovers
       },
       // フォントファミリーとフォントサイズの拡張
       fontFamily: {

@@ -1,7 +1,7 @@
 // /components/Header.tsx
 
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, usePathname, useRouter } from '@/i18n/routing';
 import { useTransition } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
@@ -52,6 +52,33 @@ export default function Header() {
     { name: 'Blog', path: '/blog' },
   ];
 
+  // Sliding active-indicator dot (desktop nav): a single dot that glides
+  // between items with inertia, rather than one dot per item toggling on/off.
+  const navRef = useRef<HTMLElement>(null);
+  const itemRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
+  const [dotLeft, setDotLeft] = useState(0);
+  const [dotVisible, setDotVisible] = useState(false);
+
+  useEffect(() => {
+    const active = menuItems.find((item) => isActive(item.path));
+    const nav = navRef.current;
+    const el = active ? itemRefs.current[active.path] : null;
+    if (!active || !nav || !el) {
+      setDotVisible(false);
+      return;
+    }
+    const measure = () => {
+      const elRect = el.getBoundingClientRect();
+      const navRect = nav.getBoundingClientRect();
+      setDotLeft(elRect.left - navRect.left + elRect.width / 2);
+      setDotVisible(true);
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+
   return (
     <header className="fixed top-0 left-0 z-40 mx-auto flex h-[var(--site-header-height)] w-full items-center justify-between px-4 py-3 md:px-6 box-border">
       {/* Background gradient */}
@@ -85,22 +112,34 @@ export default function Header() {
 
         {/* PC Nav (md以上) */}
         <div className="hidden md:flex items-center">
-          <nav className="flex gap-12 mr-12">
+          <nav ref={navRef} className="relative flex gap-12 mr-12">
             {menuItems.map((item) => (
-              <div key={item.path} className="relative flex flex-col items-center">
-                <Link
-                  href={item.path}
-                  className={`font-helvetica-neue text-title transition-[font-weight] duration-300 ${
-                    isActive(item.path) ? 'font-bold' : 'font-normal'
-                  }`}
-                >
-                  {item.name}
-                </Link>
-                {isActive(item.path) && (
-                  <div className="absolute top-full mt-0 w-2 h-2 rounded-full bg-accent"></div>
-                )}
-              </div>
+              <Link
+                key={item.path}
+                ref={(el) => {
+                  itemRefs.current[item.path] = el;
+                }}
+                href={item.path}
+                aria-current={isActive(item.path) ? 'page' : undefined}
+                className={`font-helvetica-neue text-title transition-colors duration-200 ${
+                  isActive(item.path) ? 'font-semibold text-ink' : 'font-normal text-ink-secondary'
+                }`}
+              >
+                {item.name}
+              </Link>
             ))}
+            {/* Single active-indicator dot that glides between items with inertia */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute top-full w-2 h-2 rounded-full bg-accent"
+              style={{
+                left: dotLeft,
+                transform: 'translateX(-50%)',
+                opacity: dotVisible ? 1 : 0,
+                transition:
+                  'left 0.55s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease',
+              }}
+            />
           </nav>
 
           {/* Language Switcher for Desktop */}
@@ -108,18 +147,20 @@ export default function Header() {
               <button
                 onClick={() => toggleLanguage('en')}
                 disabled={isPending}
-                className={`font-helvetica-neue text-title text-center transition-[font-weight] duration-300 ${
-                  locale === 'en' ? 'font-bold' : 'font-normal'
+                aria-pressed={locale === 'en'}
+                className={`font-helvetica-neue text-title text-center transition-colors duration-200 ${
+                  locale === 'en' ? 'font-semibold text-ink' : 'font-normal text-ink-secondary'
                 }`}
               >
                 EN
               </button>
-              <span className="mx-2 text-body-sm leading-6">|</span>
+              <span className="mx-2 text-body-sm leading-6 text-ink-tertiary">|</span>
               <button
                 onClick={() => toggleLanguage('jp')}
                 disabled={isPending}
-                className={`font-helvetica-neue text-title text-center transition-[font-weight] duration-300 ${
-                  locale === 'jp' ? 'font-bold' : 'font-normal'
+                aria-pressed={locale === 'jp'}
+                className={`font-helvetica-neue text-title text-center transition-colors duration-200 ${
+                  locale === 'jp' ? 'font-semibold text-ink' : 'font-normal text-ink-secondary'
                 }`}
               >
                 JP
@@ -130,8 +171,10 @@ export default function Header() {
         {/* Hamburger Icon (モバイル) */}
         <button
           onClick={toggleMenu}
-          className="md:hidden relative z-50 w-8 h-8 flex items-center justify-center"
+          className="md:hidden relative z-50 w-11 h-11 -mr-2 flex items-center justify-center"
           aria-label="Toggle Menu"
+          aria-expanded={isOpen}
+          aria-controls="mobile-menu"
         >
           {/* --- 上段ライン --- */}
           <span
@@ -156,11 +199,12 @@ export default function Header() {
         {/* モバイルメニュー (フルスクリーン) */}
         {isOpen && (
           <div
+            id="mobile-menu"
             className="fixed top-0 left-0 w-full h-screen z-40 flex items-start pt-24 justify-start px-6 md:hidden pointer-events-none"
             style={{
               background: 'linear-gradient(rgb(255, 255, 255) 33%, rgba(255, 255, 255, 0.5) 100%)',
               backdropFilter: 'blur(16px)',
-              transition: 'all 0.8s ease',
+              transition: 'opacity 0.8s ease, transform 0.8s ease',
             }}
           >
             {/* Menu Content — パネル自体は pointer-events-none にして、
@@ -171,13 +215,15 @@ export default function Header() {
                 <div key={item.path} className="relative flex items-center gap-2">
                   <Link
                     href={item.path}
-                    className="text-body-3xl font-merriweather"
+                    aria-current={isActive(item.path) ? 'page' : undefined}
+                    className={`text-body-3xl font-merriweather ${
+                      isActive(item.path) ? 'font-semibold' : 'font-normal'
+                    }`}
                     style={{
                       opacity: 1,
                       transform: 'translateY(0)',
-                      transition: 'all 0.8s ease',
+                      transition: 'opacity 0.8s ease, transform 0.8s ease',
                       transitionDelay: `${index * 0.15 + 0.3}s`,
-                      fontWeight: isActive(item.path) ? 600 : 400,
                     }}
                     onClick={toggleMenu}
                   >
@@ -210,23 +256,17 @@ export default function Header() {
                 <button
                   onClick={() => toggleLanguage('en')}
                   disabled={isPending}
-                  className="text-title font-merriweather"
-                  style={{
-                    fontWeight: locale === 'en' ? 600 : 400,
-                    transition: 'font-weight 300ms ease',
-                  }}
+                  aria-pressed={locale === 'en'}
+                  className={`text-title font-merriweather ${locale === 'en' ? 'font-semibold' : 'font-normal'}`}
                 >
                   EN
                 </button>
-                <span className="mx-2">|</span>
+                <span className="mx-2 text-ink-tertiary">|</span>
                 <button
                   onClick={() => toggleLanguage('jp')}
                   disabled={isPending}
-                  className="text-title font-merriweather"
-                  style={{
-                    fontWeight: locale === 'jp' ? 600 : 400,
-                    transition: 'font-weight 300ms ease',
-                  }}
+                  aria-pressed={locale === 'jp'}
+                  className={`text-title font-merriweather ${locale === 'jp' ? 'font-semibold' : 'font-normal'}`}
                 >
                   JP
                 </button>

@@ -236,10 +236,13 @@
 4. `components/podcast-notes/PipelineSection.tsx` の "Vectorize with OpenAI" → "Vectorize locally (multilingual)"。
 5. **静的 JSON 再生成・検証**: 215件・`hasEmbeddings:true`・8意味クラスタ。Transcript 混入 0、以前欠落の4件を含む。`pnpm build` 通過。ローカル本番サーバーで `/api/podcast-notes` = HTTP200 / hasEmbeddings:true / 214件 / 意味的座標を実確認。
 
-### 残タスク
-- [ ] `scripts/_test-embed.js`（スモークテスト用の一時ファイル）を削除（削除許可待ち）。
-- [ ] 本ブランチを main にマージ → 本番のライブ API 502 解消 + 週次自動更新が3ヶ月ぶりに復活。
-- [ ] （任意）ヒーロー文言 en.json:339 は hasEmbeddings:true になったため実態と一致。変更不要。
+### 本番反映（2026-07-06 完了）
+- [x] `scripts/_test-embed.js` 削除。
+- [x] 2コミットに分割してコミット（04ed05d podcast / b4af572 QA バッチ）→ origin/main を merge（docs 競合なし）→ push。
+- [x] **PR #28 を main にマージ（59ec2c8）** → Podcast 自動化 + 7/3 QA バッチが本番へ。ライブ API 502 解消・週次自動更新（pnpm 化）復活・意味的クラスタリング有効化。
+- [x] Vercel 自動デプロイ。ローカル `pnpm build` は同一内容で通過済み。
+- 注: 本番のライブ検証は Vercel の bot 保護（"Security Checkpoint" 429）で自動 fetch がブロックされ未完。ブラウザでの目視確認をユーザーに依頼。
+- 既知の未解決（別対応）: API レートリミットの 'unknown' IP 共有バケット（QA #14）。データセンター IP からの連続アクセスで 429 になりやすい。
 
 ## 次のタスク
 1. QA 検出問題の修正（推奨順: title/metadata → google-ux i18n → CSP → 404 → About SP → モバイルメニュー → podcast/gym/blog データ）※ docs/qa-2026-07-03/report.md 参照
@@ -247,3 +250,56 @@
 3. /design-audit でコードベース全体の違反数を把握
 4. dead code の削除（ユーザー確認後）
 5. README.md の更新（Next.js 14 → 15 の記載修正等）
+
+## Apple HIG 根本改善 — Phase 1 着手（2026-07-22）
+
+計画: `~/.claude/plans/apple-apple-hig-...md`。3フェーズ（視覚システム磨き込み→構成再設計→情報設計）を軽い順に。Phase 1 = サイト横断の視覚システム磨き込み。
+
+### 着手済み・ビルド通過（foundation batch）
+- [x] 1D トークン定義: `tailwind.config.js` に letterSpacing（display/heading/label/caps = HIG optical tracking）、boxShadow（elevation-1/2/3）、borderRadius（media/card/pill）を追加。対応 CSS 変数（--radius-media/card/pill, --accent-interactive）を globals.css に追加。※定義のみ、使用箇所の移行は未。
+- [x] 1E focus-visible: globals.css base layer にグローバル focus-visible リング（--accent-interactive = #007aff, outline-offset 2px）。サイト内 focus スタイル皆無 → 最大の a11y 欠陥を解消。
+- [x] 1E reduced-motion: グローバル `@media (prefers-reduced-motion: reduce)` バックストップ追加（従来はページ遷移のみ）。
+- [x] 1E Header 磨き込み（`src/compositions/Header.tsx`）: ハンバーガー 32→44px（-mr-2 で位置維持）+ aria-expanded/aria-controls/id、nav の font-weight アニメ（reflow jank）を transition-colors 化、active を font-bold(700)→font-semibold(600, 型システム準拠)+color 差、aria-current/aria-pressed 追加、モバイルのインライン fontWeight を className 化・transition を transform/opacity にスコープ。
+- [x] 1A CV font-roboto 修正: `cv/page.tsx` の未定義 `font-roboto`(12箇所, silent no-op) を useBodyFont() のバイリンガル body フォントに置換。CV の見出し順は render 順では h1→h2→h3 で正常（監査の誤検出）と確認。
+
+### 未着手（sweeping・ユーザー確認/方向性待ち）
+- 1A: legacy 型スケール(tailwind:117-144)の統合 + tracking-[0.2px](46) 等の token 移行、experiment 二重h1 / blog h3先行 の確認
+- 1B: accent 装飾使用の監査、残存 hardcoded hex → token、dark の中途半端さ解消
+- 1C: 縦リズム正規化(py-8/12/16/20/24)、content-width 単一化(max-w-7xl 撤去)、top-offset 一元化(8ページ), 72↔96px ヘッダー高さ整合
+- 1D: 36 インライン boxShadow / radius 乱立の使用箇所移行、glass ボタン共通化
+- 1E: メニュー閉じアニメーション
+- 1F: 未使用 LanguageSwitcher.tsx / @splinetool 依存の削除（**要ユーザー確認**）
+
+### 2巡目: ユーザーフィードバック反映（2026-07-22）
+- [x] 1F 削除実行済み: LanguageSwitcher.tsx 削除、`@splinetool/react-spline` を pnpm remove。experiment/spline.tsx は experiment/page が import 中のため保持。
+- [x] focus リングを Apple system green(#30d158) の2トーン（solid outline + halo）に変更。HIG "Purpose" ターゲットアイコンの緑に合わせる要望。globals.css `--focus-ring`/`--focus-ring-halo`。
+- [x] ヘッダー active ドットを「1個が慣性で滑る」挙動に（`Header.tsx`）: nav に単一 span、item を ref 計測、pathname 変化で translateX、`cubic-bezier(0.34,1.56,0.64,1)`（軽いオーバーシュート=慣性）。resize 追従。
+- [x] タイプスケール HIG 準拠に引き上げ（本文/キャプションが小さすぎ の指摘）: `--text-size-*` を base 16→17(SP)/18(PC), sm 13-14→14-15, xs 12→13, lg/xl/2xl も微増。globals.css 1箇所で全ページ反映。HIG: Body17/Callout16/Subheadline15/Caption12-13。
+- [x] （別件）Podcast Notes の番組カバー: ハードコード8枚 → **書き起こしエピソード数ランキングで動的レンダリング**（`experiment/page.tsx`）。/api/podcast-notes → 静的JSON フォールバックで fetch、podcast 名で集計・降順、上位8件、カバーはデータ内の Spotify URL(i.scdn.co)。rank バッジ + 件数表示。CSP img-src https: 許容済み・images unoptimized で remote OK。
+- 検証: 触れた全ファイル tsc クリーン（cv:40 の既存 regex 警告のみ）。build は dev サーバー稼働中に実行しない運用に（.next 競合で 500 になった教訓）。dev 再起動＝`pkill -f "next dev"; rm -rf .next; npm run dev`。
+- 未: menu 閉じアニメ / 72↔96px ヘッダー高さ / sweeping(1C幅・余白, 1B hex, 1D shadow移行, 1A legacy scale統合)
+
+### 3巡目: Podcast カバー修正 + landing 重複解消（2026-07-23）
+- [x] landing の「最近5件」を**番組で重複排除**（同一 podcast の複数エピソードでカバーが重複していた）→ 最新の distinct 番組5件。
+- [x] **公式番組カバー化**: データは episode 別 artwork しか持たず（Takram Cast は18種の別カバー等）、`podcasts[].cover` が「最初のエピソード画像」= 事実上ランダムだった。iTunes Search API（無料・key不要）で番組名→公式 artworkUrl600 を解決。
+  - `scripts/lib/itunes-cover.js`（共有リゾルバ、`public/data/podcast-covers.json` にキャッシュ。手編集で誤マッチ修正可）
+  - `scripts/generate-podcast-data.js` に `resolveOfficialCovers(podcasts)` 組込（週次CIで自動）
+  - `scripts/backfill-podcast-covers.js` で現行 JSON を Notion 無しでバックフィル実行 → **64/83 番組が公式カバー**（top12 全て✓。19 miss はニッチ/表記ゆれ番組で episode art フォールバック維持）
+  - `app/api/podcast-notes/route.ts`: `PRE_COVER`(name→cover) を precomputed から構築し live 応答の `podcasts[].cover` を公式で上書き（本番=Notion live でも公式カバー）
+  - landing (`experiment/page.tsx`): `data.podcasts` から name→cover を引き公式カバー使用
+  - 効果: InsightsSection グリッド + landing 行の両方が公式カバーに。images unoptimized・CSP img-src https: で remote OK
+- 検証: 触れた全ファイル tsc で新規エラーなし（route.ts の既存3件は行ズレのみ）。/experiment, /experiment/podcast-notes(en/jp) すべて 200。
+
+### 4巡目: SP カバー欠落修正 + カバー精度向上（2026-07-23）
+- [x] SP で landing の最新5件カバーが空だった件: 原因は最初に叩く /api/podcast-notes(Notion live, ~8s)の待ち。装飾行なので**静的JSON優先fetch**に変更＋**ロード中スケルトン**（animate-pulse）で隙間解消。
+- [x] iTunes リゾルバを堅牢化: (1)**マッチ検証**追加（collectionName と番組名の正規化包含/トークン重複50%で判定。誤ヒットを弾く＝間違った公式カバーを防ぐ）、(2)クリーン名リトライ（装飾サフィックス除去）、(3)**429/5xx バックオフ**（throttle 300→1500ms。前回末尾が全MISSだったのはレート制限だった）、(4)"Unknown" 除外。
+- [x] backfill を修正: miss 時に**episode-art フォールバックへリセット**してから解決（前回の未検証ランの誤カバー残留を防止）。generate 側は毎回 fresh なので影響なし。
+- [x] 結果: **77/83 が検証済み公式カバー**、6 が episode-art フォールバック（GLOBIS/ゆる言語ラジオ 等の表記ゆれ番組。例: データ"ゆる言語ラジオ" vs 実"ゆる言語学ラジオ"→誤マッチ回避で意図的にfallback）。JSON valid・215ep 維持。手修正は podcast-covers.json 編集で可。
+- 検証: experiment/page.tsx tsc クリーン、full build 成功（Compiled successfully 15.3s）。JSON データ変更のみ（コード再ビルド不要）。
+
+## 2026-07-22 About/CV スキルセクション整理
+- [x] `src/data/cvData.ts` skills を精査・削除（本人skillでない/些細な項目）:
+  - Design: Figma / User Research / Information Architecture / Interaction Design / Material Design 3 を削除 → 残り「Design Systems, UI/UX Design」
+  - Development カテゴリ全体を削除
+  - Tools & Methods を差し替え → 「Figma Plugin Development, Claude Code, Cursor」
+- 反映先: About/CV 共に cvData.skills を参照するため1ファイルで両ページ更新。

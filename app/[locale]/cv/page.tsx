@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { cvData, WorkExperience, Education, SkillCategory, Project } from '@/src/data/cvData';
 import { useLocale, useTranslations } from 'next-intl';
-import { useHeadingFont } from '@/src/hooks/useFonts';
+import { useHeadingFont, useBodyFont } from '@/src/hooks/useFonts';
 
 // 日付範囲フォーマット関数
 function formatDateRange(startDate: string, endDate: string | 'Present', lang: 'en' | 'jp'): string {
@@ -44,6 +44,7 @@ function parseProjectBullet(text: string): { label: string | null; body: string 
 
 // 職歴アイテムコンポーネント
 const WorkExperienceItem: React.FC<{ work: WorkExperience; lang: 'en' | 'jp' }> = ({ work, lang }) => {
+  const { getBodyFontClass } = useBodyFont();
   const summary = work.description[lang][0];
   const projects = work.description[lang].slice(1);
 
@@ -53,8 +54,8 @@ const WorkExperienceItem: React.FC<{ work: WorkExperience; lang: 'en' | 'jp' }> 
       <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-1">
         <div className="flex-1">
           <h3 className="text-title-lg">{work.position[lang]}</h3>
-          <p className="text-body-lg font-roboto text-ink-secondary">{work.company[lang]}</p>
-          <p className="text-body font-roboto text-ink-tertiary">{work.location[lang]}</p>
+          <p className={`text-body-lg ${getBodyFontClass()} text-ink-secondary`}>{work.company[lang]}</p>
+          <p className={`text-body ${getBodyFontClass()} text-ink-tertiary`}>{work.location[lang]}</p>
         </div>
         <p className="text-body-sm font-space-grotesk text-ink-tertiary shrink-0 pt-1">
           {formatDateRange(work.startDate, work.endDate, lang)}
@@ -62,7 +63,7 @@ const WorkExperienceItem: React.FC<{ work: WorkExperience; lang: 'en' | 'jp' }> 
       </div>
 
       {/* サマリー */}
-      <p className="text-body font-roboto text-ink-secondary leading-[1.6]">{summary}</p>
+      <p className={`text-body ${getBodyFontClass()} text-ink-secondary leading-[1.6]`}>{summary}</p>
 
       {/* プロジェクトカード一覧 */}
       {projects.length > 0 && (
@@ -89,7 +90,7 @@ const WorkExperienceItem: React.FC<{ work: WorkExperience; lang: 'en' | 'jp' }> 
                     </span>
                   )}
                 </div>
-                <p className="text-body font-roboto text-ink-secondary leading-[1.6]">{body}</p>
+                <p className={`text-body ${getBodyFontClass()} text-ink-secondary leading-[1.6]`}>{body}</p>
               </div>
             );
           })}
@@ -115,6 +116,7 @@ const WorkExperienceItem: React.FC<{ work: WorkExperience; lang: 'en' | 'jp' }> 
 
 // 学歴アイテムコンポーネント
 const EducationItem: React.FC<{ education: Education; lang: 'en' | 'jp' }> = ({ education, lang }) => {
+  const { getBodyFontClass } = useBodyFont();
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-2">
@@ -122,11 +124,11 @@ const EducationItem: React.FC<{ education: Education; lang: 'en' | 'jp' }> = ({ 
           <h3 className="text-title-lg">
             {education.degree[lang]} in {education.field[lang]}
           </h3>
-          <p className="text-body-lg font-roboto">
+          <p className={`text-body-lg ${getBodyFontClass()}`}>
             {education.institution[lang]}
           </p>
           {education.description && (
-            <p className="text-body font-roboto">
+            <p className={`text-body ${getBodyFontClass()}`}>
               {education.description[lang]}
             </p>
           )}
@@ -161,6 +163,7 @@ const SkillCategoryItem: React.FC<{ category: SkillCategory; lang: 'en' | 'jp' }
 // プロジェクトアイテムコンポーネント
 const ProjectItem: React.FC<{ project: Project; lang: 'en' | 'jp' }> = ({ project, lang }) => {
   const t = useTranslations('cv');
+  const { getBodyFontClass } = useBodyFont();
 
   return (
     <div className="flex flex-col gap-4">
@@ -170,7 +173,7 @@ const ProjectItem: React.FC<{ project: Project; lang: 'en' | 'jp' }> = ({ projec
           {project.period[lang]}
         </p>
       </div>
-      <p className="text-body font-roboto">
+      <p className={`text-body ${getBodyFontClass()}`}>
         {project.description[lang]}
       </p>
       {project.technologies && (
@@ -190,7 +193,7 @@ const ProjectItem: React.FC<{ project: Project; lang: 'en' | 'jp' }> = ({ projec
           href={project.link}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-body font-roboto hover:opacity-80"
+          className={`text-body ${getBodyFontClass()} hover:opacity-80`}
         >
           {t('viewProject')} →
         </a>
@@ -222,6 +225,7 @@ export default function CVPage() {
 
   const lang = locale as 'en' | 'jp';
   const { getHeadingFontClass } = useHeadingFont();
+  const { getBodyFontClass } = useBodyFont();
 
   return (
     <div className="w-full flex flex-col gap-16 my-24 md:mt-28 md:mb-16">
@@ -231,13 +235,13 @@ export default function CVPage() {
           <h1 className={`text-display font-semibold ${getHeadingFontClass()}`}>
             {cvData.personalInfo.name[lang]}
           </h1>
-          <p className="text-body-lg font-roboto">
+          <p className={`text-body-lg ${getBodyFontClass()}`}>
             {cvData.personalInfo.title[lang]}
           </p>
-          <p className="text-body font-roboto">
+          <p className={`text-body ${getBodyFontClass()}`}>
             {cvData.personalInfo.location[lang]}
           </p>
-          <p className="text-body font-roboto">
+          <p className={`text-body ${getBodyFontClass()}`}>
             {cvData.personalInfo.summary[lang]}
           </p>
         </div>
@@ -291,7 +295,7 @@ export default function CVPage() {
             href={linkedInData.profileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-body font-roboto hover:opacity-80"
+            className={`text-body ${getBodyFontClass()} hover:opacity-80`}
           >
             {linkedInData.profileUrl} →
           </a>
