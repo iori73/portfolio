@@ -297,6 +297,14 @@
 - [x] 結果: **77/83 が検証済み公式カバー**、6 が episode-art フォールバック（GLOBIS/ゆる言語ラジオ 等の表記ゆれ番組。例: データ"ゆる言語ラジオ" vs 実"ゆる言語学ラジオ"→誤マッチ回避で意図的にfallback）。JSON valid・215ep 維持。手修正は podcast-covers.json 編集で可。
 - 検証: experiment/page.tsx tsc クリーン、full build 成功（Compiled successfully 15.3s）。JSON データ変更のみ（コード再ビルド不要）。
 
+### 5巡目: Lighthouse CI 失敗の調査＆修正（2026-07-23）
+- 原因特定: `.github/workflows/lighthouse.yml` が `npm ci` のままで、pnpm 移行後 package-lock.json 不在 → `EUSAGE: can only install with an existing package-lock.json` で **install ステップで即死**（Lighthouse 実行前）。podcast workflow と同じ既存バグ。a11y assertion は無関係だった。
+- [x] workflow を pnpm 化（pnpm/action-setup@v4 + setup-node cache pnpm + `pnpm install --frozen-lockfile` + `pnpm build` + `pnpm dlx @lhci/cli autorun`）。
+- [x] 無効だったインライン assertion（`--assert.assertions.accessibility-score=95`）を廃し、`lighthouserc.json` に正規化（collect: startServerCommand `pnpm start` / url `/`、assert: `categories:accessibility` ≥ 0.95、upload: temporary-public-storage）。
+- [x] ローカル実測（Chrome headless + lighthouse CLI, prod `next start`）: home の accessibility = **96**（唯一の失格が color-contrast）。
+- [x] コントラスト修正: タグ等の `--ink-tertiary` #71717a on surface-muted(#f5f5f7)=4.43 < 4.5(WCAG AA)。**#6b6b73 に微修正**（4.85/surface 5.12）→ 全 tertiary テキストで AA クリア。再実測で **accessibility = 100 / 失格0**。
+- 注: ローカル検証サーバー :3100/:3101（background bmbnopj6v/bvs8d9mvw）は停止して良い。
+
 ## 2026-07-22 About/CV スキルセクション整理
 - [x] `src/data/cvData.ts` skills を精査・削除（本人skillでない/些細な項目）:
   - Design: Figma / User Research / Information Architecture / Interaction Design / Material Design 3 を削除 → 残り「Design Systems, UI/UX Design」
