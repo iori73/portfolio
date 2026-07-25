@@ -134,9 +134,9 @@ export default function Header() {
               className="pointer-events-none absolute top-full w-2 h-2 rounded-full bg-[var(--accent-dot)]"
               style={{
                 left: dotLeft,
-                transform: 'translateX(-50%)',
+                transform: 'translateX(-50%) translateY(4px)',
                 opacity: dotVisible ? 1 : 0,
-                boxShadow: '0 0 0 4px var(--accent-dot-halo)',
+                boxShadow: '0 0 0 2px var(--accent-dot-halo)',
                 transition:
                   'left 0.65s var(--ease-emphasized), opacity 0.3s ease',
               }}
