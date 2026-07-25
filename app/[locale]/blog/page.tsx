@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useJPFontSize, useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
+import { CTAButton } from '@/components/ui/cta-button';
 
 // ===== note の記事型 =====
 interface NoteArticle {
@@ -203,28 +204,9 @@ export default function BlogPage() {
         </div>
 
         <div className="flex w-full justify-center md:justify-center">
-          <a
-            href="https://note.com/io_73"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative flex items-center justify-center px-6 py-3 rounded-[100px] text-ink-muted hover:text-white cursor-pointer transition-[color] duration-300 whitespace-nowrap overflow-hidden group w-full md:w-auto"
-            style={{
-              background:
-                'radial-gradient(75% 150% at 100% 114.2%, rgba(210, 210, 215, 0.4) 0%, rgba(180, 180, 185, 0.4) 100%)',
-              backdropFilter: 'blur(8px)',
-            }}
-          >
-            {/* Hover background overlay */}
-            <span
-              className="absolute inset-0 rounded-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-              style={{
-                background:
-                  'radial-gradient(75% 150% at 100% 114.2%, rgba(210, 210, 215, 0.8) 0%, rgba(180, 180, 185, 0.8) 100%)',
-                backdropFilter: 'blur(8px)',
-              }}
-            />
-            <span className="relative z-10 text-body-lg font-medium">{t('goToNote')}</span>
-          </a>
+          <CTAButton href="https://note.com/io_73" external className="w-full md:w-auto">
+            {t('goToNote')}
+          </CTAButton>
         </div>
       </div>
 
@@ -256,28 +238,9 @@ export default function BlogPage() {
           </div>
 
           <div className="flex w-full justify-center md:justify-center">
-            <a
-              href="https://medium.com/@iori73"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative flex items-center justify-center px-6 py-3 rounded-[100px] text-ink hover:text-ink cursor-pointer transition-[color] duration-300 whitespace-nowrap overflow-hidden group w-full md:w-auto"
-              style={{
-                background:
-                  'radial-gradient(75% 150% at 100% 114.2%, rgba(210, 210, 215, 0.4) 0%, rgba(180, 180, 185, 0.4) 100%)',
-                backdropFilter: 'blur(8px)',
-              }}
-            >
-              {/* Hover background overlay */}
-              <span
-                className="absolute inset-0 rounded-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                style={{
-                  background:
-                    'radial-gradient(75% 150% at 100% 114.2%, rgba(210, 210, 215, 0.8) 0%, rgba(180, 180, 185, 0.8) 100%)',
-                  backdropFilter: 'blur(8px)',
-                }}
-              />
-              <span className="relative z-10 text-body-lg font-medium">{t('goToMedium')}</span>
-            </a>
+            <CTAButton href="https://medium.com/@iori73" external className="w-full md:w-auto">
+              {t('goToMedium')}
+            </CTAButton>
           </div>
         </div>
       </div>

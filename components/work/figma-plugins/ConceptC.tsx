@@ -203,7 +203,7 @@ const SCATTER_CARDS = [
 
 function ThumbnailScatter() {
   return (
-    <div className="relative w-[260px] h-[200px] flex-shrink-0 hidden md:block">
+    <div className="relative w-[300px] h-[240px] flex-shrink-0 mx-auto md:mx-0">
       {SCATTER_CARDS.map((card) => (
         <div
           key={card.alt}
@@ -253,7 +253,7 @@ export default function ConceptC() {
       <div className="relative rounded-2xl overflow-hidden px-8 py-16 md:px-16 md:py-24 bg-surface-muted">
         {SHOW_HERO_GRAPHIC && <HeroGraphicSVG />}
 
-        <div className="relative z-10 flex items-center justify-between gap-8">
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-10 md:gap-8">
           <div className="max-w-xl">
             <p className="font-space-grotesk text-label tracking-wider uppercase text-[#A259FF]">
               {t('heroTagline')}

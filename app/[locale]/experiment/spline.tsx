@@ -3,6 +3,7 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
 import { useBodyFont } from '@/src/hooks/useFonts';
+import { CTAButton } from '@/components/ui/cta-button';
 
 const FavoriteVisuals: React.FC = () => {
   const t = useTranslations('experiment');
@@ -36,28 +37,13 @@ const FavoriteVisuals: React.FC = () => {
             {t('favoriteVisualsNote')}
           </blockquote>
 
-          <a
+          <CTAButton
             href="https://elite-kite-224.notion.site/Favorite-Visuals-2b233d06cce38096b428c41871d97102?pvs=73"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative flex items-center justify-center px-6 py-3 rounded-[100px] text-ink-muted hover:text-white cursor-pointer transition-[color] duration-300 whitespace-nowrap overflow-hidden group w-full md:w-auto md:self-start"
-            style={{
-              background:
-                'radial-gradient(75% 150% at 100% 114.2%, rgba(210, 210, 215, 0.4) 0%, rgba(180, 180, 185, 0.4) 100%)',
-              backdropFilter: 'blur(8px)',
-            }}
+            external
+            className="w-full md:w-auto md:self-start"
           >
-            {/* Hover background overlay */}
-            <span
-              className="absolute inset-0 rounded-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-              style={{
-                background:
-                  'radial-gradient(75% 150% at 100% 114.2%, rgba(210, 210, 215, 0.8) 0%, rgba(180, 180, 185, 0.8) 100%)',
-                backdropFilter: 'blur(8px)',
-              }}
-            />
-            <span className="relative z-10 text-body-lg font-semibold">{tCommon('goToPage')}</span>
-          </a>
+            {tCommon('goToPage')}
+          </CTAButton>
         </div>
       </div>
     </section>

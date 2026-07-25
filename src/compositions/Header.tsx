@@ -128,16 +128,17 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
-            {/* Single active-indicator dot that glides between items with inertia */}
+            {/* Single active-indicator dot that glides between items (green core + halo) */}
             <span
               aria-hidden
-              className="pointer-events-none absolute top-full w-2 h-2 rounded-full bg-accent"
+              className="pointer-events-none absolute top-full w-2 h-2 rounded-full bg-[var(--accent-dot)]"
               style={{
                 left: dotLeft,
                 transform: 'translateX(-50%)',
                 opacity: dotVisible ? 1 : 0,
+                boxShadow: '0 0 0 4px var(--accent-dot-halo)',
                 transition:
-                  'left 0.55s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease',
+                  'left 0.65s var(--ease-emphasized), opacity 0.3s ease',
               }}
             />
           </nav>

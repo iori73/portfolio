@@ -98,8 +98,8 @@ export default function FilterBar({
 
       {/* ── Mobile horizontal bar ── */}
       <div className="md:hidden sticky top-[var(--site-header-height)] z-20 bg-surface border-b border-line-subtle py-3 -mx-6 px-6">
-        <div className="flex items-center gap-2 mb-2">
-          <div className="flex flex-wrap gap-1.5 flex-1">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="flex flex-nowrap gap-1.5 overflow-x-auto scrollbar-hide flex-1 min-w-0">
             <button
               onClick={() => { onTagChange(null); onClusterChange(null); }}
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-body font-space-grotesk transition-colors shrink-0 ${
@@ -135,13 +135,13 @@ export default function FilterBar({
           </div>
         </div>
         <Select value={activePodcast || '__all__'} onValueChange={(v) => onPodcastChange(v === '__all__' ? null : v)}>
-          <SelectTrigger className="h-auto px-3 py-1.5 rounded-lg text-body font-space-grotesk bg-surface-muted text-ink-secondary border-none shadow-none focus:ring-0 focus:ring-offset-0 max-w-[200px]">
+          <SelectTrigger className="h-auto w-full px-3 py-1.5 rounded-lg text-body font-space-grotesk bg-surface-muted text-ink-secondary border-none shadow-none focus:ring-0 focus:ring-offset-0">
             <SelectValue placeholder="All Podcasts" />
           </SelectTrigger>
-          <SelectContent className="font-space-grotesk text-body border-line-subtle bg-surface shadow-sm">
-            <SelectItem value="__all__" className="text-ink-secondary focus:bg-surface-muted focus:text-ink">All Podcasts</SelectItem>
+          <SelectContent className="font-space-grotesk text-body border-line-subtle bg-surface shadow-sm max-w-[calc(100vw-2rem)]">
+            <SelectItem value="__all__" className="text-ink-secondary focus:bg-surface-muted focus:text-ink whitespace-normal">All Podcasts</SelectItem>
             {allPodcasts.map((pod) => (
-              <SelectItem key={pod} value={pod} className="text-ink-secondary focus:bg-surface-muted focus:text-ink">
+              <SelectItem key={pod} value={pod} className="text-ink-secondary focus:bg-surface-muted focus:text-ink whitespace-normal">
                 {pod}
               </SelectItem>
             ))}

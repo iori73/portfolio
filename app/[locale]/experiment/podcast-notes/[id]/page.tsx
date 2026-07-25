@@ -337,6 +337,7 @@ export default function EpisodeDetailPage() {
                 isHighlighted={false}
                 bodyFontClass={bodyFontClass}
                 headingFontClass={headingFontClass}
+                variant="teaser"
               />
             ))}
           </div>

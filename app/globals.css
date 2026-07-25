@@ -214,10 +214,10 @@ body {
     /* Interactive accent (Apple Blue) — links, active state */
     --accent-interactive: #007aff;
 
-    /* Focus ring — Apple system green (matches HIG "Purpose" target icon).
-       Two-tone: crisp inner ring + soft halo for a concentric/gradient feel. */
-    --focus-ring: #30d158;
-    --focus-ring-halo: rgba(48, 209, 88, 0.28);
+    /* Active-nav dot — Apple system green (matches HIG "Purpose" target icon).
+       Two-tone: crisp core + soft halo for a concentric/glow feel. */
+    --accent-dot: #30d158;
+    --accent-dot-halo: rgba(48, 209, 88, 0.28);
 
     /* Motion tokens — site-wide easing + duration scale */
     --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
@@ -297,20 +297,7 @@ body {
     @apply font-switzer font-medium;
   }
 
-  /* Global focus-visible ring — keyboard-only, Apple-green two-tone ring.
-     Solid outline (never clipped) + soft halo (gradient/concentric feel).
-     Applies to all focusable elements incl. custom role="link" cards. */
-  :focus-visible {
-    outline: 2px solid var(--focus-ring);
-    outline-offset: 2px;
-    box-shadow: 0 0 0 5px var(--focus-ring-halo);
-    border-radius: 4px;
-  }
-  /* Suppress the ring for pointer/mouse focus (browsers already scope
-     :focus-visible, but keep default outline off for :focus w/o -visible). */
-  :focus:not(:focus-visible) {
-    outline: none;
-  }
+  /* Focus indication uses the browser default (no custom ring). */
 
   /* Apply font families using CSS variables */
   .font-space-grotesk {
