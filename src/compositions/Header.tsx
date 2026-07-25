@@ -142,7 +142,7 @@ export default function Header() {
               </Link>
             ))}
             {/* Single active-indicator dot that glides between items.
-                Inner = 2-stop linear gradient (Apple-style) of the tab's color;
+                Solid tab color (matches podcast-notes category colors / constellation);
                 halo = a diluted tint of the same color. */}
             <span
               aria-hidden
@@ -151,9 +151,7 @@ export default function Header() {
                 left: dotLeft,
                 transform: 'translateX(-50%) translateY(4px)',
                 opacity: dotVisible ? 1 : 0,
-                background: dotColorVar
-                  ? `linear-gradient(155deg, color-mix(in srgb, ${dotColorVar} 66%, #fff), color-mix(in srgb, ${dotColorVar} 84%, #000))`
-                  : 'var(--accent-dot)',
+                background: dotColorVar || 'var(--accent-dot)',
                 boxShadow: dotColorVar
                   ? `0 0 0 2px color-mix(in srgb, ${dotColorVar} 28%, transparent)`
                   : '0 0 0 2px var(--accent-dot-halo)',
