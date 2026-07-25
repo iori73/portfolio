@@ -219,6 +219,13 @@ body {
     --accent-dot: #30d158;
     --accent-dot-halo: rgba(48, 209, 88, 0.28);
 
+    /* Per-tab dot core colors (experiment/podcast-notes category palette).
+       The dot fill is a 2-stop linear gradient of these; the halo is a diluted tint. */
+    --tab-experiment: #0984e3; /* 青 · science */
+    --tab-about: #fdcb6e;      /* 黄 · business */
+    --tab-cv: #e17055;         /* 赤 · startup&vc */
+    --tab-blog: #6c5ce7;       /* 紫 · technology・ai */
+
     /* Motion tokens — site-wide easing + duration scale */
     --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
     --duration-fast: 300ms;
