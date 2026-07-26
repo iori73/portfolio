@@ -327,3 +327,33 @@
   - Development カテゴリ全体を削除
   - Tools & Methods を差し替え → 「Figma Plugin Development, Claude Code, Cursor」
 - 反映先: About/CV 共に cvData.skills を参照するため1ファイルで両ページ更新。
+
+## Figma portfolio_v5 デザインシステム構築 — 2回連続でMCPツール未ロードによりブロック（2026-07-25）
+`/figma-use` `/figma-generate-library` はロード済み・スキル内容は読めるが、`use_figma`/`get_metadata`/`get_screenshot` 等の実行ツールが ToolSearch で見つからない。
+`ListMcpResourcesTool` では "claude.ai Figma" サーバーのリソース/スキルは見える → MCP自体は繋がっているが、アクションツールだけツールインデックスに反映されない状態。
+ローカル確認: `lsof -iTCP:3845` で Figma Dev Mode MCP サーバー（ポート3845）はプロセス生存確認済み → サーバー側は健全、クライアント（Claude Code）側のツール反映漏れと判断。
+前回セッションも同じ症状で、Claude Code 再起動で解消した実績あり → 今回もユーザーが再起動する方針で合意。
+再開用の引き継ぎ内容（ゴール・トークン値・五色ドラフト・進め方）は `/private/tmp/claude-501/-Users-iorikawano-Documents-portfolio/9c765118-dc38-43cf-8bc1-67046eb4d7ef/scratchpad/figma-handoff-prompt.md` に保存済み。次セッションでもこの引き継ぎプロンプトをそのまま使える。
+
+## Favorite Visuals セクションを非表示化（2026-07-26）
+- 背景: 「Favorite Visuals」（Notion の個人コレクション参照）はただの private collection であり、ポートフォリオとして見せるべきものではないとユーザー判断。ただしコードは削除せず温存の方針。
+- 対応: `app/[locale]/experiment/page.tsx` から `<FavoriteVisuals />` の呼び出しと `import FavoriteVisuals from './spline'` を削除。コンポーネント本体 `app/[locale]/experiment/spline.tsx` と翻訳キー（`favoriteVisuals*`, en/jp.json）はそのまま残置 — 将来復活させる場合は import + JSX 呼び出しの2行を戻すだけでよい。
+- 検証: 該当ファイル `tsc --noEmit` でエラーなし。
+
+## ナビ・ドットのカラー決定 + CTA/レイアウト微修正（2026-07-26）
+- **CTA 白文字バグ（根本）**: `cn()` の tailwind-merge がカスタム `text-body-lg` を文字色と誤認し `text-white` を落としていた → `src/lib/utils.ts` の twMerge にカスタム font-size トークンを登録して解消（全コンポーネントで再発防止）。
+- ドット微修正: halo を 4px→**2px**、`translateY(4px)` で少し下げる。ConceptC hero の card padding 縮小、詰まったサムネの箱を h240→300 に。
+- **ナビ・ドットの色**: 仏教の五色（青=禅定/黄=中心/赤=精進/紫=智）を意味の土台に、具体色は **experiment/podcast-notes のカテゴリーパレットで統一**（Experiment `#0984E3` / About `#FDCB6E` / CV `#E17055` / Blog `#6C5CE7`）。`globals.css` に `--tab-*` を定義、`Header.tsx` でアクティブタブの色を適用。
+  - 表現は「アウラ radial」→「Apple風リニアグラデ」を検討したが、**最終的に単色フラット**に決定（8pxでグラデは視認できず、podcast-notes/constellation の単色と一貫性を優先）。halo はタブ色を28%に薄めた soft tint。
+  - 相談用アーティファクト（五色×podcastパレット、light/dark）: https://claude.ai/code/artifact/b10f2a48-f4f2-4e5f-80a5-1369d7f145fb
+
+## タブ遷移が遅い問題の修正（2026-07-26）
+- 症状: 本番プレビューで別タブへの遷移が遅い（dev のコンパイル遅延ではなく本番の実問題）。
+- **主因**: next-intl の `setRequestLocale(locale)` 未呼び出しで、`getMessages()` がヘッダを読むため **全 `/[locale]` ページが動的レンダリング（ƒ）** に落ち、タブ毎にサーバー往復。prefetch も無効。
+- 修正: `app/[locale]/layout.tsx` に **`setRequestLocale(locale)`** を追加 → ビルドで全タブが**静的（●）**に復帰（prefetch有効・CDN配信で遷移がほぼ即時）。
+- 副次: `/about` の `d3`(~250KB) を `next/dynamic({ssr:false})` で遅延ロード → About First Load JS **151→126kB**。
+- ページ遷移アニメ（TransitionOverlay）は無関係と確認（誤検知除外）。コミット 267a6c4。
+- 未着手の余地: blog の外部 rss2json fetch のサーバー化（route handler + revalidate）。
+
+## Figma portfolio_v5 構築（保留中）
+- MCP 未ロードで2回ブロック → ユーザーが `.claude/settings.json` の deny から `mcp__*` を外し、`/mcp` で再接続。次セッション（Claude Code 再起動後）に着手予定。引き継ぎプロンプトは scratchpad に保存済み。

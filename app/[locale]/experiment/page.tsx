@@ -111,8 +111,6 @@ import React, { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
 
-import FavoriteVisuals from './spline';
-
 const ExperimentPage: React.FC = () => {
   const t = useTranslations('experiment');
   const tCommon = useTranslations('common');
@@ -300,8 +298,7 @@ const ExperimentPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Favorite Visuals */}
-      <FavoriteVisuals />
+      {/* Favorite Visuals: personal collection, intentionally hidden from the live site (code kept for potential reuse) */}
     </div>
   );
 };
