@@ -13,10 +13,30 @@
 
 const fs = require('fs');
 const path = require('path');
-const { resolveOfficialCovers } = require('./lib/itunes-cover');
+const { resolveOfficialCovers, CACHE_PATH } = require('./lib/itunes-cover');
 
 const DATA_PATH = path.join(__dirname, '..', 'public', 'data', 'podcast-notes.json');
 const REFRESH = process.argv.includes('--refresh');
+
+// A show whose episodes overwhelmingly share one Spotify cover → that cover IS the
+// show's official art (from the exact podcast the notes came from). Prefer it over
+// the iTunes guess, which can match a different same-named show (e.g. "Today I learned").
+const MODE_SHARE_THRESHOLD = 0.7;
+
+function dominantSpotifyCover(episodes, podcastName) {
+  const counts = new Map();
+  let total = 0;
+  for (const e of episodes) {
+    if (e.podcast !== podcastName || !e.podcastCover) continue;
+    counts.set(e.podcastCover, (counts.get(e.podcastCover) || 0) + 1);
+    total++;
+  }
+  if (!total) return null;
+  let best = null;
+  let bestN = 0;
+  for (const [cover, n] of counts) if (n > bestN) [best, bestN] = [cover, n];
+  return bestN / total >= MODE_SHARE_THRESHOLD ? best : null;
+}
 
 (async () => {
   const data = JSON.parse(fs.readFileSync(DATA_PATH, 'utf8'));
@@ -39,6 +59,20 @@ const REFRESH = process.argv.includes('--refresh');
   console.log(`Resolving official covers for ${data.podcasts.length} podcasts${REFRESH ? ' (refresh)' : ''}...`);
   const { cache, report } = await resolveOfficialCovers(data.podcasts, { refresh: REFRESH });
 
+  // Post-step: prefer a show's dominant Spotify cover over iTunes when it exists.
+  // This is authoritative (the exact show) and immune to same-name iTunes mismatches.
+  // Applied AFTER iTunes so it wins even on --refresh; persisted to the cache too.
+  let spotifyPreferred = 0;
+  for (const pod of data.podcasts) {
+    const dom = dominantSpotifyCover(data.episodes || [], pod.name);
+    if (dom) {
+      pod.cover = dom;
+      cache[pod.name] = dom;
+      spotifyPreferred++;
+    }
+  }
+  fs.writeFileSync(CACHE_PATH, JSON.stringify(cache, null, 2) + '\n');
+
   // Audit print: show each newly-queried name → matched show title (or MISS).
   if (report.length) {
     console.log('\n--- match report (query → matched iTunes title) ---');
@@ -49,6 +83,9 @@ const REFRESH = process.argv.includes('--refresh');
 
   // Match the generate script's exact format (2-space, no trailing newline).
   fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2));
-  const resolved = data.podcasts.filter((p) => cache[p.name]).length;
-  console.log(`\nDone. ${resolved}/${data.podcasts.length} podcasts now use official covers.`);
+  const withCover = data.podcasts.filter((p) => p.cover).length;
+  console.log(
+    `\nDone. ${withCover}/${data.podcasts.length} podcasts have a cover ` +
+      `(${spotifyPreferred} from dominant Spotify show art, rest iTunes/fallback).`,
+  );
 })();

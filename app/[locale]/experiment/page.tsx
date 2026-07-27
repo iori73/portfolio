@@ -106,11 +106,10 @@
 'use client';
 import { MoveUpRight } from 'lucide-react';
 import NextLink from 'next/link';
+import { CTAButton } from '@/components/ui/cta-button';
 import React, { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
-
-import FavoriteVisuals from './spline';
 
 const ExperimentPage: React.FC = () => {
   const t = useTranslations('experiment');
@@ -292,31 +291,14 @@ const ExperimentPage: React.FC = () => {
               )}
             </div>
 
-            <NextLink
-              href={`/${locale}/experiment/podcast-notes`}
-              className="relative flex items-center justify-center px-6 py-3 rounded-[100px] text-ink-muted hover:text-white cursor-pointer transition-[color] duration-300 whitespace-nowrap overflow-hidden group w-full md:w-auto"
-              style={{
-                background:
-                  'radial-gradient(75% 150% at 100% 114.2%, rgba(210, 210, 215, 0.4) 0%, rgba(180, 180, 185, 0.4) 100%)',
-                backdropFilter: 'blur(8px)',
-              }}
-            >
-              <span
-                className="absolute inset-0 rounded-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                style={{
-                  background:
-                    'radial-gradient(75% 150% at 100% 114.2%, rgba(210, 210, 215, 0.8) 0%, rgba(180, 180, 185, 0.8) 100%)',
-                  backdropFilter: 'blur(8px)',
-                }}
-              />
-              <span className="relative z-10 text-body-lg font-medium">{tCommon('goToPage')}</span>
-            </NextLink>
+            <CTAButton href={`/${locale}/experiment/podcast-notes`} className="w-full md:w-auto">
+              {tCommon('goToPage')}
+            </CTAButton>
           </div>
         </div>
       </div>
 
-      {/* Favorite Visuals */}
-      <FavoriteVisuals />
+      {/* Favorite Visuals: personal collection, intentionally hidden from the live site (code kept for potential reuse) */}
     </div>
   );
 };

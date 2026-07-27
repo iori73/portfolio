@@ -1,8 +1,15 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
-import InterestsVisualization from './InterestsVisualization';
+import dynamic from 'next/dynamic';
 import { useTranslations, useLocale } from 'next-intl';
+
+// Lazy-load the D3 interests viz so the ~250KB d3 bundle no longer inflates the
+// About route JS — it loads as a separate chunk after the page shell renders.
+const InterestsVisualization = dynamic(() => import('./InterestsVisualization'), {
+  ssr: false,
+  loading: () => <div className="w-4/5 mx-auto aspect-square" aria-hidden />,
+});
 import { useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
 import { cvData } from '@/src/data/cvData';
 

@@ -5,7 +5,7 @@ import { MenuProvider } from '@/src/contexts/MenuContext';
 import { TransitionProvider } from '@/src/contexts/TransitionContext';
 import TransitionOverlay from '@/src/components/TransitionOverlay';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 
@@ -25,6 +25,11 @@ export default async function LocaleLayout({
   if (!routing.locales.includes(locale as any)) {
     notFound();
   }
+
+  // Enable static rendering for this locale segment (next-intl). Without this,
+  // getMessages() reads request headers and forces every route to render
+  // dynamically — which makes each tab click a server round-trip.
+  setRequestLocale(locale);
 
   const messages = await getMessages();
 

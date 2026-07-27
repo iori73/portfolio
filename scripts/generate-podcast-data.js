@@ -525,6 +525,24 @@ async function main() {
   // 7b. Replace per-episode artwork with official show covers (iTunes, cached).
   await resolveOfficialCovers(podcasts);
 
+  // 7c. Prefer a show's dominant Spotify cover (>=70% of its episodes) over iTunes.
+  // It is the exact show's art, immune to same-name iTunes mismatches (e.g. "Today I learned").
+  const MODE_SHARE_THRESHOLD = 0.7;
+  for (const pod of podcasts) {
+    const counts = new Map();
+    let total = 0;
+    for (const e of episodes) {
+      if (e.podcast !== pod.name || !e.podcastCover) continue;
+      counts.set(e.podcastCover, (counts.get(e.podcastCover) || 0) + 1);
+      total++;
+    }
+    if (!total) continue;
+    let best = null;
+    let bestN = 0;
+    for (const [cover, n] of counts) if (n > bestN) [best, bestN] = [cover, n];
+    if (bestN / total >= MODE_SHARE_THRESHOLD) pod.cover = best;
+  }
+
   // 8. Build tag distribution
   const tagDistribution = {};
   for (const ep of episodes) {

@@ -79,6 +79,19 @@ export default function Header() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
+  // Active tab's dot color (per-tab, from the podcast/五色 palette). The inner dot
+  // is a 2-stop linear gradient of this core; the halo is a diluted tint of it.
+  const dotColorVar = (() => {
+    const map: Record<string, string> = {
+      '/experiment': '--tab-experiment',
+      '/about': '--tab-about',
+      '/cv': '--tab-cv',
+      '/blog': '--tab-blog',
+    };
+    const active = menuItems.find((item) => isActive(item.path));
+    return active && map[active.path] ? `var(${map[active.path]})` : null;
+  })();
+
   return (
     <header className="fixed top-0 left-0 z-40 mx-auto flex h-[var(--site-header-height)] w-full items-center justify-between px-4 py-3 md:px-6 box-border">
       {/* Background gradient */}
@@ -128,16 +141,22 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
-            {/* Single active-indicator dot that glides between items with inertia */}
+            {/* Single active-indicator dot that glides between items.
+                Solid tab color (matches podcast-notes category colors / constellation);
+                halo = a diluted tint of the same color. */}
             <span
               aria-hidden
-              className="pointer-events-none absolute top-full w-2 h-2 rounded-full bg-accent"
+              className="pointer-events-none absolute top-full w-2 h-2 rounded-full"
               style={{
                 left: dotLeft,
-                transform: 'translateX(-50%)',
+                transform: 'translateX(-50%) translateY(4px)',
                 opacity: dotVisible ? 1 : 0,
+                background: dotColorVar || 'var(--accent-dot)',
+                boxShadow: dotColorVar
+                  ? `0 0 0 2px color-mix(in srgb, ${dotColorVar} 28%, transparent)`
+                  : '0 0 0 2px var(--accent-dot-halo)',
                 transition:
-                  'left 0.55s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease',
+                  'left 0.65s var(--ease-emphasized), opacity 0.3s ease',
               }}
             />
           </nav>

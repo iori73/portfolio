@@ -5,6 +5,7 @@ import TechnicalTooltip from '@/components/TechnicalTooltip';
 import AnnotatedSystemDiagram from '@/components/AnnotatedSystemDiagram';
 import InteractiveChart from '@/components/InteractiveChart';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { CTAButton } from '@/components/ui/cta-button';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { useTranslations, useLocale } from 'next-intl';
 import { useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
@@ -137,28 +138,9 @@ const GymDashboardPage: React.FC = () => {
               </div>
               {/* Right side: Button */}
               <div className="flex-shrink-0 w-full md:w-auto">
-                <a
-                  href="https://crowd-data-dashboard-v2.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative flex items-center justify-center px-6 py-3 rounded-[100px] text-ink-muted hover:text-white cursor-pointer transition-[color] duration-300 whitespace-nowrap overflow-hidden group w-full md:w-auto"
-                  style={{
-                    background:
-                      'radial-gradient(75% 150% at 100% 114.2%, rgba(210, 210, 215, 0.4) 0%, rgba(180, 180, 185, 0.4) 100%)',
-                    backdropFilter: 'blur(8px)',
-                  }}
-                >
-                  {/* Hover background overlay */}
-                  <span
-                    className="absolute inset-0 rounded-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                    style={{
-                      background:
-                        'radial-gradient(75% 150% at 100% 114.2%, rgba(210, 210, 215, 0.8) 0%, rgba(180, 180, 185, 0.8) 100%)',
-                      backdropFilter: 'blur(8px)',
-                    }}
-                  />
-                  <span className="relative z-10 text-body-lg font-medium">{t('common.goToSite')}</span>
-                </a>
+                <CTAButton href="https://crowd-data-dashboard-v2.vercel.app/" external className="w-full md:w-auto">
+                  {t('common.goToSite')}
+                </CTAButton>
               </div>
             </div>
           </div>

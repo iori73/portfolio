@@ -19,16 +19,20 @@ interface Props {
   isHighlighted: boolean;
   bodyFontClass: string;
   headingFontClass: string;
+  /** 'teaser' trims the expanded body for compact contexts (e.g. Related Episodes). */
+  variant?: 'default' | 'teaser';
 }
 
-export default function NoteCard({ episode, isHighlighted, bodyFontClass, headingFontClass }: Props) {
+export default function NoteCard({ episode, isHighlighted, bodyFontClass, headingFontClass, variant = 'default' }: Props) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [showChapters, setShowChapters] = useState(false);
   const color = CATEGORY_COLORS[episode.category || 'Others'] || DEFAULT_CATEGORY_COLOR;
   const locale = useLocale();
   const t = useTranslations('podcastNotesPage');
 
+  const isTeaser = variant === 'teaser';
   const chapters = episode.chapters || [];
+  const keyLearnings = isTeaser ? episode.keyLearnings.slice(0, 3) : episode.keyLearnings;
 
   return (
     <div
@@ -134,19 +138,19 @@ export default function NoteCard({ episode, isHighlighted, bodyFontClass, headin
 
           {/* Summary */}
           {episode.summary && (
-            <p className={`text-body-lg text-ink-secondary mb-4 leading-relaxed ${bodyFontClass}`}>
+            <p className={`text-body-lg text-ink-secondary mb-4 leading-relaxed ${isTeaser ? 'line-clamp-3' : ''} ${bodyFontClass}`}>
               {episode.summary}
             </p>
           )}
 
           {/* Key learnings */}
-          {episode.keyLearnings.length > 0 && (
+          {keyLearnings.length > 0 && (
             <div className="mb-4">
               <h5 className="font-space-grotesk text-label text-ink-tertiary font-semibold mb-2 uppercase tracking-wider">
                 Key Learnings
               </h5>
               <ul className="space-y-1.5">
-                {episode.keyLearnings.map((learning, i) => (
+                {keyLearnings.map((learning, i) => (
                   <li
                     key={i}
                     className={`text-body text-ink-secondary pl-4 relative ${bodyFontClass}`}
@@ -162,8 +166,8 @@ export default function NoteCard({ episode, isHighlighted, bodyFontClass, headin
             </div>
           )}
 
-          {/* Chapters */}
-          {chapters.length > 0 && (
+          {/* Chapters (hidden in teaser) */}
+          {!isTeaser && chapters.length > 0 && (
             <div className="mb-4">
               <button
                 onClick={(e) => {
@@ -212,7 +216,7 @@ export default function NoteCard({ episode, isHighlighted, bodyFontClass, headin
               <ArrowRight className="w-3.5 h-3.5" />
               {t('viewFullEpisode')}
             </Link>
-            {episode.url && (
+            {!isTeaser && episode.url && (
               <a
                 href={episode.url}
                 target="_blank"

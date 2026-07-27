@@ -180,7 +180,7 @@ const SCATTER_CARDS = [
     alt: 'Bulk Screenshot Importer',
     rotate: -11,
     tx: -50,
-    ty: 18,
+    ty: 10,
     z: 1,
   },
   {
@@ -188,7 +188,7 @@ const SCATTER_CARDS = [
     alt: 'Perfect Markdown',
     rotate: 7,
     tx: 48,
-    ty: 22,
+    ty: 12,
     z: 2,
   },
   {
@@ -203,7 +203,7 @@ const SCATTER_CARDS = [
 
 function ThumbnailScatter() {
   return (
-    <div className="relative w-[260px] h-[200px] flex-shrink-0 hidden md:block">
+    <div className="relative w-[300px] h-[300px] flex-shrink-0 mx-auto md:mx-0">
       {SCATTER_CARDS.map((card) => (
         <div
           key={card.alt}
@@ -250,10 +250,10 @@ export default function ConceptC() {
   return (
     <section>
       {/* Hero area */}
-      <div className="relative rounded-2xl overflow-hidden px-8 py-16 md:px-16 md:py-24 bg-surface-muted">
+      <div className="relative rounded-2xl overflow-hidden px-6 py-10 md:px-12 md:py-14 bg-surface-muted">
         {SHOW_HERO_GRAPHIC && <HeroGraphicSVG />}
 
-        <div className="relative z-10 flex items-center justify-between gap-8">
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-10 md:gap-8">
           <div className="max-w-xl">
             <p className="font-space-grotesk text-label tracking-wider uppercase text-[#A259FF]">
               {t('heroTagline')}

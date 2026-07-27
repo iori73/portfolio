@@ -305,9 +305,55 @@
 - [x] コントラスト修正: タグ等の `--ink-tertiary` #71717a on surface-muted(#f5f5f7)=4.43 < 4.5(WCAG AA)。**#6b6b73 に微修正**（4.85/surface 5.12）→ 全 tertiary テキストで AA クリア。再実測で **accessibility = 100 / 失格0**。
 - 注: ローカル検証サーバー :3100/:3101（background bmbnopj6v/bvs8d9mvw）は停止して良い。
 
+### 6巡目: 目視フィードバック13件（2026-07-25）
+ポートフォリオ側 A〜F（PR #33、プレビュー確認後マージ予定）:
+- A モーション/フォーカス: nav ドットの overshoot 除去・0.55→0.65s・Apple green#30d158+halo に（緑2トーンを focus リング→ドットへ移設）。focus-visible のカスタムを全廃しブラウザ標準に。
+- B CTA: 共通 `<CTAButton>`（ink 塗り+白文字 pill、控えめ hover）で 6箇所のグレー glass を置換。
+- C Podcast SP: カテゴリチップを1行横スクロール、番組 select を下段フル幅に＋ドロップダウンの画面外はみ出し修正（ui/select.tsx に available-width クランプ）、Related は `variant="teaser"`（要約 clamp / KL 上位3 / Chapters 非表示 / アクション1）。
+- D カバー: 番組の Spotify 支配的カバーを iTunes より優先（同名誤マッチ "Today I learned" 解消）。backfill + generate 両方に。73/83 が Spotify 権威カバー。
+- E 余白: figma-plugins の二重 px-6 + 1028px キャップ撤去 → home と同幅。
+- F サムネ: figma-plugins 詳細 hero の詰まった scatter を拡大+SP表示。
+- 検証: full build 成功、tsc 新規エラーなし、全ページ 200。
+
+**G Chapters（別リポ podcast-notes-automation + Notion、完了）**:
+- 原因: Gemini チャプター失敗時に文字起こし先頭50字をタイトルにする黙フォールバック + batch が timestamps を verbatim 再利用。
+- 修正: フォールバックを中立プレースホルダに / batch に `regenerate_chapter_titles()` + `--chapters-only` モード（Summary/Takeaways/Category 保持、API 最小=無料枠優先）。コミット 311a627 → origin/main push 済み。
+- バックフィル: 全 Notion エピソードに `--chapters-only` 実行、**107件のチャプターを断片→適切なタイトルに修正**（残りは元々チャプター無し。各ページ backup 保存、Gemini 無料枠4モデルローテ）。
+- **本番反映**: 詳細ページは `/api/podcast-notes/[id]` が Notion をライブ parse → 既に修正済みチャプターを表示（regen 不要）。静的 JSON フォールバックは次回週次 CI で自動更新。
+
 ## 2026-07-22 About/CV スキルセクション整理
 - [x] `src/data/cvData.ts` skills を精査・削除（本人skillでない/些細な項目）:
   - Design: Figma / User Research / Information Architecture / Interaction Design / Material Design 3 を削除 → 残り「Design Systems, UI/UX Design」
   - Development カテゴリ全体を削除
   - Tools & Methods を差し替え → 「Figma Plugin Development, Claude Code, Cursor」
 - 反映先: About/CV 共に cvData.skills を参照するため1ファイルで両ページ更新。
+
+## Figma portfolio_v5 デザインシステム構築 — 2回連続でMCPツール未ロードによりブロック（2026-07-25）
+`/figma-use` `/figma-generate-library` はロード済み・スキル内容は読めるが、`use_figma`/`get_metadata`/`get_screenshot` 等の実行ツールが ToolSearch で見つからない。
+`ListMcpResourcesTool` では "claude.ai Figma" サーバーのリソース/スキルは見える → MCP自体は繋がっているが、アクションツールだけツールインデックスに反映されない状態。
+ローカル確認: `lsof -iTCP:3845` で Figma Dev Mode MCP サーバー（ポート3845）はプロセス生存確認済み → サーバー側は健全、クライアント（Claude Code）側のツール反映漏れと判断。
+前回セッションも同じ症状で、Claude Code 再起動で解消した実績あり → 今回もユーザーが再起動する方針で合意。
+再開用の引き継ぎ内容（ゴール・トークン値・五色ドラフト・進め方）は `/private/tmp/claude-501/-Users-iorikawano-Documents-portfolio/9c765118-dc38-43cf-8bc1-67046eb4d7ef/scratchpad/figma-handoff-prompt.md` に保存済み。次セッションでもこの引き継ぎプロンプトをそのまま使える。
+
+## Favorite Visuals セクションを非表示化（2026-07-26）
+- 背景: 「Favorite Visuals」（Notion の個人コレクション参照）はただの private collection であり、ポートフォリオとして見せるべきものではないとユーザー判断。ただしコードは削除せず温存の方針。
+- 対応: `app/[locale]/experiment/page.tsx` から `<FavoriteVisuals />` の呼び出しと `import FavoriteVisuals from './spline'` を削除。コンポーネント本体 `app/[locale]/experiment/spline.tsx` と翻訳キー（`favoriteVisuals*`, en/jp.json）はそのまま残置 — 将来復活させる場合は import + JSX 呼び出しの2行を戻すだけでよい。
+- 検証: 該当ファイル `tsc --noEmit` でエラーなし。
+
+## ナビ・ドットのカラー決定 + CTA/レイアウト微修正（2026-07-26）
+- **CTA 白文字バグ（根本）**: `cn()` の tailwind-merge がカスタム `text-body-lg` を文字色と誤認し `text-white` を落としていた → `src/lib/utils.ts` の twMerge にカスタム font-size トークンを登録して解消（全コンポーネントで再発防止）。
+- ドット微修正: halo を 4px→**2px**、`translateY(4px)` で少し下げる。ConceptC hero の card padding 縮小、詰まったサムネの箱を h240→300 に。
+- **ナビ・ドットの色**: 仏教の五色（青=禅定/黄=中心/赤=精進/紫=智）を意味の土台に、具体色は **experiment/podcast-notes のカテゴリーパレットで統一**（Experiment `#0984E3` / About `#FDCB6E` / CV `#E17055` / Blog `#6C5CE7`）。`globals.css` に `--tab-*` を定義、`Header.tsx` でアクティブタブの色を適用。
+  - 表現は「アウラ radial」→「Apple風リニアグラデ」を検討したが、**最終的に単色フラット**に決定（8pxでグラデは視認できず、podcast-notes/constellation の単色と一貫性を優先）。halo はタブ色を28%に薄めた soft tint。
+  - 相談用アーティファクト（五色×podcastパレット、light/dark）: https://claude.ai/code/artifact/b10f2a48-f4f2-4e5f-80a5-1369d7f145fb
+
+## タブ遷移が遅い問題の修正（2026-07-26）
+- 症状: 本番プレビューで別タブへの遷移が遅い（dev のコンパイル遅延ではなく本番の実問題）。
+- **主因**: next-intl の `setRequestLocale(locale)` 未呼び出しで、`getMessages()` がヘッダを読むため **全 `/[locale]` ページが動的レンダリング（ƒ）** に落ち、タブ毎にサーバー往復。prefetch も無効。
+- 修正: `app/[locale]/layout.tsx` に **`setRequestLocale(locale)`** を追加 → ビルドで全タブが**静的（●）**に復帰（prefetch有効・CDN配信で遷移がほぼ即時）。
+- 副次: `/about` の `d3`(~250KB) を `next/dynamic({ssr:false})` で遅延ロード → About First Load JS **151→126kB**。
+- ページ遷移アニメ（TransitionOverlay）は無関係と確認（誤検知除外）。コミット 267a6c4。
+- 未着手の余地: blog の外部 rss2json fetch のサーバー化（route handler + revalidate）。
+
+## Figma portfolio_v5 構築（保留中）
+- MCP 未ロードで2回ブロック → ユーザーが `.claude/settings.json` の deny から `mcp__*` を外し、`/mcp` で再接続。次セッション（Claude Code 再起動後）に着手予定。引き継ぎプロンプトは scratchpad に保存済み。

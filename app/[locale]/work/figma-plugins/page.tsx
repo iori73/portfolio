@@ -18,10 +18,10 @@ export default function FigmaPluginsPage() {
 
   return (
     <div className={`my-24 md:mt-28 md:mb-16 ${getBodyFontClass()}`}>
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="w-full">
 
         {/* Project Header */}
-        <div className="max-w-[1028px] mx-auto mb-12">
+        <div className="mb-12">
           <span className="font-space-grotesk text-label text-ink-tertiary">
             Work
           </span>
@@ -34,7 +34,7 @@ export default function FigmaPluginsPage() {
         </div>
 
         {/* Overview */}
-        <section className="max-w-[1028px] mx-auto mb-16">
+        <section className="mb-16">
           <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
             {tWork('overview')}
           </h2>
