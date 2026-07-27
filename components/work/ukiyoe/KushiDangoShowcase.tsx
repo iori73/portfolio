@@ -198,7 +198,7 @@ export default function KushiDangoShowcase({ locale }: { locale: string }) {
           {/* Left: Timeline screenshot */}
           <div className="relative w-[52%] h-full overflow-hidden">
             <img
-              src="/work/ukiyoe/timeline-showcase-bg.png"
+              src="/work/ukiyoe/timeline-showcase-bg.webp"
               alt=""
               className="absolute inset-0 w-full h-full object-cover"
             />
@@ -206,7 +206,7 @@ export default function KushiDangoShowcase({ locale }: { locale: string }) {
           {/* Right: Dango photo */}
           <div className="relative flex-1 h-full overflow-hidden">
             <img
-              src="/work/ukiyoe/dango-photo.png"
+              src="/work/ukiyoe/dango-photo.webp"
               alt="Kushi-dango — three-color mochi"
               className="absolute inset-0 w-full h-full object-cover"
             />

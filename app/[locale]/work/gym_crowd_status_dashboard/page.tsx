@@ -528,7 +528,7 @@ const GymDashboardPage: React.FC = () => {
                       <div className="flex flex-col">
                         <div className="bg-surface-muted rounded-t-[8px] p-6">
                           <img
-                            src="/figma-reference/AppleShortcut_Automation_Before.png"
+                            src="/figma-reference/AppleShortcut_Automation_Before.webp"
                             alt={t('common.before')}
                             className="w-full h-auto"
                           />
@@ -550,7 +550,7 @@ const GymDashboardPage: React.FC = () => {
                       <div className="flex flex-col">
                         <div className="bg-surface-muted rounded-t-[8px] p-6">
                           <img
-                            src="/figma-reference/AppleShortcut_Automation_After.png"
+                            src="/figma-reference/AppleShortcut_Automation_After.webp"
                             alt={t('common.after')}
                             className="w-full h-auto"
                           />

@@ -109,7 +109,7 @@ const AirlineDesignSystemPage: React.FC = () => {
           <div className="w-full aspect-[8/5] bg-[#0a1628] overflow-hidden relative">
             <Image
               key={language}
-              src="/work/airline-design-system/system-structure.png"
+              src="/work/airline-design-system/system-structure.webp"
               alt="Airline Design System Architecture"
               fill
               sizes="(min-width: 768px) 1280px, 100vw"
@@ -219,7 +219,7 @@ const AirlineDesignSystemPage: React.FC = () => {
 
               <figure>
                 <Image
-                  src="/work/airline-design-system/roadmap.png"
+                  src="/work/airline-design-system/roadmap.webp"
                   alt="Project roadmap showing 4 phases from December 2024 to March 2026"
                   width={1200}
                   height={675}
@@ -253,10 +253,10 @@ const AirlineDesignSystemPage: React.FC = () => {
                 </p>
                 <figure>
                   <div className="grid grid-cols-2 gap-4">
-                    <ClampedImage src="/work/airline-design-system/competitive-1.png" alt="Competitive analysis - Airline 1" />
-                    <ClampedImage src="/work/airline-design-system/competitive-2.png" alt="Competitive analysis - Airline 2" />
-                    <ClampedImage src="/work/airline-design-system/competitive-3.png" alt="Competitive analysis - Airline 3" />
-                    <ClampedImage src="/work/airline-design-system/competitive-4.png" alt="Competitive analysis - Airline 4" />
+                    <ClampedImage src="/work/airline-design-system/competitive-1.webp" alt="Competitive analysis - Airline 1" />
+                    <ClampedImage src="/work/airline-design-system/competitive-2.webp" alt="Competitive analysis - Airline 2" />
+                    <ClampedImage src="/work/airline-design-system/competitive-3.webp" alt="Competitive analysis - Airline 3" />
+                    <ClampedImage src="/work/airline-design-system/competitive-4.webp" alt="Competitive analysis - Airline 4" />
                   </div>
                   <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
                     {t('airlineDesignSystem.captionCompetitive')}
@@ -284,7 +284,7 @@ const AirlineDesignSystemPage: React.FC = () => {
                 </p>
                 <figure>
                   <ClampedImage
-                    src="/work/airline-design-system/token-architecture.png"
+                    src="/work/airline-design-system/token-architecture.webp"
                     alt="Two-layer token architecture: Primitive and Semantic layers"
                     heightClass="h-[420px] md:h-[560px]"
                   />

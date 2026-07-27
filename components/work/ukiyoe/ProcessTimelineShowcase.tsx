@@ -48,7 +48,7 @@ export default function ProcessTimelineShowcase() {
   return (
     <div>
       <Image
-        src="/work/ukiyoe/process-timeline/process-timeline-top.png"
+        src="/work/ukiyoe/process-timeline/process-timeline-top.webp"
         alt="Isometric view of the timeline page with stacked period cards"
         width={1200}
         height={675}
@@ -88,7 +88,7 @@ export default function ProcessTimelineShowcase() {
       </div>
 
       <Image
-        src="/work/ukiyoe/process-timeline/process-timeline-bottom.png"
+        src="/work/ukiyoe/process-timeline/process-timeline-bottom.webp"
         alt="Gallery view of the timeline page with artworks organized by period"
         width={1200}
         height={675}

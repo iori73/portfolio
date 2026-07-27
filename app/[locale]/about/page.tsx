@@ -41,7 +41,7 @@ const AboutPage: React.FC = () => {
           {/* Circle avatar */}
           <div className="shrink-0">
             <Image
-              src="/about/my_image.png"
+              src="/about/my_image.webp"
               alt="Iori Kawano"
               width={160}
               height={160}

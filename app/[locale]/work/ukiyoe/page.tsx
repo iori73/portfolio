@@ -89,7 +89,7 @@ const UkiyoePage: React.FC = () => {
           <div className="w-full aspect-[8/5] bg-[#F8F5F0] overflow-hidden relative">
             <Image
               key={language}
-              src={language === 'jp' ? '/work/ukiyoe/thumbnail-jp.png' : '/work/ukiyoe/thumbnail-en.png'}
+              src={language === 'jp' ? '/work/ukiyoe/thumbnail-jp.webp' : '/work/ukiyoe/thumbnail-en.webp'}
               alt="Ukiyoe - Layer by Layer"
               fill
               sizes="(min-width: 768px) 1280px, 100vw"
@@ -226,7 +226,7 @@ const UkiyoePage: React.FC = () => {
                 </p>
                 <figure>
                   <Image
-                    src="/work/ukiyoe/research-site.png"
+                    src="/work/ukiyoe/research-site.webp"
                     alt="Cultural research across 25+ reference sites"
                     width={1200}
                     height={675}
@@ -316,7 +316,7 @@ const UkiyoePage: React.FC = () => {
                 </div>
                 <figure>
                   <Image
-                    src="/work/ukiyoe/process-timeline.png"
+                    src="/work/ukiyoe/process-timeline.webp"
                     alt="Timeline page — architecture shift to vertical scroll"
                     width={1200}
                     height={675}
@@ -377,7 +377,7 @@ const UkiyoePage: React.FC = () => {
                 </p>
                 <figure>
                   <Image
-                    src="/work/ukiyoe/process-logo.png"
+                    src="/work/ukiyoe/process-logo.webp"
                     alt="Logo design — a seal mark built on bold cropping and off-center placement"
                     width={1200}
                     height={675}

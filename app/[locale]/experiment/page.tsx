@@ -91,7 +91,7 @@
 //           <div className="absolute inset-0 bg-gray-100 rounded-[40px] -z-10"></div>
 //           <div className="relative pt-0 md:pt-8">
 //             <img
-//               src="/work/2_day_internship/2_day_internship-image.png"
+//               src="/work/2_day_internship/2_day_internship-image.webp"
 //               alt="Project overview diagram"
 //               className="w-full max-w-lg mx-auto"
 //             />

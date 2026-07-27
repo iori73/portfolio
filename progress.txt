@@ -373,3 +373,11 @@
 - [x] **google-ux 画像を WebP 化**（sharp q82/max1600px）: **68.0MB→4.1MB（−94%）**。`<img>`37参照を .png→.webp に更新。元 PNG 42枚（68MB）削除。
 - [x] **フォント weight 9→4**（Noto Sans JP: 300/400/500/600 のみ）。※next/font 再取得で初回ビルドが9分（Vercelは初回のみ・以降キャッシュ）。ビルド成功・全ページ静的(●)維持。
 - 未実行（推奨・次段階）: 他の生`<img>`大画像も WebP+リサイズ横展開 / `unoptimized:true` 再検討 / デッドSVG削除（thumbnail_gym・gcsd_thumbnail 各25MB, 0参照, 権限ゲートのため要 `!`）/ `pnpm add -D @figma/code-connect`（本番依存ツリーから除外）/ Blog 外部fetch の ISR サーバー化。
+
+## Figma portfolio_v5 に実画像を反映（2026-07-27）
+- Phase 3で使っていたグレープレースホルダーのうち、静止画像ファイルが実在する2箇所を実画像に差し替え（デスクトップ・モバイル両方）:
+  - Ukiyoeサムネイル（`public/work/ukiyoe/thumbnail-en.png`）→ Home の該当Project Card instanceを detachInstance() してから upload_assets
+  - Aboutアバター（`public/about/my_image.png`）→ 円形フレームに直接アップロード
+- Figma PluginsサムネイルとAboutのD3可視化（Interests）はどちらも静的ファイルが存在しない動的Reactコンポーネントのため、プレースホルダーのまま据え置き（実装するにはブラウザ自動化での実サイトスクリーンショット取得が別途必要）。
+- **判明した制約**: `upload_assets` の `nodeId` は instance内部の子ノードID（`I<instanceId>;<originalId>` 形式）を受け付けない（`\d+:\d+` の正規表現のみ許可）。instance内の特定ノードに画像を入れる場合は、対象instanceを `detachInstance()` してから通常ノードIDでアップロードする必要がある（コンポーネントとのリンクは切れるが、ページ上の最終コンテンツ確定としては許容範囲）。
+- **判明した制約2**: `.claude/settings.json` の deny に `"Bash(curl:*)"` も入っており、画像バイトをアップロードURLへPOSTする操作がブロックされていた → ユーザーがこの行も削除して解消（`mcp__*` の件と同根の問題）。スクリーンショット閲覧のみなら `get_screenshot` の `enableBase64Response:true` でcurl不要だが、`upload_assets` へのバイナリPOSTはcurl必須。
