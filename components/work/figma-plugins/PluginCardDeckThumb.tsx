@@ -160,7 +160,8 @@ export default function PluginCardDeckThumb() {
   useEffect(() => {
     const el = wrapRef.current;
     if (!el) return;
-    const update = () => setScale(Math.min(1, el.clientWidth / CLUSTER_W));
+    const update = () =>
+      setScale(Math.min(1, el.clientWidth / CLUSTER_W, el.clientHeight / CLUSTER_H));
     update();
     const ro = new ResizeObserver(update);
     ro.observe(el);
