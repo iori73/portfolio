@@ -18,6 +18,11 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
+    // Kept unoptimized on purpose: all served assets are pre-converted to
+    // WebP (q82, ≤2000px, ~10MB total site-wide), so the marginal payload
+    // win from Vercel's on-the-fly optimizer is small — and enabling it would
+    // meter every image against the account's transformation quota. Revisit
+    // only if we add large/uncontrolled user-supplied imagery.
     unoptimized: true,
   },
   experimental: {
