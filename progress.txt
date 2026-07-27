@@ -357,3 +357,19 @@
 
 ## Figma portfolio_v5 構築（保留中）
 - MCP 未ロードで2回ブロック → ユーザーが `.claude/settings.json` の deny から `mcp__*` を外し、`/mcp` で再接続。次セッション（Claude Code 再起動後）に着手予定。引き継ぎプロンプトは scratchpad に保存済み。
+
+## Figma portfolio_v5 構築 — Phase 0〜3 完了（2026-07-27）
+- **根本原因の確定**: 新規セッション・`/mcp`再接続・Claude Code完全再起動のいずれでも直らなかった Figma MCP ツール未ロード問題は、`.claude/settings.json` の `deny` に混入していた `"mcp__*"`（直近の "podcast-notes UI強化" コミットでセキュリティ強化ルールに紛れ込んだもの）が原因と判明。この1行を削除して解消（Figma以外の chrome-devtools/playwright も同時に復旧）。
+- **Phase 0（Discovery）**: portfolio_v5 ファイルは空（プレースホルダー矩形2つのみ）。サブスクライブ済みライブラリなし → 全てゼロから構築する方針を確認。コード側トークンはhandoff記載値と完全一致（ドリフトなし）。発見した既知の不整合: tailwind.config.js に新旧2つのtypographyスケールが並存（`--text-size-*`駆動のセマンティック版のみを正として採用）。
+- **Phase 1（Foundations）**: 5 variable collection（Primitives / Color / Radius / Typography(Mobile+Desktop) / Motion）、計61変数、全てscope+code syntax設定済み。Text style 18個・Effect style 3個（elevation-1/2/3）。Dark modeはコードに実体がないため未作成（Light単一モード）。Switzer/Helvetica NeueはFigma未登録のため **SF Pro** で統一代替（コード自体の `-apple-system` fallback chainと整合）。
+- **Phase 2（File Structure）**: ページ骨格 Cover→Getting Started→Foundations→---→Components→---→Pages→---→Utilities。Foundationsに Colors/Typography/Radius/Motion の4セクションを実装、スクリーンショット検証済み。
+- **Phase 3（Home + About）**: コンポーネント4種（Tag / Section Label / Timeline Row / Project Card）を専用ページに作成。実データ（`cvData.ts` / `messages/en.json`）でHome・Aboutページを組み立て、デスクトップ版に加え **モバイル版（375px）** も構築。Timeline Rowに Layout variant（Horizontal/Stacked）を追加し、コードの `grid-cols-1` vs `md:grid-cols-[180px_1fr]` を再現。Project Cardのタグ行に wrap を実装（`flex-wrap md:flex-nowrap` 相当）。
+- 既知の制約: サムネイル画像・About の D3可視化はグレープレースホルダー（実画像/実装は未反映）。
+- 次回: Home/About以外のページ（CV, Work一覧+各ケーススタディ, Blog, Experiment）へ拡張予定。
+
+## モバイル通信量削減 + セキュリティ調査（2026-07-27）
+ユーザー要望「守り（セキュリティ）＋通信が細い/スマホ等の非万全環境でも快適な体験」に対し、実測ベースで best-practice 調査→実行。
+- 調査: public/ 画像 ~170MB・未最適化（`images:{unoptimized:true}`）。生`<img>`18ファイル。最悪は google-ux（42 PNG=68MB を生imgで配信）。25MB×2 の SVG は 0参照＝デッド。フォント Noto Sans JP を9ウェイトロード。セキュリティヘッダは既に高水準（HSTS+preload/CSP/…）。pnpm audit 50件は @figma/code-connect→undici 等ビルド専用依存で非出荷＝ユーザーリスク低。
+- [x] **google-ux 画像を WebP 化**（sharp q82/max1600px）: **68.0MB→4.1MB（−94%）**。`<img>`37参照を .png→.webp に更新。元 PNG 42枚（68MB）削除。
+- [x] **フォント weight 9→4**（Noto Sans JP: 300/400/500/600 のみ）。※next/font 再取得で初回ビルドが9分（Vercelは初回のみ・以降キャッシュ）。ビルド成功・全ページ静的(●)維持。
+- 未実行（推奨・次段階）: 他の生`<img>`大画像も WebP+リサイズ横展開 / `unoptimized:true` 再検討 / デッドSVG削除（thumbnail_gym・gcsd_thumbnail 各25MB, 0参照, 権限ゲートのため要 `!`）/ `pnpm add -D @figma/code-connect`（本番依存ツリーから除外）/ Blog 外部fetch の ISR サーバー化。

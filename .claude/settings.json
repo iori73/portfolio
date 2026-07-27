@@ -75,7 +75,7 @@
       "Bash(psql:*)",
       "Bash(mysql:*)",
       "Bash(mongod:*)",
-      "Bash(redis:*)",
+      "Bash(redis:*)"
     ]
   }
 }

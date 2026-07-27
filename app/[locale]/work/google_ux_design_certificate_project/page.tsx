@@ -78,7 +78,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
           <div className="flex flex-wrap justify-center">
             {/* Hero Image */}
             <img
-              src="/work/google_ux_design_certificate_project/thumbnail.png"
+              src="/work/google_ux_design_certificate_project/thumbnail.webp"
               alt="Phone mockups"
               className="w-full max-w-[896px]"
             />
@@ -153,7 +153,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/02.png"
+                src="/work/google_ux_design_certificate_project/02.webp"
                 alt="Project overview placeholder"
                 className="w-full mb-8"
               />
@@ -163,7 +163,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/03.png"
+                src="/work/google_ux_design_certificate_project/03.webp"
                 alt="Project overview placeholder"
                 className="w-full mb-8"
               />
@@ -173,7 +173,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/04.png"
+                src="/work/google_ux_design_certificate_project/04.webp"
                 alt="Project overview placeholder"
                 className="w-full mb-8"
               />
@@ -188,7 +188,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/05.png"
+                src="/work/google_ux_design_certificate_project/05.webp"
                 alt="Understanding the User placeholder"
                 className="w-full mb-8"
               />
@@ -204,7 +204,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/06.png"
+                src="/work/google_ux_design_certificate_project/06.webp"
                 alt="Secondary research placeholder"
                 className="w-full mb-8"
               />
@@ -214,7 +214,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/07.png"
+                src="/work/google_ux_design_certificate_project/07.webp"
                 alt="Secondary research placeholder"
                 className="w-full mb-8"
               />
@@ -224,7 +224,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/08.png"
+                src="/work/google_ux_design_certificate_project/08.webp"
                 alt="Secondary research placeholder"
                 className="w-full mb-8"
               />
@@ -239,7 +239,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/09.png"
+                src="/work/google_ux_design_certificate_project/09.webp"
                 alt="Personas placeholder"
                 className="w-full mb-8"
               />
@@ -249,7 +249,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/10.png"
+                src="/work/google_ux_design_certificate_project/10.webp"
                 alt="Personas placeholder"
                 className="w-full mb-8"
               />
@@ -264,7 +264,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/11.png"
+                src="/work/google_ux_design_certificate_project/11.webp"
                 alt="Empathy map placeholder"
                 className="w-full mb-8"
               />
@@ -279,7 +279,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/12.png"
+                src="/work/google_ux_design_certificate_project/12.webp"
                 alt="Pain points placeholder"
                 className="w-full mb-8"
               />
@@ -294,7 +294,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/13.png"
+                src="/work/google_ux_design_certificate_project/13.webp"
                 alt="User journey map placeholder"
                 className="w-full mb-8"
               />
@@ -304,7 +304,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/14.png"
+                src="/work/google_ux_design_certificate_project/14.webp"
                 alt="User journey map placeholder"
                 className="w-full mb-8"
               />
@@ -319,7 +319,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/15.png"
+                src="/work/google_ux_design_certificate_project/15.webp"
                 alt="Value Proposition Canvas placeholder"
                 className="w-full mb-8"
               />
@@ -334,7 +334,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/16.png"
+                src="/work/google_ux_design_certificate_project/16.webp"
                 alt="Feature Ideas placeholder"
                 className="w-full mb-8"
               />
@@ -349,7 +349,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/17.png"
+                src="/work/google_ux_design_certificate_project/17.webp"
                 alt="Competitive audit placeholder"
                 className="w-full mb-8"
               />
@@ -359,7 +359,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/18.png"
+                src="/work/google_ux_design_certificate_project/18.webp"
                 alt="Competitive audit placeholder"
                 className="w-full mb-8"
               />
@@ -369,7 +369,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/19.png"
+                src="/work/google_ux_design_certificate_project/19.webp"
                 alt="Competitive audit placeholder"
                 className="w-full mb-8"
               />
@@ -379,7 +379,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/20.png"
+                src="/work/google_ux_design_certificate_project/20.webp"
                 alt="Competitive audit placeholder"
                 className="w-full mb-8"
               />
@@ -389,7 +389,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/21.png"
+                src="/work/google_ux_design_certificate_project/21.webp"
                 alt="Competitive audit placeholder"
                 className="w-full mb-8"
               />
@@ -399,7 +399,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/22.png"
+                src="/work/google_ux_design_certificate_project/22.webp"
                 alt="Competitive audit placeholder"
                 className="w-full mb-8"
               />
@@ -414,7 +414,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/23.png"
+                src="/work/google_ux_design_certificate_project/23.webp"
                 alt="Starting the design placeholder"
                 className="w-full mb-8"
               />
@@ -429,7 +429,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/24.png"
+                src="/work/google_ux_design_certificate_project/24.webp"
                 alt="User flow placeholder"
                 className="w-full mb-8"
               />
@@ -444,7 +444,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/25.png"
+                src="/work/google_ux_design_certificate_project/25.webp"
                 alt="Storyboard placeholder"
                 className="w-full mb-8"
               />
@@ -454,7 +454,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/26.png"
+                src="/work/google_ux_design_certificate_project/26.webp"
                 alt="Storyboard placeholder"
                 className="w-full mb-8"
               />
@@ -469,7 +469,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/27.png"
+                src="/work/google_ux_design_certificate_project/27.webp"
                 alt="Paper wireframes placeholder"
                 className="w-full mb-8"
               />
@@ -484,7 +484,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/28.png"
+                src="/work/google_ux_design_certificate_project/28.webp"
                 alt="Low-fidelity prototypes placeholder"
                 className="w-full mb-8"
               />
@@ -494,7 +494,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/29.png"
+                src="/work/google_ux_design_certificate_project/29.webp"
                 alt="Low-fidelity prototypes placeholder"
                 className="w-full mb-8"
               />
@@ -504,7 +504,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/30.png"
+                src="/work/google_ux_design_certificate_project/30.webp"
                 alt="Low-fidelity prototypes placeholder"
                 className="w-full mb-8"
               />
@@ -514,7 +514,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/31.png"
+                src="/work/google_ux_design_certificate_project/31.webp"
                 alt="Low-fidelity prototypes placeholder"
                 className="w-full mb-8"
               />
@@ -529,7 +529,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/36.png"
+                src="/work/google_ux_design_certificate_project/36.webp"
                 alt="Refining the design placeholder"
                 className="w-full mb-8"
               />
@@ -539,7 +539,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/37.png"
+                src="/work/google_ux_design_certificate_project/37.webp"
                 alt="Refining the design placeholder"
                 className="w-full mb-8"
               />
@@ -554,7 +554,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/38.png"
+                src="/work/google_ux_design_certificate_project/38.webp"
                 alt="Mockups placeholder"
                 className="w-full mb-8"
               />
@@ -569,7 +569,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/39.png"
+                src="/work/google_ux_design_certificate_project/39.webp"
                 alt="Going forward placeholder"
                 className="w-full mb-8"
               />
@@ -579,7 +579,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/40.png"
+                src="/work/google_ux_design_certificate_project/40.webp"
                 alt="Going forward placeholder"
                 className="w-full mb-8"
               />
@@ -589,7 +589,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   borderRadius: '8px',
                 }}
-                src="/work/google_ux_design_certificate_project/41.png"
+                src="/work/google_ux_design_certificate_project/41.webp"
                 alt="Going forward placeholder"
                 className="w-full mb-8"
               />

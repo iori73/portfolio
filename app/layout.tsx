@@ -8,7 +8,9 @@ import { getLocale } from 'next-intl/server';
 const notoSansJP = Noto_Sans_JP({
   subsets: ['latin'],
   variable: '--font-noto-sans-jp',
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  // Only the weights actually used (JP body=Light/300, Regular/400, headings=Medium/500,
+  // nav active=SemiBold/600). Dropping the unused 100/200/700/800/900 cuts font payload.
+  weight: ['300', '400', '500', '600'],
   display: 'swap',
 });
 
