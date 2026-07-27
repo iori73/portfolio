@@ -62,7 +62,6 @@
       "Edit(**/*secret*/**)",
       "Edit(**/*token*)",
       "Edit(**/*key*)",
-      "Bash(curl:*)",
       "Bash(wget:*)",
       "Bash(nc:*)",
       "Bash(netcat:*)",

@@ -118,7 +118,7 @@ export default function TimelineShowcase() {
         }`}
       >
         <Image
-          src="/work/ukiyoe/timeline-showcase-bg.png"
+          src="/work/ukiyoe/timeline-showcase-bg.webp"
           alt="Timeline page showing ukiyoe artworks organized by historical period"
           fill
           className="object-cover object-center"
@@ -135,7 +135,7 @@ export default function TimelineShowcase() {
         style={{ width: '28%' }}
       >
         <Image
-          src="/work/ukiyoe/dango-photo.png"
+          src="/work/ukiyoe/dango-photo.webp"
           alt="Kushi-dango — three-color mochi representing the project's navigation motif"
           fill
           className="object-cover object-center"

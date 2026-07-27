@@ -176,7 +176,7 @@ function HeroGraphicSVG() {
 
 const SCATTER_CARDS = [
   {
-    src: '/work/figma-plugins/bsi-cover.png',
+    src: '/work/figma-plugins/bsi-cover.webp',
     alt: 'Bulk Screenshot Importer',
     rotate: -11,
     tx: -50,
@@ -184,7 +184,7 @@ const SCATTER_CARDS = [
     z: 1,
   },
   {
-    src: '/work/figma-plugins/pm-cover.png',
+    src: '/work/figma-plugins/pm-cover.webp',
     alt: 'Perfect Markdown',
     rotate: 7,
     tx: 48,
@@ -192,7 +192,7 @@ const SCATTER_CARDS = [
     z: 2,
   },
   {
-    src: '/work/figma-plugins/pptx-cover.png',
+    src: '/work/figma-plugins/pptx-cover.webp',
     alt: 'PPTX to Figma',
     rotate: -2,
     tx: 0,

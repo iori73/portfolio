@@ -19,7 +19,7 @@ const FavoriteVisuals: React.FC = () => {
           <div className="absolute inset-0 -z-10"></div>
           <div className="relative pt-0 md:pt-8">
             <img
-              src="/favorite_visuals.png"
+              src="/favorite_visuals.webp"
               alt="Favorite Visuals"
               className="w-full max-w-lg mx-auto rounded-[16px]"
             />

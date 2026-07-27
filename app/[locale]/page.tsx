@@ -51,7 +51,7 @@ export default function Home() {
           onClick={() => {
             const rect = ukiyoeImageRef.current?.getBoundingClientRect();
             if (!rect) return;
-            const imageSrc = locale === 'jp' ? '/work/ukiyoe/thumbnail-jp.png' : '/work/ukiyoe/thumbnail-en.png';
+            const imageSrc = locale === 'jp' ? '/work/ukiyoe/thumbnail-jp.webp' : '/work/ukiyoe/thumbnail-en.webp';
             startTransition(imageSrc, rect, '/work/ukiyoe');
           }}
           onKeyDown={(e) => {
@@ -59,7 +59,7 @@ export default function Home() {
               e.preventDefault();
               const rect = ukiyoeImageRef.current?.getBoundingClientRect();
               if (!rect) return;
-              const imageSrc = locale === 'jp' ? '/work/ukiyoe/thumbnail-jp.png' : '/work/ukiyoe/thumbnail-en.png';
+              const imageSrc = locale === 'jp' ? '/work/ukiyoe/thumbnail-jp.webp' : '/work/ukiyoe/thumbnail-en.webp';
               startTransition(imageSrc, rect, '/work/ukiyoe');
             }
           }}
@@ -67,7 +67,7 @@ export default function Home() {
           <div className="mb-20">
             <div className="mb-6" ref={ukiyoeImageRef}>
               <Image
-                src={locale === 'jp' ? '/work/ukiyoe/thumbnail-jp.png' : '/work/ukiyoe/thumbnail-en.png'}
+                src={locale === 'jp' ? '/work/ukiyoe/thumbnail-jp.webp' : '/work/ukiyoe/thumbnail-en.webp'}
                 alt="Ukiyoe: Layer by Layer"
                 width={600}
                 height={300}

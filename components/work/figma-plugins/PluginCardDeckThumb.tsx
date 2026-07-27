@@ -12,7 +12,7 @@ const DECK = [
     id: 'perfect-markdown',
     name: 'Perfect Markdown',
     type: 'Widget',
-    cover: '/work/figma-plugins/pm-cover.png',
+    cover: '/work/figma-plugins/pm-cover.webp',
     accentColor: '#A259FF',
     description:
       'Renders Markdown inside Figma and FigJam with full syntax support — tables, code blocks, task lists, and light/dark themes.',
@@ -21,7 +21,7 @@ const DECK = [
     id: 'pptx-to-figma',
     name: 'PPTX to Figma',
     type: 'Plugin',
-    cover: '/work/figma-plugins/pptx-cover.png',
+    cover: '/work/figma-plugins/pptx-cover.webp',
     accentColor: '#1ABCFE',
     description:
       'Converts PowerPoint (.pptx) files into fully editable Figma designs, preserving your layout, styles, and structure.',
@@ -30,7 +30,7 @@ const DECK = [
     id: 'bulk-screenshot-importer',
     name: 'Bulk Screenshot Importer',
     type: 'Plugin',
-    cover: '/work/figma-plugins/bsi-cover.png',
+    cover: '/work/figma-plugins/bsi-cover.webp',
     accentColor: '#0ACF83',
     description:
       'Imports screenshots with folder structure preserved as Sections. Smart Import uses AI to detect scroll sequences.',

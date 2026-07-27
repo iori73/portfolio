@@ -373,3 +373,19 @@
 - [x] **google-ux 画像を WebP 化**（sharp q82/max1600px）: **68.0MB→4.1MB（−94%）**。`<img>`37参照を .png→.webp に更新。元 PNG 42枚（68MB）削除。
 - [x] **フォント weight 9→4**（Noto Sans JP: 300/400/500/600 のみ）。※next/font 再取得で初回ビルドが9分（Vercelは初回のみ・以降キャッシュ）。ビルド成功・全ページ静的(●)維持。
 - 未実行（推奨・次段階）: 他の生`<img>`大画像も WebP+リサイズ横展開 / `unoptimized:true` 再検討 / デッドSVG削除（thumbnail_gym・gcsd_thumbnail 各25MB, 0参照, 権限ゲートのため要 `!`）/ `pnpm add -D @figma/code-connect`（本番依存ツリーから除外）/ Blog 外部fetch の ISR サーバー化。
+
+## モバイル通信量削減 — 残タスク完遂 #1〜#4（2026-07-28）
+前段（07-27）の「未実行・次段階」を全て完了させ本番反映。
+- [x] **#1 全画像を WebP 化（サイト全体）**: 残る public PNG/JPG 123枚を sharp（q82/max2000px/alpha保持）で変換、生成後に元ファイル削除。コード18ファイルの .png/.jpg 参照を .webp に一括更新（文字列コンテキストのみ置換）。**101.3MB → 10.4MB（−90%）**。ビルド全ページ静的(●)維持を確認。Next.js 規約画像（favicon/opengraph/icon）は非対象で無傷。残るラスタは未参照の shadcn テンプレ placeholder 3枚のみ。ローカル podcast covers も変換したが、実カバーは podcast-notes.json 内の外部CDN URL のため元々未使用の遺物。
+- [x] **#3 @figma/code-connect を devDependencies へ移動**: figma.config.json + src/figma/*.figma.tsx（`figma connect` CLIツール）専用でランタイム未importのため。pnpm-lock.yaml を同期（`--frozen-lockfile` パス確認）。本番依存ツリーから除外＝出荷サーフェス縮小。
+- [x] **#4 Blog 外部fetch の ISR/エッジキャッシュ化**: `/api/articles` は既に `revalidate=3600` + `fetch(next:{revalidate:3600})` でサーバー側ISR済みだった。ただしレスポンスヘッダが `no-store` でエッジCDNキャッシュを無効化していた → `public, s-maxage=3600, stale-while-revalidate=86400` に変更。再訪・低速回線ユーザーが関数起動なしでエッジからJSON取得可能に。
+- [x] **#2 `images:{unoptimized:true}` は意図的に維持**: 全資産が事前WebP化（≤2000px, 計~10MB）済みで最適化器の限界利得が小さく、有効化するとVercel変換クォータを消費するため。判断理由を next.config.mjs にコメントで明記。
+- セキュリティ: audit 50件は依然ビルド専用依存（非出荷）でユーザーリスク低。ヘッダは高水準を維持。
+
+## Figma portfolio_v5 に実画像を反映（2026-07-27）
+- Phase 3で使っていたグレープレースホルダーのうち、静止画像ファイルが実在する2箇所を実画像に差し替え（デスクトップ・モバイル両方）:
+  - Ukiyoeサムネイル（`public/work/ukiyoe/thumbnail-en.png`）→ Home の該当Project Card instanceを detachInstance() してから upload_assets
+  - Aboutアバター（`public/about/my_image.png`）→ 円形フレームに直接アップロード
+- Figma PluginsサムネイルとAboutのD3可視化（Interests）はどちらも静的ファイルが存在しない動的Reactコンポーネントのため、プレースホルダーのまま据え置き（実装するにはブラウザ自動化での実サイトスクリーンショット取得が別途必要）。
+- **判明した制約**: `upload_assets` の `nodeId` は instance内部の子ノードID（`I<instanceId>;<originalId>` 形式）を受け付けない（`\d+:\d+` の正規表現のみ許可）。instance内の特定ノードに画像を入れる場合は、対象instanceを `detachInstance()` してから通常ノードIDでアップロードする必要がある（コンポーネントとのリンクは切れるが、ページ上の最終コンテンツ確定としては許容範囲）。
+- **判明した制約2**: `.claude/settings.json` の deny に `"Bash(curl:*)"` も入っており、画像バイトをアップロードURLへPOSTする操作がブロックされていた → ユーザーがこの行も削除して解消（`mcp__*` の件と同根の問題）。スクリーンショット閲覧のみなら `get_screenshot` の `enableBase64Response:true` でcurl不要だが、`upload_assets` へのバイナリPOSTはcurl必須。

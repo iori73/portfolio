@@ -109,9 +109,11 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(articles, {
       status: 200,
       headers: {
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        Pragma: 'no-cache',
-        Expires: '0',
+        // Edge-cacheable: serve from Vercel's CDN for 1h, then serve stale
+        // for up to 24h while revalidating in the background. Repeat visitors
+        // and users on slow/mobile networks get the JSON from the edge with no
+        // serverless invocation. Matches the upstream `revalidate: 3600`.
+        'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
       },
     });
   } catch (error: any) {

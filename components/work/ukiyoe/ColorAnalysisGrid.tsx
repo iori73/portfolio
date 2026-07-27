@@ -23,12 +23,12 @@ const PERIODS: PeriodColumn[] = [
     signatureColor: { hex: '#1a1a1a', ja: '墨', en: 'Sumi' },
     artworks: [
       {
-        url: '/work/ukiyoe/artworks/moronobu-yoshiwara.jpg',
+        url: '/work/ukiyoe/artworks/moronobu-yoshiwara.webp',
         ja: { title: '吉原の体', artist: '菱川師宣' },
         en: { title: 'Yoshiwara Quarters', artist: 'Hishikawa Moronobu' },
       },
       {
-        url: '/work/ukiyoe/artworks/moronobu-self-portrait.jpg',
+        url: '/work/ukiyoe/artworks/moronobu-self-portrait.webp',
         ja: { title: '自画像', artist: '菱川師宣' },
         en: { title: 'Self-Portrait', artist: 'Hishikawa Moronobu' },
       },
@@ -40,12 +40,12 @@ const PERIODS: PeriodColumn[] = [
     signatureColor: { hex: '#c9a050', ja: '金/茶', en: 'Kin' },
     artworks: [
       {
-        url: '/work/ukiyoe/artworks/kiyonobu-1.jpg',
+        url: '/work/ukiyoe/artworks/kiyonobu-1.webp',
         ja: { title: '役者絵（筒井吉十郎）', artist: '鳥居清信' },
         en: { title: 'Actor Tsutsui Kichijuro', artist: 'Torii Kiyonobu I' },
       },
       {
-        url: '/work/ukiyoe/artworks/kiyonobu-2.jpg',
+        url: '/work/ukiyoe/artworks/kiyonobu-2.webp',
         ja: { title: '歌舞伎役者図', artist: '鳥居清信' },
         en: { title: 'Kabuki Actor', artist: 'Torii Kiyonobu I' },
       },
@@ -57,12 +57,12 @@ const PERIODS: PeriodColumn[] = [
     signatureColor: { hex: '#c04545', ja: '紅', en: 'Beni' },
     artworks: [
       {
-        url: '/work/ukiyoe/artworks/masanobu-dp124527.jpg',
+        url: '/work/ukiyoe/artworks/masanobu-dp124527.webp',
         ja: { title: '絵本表紙', artist: '奥村政信' },
         en: { title: 'Illustrated Book Cover', artist: 'Okumura Masanobu' },
       },
       {
-        url: '/work/ukiyoe/artworks/masanobu-dp124524.jpg',
+        url: '/work/ukiyoe/artworks/masanobu-dp124524.webp',
         ja: { title: '華笠三幅対', artist: '奥村政信' },
         en: { title: 'Triptych of Umbrellas', artist: 'Okumura Masanobu' },
       },
@@ -74,12 +74,12 @@ const PERIODS: PeriodColumn[] = [
     signatureColor: { hex: '#7a9060', ja: '緑', en: 'Midori' },
     artworks: [
       {
-        url: '/work/ukiyoe/artworks/toyonobu-nakamura.jpg',
+        url: '/work/ukiyoe/artworks/toyonobu-nakamura.webp',
         ja: { title: '中村七三郎と佐野川市松', artist: '石川豊信' },
         en: { title: 'Actors Nakamura & Sanogawa', artist: 'Ishikawa Toyonobu' },
       },
       {
-        url: '/work/ukiyoe/artworks/toyonobu-flower-cart.jpg',
+        url: '/work/ukiyoe/artworks/toyonobu-flower-cart.webp',
         ja: { title: '花車と若衆', artist: '石川豊信' },
         en: { title: 'Wakashu with Flower Cart', artist: 'Ishikawa Toyonobu' },
       },
@@ -91,12 +91,12 @@ const PERIODS: PeriodColumn[] = [
     signatureColor: { hex: '#607888', ja: '青灰', en: 'Ao' },
     artworks: [
       {
-        url: '/work/ukiyoe/artworks/toyonobu-dp135501.jpg',
+        url: '/work/ukiyoe/artworks/toyonobu-dp135501.webp',
         ja: { title: '夏柳の美人', artist: '石川豊信' },
         en: { title: 'Summer Willow in Breeze', artist: 'Ishikawa Toyonobu' },
       },
       {
-        url: '/work/ukiyoe/artworks/toyonobu-dp135503.jpg',
+        url: '/work/ukiyoe/artworks/toyonobu-dp135503.webp',
         ja: { title: '坂田金平の飲酒図', artist: '石川豊信' },
         en: { title: 'Sakata Kinpira Drinking', artist: 'Ishikawa Toyonobu' },
       },
@@ -108,12 +108,12 @@ const PERIODS: PeriodColumn[] = [
     signatureColor: { hex: '#c04545', ja: '紅', en: 'Beni' },
     artworks: [
       {
-        url: '/work/ukiyoe/artworks/harunobu-dp114905.jpg',
+        url: '/work/ukiyoe/artworks/harunobu-dp114905.webp',
         ja: { title: '縁側にて', artist: '鈴木春信' },
         en: { title: 'On the Veranda', artist: 'Suzuki Harunobu' },
       },
       {
-        url: '/work/ukiyoe/artworks/harunobu-dp114910.jpg',
+        url: '/work/ukiyoe/artworks/harunobu-dp114910.webp',
         ja: { title: '美人琴高図', artist: '鈴木春信' },
         en: { title: 'The Bijin Kinko', artist: 'Suzuki Harunobu' },
       },
@@ -125,12 +125,12 @@ const PERIODS: PeriodColumn[] = [
     signatureColor: { hex: '#2a3848', ja: '藍', en: 'Ai' },
     artworks: [
       {
-        url: '/work/ukiyoe/artworks/kiyonaga-bathhouse.jpg',
+        url: '/work/ukiyoe/artworks/kiyonaga-bathhouse.webp',
         ja: { title: '女湯', artist: '鳥居清長' },
         en: { title: 'Bathhouse Women', artist: 'Torii Kiyonaga' },
       },
       {
-        url: '/work/ukiyoe/artworks/kiyonaga-sumida.jpg',
+        url: '/work/ukiyoe/artworks/kiyonaga-sumida.webp',
         ja: { title: '隅田川の船遊び', artist: '鳥居清長' },
         en: { title: 'Boating on Sumida River', artist: 'Torii Kiyonaga' },
       },
@@ -142,12 +142,12 @@ const PERIODS: PeriodColumn[] = [
     signatureColor: { hex: '#b8b0a4', ja: '銀灰', en: 'Gin' },
     artworks: [
       {
-        url: '/work/ukiyoe/artworks/utamaro-three-beauties.jpg',
+        url: '/work/ukiyoe/artworks/utamaro-three-beauties.webp',
         ja: { title: '寛政三美人', artist: '喜多川歌麿' },
         en: { title: 'Three Beauties', artist: 'Kitagawa Utamaro' },
       },
       {
-        url: '/work/ukiyoe/artworks/sharaku-otani.jpg',
+        url: '/work/ukiyoe/artworks/sharaku-otani.webp',
         ja: { title: '大谷鬼次の奴江戸兵衛', artist: '東洲斎写楽' },
         en: { title: 'Otani Oniji as Edobei', artist: 'Toshusai Sharaku' },
       },
@@ -159,12 +159,12 @@ const PERIODS: PeriodColumn[] = [
     signatureColor: { hex: '#2d4f6e', ja: 'ベロ藍', en: 'Bero' },
     artworks: [
       {
-        url: '/work/ukiyoe/artworks/hokusai-great-wave.jpg',
+        url: '/work/ukiyoe/artworks/hokusai-great-wave.webp',
         ja: { title: '神奈川沖浪裏', artist: '葛飾北斎' },
         en: { title: 'The Great Wave', artist: 'Katsushika Hokusai' },
       },
       {
-        url: '/work/ukiyoe/artworks/hokusai-red-fuji.jpg',
+        url: '/work/ukiyoe/artworks/hokusai-red-fuji.webp',
         ja: { title: '凱風快晴', artist: '葛飾北斎' },
         en: { title: 'Red Fuji', artist: 'Katsushika Hokusai' },
       },

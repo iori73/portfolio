@@ -95,7 +95,7 @@ export default function PortfolioOverview() {
             {/* 画像 */}
             <div className="relative pt-8 px-4">
               <Image
-                src="/work/2_day_internship-image.png"
+                src="/work/2_day_internship-image.webp"
                 alt="Meeting scheduling workflow illustration"
                 width={463}
                 height={557}

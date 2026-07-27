@@ -239,7 +239,7 @@ const GymDashboardHero: React.FC<GymDashboardHeroProps> = ({ gymStats: propGymSt
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage: 'url(/figma-reference/gcsd_thumbnail_bg.png)',
+          backgroundImage: 'url(/figma-reference/gcsd_thumbnail_bg.webp)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}

@@ -7,12 +7,12 @@ import { useHeadingFont } from '@/src/hooks/useFonts';
 const PHASES = [
   {
     key: 'topPagePhaseBenizuri' as const,
-    image: '/work/ukiyoe/process-toppage/Benizuri-e.png',
+    image: '/work/ukiyoe/process-toppage/Benizuri-e.webp',
     swatches: ['#c04545', '#7a9060'], // Beni, Midori
   },
   {
     key: 'topPagePhaseNishiki' as const,
-    image: '/work/ukiyoe/process-toppage/Nishiki-e.png',
+    image: '/work/ukiyoe/process-toppage/Nishiki-e.webp',
     swatches: ['#c9a050', '#607888', '#2a3848', '#c04545'], // Kin, Ao, Ai, Beni
   },
 ] as const;
