@@ -68,12 +68,16 @@ function extractPageMetadata(page: {
   const releaseProp = props['Release Date'] as { date?: { start?: string } } | undefined;
   const urlProp = props.URL as { url?: string } | undefined;
   const durationProp = props['1. Duration'] as { number?: number } | undefined;
+  const podcastName = podcastProp?.select?.name || 'Unknown';
 
   return {
     id: page.id,
     title: extractRichText(nameProp?.title) || '(Untitled)',
-    podcast: podcastProp?.select?.name || 'Unknown',
-    podcastCover: page.cover?.external?.url || page.cover?.file?.url || '',
+    podcast: podcastName,
+    // Prefer the official show cover (resolved offline via iTunes) over Notion's
+    // per-page cover so a broken or arbitrary episode image never surfaces —
+    // same canonical-artwork intent already applied to the aggregation below.
+    podcastCover: PRE_COVER.get(podcastName) || page.cover?.external?.url || page.cover?.file?.url || '',
     category,
     tags: [category].filter(Boolean),
     date: releaseProp?.date?.start || (page.created_time?.split('T')[0] ?? ''),
