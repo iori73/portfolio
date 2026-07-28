@@ -382,6 +382,13 @@
 - [x] **#2 `images:{unoptimized:true}` は意図的に維持**: 全資産が事前WebP化（≤2000px, 計~10MB）済みで最適化器の限界利得が小さく、有効化するとVercel変換クォータを消費するため。判断理由を next.config.mjs にコメントで明記。
 - セキュリティ: audit 50件は依然ビルド専用依存（非出荷）でユーザーリスク低。ヘッダは高水準を維持。
 
+## Home の Figma Plugins カードがモバイルでタップ不発（2026-07-28）
+ユーザー報告「Figma Plugins & Widgets をtapしても詳細に行かない」。
+- **真因**: Home の Figma カードは `<Link>` で包まれているが、サムネイルの `PluginCardDeckThumb`（3枚のプラグインカードを扇状に重ねた装飾）が hover で `setActive`→カードを 1.08倍に scale する。**タッチ環境では最初のタップで `onMouseEnter` が発火→transition 中にカードが指の下で動く→ブラウザが後続の click を抑制**し、親 `<Link>` へ届かない（＝1タップ目は拡大だけで遷移しない）。デスクトップ（マウス）では発生しない。
+- **修正**（`PluginCardDeckThumb.tsx`）: hover 可能デバイス（`(hover: hover) and (pointer: fine)`）でのみ hover-scale を有効化。タッチ環境（`canHover=false`）では装飾デッキを `pointer-events:none` にし、タップが素通りで `<Link>` に届くように。デスクトップの hover アニメは不変。
+- **検証**: 本番でデッキに `pointer-events:none` を適用するとサムネイル上の最前面要素が `<Link>` 配下に変わり（passthrough）、タップで `/work/figma-plugins` へ遷移することを確認。デスクトップ経路（デッキ最前面＋clickバブリング）も遷移維持。
+- 教訓: タッチ端末では「hover で要素が動く」装飾はタップを殺す。装飾は `(hover: hover)` 限定にし、タッチでは `pointer-events:none` でリンクを優先する。
+
 ## 本番検証（デスクトップ+SP）+ 壊れカバー修正（2026-07-28）
 WebP/perfラウンドを Playwright で全ページ実巡回検証（`docs/verification-2026-07-28.md`）。
 - デスクトップ/SP(390px) 全9ページ: **壊れ画像0・横あふれ0**。Blog は `x-vercel-cache: HIT`（エッジキャッシュ実働）。Podcast SP のフィルタ横スクロール/Select独立行もスクショで確認。
