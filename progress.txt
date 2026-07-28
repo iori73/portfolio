@@ -382,6 +382,16 @@
 - [x] **#2 `images:{unoptimized:true}` は意図的に維持**: 全資産が事前WebP化（≤2000px, 計~10MB）済みで最適化器の限界利得が小さく、有効化するとVercel変換クォータを消費するため。判断理由を next.config.mjs にコメントで明記。
 - セキュリティ: audit 50件は依然ビルド専用依存（非出荷）でユーザーリスク低。ヘッダは高水準を維持。
 
+## 本番検証（デスクトップ+SP）+ 壊れカバー修正（2026-07-28）
+WebP/perfラウンドを Playwright で全ページ実巡回検証（`docs/verification-2026-07-28.md`）。
+- デスクトップ/SP(390px) 全9ページ: **壊れ画像0・横あふれ0**。Blog は `x-vercel-cache: HIT`（エッジキャッシュ実働）。Podcast SP のフィルタ横スクロール/Select独立行もスクショで確認。
+- **発見: Podcast一覧の1カバーが壊れ**（「神保町で会いましょう」の Spotify CDN URL が404）。
+- 修正2段階:
+  1. `podcast-covers.json` + `podcast-notes.json`（cache と静的データ）の該当URLを iTunes公式カバー（mzstatic 600x600, HTTP200検証済み）に再解決。
+  2. **真因**: ライブAPI（`/api/podcast-notes`）は各エピソードの `podcastCover` を **Notionページカバー**（=古いSpotify URL）から取っており、静的JSON修正がレンダリングに届かなかった。→ `route.ts:76` を **`PRE_COVER`（iTunes公式）優先** に変更（集約側と同じ canonical-artwork 意図を episode 側にも適用、Notionカバーはフォールバック）。
+- 本番再検証: API が公式カバーを返し（fresh MISS）、一覧224枚で**壊れ画像0**、該当カバー `loaded:true` を確認。
+- 教訓: Podcast のカバーは静的JSONでなく**Notion→API経由がソース**。データ修正だけでなくAPIの解決ロジックを直す必要がある。
+
 ## Figma portfolio_v5 に実画像を反映（2026-07-27）
 - Phase 3で使っていたグレープレースホルダーのうち、静止画像ファイルが実在する2箇所を実画像に差し替え（デスクトップ・モバイル両方）:
   - Ukiyoeサムネイル（`public/work/ukiyoe/thumbnail-en.png`）→ Home の該当Project Card instanceを detachInstance() してから upload_assets
