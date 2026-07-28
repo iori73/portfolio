@@ -154,6 +154,21 @@ export default function PluginCardDeckThumb() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
 
+  // Only enable the hover-to-scale interaction on devices that actually hover
+  // (fine pointer). On touch, a tap would fire onMouseEnter → scale the card
+  // mid-transition, moving it under the finger, which makes the browser SUPPRESS
+  // the click — so the parent <Link> never navigates. Disabling pointer events
+  // on the (decorative) deck for touch lets the tap fall straight through.
+  const [canHover, setCanHover] = useState(false);
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) return;
+    const mq = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const update = () => setCanHover(mq.matches);
+    update();
+    mq.addEventListener?.('change', update);
+    return () => mq.removeEventListener?.('change', update);
+  }, []);
+
   // The cluster is laid out at a fixed design width (CLUSTER_W). On viewports
   // narrower than that (smaller desktops, tablets, mobile) we scale the whole
   // cluster down to fit instead of clipping the outer cards.
@@ -172,9 +187,11 @@ export default function PluginCardDeckThumb() {
     <div
       ref={wrapRef}
       className="w-full h-full flex items-center justify-center overflow-hidden"
-      onMouseLeave={() => setActive(null)}
+      onMouseLeave={canHover ? () => setActive(null) : undefined}
     >
-      {/* Fixed-size cluster container, scaled to fit narrow viewports */}
+      {/* Fixed-size cluster container, scaled to fit narrow viewports.
+          On touch (no hover), pointer-events are disabled so a tap falls
+          through to the parent <Link> instead of triggering the hover-scale. */}
       <div
         className="relative"
         style={{
@@ -182,6 +199,7 @@ export default function PluginCardDeckThumb() {
           height: CLUSTER_H,
           transform: `scale(${scale})`,
           transformOrigin: 'center',
+          pointerEvents: canHover ? undefined : 'none',
         }}
       >
 
@@ -221,8 +239,8 @@ export default function PluginCardDeckThumb() {
                   : '0 2px 10px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05)',
                 transition: 'transform 0.45s cubic-bezier(0.34, 1.2, 0.64, 1), box-shadow 0.35s ease, z-index 0s',
               }}
-              onMouseEnter={() => setActive(i)}
-              onMouseLeave={() => setActive(null)}
+              onMouseEnter={canHover ? () => setActive(i) : undefined}
+              onMouseLeave={canHover ? () => setActive(null) : undefined}
             >
               <CardContent plugin={plugin} />
             </div>
