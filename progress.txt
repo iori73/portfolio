@@ -475,3 +475,33 @@ Notion エクスポート `~/Downloads/ゆめみポートフォリオ` を一次
 2. **Figma Plugins のケーススタディを PDF に追加** — 「仕事」扱いで掲載確定（アクセンチュアで航空デザインシステム用に作った12本、Figma Community で公開済み）。**Airline に次いで画像がありNDA問題も無い唯一の案件**なので、v1 の形式が固まり次第すぐ足せる。ただし現状136語なので要加筆。
 3. **Airline `system-structure.webp` の高解像度化** — Figma 実ファイルから ≥2400px 再書き出し、またはインライン SVG/JSX で作り直す（`components/GymSystemDiagram.tsx` に前例あり）。2倍ルールだと現状 104mm までしか正直に置けない。サイト側の品質も同時に上がる。
 4. `globals.css:79-90` の `Merriweather Sans Local` の `@font-face` パスが2つとも404（実ファイルは `public/fonts/Merriweather_Sans/` に1階層深い）。どこからも参照されていない死んだ宣言だが、直すなら別コミットで。
+
+## /about・/cv のファクトチェック修正（docs/portfolio-review.md 反映）（2026-07-29）
+`docs/portfolio-review.md`（projects.json・Notion・面接準備Q&Aとの突き合わせレビュー）に基づき `src/data/cvData.ts` / `cv/page.tsx` / `about/page.tsx` を修正。
+
+- **学歴（A-1/A-2/E-1/E-2/E-3）**: field を「Global Studies and Collaboration, Sociology」→「Global Studies and Collaboration」（専攻＝社会学ではなく地球社会共生学部内の1領域）に修正。bio の "Sociology background" も "Social-science background" に。**JP版 /cv の見出しが「学士 in 地球社会共生学部 社会学」という誤植レベルの表示だったバグを発見**（`EducationItem` が `{degree} in {field}` を言語問わず固定表示していた）→ ロケール分岐で JP は「地球社会共生学部 卒業（学士）」に修正。/about も学部名が完全に欠落していた（`{degree} — {institution}` のみで `field` 未使用）→ `{institution} — {field}` に修正。
+- **ANA案件（B-1/B-2/B-3/C）**: 「346変数」→ 実際に稼働中のケーススタディページ（`/work/airline-design-system`）と一致する「399変数・6コレクション」に統一。「Owned the design system」（過大表現）→「Built the token foundation and tooling」に是正。「12 custom Figma plugins」は資料間で6/12/15と数が不一致だったため**数を出さずに目的・効果ベースの記述**（token setup / lint fixing / variable migration、Lint→Migrate順序の設計意図）に置き換え。
+- **NEXT STAGE/ACRO5案件（A-3/B-5）**: 「residential construction industry」表記の正確性についてユーザーに確認したところ「技能職だけじゃないと思う、NEXT STAGEとAcro5を調べて」と指示 → **Notion「Interview Prep」内の一次資料（`6・NEXT STAGE (EN/JP)`）を直接取得して検証**。正しくは「住宅建設業界向け・技能職（職人）向け」の両方が真（どちらか一方ではない）。また現行コピーの**「20 of its 77 screens」の77という数字は一次資料のどこにも存在しない誤情報**と判明（一次資料が示すのは「プロジェクト全体スコープ=11画面+」「本人担当=カット数ベースで約20画面（検索・受講中/復習・eラーニング・汎用ローディング）」）→ 77を削除し実数に修正。「Led full UI renewal」も3名体制メンバーの1人という実態に合わせ「Contributed to」に是正。同様に根拠のなかった「15 business days」も削除（「3 client review sessions」は議事録で実在確認済みのため維持）。
+- **Panasonic（大手電機）案件（B-4）**: 冗長だったサマリー（ローダーアニメ・命名規則の詳細まで含む）をレビュー提案どおり簡潔化。詳細は面接の深掘りネタとして扱う方針（サマリーには残さない）。
+- **スキル表記（A-4）**: 「Figma Plugin Development」がツール欄の筆頭だと過大に見えるとの指摘 → `Claude Code, Cursor, Figma Plugin Development` の順に並べ替え。
+- **スコープ外と確認済み**: `/work/airline-design-system` ケーススタディページの roleText（"sole designer and developer"）は今回のレビュー対象外（ユーザーに確認済み、/about・/cvのみが対象）。NEXT STAGE案件の `period`（cvData: 2025-03〜07 / 一次資料: 2025年4〜8月）も軽微な差異だが今回は不問。
+- **検証**: `tsc --noEmit` で今回編集した3ファイルにエラー無し（他の pre-existing エラーは無関係な旧ファイル群）。dev server 起動し EN/JP の /about・/cv を curl で確認、修正後の文言が正しくレンダリングされていることを確認。
+
+## 応募提出用 PDF ポートフォリオ — v1 実装完了（2026-07-29）
+上記「方針決定」の3つの技術的な壁を解消し、実際に動くパイプラインとして実装済み（このセッションでは検証・記録のみ、実装自体は別セッションで完了していたものを確認）。
+
+- **共有ロジックの抽出**: `src/cv/format.ts`（日付整形）・`src/cv/selectors.ts`（`buildProjectBlocks` で detail ブロック抽出）・`src/cv/fontClasses.ts`（ロケール→フォントクラスの純粋関数）を新設。`cv/page.tsx` と `useFonts.ts` はこれらに委譲する形にリファクタリングされ、ロジックの二重管理を解消（壁1の解決）。
+- **`/print` ルート新設**: `app/print/`（`app/[locale]/` とは別系統。Header/Footer/TransitionOverlay を持たない）。`[locale]/portfolio/page.tsx` は URL セグメントから直接ロケールを取る server component で、表紙+レジュメ2ページ+Airline Design System 3ページの6ページ構成を生成。本番では `ENABLE_PRINT_ROUTES=1` の環境変数がない限り到達不可（サイト公開領域を汚さない設計）。`middleware.ts` の matcher に `print` を除外リストとして追加し、`[locale]` へのリライトで 404 しないようにした。
+- **`src/print/`**: `PdfPage.tsx`（A4ページのプリミティブ。Chromium が `@page` マージンボックス/`counter(page)` に未対応なため、ページ番号を DOM に直接焼き込む）と `PdfResume.tsx`（`/cv` と同じ `cvData` を描画するが、Radix `Collapsible` は非表示中に DOM からアンマウントされ PDF キャプチャで detail が消えるため、常時展開のフラット版として再実装 — 壁1の実践的な回避策）。
+- **生成スクリプト**: `scripts/generate-portfolio-pdf.mjs`（`pnpm generate:pdf` で起動）。Playwright（新規 devDependency）で Next サーバーを起動/再利用し `/print/<locale>/portfolio` を開いて `page.pdf()` を実行。フォント読み込み・画像デコードエラー・ページはみ出し・宣言した `.pdf-page` 数と実際のPDFページ数の一致をアサートし、**`CLIENT_DENYLIST`（Panasonic・花王ブランド・ゆめみ等の実名）で本文をgrepしてNDA漏洩を機械的にブロック**してから `public/downloads/Iori-Kawano-Portfolio-{EN,JP}.pdf` に書き出す。
+- **検証**: `pnpm build` で `/print/en/portfolio`・`/print/jp/portfolio` を含む全33ルートが正常にビルド（静的生成）されることを確認。
+- **⚠️ 未解決の問題（要フォローアップ）**: `pnpm generate:pdf` を実行すると PDF 自体は生成される（6ページ・11.49MB）が、スクリプト自身の品質ゲートが **exit code 1 で失敗**：`font not loaded: grotesk`／`font not loaded: jp`／`page 3 overflows by 826px` の3件。原因調査中に判明したのは、`playwright-core` が要求する pinned Chromium（`chromium_headless_shell` の特定リビジョン）がこの環境のキャッシュに無く、スクリプトが `bundled Chromium missing — falling back to installed Chrome` と表示してシステムの通常版 Chrome にフォールバックしていたこと。`npx playwright install chromium` および `pnpm exec playwright install chromium` の両方でリビジョンのダウンロードを試みたが、セッション終了までに完了しなかった（ネットワークが遅いか、この環境でダウンロードが進んでいない）。**そのため「フォールバックブラウザが原因の見かけ上の失敗」なのか「print パイプライン自体の実バグ」なのかは未確定**。次回セッションで `pnpm exec playwright install chromium`（プロジェクトローカルの pinned バージョンで実行するのが重要）を完了させてから再検証すること。
+- 未着手（v1スコープ外、前回記録のTODO参照）: 画像0枚のゆめみ5案件・大学アプリの図版化／Figma Pluginsケーススタディの追加／Airlineヒーロー画像の高解像度化。
+
+## ページトランジション + Figma Plugins ページのビジュアル刷新（別セッションで進行中の作業を確認）
+このセッションの主作業ではないが、コミット対象に含まれるため記録。
+
+- **共有要素トランジションの拡張**: `TransitionContext.tsx` の `startTransition` が `imageSrc: string` 固定から `TransitionContent = {type:'image', src} | {type:'node', key:'figmaPluginsDeck'}` の判別共用体に変更。ホーム画面の Figma Plugins カードは静的画像ではなく実際の `PluginCardDeckThumb` コンポーネントをオーバーレイに描画したまま遷移先へ運べるようになった（`TransitionOverlay.tsx` が `type` で分岐）。
+- **Figma Plugins ページ**: 全面ヒーローセクションを追加し、遷移完了 ~100ms 後に `endTransition()` を呼んでオーバーレイから実ページへハンドオフ。
+- **`ConceptC.tsx`**: 旧 `ThumbnailScatter`（3枚固定の回転オーバーラップ）を廃止し、`PluginBentoGrid.tsx`（新規）に置き換え。users/likes のブレンドしたパーセンタイルスコアでタイルサイズ（lg/md/sm、5件未満なら full）を動的に割り当てるベントーグリッド。
+- **`PluginCardDeckThumb.tsx`**: `maxScale` prop を追加（デフォルト1=縮小のみ）。ヒーロー/オーバーレイ用に `Infinity` を渡して拡大も許容できるように。
