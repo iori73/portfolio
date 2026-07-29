@@ -361,7 +361,13 @@
     "projects": "Projects",
     "linkedIn": "LinkedIn",
     "viewProject": "View Project",
-    "present": "Present"
+    "present": "Present",
+    "caseContext": "Context & Challenge",
+    "caseGoal": "Goal",
+    "caseDeliverables": "Deliverables",
+    "caseOutcome": "Outcome",
+    "showDetail": "Show detail",
+    "hideDetail": "Hide detail"
   },
   "figmaPlugins": {
     "title": "Figma Plugins & Widgets",

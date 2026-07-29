@@ -1,59 +1,105 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { cvData, WorkExperience, Education, SkillCategory, Project } from '@/src/data/cvData';
+import { cvData, WorkExperience, WorkProject, Education, SkillCategory, Project } from '@/src/data/cvData';
 import { useLocale, useTranslations } from 'next-intl';
 import { useHeadingFont, useBodyFont } from '@/src/hooks/useFonts';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+// 日付整形と detail ブロックの組み立ては print（PDF）側と共有する。
+// ここで再定義すると両者がサイレントに乖離するため src/cv/* を参照すること。
+import { formatDateRange, formatProjectPeriod } from '@/src/cv/format';
+import { buildProjectBlocks } from '@/src/cv/selectors';
 
-// 日付範囲フォーマット関数
-function formatDateRange(startDate: string, endDate: string | 'Present', lang: 'en' | 'jp'): string {
-  const formatDate = (dateStr: string) => {
-    const [year, month] = dateStr.split('-');
-    if (lang === 'en') {
-      const monthNames = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-      ];
-      return `${monthNames[parseInt(month) - 1]} ${year}`;
-    } else {
-      return `${year}年${parseInt(month)}月`;
-    }
-  };
+// 案件カード。detail があれば展開可能、なければ静的表示
+const WorkProjectCard: React.FC<{ project: WorkProject; lang: 'en' | 'jp' }> = ({ project, lang }) => {
+  const t = useTranslations('cv');
+  const { getBodyFontClass } = useBodyFont();
+  const [open, setOpen] = useState(false);
 
-  const start = formatDate(startDate);
-  const end = endDate === 'Present' ? (lang === 'en' ? 'Present' : '現在') : formatDate(endDate);
+  const bodyClass = `text-body ${getBodyFontClass()} text-ink-secondary leading-[1.6]`;
+  const meta = (
+    <div className="flex items-baseline gap-3">
+      <span className="font-space-grotesk text-label font-semibold text-ink-tertiary uppercase tracking-[0.06em]">
+        {project.label[lang]}
+      </span>
+      <span className="font-space-grotesk text-label text-ink-tertiary">
+        {formatProjectPeriod(project.period, lang)}
+      </span>
+    </div>
+  );
 
-  return `${start} - ${end}`;
-}
+  if (!project.detail) {
+    return (
+      <div className="border-l-2 border-line-subtle pl-4 flex flex-col gap-1">
+        {meta}
+        <p className={bodyClass}>{project.summary[lang]}</p>
+      </div>
+    );
+  }
 
-// [Industry] テキストをラベルと本文に分割
-function parseProjectBullet(text: string): { label: string | null; body: string } {
-  const match = text.match(/^\[([^\]]+)\]\s(.+)$/s);
-  if (match) return { label: match[1], body: match[2] };
-  return { label: null, body: text };
-}
+  const blocks = buildProjectBlocks(project, lang);
+
+  return (
+    <Collapsible open={open} onOpenChange={setOpen} className="border-l-2 border-line-subtle pl-4">
+      <CollapsibleTrigger className="group w-full min-h-[44px] py-1 flex flex-col gap-1 text-left rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2">
+        {meta}
+        <div className="flex items-start gap-3">
+          <p className={bodyClass}>{project.summary[lang]}</p>
+          <svg
+            className="shrink-0 mt-1 size-4 text-ink-tertiary transition-transform duration-200 motion-reduce:transition-none group-data-[state=open]:rotate-90"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M6 3.5 10.5 8 6 12.5" />
+          </svg>
+        </div>
+        <span className="sr-only">{open ? t('hideDetail') : t('showDetail')}</span>
+      </CollapsibleTrigger>
+
+      <CollapsibleContent>
+        <div className="flex flex-col gap-4 pt-4 pb-2">
+          {blocks.map(({ labelKey, items }) => (
+            <div key={labelKey} className="flex flex-col gap-1.5">
+              <h4 className="font-space-grotesk text-label font-semibold text-ink-tertiary uppercase tracking-[0.06em]">
+                {t(labelKey)}
+              </h4>
+              <ul className="flex flex-col gap-1.5">
+                {items?.map((item, index) => (
+                  <li key={index} className={`${bodyClass} pl-4 relative`}>
+                    <span className="absolute left-0 text-ink-tertiary" aria-hidden="true">
+                      ·
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </CollapsibleContent>
+    </Collapsible>
+  );
+};
 
 // 職歴アイテムコンポーネント
 const WorkExperienceItem: React.FC<{ work: WorkExperience; lang: 'en' | 'jp' }> = ({ work, lang }) => {
   const { getBodyFontClass } = useBodyFont();
-  const summary = work.description[lang][0];
-  const projects = work.description[lang].slice(1);
 
   return (
     <div className="flex flex-col gap-6">
       {/* 会社ヘッダー */}
       <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-1">
         <div className="flex-1">
-          <h3 className="text-title-lg">{work.position[lang]}</h3>
+          <h3 className="text-title-lg">
+            {work.position[lang]}
+            {work.employmentType && (
+              <span className="text-ink-tertiary"> ({work.employmentType[lang]})</span>
+            )}
+          </h3>
           <p className={`text-body-lg ${getBodyFontClass()} text-ink-secondary`}>{work.company[lang]}</p>
           <p className={`text-body ${getBodyFontClass()} text-ink-tertiary`}>{work.location[lang]}</p>
         </div>
@@ -63,37 +109,14 @@ const WorkExperienceItem: React.FC<{ work: WorkExperience; lang: 'en' | 'jp' }> 
       </div>
 
       {/* サマリー */}
-      <p className={`text-body ${getBodyFontClass()} text-ink-secondary leading-[1.6]`}>{summary}</p>
+      <p className={`text-body ${getBodyFontClass()} text-ink-secondary leading-[1.6]`}>{work.summary[lang]}</p>
 
       {/* プロジェクトカード一覧 */}
-      {projects.length > 0 && (
+      {work.projects && work.projects.length > 0 && (
         <div className="flex flex-col gap-3">
-          {projects.map((item, index) => {
-            const { label, body } = parseProjectBullet(item);
-            const period = work.projectPeriods?.[index];
-            const periodStr = period
-              ? period.start === period.end
-                ? formatDateRange(period.start, period.end, lang).split(' - ')[0]
-                : formatDateRange(period.start, period.end, lang)
-              : null;
-            return (
-              <div key={index} className="border-l-2 border-line-subtle pl-4 flex flex-col gap-1">
-                <div className="flex items-baseline gap-3">
-                  {label && (
-                    <span className="font-space-grotesk text-label font-semibold text-ink-tertiary uppercase tracking-[0.06em]">
-                      {label}
-                    </span>
-                  )}
-                  {periodStr && (
-                    <span className="font-space-grotesk text-label text-ink-tertiary">
-                      {periodStr}
-                    </span>
-                  )}
-                </div>
-                <p className={`text-body ${getBodyFontClass()} text-ink-secondary leading-[1.6]`}>{body}</p>
-              </div>
-            );
-          })}
+          {work.projects.map((project) => (
+            <WorkProjectCard key={project.id} project={project} lang={lang} />
+          ))}
         </div>
       )}
 
@@ -122,7 +145,9 @@ const EducationItem: React.FC<{ education: Education; lang: 'en' | 'jp' }> = ({ 
       <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-2">
         <div className="flex-1">
           <h3 className="text-title-lg">
-            {education.degree[lang]} in {education.field[lang]}
+            {lang === 'en'
+              ? `${education.degree.en} in ${education.field.en}`
+              : `${education.field.jp} 卒業（${education.degree.jp}）`}
           </h3>
           <p className={`text-body-lg ${getBodyFontClass()}`}>
             {education.institution[lang]}

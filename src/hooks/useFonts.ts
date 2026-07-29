@@ -1,5 +1,8 @@
 'use client';
 import { useLocale } from 'next-intl';
+// The locale → font-class rules live in src/cv/fontClasses.ts as pure functions
+// so the print/PDF tree (server components, no hooks) applies the same mapping.
+import { bodyFontClass, headingFontClass } from '@/src/cv/fontClasses';
 
 /**
  * Hook for responsive font sizing with optional language-specific sizes
@@ -38,12 +41,7 @@ export const useBodyFont = () => {
   const locale = useLocale();
 
   // Body font class based on language (English: Helvetica Neue, Japanese: Noto Sans JP Light)
-  const getBodyFontClass = () => {
-    if (locale === 'jp') {
-      return 'font-noto-sans-jp font-light';
-    }
-    return 'font-helvetica-neue';
-  };
+  const getBodyFontClass = () => bodyFontClass(locale === 'jp' ? 'jp' : 'en');
 
   // Deprecated: kept for backward compatibility
   const getBodyFontStyle = () => {
@@ -61,12 +59,7 @@ export const useHeadingFont = () => {
   const locale = useLocale();
 
   // Heading font class based on language (English: default from @layer base, Japanese: Noto Sans JP Medium)
-  const getHeadingFontClass = () => {
-    if (locale === 'jp') {
-      return 'font-noto-sans-jp font-medium';
-    }
-    return ''; // English uses base layer default (Helvetica Neue Medium)
-  };
+  const getHeadingFontClass = () => headingFontClass(locale === 'jp' ? 'jp' : 'en');
 
   // Deprecated: kept for backward compatibility
   const getHeadingFontStyle = () => {

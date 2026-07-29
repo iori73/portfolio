@@ -372,7 +372,13 @@
     "projects": "プロジェクト",
     "linkedIn": "LinkedIn",
     "viewProject": "プロジェクトを見る",
-    "present": "現在"
+    "present": "現在",
+    "caseContext": "背景・課題",
+    "caseGoal": "プロジェクトゴール",
+    "caseDeliverables": "成果物",
+    "caseOutcome": "アウトカム",
+    "showDetail": "詳細を見る",
+    "hideDetail": "詳細を閉じる"
   },
   "airlineDesignSystem": {
     "title": "航空会社デザインシステム",

@@ -406,3 +406,72 @@ WebP/perfラウンドを Playwright で全ページ実巡回検証（`docs/verif
 - Figma PluginsサムネイルとAboutのD3可視化（Interests）はどちらも静的ファイルが存在しない動的Reactコンポーネントのため、プレースホルダーのまま据え置き（実装するにはブラウザ自動化での実サイトスクリーンショット取得が別途必要）。
 - **判明した制約**: `upload_assets` の `nodeId` は instance内部の子ノードID（`I<instanceId>;<originalId>` 形式）を受け付けない（`\d+:\d+` の正規表現のみ許可）。instance内の特定ノードに画像を入れる場合は、対象instanceを `detachInstance()` してから通常ノードIDでアップロードする必要がある（コンポーネントとのリンクは切れるが、ページ上の最終コンテンツ確定としては許容範囲）。
 - **判明した制約2**: `.claude/settings.json` の deny に `"Bash(curl:*)"` も入っており、画像バイトをアップロードURLへPOSTする操作がブロックされていた → ユーザーがこの行も削除して解消（`mcp__*` の件と同根の問題）。スクリーンショット閲覧のみなら `get_screenshot` の `enableBase64Response:true` でcurl不要だが、`upload_assets` へのバイナリPOSTはcurl必須。
+
+## Figma portfolio_v5 — 残り全ページ構築完了（2026-07-28）
+ユーザー指示「残り全てやって」を受け、CV・Blog・Experiment・Experiment/podcast-notes・Work配下5ケーススタディを全て `Pages` ページ配下に構築。全ページスクリーンショットで視覚検証済み。
+
+- **CTA Button** コンポーネントを新規作成（ink塗り+白pill、複数ページで再利用）
+- **CV**: cvData.ts の実データで職歴・学歴・スキル・プロジェクトを完全再現（Tag/CTAButtonコンポーネント再利用）
+- **Blog**: note/Medium記事グリッド（ライブRSS依存のため代表的なダミー記事で構成、実データではない旨は明記）
+- **Experiment**: Podcast Notes導線セクション（カテゴリタグ9個、カバー画像プレースホルダー行）
+- **Experiment/podcast-notes**: ダークグラデーションHero(Knowledge Constellation) + Insights統計 + Browse Notes(カテゴリカラー実変数使用の3サンプルカード) + Pipelineステップ
+- **Work: Ukiyoe**（561行の大型ページ）: Hero+情報バー+セクションnav+Overview全文、Research/Design Process/Hand-Coloring/AI論考/Reflectionは見出し+代表段落+プレースホルダーに縮約（全サブセクション完全再現は対象外と判断）。Technical Highlightsのみ実カード4枚を完全再現
+- **Work: Figma Plugins**: Hero band(統計3/10.9k+) + 公開済み3プラグインの実データ(ユーザー数・いいね数・タグ・アクセントカラー)をフルカード化
+- **Work: Google UX**: 「見出し+画像ギャラリー」構造の実ページ特性に合わせ、本文なし・セクション/サブセクションごとに実際の画像枚数分のプレースホルダーを配置(全41画像→代表数で再現)
+- **Work: Gym Dashboard**: TL;DR(Problem/Solution+3統計)、System Flow、Design Process(3ステップ)、Solution(Before/After比較・OCRエンジン・CI/CD障害史)、Impact & Reflectionを実データで構築
+- **Work: Airline Design System**: NDA確認済み(実クライアント名は一切コード内に存在しないことをサブエージェントで検証済み)。Overview/Design Process(競合調査・トークンアーキテクチャ)/Solution(399変数・6コレクション・12プラグイン4カテゴリ)/Impact & Reflectionを構築
+- **手法**: 5ケーススタディは並列Exploreサブエージェント5体でページ構造・実コピー・画像枚数を抽出してから構築（800行超のページを自分で全文読まずに効率化）
+- **共通の判断**: 800行超級の大型ケーススタディページは全サブセクション・全画像を完全再現せず、見出し構造+代表的な実コピー+カスタムビジュアルはプレースホルダーという縮尺で統一。理由は全て完全再現すると際限なくスコープが膨らむため。ユーザーが特定ページの深掘りを望めば個別に肉付け可能。
+
+## Figma portfolio_v5 — 全ページのSP版構築 + フレーム重なり修正（2026-07-28）
+ユーザーから2点の指摘: ①フレームが重なっている ②全ページ分のSP版・インタラクションは本当にあるのか。
+
+- **重なりの原因と修正**: フレーム作成時のx/y座標を実際の高さを考慮せず決め打ちしていたため、特にWork配下4ケーススタディ（Figma Plugins/Google UX/Gym Dashboard/Airline）が縦に重なっていた。全22フレームを実測幅+200pxギャップで1列に再配置し、物理的に重なり得ない構造に修正。
+- **SP版の状況を正直に報告**: 作業時点でSP版があったのはHome/Aboutの2つのみだった → ユーザー確認の上、**残り11ページ全てにSP版（375px）を追加**（CV, Blog, Experiment, Podcast Notes, Work配下5ケーススタディ）。各ケーススタディは「サイドバーnav非表示・メタグリッド4→2列・グリッド1列化」など実コードのモバイルブレークポイント挙動に合わせて再構成。Timeline RowのStacked variant、Project Cardのtag wrapなど既存の仕組みをそのまま活用。
+- **インタラクションの扱い**: ユーザー判断で「静止画面のままでよい」に決定 → ホバー・アニメーション・スクロール連動などは一切実装せず、全て静的スナップショットのまま。
+- **副産物として発見・削除したノイズ**: Pagesページに私の作業と無関係な浮遊ノードが3つ存在（①Figma公式の「Config 2026 playground」テンプレートフレーム、②③Figma Pluginsのhero bandが3重複製された不明フレーム）。ユーザー確認の上、3つとも削除。
+- **最終状態**: Pagesページ配下は22フレーム（デスクトップ11 + モバイル11）、重なりなし、浮遊ノイズなし。
+
+## /cv にゆめみ期（2024/06〜2025/12）の詳細ポートフォリオを追加（2026-07-28）
+Notion エクスポート `~/Downloads/ゆめみポートフォリオ` を一次資料として、現行 CV より前のゆめみ期を /cv に反映。
+
+- **一次資料の制約2点**: ①エクスポートはブラウザの「Save Page As」で、`attachment_*.png`（Figma スクショ・コンポーネント一覧・スライド図版）は参照だけ残り**実ファイル0件** → 画像を使うケーススタディページ（/work/*）は不可と判断し、CV内の展開カード方式を選択。②内容の大半が公開不可（クライアント実名／同僚の氏名・メール／実名入りSlack投稿／社内URL・ZACコード／**社内eNPSスコアと従業員の自由記述**）→ 匿名化した「実質」のみ採用。
+- **判明した齟齬（一次資料で修正）**: 現行 cvData.ts のゆめみ在籍は 2025-04→2025-12・案件2件だったが、実績DBでは最初の案件が **2024/06** 開始・計6件。学歴の卒業が 2025-03 のため、**インターン（2024-06→2025-03）→ 正社員（2025-04→2025-12）の2エントリに分割**（ユーザー確認済み）。
+- **データモデル移行**: `WorkExperience` の壊れやすい並行配列（`description[]` の [0]=summary/[1+]=バレット ＋ index対応の `projectPeriods[]` ＋ 本文に埋め込んだ `[Industry]` ラベルを正規表現で剥がす）を廃止し、**`WorkProject` を第一級オブジェクト化**（label / period / summary / detail{context,goal,deliverables,outcome}）。`cv/page.tsx` の `parseProjectBullet()` は不要になり削除。既存の Accenture 2案件も同じ文法に移行。
+- **UI**: リポジトリで初めて `components/ui/collapsible.tsx`（`@radix-ui/react-collapsible`、インストール済み・全リポジトリ未使用だった）を採用。閉状態は従来と同じ1行、開くと4ブロック。`detail` 無しの案件（Accenture 2件・音声PUSH②）は従来どおり静的表示のフォールバック。tailwind.config.js に accordion keyframes が無く framer-motion も未導入のため、**高さアニメは行わずシェブロンの transform のみ**（`motion-reduce:transition-none` 付き）。
+- **掲載5案件（匿名化）**: 音声PUSH①[大手電機] / LINEミニアプリLP[化粧品] / デザインシステム構築[公共・デジタル] / お天気調査[社内] / ACRO5[建築テック]。アジャイルラボ_第2期は素材が内省ログ1行のみのため不掲載。お天気調査は**数値・回答率・eNPS・自由記述・ギルド名を一切書かず**概要のみ。
+- **ユーザー確認で確定した数字**: ACRO5 は一次資料内で「77画面中20画面」「40〜50画面」「11画面以上」の3つが併存 → **77画面中20画面**を採用。音声PUSHは3フェーズあり仕事の中身が違うため**①2024-07→2025-01（Figmaライブラリ整備）と②2025-06→2025-10（音声通知UI設計）に分割**。
+- **i18n**: `cv` 名前空間に UI ラベル6キー追加（caseContext/caseGoal/caseDeliverables/caseOutcome/showDetail/hideDetail）。本文は従来どおり cvData.ts の `{en,jp}` に置く（リポジトリは配列も t.raw() も不使用のため）。
+- **検証**: `pnpm build` で `/[locale]/cv`・`/[locale]/about` とも**静的（●）を維持**。EN/JP × デスクトップ1280 / モバイル390（CDP device emulation）で巡回 — 横あふれ0、トリガー高さ最小112px（44px超）、`aria-expanded`/`aria-controls` 付き native button でキーボード開閉可、コンソールエラーは localhost の Vercel Analytics 404 のみ。**機密語グレップ（クライアント実名・ブランド名・同僚名・eNPS・ZAC 等）は0件**。
+- 教訓: Notion の「Save Page As」エクスポートは**本文テキストしか残らない**（画像は全滅）。画像が要る用途なら Notion 公式の Export（Markdown & CSV / HTML）を使うか、個別に画像を保存してもらう必要がある。
+- 未反映（要ユーザー判断）: `personalInfo.summary` はゆめみ期を2案件で要約したままで5案件を反映していない（一人称の自己紹介コピーのため AI が推測で書き換えない方針）。`skills` も5項目のままで OOUI／データ可視化／STUDIO／Google Colab 未追加。
+
+## Figma portfolio_v5 — 実画像を全ケーススタディに反映（2026-07-28）
+ユーザーから「まだ全然画像が入っていない」との指摘 → 調査の結果、Figma Plugins/Airline/Gym Dashboard/Google UX/Experimentに実画像ファイルが存在するのに未アップロードだったことが判明。全て反映。
+
+- **Figma Plugins**: カバー3枚(pptx-cover/pm-cover/bsi-cover.webp)をデスクトップ+モバイル計6箇所に実画像化
+- **Airline Design System**: hero(system-structure.webp)・roadmap・competitive-1〜4・token-architectureの計7画像をデスクトップ+モバイル計14箇所に反映
+- **Gym Dashboard**: hero(gcsd_thumbnail.webp)・Before/After(AppleShortcut_Automation_*.webp)・system flow図(gym-system-diagram.svg)を反映。**この過程で発見したバグ**: デスクトップのBefore/After画像を探すスクリプトのロジックミスで、本来の372×160矩形ではなく小さいテキストラベル(「Initial design」等)に誤って画像fillを適用していた → 正しいノードIDを再取得して修正
+- **Google UX**: 実画像42枚中36枚(02〜31.webp, 36〜41.webp — 32〜35.webpはコード側でも未使用のため対象外)を一括アップロード(count=36で36個のアップロードURLを取得→bashで並列curl POST→1回のuse_figmaスクリプトで全36枚を対応する矩形へ移動+モバイル用に複製)。72回分の作業を36回のアップロードに削減。
+- **Experiment**: イラストSVG(Radial cluster tree.svg)をデスクトップ+モバイルに反映
+- **判明した重要な事実**: `get_screenshot`ツールが一部の画像で**真っ白にレンダリング**する不具合があり、一時「画像が反映されていない」と誤認しかけた。ユーザーに実際のFigmaアプリでの表示を確認してもらったところ、画像は正しく表示されていることが判明 → 原因は`get_screenshot`側のレンダリング/キャッシュ不具合であり、アップロードや実ファイルの問題ではなかった。以降はこの限界を踏まえ、fillのデータ構造チェックを主な検証手段とした。
+- **SVGアップロードの仕様**: `upload_assets`は`nodeId`指定時はraster画像のみ対応(SVGは非対応)。SVGは常に「現在のページ」(今回はCoverページ)に新規フレームとして作成されるため、作成後に`insertChild`で目的の位置へ移動し、`clone()`でモバイル用の複製を作る手順が必要。
+
+## 応募提出用 PDF ポートフォリオ — 方針決定（2026-07-29）
+「/cv には画像がなく、採用担当・応募先に出す資料として弱い。本格的な画像とより詳細な文章を備えた PDF 版が欲しい」という要望に対し、探索の上で方針を確定。
+
+- **調査結果: PDF 基盤は完全にゼロ**。`playwright`/`puppeteer`/`@react-pdf/renderer` いずれも未インストール、print CSS（`@media print`/`@page`/`print:`）の使用例がリポジトリ全体で0件、`/print` ルートも無し。
+- **生成方法は「コード生成」に決定**（専用 print ルート + Playwright `page.pdf()`）。Figma 手組みは `cvData.ts` との二重管理になり CV 更新のたびに手作業が発生するため不採用。`pnpm generate:pdf` で EN/JP 2版を何度でも再生成できる状態を目指す。
+- **掲載対象は「仕事のみ、personal は入れない」**（ユーザー判断）→ Ukiyoe / Gym Dashboard / Google UX は除外。**クライアント名はサイトと同じく全て匿名**（PDF は転送・保存されやすく統制が効かないため）。
+- **v1 のスコープ = 表紙 + レジュメ2ページ + Airline Design System 3ページ**。画像0枚の案件は後回し（下記TODO）。
+- **判明した技術的な壁3つ**:
+  1. **Collapsible 問題** — `WorkProjectCard` の `CollapsibleContent` は閉じている間 DOM からアンマウントされる。素朴に `page.pdf()` すると今回追加した detail が全部消える。→ `forceOpen` でも複製でもなく、**乖離してはいけないロジックだけ `src/cv/{format,selectors,fontClasses}.ts` に抽出**して print 側と共有する方針。
+  2. **A4 は 793.7 CSS px で `md:` ブレークポイント（768px）を超える** → 印刷時もデスクトップのトークン（`--text-size-4xl: 56px`）が生きてしまう。→ `:root` や `globals.css` を触らず **`.pdf-doc` ラッパーに `--text-size-*` を置いて継承で勝たせる**（ライブサイトへの影響が構造的にゼロ、かつ画面プレビュー可能）。
+  3. **フォントが3系統に分裂** — `globals.css:17` のリモート Google Fonts `@import` が実際の Space Grotesk / Noto Sans JP の供給元で `next/font` 変数は上書きされ死んでいる。EN 本文はシステムの Helvetica Neue で埋め込まれない。→ print ツリー限定で **EN本文を自前ホストの Switzer に、Space Grotesk / Noto を `var(--font-*)`（next/font のビルド時セルフホスト）に**差し替え、オフラインでも同一 PDF になるようにする。
+- **画像の穴（最大の課題）**: personal を除外した結果、画像を持つ work 案件がほぼ無い。Airline は7枚あるがヒーローが **784×716 しかなく全資産中で最弱かつ最重要**。ゆめみ5案件と大学校友アプリは **0枚**（Notion エクスポートで画像が全滅）。
+
+### 残 TODO（v1 スコープ外）
+1. **画像0枚の work 案件の図版化** — ゆめみ5案件（音声PUSH①②／LINEミニアプリLP／デザインシステム構築／お天気調査／ACRO5）＋大学校友アプリ。クライアント UI そのものは匿名化方針と矛盾するため使えず、**手法を示す匿名オリジナル図版を自作**する方針（トークン階層図／コンポーネント一覧12種／OOUI オブジェクト図／195画面の遷移マップ／テンプレート×Variants の図解）。ユーザーが仕事参加プロジェクトを現在ここで整理中: https://www.figma.com/design/mL8A4ftR6Hh5GlMjxSivtK/my-AI-workflow-summary?node-id=27-273
+2. **Figma Plugins のケーススタディを PDF に追加** — 「仕事」扱いで掲載確定（アクセンチュアで航空デザインシステム用に作った12本、Figma Community で公開済み）。**Airline に次いで画像がありNDA問題も無い唯一の案件**なので、v1 の形式が固まり次第すぐ足せる。ただし現状136語なので要加筆。
+3. **Airline `system-structure.webp` の高解像度化** — Figma 実ファイルから ≥2400px 再書き出し、またはインライン SVG/JSX で作り直す（`components/GymSystemDiagram.tsx` に前例あり）。2倍ルールだと現状 104mm までしか正直に置けない。サイト側の品質も同時に上がる。
+4. `globals.css:79-90` の `Merriweather Sans Local` の `@font-face` パスが2つとも404（実ファイルは `public/fonts/Merriweather_Sans/` に1階層深い）。どこからも参照されていない死んだ宣言だが、直すなら別コミットで。
