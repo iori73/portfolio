@@ -80,10 +80,11 @@ const AboutPage: React.FC = () => {
             </div>
             <div>
               <p className={`text-title font-switzer font-medium mb-1`}>
-                {job.position[locale]} — {job.company[locale]}
+                {job.position[locale]}
+                {job.employmentType && ` (${job.employmentType[locale]})`} — {job.company[locale]}
               </p>
               <p className={`text-body ${getBodyFontClass()} text-ink-secondary leading-[1.6]`}>
-                {job.description[locale][0]}
+                {job.summary[locale]}
               </p>
             </div>
           </div>
@@ -100,7 +101,9 @@ const AboutPage: React.FC = () => {
             </div>
             <div>
               <p className={`text-title font-switzer font-medium mb-1`}>
-                {edu.degree[locale]} — {edu.institution[locale]}
+                {locale === 'jp'
+                  ? `${edu.institution[locale]}　${edu.field[locale]}`
+                  : `${edu.institution[locale]} — ${edu.field[locale]}`}
               </p>
               <p className={`text-body ${getBodyFontClass()} text-ink-secondary leading-[1.6]`}>
                 {edu.description?.[locale]}

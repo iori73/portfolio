@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import PluginCard from './PluginCard';
+import PluginBentoGrid from './PluginBentoGrid';
 import { plugins, formatUsers } from './pluginData';
 
 function HeroGraphicSVG() {
@@ -174,63 +174,6 @@ function HeroGraphicSVG() {
   );
 }
 
-const SCATTER_CARDS = [
-  {
-    src: '/work/figma-plugins/bsi-cover.webp',
-    alt: 'Bulk Screenshot Importer',
-    rotate: -11,
-    tx: -50,
-    ty: 10,
-    z: 1,
-  },
-  {
-    src: '/work/figma-plugins/pm-cover.webp',
-    alt: 'Perfect Markdown',
-    rotate: 7,
-    tx: 48,
-    ty: 12,
-    z: 2,
-  },
-  {
-    src: '/work/figma-plugins/pptx-cover.webp',
-    alt: 'PPTX to Figma',
-    rotate: -2,
-    tx: 0,
-    ty: 0,
-    z: 3,
-  },
-];
-
-function ThumbnailScatter() {
-  return (
-    <div className="relative w-[300px] h-[300px] flex-shrink-0 mx-auto md:mx-0">
-      {SCATTER_CARDS.map((card) => (
-        <div
-          key={card.alt}
-          className="absolute rounded-xl overflow-hidden"
-          style={{
-            width: 180,
-            height: 112,
-            left: `calc(50% - 90px + ${card.tx}px)`,
-            top: `calc(50% - 56px + ${card.ty}px)`,
-            transform: `rotate(${card.rotate}deg)`,
-            zIndex: card.z,
-            boxShadow: '0 4px 20px rgba(0,0,0,0.18), 0 1px 4px rgba(0,0,0,0.10)',
-          }}
-        >
-          <Image
-            src={card.src}
-            alt={card.alt}
-            fill
-            sizes="180px"
-            className="object-cover"
-          />
-        </div>
-      ))}
-    </div>
-  );
-}
-
 // Decorative "pop" background graphic (blobs, flowers, checkerboard, dots).
 // Hidden for now — it clashes with the intended personal brand. The
 // HeroGraphicSVG component above is kept in the file so it can be re-enabled
@@ -282,7 +225,7 @@ export default function ConceptC() {
             </div>
           </div>
 
-          <ThumbnailScatter />
+          <PluginBentoGrid plugins={plugins} />
         </div>
       </div>
 

@@ -46,31 +46,7 @@ Iori Kawano の個人ポートフォリオサイト。バイリンガル（EN/JP
 
 ## デザイン/スタイル規約
 
-> 詳細は [docs/architecture/design-system.md](docs/architecture/design-system.md) を参照。
-
-### カラートークン（セマンティック）
-| 用途 | Tailwind クラス | CSS 変数 |
-|---|---|---|
-| 見出し・主要テキスト | `text-ink` | `--ink: #0A0A0A` |
-| 副次テキスト | `text-ink-secondary` | `--ink-secondary: #333333` |
-| ラベル・キャプション | `text-ink-tertiary` | `--ink-tertiary: #71717a` |
-| CTA テキスト | `text-ink-muted` | `--ink-muted: rgba(0,0,0,0.56)` |
-| ページ背景 | `bg-surface` | `--surface: #fcfbfc` |
-| タグ背景等 | `bg-surface-muted` | `--surface-muted: #f5f5f7` |
-| コンテンツ区切り | `border-line-subtle` | `--line-subtle: #e4e4e7` |
-| セクション区切り | `border-line-section` | `--line-section: #d4d4d8` |
-
-### フォント
-- **見出し（EN）**: Switzer Medium — `@layer base` で自動適用 (セルフホスト WOFF2, Fontshare)
-- **見出し（JP）**: `${getHeadingFontClass()}` → `font-noto-sans-jp font-medium`
-- **本文（EN）**: `${getBodyFontClass()}` → `font-helvetica-neue`
-- **本文（JP）**: `${getBodyFontClass()}` → `font-noto-sans-jp font-light`
-- **タグ・キャプション**: `font-space-grotesk`
-
-### レスポンシブ
-- **Mobile**: default (< 768px)
-- **Desktop**: `md:` prefix (>= 768px)
-- モバイルファーストで設計
+> カラートークン・フォント・レスポンシブブレークポイントの詳細は [docs/architecture/design-system.md](docs/architecture/design-system.md) を参照。
 
 ---
 
@@ -160,9 +136,3 @@ CV・ケーススタディの編集時は **`src/data/projects.json`** を参照
 ## 過去の学び
 
 > 詳細は [lessons.md](lessons.md) を参照。
-
-### 2026-02-23: デザインシステム整理
-- **問題**: インライン `fontFamily`/`fontWeight` style が各ページに散在し、`getHeadingFontClass()` と二重管理になっていた
-- **教訓**: フォントスタイルは hooks（`useFonts.ts`）で一元管理し、インライン style は使わない
-- **問題**: hardcoded hex カラーが散在（`#0A0A0A`, `#333333`, `#656d76` 等）
-- **教訓**: セマンティックカラートークン（`text-ink`, `text-ink-secondary`）を優先使用する

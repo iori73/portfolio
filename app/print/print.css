@@ -1,0 +1,126 @@
+/*
+ * Print document primitives — loaded ONLY by app/print/layout.tsx.
+ *
+ * Design rule: never touch :root and never add @media print to globals.css.
+ * CSS custom properties resolve by inheritance, so putting the --text-size-*
+ * tokens on .pdf-doc beats both :root and the @media (min-width:768px) block in
+ * globals.css. Effect on the live site is structurally zero, and the print
+ * layout stays previewable on screen.
+ *
+ * Why the override is mandatory: an A4 page box is 793.7 CSS px wide at 96dpi,
+ * which is ABOVE the 768px `md:` breakpoint — so without this, printing would
+ * use the desktop scale (--text-size-4xl: 56px) on a 210mm page.
+ */
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+.pdf-doc {
+  --pdf-page-w: 210mm;
+  /* NOT 297mm: a box exactly equal to the sheet height plus `break-after: page`
+     makes Chromium emit a spurious blank page from sub-pixel rounding. */
+  --pdf-page-h: 296.9mm;
+  --pdf-mx: 18mm;
+  --pdf-mt: 16mm;
+  --pdf-mb: 14mm;
+
+  /* Print type scale. One block re-scales every semantic size class. */
+  --text-size-xs: 7.5pt;
+  --text-size-sm: 8.5pt;
+  --text-size-base: 10pt;
+  --text-size-lg: 11.5pt;
+  --text-size-xl: 13pt;
+  --text-size-2xl: 16pt;
+  --text-size-3xl: 22pt;
+  --text-size-4xl: 30pt;
+
+  /* globals.css sets body { background: #fcfbfc }, which prints as a faint
+     tint on every sheet under printBackground:true and can band on some
+     printers. Force true white. */
+  background: #fff;
+  color: var(--ink);
+}
+
+.pdf-page {
+  position: relative;
+  box-sizing: border-box;
+  width: var(--pdf-page-w);
+  height: var(--pdf-page-h);
+  padding: var(--pdf-mt) var(--pdf-mx) var(--pdf-mb);
+  background: #fff;
+  overflow: hidden; /* generator asserts nothing actually overflows */
+  break-after: page;
+}
+
+.pdf-page:last-child {
+  break-after: auto;
+}
+
+/* Auto-flowing page: used for the résumé, which grows as cvData.ts grows.
+   Spilling onto another sheet is the correct failure mode there; clipping is not. */
+.pdf-flow {
+  height: auto;
+  min-height: var(--pdf-page-h);
+  overflow: visible;
+  break-after: auto;
+}
+
+.pdf-block {
+  break-inside: avoid;
+}
+
+.pdf-doc p,
+.pdf-doc li {
+  orphans: 3;
+  widows: 3;
+}
+
+.pdf-page__footer {
+  position: absolute;
+  left: var(--pdf-mx);
+  right: var(--pdf-mx);
+  bottom: 7mm;
+  display: flex;
+  justify-content: space-between;
+  font-size: 7.5pt;
+  color: var(--ink-tertiary);
+}
+
+/* Figures: keep backgrounds/diagram fills under printBackground:true. */
+.pdf-figure {
+  break-inside: avoid;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+.pdf-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Banded excerpt of a very tall screenshot — same idea as ClampedImage on the
+   airline case-study page. */
+.pdf-figure--band img {
+  height: var(--band-h, 42mm);
+  object-fit: cover;
+  object-position: top;
+}
+
+/* Screen preview only: a grey desk so page edges are visible while iterating. */
+@media screen {
+  .pdf-doc {
+    background: #e9e9ee;
+    padding: 24px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .pdf-page {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+  }
+}

@@ -1,11 +1,13 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { MoveUpRight } from 'lucide-react';
 import BackToTopButton from '@/src/compositions/BackToTopButton';
 import { useJPFontSize, useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
 import ConceptC from '@/components/work/figma-plugins/ConceptC';
+import PluginCardDeckThumb from '@/components/work/figma-plugins/PluginCardDeckThumb';
+import { usePageTransition } from '@/src/contexts/TransitionContext';
 
 export default function FigmaPluginsPage() {
   const t = useTranslations('figmaPlugins');
@@ -14,14 +16,34 @@ export default function FigmaPluginsPage() {
   const { getBodyFontClass } = useBodyFont();
   const { getHeadingFontClass } = useHeadingFont();
 
+  const { state: transitionState, endTransition } = usePageTransition();
+
+  useEffect(() => {
+    if (transitionState.phase === 'navigating') {
+      const timeout = setTimeout(() => endTransition(), 100);
+      return () => clearTimeout(timeout);
+    }
+  }, [transitionState.phase, endTransition]);
+
   const bodyTextClass = `${getBodyFontClass()} tracking-[0.2px] ${jpFontSize('text-body-base', 'text-body-lg')}`;
 
   return (
     <div className={`my-24 md:mt-28 md:mb-16 ${getBodyFontClass()}`}>
+      <BackToTopButton />
+
+      {/* Hero */}
+      <section className="mb-0 md:mb-12 full-bleed">
+        <div className="w-full">
+          <div className="w-full aspect-[8/5] bg-[#F5F5F7] overflow-hidden relative">
+            <PluginCardDeckThumb maxScale={Infinity} />
+          </div>
+        </div>
+      </section>
+
       <div className="w-full">
 
         {/* Project Header */}
-        <div className="mb-12">
+        <div className="mb-12 mt-6 md:mt-12">
           <span className="font-space-grotesk text-label text-ink-tertiary">
             Work
           </span>
@@ -80,8 +102,6 @@ export default function FigmaPluginsPage() {
         {/* Gallery */}
         <ConceptC />
       </div>
-
-      <BackToTopButton />
     </div>
   );
 }

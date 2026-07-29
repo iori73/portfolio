@@ -108,7 +108,7 @@ function CardContent({ plugin }: { plugin: (typeof DECK)[number] }) {
             src={plugin.cover}
             alt={plugin.name}
             fill
-            sizes={`${IMG_W}px`}
+            sizes="400px"
             className="object-cover object-top"
           />
         ) : (
@@ -149,7 +149,14 @@ function CardContent({ plugin }: { plugin: (typeof DECK)[number] }) {
   );
 }
 
-export default function PluginCardDeckThumb() {
+interface PluginCardDeckThumbProps {
+  // Caps how far the cluster scales up to fill a larger container (e.g. a
+  // full-bleed hero). Home keeps the default of 1 (shrink-to-fit only, never
+  // enlarge); pass Infinity to let it grow and fill any container size.
+  maxScale?: number;
+}
+
+export default function PluginCardDeckThumb({ maxScale = 1 }: PluginCardDeckThumbProps) {
   const [active, setActive] = useState<number | null>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
@@ -176,12 +183,12 @@ export default function PluginCardDeckThumb() {
     const el = wrapRef.current;
     if (!el) return;
     const update = () =>
-      setScale(Math.min(1, el.clientWidth / CLUSTER_W, el.clientHeight / CLUSTER_H));
+      setScale(Math.min(maxScale, el.clientWidth / CLUSTER_W, el.clientHeight / CLUSTER_H));
     update();
     const ro = new ResizeObserver(update);
     ro.observe(el);
     return () => ro.disconnect();
-  }, []);
+  }, [maxScale]);
 
   return (
     <div

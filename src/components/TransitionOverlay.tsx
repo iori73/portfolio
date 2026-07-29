@@ -4,6 +4,7 @@ import { useEffect, useRef, useLayoutEffect, useMemo } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { usePageTransition } from '@/src/contexts/TransitionContext';
+import PluginCardDeckThumb from '@/components/work/figma-plugins/PluginCardDeckThumb';
 
 export default function TransitionOverlay() {
   const { state, setPhase } = usePageTransition();
@@ -99,7 +100,7 @@ export default function TransitionOverlay() {
     >
       <div className="page-transition-bg" />
 
-      {state.imageSrc && hero && (
+      {hero && (
         <div
           ref={imageRef}
           className="page-transition-image"
@@ -108,16 +109,21 @@ export default function TransitionOverlay() {
             left: hero.left,
             width: hero.width,
             height: hero.height,
+            backgroundColor: state.content.type === 'node' ? '#F5F5F7' : undefined,
           }}
         >
-          <Image
-            src={state.imageSrc}
-            alt=""
-            fill
-            sizes="100vw"
-            className="object-cover"
-            priority
-          />
+          {state.content.type === 'image' ? (
+            <Image
+              src={state.content.src}
+              alt=""
+              fill
+              sizes="100vw"
+              className="object-cover"
+              priority
+            />
+          ) : (
+            <PluginCardDeckThumb maxScale={Infinity} />
+          )}
         </div>
       )}
     </div>
