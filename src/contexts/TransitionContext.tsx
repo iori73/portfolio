@@ -9,17 +9,21 @@ interface SourceRect {
   height: number;
 }
 
+// A transition can fly a plain image, or a named custom component (e.g. the
+// Figma Plugins card deck) whose rendering TransitionOverlay looks up by key.
+export type TransitionContent = { type: 'image'; src: string } | { type: 'node'; key: 'figmaPluginsDeck' };
+
 interface TransitionState {
   isTransitioning: boolean;
   phase: 'idle' | 'expanding' | 'navigating' | 'fading';
-  imageSrc: string;
+  content: TransitionContent;
   sourceRect: SourceRect | null;
   targetUrl: string;
 }
 
 interface TransitionContextType {
   state: TransitionState;
-  startTransition: (imageSrc: string, rect: SourceRect, url: string) => void;
+  startTransition: (content: TransitionContent, rect: SourceRect, url: string) => void;
   setPhase: (phase: TransitionState['phase']) => void;
   endTransition: () => void;
 }
@@ -27,7 +31,7 @@ interface TransitionContextType {
 const initialState: TransitionState = {
   isTransitioning: false,
   phase: 'idle',
-  imageSrc: '',
+  content: { type: 'image', src: '' },
   sourceRect: null,
   targetUrl: '',
 };
@@ -37,11 +41,11 @@ const TransitionContext = createContext<TransitionContextType | undefined>(undef
 export function TransitionProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<TransitionState>(initialState);
 
-  const startTransition = useCallback((imageSrc: string, rect: SourceRect, url: string) => {
+  const startTransition = useCallback((content: TransitionContent, rect: SourceRect, url: string) => {
     setState({
       isTransitioning: true,
       phase: 'expanding',
-      imageSrc,
+      content,
       sourceRect: rect,
       targetUrl: url,
     });

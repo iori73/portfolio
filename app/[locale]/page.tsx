@@ -1,7 +1,6 @@
 'use client';
 import { useRef } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
 import { useJPFontSize, useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
 import { usePageTransition } from '@/src/contexts/TransitionContext';
@@ -15,6 +14,7 @@ export default function Home() {
   const { getHeadingFontClass, getHeadingFontStyle } = useHeadingFont();
   const { startTransition } = usePageTransition();
   const ukiyoeImageRef = useRef<HTMLDivElement>(null);
+  const figmaPluginsImageRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className="mt-24 md:mt-28 md:mb-16">
@@ -52,7 +52,7 @@ export default function Home() {
             const rect = ukiyoeImageRef.current?.getBoundingClientRect();
             if (!rect) return;
             const imageSrc = locale === 'jp' ? '/work/ukiyoe/thumbnail-jp.webp' : '/work/ukiyoe/thumbnail-en.webp';
-            startTransition(imageSrc, rect, '/work/ukiyoe');
+            startTransition({ type: 'image', src: imageSrc }, rect, '/work/ukiyoe');
           }}
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
@@ -60,7 +60,7 @@ export default function Home() {
               const rect = ukiyoeImageRef.current?.getBoundingClientRect();
               if (!rect) return;
               const imageSrc = locale === 'jp' ? '/work/ukiyoe/thumbnail-jp.webp' : '/work/ukiyoe/thumbnail-en.webp';
-              startTransition(imageSrc, rect, '/work/ukiyoe');
+              startTransition({ type: 'image', src: imageSrc }, rect, '/work/ukiyoe');
             }
           }}
         >
@@ -104,9 +104,29 @@ export default function Home() {
         </div>
 
         {/* Project 1 - Figma Plugins */}
-        <Link href="/work/figma-plugins" className="block mb-16">
+        <div
+          className="block mb-16 cursor-pointer hover:opacity-80"
+          role="link"
+          tabIndex={0}
+          onClick={() => {
+            const rect = figmaPluginsImageRef.current?.getBoundingClientRect();
+            if (!rect) return;
+            startTransition({ type: 'node', key: 'figmaPluginsDeck' }, rect, '/work/figma-plugins');
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              const rect = figmaPluginsImageRef.current?.getBoundingClientRect();
+              if (!rect) return;
+              startTransition({ type: 'node', key: 'figmaPluginsDeck' }, rect, '/work/figma-plugins');
+            }
+          }}
+        >
           <div className="mb-20">
-            <div className="mb-6 w-full aspect-[2/1] rounded-lg bg-[#F5F5F7] overflow-hidden">
+            <div
+              className="mb-6 w-full aspect-[2/1] rounded-lg bg-[#F5F5F7] overflow-hidden"
+              ref={figmaPluginsImageRef}
+            >
               <PluginCardDeckThumb />
             </div>
 
@@ -136,7 +156,7 @@ export default function Home() {
               {t('projects.figmaPlugins.description2')}
             </p>
           </div>
-        </Link>
+        </div>
 
       </section>
     </div>
