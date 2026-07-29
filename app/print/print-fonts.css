@@ -1,0 +1,78 @@
+/*
+ * Deterministic fonts for the print tree — scoped entirely to .pdf-doc.
+ * The live site's font loading is deliberately left untouched.
+ *
+ * Why this is needed:
+ *  - globals.css:17 pulls Space Grotesk / Noto Sans JP from fonts.googleapis.com
+ *    at runtime. The next/font instances in app/layout.tsx self-host the same
+ *    families but their CSS variables lose to the identically-named Tailwind
+ *    utilities, so the remote copy is what actually renders. A PDF render would
+ *    then need live network, and `display: swap` risks baking fallback glyphs in.
+ *  - The EN body font is the system 'Helvetica Neue' (globals.css:102), which is
+ *    not embedded. Off macOS it silently becomes Arimo/DejaVu.
+ *
+ * Specificity note: `.pdf-doc .font-space-grotesk` is (0,2,0) and cleanly beats
+ * the Tailwind utility at (0,1,0). No !important anywhere.
+ */
+
+/* Self-hosted, already in the repo (OFL). font-display:block so we never paint
+   a fallback while waiting — the generator awaits document.fonts.ready. */
+@font-face {
+  font-family: 'PDF Head';
+  src: url('/fonts/Switzer/Switzer-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'PDF Head';
+  src: url('/fonts/Switzer/Switzer-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'PDF Head';
+  src: url('/fonts/Switzer/Switzer-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: block;
+}
+
+.pdf-doc,
+.pdf-doc :is(h1, h2, h3, h4, h5, h6) {
+  font-family: 'PDF Head', sans-serif;
+}
+
+/* EN body: Switzer instead of system Helvetica Neue, so output is byte-stable
+   on any machine. Same neo-grotesk genre as the headings. */
+.pdf-doc .font-helvetica-neue {
+  font-family: 'PDF Head', sans-serif;
+}
+
+/* Point these at the next/font variables — build-time self-hosted, so the print
+   tree needs no network and matches the site's typefaces exactly. */
+.pdf-doc .font-space-grotesk {
+  font-family: var(--font-space-grotesk), sans-serif;
+}
+
+.pdf-doc .font-noto-sans-jp {
+  font-family: var(--font-noto-sans-jp), sans-serif;
+}
+
+.pdf-doc[data-lang='ja'] {
+  font-family: var(--font-noto-sans-jp), sans-serif;
+}
+
+/* Light (300) disappears at 10pt on paper. */
+.pdf-doc[data-lang='ja'] .font-light {
+  font-weight: 400;
+}
+
+.pdf-doc[data-lang='ja'] p,
+.pdf-doc[data-lang='ja'] li {
+  line-height: 1.75;
+  line-break: strict;
+}
