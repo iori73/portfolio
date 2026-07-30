@@ -6,7 +6,7 @@ import { MoveUpRight } from 'lucide-react';
 import BackToTopButton from '@/src/compositions/BackToTopButton';
 import { useJPFontSize, useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
 import ConceptC from '@/components/work/figma-plugins/ConceptC';
-import PluginCardDeckThumb from '@/components/work/figma-plugins/PluginCardDeckThumb';
+import PluginCardDeckThumb, { PLUGIN_DECK_HERO_MAX_SCALE } from '@/components/work/figma-plugins/PluginCardDeckThumb';
 import { usePageTransition } from '@/src/contexts/TransitionContext';
 
 export default function FigmaPluginsPage() {
@@ -34,8 +34,8 @@ export default function FigmaPluginsPage() {
       {/* Hero */}
       <section className="mb-0 md:mb-12 full-bleed">
         <div className="w-full">
-          <div className="w-full aspect-[8/5] bg-[#F5F5F7] overflow-hidden relative">
-            <PluginCardDeckThumb maxScale={Infinity} />
+          <div className="w-full aspect-[5/2] bg-[#F5F5F7] overflow-hidden relative">
+            <PluginCardDeckThumb maxScale={PLUGIN_DECK_HERO_MAX_SCALE} />
           </div>
         </div>
       </section>
