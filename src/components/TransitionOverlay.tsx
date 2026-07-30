@@ -4,7 +4,7 @@ import { useEffect, useRef, useLayoutEffect, useMemo } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { usePageTransition } from '@/src/contexts/TransitionContext';
-import PluginCardDeckThumb from '@/components/work/figma-plugins/PluginCardDeckThumb';
+import PluginCardDeckThumb, { PLUGIN_DECK_HERO_MAX_SCALE } from '@/components/work/figma-plugins/PluginCardDeckThumb';
 
 export default function TransitionOverlay() {
   const { state, setPhase } = usePageTransition();
@@ -16,13 +16,19 @@ export default function TransitionOverlay() {
     if (state.phase === 'idle' || typeof window === 'undefined') return null;
     const vw = window.innerWidth;
     const isMd = vw >= 768;
+    // The deck hero is a cluster of capped-size cards, not a bleeding photo like
+    // Ukiyoe's — it needs a shorter box (aspect-[8/5] left it swimming in empty
+    // vertical space once maxScale capped its growth). Must match the aspect-ratio
+    // class on the real hero container in work/figma-plugins/page.tsx exactly, or
+    // the overlay and the real DOM disagree the instant the overlay fades out.
+    const heightRatio = state.content.type === 'node' ? 2 / 5 : 5 / 8;
     return {
       top: isMd ? 112 : 96,
       left: 0,
       width: vw,
-      height: vw * (5 / 8),
+      height: vw * heightRatio,
     };
-  }, [state.phase]);
+  }, [state.phase, state.content.type]);
 
   useLayoutEffect(() => {
     if (state.phase !== 'expanding' || !imageRef.current || !state.sourceRect || !hero) return;
@@ -122,7 +128,7 @@ export default function TransitionOverlay() {
               priority
             />
           ) : (
-            <PluginCardDeckThumb maxScale={Infinity} />
+            <PluginCardDeckThumb maxScale={PLUGIN_DECK_HERO_MAX_SCALE} />
           )}
         </div>
       )}

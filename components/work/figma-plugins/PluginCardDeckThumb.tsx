@@ -149,10 +149,21 @@ function CardContent({ plugin }: { plugin: (typeof DECK)[number] }) {
   );
 }
 
+// Cap for hero usage (detail-page hero + its transition-overlay clone). Deliberately
+// NOT Infinity: on a wide viewport the full-bleed hero container is much wider than
+// the deck's natural size, and letting the cluster fill it edge-to-edge produced 3
+// oversized, heavily-shadowed cards with no breathing room — at odds with this site's
+// airy, HIG-influenced restraint (contrast the Ukiyoe hero, a single bleeding photo,
+// not a cluster of drop-shadowed objects). Capping growth keeps the deck modest and
+// centered, with real margin on wide screens. Both render sites MUST use this same
+// constant — the overlay clones the deck mid-transition, and any mismatch with the
+// real hero underneath would cause a visible size "snap" the instant it fades in.
+export const PLUGIN_DECK_HERO_MAX_SCALE = 1.5;
+
 interface PluginCardDeckThumbProps {
   // Caps how far the cluster scales up to fill a larger container (e.g. a
   // full-bleed hero). Home keeps the default of 1 (shrink-to-fit only, never
-  // enlarge); pass Infinity to let it grow and fill any container size.
+  // enlarge); pass PLUGIN_DECK_HERO_MAX_SCALE for hero usage.
   maxScale?: number;
 }
 
