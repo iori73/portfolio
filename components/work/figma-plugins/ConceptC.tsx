@@ -1,10 +1,8 @@
 'use client';
 
 import React from 'react';
-import { useTranslations } from 'next-intl';
 import PluginCard from './PluginCard';
-import PluginBentoGrid from './PluginBentoGrid';
-import { plugins, formatUsers } from './pluginData';
+import { plugins } from './pluginData';
 
 function HeroGraphicSVG() {
   return (
@@ -181,54 +179,8 @@ function HeroGraphicSVG() {
 const SHOW_HERO_GRAPHIC = false;
 
 export default function ConceptC() {
-  const t = useTranslations('figmaPlugins');
-
-  const totalUsers = plugins.reduce((sum, p) => sum + (p.users ?? 0), 0);
-
-  const stats = [
-    { value: String(plugins.length), label: 'Total tools', color: '#A259FF' },
-    { value: `${formatUsers(totalUsers)}+`, label: 'Users', color: '#1ABCFE' },
-  ];
-
   return (
     <section>
-      {/* Hero area */}
-      <div className="relative rounded-2xl overflow-hidden px-6 py-10 md:px-12 md:py-14 bg-surface-muted">
-        {SHOW_HERO_GRAPHIC && <HeroGraphicSVG />}
-
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-10 md:gap-8">
-          <div className="max-w-xl">
-            <p className="font-space-grotesk text-label tracking-wider uppercase text-[#A259FF]">
-              {t('heroTagline')}
-            </p>
-            <h2 className="text-display font-bold text-ink mt-3">
-              {t('heroTitle')}
-            </h2>
-            <p className="text-body-lg text-ink-secondary mt-4 leading-relaxed max-w-md">
-              {t('heroDescription')}
-            </p>
-
-            <div className="mt-8 flex flex-wrap gap-6">
-              {stats.map((stat) => (
-                <div key={stat.label} className="flex items-baseline gap-2">
-                  <span
-                    className="text-title-lg font-bold"
-                    style={{ color: stat.color }}
-                  >
-                    {stat.value}
-                  </span>
-                  <span className="font-space-grotesk text-caption text-ink-tertiary">
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <PluginBentoGrid plugins={plugins} />
-        </div>
-      </div>
-
       {/* Published plugins */}
       <div className="mt-12">
         <h3 className="font-space-grotesk text-label tracking-wider uppercase text-ink-tertiary mb-6">

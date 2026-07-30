@@ -8,6 +8,7 @@ import { useJPFontSize, useBodyFont, useHeadingFont } from '@/src/hooks/useFonts
 import ConceptC from '@/components/work/figma-plugins/ConceptC';
 import PluginCardDeckThumb, { PLUGIN_DECK_HERO_MAX_SCALE } from '@/components/work/figma-plugins/PluginCardDeckThumb';
 import { usePageTransition } from '@/src/contexts/TransitionContext';
+import { plugins, formatUsers } from '@/components/work/figma-plugins/pluginData';
 
 export default function FigmaPluginsPage() {
   const t = useTranslations('figmaPlugins');
@@ -26,6 +27,7 @@ export default function FigmaPluginsPage() {
   }, [transitionState.phase, endTransition]);
 
   const bodyTextClass = `${getBodyFontClass()} tracking-[0.2px] ${jpFontSize('text-body-base', 'text-body-lg')}`;
+  const totalUsers = plugins.reduce((sum, p) => sum + (p.users ?? 0), 0);
 
   return (
     <div className={`my-24 md:mt-28 md:mb-16 ${getBodyFontClass()}`}>
@@ -53,6 +55,21 @@ export default function FigmaPluginsPage() {
           <p className={`text-body-lg text-ink-secondary mt-3 max-w-2xl ${getBodyFontClass()} tracking-[0.2px]`}>
             {t('subtitle')}
           </p>
+
+          <div className="grid grid-cols-2 gap-6 mt-8 max-w-md">
+            <div>
+              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
+                Total tools
+              </span>
+              <p className="text-body-lg tracking-[0.2px]">{plugins.length}</p>
+            </div>
+            <div>
+              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
+                Users
+              </span>
+              <p className="text-body-lg tracking-[0.2px]">{formatUsers(totalUsers)}+</p>
+            </div>
+          </div>
         </div>
 
         {/* Overview */}
