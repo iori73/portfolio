@@ -64,6 +64,8 @@ export interface Project {
   period: { en: string; jp: string };
   technologies?: string[];
   link?: string;
+  /** true にすると /cv のプロジェクト一覧から除外される（データは残す） */
+  hidden?: boolean;
 }
 
 export interface Certification {
@@ -525,6 +527,8 @@ export const cvData: CVData = {
       period: { en: '2024', jp: '2024年' },
       technologies: ['GitHub Actions', 'Apple Shortcuts', 'OCR'],
       link: '/work/gym_crowd_status_dashboard',
+      // 完成度がまだ低いため /cv では非表示（/work のページ自体は公開のまま）
+      hidden: true,
     },
     {
       id: 'project-google-ux',

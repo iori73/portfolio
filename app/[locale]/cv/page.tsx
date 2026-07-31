@@ -306,9 +306,11 @@ export default function CVPage() {
       <section className="pt-4 md:pt-16 pb-4 md:pb-16">
         <h2 className="text-headline mb-8">{t('projects')}</h2>
         <div className="flex flex-col gap-12">
-          {cvData.projects.map((project) => (
-            <ProjectItem key={project.id} project={project} lang={lang} />
-          ))}
+          {cvData.projects
+            .filter((project) => !project.hidden)
+            .map((project) => (
+              <ProjectItem key={project.id} project={project} lang={lang} />
+            ))}
         </div>
       </section>
 
