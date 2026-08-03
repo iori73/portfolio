@@ -207,7 +207,7 @@ export default function KushiDangoShowcase({ locale }: { locale: string }) {
           <div className="relative flex-1 h-full overflow-hidden">
             <img
               src="/work/ukiyoe/dango-photo.webp"
-              alt="Kushi-dango — three-color mochi"
+              alt="Kushi-dango: three-color mochi"
               className="absolute inset-0 w-full h-full object-cover"
             />
           </div>

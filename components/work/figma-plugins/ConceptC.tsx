@@ -184,7 +184,7 @@ export default function ConceptC() {
       {/* Published plugins */}
       <div className="mt-12">
         <h3 className="font-space-grotesk text-label tracking-wider uppercase text-ink-tertiary mb-6">
-          Published — {plugins.length} tools
+          Published: {plugins.length} tools
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {plugins.map((plugin) => (
