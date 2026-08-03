@@ -7,6 +7,11 @@ export interface CVData {
     email: string;
     website?: string;
     summary: { en: string; jp: string };
+    /**
+     * Résumé-only opening. The site summary is a position statement; a résumé
+     * is screened in about thirty seconds, so this one states scope instead.
+     */
+    resumeSummary?: { en: string; jp: string };
   };
   workExperience: WorkExperience[];
   education: Education[];
@@ -21,6 +26,11 @@ export interface WorkProject {
   label: { en: string; jp: string }; // 業界ラベル（NDAのためクライアント実名は使わない）
   period: { start: string; end: string | 'Present' };
   summary: { en: string; jp: string };
+  /**
+   * One-line condensation for the résumé PDF, where a full summary does not fit.
+   * Omit and the résumé falls back to the first sentence of `summary`.
+   */
+  resumeLine?: { en: string; jp: string };
   detail?: {
     context?: { en: string[]; jp: string[] }; // 背景・課題
     goal?: { en: string[]; jp: string[] }; // プロジェクトゴール
@@ -87,8 +97,12 @@ export const cvData: CVData = {
     email: 'iori730002204294@gmail.com',
     website: 'https://iori-kawano.vercel.app',
     summary: {
-      en: 'AI has made iteration fast. It has not made the two ends easier: deciding what is worth making in the first place, and the craft at the end that determines whether it holds up. Those ends, and how the result is actually experienced, are where I put my attention. I currently design system foundations for enterprise clients, along with the tooling that keeps them maintainable in practice.',
-      jp: 'AIによって反復は速くなりました。一方で、何をつくる価値があるのかを決める最初の部分と、それが本当に成立するかを決める最後のクラフトは、簡単にはなっていません。この両端と、それを人がどう体験するかにいちばん時間を使っています。現在はエンタープライズ領域で、デザインシステムの基盤と、その運用を支えるツールを設計しています。',
+      en: 'AI has made iteration fast. It has not made the two ends easier: deciding what is worth making in the first place, and the craft at the end that determines whether it holds up. Those ends, and how the result is actually experienced, are where I put most of my energy. I currently design digital services across a range of industries for enterprise clients, along with the tooling that supports how they are run.',
+      jp: 'AIによって反復は速くなりました。一方で、何をつくる価値があるのかを決める最初の部分と、それが本当に成立するかを決める最後のクラフトは簡単にはなっていません。この両端と、それを人がどう体験するかに最もエネルギーを注いでいます。現在はエンタープライズ領域で様々な領域のデジタルサービスのデザインと、その運用を支えるツールを設計しています。',
+    },
+    resumeSummary: {
+      en: 'UI/UX designer for enterprise clients, designing digital services across a range of industries along with the tooling that supports how they are run. Works from information design through to how the finished product is actually experienced. Bilingual Japanese/English.',
+      jp: 'エンタープライズ領域で、様々な業界のデジタルサービスのデザインと、その運用を支えるツールを設計する UI/UX デザイナー。情報設計から、実際に人がどう体験するかまでを担当領域とする。日英バイリンガル。',
     },
   },
   workExperience: [
@@ -127,9 +141,13 @@ export const cvData: CVData = {
             en: 'Built the token foundation and tooling for the airline\'s design system: a two-layer token architecture spanning color, typography, and spacing with multi-theme support, and custom Figma plugins for token setup, design-lint fixing, and variable migration. Sequencing migration after lint cut manual re-binding significantly.',
             jp: '航空会社のデザインシステムのトークン基盤とツールを構築。カラー・タイポグラフィ・スペーシングを対象に、マルチテーマ対応の2層トークンアーキテクチャを設計し、トークンの自動セットアップ・デザインLint修正・変数マイグレーションを担うFigmaプラグイン群を開発。「Lint→Migrate」の順序設計により、手作業の再バインドを大幅に削減した。',
           },
+          resumeLine: {
+            en: "Built the design system's token foundation, along with the tooling that supports its day-to-day use.",
+            jp: 'デザインシステムのトークン基盤と、その運用を支えるツールを構築。',
+          },
         },
       ],
-      technologies: ['Figma', 'TypeScript', 'Next.js', 'React', 'Tailwind CSS', 'shadcn/ui'],
+      technologies: ['Figma', 'Design Systems', 'Design Tokens'],
     },
     {
       id: 'work-yumemi',
@@ -163,7 +181,7 @@ export const cvData: CVData = {
           label: { en: 'Construction Tech', jp: '建築テック' },
           period: { start: '2025-03', end: '2025-07' },
           summary: {
-            en: 'Contributed to the UI renewal of a video learning platform for skilled-trade workers in the housing construction industry, on a three-person design team. Owned the search, in-progress and review, e-learning, and shared loading screens, applying OOUI methodology and gamification design through successive client reviews.',
+            en: 'Contributed to the UI renewal of a video learning platform for skilled-trade workers in the housing construction industry, on a three-person design team. Owned the search, in-progress and review, e-learning, and shared loading screens, restructuring objects and actions to rebuild the information architecture, with gamification design, through successive client reviews.',
             jp: '住宅建設業界の技能職（職人）向け動画学習プラットフォームのUIリニューアルに、3名のデザインチームで参画。OOUI手法とゲーミフィケーション設計を用い、検索・受講中/復習・eラーニング・汎用ローディングの各画面を、複数回のクライアントレビューを経て設計した。',
           },
           detail: {
@@ -181,7 +199,7 @@ export const cvData: CVData = {
             },
             goal: {
               en: [
-                'Organize objects and actions from an OOUI perspective, restructure the information architecture, and rebuild the main flows.',
+                'Organize objects and actions, restructure the information architecture, and rebuild the main flows.',
                 'Make learning progress visible and structured through curricula, badges, and team standings.',
                 'Balance a modern feel with the flexibility and structure that corporate use demands.',
               ],
@@ -194,7 +212,7 @@ export const cvData: CVData = {
             deliverables: {
               en: [
                 'UX/UI improvement proposals and renewal designs, from wireframes through visual design.',
-                'Moodboard, sitemap, and OOUI analysis board.',
+                'Moodboard, sitemap, and an object-and-action analysis board.',
                 'New feature concepts: learning courses, badges and ranks, team standings, and playlists.',
                 'An explicit out-of-scope definition (login/signup, corporate site top, contact, Q&A, manuals) to hold the scope steady.',
               ],
@@ -207,10 +225,10 @@ export const cvData: CVData = {
             },
             outcome: {
               en: [
-                'Reorganizing screen granularity and transitions along OOUI lines lowered the navigation load on the main flows.',
+                'Reorganizing screen granularity and transitions around objects and actions lowered the navigation load on the main flows.',
                 'Fixing the scope up front kept review discussions from drifting and reduced rework.',
                 'Established a rhythm with the client-side designer, agree then apply immediately, which shortened the UI update lead time.',
-                'Turned the OOUI structuring and the review criteria (information architecture, appropriateness of data representation) into a reusable process for later projects.',
+                'Turned the structuring method and the review criteria (information architecture, appropriateness of data representation) into a reusable process for later projects.',
               ],
               jp: [
                 'OOUIに基づく画面粒度と遷移の整理で、主要フローのナビゲーション負荷を低減。',
@@ -222,18 +240,7 @@ export const cvData: CVData = {
           },
         },
       ],
-      technologies: [
-        'Figma',
-        'TypeScript',
-        'Next.js',
-        'React',
-        'Tailwind CSS',
-        'shadcn/ui',
-        'HTML/CSS',
-        'Lottie',
-        'Playwright',
-        'Python',
-      ],
+      technologies: ['Figma', 'Design Systems', 'Information Architecture', 'Prototyping', 'Lottie'],
     },
     {
       id: 'work-yumemi-intern',
@@ -466,7 +473,7 @@ export const cvData: CVData = {
           },
         },
       ],
-      technologies: ['Figma', 'STUDIO', 'Google Colab', 'Python'],
+      technologies: ['Figma', 'STUDIO', 'Data Visualization'],
     },
     {
       id: 'work-kibidango',
@@ -514,11 +521,21 @@ export const cvData: CVData = {
   skills: [
     {
       category: { en: 'Design', jp: 'デザイン' },
-      items: ['Design Systems', 'UI/UX Design'],
+      items: [
+        'Design Systems',
+        'UI/UX Design',
+        'Information Architecture',
+        'Prototyping',
+        'Data Visualization',
+      ],
     },
     {
-      category: { en: 'Tools & Methods', jp: 'ツール & 手法' },
-      items: ['Claude Code', 'Cursor', 'Figma Plugin Development'],
+      category: { en: 'Tools', jp: 'ツール' },
+      items: ['Figma', 'Claude Code', 'Cursor'],
+    },
+    {
+      category: { en: 'Languages', jp: '語学' },
+      items: ['Japanese (native)', 'English (bilingual)'],
     },
   ],
   projects: [
@@ -533,7 +550,7 @@ export const cvData: CVData = {
         jp: '浮世絵の木版画をレイヤーごとに分解し、伝統芸術をインタラクティブに探索するデジタル体験。',
       },
       period: { en: '2025 - 2026', jp: '2025年 - 2026年' },
-      technologies: ['Next.js', 'React', 'TypeScript'],
+      technologies: ['Interaction Design', 'Motion Design'],
       link: '/work/ukiyoe',
     },
     {
@@ -577,8 +594,34 @@ export const cvData: CVData = {
         jp: 'デザインワークフローを自動化するためのカスタムFigmaプラグイン & ウィジェット集。トークン設定、コンポーネント整理、レガシー移行ツールなど。',
       },
       period: { en: '2025 - 2026', jp: '2025年 - 2026年' },
-      technologies: ['TypeScript', 'Figma API'],
+      technologies: ['Figma', 'Workflow Automation'],
       link: '/work/figma-plugins',
+    },
+  ],
+  certifications: [
+    {
+      id: 'cert-figma-csp',
+      name: {
+        en: 'Figma Certified Service Partner',
+        jp: 'Figma Certified Service Partner',
+      },
+      issuer: { en: 'Figma', jp: 'Figma' },
+      date: '2025-12',
+    },
+    {
+      id: 'cert-eiken-1',
+      name: { en: 'EIKEN Grade 1', jp: '実用英語技能検定 1級' },
+      issuer: {
+        en: 'Eiken Foundation of Japan',
+        jp: '日本英語検定協会',
+      },
+      date: '2022-02',
+    },
+    {
+      id: 'cert-ielts',
+      name: { en: 'IELTS 7.0', jp: 'IELTS 7.0' },
+      issuer: { en: 'British Council', jp: 'ブリティッシュ・カウンシル' },
+      date: '2022-01',
     },
   ],
 };
