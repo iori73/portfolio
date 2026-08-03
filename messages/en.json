@@ -52,7 +52,7 @@
       "title": "Airline Design System",
       "description1": "Enterprise-scale design system spanning 9 digital platforms",
       "timeline": "Dec 2025 - Mar 2026",
-      "skills": "Design Systems, Figma, TypeScript, Next.js",
+      "skills": "Design Systems, Design Tokens, Figma",
       "deliverables": "Token System, Custom Figma Plugins, Component Prototype, 51+ Docs"
     }
   },
@@ -308,7 +308,7 @@
     "aiCraftText1": "I estimated this project would take 2 to 3 weeks with AI handling the implementation. It took three months. Not because AI failed, but because the work that mattered most turned out to be the work AI could not do: hand-coloring layer assets, making cultural design judgments, and finding unexpected connections between historical research and interaction design.",
     "aiCraftText2": "AI was still central to execution. I used Claude and Cursor to prototype components, iterate on responsive layouts, and implement scroll-driven animations that would have taken much longer to build alone. But my process goes beyond prompting. I bring cultural context, historical references, and design intent into every interaction. When building the timeline's color system, I did not ask AI to \"pick nice colors.\" I researched pigment histories, wrote Python scripts to extract colors from museum archives, then designed a canonical slot structure that makes 130 years of palette evolution legible at a glance. AI implemented each step faster. The story, the structure, and the judgment were mine.",
     "aiCraftText3": "AI can create, but it can't craft. Craft is the narrative behind a design choice, the sensitivity to a cultural context, the attention to a detail that nobody requested but that makes the whole thing feel intentional. The isometric layer animations, the kushi-dango navigation motif, the canonical color slots: each reflects a specific design decision rooted in genuine research, not generic output. What AI gave me was speed. What I brought was direction, a cultural story, and the conviction that the details matter.",
-    "technicalIntro": "Built with React 18 and Vite 6, using Framer Motion for scroll-driven animations and a custom CSS variable-based design system with historically-derived color tokens.",
+    "technicalIntro": "Built as a custom design system of CSS variables carrying historically-derived color tokens, with scroll-driven animation throughout.",
     "techFeature1Title": "Scroll-Driven Layer Animation",
     "techFeature1Text": "Framer Motion's useScroll and useTransform hooks orchestrate layer-stacking animations synchronized to scroll position. Each technique era has its own set of hand-painted layers that stack progressively.",
     "techFeature2Title": "Parallax Artwork Gallery",
@@ -367,7 +367,11 @@
     "caseDeliverables": "Deliverables",
     "caseOutcome": "Outcome",
     "showDetail": "Show detail",
-    "hideDetail": "Hide detail"
+    "hideDetail": "Hide detail",
+    "summary": "Summary",
+    "selectedWork": "Selected Work",
+    "certifications": "Certifications",
+    "downloadPdf": "Download PDF"
   },
   "figmaPlugins": {
     "title": "Figma Plugins & Widgets",
@@ -391,7 +395,7 @@
     "challenge2": "Need to support both iOS Human Interface Guidelines and Android Material Design 3 from a single source of truth",
     "challenge3": "Legacy design files with unbound values, manual workflows, and no token architecture in place",
     "roleTitle": "My Role",
-    "roleText": "I was the sole designer and developer on the design system, responsible for token architecture, component audit, Figma plugin development, frontend prototype implementation, and documentation. I worked within a consulting structure (YUMEMI → Accenture → Airline) and collaborated with the airline's internal design and development teams.",
+    "roleText": "I was the sole designer and developer on the design system, responsible for token architecture, component audit, Figma plugin development, frontend prototype implementation, and documentation. I worked as part of Accenture Song, collaborating with the airline's internal design and development teams.",
     "captionRoadmap": "4-phase project roadmap spanning research, token design, component implementation, and documentation",
     "designProcessIntro": "The design process balanced deep research with rapid prototyping. I needed to understand the existing landscape before proposing a system, then validate architectural decisions through working code.",
     "competitiveTitle": "Competitive Research",
@@ -413,7 +417,7 @@
     "pluginsTitle": "Custom Figma Plugins",
     "pluginsText": "To make the design system practical rather than theoretical, I built custom Figma plugins that automate the most tedious parts of design system work. Each plugin solves a specific workflow bottleneck, from initial token setup to ongoing production support.",
     "prototypeTitle": "Component Prototype",
-    "prototypeText": "I built a living prototype using Next.js 15, React 19, Tailwind CSS v4, and shadcn/ui as the component base. The prototype serves as both a reference implementation and a testing ground for token values. It includes 11 page variants demonstrating Button, TextField, Assist Chip, Header, Navigation, and Loading components, all themed with the airline's brand tokens.",
+    "prototypeText": "I built a living prototype in code, on top of an existing component base. The prototype serves as both a reference implementation and a testing ground for token values. It includes 11 page variants demonstrating Button, TextField, Assist Chip, Header, Navigation, and Loading components, all themed with the airline's brand tokens.",
     "docsTitle": "Documentation System",
     "docsText": "I authored 51+ markdown documents organized into 5 categories: reference materials, analysis (UI audits, gap analysis, brand investigation), design specifications (component specs, typography, color), implementation guides, and planning documents. This documentation ensures the system can be maintained and extended by future designers and developers.",
     "impactTitle": "Impact",

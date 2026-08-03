@@ -27,16 +27,18 @@ export type PdfPageProps = {
   flow?: boolean;
   /** Anchor target so the contents page can link here. */
   id?: string;
+  /** Document name in the running footer. Defaults to the portfolio deck. */
+  docName?: string;
   children: ReactNode;
 };
 
-export function PdfPage({ n, total, lang, kicker, flow, id, children }: PdfPageProps) {
+export function PdfPage({ n, total, lang, kicker, flow, id, docName, children }: PdfPageProps) {
   return (
     <section id={id} data-page={n} className={`pdf-page${flow ? ' pdf-flow' : ''}`}>
       {children}
       <div className="pdf-page__footer font-space-grotesk">
         <span>{kicker ?? ''}</span>
-        <span>Iori Kawano — {lang === 'jp' ? 'ポートフォリオ' : 'Portfolio'}</span>
+        <span>Iori Kawano — {docName ?? (lang === 'jp' ? 'ポートフォリオ' : 'Portfolio')}</span>
         <span>
           {n} / {total}
         </span>

@@ -211,7 +211,7 @@ export function PdfEducationSkills({ lang, labels }: { lang: 'en' | 'jp'; labels
               {skill.category[lang]}
             </span>
             <p className={`text-body-sm ${body} text-ink-secondary leading-[1.55]`}>
-              {skill.items.join(', ')}
+              {skill.items.map((i) => i[lang]).join(', ')}
             </p>
           </div>
         ))}
