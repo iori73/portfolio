@@ -31,7 +31,7 @@ function ProjectEntry({
   const blocks = buildProjectBlocks(project, lang);
 
   return (
-    <div className="pdf-block border-l-2 border-line-subtle pl-3 mb-3">
+    <div className="pdf-block border-l-2 border-line-subtle pl-3 mb-2.5">
       <div className="mb-1">
         <span className="font-space-grotesk text-label font-semibold text-ink-tertiary uppercase tracking-[0.06em]">
           {project.label[lang]}
@@ -41,12 +41,12 @@ function ProjectEntry({
         </span>
       </div>
 
-      <p className={`text-body ${body} text-ink-secondary leading-[1.55] mb-2`}>
+      <p className={`text-body ${body} text-ink-secondary leading-[1.55] mb-1.5`}>
         {project.summary[lang]}
       </p>
 
       {blocks.map(({ labelKey, items }) => (
-        <div key={labelKey} className="mb-1.5">
+        <div key={labelKey} className="mb-1">
           <h4 className="font-space-grotesk text-caption font-semibold text-ink-tertiary uppercase tracking-[0.06em] mb-0.5">
             {labels[labelKey] ?? labelKey}
           </h4>
@@ -87,7 +87,7 @@ function ExperienceEntry({
     : work.projects;
 
   return (
-    <div className="mb-5">
+    <div className="mb-4">
       {showHeader ? (
         // Header stays with at least the summary below it.
         <div className="pdf-block mb-2">
@@ -124,7 +124,7 @@ function ExperienceEntry({
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="font-space-grotesk text-label font-semibold text-ink-tertiary uppercase tracking-[0.06em] border-t border-line-section pt-2 mb-3">
+    <h2 className="font-space-grotesk text-label font-semibold text-ink-tertiary uppercase tracking-[0.06em] border-t border-line-section pt-2 mb-2">
       {children}
     </h2>
   );
@@ -183,7 +183,7 @@ export function PdfEducationSkills({ lang, labels }: { lang: 'en' | 'jp'; labels
     <>
       <SectionHeading>{labels.education}</SectionHeading>
       {education.map((edu) => (
-        <div key={edu.id} className="pdf-block mb-4">
+        <div key={edu.id} className="pdf-block mb-3">
           <div className="flex items-baseline justify-between gap-4">
             <h3 className="text-title">
               {lang === 'en'

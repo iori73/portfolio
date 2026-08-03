@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-const TOTAL = 7;
+const TOTAL = 8;
 
 /** Section label in the shared caps style. */
 function Kicker({ children }: { children: React.ReactNode }) {
@@ -81,12 +81,10 @@ export default async function PrintPortfolioPage({
     <div className="pdf-doc" data-lang={lang === 'jp' ? 'ja' : 'en'}>
       {/* ── 1. Cover ─────────────────────────────────────────────── */}
       <PdfPage n={1} total={TOTAL} lang={lang} kicker="">
-        <div className="h-full flex flex-col justify-between">
-          <div>
-            <Kicker>{lang === 'jp' ? 'ポートフォリオ' : 'Portfolio'}</Kicker>
-            <h1 className="text-display leading-[1.05] mb-3">{personalInfo.name[lang]}</h1>
-            <p className={`text-title ${body} text-ink-secondary`}>{personalInfo.title[lang]}</p>
-          </div>
+        <div className="h-full flex flex-col">
+          <Kicker>{lang === 'jp' ? 'ポートフォリオ' : 'Portfolio'}</Kicker>
+          <h1 className="text-display leading-[1.05] mb-3">{personalInfo.name[lang]}</h1>
+          <p className={`text-title ${body} text-ink-secondary mb-8`}>{personalInfo.title[lang]}</p>
 
           <div className="max-w-[150mm]">
             <p className={`text-body ${body} text-ink-secondary leading-[1.7]`}>
@@ -94,7 +92,7 @@ export default async function PrintPortfolioPage({
             </p>
           </div>
 
-          <div className={`text-body-sm ${body} text-ink-tertiary`}>
+          <div className={`text-body-sm ${body} text-ink-tertiary mt-auto`}>
             <p>{personalInfo.location[lang]}</p>
             <p>
               <a href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a>
@@ -106,18 +104,14 @@ export default async function PrintPortfolioPage({
         </div>
       </PdfPage>
 
-      {/* ── 2–5. Résumé ──────────────────────────────────────────────
+      {/* ── 2–4. Résumé ──────────────────────────────────────────────
           Page breaks are explicit rather than auto-flowed so the baked footer
           numbers stay correct; the generator asserts no page overflows. */}
       <PdfPage n={2} total={TOTAL} lang={lang} kicker={labels.workExperience}>
-        <PdfExperience lang={lang} labels={labels} ids={['work-accenture-song']} />
+        <PdfExperience lang={lang} labels={labels} ids={['work-accenture-song', 'work-yumemi']} />
       </PdfPage>
 
       <PdfPage n={3} total={TOTAL} lang={lang} kicker={labels.workExperience}>
-        <PdfExperience lang={lang} labels={labels} ids={['work-yumemi']} heading={false} />
-      </PdfPage>
-
-      <PdfPage n={4} total={TOTAL} lang={lang} kicker={labels.workExperience}>
         <PdfExperience
           lang={lang}
           labels={labels}
@@ -127,7 +121,7 @@ export default async function PrintPortfolioPage({
         />
       </PdfPage>
 
-      <PdfPage n={5} total={TOTAL} lang={lang} kicker={labels.workExperience}>
+      <PdfPage n={4} total={TOTAL} lang={lang} kicker={labels.workExperience}>
         <PdfExperience
           lang={lang}
           labels={labels}
@@ -136,11 +130,17 @@ export default async function PrintPortfolioPage({
           showEntryHeader={false}
           projectIds={['yumemi-voice-push-1', 'yumemi-brand-lp']}
         />
+        {/* Kibidango has no project entries, so it rides along at the end of the
+            last work-experience page rather than claiming a sheet of its own. */}
+        <PdfExperience lang={lang} labels={labels} ids={['work-kibidango']} heading={false} />
+      </PdfPage>
+
+      <PdfPage n={5} total={TOTAL} lang={lang} kicker={labels.education}>
         <PdfEducationSkills lang={lang} labels={labels} />
       </PdfPage>
 
-      {/* ── 5. Airline — overview ────────────────────────────────── */}
-      <PdfPage n={5} total={TOTAL} lang={lang} kicker={caseKicker} id="cs-airline">
+      {/* ── 6. Airline — overview ────────────────────────────────── */}
+      <PdfPage n={6} total={TOTAL} lang={lang} kicker={caseKicker} id="cs-airline">
         <Kicker>{a('type')}</Kicker>
         <h2 className="text-headline mb-2">{a('title')}</h2>
         <p className={`text-body-lg ${body} text-ink-secondary leading-[1.6] mb-5`}>{a('subtitle')}</p>
@@ -178,8 +178,8 @@ export default async function PrintPortfolioPage({
         </div>
       </PdfPage>
 
-      {/* ── 6. Airline — design process ──────────────────────────── */}
-      <PdfPage n={6} total={TOTAL} lang={lang} kicker={caseKicker}>
+      {/* ── 7. Airline — design process ──────────────────────────── */}
+      <PdfPage n={7} total={TOTAL} lang={lang} kicker={caseKicker}>
         <Kicker>{t('work.designProcess')}</Kicker>
         <p className={`text-body ${body} text-ink-secondary leading-[1.6] mb-5`}>
           {a('designProcessIntro')}
@@ -223,8 +223,8 @@ export default async function PrintPortfolioPage({
         </div>
       </PdfPage>
 
-      {/* ── 7. Airline — solution & impact ───────────────────────── */}
-      <PdfPage n={7} total={TOTAL} lang={lang} kicker={caseKicker}>
+      {/* ── 8. Airline — solution & impact ───────────────────────── */}
+      <PdfPage n={8} total={TOTAL} lang={lang} kicker={caseKicker}>
         <Kicker>{t('work.solution')}</Kicker>
         <p className={`text-body ${body} text-ink-secondary leading-[1.6] mb-4`}>{a('solutionIntro')}</p>
 
