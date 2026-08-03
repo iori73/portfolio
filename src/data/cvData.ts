@@ -64,7 +64,8 @@ export interface Education {
 
 export interface SkillCategory {
   category: { en: string; jp: string };
-  items: string[];
+  /** Localised: the JP 職務経歴書 should not carry English skill names. */
+  items: { en: string; jp: string }[];
 }
 
 export interface Project {
@@ -94,15 +95,15 @@ export const cvData: CVData = {
       jp: 'UI/UXデザイナー',
     },
     location: { en: 'Tokyo, Japan', jp: '東京都' },
-    email: 'iori730002204294@gmail.com',
+    email: 'iorikawano.design@gmail.com',
     website: 'https://iori-kawano.vercel.app',
     summary: {
       en: 'AI has made iteration fast. It has not made the two ends easier: deciding what is worth making in the first place, and the craft at the end that determines whether it holds up. Those ends, and how the result is actually experienced, are where I put most of my energy. I currently design digital services across a range of industries for enterprise clients, along with the tooling that supports how they are run.',
       jp: 'AIによって反復は速くなりました。一方で、何をつくる価値があるのかを決める最初の部分と、それが本当に成立するかを決める最後のクラフトは簡単にはなっていません。この両端と、それを人がどう体験するかに最もエネルギーを注いでいます。現在はエンタープライズ領域で様々な領域のデジタルサービスのデザインと、その運用を支えるツールを設計しています。',
     },
     resumeSummary: {
-      en: 'UI/UX designer for enterprise clients, designing digital services across a range of industries along with the tooling that supports how they are run. Works from information design through to how the finished product is actually experienced. Bilingual Japanese/English.',
-      jp: 'エンタープライズ領域で、様々な業界のデジタルサービスのデザインと、その運用を支えるツールを設計する UI/UX デザイナー。情報設計から、実際に人がどう体験するかまでを担当領域とする。日英バイリンガル。',
+      en: 'UI/UX designer designing digital services across a range of industries, along with the tooling that supports how they are run. Works from information design through to how the finished product is actually experienced. Bilingual Japanese/English.',
+      jp: '様々な業界のデジタルサービスのデザインと、その運用を支えるツールを設計する UI/UX デザイナー。情報設計から、実際に人がどう体験するかまでを担当領域とする。日英バイリンガル。',
     },
   },
   workExperience: [
@@ -522,20 +523,27 @@ export const cvData: CVData = {
     {
       category: { en: 'Design', jp: 'デザイン' },
       items: [
-        'Design Systems',
-        'UI/UX Design',
-        'Information Architecture',
-        'Prototyping',
-        'Data Visualization',
+        { en: 'Design Systems', jp: 'デザインシステム' },
+        { en: 'UI/UX Design', jp: 'UI/UXデザイン' },
+        { en: 'Information Architecture', jp: '情報設計' },
+        { en: 'Prototyping', jp: 'プロトタイピング' },
+        { en: 'Data Visualization', jp: 'データ可視化' },
       ],
     },
     {
       category: { en: 'Tools', jp: 'ツール' },
-      items: ['Figma', 'Claude Code', 'Cursor'],
+      items: [
+        { en: 'Figma', jp: 'Figma' },
+        { en: 'Claude Code', jp: 'Claude Code' },
+        { en: 'Cursor', jp: 'Cursor' },
+      ],
     },
     {
       category: { en: 'Languages', jp: '語学' },
-      items: ['Japanese (native)', 'English (bilingual)'],
+      items: [
+        { en: 'Japanese (native)', jp: '日本語（ネイティブ）' },
+        { en: 'English (bilingual)', jp: '英語（バイリンガル）' },
+      ],
     },
   ],
   projects: [

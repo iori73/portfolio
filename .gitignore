@@ -45,6 +45,12 @@ font-previews/
 
 # Generated application PDFs. This repo is PUBLIC and Next.js serves public/
 # at the site root, so committing these would publish them to the world —
-# the figures still contain internal Japanese project terminology.
+# the deck's figures still contain internal Japanese project terminology.
 # Backed up to the private iori73/portfolio-assets repo instead.
-public/downloads/
+#
+# The résumé is the exception and IS committed: it is text only, rendered from
+# the same cvData already published at /cv, with clients behind industry labels
+# and the generator's client-name denylist asserted on every build. It has to be
+# in the repo for the Download button on /cv to resolve.
+public/downloads/*
+!public/downloads/Iori-Kawano-Resume-*.pdf

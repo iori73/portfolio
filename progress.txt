@@ -663,3 +663,134 @@ Notion エクスポート `~/Downloads/ゆめみポートフォリオ` を一次
 - `messages/en.json:394` の `roleText` に「a consulting structure (YUMEMI → Accenture → Airline)」とある。
   これは航空案件を **ゆめみ側から** 担当していた構図を示すが、`cvData.ts` では同案件が Accenture の
   職歴配下（2025-12 開始）に置かれている。どちらの所属で担当した案件なのか要確認
+
+---
+
+## 2026-08-03: レジュメPDF新設（EN 1枚 / JP 職務経歴書3枚）+ CVコピーの整理
+
+### 経緯
+外部プロフィール整合の続き。本人から3点の指示があった。
+1. サマリー文面の差し替え（ポジショニングを「デザインシステム基盤」から「様々な領域のデジタルサービス」へ拡張）
+2. 開発言語（React / TypeScript / Python 等）をスキルとして掲げない。
+   「Claude Code に書かせているので、私はプログラミング言語を選択していない」
+3. 他デザイナーに倣い、ダウンロード可能なCV PDFを用意したい
+
+### 調査したこと（レジュメの設計根拠）
+- 既存の8ページPDFは「ポートフォリオデック」であって「レジュメ」ではない。
+  読者（デザインリード vs 採用担当/ATS）も分量も用途も違うので、統合せず別ドキュメントとした
+- 2026年のATSは単純な1枚優先ではなくセマンティックマッチング。単一カラム・標準見出し・
+  選択可能テキストが要件。図版・表・多段組みは不可
+- 英文レジュメは履歴書と職務経歴書を統合して簡潔に。志望動機はカバーレターへ。
+  日本の職務経歴書はプロジェクト単位の課題・担当・成果を厚く書く
+  → EN と JP は翻訳関係にせず、別フォーマットにした
+- ポートフォリオURLはヘッダー最上部に置く（レジュメ本体より効く）
+
+### 実装
+- `app/print/[locale]/resume/page.tsx` を新設。EN=1枚（compact）、JP=3枚（detailed / 職務経歴書）
+- `src/print/PdfResumeDoc.tsx` を新設。`variant` で compact / detailed を切り替え
+  - compact: 職歴1件につき summary 1行 + 案件1行（`resumeLine` ?? summary の第1文）
+  - detailed: 案件ごとに 背景・課題 / アウトカム のみ（ゴールと成果物はデック側に残す）
+- `scripts/generate-portfolio-pdf.mjs` を複数ドキュメント対応に拡張（`--doc portfolio|resume|all`）
+- `src/print/PdfPage.tsx` に `docName` を追加（フッターが常に "Portfolio" だったのを修正）
+- `/cv` に Download PDF ボタン（ロケール別に EN/JP の PDF を指す）
+
+### cvData の変更
+- `personalInfo.summary` EN/JP を新文面に更新（JPは本人指定、ENは同期。LinkedIn側は未更新）
+- `personalInfo.resumeSummary` を追加。レジュメ冒頭は哲学ではなく職務範囲を述べる別文面
+- `certifications` を初めて投入（Figma CSP / 英検1級 / IELTS 7.0）。型はあったがデータが空だった
+- `skills` を拡充し、`items` を `string[]` から `{en, jp}[]` に変更
+  （JP職務経歴書に英語のスキル名が出ていたため）
+- `technologies` から開発言語を除去し、デザイン側の語彙に置換
+- `WorkProject.resumeLine` を追加（レジュメ用の1行要約。航空案件のみ設定）
+- OOUI: EN は平易な表現に置換、JP は残す（日本の採用市場では通用する語彙のため）
+
+### 配布方針
+`.gitignore` を `public/downloads/*` + `!public/downloads/Iori-Kawano-Resume-*.pdf` に変更。
+- レジュメ（70KB / 1.1MB）はコミットする。テキストのみで、内容は既に公開済みの /cv と同一。
+  生成時にクライアント名デニーリストを検証済み
+- デック（11-13MB）は従来どおり除外。図版に社内用語が残っているため
+Google Drive 方式を採らなかった理由: 手動アップロードは cvData とPDFがずれる仕組みで、
+今日ずっと直していた「媒体間のずれ」と同じバグを新設することになる
+
+### 検証
+`npx next build` 成功、`npx tsc --noEmit` で触れたファイルにエラーなし、
+4ドキュメント全て生成成功（フォント・ページ数・オーバーフロー・匿名化の各アサート通過）、
+`/cv` `/jp/cv` からPDFが 200 で配信されることを確認
+
+### 未解決（本人判断待ち）
+- `resumeSummary` の文面が未承認。私が起案したもの
+- レジュメの SELECTED WORK に Google UXデザイン認定プロジェクト（2024）が載っている。
+  実務3年の経歴に対して弱い項目かもしれない
+- 連絡先メールが `iori730002204294@gmail.com`。応募書類としては読みにくい
+- 浮世絵ページ `techFeature1Text` が Framer Motion の useScroll / useTransform まで書いている
+- EN の LinkedIn About がサイトと非同期（サイト側だけ広い表現に更新済み）
+
+---
+
+## 2026-08-03（追記）: 外部プロフィールの確定と連絡先の更新
+
+レジュメPDF実装のあと、本人と詰めて以下を確定した。サイト側の変更を伴うものと、
+LinkedIn 側だけの変更が混在しているので分けて記録する。
+
+### リポジトリに反映したもの
+- 連絡先メールを `iori730002204294@gmail.com` から **`iorikawano.design@gmail.com`** へ。
+  `cvData.ts` の1箇所のみが実体で、PDFもサイトも全部そこから派生している
+- `resumeSummary` から `for enterprise clients` /「エンタープライズ領域で、」を削除。
+  本人談「別にエンタープライズが好きなわけじゃないので、そういう印象をつけたくない」
+- Airline ケーススタディの `roleText` から誤った下請け構造の記述を削除
+  （実態は、ゆめみ買収直後でACN社内からゆめみの人と見られていたという話。案件自体はACNの実績）
+
+### LinkedIn 側で確定したもの（リポジトリ外）
+ヘッドライン:
+```
+UI/UX Designer | Product design and design systems | JP/EN bilingual
+```
+`AI Experience Designer` から変更。理由は3点。(1) AIプロダクトを作る人だと誤読される
+（実際はAIは作り方であって対象ではない）、(2) リクルーター検索でヒットしない、
+(3) 他の全媒体が UI/UXデザイナー なのでここだけ食い違っていた。
+`Enterprise` を入れる案も出したが、業種ラベルが検索フィルタとして働き、
+好きでもない領域の求人ばかり来るので却下。
+
+About 本文（確定）:
+```
+AI has made iteration fast. It has not made the two ends easier:
+deciding what is worth making in the first place, and the craft at
+the end that determines whether it holds up.
+
+I work on digital services across a range of industries. I usually
+start from information structure, and I don't stop at the design
+file. I check my decisions in a working prototype before I consider
+them finished. When a step in the process becomes repetitive, I
+build a tool for it instead of doing it by hand every time.
+
+Happy to talk about design systems, internal tooling, or how AI is
+changing the way designers spend their time.
+```
+第1段落はサイトの `personalInfo.summary` と同一テキスト。ここを触るときは
+`cvData.ts` も同時に直すこと。第2・第3段落はLinkedIn専用。
+
+設計判断:
+- 冒頭2行だけが展開前に見えるので、フックは動かさない。`But` は入れない
+  （`has made` / `has not made` の反復が既に逆接として働いているため、
+  接続詞を足すと構造で言っていることの重複になり切れ味が落ちる）
+- 案件名・業種名は書かない。すぐ下の Experience セクションに既に出ているので重複。
+  About は「どう働くか」を担う
+- 「日英バイリンガル」は About に書かない。ヘッドラインに既にあり、本人が
+  「自慢することじゃない」と判断
+- 求職の意思は About に書かない。在職中なので Open to work（Recruiters only）に置く
+- 英語のレベルは意図的に平易化（受動態と比喩を減らす）。ネイティブ的すぎると本人の声にならない
+
+Top skills: `React.js` `TypeScript` を外し、`Figma` `User Experience (UX)` に変更済み。
+`Design Systems` の追加を推奨した（5枠まで使える）。
+
+### 事故と対処
+PR #47 と #49 で、コミットせずに push / merge を実行したためタイトルと中身が
+食い違うPRができた。#49 は3ファイルのみを含み、レジュメ関連は手元に残っていた。
+実害はないが、`git commit` → `git push` → `gh pr create` の順序は飛ばさないこと。
+
+### 残タスク
+- `personalInfo.summary`（サイト用）には `for enterprise clients` /「エンタープライズ領域で」が
+  まだ残っている。本人が書いた文で、かつ現職の事実記述なので意図的に残した。要否は本人判断
+- git の `user.email` が旧アドレスのまま。公開リポジトリなので全コミットに刻まれる
+- `middleware.ts` + `app/preview/` はアートディレクション案A/Bの選択待ちで未コミットのまま
+- 浮世絵ページ `techFeature1Text` が Framer Motion の useScroll / useTransform まで書いている

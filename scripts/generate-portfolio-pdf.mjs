@@ -2,8 +2,9 @@
 /**
  * Render the print route to PDF with headless Chromium.
  *
- *   pnpm generate:pdf                  # both locales
+ *   pnpm generate:pdf                  # every document, both locales
  *   pnpm generate:pdf -- --locale jp
+ *   pnpm generate:pdf -- --doc resume
  *   pnpm generate:pdf -- --offline-fonts
  *
  * The script owns its server. "Assume one is already running" is the main cause
@@ -38,11 +39,22 @@ const CLIENT_DENYLIST = [
 
 const A4 = { width: 794, height: 1123 }; // CSS px at 96dpi
 
+/**
+ * The documents this script emits. `portfolio` is the deck sent when someone
+ * asks for work samples; `resume` is the sheet attached to an application.
+ * They share cvData but not a layout, so they are separate print routes.
+ */
+const DOCS = [
+  { slug: 'portfolio', file: 'Portfolio' },
+  { slug: 'resume', file: 'Resume' },
+];
+
 function parseArgs(argv) {
-  const args = { locale: 'all', port: 3210, dev: false, offlineFonts: false, keepServer: false };
+  const args = { locale: 'all', doc: 'all', port: 3210, dev: false, offlineFonts: false, keepServer: false };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--locale') args.locale = argv[++i];
+    else if (a === '--doc') args.doc = argv[++i];
     else if (a === '--port') args.port = Number(argv[++i]);
     else if (a === '--dev') args.dev = true;
     else if (a === '--offline-fonts') args.offlineFonts = true;
@@ -111,9 +123,9 @@ function countPdfPages(buf) {
   return matches ? matches.length : 0;
 }
 
-async function renderLocale({ browser, base, locale, offlineFonts }) {
-  const url = `${base}/print/${locale}/portfolio`;
-  const outPath = path.join(OUT_DIR, `Iori-Kawano-Portfolio-${locale.toUpperCase()}.pdf`);
+async function renderDoc({ browser, base, locale, doc, offlineFonts }) {
+  const url = `${base}/print/${locale}/${doc.slug}`;
+  const outPath = path.join(OUT_DIR, `Iori-Kawano-${doc.file}-${locale.toUpperCase()}.pdf`);
   const problems = [];
 
   const context = await browser.newContext({ viewport: A4, deviceScaleFactor: 2 });
@@ -224,6 +236,7 @@ async function renderLocale({ browser, base, locale, offlineFonts }) {
 
   return {
     locale,
+    doc: doc.slug,
     outPath,
     realPages,
     declaredPages,
@@ -256,6 +269,8 @@ async function launchBrowser() {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const locales = args.locale === 'all' ? ['en', 'jp'] : [args.locale];
+  const docs = args.doc === 'all' ? DOCS : DOCS.filter((d) => d.slug === args.doc);
+  if (!docs.length) throw new Error(`unknown --doc: ${args.doc}`);
 
   const server = await ensureServer(args);
   const results = [];
@@ -264,9 +279,13 @@ async function main() {
   try {
     // Launch inside the try so a failure here still stops the server we spawned.
     browser = await launchBrowser();
-    for (const locale of locales) {
-      console.log(`▸ rendering ${locale}`);
-      results.push(await renderLocale({ browser, base: server.base, locale, offlineFonts: args.offlineFonts }));
+    for (const doc of docs) {
+      for (const locale of locales) {
+        console.log(`▸ rendering ${doc.slug} / ${locale}`);
+        results.push(
+          await renderDoc({ browser, base: server.base, locale, doc, offlineFonts: args.offlineFonts }),
+        );
+      }
     }
   } finally {
     if (browser) await browser.close();
@@ -275,7 +294,7 @@ async function main() {
 
   let failed = false;
   for (const r of results) {
-    console.log(`\n${r.locale.toUpperCase()} → ${path.relative(ROOT, r.outPath)}`);
+    console.log(`\n${r.doc} ${r.locale.toUpperCase()} → ${path.relative(ROOT, r.outPath)}`);
     console.log(`  ${r.realPages} pages · ${r.sizeMB} MB`);
 
     if (r.weakImages.length) {
