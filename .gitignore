@@ -42,3 +42,9 @@ src/data/projects.json
 
 # font previews
 font-previews/
+
+# Generated application PDFs. This repo is PUBLIC and Next.js serves public/
+# at the site root, so committing these would publish them to the world —
+# the figures still contain internal Japanese project terminology.
+# Backed up to the private iori73/portfolio-assets repo instead.
+public/downloads/
