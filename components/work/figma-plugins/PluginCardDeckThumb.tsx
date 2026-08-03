@@ -15,7 +15,7 @@ const DECK = [
     cover: '/work/figma-plugins/pm-cover.webp',
     accentColor: '#A259FF',
     description:
-      'Renders Markdown inside Figma and FigJam with full syntax support — tables, code blocks, task lists, and light/dark themes.',
+      'Renders Markdown inside Figma and FigJam with full syntax support: tables, code blocks, task lists, and light/dark themes.',
   },
   {
     id: 'pptx-to-figma',

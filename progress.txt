@@ -505,3 +505,161 @@ Notion エクスポート `~/Downloads/ゆめみポートフォリオ` を一次
 - **Figma Plugins ページ**: 全面ヒーローセクションを追加し、遷移完了 ~100ms 後に `endTransition()` を呼んでオーバーレイから実ページへハンドオフ。
 - **`ConceptC.tsx`**: 旧 `ThumbnailScatter`（3枚固定の回転オーバーラップ）を廃止し、`PluginBentoGrid.tsx`（新規）に置き換え。users/likes のブレンドしたパーセンタイルスコアでタイルサイズ（lg/md/sm、5件未満なら full）を動的に割り当てるベントーグリッド。
 - **`PluginCardDeckThumb.tsx`**: `maxScale` prop を追加（デフォルト1=縮小のみ）。ヒーロー/オーバーレイ用に `Infinity` を渡して拡大も許容できるように。
+
+## PDF 生成基盤 v1 実装完了（2026-07-29）
+方針決定に続けて実装。`pnpm generate:pdf` で EN/JP 各8ページの PDF を生成できる状態になった。
+
+- **成果物**: `public/downloads/Iori-Kawano-Portfolio-{EN,JP}.pdf`（各8ページ / 11.5MB・13.0MB）。構成は 表紙1p + レジュメ4p（職歴3p + 学歴/スキル1p）+ Airline Design System 3p。
+- **ルート構成**: `app/print/`（`[locale]` の兄弟）に独立配置し、Header/Footer/TransitionOverlay/max-w-6xl を回避。`middleware.ts` の matcher lookahead に `print` を追加（これが唯一の共有ファイル編集）。print ツリーは全て **server component** で locale を URL セグメントから明示的に受け取る（middleware を通らないため）。
+- **本番での露出防止**: `robots: noindex` ＋ `NODE_ENV==='production' && ENABLE_PRINT_ROUTES!=='1'` で `notFound()`。**実測で確認**: フラグ無し→404、`ENABLE_PRINT_ROUTES=1` 付き `next start`→200。ゲートはビルド時に焼き付かずリクエスト毎に評価される。
+- **型スケール**: `:root` も `globals.css` も触らず、`.pdf-doc` に `--text-size-*` を置いて継承で勝たせる方式が想定どおり機能。A4 が 793.7px で `md:`(768px) を超えるためこの上書きは必須だった。
+- **Collapsible 問題の解消**: `src/cv/{format,selectors,fontClasses}.ts` を新設し、`cv/page.tsx`・`useFonts.ts`・print 側の3者が同じ純関数を共有。`parseProjectBullet()` と重複定義は削除済み。PDF 側は Radix を使わず detail を常時展開して描画する。
+- **フォント**: `app/print/print-fonts.css` で print ツリー限定に EN本文→Switzer(自前ホスト)、Space Grotesk/Noto→`var(--font-*)`(next/font のビルド時セルフホスト)へ差し替え。ライブサイトのフォント読み込みは無変更。
+- **生成スクリプト** `scripts/generate-portfolio-pdf.mjs`: サーバーを自前で起動/停止。`document.fonts.ready` + `img.decode()` 待機後、**5種のアサーション**（フォント実ロード / 固定ページのはみ出し / 実PDFページ数==`.pdf-page`数 / 画像が配置幅の2倍以上 / クライアント実名 denylist）。1つでも失敗すると exit 1。
+- **Playwright**: devDep 追加。バンドル Chromium のダウンロードが失敗したため、**インストール済み Google Chrome へ自動フォールバック**する実装にした（`PDF_CHANNEL=chrome` で明示指定も可）。再現性のためには `pnpm exec playwright install chromium` を後で通しておくのが望ましい。
+- **ページ割りの試行錯誤**: 当初レジュメを `.pdf-flow`（自動フロー）にする設計だったが、フローするとフッターのページ番号が実ページとズレるため**全ページ固定高さ**に変更。はみ出しはアサーションが検出するので、cvData が増えたときは沈黙のクリップではなく明示的なエラーになる。9→7→8ページと調整し、最終的に余白バランスとオーバーフロー無しを両立。
+
+### 次にやること（v1 スコープ外）
+- **⚠ Airline の図版とキャプションの不一致（サイト側にも存在）**: PDF 7ページ目で「Two-layer token architecture」というキャプションが付いている `token-architecture.webp` は、実際には**チケット移行のフロー図**（「旧チケット17件→新チケット17件」「1 solution検討」「7 Native Flutter比較」等）に見える。ヒーローの `system-structure.webp` も設計システムの構造図というよりフェーズ／ロードマップ図。`app/[locale]/work/airline-design-system/page.tsx` でも同じ組み合わせなので**サイト側から要確認・差し替え**。
+- **⚠ 匿名化 denylist は画像内テキストを検査できない**: スクリプトの検査は `document.body.innerText` のみ。上記2枚の図版には日本語の内部プロジェクト用語が写り込んでいる（クライアント名は視認範囲では無し）。**提出前に画像の中身を目視確認すること**。EN版に日本語の図版が入る点も要検討。
+- `system-structure.webp` は 784px しかなく、2倍ルールでは104mmまでしか置けない（アサーションが毎回警告を出す）。Figma から ≥2400px 再書き出し、またはインライン SVG 化。
+- Figma Plugins のケーススタディ追加（画像あり・NDA問題なしの唯一の案件、要加筆）。
+- 画像0枚の work 案件（ゆめみ5件＋大学校友アプリ）の匿名オリジナル図版化。
+- `/cv` から PDF ダウンロードリンクを張る（出力先を `public/downloads/` にしてあるので配置済み）。
+
+## /cv から Gym Crowd Status Dashboard を非表示 → 本番反映済み（2026-07-30 実装 / 2026-07-31 デプロイ）
+本人判断で「完成度が低く自信がない」ため CV のプロジェクト一覧から外した。データは削除せずフラグで制御。
+
+- `src/data/cvData.ts`: `Project` 型に `hidden?: boolean` を追加。`project-gym` に `hidden: true` を設定（他フィールドは無変更）。
+- `app/[locale]/cv/page.tsx`: プロジェクト一覧を `.filter((p) => !p.hidden)` してから描画。
+- `/work/gym_crowd_status_dashboard` のケーススタディページ自体は公開のまま（CV 掲載だけを止めた）。再掲載は `hidden` を消すだけ。
+- `cvData.projects` を読むのは `/cv` のみ（PDF 側 `PdfResume.tsx` は `workExperience` ベースなので影響なし）。
+- **ホームの Work 一覧には Gym が残っている**。あちらは `messages/{en,jp}.json` の `projects.gymDashboard` を参照する別系統なので、消したい場合は別対応が必要（未着手）。
+- **デプロイ**: commit `7872397` → PR #46 → CI 3件 pass（Vercel / Vercel Preview Comments / lighthouse）→ `main` マージ（2026-07-31 06:47 UTC）。本番 `iori-kawano.vercel.app/cv` で消えていることを本人が目視確認済み。
+
+### 検証時のハマりどころ（次回のため）
+- ローカル `/cv` の HTML を grep すると文字列 `"Gym Crowd Status Dashboard"` が**1件ヒットするが誤検知**。next-intl が全翻訳メッセージを `NextIntlClientProviderServer` の props として RSC ペイロードに載せるため、`messages/en.json` の `projects.gymDashboard` が描画内容と無関係に混入する。非表示の判定は**タイトル文字列ではなく** `cvData` 固有の説明文（`End-to-end system for real-time gym crowd monitoring`）か `/work/gym_crowd_status_dashboard` へのリンク数で行うこと。
+- このリポジトリの `.claude/settings.json` の deny に `Bash(git commit:*)` / `Bash(git push:*)` があるため、コミットとプッシュは**ユーザー自身が実行する必要がある**（`!` プレフィックス）。PR 作成・マージは `gh` 経由で AI 側から可能。
+
+## PDF の図版は根本的に作り直し — TODO 化（2026-07-31）
+生成した EN/JP の PDF をユーザーが確認し、**「画像の部分が全く良くない。根本的に直すべき」**と判断。今すぐ解決すると時間がかかるため、いったん TODO として保留にした。**生成基盤（ルート・CSS・スクリプト・アサーション）は完成して動いているので、次に着手するのはレイアウトやスクリプトではなく図版そのもの。**
+
+### 具体的に何がダメか
+1. **`token-architecture.webp` がキャプションと別物**。「2層トークンアーキテクチャ — Primitive を Semantic にマッピング」というキャプションに対し、図の中身は「旧チケット17件 → 新チケット17市」「1 solution検討」「7 Native Flutter比較」「4 Figma制約条件」「2 全体スケジュール」、矢印は「統合」「移行」＝**チケット移行フロー図**。トークンの本文の横にこれが置かれている。`app/[locale]/work/airline-design-system/page.tsx` の `captionToken` も同じ組み合わせなので**サイト側から要修正**。
+2. **JP 版の方が問題が目立つ**。キャプションも図も日本語なので、日本語話者の採用担当には不一致がはっきり見えてしまう。逆に EN 版には日本語の図版が入っているという別の問題がある。
+3. **`system-structure.webp` が 784×716 しかない**（6ページ目のヒーロー）。2倍ルールで104mmまでしか置けず、生成のたびに解像度警告。全資産中で最弱なのに最重要の位置。
+4. **画像0枚の案件が大半**。personal を除外した結果、ゆめみ5案件＋大学校友アプリは図版ゼロのまま文字だけのページになっている。
+
+### 着手するときの方針
+- クライアントUIのスクショは匿名化方針と矛盾して使えない → **手法を示す匿名オリジナル図版を自作**（トークン階層図／コンポーネント一覧12種／OOUIオブジェクト図／195画面の遷移マップ／テンプレート×Variantsの図解）。
+- 仕事参加プロジェクトの整理はユーザーが進行中: https://www.figma.com/design/mL8A4ftR6Hh5GlMjxSivtK/my-AI-workflow-summary?node-id=27-273
+- インライン SVG にすれば印刷でベクターのまま出る（`src/print/InlineSvg.tsx` は未作成だが設計済み）。ラスタの拡大は線画がぼやけるので不可。
+- **匿名化チェックは画像の中身を見ていない**（`document.body.innerText` の grep のみ）。差し替えたら必ず目視確認。
+
+### 図版と無関係に残っている作業
+- **print ルートの修正が未コミット**: `app/print/[locale]/portfolio/page.tsx` と `src/print/PdfResume.tsx`。コミット済み（origin/main）の版は renumber 途中の状態で **`TOTAL = 7` かつ `n={5}` が2ページに重複**しており、フッター番号が壊れている＋オーバーフローのアサーションに引っかかる。**手元の8ページ版が正しい**ので、これを入れるまで main から `pnpm generate:pdf` を回すと失敗する。
+- 本番確認済み（2026-07-30、実ブラウザ）: `/cv` はゆめみ期の内容を配信中（(Internship) 表記・業界ラベル5種・展開カード5個・4ブロック全て表示）。`/print/{en,jp}/portfolio` は本番で **404**（env ゲートは効いている）。ただし 404 ページのタブタイトルだけ "Portfolio (print)" が残る（Next が notFound 経路でも metadata を適用するため。内容の露出は無し）。
+- `pnpm exec playwright install chromium` が未完了で、現在はインストール済み Chrome にフォールバックして生成している。
+
+## アートディレクション刷新の検討 — /preview に2案プロトタイプ（2026-07-31）
+「サイトがグレースケールで色味がない。seremoni.com のような世界観にしたい」というユーザーの相談から着手。
+要件定義が曖昧なままでは実装しても外すので、**先に参照サイトを実測 → 決定事項をヒアリング → 本番非破壊のプロトタイプ2案** の順で進めた。
+
+### seremoni.com の実測値（app.CleFsfex.css から抽出）— 推測でなく一次情報
+- 色は**5色だけ**: salt `#ebe8de`（地）/ black `#2b2b2b`（純黒ではない）/ pink `#ea677e` / stone-blue `#85a9c0` / white。罫線 `#c9c9c9`。
+- 書体は**2書体**: Basel Grotesk（sans）+ Store Norske Gangster（高コントラストのディスプレイ、**商用フォント**）。字間は display `-.04〜-.05em`、caps `.1em`。
+- 動きは**極端に少ない**: `@keyframes` は marquee 2本のみ。easing は `ease-out (0,0,.2,1)` 一種、duration は `.2 / .5 / .6s`。パララックスもスプリングも無い。
+- 素材: `autoplay muted loop` の動画1本（poster付き）+ 静止画36枚。角丸 21–25px、ドーム/円マスク。
+- 質感: フッターのテクスチャPNG + `mix-blend-mode: multiply`。
+
+### ユーザーの決定事項（この回のヒアリング結果）
+1. 適用範囲 = **トーン＋シェイプ・レイアウト**（情報設計・コピーは現状維持）。ただし**本番には適用せず、まず preview を見たい**。
+2. 光の作り方 = **自分で撮った写真** + **抽象（グラデ＋紙テクスチャ）** の併用。
+3. イラスト = **今回は入れない**（後フェーズ送り）。
+4. 次の一手 = **トップページの視覚プロトタイプ2案**。
+
+### 作ったもの（本番非破壊）
+`app/preview/` ツリー。`app/[locale]/` の兄弟なのでサイトの chrome もトークンも継承しない。**ディレクトリを消せば跡形なく元に戻る**。
+- `preview.css` — 全スタイルを `.pv` にスコープ。`app/globals.css` は無変更。
+- `page.tsx`（目次 / 判断材料）、`a/page.tsx`（案A Harbor）、`b/page.tsx`（案B Paper & Light）、`Reveal.tsx`、`Switcher.tsx`。
+- **案A Harbor** = 写真主導。ドーム/アーチのメディア、ディスプレイセリフ（Instrument Serif ＝ Store Norske Gangster の代替）、マーキー帯。seremoni に最も近いが**良い写真が無いと成立しない**。
+- **案B Paper & Light** = 質感主導。光を写真でなく「地の裏の固定暖色レイヤー + 紙の粒子」で作り、紙スラブを浮かせる。見出しは既存 Switzer のまま字間だけ `-0.045em`。**写真ゼロでも成立する**。
+- 写真の差し込みはコード変更不要: `public/preview-photos/` に `hero.jpg` / `harbor-1〜3.jpg` を置くだけ。`background-image` の1層目が404なら同色域のグラデーションに落ちる設計。
+
+### 本番に触れた唯一の箇所
+`middleware.ts` の matcher に `preview` を追加（`print` と同じ除外理由。next-intl が `/en/preview` にリライトして404になるのを防ぐ）。既存パスの挙動は変わらない。
+
+### 次にやること
+- ユーザーが `/preview/a` と `/preview/b` を実機で見て方向を選ぶ（またはA/Bの要素を混ぜる指示）。
+- 選定後に要件定義書（docs/）へ落とし、**その後で**本番トークンへの適用範囲を決める。作品サムネの色バラつきをクリーム地にどう馴染ませるかが最大の未解決論点。
+- 浮世絵サムネはクリーム地と相性が良いことをプロトタイプで確認済み（和紙的な地色）。
+
+## 現在地スナップショット（2026-07-31）
+2つの作業が並行しているので、どこまでが本番に出ていて何が手元だけなのかを一箇所にまとめる。
+
+**本番（origin/main）に出ているもの**
+- `/cv` のゆめみ期コンテンツ一式（インターン／正社員の2エントリ、匿名化した5案件、展開カード）。2026-07-30 に実ブラウザで配信確認済み。
+- PDF 生成基盤（`app/print/`、`app/print/print.css`、`print-fonts.css`、`src/print/*`、`src/cv/*`、`scripts/generate-portfolio-pdf.mjs`、`pnpm generate:pdf`）。
+- `/print/{en,jp}/portfolio` は本番で 404（env ゲート有効）。404 ページのタブタイトルだけ "Portfolio (print)" が残るが内容の露出は無し。
+
+**手元にあるだけ（未コミット）**
+- **print ルートのページ番号修正**（8ページ版）。上記のとおり main の版は壊れているので、これは早めに入れた方がよい。
+- **`app/preview/`（未追跡）** — アートディレクション検証の2案（案A Harbor / 案B Paper & Light）。`middleware.ts` の matcher は `print` に加えて `preview` も除外するようになった。経緯と教訓は `lessons.md`（2026-07-31 の項）とメモリ `feedback-preview-before-production` にある。ディレクトリを消せば元通りになる隔離構成。
+- **`public/downloads/*.pdf`（未追跡）** — v1 の EN/JP 各8ページ。git には入れていない（合計25MB、かつ提出はメール／アップロード想定のため）。サイトからダウンロードさせたい場合はコミットが必要。
+
+**保留中の判断**
+- PDF の図版は根本的に作り直し（2026-07-31 ユーザー判断）。詳細は上記「PDF の図版は根本的に作り直し」の項とメモリ `project-pdf-portfolio-visuals`。
+- アートディレクションは案A / 案B のどちらに進むか本人が選ぶ段階。
+
+**環境まわり**
+- `pnpm exec playwright install chromium` が未完了。現在はインストール済み Google Chrome にフォールバックして PDF を生成している（`PDF_CHANNEL=chrome` でも明示可）。再現性を上げたいなら通しておく。
+
+---
+
+## 2026-08-02: 外部プロフィール整合 引き継ぎ書の反映（CV事実修正 + 文体ルール適用）
+
+別セッション（claude-in-chrome での LinkedIn / ReDesigner / Wantedly 整合作業）が出した引き継ぎ書
+`portfolio-handoff.md` を受けて、リポジトリ側を検証・修正した。
+
+### 引き継ぎ書の裏取り結果
+- タスクA（ゆめみ正社員の終了月が Accenture 開始と重複）→ 事実。`cvData.ts` で確認
+- タスクB（きびだんご不在）→ 事実。リポジトリ全体で 0 ヒット
+- タスクC（サマリーの文体違反）→ 事実。ただし違反指摘②「社名を出している」は **CV には不適用**（職歴に自社名を書くのは当然）とユーザー判断
+- 「`src/data/projects.json` とどちらを直すか」→ **そのファイルは存在しない**。CLAUDE.md の記述が古い。cvData.ts が唯一の実データ
+- タスクD-2（Gym を独立カード化）→ **却下**。直前のコミット 7872397 で意図的に `hidden: true` にした決定と逆行するため触らない
+
+### 引き継ぎ書が見落としていて、こちらで見つけたもの
+- `project-ukiyoe` の制作年が CV `2024` / サイト `Dec 2025 - Feb 2026` で矛盾 → CV を `2025 - 2026` に修正
+- `project-gym` も CV `2024` / サイト・実データ `2025-06〜2025-11` で矛盾 → `2025` に修正
+- `messages/*.json` の Airline タイムラインが `Nov 2025` = 入社前 → ユーザー確定値 `Dec 2025 - Mar 2026` に修正
+- ゆめみインターンの summary が学部を「社会学部 / sociology degree」と誤記（正: 地球社会共生学部）→ 学部への言及自体を削除
+
+### 実施した変更
+- `src/data/cvData.ts`
+  - ゆめみ正社員 `endDate: '2025-12'` → `'2025-11'`
+  - きびだんご（2023-07〜2024-03、開発部アシスタント／インターン）を `workExperience` 末尾に追加
+  - `personalInfo.summary` を他媒体と統一した承認済みテキスト（EN/JP）に差し替え
+  - 数値の粒度を「リクルーターが読んで自然な水準」に調整: 399変数/6コレクション/3モード、約20画面、195画面/18仕様 を定性記述へ。3名体制・約50ページなど常識的なスケール表現は維持
+  - プロジェクト制作年 2件を修正
+- `messages/en.json` / `messages/jp.json`: Airline タイムライン修正、em dash 全廃（EN 25→0、JP 10→0）
+- `components/work/figma-plugins/{pluginData.ts,PluginCardDeckThumb.tsx,ConceptC.tsx}`、
+  `app/[locale]/work/ukiyoe/page.tsx`、`components/work/ukiyoe/{TimelineShowcase,KushiDangoShowcase}.tsx`:
+  散文・alt テキストの em dash を除去
+
+### 意図的に残したもの
+- **構造的セパレータとしての em dash**: `Iori Kawano — UI/UX Designer`（layout の title template）、
+  about ページの年レンジ `2021 — 2025`、`PdfResume.tsx` の `役職 — 会社名`、
+  `PluginCardDeckThumb.tsx` の欠損値プレースホルダ `'—'`。
+  これらは AI 由来の散文ダッシュではなく組版上のセパレータなので、禁止ルールの対象外と判断
+- ケーススタディページ（`messages` の airline セクション）の 399変数・9プラットフォーム等の数値。
+  CV とはレジスターが違い、事例紹介での定量は妥当
+
+### 検証
+- `npx tsc --noEmit`: 触れたファイルにエラー無し（残存する d3 の TS7016/7006 は既存かつ無関係）
+- `messages/*.json` の JSON パース OK
+- `npx next build` 成功
+
+### 未解決（ユーザー確認待ち）
+- `messages/en.json:394` の `roleText` に「a consulting structure (YUMEMI → Accenture → Airline)」とある。
+  これは航空案件を **ゆめみ側から** 担当していた構図を示すが、`cvData.ts` では同案件が Accenture の
+  職歴配下（2025-12 開始）に置かれている。どちらの所属で担当した案件なのか要確認

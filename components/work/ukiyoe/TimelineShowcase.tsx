@@ -136,7 +136,7 @@ export default function TimelineShowcase() {
       >
         <Image
           src="/work/ukiyoe/dango-photo.webp"
-          alt="Kushi-dango — three-color mochi representing the project's navigation motif"
+          alt="Kushi-dango: three-color mochi representing the project's navigation motif"
           fill
           className="object-cover object-center"
           sizes="350px"

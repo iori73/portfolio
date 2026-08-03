@@ -38,7 +38,7 @@ const basePlugins: PluginData[] = [
     type: 'Plugin',
     category: 'personal',
     description:
-      'Converts PowerPoint (.pptx) files into fully editable Figma designs — preserving text styles, shapes, tables, images, and theme colors. Each slide becomes a separate Frame.',
+      'Converts PowerPoint (.pptx) files into fully editable Figma designs, preserving text styles, shapes, tables, images, and theme colors. Each slide becomes a separate Frame.',
     tags: ['Plugin', 'Import', 'PowerPoint'],
     link: 'https://www.figma.com/community/plugin/1579722656902401183',
     accentColor: '#1ABCFE',
@@ -53,7 +53,7 @@ const basePlugins: PluginData[] = [
     type: 'Widget',
     category: 'personal',
     description:
-      'Renders Markdown inside Figma and FigJam with full syntax support — tables, code blocks, task lists, and light/dark themes.',
+      'Renders Markdown inside Figma and FigJam with full syntax support: tables, code blocks, task lists, and light/dark themes.',
     tags: ['Widget', 'Markdown', 'FigJam'],
     link: 'https://www.figma.com/community/widget/1594023679858160179',
     accentColor: '#A259FF',

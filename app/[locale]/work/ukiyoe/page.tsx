@@ -317,7 +317,7 @@ const UkiyoePage: React.FC = () => {
                 <figure>
                   <Image
                     src="/work/ukiyoe/process-timeline.webp"
-                    alt="Timeline page — architecture shift to vertical scroll"
+                    alt="Timeline page: architecture shift to vertical scroll"
                     width={1200}
                     height={675}
                     className="w-full h-auto"
@@ -378,7 +378,7 @@ const UkiyoePage: React.FC = () => {
                 <figure>
                   <Image
                     src="/work/ukiyoe/process-logo.webp"
-                    alt="Logo design — a seal mark built on bold cropping and off-center placement"
+                    alt="Logo design: a seal mark built on bold cropping and off-center placement"
                     width={1200}
                     height={675}
                     className="w-full h-auto rounded-lg"
