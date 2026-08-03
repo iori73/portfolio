@@ -15,13 +15,15 @@ const WorkProjectCard: React.FC<{ project: WorkProject; lang: 'en' | 'jp' }> = (
   const { getBodyFontClass } = useBodyFont();
   const [open, setOpen] = useState(false);
 
-  const bodyClass = `text-body ${getBodyFontClass()} text-ink-secondary leading-[1.6]`;
+  // 案件カードの本文は職務サマリー（text-body）の一段下。実機で両者が同じ大きさに
+  // 見えて入れ子が読めなかったため、サイズで従属関係を出す。
+  const bodyClass = `text-body-sm ${getBodyFontClass()} text-ink-secondary leading-[1.6]`;
   const meta = (
     <div className="flex items-baseline gap-3">
-      <span className="font-space-grotesk text-label font-semibold text-ink-tertiary uppercase tracking-[0.06em]">
+      <span className="font-space-grotesk text-label font-semibold text-ink uppercase tracking-caps">
         {project.label[lang]}
       </span>
-      <span className="font-space-grotesk text-label text-ink-tertiary">
+      <span className="font-space-grotesk text-caption text-ink-tertiary">
         {formatProjectPeriod(project.period, lang)}
       </span>
     </div>
@@ -29,7 +31,7 @@ const WorkProjectCard: React.FC<{ project: WorkProject; lang: 'en' | 'jp' }> = (
 
   if (!project.detail) {
     return (
-      <div className="border-l-2 border-line-subtle pl-4 flex flex-col gap-1">
+      <div className="border-l-2 border-line-section pl-4 flex flex-col gap-1">
         {meta}
         <p className={bodyClass}>{project.summary[lang]}</p>
       </div>
@@ -39,7 +41,7 @@ const WorkProjectCard: React.FC<{ project: WorkProject; lang: 'en' | 'jp' }> = (
   const blocks = buildProjectBlocks(project, lang);
 
   return (
-    <Collapsible open={open} onOpenChange={setOpen} className="border-l-2 border-line-subtle pl-4">
+    <Collapsible open={open} onOpenChange={setOpen} className="border-l-2 border-line-section pl-4">
       <CollapsibleTrigger className="group w-full min-h-[44px] py-1 flex flex-col gap-1 text-left rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2">
         {meta}
         <div className="flex items-start gap-3">
