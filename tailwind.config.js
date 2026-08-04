@@ -34,6 +34,9 @@ module.exports = {
         surface: {
           DEFAULT: 'var(--surface)',
           muted: 'var(--surface-muted)',
+          /* Lighter than the ground — for media wells and cards that should
+             lift off the cream sheet rather than sink into it. */
+          raised: 'var(--surface-raised)',
         },
         line: {
           subtle: 'var(--line-subtle)',
