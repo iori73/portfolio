@@ -332,19 +332,10 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* 終端バンド。treemap の最下段はグラデーションが純白で消えるため、これが無いと
-            ページの終わりが視覚的に存在せず「まだ下に続く」と読めてしまう。
-            トーンを強く終わらせたい場合は bg-surface-muted → bg-ink text-white に差し替える。 */}
-        <div className="w-full border-t border-line-section bg-surface-muted text-center py-3 px-6">
-          <span
-            className="font-space-grotesk text-caption text-ink-tertiary tracking-[-0.4px]"
-            style={{ lineHeight: '1.164' }}
-          >
-            {/* 年はハードコード。new Date() だと SSR(UTC) と client(JST) で年末年始に
-                食い違い、hydration mismatch の console error が出る。 */}
-            © 2026 Iori Kawano
-          </span>
-        </div>
+        {/* 終端バンド（copyright）は置かない。treemap より明るい面が最下段に来ると、
+            バンドだけが浮いて見える（2026-08-04 実機で確認）。
+            「ページの終わり」は treemap の色面そのものが担い、ラバーバンドは
+            globals.css の overscroll-behavior-y: none で止めている。 */}
       </div>
     </footer>
   );
