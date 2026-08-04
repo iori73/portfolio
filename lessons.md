@@ -276,6 +276,27 @@
 
 ---
 
+## 2026-08-04: dev サーバー起動中に next build を打つと .next が壊れる
+
+**状況**: 変更を実機確認するため `next dev -p 3111` を起動したまま、検証のつもりで
+`npx next build` を実行した。本番ビルドが `.next` を作り直し、dev サーバーが参照していた
+`.next/server/pages/_document.js` が消え、ブラウザが
+`ENOENT: no such file or directory` の Runtime Error になった。
+
+**原因**: `next dev` と `next build` は**同じ `.next` ディレクトリを共有する**。
+build は開発用の成果物を前提なく上書きするので、走っている dev サーバーの足元が抜ける。
+
+**教訓**:
+- **dev サーバーと build を同時に走らせない。** 確認したいことによって使い分ける
+  - 見た目・挙動の確認 → `next dev` だけで足りる。build は不要
+  - 型・ビルド成功の確認 → dev を止めてから `next build`
+  - PDF生成（`scripts/generate-portfolio-pdf.mjs`）は本番ビルドを要求するので、
+    これを回すときも先に dev を止める
+- 別ディレクトリを使いたいなら `next build --distDir .next-build` のように分離できる
+- 復旧は `rm -rf .next && npx next dev`。コードは無傷なので慌てて他を触らないこと
+
+---
+
 ## 2026-08-03: 本番デプロイの確認ポーリングでサイト全体を429にした
 
 **状況**: PR マージ後、本番に反映されたか確認するため `curl` を15秒間隔で30回ループさせた。

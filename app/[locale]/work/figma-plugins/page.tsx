@@ -36,7 +36,7 @@ export default function FigmaPluginsPage() {
       {/* Hero */}
       <section className="mb-0 md:mb-12 full-bleed">
         <div className="w-full">
-          <div className="w-full aspect-[5/2] bg-[#F5F5F7] overflow-hidden relative">
+          <div className="w-full aspect-[5/2] bg-surface-raised overflow-hidden relative">
             <PluginCardDeckThumb maxScale={PLUGIN_DECK_HERO_MAX_SCALE} />
           </div>
         </div>

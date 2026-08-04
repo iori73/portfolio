@@ -109,7 +109,9 @@ export default function Header() {
         className="absolute inset-0 pointer-events-none"
         style={{
           backdropFilter: 'blur(40px)',
-          background: 'rgba(252,251,252,0.6)',
+          // Tinted to the cream ground (--surface #ebe8de). A white veil here
+          // reads as a separate white bar sitting on top of a warm sheet.
+          background: 'rgba(235,232,222,0.6)',
           // maskImage:
           //   'linear-gradient(180deg, rgba(229, 229, 229, 10) 0%, rgba(229, 229, 229, 0.9) 25%, rgba(229, 229, 229, 0.7) 50%, rgba(229, 229, 229, .5) 70%, rgba(229, 229, 229, 0.1) 90%, rgba(229, 229, 229, 0) 100%)',
           // WebkitMaskImage:
@@ -221,7 +223,7 @@ export default function Header() {
             id="mobile-menu"
             className="fixed top-0 left-0 w-full h-screen z-40 flex items-start pt-24 justify-start px-6 md:hidden pointer-events-none"
             style={{
-              background: 'linear-gradient(rgb(255, 255, 255) 33%, rgba(255, 255, 255, 0.5) 100%)',
+              background: 'linear-gradient(rgb(235, 232, 222) 33%, rgba(235, 232, 222, 0.5) 100%)',
               backdropFilter: 'blur(16px)',
               transition: 'opacity 0.8s ease, transform 0.8s ease',
             }}

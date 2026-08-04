@@ -124,7 +124,7 @@ export default function Home() {
         >
           <div className="mb-20">
             <div
-              className="mb-6 w-full aspect-[2/1] rounded-lg bg-[#F5F5F7] overflow-hidden"
+              className="mb-6 w-full aspect-[2/1] rounded-lg bg-surface-raised overflow-hidden"
               ref={figmaPluginsImageRef}
             >
               <PluginCardDeckThumb />
