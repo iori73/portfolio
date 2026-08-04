@@ -9,5 +9,7 @@ export const config = {
   // `print` is excluded so /print/<locale>/... resolves to app/print/ instead of
   // being rewritten into the [locale] tree (which would 404 via [...rest]).
   // The print tree passes its locale explicitly, so it needs no middleware.
-  matcher: ['/((?!api|print|_next|_vercel|.*\\..*).*)', '/']
+  // `preview` (art-direction prototypes) is excluded for the same reason — it is
+  // a single-locale, non-indexed tree living outside app/[locale]/.
+  matcher: ['/((?!api|print|preview|_next|_vercel|.*\\..*).*)', '/']
 };
