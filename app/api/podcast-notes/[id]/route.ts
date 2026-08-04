@@ -1,7 +1,8 @@
 /**
  * Podcast Notes Detail API: Fetches a single episode's structured content from Notion.
  *
- * Returns metadata + parsed sections (Summary, Key Points, Chapters).
+ * Returns metadata + parsed sections (Summary, Key Points, Chapters) — all AI-generated —
+ * plus `ownNotes`: the sections the author wrote by hand.
  * Transcript is flagged but not returned (too large).
  *
  * Environment: NOTION_API_KEY
@@ -12,10 +13,17 @@ import { Client } from '@notionhq/client';
 import {
   normalizeCategoryName,
 } from '@/components/podcast-notes/types';
-import type { Chapter } from '@/components/podcast-notes/types';
+import type { Chapter, NoteBlock, OwnNoteSection } from '@/components/podcast-notes/types';
 import { rateLimit } from '@/src/lib/rate-limit';
 
 const NOTION_API_KEY = process.env.NOTION_API_KEY;
+
+// ownNotes の取り込み上限。Notion 側でいくら書かれてもレスポンスと serverless 実行時間が
+// 膨らまないようにする。子ブロック取得のリクエスト数も含めて上限を持たせる。
+const MAX_OWN_SECTIONS = 10;
+const MAX_BLOCKS_PER_SECTION = 40;
+const MAX_BLOCK_TEXT = 2000;
+const MAX_CHILD_REQUESTS = 20;
 
 function extractRichText(richText: { plain_text?: string }[] | undefined): string {
   if (!richText || !Array.isArray(richText)) return '';
@@ -27,15 +35,50 @@ interface ParsedContent {
   keyLearnings: string[];
   chapters: Chapter[];
   hasTranscript: boolean;
+  ownNotes: OwnNoteSection[];
 }
 
-function parseBlocks(blocks: Record<string, unknown>[]): ParsedContent {
+/** Notion のブロック type → 表示用の NoteBlock type。対象外は null（＝取り込まない）。 */
+function noteBlockType(notionType: string): NoteBlock['type'] | null {
+  switch (notionType) {
+    case 'paragraph':
+      return 'paragraph';
+    case 'bulleted_list_item':
+      return 'bulleted';
+    case 'numbered_list_item':
+      return 'numbered';
+    case 'quote':
+      return 'quote';
+    case 'callout':
+    case 'toggle':
+      return 'callout';
+    case 'code':
+      return 'code';
+    default:
+      return null;
+  }
+}
+
+/**
+ * 既知セクション（Summary / Chapters / Transcript …）以外の見出し配下を「本人が書いたメモ」として拾う。
+ *
+ * 見出し名を決め打ちで足していく方式にしないのがポイント。Notion 側の見出し文言が変わっても
+ * 落ちないよう、「知らない見出しは全部自分のメモ」という構造ベースで判定する。
+ *
+ * @param fetchChildren ブロックの子を1階層取得する。呼び出し回数は MAX_CHILD_REQUESTS で制限。
+ */
+async function parseBlocks(
+  blocks: Record<string, unknown>[],
+  fetchChildren: (blockId: string) => Promise<Record<string, unknown>[]>
+): Promise<ParsedContent> {
   let currentSection: string | null = null;
   let currentSubSection: string | null = null;
   const summaryParts: string[] = [];
   const keyLearnings: string[] = [];
   const chapters: Chapter[] = [];
+  const ownNotes: OwnNoteSection[] = [];
   let hasTranscript = false;
+  let childRequests = 0;
 
   const SECTION_NAMES = ['basic information', 'summary', 'chapters', 'timestamps', 'transcript'];
   const SKIP_SECTIONS = ['basic information'];
@@ -43,6 +86,51 @@ function parseBlocks(blocks: Record<string, unknown>[]): ParsedContent {
   const CHAPTER_SECTIONS = ['chapters', 'timestamps'];
   const TRANSCRIPT_SECTIONS = ['transcript'];
   const KEY_POINT_LABELS = ['主要ポイント', 'key points', 'key learnings', 'key takeaways', 'takeaways'];
+
+  /** callout / toggle の中身（用語リストなど）を深さ2まで取る。 */
+  async function collectChildren(blockId: string, depth: number): Promise<NoteBlock[] | undefined> {
+    if (depth <= 0 || childRequests >= MAX_CHILD_REQUESTS) return undefined;
+    childRequests++;
+    let children: Record<string, unknown>[];
+    try {
+      children = await fetchChildren(blockId);
+    } catch {
+      return undefined;
+    }
+
+    const out: NoteBlock[] = [];
+    for (const child of children) {
+      if (out.length >= MAX_BLOCKS_PER_SECTION) break;
+      const block = await toNoteBlock(child, depth - 1);
+      if (block) out.push(block);
+    }
+    return out.length > 0 ? out : undefined;
+  }
+
+  async function toNoteBlock(
+    block: Record<string, unknown>,
+    childDepth: number
+  ): Promise<NoteBlock | null> {
+    const type = block.type as string;
+    const mapped = noteBlockType(type);
+    if (!mapped) return null;
+
+    const content = block[type] as
+      | { rich_text?: { plain_text?: string }[]; icon?: { emoji?: string } }
+      | undefined;
+    const text = extractRichText(content?.rich_text).trim().slice(0, MAX_BLOCK_TEXT);
+    const children = block.has_children ? await collectChildren(block.id as string, childDepth) : undefined;
+
+    // テキストが空でも子があれば構造として意味があるので残す。
+    if (!text && !children) return null;
+
+    return {
+      type: mapped,
+      text,
+      ...(content?.icon?.emoji ? { icon: content.icon.emoji } : {}),
+      ...(children ? { children } : {}),
+    };
+  }
 
   for (const block of blocks) {
     const type = block.type as string;
@@ -68,15 +156,39 @@ function parseBlocks(blocks: Record<string, unknown>[]): ParsedContent {
         currentSubSection = null;
         continue;
       }
-      if (currentSection === 'summary') {
-        const subLower = text.toLowerCase().trim();
-        if (KEY_POINT_LABELS.some((kp) => subLower.includes(kp))) {
-          currentSubSection = 'keypoints';
-        } else {
-          currentSubSection = 'text';
+
+      // 「主要ポイント」等は Summary の小見出し。ここを own-note に取り違えると
+      // keyLearnings が空になるので、レベルに関係なく必ず Summary 側に残す。
+      const isKeyPointHeading = KEY_POINT_LABELS.some((kp) => headerLower.includes(kp));
+      if (currentSection === 'summary' && (isKeyPointHeading || type === 'toggle')) {
+        currentSubSection = isKeyPointHeading ? 'keypoints' : 'text';
+        continue;
+      }
+
+      // 未知の見出し＝本人が書いたセクションの開始。
+      // toggle は見出しではなく本文の一部として扱う（own セクション内なら中身ごと拾う）。
+      if (type !== 'toggle' && text.trim()) {
+        currentSection = 'own';
+        currentSubSection = null;
+        if (ownNotes.length < MAX_OWN_SECTIONS) {
+          ownNotes.push({ heading: text.trim().slice(0, 200), blocks: [] });
         }
         continue;
       }
+
+      if (currentSection === 'summary') {
+        currentSubSection = 'text';
+        continue;
+      }
+    }
+
+    if (currentSection === 'own') {
+      const section = ownNotes[ownNotes.length - 1];
+      // MAX_OWN_SECTIONS を超えた分は heading を push していないので捨てる。
+      if (!section || section.blocks.length >= MAX_BLOCKS_PER_SECTION) continue;
+      const noteBlock = await toNoteBlock(block, 2);
+      if (noteBlock) section.blocks.push(noteBlock);
+      continue;
     }
 
     if (!text) continue;
@@ -113,6 +225,8 @@ function parseBlocks(blocks: Record<string, unknown>[]): ParsedContent {
     keyLearnings: keyLearnings.slice(0, 8),
     chapters,
     hasTranscript,
+    // 中身が空になったセクション（見出しだけ）は出さない
+    ownNotes: ownNotes.filter((s) => s.blocks.length > 0),
   };
 }
 
@@ -187,7 +301,10 @@ export async function GET(
       cursor = response.next_cursor ?? undefined;
     }
 
-    const parsed = parseBlocks(blocks);
+    const parsed = await parseBlocks(blocks, async (blockId) => {
+      const res = await notion.blocks.children.list({ block_id: blockId, page_size: 100 });
+      return res.results as Record<string, unknown>[];
+    });
 
     return NextResponse.json(
       { ...metadata, ...parsed },

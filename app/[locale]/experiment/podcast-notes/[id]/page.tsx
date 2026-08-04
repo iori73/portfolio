@@ -15,8 +15,9 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import NoteCard from '@/components/podcast-notes/NoteCard';
+import OwnNotesSection from '@/components/podcast-notes/OwnNotesSection';
 import BackToTopButton from '@/src/compositions/BackToTopButton';
-import type { Episode, Chapter, PodcastData } from '@/components/podcast-notes/types';
+import type { Episode, Chapter, OwnNoteSection, PodcastData } from '@/components/podcast-notes/types';
 import { CATEGORY_COLORS, DEFAULT_CATEGORY_COLOR } from '@/components/podcast-notes/types';
 
 interface EpisodeDetail {
@@ -33,6 +34,8 @@ interface EpisodeDetail {
   keyLearnings: string[];
   chapters: Chapter[];
   hasTranscript: boolean;
+  /** 本人が Notion に手で書いたセクション。静的 JSON フォールバック時は undefined。 */
+  ownNotes?: OwnNoteSection[];
 }
 
 function formatDuration(minutes: number): string {
@@ -261,24 +264,42 @@ export default function EpisodeDetailPage() {
 
       <hr className="border-line-section mb-8" />
 
-      {/* Summary */}
+      {/* 自分で書いたメモ。AI 要約より先に置く — 「手を入れた部分」が先に伝わる順序にする */}
+      <OwnNotesSection
+        sections={detail.ownNotes ?? []}
+        label={t('myNotesSection')}
+        bodyFontClass={bodyFontClass}
+        headingFontClass={headingFontClass}
+      />
+
+      {/* Summary（自動生成） */}
       {detail.summary && (
         <section className="mb-8">
-          <h2 className={`text-title-lg text-ink mb-4 ${headingFontClass}`}>
-            {t('summarySection')}
-          </h2>
+          <div className="flex items-baseline gap-3 mb-4">
+            <h2 className={`text-title-lg text-ink ${headingFontClass}`}>
+              {t('summarySection')}
+            </h2>
+            <span className="font-space-grotesk text-caption text-ink-tertiary">
+              {t('autoSummarizedLabel')}
+            </span>
+          </div>
           <p className={`text-body-lg text-ink-secondary leading-relaxed ${bodyFontClass}`}>
             {detail.summary}
           </p>
         </section>
       )}
 
-      {/* Key Points */}
+      {/* Key Points（自動生成） */}
       {detail.keyLearnings.length > 0 && (
         <section className="mb-8">
-          <h2 className={`text-title-lg text-ink mb-4 ${headingFontClass}`}>
-            {t('keyPointsSection')}
-          </h2>
+          <div className="flex items-baseline gap-3 mb-4">
+            <h2 className={`text-title-lg text-ink ${headingFontClass}`}>
+              {t('keyPointsSection')}
+            </h2>
+            <span className="font-space-grotesk text-caption text-ink-tertiary">
+              {t('autoSummarizedLabel')}
+            </span>
+          </div>
           <ul className="space-y-3">
             {detail.keyLearnings.map((point, i) => (
               <li

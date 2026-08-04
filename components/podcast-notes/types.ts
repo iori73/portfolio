@@ -3,6 +3,26 @@ export interface Chapter {
   title: string;
 }
 
+/**
+ * 本人が Notion ページに手で書いたブロック。AI 生成の summary / keyLearnings とは
+ * 区別して扱うため、見出し単位のセクションとして持つ。
+ * detail API（/api/podcast-notes/[id]）のレスポンスにのみ載る — 一覧 API は
+ * ページ本文を取得しないので Episode には足さない。
+ */
+export interface NoteBlock {
+  type: 'paragraph' | 'bulleted' | 'numbered' | 'quote' | 'callout' | 'code';
+  text: string;
+  /** callout の絵文字アイコン（あれば） */
+  icon?: string;
+  /** callout / toggle 配下の入れ子ブロック（深さ2まで） */
+  children?: NoteBlock[];
+}
+
+export interface OwnNoteSection {
+  heading: string;
+  blocks: NoteBlock[];
+}
+
 export interface Episode {
   id: string;
   title: string;
