@@ -183,8 +183,10 @@ const getIconColor = (opacity: number): string => {
 export default function Footer() {
   const t = useTranslations('footer');
 
+  // 本文とフッターの間の余白（ページ root の my-24 の下マージン）が「意図された余白」に
+  // 読めるよう上端に境界線を引く。ページ側の縦リズムは触らない。
   return (
-    <footer className="w-full relative ">
+    <footer className="w-full relative border-t border-line-section">
       <div className="w-full mx-auto">
         {/* Header Container */}
         <div className="flex flex-col items-start gap-3 pt-8 px-6">
@@ -330,15 +332,19 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Copyright */}
-        {/* <div className="w-full text-center py-2 px-6">
+        {/* 終端バンド。treemap の最下段はグラデーションが純白で消えるため、これが無いと
+            ページの終わりが視覚的に存在せず「まだ下に続く」と読めてしまう。
+            トーンを強く終わらせたい場合は bg-surface-muted → bg-ink text-white に差し替える。 */}
+        <div className="w-full border-t border-line-section bg-surface-muted text-center py-3 px-6">
           <span
-            className="font-space-grotesk text-caption text-ink tracking-[-0.4px]"
+            className="font-space-grotesk text-caption text-ink-tertiary tracking-[-0.4px]"
             style={{ lineHeight: '1.164' }}
           >
-            @ 2025 Iori Kawano
+            {/* 年はハードコード。new Date() だと SSR(UTC) と client(JST) で年末年始に
+                食い違い、hydration mismatch の console error が出る。 */}
+            © 2026 Iori Kawano
           </span>
-        </div> */}
+        </div>
       </div>
     </footer>
   );

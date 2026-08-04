@@ -59,6 +59,7 @@
   "about": {
     "description1": "I'm a UI/UX designer with a passion for creating structured, detail-oriented designs. I explore the joy of collaboration between frictionless and creative design.",
     "description2": "I specialize in creating manageable and scalable design systems (not as an end goal, but as a foundation), freeing design from repetition and opening space for human-centered, contextual exploration.",
+    "viewFullCv": "View full CV",
     "myInterests": "My Interests",
     "interestsDescription": "This visualization highlights the topics I am deeply interested in. Each node represents a subject that inspires my curiosity and enriches my perception of the world."
   },
@@ -310,7 +311,7 @@
     "aiCraftText3": "AI can create, but it can't craft. Craft is the narrative behind a design choice, the sensitivity to a cultural context, the attention to a detail that nobody requested but that makes the whole thing feel intentional. The isometric layer animations, the kushi-dango navigation motif, the canonical color slots: each reflects a specific design decision rooted in genuine research, not generic output. What AI gave me was speed. What I brought was direction, a cultural story, and the conviction that the details matter.",
     "technicalIntro": "Built as a custom design system of CSS variables carrying historically-derived color tokens, with scroll-driven animation throughout.",
     "techFeature1Title": "Scroll-Driven Layer Animation",
-    "techFeature1Text": "Framer Motion's useScroll and useTransform hooks orchestrate layer-stacking animations synchronized to scroll position. Each technique era has its own set of hand-painted layers that stack progressively.",
+    "techFeature1Text": "Layer-stacking animations are driven directly by scroll position. Each technique era has its own set of hand-painted layers that stack progressively.",
     "techFeature2Title": "Parallax Artwork Gallery",
     "techFeature2Text": "A native scroll-based parallax system where artwork images move at different speeds based on depth. Fixed period panels and progress indicators help users navigate five historical eras.",
     "techFeature3Title": "Cultural Color Tokens",
@@ -345,6 +346,8 @@
     "showLess": "Show first {count} episodes",
     "allEpisodesTitle": "All Episodes",
     "backToOverview": "← Knowledge Constellation",
+    "myNotesSection": "In My Words",
+    "autoSummarizedLabel": "Auto-summarized",
     "summarySection": "Summary",
     "keyPointsSection": "Key Points",
     "chaptersSection": "Chapters",

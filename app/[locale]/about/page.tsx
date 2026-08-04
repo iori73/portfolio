@@ -11,7 +11,7 @@ const InterestsVisualization = dynamic(() => import('./InterestsVisualization'),
   loading: () => <div className="w-4/5 mx-auto aspect-square" aria-hidden />,
 });
 import { useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
-import { cvData } from '@/src/data/cvData';
+import { CTAButton } from '@/components/ui/cta-button';
 
 // Section label: Space Grotesk uppercase with top border
 function SectionLabel({ children }: { children: React.ReactNode }) {
@@ -27,10 +27,6 @@ const AboutPage: React.FC = () => {
   const locale = useLocale() as 'en' | 'jp';
   const { getBodyFontClass } = useBodyFont();
   const { getHeadingFontClass } = useHeadingFont();
-
-  // Format date range: "2025-04" → "2025" (or "Present")
-  const formatYear = (date: string | 'Present') =>
-    date === 'Present' ? (locale === 'jp' ? '現在' : 'Present') : date.slice(0, 4);
 
   return (
     <div className="font-sans my-24 md:mt-28 md:mb-16">
@@ -58,78 +54,17 @@ const AboutPage: React.FC = () => {
               <p className={`text-body-lg ${getBodyFontClass()} mb-4`}>{t('description1')}</p>
               <p className={`text-body-lg ${getBodyFontClass()}`}>{t('description2')}</p>
             </div>
+
+            {/* 経歴・スキルは /cv が唯一のソース（cvData）。ここに同じものを並べると
+                二重管理になるため、導線だけ置く。 */}
+            <div className="mt-8">
+              <CTAButton href={`/${locale}/cv`}>{t('viewFullCv')}</CTAButton>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── Career ── */}
-      <SectionLabel>Career</SectionLabel>
-      <h2 className={`text-title-lg mb-8 ${getHeadingFontClass()}`}>
-        {locale === 'jp' ? 'システムで考え、細部にこだわる。' : 'Thinks in systems. Details in design.'}
-      </h2>
-
-      <div>
-        {/* Work experience */}
-        {cvData.workExperience.map((job) => (
-          <div
-            key={job.id}
-            className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-2 md:gap-6 py-6 border-b border-line-subtle"
-          >
-            <div className="font-space-grotesk text-label text-ink-tertiary pt-1">
-              {formatYear(job.startDate)} — {formatYear(job.endDate)}
-            </div>
-            <div>
-              <p className={`text-title font-switzer font-medium mb-1`}>
-                {job.position[locale]}
-                {job.employmentType && ` (${job.employmentType[locale]})`} — {job.company[locale]}
-              </p>
-              <p className={`text-body ${getBodyFontClass()} text-ink-secondary leading-[1.6]`}>
-                {job.summary[locale]}
-              </p>
-            </div>
-          </div>
-        ))}
-
-        {/* Education */}
-        {cvData.education.map((edu) => (
-          <div
-            key={edu.id}
-            className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-2 md:gap-6 py-6 border-b border-line-subtle last:border-b-0"
-          >
-            <div className="font-space-grotesk text-label text-ink-tertiary pt-1">
-              {formatYear(edu.startDate)} — {formatYear(edu.endDate)}
-            </div>
-            <div>
-              <p className={`text-title font-switzer font-medium mb-1`}>
-                {locale === 'jp'
-                  ? `${edu.institution[locale]}　${edu.field[locale]}`
-                  : `${edu.institution[locale]} — ${edu.field[locale]}`}
-              </p>
-              <p className={`text-body ${getBodyFontClass()} text-ink-secondary leading-[1.6]`}>
-                {edu.description?.[locale]}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* ── Skills ── */}
-      <SectionLabel>Skills</SectionLabel>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-        {cvData.skills.map((skill) => (
-          <div key={skill.category.en}>
-            <div className="font-space-grotesk text-label font-semibold text-ink-tertiary uppercase tracking-[0.04em] mb-3">
-              {skill.category.en}
-            </div>
-            <p className={`text-body ${getBodyFontClass()} text-ink-secondary leading-[1.6]`}>
-              {skill.items.join(', ')}.
-            </p>
-          </div>
-        ))}
-      </div>
-
-      {/* ── My Interests (moved to bottom) ── */}
+      {/* ── My Interests ── */}
       <SectionLabel>{t('myInterests')}</SectionLabel>
       <p className={`text-body-lg ${getBodyFontClass()} mb-8`}>
         {t('interestsDescription')}
