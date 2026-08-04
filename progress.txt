@@ -794,3 +794,104 @@ PR #47 と #49 で、コミットせずに push / merge を実行したためタ
 - git の `user.email` が旧アドレスのまま。公開リポジトリなので全コミットに刻まれる
 - `middleware.ts` + `app/preview/` はアートディレクション案A/Bの選択待ちで未コミットのまま
 - 浮世絵ページ `techFeature1Text` が Framer Motion の useScroll / useTransform まで書いている
+
+---
+
+## 2026-08-03（追記2）: iPhone/Chrome 実機フィードバック 4件
+
+本人が iPhone の Chrome で本番を見て取ったスクリーンショット4枚
+（`~/Downloads/sp portfolio 0803/`）起点。実機で初めて気づいた4点を修正。
+
+### 1. CV 案件カードのラベルが本文と区別できない
+`app/[locale]/cv/page.tsx` の `WorkProjectCard`。ラベル（UNIVERSITY / AIRLINE）が
+`text-label`/`ink-tertiary`、案件本文が `text-body`/`ink-secondary` で、職務サマリーと
+案件本文が同じ見た目だった。入れ子の手がかりが `border-line-subtle`(#e4e4e7) の細線のみ。
+
+- ラベル: `ink-tertiary` → `ink` + semibold、`tracking-caps` トークン化
+- 期間: `text-label` → `text-caption`（従属させる）
+- 案件本文: `text-body` → `text-body-sm`（職務サマリーの一段下）
+- 左罫線: `border-line-subtle` → `border-line-section`（#d4d4d8）
+
+`src/cv/format.ts` / `selectors.ts` / `src/print/*` は未変更なので PDF とは乖離しない。
+
+### 2. 「フッターの下までスクロールできる」→ 実体は無かった
+本番を iPhone 相当で実測: `footer` 下端 5621px = `document.scrollHeight` と**完全一致**。
+DOM 上に余白は存在せず、iOS のラバーバンドで body 背景 `#fcfbfc` が見えていただけ。
+フッター最下段のグラデーションが純白で終わるため「終端」が視覚的に無く、余白に見えていた。
+
+- `app/globals.css`: `html { overscroll-behavior-y: none }` でバウンス自体を止める
+- `src/compositions/Footer.tsx`: `<footer>` に `border-t border-line-section`（本文との
+  96px の隙間 = ページ root の `my-24` 下マージン を「意図された余白」として読ませる）
+- コメントアウトされていた copyright を終端バンドとして復活
+  （`border-t border-line-section bg-surface-muted`）。年はハードコード
+  （`new Date()` だと SSR(UTC)/client(JST) で年末年始に hydration mismatch）
+- ページ側の `my-24` は触っていない（6ページの縦リズムを壊さないため）
+
+### 3. /about に /cv と同じ内容
+`about/page.tsx` が `cvData.workExperience` / `education` / `skills` を /cv と同一ソースから
+重複描画していた。Career / Skills を削除し、Hero 直後に CV への `CTAButton` を置いた。
+`cvData.ts` は未変更。/about = Hero + CV導線 + My Interests に役割を絞った。
+
+### 4. Notion に書いた自分のメモが site に出ていなかった
+`app/api/podcast-notes/[id]/route.ts` の `parseBlocks()` が
+`basic information / summary / chapters / timestamps / transcript` の5セクションしか
+認識せず、それ以外の見出し配下を全部落としていた。結果、出ていたのは AI 要約だけで、
+「このエピソードから自分のシステムへ」「用語」などの手書き部分が消えていた。
+
+見出し名を足していく方式ではなく**「知らない見出しは全部自分のメモ」**という構造ベースに変更。
+
+- `parseBlocks` を async 化し `ownNotes: OwnNoteSection[]` を返す
+- callout / toggle の中身（用語リスト）は `has_children` を深さ2まで再帰取得
+- 上限: セクション10 / ブロック40 / テキスト2000字 / 子取得リクエスト20
+- 「主要ポイント」等（KEY_POINT_LABELS）はレベルに関係なく Summary 側に残す
+  → `keyLearnings` が空になる事故を防ぐ
+- 新規 `components/podcast-notes/OwnNotesSection.tsx` で再帰描画
+- 詳細ページで **Summary より上**に配置。Summary / Key Points 側には「自動要約」ラベルを添えて
+  自分の言葉と自動生成を区別
+
+検証（該当エピソード 3b026482-6e0c-8114-b1f5-ef41c04449b9）: ownNotes 6セクション取得、
+callout の子8件も取得。既存の summary 513字 / keyLearnings 5件 / chapters 7件は変化なし。
+
+### 残タスク・申し送り
+- ownNotes は日本語で書かれているため EN ロケールでも日本語のまま出る（ソースコンテンツ扱い）
+- 1つ目のセクション「公式ショーノート（話したネタ）」は厳密には自分の言葉ではなく
+  公式ショーノートの転記。「自分のメモ」ラベルの妥当性は本人判断
+- `middleware.ts` + `app/preview/` は依然アートディレクション案A/Bの選択待ちで未コミット
+- `public/data/podcast-notes.json`（週次パイプライン）には ownNotes を入れていない。
+  API 停止時のフォールバックでは自分のメモが出ない
+
+---
+
+## 2026-08-04: 積み残し3件の解消
+
+本番反映（PR #50 / #51）の確認後、保留していた3件を処理した。
+
+1. **CLAUDE.md のデータソース記述を修正**
+   存在しない `src/data/projects.json` を「CV・ケーススタディの参照元」として指していた。
+   実体は `src/data/cvData.ts` 一本。参照ドキュメント表のリンクも差し替えた。
+   あわせて「職歴を追加したら app/print/ の職歴ID直書きを確認する」という注意を追記
+   （2026-08-03 にきびだんごが PDF から消えた件の再発防止）
+
+2. **サイト用 `personalInfo.summary` から enterprise を除去**
+   EN: `for enterprise clients` を削除。JP: 「エンタープライズ領域で」を削除。
+   本人が業種ラベルで囲い込まれることを望まないため。これで cvData 内から
+   enterprise / エンタープライズ の表記は全て消えた
+
+3. **浮世絵ページから Framer Motion の API 名を除去**
+   `techFeature1Text` が useScroll / useTransform まで書いていた。
+   「スクロール位置に同期して、レイヤーの重ね合わせアニメーションを制御」に変更。
+   デザイナーのケーススタディにエンジニアの粒度は不要という判断（開発言語除去と同じ方針）
+
+### 見送った項目
+- **git の `user.email`** は `iori730002204294@gmail.com` のまま維持する。
+  GitHub アカウントに紐づいているアドレスで、変えると過去のコミットが紐づかなくなる。
+  本人判断で現状維持
+
+### 検証
+`npx next build` 成功、`npx tsc --noEmit` エラーなし、4ドキュメント全て生成成功
+
+### なお
+PR #51 は `lessons.md` の追記コミットだったが、並行して編集されていた
+`app/[locale]/cv/page.tsx`（案件カードのタイポグラフィ調整）が事前ステージされており
+同じコミットに混入した。内容は意図的な変更なので実害なし。
+コミットメッセージと中身が一致していない記録上のずれのみ。
