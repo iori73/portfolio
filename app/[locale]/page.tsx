@@ -5,6 +5,13 @@ import { useTranslations, useLocale } from 'next-intl';
 import { useJPFontSize, useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
 import { usePageTransition } from '@/src/contexts/TransitionContext';
 import PluginCardDeckThumb from '@/components/work/figma-plugins/PluginCardDeckThumb';
+// The hero pairs both languages on screen at the same time, so it cannot go
+// through useTranslations — that resolves to the active locale only.
+import enMessages from '@/messages/en.json';
+import jpMessages from '@/messages/jp.json';
+
+const enHero = enMessages.hero;
+const jpHero = jpMessages.hero;
 
 export default function Home() {
   const t = useTranslations();
@@ -21,19 +28,21 @@ export default function Home() {
       {/* Hero Section - Bilingual Layout */}
       <section className="py-16 md:py-24">
         <div className="flex flex-col md:flex-row gap-8 md:gap-16 md:items-end">
-          {/* Left Column - English */}
+          {/* Left Column - English.
+              Read straight from the EN messages rather than through t(), because
+              this block is bilingual by design: both languages show side by side
+              at once. Going through t() made the left column follow the locale,
+              so /jp rendered Japanese twice. */}
           <div className="flex-1">
-            <h1 className="text-display mb-2">{t('hero.name')}</h1>
-            <p className="text-body-lg font-helvetica-neue mb-1">{t('hero.description1')}</p>
-            <p className="text-body-lg font-helvetica-neue">{t('hero.description2')}</p>
+            <h1 className="text-display mb-2">{enHero.name}</h1>
+            <p className="text-body-lg font-helvetica-neue mb-1">{enHero.description1}</p>
+            <p className="text-body-lg font-helvetica-neue">{enHero.description2}</p>
           </div>
 
-          {/* Right Column - Japanese */}
+          {/* Right Column - Japanese. Same reason, from the JP messages. */}
           <div className="flex-1">
-            <p className="text-body-lg font-noto-sans-jp font-light mb-1">
-              好奇心が私の仕事と人生を動かしています。
-            </p>
-            <p className="text-body-lg font-noto-sans-jp font-light">誰もがつくれる時代に、デザインに「意味」をもたらすものを探っています。</p>
+            <p className="text-body-lg font-noto-sans-jp font-light mb-1">{jpHero.description1}</p>
+            <p className="text-body-lg font-noto-sans-jp font-light">{jpHero.description2}</p>
           </div>
         </div>
       </section>
