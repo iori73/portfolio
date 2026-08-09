@@ -56,12 +56,12 @@
 
 | トークン | Mobile (<768) | Desktop (≥768) |
 |---|---|---|
-| `--text-size-xs` | 12px | 12px |
-| `--text-size-sm` | 13px | 14px |
-| `--text-size-base` | 16px | 16px |
-| `--text-size-lg` | 18px | 20px |
-| `--text-size-xl` | 20px | 24px |
-| `--text-size-2xl` | 24px | 32px |
+| `--text-size-xs` | 13px | 13px |
+| `--text-size-sm` | 14px | 15px |
+| `--text-size-base` | 17px | 18px |
+| `--text-size-lg` | 19px | 21px |
+| `--text-size-xl` | 21px | 24px |
+| `--text-size-2xl` | 26px | 32px |
 | `--text-size-3xl` | 32px | 48px |
 | `--text-size-4xl` | 40px | 56px |
 
@@ -75,6 +75,7 @@
 | `text-title` | `--text-size-xl` | 1.25 | h3 サブセクション |
 | `text-title-sm` | `--text-size-lg` | 1.3 | h4, カード見出し |
 | `text-body-lg` | `--text-size-lg` | 1.6 | リード文、Hero subtitle、ケーススタディ本文 |
+| `text-body-lg-jp` | `--text-size-lg` × 0.857 | 1.9 | `text-body-lg` の英語と**同時に並ぶ**日本語（Home のバイリンガル導入部） |
 | `text-body` | `--text-size-base` | 1.6 | UI要素、ラベル、短いテキスト |
 | `text-body-sm` | `--text-size-sm` | 1.5 | 補助テキスト、カードメタ |
 | `text-label` | `--text-size-sm` | 1.3 | タグ、フィルター、ボタンラベル |
@@ -105,11 +106,18 @@
 
 | 用途 | クラス | Mobile → Desktop |
 |---|---|---|
-| 短いテキスト・UI要素 | `text-body` + `getBodyFontClass()` | 16px (固定) |
-| ケーススタディ本文・リード文 | `text-body-lg` + `getBodyFontClass()` | 18px → 20px |
-| 補助テキスト | `text-body-sm` + `getBodyFontClass()` | 13px → 14px |
-| タグ・ラベル | `text-label font-space-grotesk` | 13px → 14px |
-| 微小テキスト | `text-caption` | 12px (固定) |
+| 短いテキスト・UI要素 | `text-body` + `getBodyFontClass()` | 17px → 18px |
+| ケーススタディ本文・リード文 | `text-body-lg` + `getBodyFontClass()` | 19px → 21px |
+| 英語と併記される日本語 | `text-body-lg-jp font-noto-sans-jp font-light` | 16px → 18px |
+| 補助テキスト | `text-body-sm` + `getBodyFontClass()` | 14px → 15px |
+| タグ・ラベル | `text-label font-space-grotesk` | 14px → 15px |
+| 微小テキスト | `text-caption` | 13px (固定) |
+
+> **和欧の光学サイズ差**: 同じ px でも Noto Sans JP の字面は Helvetica Neue の
+> x-height の約 1.76 倍（21px 時: 19.1px vs 10.9px）。日本語と英語を**同じランクで
+> 同時に見せる**場面では、同じサイズ指定にすると日本語だけが大きく・行間が広く見える。
+> `text-body-lg-jp` はこの補正用。ロケール切替で片方だけを出す場面（`useJPFontSize`）
+> には不要 — 並置しない限り比較対象が無いため。
 
 ### 1.7 見出しのスタイル適用方法
 

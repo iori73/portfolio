@@ -129,6 +129,14 @@ module.exports = {
         'title': ['var(--text-size-xl)', { lineHeight: '1.25' }],
         'title-sm': ['var(--text-size-lg)', { lineHeight: '1.3' }],
         'body-lg': ['var(--text-size-lg)', { lineHeight: '1.6' }],
+        /* Japanese set alongside body-lg English at the same rank (the bilingual
+           hero). At an identical px size the CJK glyph body is ~1.76x the Latin
+           x-height, so the Japanese reads noticeably larger and its leading reads
+           wider. 0.857 pulls the two to equal optical mass; the extra leading
+           keeps the block bottom aligned with the English column. Derived from
+           --text-size-lg rather than a fixed px so the ratio holds at every
+           breakpoint. */
+        'body-lg-jp': ['calc(var(--text-size-lg) * 0.857)', { lineHeight: '1.9' }],
         'body': ['var(--text-size-base)', { lineHeight: '1.6' }],
         'body-sm': ['var(--text-size-sm)', { lineHeight: '1.5' }],
         'label': ['var(--text-size-sm)', { lineHeight: '1.3' }],

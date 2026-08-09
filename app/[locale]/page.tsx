@@ -39,10 +39,12 @@ export default function Home() {
             <p className="text-body-lg font-helvetica-neue">{enHero.description2}</p>
           </div>
 
-          {/* Right Column - Japanese. Same reason, from the JP messages. */}
+          {/* Right Column - Japanese. Same reason, from the JP messages.
+              text-body-lg-jp, not text-body-lg: at the same px the Japanese
+              outweighs the English optically. See the token in tailwind.config.js. */}
           <div className="flex-1">
-            <p className="text-body-lg font-noto-sans-jp font-light mb-1">{jpHero.description1}</p>
-            <p className="text-body-lg font-noto-sans-jp font-light">{jpHero.description2}</p>
+            <p className="text-body-lg-jp font-noto-sans-jp font-light mb-1">{jpHero.description1}</p>
+            <p className="text-body-lg-jp font-noto-sans-jp font-light">{jpHero.description2}</p>
           </div>
         </div>
       </section>
