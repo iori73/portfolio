@@ -333,6 +333,12 @@ PDFだけでなくルートも 429。同じ回線のユーザーのブラウザ�
 
 ---
 
+**再発（2026-08-09）**: 「1回だけ確認」と言いながら、バックグラウンドで
+`until curl ...; do sleep 20; done` を回して再び 429 を出した。
+**本番に対してポーリングループを書かない。** 待つ必要があるなら、
+確認そのものを本人に渡すか、時間を置いて単発の curl を1回打つ。
+「ループで待つ」は手段として禁止する。
+
 ## 2026-08-03: データ追加は「それを読む全レンダラー」を確認してから終わりにする
 
 **状況**: `cvData.ts` に きびだんご の職歴を追加したが、PDF側は各ページに載せる職歴IDを
@@ -579,3 +585,92 @@ Noto Sans JP の字面は 19.1px — **約 1.76倍**。日本語だけが大き�
 実害は `git status` の常時汚染と、バイナリゆえの競合時マージ不能。
 対処は**グローバル gitignore**（`core.excludesfile`）。リポジトリ側の `.gitignore`
 に書くのは対症療法で、次の新規リポジトリで同じことが再発する。
+
+## 静的な allow ルールは分類器より先に決着する（＝安全ルールが呼ばれない）
+
+`~/.claude/settings.json` の `autoMode.soft_deny` に「main への push は必ず確認。
+main への push は本番デプロイを引き起こすため」と書いてあっても、同じファイルの
+`permissions.allow` に `Bash(git push*)` があると**そちらが先に一致して決着し、
+分類器（soft_deny を読む部分）に到達しない**。
+
+**実測で確認した（2026-08-09）**:
+
+| コマンド | 結果 |
+|---|---|
+| `git push 2>&1 \| tail -5; echo ...`（複合） | 分類器が評価 → ブロック |
+| `git push`（単体） | 即座に通過。分類器を経ていない |
+
+複合コマンドは静的ルールに一致しないので分類器へ落ちるが、単体コマンドは
+`Bash(git push*)` に一致して素通りする。つまり **main 上での素の `git push` も
+同じく素通りし、soft_deny は発火しない**。
+
+schema にも裏付けがある:
+> `classifyAllShell`: When true, every Bash/PowerShell allow rule is suspended
+> while auto mode is active so all shell commands are routed through the
+> classifier. **Default: false.**
+
+**対処**: `classifyAllShell: true` は全コマンド（`ls` も `cat` も）を LLM 判定に
+回すので遅延とコストが乗る。**`Bash(git push*)` を allow から削除するだけでよい。**
+一致する allow が無くなれば push だけが分類器に落ち、feature ブランチは通過・
+main は確認、と設計どおりに動く。
+
+**一般化**: 「安全ルールを書いたから守られている」と思い込まない。allow に
+同じ操作を通すルールが無いかを必ず確認する。守りたい操作は allow に書かない。
+
+## deny は全ソースを通じて適用される — プロジェクト設定がグローバルを打ち消す
+
+`.claude/settings.json`（プロジェクト）の deny に `Bash(git commit:*)` があると、
+`~/.claude/settings.json`（グローバル）の allow に `Bash(git commit *)` があっても
+コミットできない。deny は層の順序に関係なく効く。
+
+**症状**: 「グローバルで許可したはずなのに毎回確認される」。
+**確認方法**: `jq -r '.permissions.deny[]' .claude/settings.json` で
+プロジェクト側の deny を見る。
+
+**設計原則**（2026-08-09 に確立）:
+- **グローバル** = 自分の働き方に関する普遍的なルール（認証情報の保護、rm 禁止、
+  push の扱い）。全プロジェクトに効かせたいものは必ずここ
+- **プロジェクト** = そのリポジトリ固有の **allow** だけ。deny を書くのはほぼ常に
+  グローバルの重複か、書くべき場所を間違えている
+- 例: food-record は `sqlite3` / `launchctl` / `bash scripts/*.sh` を allow して
+  いて、これは正しい。グローバルに上げてはいけない（全リポジトリで
+  `launchctl bootout` が通ってしまう）
+
+**発見した実害**: portfolio のプロジェクト設定にだけ `Read(.env*)` /
+`Read(~/.ssh/**)` / `Read(~/.aws/**)` の deny があり、グローバルには **1件も無かった**。
+グローバルの allow には `Read(*)` `Edit(*)` `Write(*)` があるので、
+他の20以上のリポジトリでは認証情報が無防備だった。厳しすぎると思っていた
+プロジェクト設定の中で、唯一価値のあるルールが1リポジトリにしか効いていなかった。
+
+## 機密ファイルの deny は「名前が怪しいか」でなく「その形式が鍵を格納するか」で書く
+
+2026-08-09、グローバル設定に認証情報の保護を入れる際、名前の部分一致で書いて
+**本人の仕事道具を塞いだ**:
+
+```
+Read(**/*token*)  → shokihi-A/B/C/D/src/theme/tokens.ts（デザイントークン、4件）
+                     hm-lp/reference/token-audit.md
+                     figma-plugin/.../typography-token-setup, color-token-setup
+Read(**/*password*) → nakahatsu/theme/.../main-reset-password.liquid, password.liquid
+                     （Shopify のパスワードページテンプレート）
+Edit(**/*token*)  → デザイントークンの編集が不能に
+```
+
+デザイントークンを扱うのが本人の主要業務なのに、それを禁止するルールを
+本番の設定に入れてしまった。
+
+**正しい書き方** — 実際に鍵を格納する形式とパスで指定する:
+- 拡張子: `*.pem` `*.key` `*.p12` `*.pfx` `*.keystore` `*.jks`
+- 決まったパス: `~/.ssh/**` `~/.aws/**` `~/.gnupg/**` `~/.netrc` `~/.npmrc`
+  `~/.docker/config.json`
+- 決まったファイル名: `.env*` `id_rsa*` `id_ed25519*` `credentials.json`
+  `service-account*.json`
+
+差し替え後、`find` で全プロジェクトを走査して**誤爆ゼロ**を確認した。
+deny を書いたら、必ず「このパターンに当たる正当なファイルはないか」を実測すること。
+
+## `!` で本人が実行したコマンドは権限テストにならない
+
+「merge のときに確認が出るか見てください」と依頼したが、`!` プレフィックスの
+コマンドは本人のシェルで直接実行されるので、そもそも権限チェックを通らない。
+分類器の挙動を確かめられるのは AI 側がツールとして実行したときだけ。

@@ -1058,3 +1058,43 @@ git config --global core.excludesfile ~/.gitignore_global
 ```
 
 リポジトリ単位の対処だと次の新規リポジトリでまた同じことが起きる。
+
+### 4. 権限設定の再設計（2026-08-09 追記）
+
+**きっかけ**: コミット1つに毎回許可が要り、1つの作業に6コマンド打つ必要があった。
+
+**原因**: `.claude/settings.json`（プロジェクト）の deny に `Bash(git commit:*)`
+`Bash(git reset:*)` があり、`~/.claude/settings.json`（グローバル）の allow を
+打ち消していた。deny は層の順序に関係なく全ソースから適用される。
+設定が矛盾していて、厳しい方だけが効いている状態だった。
+
+**判明した実害（本題より重い）**: そのプロジェクト設定にだけ `Read(.env*)` /
+`Read(~/.ssh/**)` / `Read(~/.aws/**)` / `Edit(**/*secret*)` の deny があり、
+**グローバルには1件も無かった**。グローバルの allow には `Read(*)` `Edit(*)`
+`Write(*)` があるので、他の20以上のリポジトリでは認証情報が無防備。
+「プロジェクト設定が厳しすぎる」と思っていたが、実際はその中で唯一価値のある
+ルールが1リポジトリにしか効いていなかった。
+
+**もう1つの穴（実測で確認）**: `autoMode.soft_deny` に「main への push は必ず確認」
+と書いてあっても、`permissions.allow` の `Bash(git push*)` が先に一致して決着し、
+分類器に到達しない。実測:
+- `git push 2>&1 | tail -5; ...`（複合）→ 分類器が評価してブロック
+- `git push`（単体）→ 即座に通過。分類器を経ていない
+
+つまり main 上での素の `git push` も素通りする。対処は `classifyAllShell: true`
+ではなく（全コマンドを LLM 判定に回すので重い）、**`Bash(git push*)` を allow から
+削除する**こと。一致する allow が無くなれば push だけが分類器に落ちる。
+
+**確立した設計原則**:
+- グローバル = 働き方に関する普遍的ルール（認証情報の保護、rm 禁止、push の扱い）
+- プロジェクト = そのリポジトリ固有の **allow** だけ。deny を書かない
+- 例外は food-record（`sqlite3` / `launchctl` / `bash scripts/*.sh` を allow）。
+  これはグローバルに上げてはいけない — 全リポジトリで `launchctl bootout` が通る
+
+**実施済み**: portfolio の `.claude/settings.json` を削除（commit 3dfe30f）。
+`git commit` が確認なしで通ることを実証した。
+
+**未実施（本人が実行する）**: グローバルへの引き上げ。案は
+`~/.claude/jobs/2cbec548/tmp/global-proposed.json` に生成・検証済み
+（認証情報の deny 16件を追加 + `Bash(git push*)` を allow から削除）。
+これを当てるまで、認証情報の保護は**どのリポジトリにも効いていない**。
