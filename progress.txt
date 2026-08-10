@@ -1098,3 +1098,55 @@ git config --global core.excludesfile ~/.gitignore_global
 `~/.claude/jobs/2cbec548/tmp/global-proposed.json` に生成・検証済み
 （認証情報の deny 16件を追加 + `Bash(git push*)` を allow から削除）。
 これを当てるまで、認証情報の保護は**どのリポジトリにも効いていない**。
+
+---
+
+## 2026-08-10: セッション終了時点の状態
+
+### 本番に出ているもの（origin/main = e3a0b66 まで）
+
+- バイリンガル導入部の和欧サイズ補正（`text-body-lg-jp`）
+- `/preview` の本番遮断（`ENABLE_PREVIEW_ROUTES=1` のときだけ表示）
+- `.DS_Store` 16件の削除
+- プロジェクト権限ファイル（`.claude/settings.json`）の削除
+
+### 環境側（リポジトリ外・全プロジェクトに影響）
+
+すべて適用・動作確認済み:
+
+| 設定 | 状態 |
+|---|---|
+| `~/.claude/settings.json` v2 | 適用済み。認証情報の deny 25件、`Bash(git push*)` を allow から削除 |
+| `~/.gitignore_global` | 適用済み。`core.excludesfile` 設定済み・実物で発火を確認 |
+| プロジェクト権限ファイル | portfolio からは削除。food-record は allow のみ残す方針（未実施） |
+
+### 検証で確定したこと
+
+1. **静的 allow は分類器より先に決着する** — `permissions.allow` に
+   `Bash(git push*)` があると `autoMode.soft_deny` の「main への push は確認」が
+   発火しない。実測（複合コマンド→ブロック / 単体→即通過）。v2 で allow から
+   削除して解消
+2. **deny は全ソースから適用される** — プロジェクトの deny がグローバルの allow を
+   打ち消す。これが確認過多の原因だった
+3. **`Read(**/*.pem)` 系は機能している** — プロジェクト直下に囮を置き、同じ
+   ディレクトリの `lessons.md` は読めて `decoy.pem` は読めないことを対で確認
+4. **既知の穴**: `**/` 系はプロジェクトルート基準なので、プロジェクト外かつ
+   `~/.ssh` `~/.aws` 等の絶対パス指定から外れる場所（例: `~/Downloads/foo.pem`）は
+   保護されない
+
+### 次に触るときの前提
+
+- コミットは確認不要で進めてよい。人に渡すのは push と PR merge（公開＋本番デプロイ）だけ
+- プロジェクト側に `.claude/settings.json` を新設しない。deny を書くと
+  グローバルの allow を打ち消して事故る。置くのは「そのリポジトリ固有の allow」が
+  あるときだけ（例: food-record の `sqlite3` / `launchctl` / `bash scripts/*.sh`）
+
+### 未着手（次回以降）
+
+- `/about` のプロフィール写真が青灰色の背景を焼き込んでいて、クリーム地と合わない
+  （`mix-blend-mode: multiply` で再書き出しなしに解決できないか未検証）
+- フッターのソーシャルバーがグレースケールでクリーム地に対して冷たく見える
+  （サイズ=使用頻度・濃淡=投稿頻度というエンコーディングは維持すること）
+- 作品ページ（ukiyoe / Airline / gym / figma-plugins）をクリーム地で未確認
+- 古いブランチがローカル3本・リモート14本ほど滞留
+- food-record の `.claude/settings.json` から deny を削除（allow は残す）
