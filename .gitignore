@@ -54,3 +54,5 @@ font-previews/
 # in the repo for the Download button on /cv to resolve.
 public/downloads/*
 !public/downloads/Iori-Kawano-Resume-*.pdf
+# Claude Code の個人用オーバーライド（マシン固有・共有しない）
+.claude/settings.local.json
