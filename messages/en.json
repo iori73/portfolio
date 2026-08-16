@@ -97,7 +97,8 @@
     "before": "Before",
     "after": "After",
     "beforeAfterComparison": "Drag the slider to compare the improvements",
-    "clientWork": "Client Work"
+    "clientWork": "Client Work",
+    "viewFull": "View full"
   },
   "tags": {
     "business": "Business",

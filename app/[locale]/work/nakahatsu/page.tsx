@@ -13,17 +13,31 @@ import { usePageTransition } from '@/src/contexts/TransitionContext';
  * まで縮む。読める大きさにならないビューポートがあるため、原寸を別タブで
  * 開けるようにしてある。
  */
-function FullSizeImage({ src, alt }: { src: string; alt: string }) {
+function FullSizeImage({
+  src,
+  alt,
+  visibleLabel,
+  openLabel,
+}: {
+  src: string;
+  alt: string;
+  visibleLabel: string;
+  openLabel: string;
+}) {
   return (
     <a
       href={src}
       target="_blank"
       rel="noopener noreferrer"
+      /* 可視ラベルは5枚とも同じ文言なので、そのままだとスクリーンリーダーのリンク
+         一覧で5つとも同じ名前になり、どれがどの図版か区別できない。図版ごとの名前を
+         渡す。頭は可視ラベルと同じ語で始めてある（WCAG 2.5.3 Label in Name）。 */
+      aria-label={openLabel}
       className="group relative block w-full overflow-hidden rounded-lg"
     >
       <Image src={src} alt={alt} width={1200} height={675} className="w-full h-auto" />
       <span className="pointer-events-none absolute bottom-2 right-3 font-space-grotesk text-body-sm text-ink-tertiary opacity-0 transition-opacity group-hover:opacity-100">
-        View full ↗
+        {visibleLabel} ↗
       </span>
     </a>
   );
@@ -226,6 +240,8 @@ const NakahatsuPage: React.FC = () => {
                 <FullSizeImage
                   src="/work/nakahatsu/before-after.webp"
                   alt="The previous WordPress site and EC-CUBE shop next to the new Shopify storefront"
+                  visibleLabel={t('common.viewFull')}
+                  openLabel={`${t('common.viewFull')}: ${t('nakahatsu.captionBeforeAfter')}`}
                 />
                 <figcaption className={captionClass}>
                   {t('nakahatsu.captionBeforeAfter')}
@@ -281,6 +297,8 @@ const NakahatsuPage: React.FC = () => {
                   <FullSizeImage
                     src="/work/nakahatsu/vertical-typography.webp"
                     alt="Vertical Japanese body copy on the About page"
+                    visibleLabel={t('common.viewFull')}
+                    openLabel={`${t('common.viewFull')}: ${t('nakahatsu.captionVerticalTypography')}`}
                   />
                   <figcaption className={captionClass}>
                     {t('nakahatsu.captionVerticalTypography')}
@@ -300,6 +318,8 @@ const NakahatsuPage: React.FC = () => {
                   <FullSizeImage
                     src="/work/nakahatsu/bilingual.webp"
                     alt="The same About section in Japanese and English"
+                    visibleLabel={t('common.viewFull')}
+                    openLabel={`${t('common.viewFull')}: ${t('nakahatsu.captionBilingual')}`}
                   />
                   <figcaption className={captionClass}>
                     {t('nakahatsu.captionBilingual')}
@@ -346,6 +366,8 @@ const NakahatsuPage: React.FC = () => {
                   <FullSizeImage
                     src="/work/nakahatsu/products.webp"
                     alt="The product grid on the home page"
+                    visibleLabel={t('common.viewFull')}
+                    openLabel={`${t('common.viewFull')}: ${t('nakahatsu.captionProducts')}`}
                   />
                   <figcaption className={captionClass}>
                     {t('nakahatsu.captionProducts')}
@@ -365,6 +387,8 @@ const NakahatsuPage: React.FC = () => {
                   <FullSizeImage
                     src="/work/nakahatsu/responsive.webp"
                     alt="The home page at 1440, 768 and 390 pixels wide"
+                    visibleLabel={t('common.viewFull')}
+                    openLabel={`${t('common.viewFull')}: ${t('nakahatsu.captionResponsive')}`}
                   />
                   <figcaption className={captionClass}>
                     {t('nakahatsu.captionResponsive')}

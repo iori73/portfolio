@@ -97,7 +97,8 @@
     "before": "改善前",
     "after": "改善後",
     "beforeAfterComparison": "スライダーをドラッグして改善点を比較",
-    "clientWork": "クライアントワーク"
+    "clientWork": "クライアントワーク",
+    "viewFull": "原寸で開く"
   },
   "tags": {
     "business": "ビジネス",
