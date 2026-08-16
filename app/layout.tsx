@@ -4,6 +4,7 @@ import './globals.css';
 import { Noto_Sans_JP, Space_Grotesk } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import { getLocale } from 'next-intl/server';
+import { toLangTag } from '@/src/lib/locale';
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ['latin'],
@@ -52,7 +53,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const locale = await getLocale();
 
   return (
-    <html lang={locale} className={`${notoSansJP.variable} ${spaceGrotesk.variable}`}>
+    // lang は BCP 47 の言語タグ。URL セグメントの `jp` は国コードなのでそのままは出せない。
+    <html lang={toLangTag(locale)} className={`${notoSansJP.variable} ${spaceGrotesk.variable}`}>
       <body className="min-h-screen">
 {children}
         <Analytics />
