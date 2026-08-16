@@ -4,6 +4,7 @@ import './globals.css';
 import { Noto_Sans_JP, Space_Grotesk } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import { getLocale } from 'next-intl/server';
+import { toLangTag } from '@/src/lib/locale';
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ['latin'],
@@ -39,12 +40,16 @@ export const metadata: Metadata = {
     url: 'https://iori-kawano.vercel.app',
     siteName: 'Iori Kawano',
     type: 'website',
+    // 各ページは src/lib/pageMetadata.ts が自分のカードで上書きする。
+    // ここは layout を持たないルートが出てきたときの取りこぼし防止。
+    images: [{ url: '/og/default.png', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Iori Kawano — UI/UX Designer',
     description:
       'Portfolio of Iori Kawano, a UI/UX designer who thinks in systems and ships in code.',
+    images: ['/og/default.png'],
   },
 };
 
@@ -52,7 +57,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const locale = await getLocale();
 
   return (
-    <html lang={locale} className={`${notoSansJP.variable} ${spaceGrotesk.variable}`}>
+    // lang は BCP 47 の言語タグ。URL セグメントの `jp` は国コードなのでそのままは出せない。
+    <html lang={toLangTag(locale)} className={`${notoSansJP.variable} ${spaceGrotesk.variable}`}>
       <body className="min-h-screen">
 {children}
         <Analytics />
