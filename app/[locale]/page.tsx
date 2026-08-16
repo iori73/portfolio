@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import { useTranslations, useLocale } from 'next-intl';
 import { useJPFontSize, useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
-import { usePageTransition } from '@/src/contexts/TransitionContext';
+import { useWorkCardLink } from '@/src/hooks/useWorkCardLink';
 import PluginCardDeckThumb from '@/components/work/figma-plugins/PluginCardDeckThumb';
 // The hero pairs both languages on screen at the same time, so it cannot go
 // through useTranslations — that resolves to the active locale only.
@@ -19,7 +19,7 @@ export default function Home() {
   const { jpFontSize } = useJPFontSize();
   const { getBodyFontClass, getBodyFontStyle } = useBodyFont();
   const { getHeadingFontClass, getHeadingFontStyle } = useHeadingFont();
-  const { startTransition } = usePageTransition();
+  const workCard = useWorkCardLink();
   const ukiyoeImageRef = useRef<HTMLDivElement>(null);
   const figmaPluginsImageRef = useRef<HTMLDivElement>(null);
 
@@ -55,25 +55,13 @@ export default function Home() {
         <h2 className="text-headline mb-16">Work</h2>
 
         {/* Project 0 - Ukiyoe */}
-        <div
+        <a
+          href={workCard.href('ukiyoe')}
           className="block mb-16 cursor-pointer hover:opacity-80"
-          role="link"
-          tabIndex={0}
-          onClick={() => {
-            const rect = ukiyoeImageRef.current?.getBoundingClientRect();
-            if (!rect) return;
-            const imageSrc = locale === 'jp' ? '/work/ukiyoe/thumbnail-jp.webp' : '/work/ukiyoe/thumbnail-en.webp';
-            startTransition({ type: 'image', src: imageSrc }, rect, '/work/ukiyoe');
-          }}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              const rect = ukiyoeImageRef.current?.getBoundingClientRect();
-              if (!rect) return;
-              const imageSrc = locale === 'jp' ? '/work/ukiyoe/thumbnail-jp.webp' : '/work/ukiyoe/thumbnail-en.webp';
-              startTransition({ type: 'image', src: imageSrc }, rect, '/work/ukiyoe');
-            }
-          }}
+          onClick={workCard.onClick('ukiyoe', ukiyoeImageRef, {
+            type: 'image',
+            src: locale === 'jp' ? '/work/ukiyoe/thumbnail-jp.webp' : '/work/ukiyoe/thumbnail-en.webp',
+          })}
         >
           <div className="mb-20">
             <div className="mb-6" ref={ukiyoeImageRef}>
@@ -112,26 +100,16 @@ export default function Home() {
               {t('projects.ukiyoe.description2')}
             </p>
           </div>
-        </div>
+        </a>
 
         {/* Project 1 - Figma Plugins */}
-        <div
+        <a
+          href={workCard.href('figma-plugins')}
           className="block mb-16 cursor-pointer hover:opacity-80"
-          role="link"
-          tabIndex={0}
-          onClick={() => {
-            const rect = figmaPluginsImageRef.current?.getBoundingClientRect();
-            if (!rect) return;
-            startTransition({ type: 'node', key: 'figmaPluginsDeck' }, rect, '/work/figma-plugins');
-          }}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              const rect = figmaPluginsImageRef.current?.getBoundingClientRect();
-              if (!rect) return;
-              startTransition({ type: 'node', key: 'figmaPluginsDeck' }, rect, '/work/figma-plugins');
-            }
-          }}
+          onClick={workCard.onClick('figma-plugins', figmaPluginsImageRef, {
+            type: 'node',
+            key: 'figmaPluginsDeck',
+          })}
         >
           <div className="mb-20">
             <div
@@ -167,7 +145,7 @@ export default function Home() {
               {t('projects.figmaPlugins.description2')}
             </p>
           </div>
-        </div>
+        </a>
 
       </section>
     </div>
