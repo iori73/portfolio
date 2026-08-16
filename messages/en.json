@@ -54,6 +54,14 @@
       "timeline": "Dec 2025 - Mar 2026",
       "skills": "Design Systems, Design Tokens, Figma",
       "deliverables": "Token System, Custom Figma Plugins, Component Prototype, 51+ Docs"
+    },
+    "nakahatsu": {
+      "title": "Nakahatsu Shoten Website",
+      "description1": "Moving a 130-year-old brewery off two split systems and onto one bilingual Shopify storefront",
+      "description2": "The shop could not take credit cards and could not sell outside Japan. Research, a redesign in Figma, a design system, and a custom Shopify theme, built solo.",
+      "timeline": "Mar 2026 - Present",
+      "skills": "UX Research, UI Design, Design System, Shopify Development, i18n",
+      "deliverables": "Shopify Theme, Design System, Bilingual Storefront"
     }
   },
   "about": {
@@ -88,7 +96,8 @@
     "wireframes": "Wireframes",
     "before": "Before",
     "after": "After",
-    "beforeAfterComparison": "Drag the slider to compare the improvements"
+    "beforeAfterComparison": "Drag the slider to compare the improvements",
+    "clientWork": "Client Work"
   },
   "tags": {
     "business": "Business",
@@ -429,5 +438,57 @@
     "learningText": "The most important lesson came from Dan Mall's framework: \"Build it and they will come\" doesn't work for design systems. Adoption requires making the system the path of least resistance. The Figma plugins were crucial here: they didn't just automate tasks, they made following the design system easier than not following it. The Variable Migrator plugin, for example, let designers update legacy files to the new token system in minutes rather than days.",
     "technicalTitle": "Technical Reflection",
     "technicalText": "Building custom Figma plugins taught me that the gap between design and development is often a tooling problem, not a communication problem. When designers have plugins that enforce token usage and developers have a Next.js prototype showing exactly how components should render, alignment happens naturally. I'd like to explore deeper Code Connect integration and automated design-to-code pipelines in future projects."
+  },
+  "nakahatsu": {
+    "title": "Nakahatsu Shoten Website",
+    "subtitle": "A full rebuild of a 130-year-old brewery website, from competitor research and a Figma redesign through Shopify theme development and Japanese/English localization.",
+    "overviewText1": "Nakahatsu Shoten has been brewing soy sauce and miso in Kanazawa since 1896. Online, the business was running two disconnected systems: a WordPress site that told the company story, and an EC-CUBE shop that sold the products. The two had different designs and different navigation, and everything had to be maintained twice.",
+    "overviewText2": "The shop was the bigger problem. It could not take credit cards, and it could not sell outside Japan. I was brought in to look at the situation, redesign the site, and rebuild the whole thing on Shopify as one bilingual storefront.",
+    "challengeTitle": "What the previous setup could not do",
+    "challenge1": "Credit cards were not accepted. The only ways to pay were bank transfer, postal transfer, and cash on delivery.",
+    "challenge2": "Nothing about the shop worked from overseas: Japanese only, yen only, domestic shipping only, and payment methods that cannot be used from abroad.",
+    "challenge3": "The account registration email took about two hours to arrive. Anyone who registered again while waiting was told the address was already taken, which took the sign-up away entirely.",
+    "challenge4": "The purchase path was split across two systems, which made one consistent design impossible and doubled the maintenance.",
+    "challenge5": "The things people want to know before buying, shipping cost, delivery time, returns, and accepted payment methods, only existed in a corner of the legal notice page.",
+    "contextTitle": "Where the category stood",
+    "contextText": "I looked at ten other breweries in the same business. Almost none of them offered their site in any language other than Japanese. That made English support less of a checkbox and more of a way to stand apart, so I designed for it from the beginning rather than adding it at the end.",
+    "roleTitle": "My Role",
+    "roleText": "I worked solo across the whole project: research and technical analysis, competitor and design research, the proposal and estimate, requirements, UI design in Figma for both desktop and mobile, the design system, the Shopify theme itself, Japanese and English localization, quality audits, drafts of the legal and operational documents, shipping configuration, and project management. Enabling payments, setting up the Instagram integration, and deciding what to do with existing customer data stayed on the client side.",
+    "captionBeforeAfter": "Before: a WordPress company site and a separate EC-CUBE shop. After: one Shopify storefront.",
+    "designProcessIntro": "The brief was to keep the existing design and skip wireframes. Research changed that, and how I handled the disagreement mattered more than the redesign itself.",
+    "researchTitle": "Research",
+    "researchText": "I audited ten competitors in the same category, read through the history pages of six long-established Japanese companies, studied the geography and history of the neighborhood the brewery sits in, and put together three moodboard directions. What came out of it was that the brand had assets it was not using anywhere on the site: a history reaching back to 1896, the story behind the name, and a strong sense of place.",
+    "twoDirectionsTitle": "Two directions instead of one argument",
+    "twoDirectionsText": "We had already agreed to keep the existing design, so proposing a redesign meant reopening a settled decision. Rather than argue for it, I first checked what \"do not change the design\" actually covered, layout only or the content as well. Then I built both: v1 reproduced the existing site, v2 was the redesign. I shared them side by side and let the comparison make the case. v2 was chosen, described as clearer and better structured all the way through the purchase path.",
+    "dsTitle": "A design system, and then an argument with it",
+    "dsText": "The design system started at five collections, fifty-four variables, eleven text styles, one effect style, and eleven shared components, and grew from there. It also turned out to be wrong in one place. The vertical Japanese body copy on the About page followed the Figma spec exactly, sixteen pixels at a line height of 1.4, and it read as cramped. The reason was that the line-height variable had been designed for horizontal text and reused for vertical without being reconsidered. Vertical Japanese wants somewhere between 1.7 and 2.0. Rather than override it locally, I registered a line-height token specifically for vertical text in the system. Following a design system properly sometimes means questioning it.",
+    "captionVerticalTypography": "The vertical Japanese body copy on the About page, set with its own line-height token.",
+    "i18nTypeTitle": "Deciding what stays vertical in English",
+    "i18nTypeText": "Switching to English at first flipped every vertical element to horizontal, which pushed the brand tagline, \"Founded in 1896\", out beside the logo where it floated. Long body copy does belong horizontal in English. A short brand tagline does not: it reads better vertical, and its line stays aligned with the logo, which is part of what makes the brand feel long established. I took it out of the blanket override. For the same reason the brush-lettered brand name in the hero stays Japanese in the English locale, because it works as a logo rather than as text.",
+    "captionBilingual": "The same About section in Japanese and in English.",
+    "solutionIntro": "The result is one Shopify storefront covering the whole site, built on custom sections rather than on a purchased theme.",
+    "buildTitle": "What was built",
+    "buildText": "I wrote twenty-three Liquid sections from scratch so the layout would not depend on a theme I did not control. The home page alone is eleven of them. The store covers the top page, product, collection, search, about, contact, blog list and article, FAQ, 404, six policy pages, and seven customer account templates. Twelve products went in with their descriptions and photography, split across three collections, and the shipping table from the old site was extracted and reloaded as ten zones covering all forty-seven prefectures.",
+    "stat1": "Custom Liquid sections",
+    "stat2": "Products across 3 collections",
+    "stat3": "Shipping zones, 47 prefectures",
+    "captionProducts": "Part of the product grid. Twelve products in all, across three collections.",
+    "responsiveTitle": "Responsive work",
+    "responsiveText": "Layouts were verified at seven widths, and the tablet range got a pass of its own: four widths across three pages, twelve screenshots, and ten fixes in two rounds. One fix came from a real device rather than an emulator. A hero set to 60vh passes at 390 by 844 in the simulator, but on a real phone the browser chrome eats into the height and absolutely positioned elements inside spill over the text. Dynamic viewport units were not the answer either, because the height then shifts while you scroll. It ended up as a fixed pixel height.",
+    "captionResponsive": "The home page at 1440, 768, and 390 pixels.",
+    "checkoutTitle": "Where the brand color stops",
+    "checkoutText": "The brand color is a deep crimson taken from the traditional five colors of Kaga. I applied it to checkout as well at first. Checkout draws its links as underlined text in the accent color, and in crimson they did not read as links, which is a risk on the last screen before a purchase completes. So the accent splits: crimson up to the cart, where the job is brand, and blue from checkout onward, where the job is being understood. Branding trades off against conversion, and it is better to draw that line on purpose than to let it fall wherever.",
+    "uncertainTitle": "Designing around a photo that will change",
+    "uncertainText": "A year number sits over a photograph in the history section. Tuning a translucent overlay so it sits well on the sample photo works until the photo is replaced. Optimizing color per image is not something anyone can maintain, so instead of tuning the color I cut the dependency: the overlap shrank from forty pixels to eight, which puts most of the year on the background rather than on the image. Parameters that are going to change deserve different treatment from parameters that are fixed.",
+    "qualityTitle": "Quality",
+    "qualityText": "Quality ran as seven review passes, which logged and cleared forty-three findings, ten high, nineteen medium, and fourteen low. Accessibility and SEO were both audited and improved, but I am not quoting Lighthouse scores here. While the store is unpublished it renders behind a Shopify preview bar, and that alone moves the numbers, so any score I gave would need a footnote. Japanese text left in the English locale was checked page by page and came out at zero across all thirteen pages.",
+    "translationTitle": "Shopify translations live in two layers, and one of them hides",
+    "translationText": "English pages were still rendering Japanese content, and the cause was structural rather than careless. Shopify splits translation into theme strings, which live in locale files, and section or page settings, which live in the admin translation tool. The trap is in the second layer: a setting that exists only as a default value inside the section schema, without being written into the JSON template, never appears in the translation tool at all, because the API does not return it as content. The fix was to write those settings explicitly into the templates so the API could see them, then load one hundred and sixty-six entries through a GraphQL mutation in thirteen batches, which is where it stood in May 2026. Doing that one field at a time in the admin would have taken hours. It also settled where each string belongs: structural UI the client never touches, form labels, aria-labels, alt text, validation, and navigation, belongs in code, while anything the client will want to reword, headings, body copy, product descriptions, questions and answers, and announcements, belongs in the admin. Since this project I do not write Japanese into a section schema default at all.",
+    "policyTitle": "Policy pages ignore the layout you give them",
+    "policyText": "The policy pages were rendering with the old header and footer even though the template specified a custom layout. Policies entered through the Shopify admin, returns, privacy, terms, shipping, the Japanese legal notice, and contact information, are drawn by an internal renderer that ignores the layout directive and uses the default layout. Rewriting the default layout would have had side effects elsewhere, so instead I pulled the header, drawer, cart toast, and scripts out of the layout and into sections, then swapped the section types in the header and footer groups. The general lesson is to be explicit at the start about which parts of a store a theme controls and which parts only the admin or the API can reach. The same boundary shows up in policies not supporting JSON templates, page records not being covered by a theme push, and presets only firing through the theme editor.",
+    "tokenTitle": "A token can be a ratio or an absolute value",
+    "tokenText": "Replacing hardcoded line-height values with a token looked mechanical until I checked what the token actually held. It was an absolute pixel value, sixteen multiplied by 1.4, so 22.4 pixels. Applied in a fourteen pixel context that is a ratio of 1.6, which renders fourteen percent looser. Some font sizes also had a root override between desktop and mobile, so the ratio and the token drifted apart differently depending on the viewport. I separated the safe swaps from the dangerous ones by calculation, then decided the system was healthier with the values that had scattered across 1.6, 1.7, 1.8 and 1.9 consolidated into a single reading token. Fifty-nine cases went through in four phases, sorted into no visual change and five percent change. Six were left alone, because keeping the ratio was the right answer there.",
+    "statusTitle": "Where it stands",
+    "statusText": "The project is still in progress. The store runs on a password-protected development theme and has not launched, and it has not been through final acceptance. The remaining blocker is payment configuration on the client side, and no launch date is set. Copyright in the design and the implementation belongs to the client. Because the site has not launched, there are no sales, conversion, or traffic figures to report, and I would rather say so than invent them."
   }
 }

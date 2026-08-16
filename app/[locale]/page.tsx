@@ -22,6 +22,7 @@ export default function Home() {
   const workCard = useWorkCardLink();
   const ukiyoeImageRef = useRef<HTMLDivElement>(null);
   const figmaPluginsImageRef = useRef<HTMLDivElement>(null);
+  const nakahatsuImageRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className="mt-24 md:mt-28 md:mb-16">
@@ -150,6 +151,68 @@ export default function Home() {
             </p>
           </div>
         </a>
+
+        {/* Project 2 - Nakahatsu Shoten */}
+        <div
+          className="block mb-16 cursor-pointer hover:opacity-80"
+          role="link"
+          tabIndex={0}
+          onClick={() => {
+            const rect = nakahatsuImageRef.current?.getBoundingClientRect();
+            if (!rect) return;
+            const imageSrc =
+              locale === 'jp' ? '/work/nakahatsu/thumbnail-jp.webp' : '/work/nakahatsu/thumbnail-en.webp';
+            startTransition({ type: 'image', src: imageSrc }, rect, '/work/nakahatsu');
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              const rect = nakahatsuImageRef.current?.getBoundingClientRect();
+              if (!rect) return;
+              const imageSrc =
+                locale === 'jp' ? '/work/nakahatsu/thumbnail-jp.webp' : '/work/nakahatsu/thumbnail-en.webp';
+              startTransition({ type: 'image', src: imageSrc }, rect, '/work/nakahatsu');
+            }
+          }}
+        >
+          <div className="mb-20">
+            <div className="mb-6" ref={nakahatsuImageRef}>
+              <Image
+                src={locale === 'jp' ? '/work/nakahatsu/thumbnail-jp.webp' : '/work/nakahatsu/thumbnail-en.webp'}
+                alt="Nakahatsu Shoten Website"
+                width={600}
+                height={375}
+                className="w-full object-cover rounded-lg"
+              />
+            </div>
+
+            <div className="flex items-center gap-6 mb-4 flex-wrap md:flex-nowrap">
+              <h3 className={`text-title-lg ${getHeadingFontClass()}`}>
+                {t('projects.nakahatsu.title')}
+              </h3>
+              <div className="flex gap-2">
+                <span className="font-space-grotesk text-label md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
+                  Shopify
+                </span>
+                <span className="font-space-grotesk text-label md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
+                  Design System
+                </span>
+              </div>
+            </div>
+
+            <p className={`mb-2 text-body-lg ${getBodyFontClass()}`}>{t('projects.nakahatsu.description1')}</p>
+            <p
+              className={`${getBodyFontClass()} ${jpFontSize(
+                'text-body',
+                'text-body-lg',
+                'text-body-sm',
+                'text-body',
+              )}`}
+            >
+              {t('projects.nakahatsu.description2')}
+            </p>
+          </div>
+        </div>
 
       </section>
     </div>

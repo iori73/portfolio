@@ -15,8 +15,11 @@
 /en/cv                     → CV
 /en/experiment             → Experiment
 /en/work/ukiyoe            → Work: Ukiyoe
-/en/work/gym_crowd_status_dashboard  → Work: Gym Dashboard
-/en/work/google_ux_design_certificate_project → Work: Google UX
+/en/work/figma-plugins     → Work: Figma Plugins & Widgets
+/en/work/nakahatsu         → Work: 中初商店 ウェブサイト制作
+/en/work/airline-design-system → Work: Airline Design System（Home からの導線なし）
+/en/work/gym_crowd_status_dashboard  → Work: Gym Dashboard（Home からの導線なし）
+/en/work/google_ux_design_certificate_project → Work: Google UX（Home からの導線なし）
 /(any invalid path)        → 404 Not Found
 ```
 
@@ -73,7 +76,9 @@ Header → Experiment → Spline 3D インタラクション
 - ヒーロー画像（全幅 or max-w-7xl）
 - プロジェクト情報（Timeline, Skills, Type, Deliverables）
 - メインコンテンツ + サイドバーナビ（デスクトップのみ）
-- セクション: Overview → Research → Design Process → Technical → Reflection
+- セクション: Overview → Design Process → Solution → Reflection
+  （`SECTIONS = ['overview','design-process','solution','reflection']`。
+  airline-design-system / nakahatsu が現行の書き方。古いページは構成が異なる）
 
 ### Blog (`/[locale]/blog`)
 - Medium 記事一覧（RSS 連携）
