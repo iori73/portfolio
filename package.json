@@ -55,8 +55,8 @@
     "input-otp": "1.4.1",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.454.0",
-    "next": "^15.5.9",
-    "next-intl": "^4.5.5",
+    "next": "^15.5.23",
+    "next-intl": "^4.13.6",
     "next-themes": "^0.4.4",
     "react": "^19.2.3",
     "react-day-picker": "8.10.1",
@@ -81,9 +81,16 @@
     "@types/xml2js": "^0.4.14",
     "eslint": "^8.57.1",
     "playwright": "^1.62.0",
-    "postcss": "^8",
+    "postcss": "^8.5.26",
     "tailwindcss": "^3.4.17",
     "typescript": "^5",
     "umap-js": "^1.4.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "postcss": "^8.5.26",
+      "nanoid": "^3.3.18",
+      "lodash": "^4.18.1"
+    }
   }
 }
