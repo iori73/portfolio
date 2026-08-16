@@ -1150,3 +1150,94 @@ git config --global core.excludesfile ~/.gitignore_global
 - 作品ページ（ukiyoe / Airline / gym / figma-plugins）をクリーム地で未確認
 - 古いブランチがローカル3本・リモート14本ほど滞留
 - food-record の `.claude/settings.json` から deny を削除（allow は残す）
+
+---
+
+## 2026-08-16: サイト本体の衛生ブランチ（site-hygiene / 本番未反映）
+
+**ブランチ**: `site-hygiene`（worktree: `.claude/worktrees/site-hygiene`、origin/main から分岐）
+**状態**: ローカル完成。**push も merge もしていない。**
+中初ケーススタディの `worktree-nakahatsu-case-study` とは独立した別ブランチ。
+
+### 1. 依存の脆弱性 38件 → 1件
+
+`pnpm audit --prod` の実測。すべて宣言レンジ内か、ビルド専用ツールへの override。
+- next 15.5.14 → 15.5.23（middleware/proxy bypass・SSRF・DoS・XSS・cache poisoning など20件）
+- next-intl 4.8.3 → 4.13.6（open redirect 2件 + 依存 icu-minify の DoS 1件）
+- postcss 8.5.8 → 8.5.26
+- `pnpm.overrides`: postcss ^8.5.26 / nanoid ^3.3.18（tailwind 配下に古い版が残るため）/
+  lodash ^4.18.1（recharts 2.15.0 経由）
+
+**残る1件**: sharp 0.34.5（要 >=0.35.0）。next の optional 依存で、
+`images.unoptimized: true` なので画像最適化の経路には乗らない。next 側が上げるまで待つ。
+
+**recharts について**: lodash を引いているのは recharts で、これを使っている
+`components/ui/chart.tsx` は**どこからも import されていない**。recharts を外せば
+override も不要になるが、依存の削除は本人確認が要るので手を付けていない。
+
+### 2. `<html lang>` を ja に
+
+`jp` は ISO 3166 の国コードで言語タグではない。全ページで誤っていた。
+**URL は `/jp/...` のまま**。対応表は `src/lib/locale.ts` の1箇所。
+
+### 3. sitemap.xml / robots.txt（どちらも 404 だった）
+
+素直に「全ルートを列挙」すると事故ることが分かった。`app/[locale]/work/` には
+**トップからリンクしていないページが3つ**あり、200 かつ noindex なしで出ていた。
+検索に出ていなかったのは意図した制御ではなく、たまたま導線が無かっただけ。
+
+公開範囲を `src/data/siteRoutes.ts` の1箇所に集約:
+- `CARD_WORK_SLUGS` トップにカードを置く（ukiyoe / figma-plugins）
+- `INDEXED_WORK_SLUGS` sitemap に載せる（上記 + google_ux）
+- `ARCHIVED_WORK_SLUGS` 公開しない（airline / gym）→ **本番で 404**
+
+airline / gym は `/preview`・print ツリーと同じ env ゲート。ソースは残してある。
+デプロイ済みビルドで見るなら `ENABLE_ARCHIVED_WORK=1`。ローカルでは常に見られる（実測済み）。
+robots.txt に Disallow は書かない（誰でも読めるので隠したいパスが公開情報になる）。
+
+### 4. ページごとの title / canonical / og:image / hreflang
+
+全ページの `<title>` が同一で、canonical・og:image・hreflang が無かった。
+各ルートに server component の `layout.tsx` を置き、`src/lib/pageMetadata.ts` で組み立てる。
+OG 画像は `scripts/generate-og-images.mjs` で既存の作品画像から書き出す（1200x630）。
+
+**踏んだ罠**: Next.js の `title` にただの文字列を返すと、そのセグメントが親の
+テンプレートを消費し、**配下の全ページがテンプレートを失う**。実測で /about が
+「About」だけになり、トップが「… — Iori Kawano — Iori Kawano」と二重になった。
+`absolute`（自分は親から抜ける）と `template`（子に渡し直す）をセットで返すと解決。
+
+### 5. Work カードを `<a href>` に
+
+`<div role="link">` だったので検索エンジンがたどれず、右クリック「新しいタブで開く」・
+中クリック・リンクのコピーが効かなかった。`src/hooks/useWorkCardLink.ts` に集約。
+**修飾キーと中クリックでは preventDefault しない**のが肝。素のクリックだけ FLIP に渡す。
+
+### 実測した検証結果（next build + next start）
+
+- 19ルートのステータス: 公開ページ 200 / airline・gym 404 / 存在しない URL 404 /
+  sitemap.xml・robots.txt 200
+- sitemap は9パス × hreflang en/ja。airline と gym は入っていない
+- 13ルートで canonical がすべて一意、サブページの title はすべて固有
+- FLIP: ukiyoe（image）overlay top:112 / 1440x900 と実 hero が一致、
+  figma-plugins（node）overlay top:112 / 1440x576 と実 hero が一致
+- 修飾キー付きクリック `defaultPrevented=false` / 素のクリック `true`
+- 390 / 768 / 1440px の全スクロール位置で横スクロール0・はみ出し0
+
+### 見つけたが手を付けていないもの
+
+- **`i18n.ts`（リポジトリ直下）は死にコード**。`locales` / `defaultLocale` が
+  `i18n/routing.ts` と重複しているが、next.config.mjs のプラグインは
+  `./i18n/request.ts` を指しており、importer も0件。削除は本人確認が要るので残置
+- airline ページの図版5枚が縦長スクショを横長枠に cover で入れており、
+  元画像の18〜40%しか見えていない（`token-architecture.webp` は 18%）。
+  **公開しない判断になったので今回は直していない**
+
+### 中初ブランチとの合流時にやること
+
+1. `app/[locale]/page.tsx` が両ブランチで競合する（こちらは既存2枚を `<a href>` 化、
+   あちらは3枚目を追加）。合流後、**中初カードも同じ `useWorkCardLink` に載せ替える**
+2. `app/[locale]/work/nakahatsu/layout.tsx` を作って metadata を出す
+3. `src/data/siteRoutes.ts` の `CARD_WORK_SLUGS` と `INDEXED_WORK_SLUGS` に
+   `nakahatsu` を足す（クライアントサイト公開後）
+4. OG 画像 `public/og/nakahatsu.jpg` を生成スクリプトに追加
+
