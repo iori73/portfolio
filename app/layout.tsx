@@ -40,12 +40,16 @@ export const metadata: Metadata = {
     url: 'https://iori-kawano.vercel.app',
     siteName: 'Iori Kawano',
     type: 'website',
+    // 各ページは src/lib/pageMetadata.ts が自分のカードで上書きする。
+    // ここは layout を持たないルートが出てきたときの取りこぼし防止。
+    images: [{ url: '/og/default.png', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Iori Kawano — UI/UX Designer',
     description:
       'Portfolio of Iori Kawano, a UI/UX designer who thinks in systems and ships in code.',
+    images: ['/og/default.png'],
   },
 };
 
