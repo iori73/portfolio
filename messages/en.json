@@ -485,11 +485,13 @@
     "clientLearningTitle": "The design that only comes from knowing them",
     "clientLearningText": "I went through the client’s Instagram account and their existing site in detail to understand what they actually do. What came out of it was that this is not a shop that only sells things. They run miso and soy sauce making workshops for people of every age and background. Relationships with people are part of the business. That is where a new section on the home page came from, headed “Us and our customers”, introducing that side of their work.",
     "copyTitle": "The words were carried over unchanged",
-    "copyText": "The copy on the site is the client’s own, carried over from the existing site without rewriting. It is plain, serious, and sincere enough that you feel all of that from the writing alone. I wanted the design to be true to that, so I aimed for something quiet, careful, and with feeling in it.",
+    "copyText": "The copy on the site is the client’s own, carried over from the existing site without rewriting. It is plain, serious, and sincere enough that you feel all of that from the writing alone. I wanted the design to be true to that, so I aimed for something quiet and beautiful with something firm at the centre of it.",
     "captionChallenges": "From the previous site: the list of payment methods, how shipping and delivery were described, and the sign-up error.",
     "referencesTitle": "Sites surveyed",
     "referencesNote": "The ten businesses behind the market note above. Surveyed in March 2026; all are the companies’ own public websites.",
     "swatchBrand": "Enji — up to the cart (brand)",
-    "swatchCheckout": "Blue — checkout onward (recognition)"
+    "swatchCheckout": "Blue — checkout onward (recognition)",
+    "overviewText2Live": "The shop was the bigger problem. It could not take credit cards, and it could not sell outside Japan. I was brought in to look at the situation, redesign the site, and rebuild the whole thing on Shopify as one storefront that reads in both Japanese and English.",
+    "qualityTextLive": "Quality ran as seven review passes, which logged and cleared forty-three findings, ten high, nineteen medium, and fourteen low. Japanese text left in the English pages was checked page by page and came out at zero across all thirteen. Accessibility and SEO were audited and improved as well."
   }
 }
