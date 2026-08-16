@@ -1300,4 +1300,65 @@ headed にすると通る。実機で4パターン総当たりして確認済み
 移転完了までスクレイパーが毎回失敗してIssueが毎週立ってしまうため、
 移転完了後に `scripts/scrape-figma-stats.mjs` の `TARGETS` に追加する。
 それまでは `scripts/fetch-figma-stats.mjs`（手動ヘルパー）で維持。
+## 2026-08-16: 中初商店ケーススタディを追加（ブランチ保持・本番未反映）
+
+**ブランチ**: `worktree-nakahatsu-case-study`（worktree: `.claude/worktrees/nakahatsu-case-study`）
+**状態**: ローカル完成。**main へは merge しない**。クライアントサイトの一般公開を待つ。
+
+仕様は中初リポジトリ側の `docs/portfolio/CASE-STUDY-HANDOFF.md`。実装の書き方は
+airline-design-system のケーススタディに合わせた（SECTIONS 4本、hero aspect-[8/5]、
+Project Info の 4 カラム、figure + figcaption）。
+
+### 追加したもの
+- `app/[locale]/work/nakahatsu/page.tsx`（新規）
+- `app/[locale]/page.tsx` に3枚目のカード（Ukiyoe → Figma Plugins → 中初）
+- `messages/{en,jp}.json` に `projects.nakahatsu` / `nakahatsu`（50キー）/ `common.clientWork`
+- `public/work/nakahatsu/` に図版7枚（thumbnail-en/jp 2000x1250、本文図版5枚 1200x675）
+- `.gitignore` に `.capture/`（図版の生データ置き場。クライアントサイトの生スクショが入る）
+- `docs/APP_FLOW.md` のルート一覧を実態に合わせて更新
+
+### 掲載範囲の確定（中初側セッションが一次資料で裏取り）
+- **Lighthouse スコアは載せない。** 89→96 / 83→100 は 2026-04-26 のスナップショットで、
+  05-10 の再計測では a11y 92 / Best Practices 76 に低下。原因は未公開ストアの preview bar。
+  CLS 0.00 / LCP 825〜1101ms も同時期の値なので併せて外した
+- 翻訳166項目は「2026年5月時点の一括投入分」と時点明記
+- **v1/v2 の比較図版は不採用**（v1 のビジュアルはクライアントの既存デザイン。かつ現行の
+  v1 プレビューはヘッダー/フッターだけ新テーマのハイブリッドで忠実な v1 ではない）
+- ステータスは「進行中・未公開・検収前」。「完成」「納品済み」は書かない
+- 旧サイトの Before スクショは掲載可。ただし旧サイトを貶める語は使わない
+
+### プライバシーの仕掛け
+トップページの About セクションにある写真帯 `nkv2-kioke-band-single.webp` は
+Instagram 由来かつ選定途中。ライブ実測で 1440px:y=1588 / 768px:y=1518 / 390px:y=1539 から始まる。
+図版生成スクリプトに `HOME_SAFE_MAX_CSS = 1500` の assert を入れ、超えるクロップは例外で落ちる。
+Instagram セクション（実 IG 投稿）も全図版の範囲外。
+
+### 実測した検証結果
+- 375 / 390 / 768 / 1024 / 1440px の全スクロール位置で横スクロール0・はみ出し0・
+  テキスト見切れ0・未翻訳キー0・alt 欠落0・console エラー0
+- CLS **0.0000**（layout-shift エントリ0件）、LCP 276ms（dev）
+- FLIP トランジション: PC は overlay(top:112 / 1440x900) と実 hero が完全一致、
+  SP も (top:96 / 390x244) で一致
+- タイポ・余白は airline ページと計算値が完全一致（h1 48/57.6、h2 32/38.4、h3 24/30、
+  body 21/33.6、figcaption 16/25.6、section py 64/80、scroll-mt 128、hero ratio 1.600）
+- 図版5枚すべて 1200x675 が 883x497 に表示され、可視率100% / 歪み0%
+- 認証情報の混入0（配信 HTML・JSON・コミット差分すべて grep 実測）
+
+### 次に触るときの前提
+1. **撮り直し待ち**: 写真帯の最終選定が終わったら、トップページ由来の図版
+   （thumbnail-en/jp、before-after の After 側、responsive）を撮り直す。
+   中初側が 2026-08-16 に入れた EN 見出しの修正（flavor of / flavor for）も未反映
+2. **未着手**: `src/data/cvData.ts` への追加（ハンドオフでは任意扱い。PDF 生成の
+   クライアント名デニーリストに触るため別作業にした）
+3. **merge の条件**: クライアントサイトが一般公開されてから、本人 GO で main へ
+
+### この作業のスコープ外だが実測で見つかった既存の問題（サイト全体）
+中初側セッションの独立監査で検出。**今回の実装が原因ではなく、既存ページ全部に同じ問題がある。**
+- 本番依存に脆弱性38件（high 19 / moderate 16 / low 3）。大半は `next@15.5.14` → `>=15.5.16`
+  で解消する。`package.json` の宣言は `^15.5.9` なのでレンジを壊さず `pnpm update next` で済む。
+  **今回のブランチでは実行していない**（ケーススタディ追加にフレームワーク更新を混ぜないため）
+- `<html lang="jp">` は誤り。正しくは `ja`（`jp` は国コード）
+- Work カードが `<a href>` ではなく `<div role="link">` なので検索エンジンがたどれない
+- 本番の `/sitemap.xml` `/robots.txt` が 404
+- 詳細ページの `<title>` がトップと同一。canonical / og:image / hreflang 未設定
 
