@@ -1223,11 +1223,24 @@ OG 画像は `scripts/generate-og-images.mjs` で既存の作品画像から書�
 - 修飾キー付きクリック `defaultPrevented=false` / 素のクリック `true`
 - 390 / 768 / 1440px の全スクロール位置で横スクロール0・はみ出し0
 
+### 検証環境の事故（記録）
+
+`next start`（:3210）と `next dev`（:3211）を同じ worktree で同時に動かしたため、
+dev が `.next` を書き換えて start 側の `/_next/static/**` 17件が 400 になった。
+`/` は 200 を返し続けるのでステータスチェックでは気づけない。
+独立監査役の別セッションが静的アセットを個別に叩いて検出した。
+dev を止めて再ビルドしてから全項目を測り直し、スクリプト6本の読み込みと
+地色 `rgb(235,232,222)` を確認したうえで pass を再確認した。詳細は lessons.md。
+
 ### 見つけたが手を付けていないもの
 
 - **`i18n.ts`（リポジトリ直下）は死にコード**。`locales` / `defaultLocale` が
   `i18n/routing.ts` と重複しているが、next.config.mjs のプラグインは
   `./i18n/request.ts` を指しており、importer も0件。削除は本人確認が要るので残置
+- **ヘッダーのナビが英語直書き**（`src/compositions/Header.tsx:49-52`）。
+  `messages/jp.json` の `navigation`（実験 / 私について / ブログ）は使われていない。
+  そのため JP の `<title>` を About / CV / Blog / Experiment と英語にしてあるのは
+  画面と一致している。日本語化するならナビとタイトルを同時に変える必要がある
 - airline ページの図版5枚が縦長スクショを横長枠に cover で入れており、
   元画像の18〜40%しか見えていない（`token-architecture.webp` は 18%）。
   **公開しない判断になったので今回は直していない**
