@@ -4,7 +4,32 @@ import Image from 'next/image';
 import BackToTopButton from '@/src/compositions/BackToTopButton';
 import { useTranslations, useLocale } from 'next-intl';
 import { useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
+import { CTAButton } from '@/components/ui/cta-button';
 import { usePageTransition } from '@/src/contexts/TransitionContext';
+
+/**
+ * 公開先。移行が完了すると nakahatsu.jp が新サイトになる。
+ * このケーススタディ自体、クライアントサイトが一般公開されるまで
+ * デプロイしない前提なので、公開時点ではこの URL が正しい。
+ * ただしそれまでは旧サイト（WordPress + EC-CUBE）が返るため、
+ * ローカルで押すと「移行前」が開く。公開前に必ず実物を確認すること。
+ */
+const SITE_URL = 'https://nakahatsu.jp/';
+
+/** 同業リサーチで実際に調べた10サイト（docs/research/COMPETITOR-RESEARCH.md）。
+ *  各社の公開サイトで、順序は調査時のもの。 */
+const SURVEYED_SITES = [
+  { name: '弓削多醤油', url: 'https://yugeta.com/' },
+  { name: '金沢こんかこんか', url: 'https://kanazawakonkakonka.myshopify.com/' },
+  { name: 'ヤマニ味噌', url: 'https://www.yamanimiso.jp/' },
+  { name: 'ヤマト醤油味噌', url: 'https://shop.yamato-soysauce-miso.co.jp/' },
+  { name: 'まめくら', url: 'https://mamekura.myshopify.com/' },
+  { name: '河村醤油', url: 'https://www.kawamura-shoyu.co.jp/' },
+  { name: 'ヒガシマル醤油', url: 'https://shop.higashimaru.co.jp/' },
+  { name: 'ヤマヒサ', url: 'https://yama-hisa.jp/' },
+  { name: '加賀生麩処 茶庵', url: 'https://saan-shopping.com/' },
+  { name: '寧楽醗酵', url: 'https://narahakko.theshop.jp/' },
+] as const;
 
 /**
  * 本文図版。ハンドオフ §5.2 の仕様どおり 16:9 / 1200x675 で、器と画像の比率が
@@ -12,6 +37,9 @@ import { usePageTransition } from '@/src/contexts/TransitionContext';
  * なので、本文幅に収まるとラベルが実測 12.5px（1440px 幅）/ 4.0px（390px 幅）
  * まで縮む。読める大きさにならないビューポートがあるため、原寸を別タブで
  * 開けるようにしてある。
+ *
+ * href を渡すと、原寸画像ではなくその URL を開く。実際のページを見せたほうが
+ * 情報量が多い図版（商品一覧など）はこちらを使う。
  */
 function FullSizeImage({
   src,
@@ -20,6 +48,7 @@ function FullSizeImage({
   openLabel,
   width = 1200,
   height = 675,
+  href,
 }: {
   src: string;
   alt: string;
@@ -27,10 +56,11 @@ function FullSizeImage({
   openLabel: string;
   width?: number;
   height?: number;
+  href?: string;
 }) {
   return (
     <a
-      href={src}
+      href={href ?? src}
       target="_blank"
       rel="noopener noreferrer"
       /* 可視ラベルは5枚とも同じ文言なので、そのままだとスクリーンリーダーのリンク
@@ -44,6 +74,27 @@ function FullSizeImage({
         {visibleLabel} ↗
       </span>
     </a>
+  );
+}
+
+/**
+ * ブランドカラーをどこで止めたかを、文章の横に実際の色で示す。
+ * 「加賀五彩に由来する臙脂色」は言葉だけだと専門用語が2つ重なるため、色そのものを見せる。
+ * 値は案件側の記録に基づく実値（臙脂 = ブランド、#005BD3 = Checkout 以降）。
+ */
+function ColorStop({ hex, label }: { hex: string; label: string }) {
+  return (
+    <div className="flex items-center gap-3">
+      <span
+        aria-hidden="true"
+        className="h-9 w-9 flex-shrink-0 rounded-full ring-1 ring-black/10"
+        style={{ backgroundColor: hex }}
+      />
+      <div className="min-w-0">
+        <p className="text-body-sm text-ink">{label}</p>
+        <p className="font-space-grotesk text-caption-lg text-ink-tertiary">{hex}</p>
+      </div>
+    </div>
   );
 }
 
@@ -136,7 +187,7 @@ const NakahatsuPage: React.FC = () => {
       <section className="pt-6 pb-12 md:pt-8 md:pb-16">
         <div className="max-w-[1028px] w-full mx-auto">
           <div className="mb-10 md:mb-12">
-            <div className="flex flex-col items-start gap-4">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6">
               <div className="flex-1">
                 <h1
                   className={`text-headline text-ink mb-3 md:mb-2 ${getHeadingFontClass()}`}
@@ -148,6 +199,11 @@ const NakahatsuPage: React.FC = () => {
                 >
                   {t('nakahatsu.subtitle')}
                 </p>
+              </div>
+              <div className="flex-shrink-0 w-full md:w-auto">
+                <CTAButton href={SITE_URL} external className="w-full md:w-auto">
+                  {t('common.goToSite')}
+                </CTAButton>
               </div>
             </div>
           </div>
@@ -220,6 +276,22 @@ const NakahatsuPage: React.FC = () => {
                   <li>{t('nakahatsu.challenge4')}</li>
                   <li>{t('nakahatsu.challenge5')}</li>
                 </ul>
+                {/* 箇条書きだけだと主張の裏付けがないため、旧サイトからの証拠を添える。
+                    パネル内は日本語のサイトのスクショなので日本語のまま。
+                    16:9 ではなく 1200x910。パネル3段構成の実寸に合わせている。 */}
+                <figure className="mt-8">
+                  <FullSizeImage
+                    src="/work/nakahatsu/challenges.webp"
+                    alt="Evidence from the previous site: the payment methods, the missing shipping costs, and the sign-up error"
+                    width={1200}
+                    height={910}
+                    visibleLabel={t('common.viewFull')}
+                    openLabel={`${t('common.viewFull')}: ${t('nakahatsu.captionChallenges')}`}
+                  />
+                  <figcaption className={captionClass}>
+                    {t('nakahatsu.captionChallenges')}
+                  </figcaption>
+                </figure>
               </div>
 
               <div className="mb-10 md:mb-14">
@@ -299,14 +371,9 @@ const NakahatsuPage: React.FC = () => {
                 </p>
               </div>
 
-              {/* Bilingual typesetting */}
+              {/* 日英の組版。「英語のとき何を縦書きに残すか」の解説文は
+                  説明するまでもない内容だったため落とし、図版だけ残している。 */}
               <div className="mb-10 md:mb-14">
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
-                  {t('nakahatsu.i18nTypeTitle')}
-                </h3>
-                <p className={`mb-6 text-ink-secondary ${bodyTextClass}`}>
-                  {t('nakahatsu.i18nTypeText')}
-                </p>
                 <figure>
                   <FullSizeImage
                     src="/work/nakahatsu/bilingual.webp"
@@ -360,9 +427,12 @@ const NakahatsuPage: React.FC = () => {
                 <figure>
                   <FullSizeImage
                     src="/work/nakahatsu/products.webp"
+                    /* 原寸画像より実物のコレクションページのほうが情報量が多いので、
+                       ここだけサイトを直接開く。SITE_URL のコメント参照。 */
+                    href={`${SITE_URL}collections/all`}
                     alt="The product grid on the home page"
-                    visibleLabel={t('common.viewFull')}
-                    openLabel={`${t('common.viewFull')}: ${t('nakahatsu.captionProducts')}`}
+                    visibleLabel={t('common.goToSite')}
+                    openLabel={`${t('common.goToSite')}: ${t('nakahatsu.captionProducts')}`}
                   />
                   <figcaption className={captionClass}>
                     {t('nakahatsu.captionProducts')}
@@ -370,14 +440,9 @@ const NakahatsuPage: React.FC = () => {
                 </figure>
               </div>
 
-              {/* Responsive */}
+              {/* レスポンシブ。解説文は「当たり前のこと」として落とし、
+                  3幅の比較図版だけ残している。 */}
               <div className="mb-10 md:mb-14">
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
-                  {t('nakahatsu.responsiveTitle')}
-                </h3>
-                <p className={`mb-6 text-ink-secondary ${bodyTextClass}`}>
-                  {t('nakahatsu.responsiveText')}
-                </p>
                 <figure>
                   <FullSizeImage
                     src="/work/nakahatsu/responsive.webp"
@@ -399,16 +464,10 @@ const NakahatsuPage: React.FC = () => {
                 <p className={`text-ink-secondary ${bodyTextClass}`}>
                   {t('nakahatsu.checkoutText')}
                 </p>
-              </div>
-
-              {/* Designing around uncertain assets */}
-              <div className="mb-10 md:mb-14">
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
-                  {t('nakahatsu.uncertainTitle')}
-                </h3>
-                <p className={`text-ink-secondary ${bodyTextClass}`}>
-                  {t('nakahatsu.uncertainText')}
-                </p>
+                <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:gap-10">
+                  <ColorStop hex="#8B2252" label={t('nakahatsu.swatchBrand')} />
+                  <ColorStop hex="#005BD3" label={t('nakahatsu.swatchCheckout')} />
+                </div>
               </div>
 
               {/* Quality */}
@@ -430,39 +489,56 @@ const NakahatsuPage: React.FC = () => {
               <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
                 {t('work.reflection')}
               </h2>
-              <div className="space-y-6">
-                <div>
-                  <h3 className={`text-title mb-3 ${getHeadingFontClass()}`}>
-                    {t('nakahatsu.translationTitle')}
-                  </h3>
-                  <p className={`text-ink-secondary ${bodyTextClass}`}>
-                    {t('nakahatsu.translationText')}
-                  </p>
-                </div>
-                <div>
-                  <h3 className={`text-title mb-3 ${getHeadingFontClass()}`}>
-                    {t('nakahatsu.policyTitle')}
-                  </h3>
-                  <p className={`text-ink-secondary ${bodyTextClass}`}>
-                    {t('nakahatsu.policyText')}
-                  </p>
-                </div>
-                <div>
-                  <h3 className={`text-title mb-3 ${getHeadingFontClass()}`}>
-                    {t('nakahatsu.tokenTitle')}
-                  </h3>
-                  <p className={`text-ink-secondary ${bodyTextClass}`}>
-                    {t('nakahatsu.tokenText')}
-                  </p>
-                </div>
-                <div>
-                  <h3 className={`text-title mb-3 ${getHeadingFontClass()}`}>
-                    {t('nakahatsu.statusTitle')}
-                  </h3>
-                  <p className={`text-ink-secondary ${bodyTextClass}`}>
-                    {t('nakahatsu.statusText')}
-                  </p>
-                </div>
+              {/* 振り返りは、技術的な武勇伝ではなく「この案件で何を学んだか」を書く場所。
+                  Shopify の翻訳2層構造・ポリシーのレイアウト・トークンの比率といった
+                  実装の詳細は、ここに置くべき内容ではないため落とした。 */}
+              <div className="space-y-8 md:space-y-10">
+                {(
+                  [
+                    ['aiLeverageTitle', 'aiLeverageText'],
+                    ['aiLimitTitle', 'aiLimitText'],
+                    ['clientLearningTitle', 'clientLearningText'],
+                    ['copyTitle', 'copyText'],
+                    ['statusTitle', 'statusText'],
+                  ] as const
+                ).map(([titleKey, textKey]) => (
+                  <div key={titleKey}>
+                    <h3 className={`text-title mb-3 ${getHeadingFontClass()}`}>
+                      {t(`nakahatsu.${titleKey}`)}
+                    </h3>
+                    <p className={`text-ink-secondary ${bodyTextClass}`}>
+                      {t(`nakahatsu.${textKey}`)}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              {/* 参考文献。「市場の前提」で触れた同業10サイトを、本の巻末注のように
+                  ページの最後にまとめる。本文の流れを切らずに出典を示すため。 */}
+              <div className="mt-14 md:mt-20 border-t border-black/10 pt-8">
+                <h3 className={`text-title-sm mb-2 ${getHeadingFontClass()}`}>
+                  {t('nakahatsu.referencesTitle')}
+                </h3>
+                <p className={`mb-5 text-body-sm text-ink-tertiary ${getBodyFontClass()}`}>
+                  {t('nakahatsu.referencesNote')}
+                </p>
+                <ol className="grid grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-2">
+                  {SURVEYED_SITES.map((site, i) => (
+                    <li key={site.url} className="flex gap-2 text-body-sm">
+                      <span className="font-space-grotesk text-ink-tertiary tabular-nums">
+                        {i + 1}.
+                      </span>
+                      <a
+                        href={site.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-ink-secondary underline decoration-black/20 underline-offset-4 transition-colors hover:text-ink hover:decoration-current"
+                      >
+                        {site.name}
+                      </a>
+                    </li>
+                  ))}
+                </ol>
               </div>
             </section>
           </div>
