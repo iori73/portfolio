@@ -18,11 +18,15 @@ function FullSizeImage({
   alt,
   visibleLabel,
   openLabel,
+  width = 1200,
+  height = 675,
 }: {
   src: string;
   alt: string;
   visibleLabel: string;
   openLabel: string;
+  width?: number;
+  height?: number;
 }) {
   return (
     <a
@@ -35,7 +39,7 @@ function FullSizeImage({
       aria-label={openLabel}
       className="group relative block w-full overflow-hidden rounded-lg"
     >
-      <Image src={src} alt={alt} width={1200} height={675} className="w-full h-auto" />
+      <Image src={src} alt={alt} width={width} height={height} className="w-full h-auto" />
       <span className="pointer-events-none absolute bottom-2 right-3 font-space-grotesk text-body-sm text-ink-tertiary opacity-0 transition-opacity group-hover:opacity-100">
         {visibleLabel} ↗
       </span>
@@ -290,20 +294,9 @@ const NakahatsuPage: React.FC = () => {
                 <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('nakahatsu.dsTitle')}
                 </h3>
-                <p className={`mb-6 text-ink-secondary ${bodyTextClass}`}>
+                <p className={`text-ink-secondary ${bodyTextClass}`}>
                   {t('nakahatsu.dsText')}
                 </p>
-                <figure>
-                  <FullSizeImage
-                    src="/work/nakahatsu/vertical-typography.webp"
-                    alt="Vertical Japanese body copy on the About page"
-                    visibleLabel={t('common.viewFull')}
-                    openLabel={`${t('common.viewFull')}: ${t('nakahatsu.captionVerticalTypography')}`}
-                  />
-                  <figcaption className={captionClass}>
-                    {t('nakahatsu.captionVerticalTypography')}
-                  </figcaption>
-                </figure>
               </div>
 
               {/* Bilingual typesetting */}
@@ -317,7 +310,9 @@ const NakahatsuPage: React.FC = () => {
                 <figure>
                   <FullSizeImage
                     src="/work/nakahatsu/bilingual.webp"
-                    alt="The same About section in Japanese and English"
+                    alt="The same hero in Japanese and in English"
+                    width={1200}
+                    height={1572}
                     visibleLabel={t('common.viewFull')}
                     openLabel={`${t('common.viewFull')}: ${t('nakahatsu.captionBilingual')}`}
                   />
