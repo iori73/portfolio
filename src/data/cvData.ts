@@ -121,8 +121,8 @@ export const cvData: CVData = {
       startDate: '2025-12',
       endDate: 'Present',
       summary: {
-        en: 'Design system for a major airline across mobile apps and web, a university alumni app, and an RFP proposal for a public transport operator.',
-        jp: '大手航空会社向けデザインシステム（モバイルアプリ・Web）、大学OB・OG向け校友アプリ、公共交通事業者向けRFP提案。',
+        en: 'Design system for a major airline across mobile apps and web, and a university alumni app.',
+        jp: '大手航空会社向けデザインシステム（モバイルアプリ・Web）と、大学OB・OG向け校友アプリ。',
       },
       projects: [
         {
@@ -147,67 +147,8 @@ export const cvData: CVData = {
             jp: 'デザインシステムのトークン基盤と、その運用を支えるツールを構築。',
           },
         },
-        {
-          id: 'acn-transit',
-          label: { en: 'Public Transport', jp: '公共交通' },
-          period: { start: '2026-08', end: '2026-08' },
-          summary: {
-            en: "Proposal-phase engagement for a public transport operator's app renewal (RFP). Contributed to current-state analysis, competitive evaluation, and concept direction — reconstructing the current app's information architecture from firsthand walkthroughs, and designing a scope-narrowing and reproducibility framework for a 188-screen competitive audit.",
-            jp: '公共交通事業者のアプリリニューアルRFP提案フェーズに参画。現状分析・競合評価・コンセプト方向性の実務を担当し、実機踏破による現行アプリのIA導出と、188画面規模の競合監査における対象絞り込み・再現性設計を担った。',
-          },
-          resumeLine: {
-            en: 'Contributed current-state analysis, competitive evaluation, and concept direction on an RFP proposal for a public transport operator.',
-            jp: '公共交通事業者向けRFP提案で、現状分析・競合評価・コンセプト方向性の実務を担当。',
-          },
-          detail: {
-            context: {
-              en: [
-                'The proposal needed to diagnose why users abandon the current app, but the team had no access to the client\'s Figma files, leaving no primary source on the existing UI.',
-                'The competitive audit covered 188 screens across the benchmark set — too many to review at even depth, while a partial-coverage claim would not hold up under client scrutiny.',
-              ],
-              jp: [
-                '提案では現行アプリの離脱要因を特定する必要があったが、クライアントのFigmaにアクセスできず、現行UIの一次資料が存在しなかった。',
-                '競合監査の対象は計測ベースで188画面に及び、全数を同じ深さで見る時間はなく、かつ「一部しか見ていない」という前提では評価の説得力を保てなかった。',
-              ],
-            },
-            goal: {
-              en: [
-                "Reconstruct the current app's information architecture as-is and derive a to-be structure with traceable rationale, using firsthand observation in place of the missing design files.",
-                "Narrow the audit's scope while keeping the narrowing itself explainable and defensible to the client.",
-              ],
-              jp: [
-                '入手できないデザインファイルの代わりに実機観察を用いて、現行アプリのIA構造をas-isで再構成し、根拠を追える形でto-be構造を導出する。',
-                '監査対象を絞り込みつつ、絞り込みの根拠自体をクライアントに説明可能な状態に保つ。',
-              ],
-            },
-            deliverables: {
-              en: [
-                "Walkthrough records of the app's first-launch and account-registration flows, an as-is/to-be IA diagram, and a 10-item table of change rationale.",
-                'A three-tier (plus acquisition-cost) screening framework that cut the screenshot-request list from 43 screens to 2, an explicit classification rule set, a confidence-label system (direct data / aggregated / classification-dependent / retracted) applied to every figure, and a step-by-step reproduction guide.',
-                'A route-search accessibility finding — the wheelchair-accessibility option was presented as text only, with no accompanying icon — logged as a WCAG 1.3.3 / 1.4.1 issue.',
-                "Contributions to the proposal's Figma design system tokens and components, including measuring contrast ratios and correcting values that failed WCAG AA.",
-              ],
-              jp: [
-                '初回起動・アカウント登録フローの踏破記録、as-is/to-beのIA構造図、変更根拠を示す10項目の対照表。',
-                '188画面をTier 1〜3と取得コスト軸で絞り込むスクリーニング基準（撮影依頼を43画面から2画面に縮減）、明文化した分類ルール、全数値への確度ラベル付与（原データ直読／集計・比率／自チーム分類依存／撤回済み）、再現手順書。',
-                '監査作業中に発見した経路検索画面のアクセシビリティ課題（車いす利用の選択肢がアイコンを伴わずテキストのみで提示）をWCAG 1.3.3／1.4.1として記録。',
-                '提案用Figmaデザインシステムのトークン・コンポーネント整備への参加。コントラスト比を実測し、WCAG AA基準を満たさない値を修正。',
-              ],
-            },
-            outcome: {
-              en: [
-                "The IA walkthrough served as the team's only firsthand source on the existing UI for as long as the client's Figma stayed inaccessible, and fed directly into the competitive comparison and concept work that followed. The proposal was submitted before an award decision, so no downstream result can yet be claimed.",
-                'Applying the confidence labels surfaced two of my own conclusions as denominator mistakes, which I retracted myself, along with ten label inconsistencies and a screenshot swap in a teammate\'s output that a total-value check alone could not have detected.',
-              ],
-              jp: [
-                'IA踏破記録は、クライアントのFigmaが入手できない期間、チーム内で唯一の現行UI一次資料として機能し、その後の競合比較・コンセプト検討の土台になった。提案書提出後で受注可否は未確定のため、その先の成果は主張できない。',
-                '確度ラベルの適用により、自身の結論のうち2件を分母の取り違えとして自ら撤回。加えて他メンバーの成果物のラベル不一致10件と、合計値のチェックだけでは検出できない撮影リストの入れ替わりを発見した。',
-              ],
-            },
-          },
-        },
       ],
-      technologies: ['Figma', 'Design Systems', 'Design Tokens', 'Information Architecture'],
+      technologies: ['Figma', 'Design Systems', 'Design Tokens'],
     },
     {
       id: 'work-yumemi',
