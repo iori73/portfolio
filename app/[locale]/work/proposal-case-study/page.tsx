@@ -12,13 +12,6 @@ const SECTIONS = [
   'reflection',
 ] as const;
 
-const StatCard: React.FC<{ value: string; caption: string }> = ({ value, caption }) => (
-  <div className="p-6 rounded-lg bg-surface-muted">
-    <p className="text-title-sm font-space-grotesk font-semibold text-ink mb-2">{value}</p>
-    <p className="text-body-sm text-ink-tertiary">{caption}</p>
-  </div>
-);
-
 const PublicTransportRfpPage: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('overview');
   const t = useTranslations();
@@ -85,10 +78,10 @@ const PublicTransportRfpPage: React.FC = () => {
             <div className="flex flex-col items-start gap-4">
               <div className="flex-1">
                 <h1 className={`text-headline text-ink mb-3 md:mb-2 ${getHeadingFontClass()}`}>
-                  {t('publicTransportRfp.title')}
+                  {t('proposalCaseStudy.title')}
                 </h1>
                 <p className={`text-body-lg ${getBodyFontClass()} text-ink-secondary tracking-[0.2px]`}>
-                  {t('publicTransportRfp.subtitle')}
+                  {t('proposalCaseStudy.subtitle')}
                 </p>
               </div>
             </div>
@@ -99,25 +92,25 @@ const PublicTransportRfpPage: React.FC = () => {
               <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
                 {t('common.timeline')}
               </span>
-              <p className="text-body-lg tracking-[0.2px]">{t('projects.publicTransportRfp.timeline')}</p>
+              <p className="text-body-lg tracking-[0.2px]">{t('projects.proposalCaseStudy.timeline')}</p>
             </div>
             <div>
               <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
                 {t('common.mySkills')}
               </span>
-              <p className="text-body-lg tracking-[0.2px]">{t('projects.publicTransportRfp.skills')}</p>
+              <p className="text-body-lg tracking-[0.2px]">{t('projects.proposalCaseStudy.skills')}</p>
             </div>
             <div>
               <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
                 {t('common.type')}
               </span>
-              <p className="text-body-lg tracking-[0.2px]">{t('publicTransportRfp.type')}</p>
+              <p className="text-body-lg tracking-[0.2px]">{t('proposalCaseStudy.type')}</p>
             </div>
             <div>
               <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
                 {t('common.deliverables')}
               </span>
-              <p className="text-body-lg tracking-[0.2px]">{t('projects.publicTransportRfp.deliverables')}</p>
+              <p className="text-body-lg tracking-[0.2px]">{t('projects.proposalCaseStudy.deliverables')}</p>
             </div>
           </div>
         </div>
@@ -131,21 +124,21 @@ const PublicTransportRfpPage: React.FC = () => {
             {/* OVERVIEW */}
             <section id="overview" className="w-full mx-auto py-12 md:py-16 text-ink-secondary scroll-mt-32">
               <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>{t('work.overview')}</h2>
-              <p className={`mb-4 ${bodyTextClass}`}>{t('publicTransportRfp.overviewText1')}</p>
-              <p className={`mb-8 ${bodyTextClass}`}>{t('publicTransportRfp.overviewText2')}</p>
+              <p className={`mb-4 ${bodyTextClass}`}>{t('proposalCaseStudy.overviewText1')}</p>
+              <p className={`mb-8 ${bodyTextClass}`}>{t('proposalCaseStudy.overviewText2')}</p>
 
               <div className="mb-10 md:mb-14">
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>{t('publicTransportRfp.challengeTitle')}</h3>
+                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>{t('proposalCaseStudy.challengeTitle')}</h3>
                 <ul className={`list-disc list-inside space-y-2 ${bodyTextClass}`}>
-                  <li>{t('publicTransportRfp.challenge1')}</li>
-                  <li>{t('publicTransportRfp.challenge2')}</li>
-                  <li>{t('publicTransportRfp.challenge3')}</li>
+                  <li>{t('proposalCaseStudy.challenge1')}</li>
+                  <li>{t('proposalCaseStudy.challenge2')}</li>
+                  <li>{t('proposalCaseStudy.challenge3')}</li>
                 </ul>
               </div>
 
               <div className="mb-10 md:mb-14">
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>{t('publicTransportRfp.roleTitle')}</h3>
-                <p className={bodyTextClass}>{t('publicTransportRfp.roleText')}</p>
+                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>{t('proposalCaseStudy.roleTitle')}</h3>
+                <p className={bodyTextClass}>{t('proposalCaseStudy.roleText')}</p>
               </div>
             </section>
 
@@ -153,32 +146,32 @@ const PublicTransportRfpPage: React.FC = () => {
             <section id="design-process" className="py-12 md:py-20 scroll-mt-32">
               <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>{t('work.designProcess')}</h2>
               <p className={`mb-10 md:mb-14 text-ink-secondary ${bodyTextClass}`}>
-                {t('publicTransportRfp.designProcessIntro')}
+                {t('proposalCaseStudy.designProcessIntro')}
               </p>
 
               {/* IA Reconstruction */}
               <div className="mb-10 md:mb-14">
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>{t('publicTransportRfp.iaTitle')}</h3>
-                <p className={`mb-4 text-ink-secondary ${bodyTextClass}`}>{t('publicTransportRfp.iaText')}</p>
-                <p className={`text-ink-secondary ${bodyTextClass}`}>{t('publicTransportRfp.iaOutcome')}</p>
+                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>{t('proposalCaseStudy.iaTitle')}</h3>
+                <p className={`mb-4 text-ink-secondary ${bodyTextClass}`}>{t('proposalCaseStudy.iaText')}</p>
+                <p className={`text-ink-secondary ${bodyTextClass}`}>{t('proposalCaseStudy.iaOutcome')}</p>
               </div>
 
               {/* Audit Scoping */}
               <div className="mb-10 md:mb-14">
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>{t('publicTransportRfp.auditTitle')}</h3>
-                <p className={`text-ink-secondary ${bodyTextClass}`}>{t('publicTransportRfp.auditText')}</p>
+                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>{t('proposalCaseStudy.auditTitle')}</h3>
+                <p className={`text-ink-secondary ${bodyTextClass}`}>{t('proposalCaseStudy.auditText')}</p>
               </div>
 
               {/* Confidence Labels & Self-Correction */}
               <div className="mb-10 md:mb-14">
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>{t('publicTransportRfp.confidenceTitle')}</h3>
-                <p className={`text-ink-secondary ${bodyTextClass}`}>{t('publicTransportRfp.confidenceText')}</p>
+                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>{t('proposalCaseStudy.confidenceTitle')}</h3>
+                <p className={`text-ink-secondary ${bodyTextClass}`}>{t('proposalCaseStudy.confidenceText')}</p>
               </div>
 
               {/* Accessibility & Design System */}
               <div className="mb-10 md:mb-14">
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>{t('publicTransportRfp.a11yTitle')}</h3>
-                <p className={`text-ink-secondary ${bodyTextClass}`}>{t('publicTransportRfp.a11yText')}</p>
+                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>{t('proposalCaseStudy.designSystemTitle')}</h3>
+                <p className={`text-ink-secondary ${bodyTextClass}`}>{t('proposalCaseStudy.designSystemText')}</p>
               </div>
             </section>
 
@@ -186,24 +179,16 @@ const PublicTransportRfpPage: React.FC = () => {
             <section id="solution" className="py-12 md:py-20 scroll-mt-32">
               <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>{t('work.solution')}</h2>
               <p className={`mb-10 md:mb-14 text-ink-secondary ${bodyTextClass}`}>
-                {t('publicTransportRfp.solutionIntro')}
+                {t('proposalCaseStudy.solutionIntro')}
               </p>
 
               <div className="mb-10 md:mb-14">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 mb-6">
-                  <StatCard value="188" caption={t('publicTransportRfp.stat1')} />
-                  <StatCard value="43 → 2" caption={t('publicTransportRfp.stat2')} />
-                  <StatCard value="10 + 1" caption={t('publicTransportRfp.stat3')} />
-                </div>
-              </div>
-
-              <div className="mb-10 md:mb-14">
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>{t('publicTransportRfp.deliverablesTitle')}</h3>
+                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>{t('proposalCaseStudy.deliverablesTitle')}</h3>
                 <ul className={`list-disc list-inside space-y-2 ${bodyTextClass}`}>
-                  <li>{t('publicTransportRfp.deliverable1')}</li>
-                  <li>{t('publicTransportRfp.deliverable2')}</li>
-                  <li>{t('publicTransportRfp.deliverable3')}</li>
-                  <li>{t('publicTransportRfp.deliverable4')}</li>
+                  <li>{t('proposalCaseStudy.deliverable1')}</li>
+                  <li>{t('proposalCaseStudy.deliverable2')}</li>
+                  <li>{t('proposalCaseStudy.deliverable3')}</li>
+                  <li>{t('proposalCaseStudy.deliverable4')}</li>
                 </ul>
               </div>
             </section>
@@ -213,16 +198,16 @@ const PublicTransportRfpPage: React.FC = () => {
               <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>{t('work.impactReflection')}</h2>
               <div className="space-y-6">
                 <div>
-                  <h3 className={`text-title mb-3 ${getHeadingFontClass()}`}>{t('publicTransportRfp.statusTitle')}</h3>
-                  <p className={`text-ink-secondary ${bodyTextClass}`}>{t('publicTransportRfp.statusText')}</p>
+                  <h3 className={`text-title mb-3 ${getHeadingFontClass()}`}>{t('proposalCaseStudy.statusTitle')}</h3>
+                  <p className={`text-ink-secondary ${bodyTextClass}`}>{t('proposalCaseStudy.statusText')}</p>
                 </div>
                 <div>
-                  <h3 className={`text-title mb-3 ${getHeadingFontClass()}`}>{t('publicTransportRfp.learningTitle')}</h3>
-                  <p className={`text-ink-secondary ${bodyTextClass}`}>{t('publicTransportRfp.learningText')}</p>
+                  <h3 className={`text-title mb-3 ${getHeadingFontClass()}`}>{t('proposalCaseStudy.learningTitle')}</h3>
+                  <p className={`text-ink-secondary ${bodyTextClass}`}>{t('proposalCaseStudy.learningText')}</p>
                 </div>
                 <div>
-                  <h3 className={`text-title mb-3 ${getHeadingFontClass()}`}>{t('publicTransportRfp.roleClarityTitle')}</h3>
-                  <p className={`text-ink-secondary ${bodyTextClass}`}>{t('publicTransportRfp.roleClarityText')}</p>
+                  <h3 className={`text-title mb-3 ${getHeadingFontClass()}`}>{t('proposalCaseStudy.roleClarityTitle')}</h3>
+                  <p className={`text-ink-secondary ${bodyTextClass}`}>{t('proposalCaseStudy.roleClarityText')}</p>
                 </div>
               </div>
             </section>

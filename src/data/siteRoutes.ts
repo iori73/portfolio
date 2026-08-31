@@ -36,7 +36,7 @@ export const INDEXED_WORK_SLUGS = [
 export const ARCHIVED_WORK_SLUGS = [
   'airline-design-system',
   'gym_crowd_status_dashboard',
-  'public-transport-rfp',
+  'proposal-case-study',
 ] as const;
 
 /** Work 以外で sitemap に載せるページ。 */
