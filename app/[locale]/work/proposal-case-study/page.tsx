@@ -71,7 +71,7 @@ const PublicTransportRfpPage: React.FC = () => {
     <div className="font-sans my-24 md:mt-28 md:mb-16">
       <BackToTopButton />
 
-      {/* Project Info (no hero image — proposal-phase project, no client assets to show) */}
+      {/* Project Info (no hero image: proposal-phase project, no client assets to show) */}
       <section className="pt-16 pb-12 md:pt-20 md:pb-16">
         <div className="max-w-[1028px] w-full mx-auto">
           <div className="mb-10 md:mb-12">
