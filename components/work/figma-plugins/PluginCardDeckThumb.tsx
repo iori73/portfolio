@@ -91,7 +91,13 @@ function CardContent({ plugin }: { plugin: PluginData }) {
           </p>
           <div className="flex items-center gap-2 flex-shrink-0 pt-0.5">
             <span className="font-space-grotesk text-[9px] text-ink-tertiary whitespace-nowrap">♡ {likes}</span>
-            <span className="font-space-grotesk text-[9px] text-ink-tertiary whitespace-nowrap">↓ {users}</span>
+            <span className="flex items-center gap-[2px] font-space-grotesk text-[9px] text-ink-tertiary whitespace-nowrap">
+              <svg width="8" height="8" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="2" />
+                <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+              {users}
+            </span>
           </div>
         </div>
         <div className="flex items-center gap-1.5 mb-2">
