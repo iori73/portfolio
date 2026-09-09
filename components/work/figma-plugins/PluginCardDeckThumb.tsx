@@ -1,44 +1,18 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useMemo, useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { plugins, formatUsers } from './pluginData';
+import { plugins, formatUsers, PluginData } from './pluginData';
 
-// Published plugins only, ordered left → center → right (center is the hero).
-// likes/users are NOT stored here — they are pulled from pluginData (the single
-// source, refreshed by the build-time Figma fetch) via `id`.
-const DECK = [
-  {
-    id: 'perfect-markdown',
-    name: 'Perfect Markdown',
-    type: 'Widget',
-    cover: '/work/figma-plugins/pm-cover.webp',
-    accentColor: '#A259FF',
-    description:
-      'Renders Markdown inside Figma and FigJam with full syntax support: tables, code blocks, task lists, and light/dark themes.',
-  },
-  {
-    id: 'pptx-to-figma',
-    name: 'PPTX to Figma',
-    type: 'Plugin',
-    cover: '/work/figma-plugins/pptx-cover.webp',
-    accentColor: '#1ABCFE',
-    description:
-      'Converts PowerPoint (.pptx) files into fully editable Figma designs, preserving your layout, styles, and structure.',
-  },
-  {
-    id: 'bulk-screenshot-importer',
-    name: 'Bulk Screenshot Importer',
-    type: 'Plugin',
-    cover: '/work/figma-plugins/bsi-cover.webp',
-    accentColor: '#0ACF83',
-    description:
-      'Imports screenshots with folder structure preserved as Sections. Smart Import uses AI to detect scroll sequences.',
-  },
-];
-
-// Lookup of real likes/users by plugin id (from pluginData / build-time fetch).
-const STATS_BY_ID = Object.fromEntries(plugins.map((p) => [p.id, p]));
+// Fanned hero deck, driven entirely by pluginData.ts — adding a plugin there
+// is the only step needed; this component never needs a manual edit.
+//
+// Above MAX_VISIBLE plugins, showing everyone at once gets visually cramped
+// (rotation/spacing grows with the card count), so instead we show a
+// MAX_VISIBLE-wide window that auto-rotates through the full list. Below that
+// count (today: 4), every plugin is shown, statically, exactly as before.
+const MAX_VISIBLE = 5;
+const ROTATE_INTERVAL_MS = 4500;
 
 const CARD_W = 200;
 const CARD_H = Math.round(CARD_W * (537 / 432)); // 249
@@ -52,24 +26,9 @@ const IMG_H = Math.round(IMG_W / 2);
 // the cursor target for each card is easy to predict.
 const STEP = 150;
 
-// Default fan positions: [rotDeg, tx, ty] for each card.
-// Symmetric, evenly spaced fan — outer cards lean + sit slightly lower so the
-// arc reads naturally, but gaps are uniform so hover targets stay predictable.
-const BASE: [number, number, number][] = [
-  [-7, -1 * STEP, 6],  // Perfect Markdown — left
-  [ 0,        0,  0],  // PPTX to Figma — center (hero)
-  [ 7,  1 * STEP, 6],  // Bulk Screenshot Importer — right
-];
-
-// Design size of the fixed-layout cluster. The outer card centers sit at
-// ±1*STEP, plus half a card and breathing room for rotation / hover scale.
-const CLUSTER_W = 2 * (STEP + CARD_W / 2) + 80; // 580
-const CLUSTER_H = CARD_H + 90;
-
-function CardContent({ plugin }: { plugin: (typeof DECK)[number] }) {
-  const stat = STATS_BY_ID[plugin.id];
-  const likes = stat?.likes != null ? String(stat.likes) : '—';
-  const users = stat?.users != null ? formatUsers(stat.users) : '—';
+function CardContent({ plugin }: { plugin: PluginData }) {
+  const likes = plugin.likes != null ? String(plugin.likes) : '—';
+  const users = plugin.users != null ? formatUsers(plugin.users) : '—';
   return (
     <>
       <div
@@ -103,9 +62,9 @@ function CardContent({ plugin }: { plugin: (typeof DECK)[number] }) {
         className="relative overflow-hidden rounded-sm"
         style={{ marginLeft: IMG_MARGIN, marginRight: IMG_MARGIN, height: IMG_H }}
       >
-        {plugin.cover ? (
+        {plugin.thumbnail ? (
           <Image
-            src={plugin.cover}
+            src={plugin.thumbnail}
             alt={plugin.name}
             fill
             sizes="400px"
@@ -172,6 +131,41 @@ export default function PluginCardDeckThumb({ maxScale = 1 }: PluginCardDeckThum
   const wrapRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
 
+  const visibleCount = Math.min(plugins.length, MAX_VISIBLE);
+  const rotates = plugins.length > MAX_VISIBLE;
+
+  // Rotating window into `plugins`: when the library is bigger than
+  // MAX_VISIBLE, `windowStart` slides forward on a timer so every plugin
+  // eventually gets its turn in the deck without any layout ever needing to
+  // grow past MAX_VISIBLE cards. Paused while a card is hovered so the deck
+  // doesn't shift under the cursor mid-interaction.
+  const [windowStart, setWindowStart] = useState(0);
+  useEffect(() => {
+    if (!rotates || active !== null) return;
+    const id = setInterval(() => {
+      setWindowStart((s) => (s + 1) % plugins.length);
+    }, ROTATE_INTERVAL_MS);
+    return () => clearInterval(id);
+  }, [rotates, active]);
+
+  const deck = useMemo(
+    () => Array.from({ length: visibleCount }, (_, k) => plugins[(windowStart + k) % plugins.length]),
+    [visibleCount, windowStart],
+  );
+
+  // Symmetric fan positions, generalized for any card count: index distance
+  // from the fractional center drives rotation/x-offset (same 7deg / STEP
+  // per step as the original hand-tuned 3-card layout); the nearest-to-center
+  // card is elevated as the hero, matching the original design language.
+  const center = (visibleCount - 1) / 2;
+  const heroIndex = Math.round(center);
+  const maxAbsD = Math.max(...deck.map((_, i) => Math.abs(i - center)), 0);
+
+  // Design size of the fixed-layout cluster. The outermost card centers sit at
+  // ±maxAbsD*STEP, plus half a card and breathing room for rotation / hover scale.
+  const CLUSTER_W = 2 * (maxAbsD * STEP + CARD_W / 2) + 80;
+  const CLUSTER_H = CARD_H + 90;
+
   // Only enable the hover-to-scale interaction on devices that actually hover
   // (fine pointer). On touch, a tap would fire onMouseEnter → scale the card
   // mid-transition, moving it under the finger, which makes the browser SUPPRESS
@@ -199,7 +193,7 @@ export default function PluginCardDeckThumb({ maxScale = 1 }: PluginCardDeckThum
     const ro = new ResizeObserver(update);
     ro.observe(el);
     return () => ro.disconnect();
-  }, [maxScale]);
+  }, [maxScale, CLUSTER_W, CLUSTER_H]);
 
   return (
     <div
@@ -221,27 +215,28 @@ export default function PluginCardDeckThumb({ maxScale = 1 }: PluginCardDeckThum
         }}
       >
 
-        {/* All 3 cards. Hover enlarges a card IN PLACE (pure scale — the card
+        {/* All visible cards. Hover enlarges a card IN PLACE (pure scale — the card
             never moves), so onMouseEnter/onMouseLeave fire exactly when the
             cursor enters/leaves the card and the hover clears the moment the
             cursor is off it, with no flicker. */}
-        {DECK.map((plugin, i) => {
-          const [baseR, baseTx, baseTy] = BASE[i];
+        {deck.map((plugin, i) => {
+          const d = i - center;
+          const baseR = d * 7;
+          const baseTx = d * STEP;
           const isActive = active === i;
           const anyActive = active !== null;
 
-          // i=1 (PPTX) is the hero card — elevated by default even without hover.
-          const isHero = i === 1;
+          const isHero = i === heroIndex;
           // Position and rotation stay constant per card; only scale/z/shadow
           // change on hover. Keeping geometry fixed prevents the card from
           // moving out from under the cursor (which would cause hover flicker).
-          const ty = isHero ? baseTy - 10 : baseTy;
+          const ty = 6 + (isHero ? -16 : 0);
           const cardScale = isActive ? 1.08 : isHero && !anyActive ? 1.04 : anyActive ? 0.94 : 1;
           const z = isActive ? 10 : isHero ? 5 : 1;
 
           return (
             <div
-              key={plugin.name}
+              key={plugin.id}
               className="absolute rounded-2xl bg-white overflow-hidden cursor-pointer"
               style={{
                 width: CARD_W,
