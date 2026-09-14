@@ -1,0 +1,56 @@
+name: Update Figma Plugin Stats
+
+on:
+  schedule:
+    - cron: '0 4 * * 1'  # 毎週月曜 4時 (UTC)
+  workflow_dispatch:       # 手動実行も可能
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Install xvfb
+        # Figma Community's bot protection blocks headless Chromium outright
+        # (confirmed empirically — see scripts/scrape-figma-stats.mjs header
+        # comment). The scraper runs Chromium in headed mode, so it needs a
+        # virtual display on this display-less runner.
+        run: sudo apt-get update && sudo apt-get install -y xvfb
+
+      - name: Scrape Figma Community stats
+        run: xvfb-run -a pnpm run scrape:figma-stats
+
+      - name: Commit updated stats
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add components/work/figma-plugins/pluginStats.json
+          git diff --staged --quiet || git commit -m "chore: update Figma plugin stats"
+          git push
+
+      - name: Open an issue if the scrape failed
+        if: failure()
+        run: |
+          gh issue create \
+            --title "Figma plugin stats scrape failed ($(date -u +%Y-%m-%d))" \
+            --body "The scheduled Figma Community stats scrape (scripts/scrape-figma-stats.mjs) failed, so pluginStats.json was NOT updated. This usually means Figma changed their page markup, their bot-detection, or a tracked plugin/profile URL is wrong. Check the failed run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
