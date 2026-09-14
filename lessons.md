@@ -718,4 +718,27 @@ permission settings." で、ディレクトリが原因であるかのように�
 
 **残る既知の穴**: プロジェクト外かつ `~/.ssh` `~/.aws` `~/.gnupg` 等の
 絶対パス指定から外れる場所（例: `~/Downloads/foo.pem`）は保護されない。
+
+## Figma Community は headless ブラウザを判定してブロックする（bot対策）
+
+Figma Community プラグイン統計の自動スクレイピング（`scripts/scrape-figma-stats.mjs`）を
+組む際、`chromium.launch()`（デフォルト = headless）で `https://www.figma.com/@io_73` に
+アクセスすると **常に 403（CloudFront ブロック）**。bundled Chromium でも実機の
+system Chrome (`channel: 'chrome'`) でも結果は同じ — ブラウザの種類ではなく
+**headless フラグそのもの**が判定材料になっている。
+
+`headless: false` にした瞬間（bundled Chromium のままでも）200〜202 で通り、
+`[data-testid="community-resource-tile"]` が正常に取得できた。curl 等の非ブラウザ
+リクエストがブロックされるのは既知（`fetch-figma-stats.mjs` の元々のコメント参照）
+だったが、**ヘッドレス Chromium も同列に扱われる**点は実機で4パターン
+（bundled headless / system headless / system headed / bundled headed）を
+総当たりするまで分からなかった。
+
+**対処**: CI（GitHub Actions、ディスプレイなし）で headed 実行するには `xvfb-run` で
+仮想ディスプレイを与える。`sudo apt-get install -y xvfb` → `xvfb-run -a <command>`。
+
+**適用範囲**: Figma Community（`figma.com/@*` プロフィールページ、プラグイン/ウィジェット
+詳細ページ）を対象にした自動化全般。他の Cloudflare/CloudFront 配下のサイトでも
+同じ判定ロジックが使われている可能性があるので、403 で詰まったら真っ先に
+headless フラグを疑う。
 `**/` 系はプロジェクト内、`~/` 系は指定したパスのみ、と役割が分かれている。
