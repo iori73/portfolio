@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "stats": "node scripts/fetch-figma-stats.mjs",
+    "scrape:figma-stats": "node scripts/scrape-figma-stats.mjs",
     "generate:pdf": "node scripts/generate-portfolio-pdf.mjs --locale all",
     "lint": "next lint",
     "generate:podcast-data": "node scripts/generate-podcast-data.js",

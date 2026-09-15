@@ -1254,3 +1254,50 @@ dev を止めて再ビルドしてから全項目を測り直し、スクリプ�
    `nakahatsu` を足す（クライアントサイト公開後）
 4. OG 画像 `public/og/nakahatsu.jpg` を生成スクリプトに追加
 
+## 2026-09-13: Figma Plugins ギャラリーに Pinterest to Figma 追加 + hero deck 動的化 + 統計自動化
+
+### 1. Pinterest to Figma エントリ追加（PR #61, マージ済み）
+
+`components/work/figma-plugins/pluginData.ts` の `basePlugins` に追加。
+アイコン/カバー画像は Downloads から webp 変換して `public/work/figma-plugins/p2f-*.webp` に配置。
+`ConceptC.tsx`（ギャラリー）は `plugins` 配列を map するだけなので他ファイル変更不要。
+
+### 2. hero deck（`PluginCardDeckThumb.tsx`）をハードコードから動的化（PR #62, マージ済み）
+
+以前は3枚固定の `DECK` 配列を手動管理しており、Pinterest to Figma 追加時に
+更新漏れしていた（気づかれて指摘された）。`plugins` 配列から直接描画するよう書き換え、
+扇形レイアウトの角度・オフセット計算を N枚に一般化（中心からの距離ベース）。
+5枚を超えたら自動ローテーション窓（4.5秒ごと、hover中は停止）に切り替わる設計。
+Playwright で dev server 起動 → デスクトップ/モバイル(390px) 両方でスクリーンショット確認済み。
+
+### 3. hero deck の統計アイコンを「↓」→人物アイコンに修正（PR #63, マージ済み）
+
+`PluginCardDeckThumb.tsx` の install count 表示が `↓`（ダウンロード矢印）の
+Unicode文字だったが、本物の Figma Community カードは人物アイコンを使っている。
+このカードは Figma Community の見た目を模したものなので、インラインSVGの
+人物アイコンに置き換えた（`PluginCard.tsx` 本体側はプレーンテキストのみで問題なし）。
+
+### 4. Figma Community の統計を自動スクレイピング（ブランチ作成済み・未push/未PR）
+
+`pluginStats.json`（users/likes）が手動更新のまま放置されて実データと乖離していた
+（例: pptx-to-figma が 10.2k/100 のまま、実際は 15.3k/148）。
+`scripts/scrape-figma-stats.mjs` を新規作成し、`.github/workflows/update-figma-stats.yml`
+で毎週月曜4時(UTC)に自動実行 → `pluginStats.json` を自動コミット。
+
+**検証で確定した重要事実**: Figma Community は **headless ブラウザを問答無用でブロックする**
+（bundled Chromium / system Chrome どちらも headless だと 403、同じブラウザを
+headed にすると通る。実機で4パターン総当たりして確認済み）。
+そのため scraper は Chromium を headed で起動し、GitHub Actions 側は
+`xvfb-run` で仮想ディスプレイを与えて headed 実行させている。
+
+失敗時に静かに古いデータのまま放置しないよう、対象プラグインの stats が
+1件でも取得・パース失敗したら **exit 1 で pluginStats.json に一切書き込まない**
+（部分更新はしない）。ワークフロー側は失敗時に GitHub Issue を自動作成して
+可視化する（ユーザーから「絶対に静かに失敗させるな」と明示要求があったため）。
+
+`perfect-markdown` は意図的に対象外。現在まだ `@iorikawano2` に公開されており、
+`@io_73` への移転予定はあるが未完了（本人に確認済み）。対象に含めると
+移転完了までスクレイパーが毎回失敗してIssueが毎週立ってしまうため、
+移転完了後に `scripts/scrape-figma-stats.mjs` の `TARGETS` に追加する。
+それまでは `scripts/fetch-figma-stats.mjs`（手動ヘルパー）で維持。
+
