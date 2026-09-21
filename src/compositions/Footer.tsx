@@ -8,6 +8,8 @@ import { useTranslations } from 'next-intl';
 const XIcon = () => (
   <svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M31.8067 11.8125H35.9434L26.9082 22.1367L37.5371 36.1875H29.2168L22.6953 27.6679L15.2422 36.1875H11.0996L20.7617 25.1425L10.5723 11.8125H19.1035L24.9922 19.5996L31.8067 11.8125ZM30.3536 33.7148H32.6445L17.8555 14.1562H15.3945L30.3536 33.7148Z"
       fill="currentColor"
     />
@@ -81,6 +83,16 @@ const MediumIcon = () => (
   </svg>
 );
 
+// Source: simple-icons (raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/substack.svg), 24x24 viewBox scaled x2 to match this file's 48x48 convention
+const SubstackIcon = () => (
+  <svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path
+      d="M45.078 16.484H2.92V10.812h42.16v5.672zM2.92 21.624V48L24 36.22 45.08 48V21.624H2.92zM45.08 0H2.92v5.672h42.16V0z"
+      fill="currentColor"
+    />
+  </svg>
+);
+
 const BehanceIcon = () => (
   <svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <g clipPath="url(#clip0_552_17871)">
@@ -110,47 +122,55 @@ const PLATFORM_DATA = [
     name: 'X',
     href: 'https://twitter.com/iori73wsy',
     Icon: XIcon,
-    widthPercent: 29.5, // usage frequency - adjusted to ensure min 104px width
+    widthPercent: 27.0, // usage frequency - adjusted to ensure min 104px width
     opacity: 1.0, // posting frequency (highest)
+  },
+  {
+    id: 'substack',
+    name: 'Substack',
+    href: 'https://substack.com/@iori67',
+    Icon: SubstackIcon,
+    widthPercent: 15.0, // usage frequency - newly launched 2026-09, primary home for long-form writing going forward
+    opacity: 0.75, // posting frequency - active launch, second only to X
   },
   {
     id: 'github',
     name: 'GitHub',
     href: 'https://github.com/iori73',
     Icon: GitHubIcon,
-    widthPercent: 13.0, // usage frequency - adjusted to ensure min 104px width
-    opacity: 0.8, // posting frequency - adjusted to be visually between X and note
+    widthPercent: 12.0, // usage frequency - adjusted to ensure min 104px width
+    opacity: 0.55, // posting frequency - adjusted to be visually between X and note
   },
   {
     id: 'note',
     name: 'note',
     href: 'https://note.com/io_73',
     Icon: NoteIcon,
-    widthPercent: 11.0, // adjusted to ensure min 104px width
-    opacity: 0.5, // posting frequency - adjusted lower to account for white background making it appear brighter
+    widthPercent: 9.0, // adjusted to ensure min 104px width
+    opacity: 0.35, // posting frequency - lowered further as long-form writing migrates to Substack
   },
   {
     id: 'medium',
     name: 'Medium',
     href: 'https://medium.com/@iori73',
     Icon: MediumIcon,
-    widthPercent: 10.5, // adjusted to ensure min 104px width (10.5% × 1024px = 107.52px)
-    opacity: 0.3, // posting frequency
+    widthPercent: 8.0, // adjusted to ensure min 104px width
+    opacity: 0.25, // posting frequency
   },
   {
     id: 'linkedin',
     name: 'LinkedIn',
     href: 'https://www.linkedin.com/in/iori-kawano-131a4122a/',
     Icon: LinkedInIcon,
-    widthPercent: 25.5, // usage frequency - adjusted to ensure min 104px width
-    opacity: 0.2, // posting frequency
+    widthPercent: 21.0, // usage frequency - adjusted to ensure min 104px width
+    opacity: 0.15, // posting frequency
   },
   {
     id: 'behance',
     name: 'Behance',
     href: 'https://www.behance.net/835e5127',
     Icon: BehanceIcon,
-    widthPercent: 10.5, // adjusted to ensure min 104px width (10.5% × 1024px = 107.52px)
+    widthPercent: 8.0, // adjusted to ensure min 104px width
     opacity: 0.05, // posting frequency (lowest)
   },
 ];
@@ -269,66 +289,57 @@ export default function Footer() {
           </div>
 
           {/* Mobile treemap layout - 2 rows */}
+          {/* Row split is index-based (first 4 / remaining 3); row totals are computed
+              from PLATFORM_DATA below rather than hardcoded, so adding/removing a
+              platform can't silently desync the normalization math. */}
           <div className="relative md:hidden h-full">
-            {/* Row 1: X (29.5%), GitHub (13.0%), note (11.0%) = 53.5% */}
-            <div className="flex h-1/2">
-              {PLATFORM_DATA.slice(0, 3).map((platform) => {
-                const IconComponent = platform.Icon;
-                // Calculate icon color with smooth gradient from #FFFFFF to #151515 based on posting frequency
-                const iconColor = getIconColor(platform.opacity);
+            {(() => {
+              const row1 = PLATFORM_DATA.slice(0, 4);
+              const row2 = PLATFORM_DATA.slice(4);
+              const row1Total = row1.reduce((sum, p) => sum + p.widthPercent, 0);
+              const row2Total = row2.reduce((sum, p) => sum + p.widthPercent, 0);
 
-                return (
-                  <Link
-                    key={platform.id}
-                    href={platform.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="h-full flex items-end justify-start p-3 md:p-6 transition-opacity active:opacity-60"
-                    style={{
-                      width: `${(platform.widthPercent / 53.5) * 100}%`, // Normalize to row total
-                      backgroundColor: `rgba(0, 0, 0, ${platform.opacity})`,
-                      color: iconColor,
-                    }}
-                    aria-label={platform.name}
-                  >
-                    {/* Icon - 40x40px with currentColor fill for flexible color control, opacity 100% */}
-                    <div className="w-10 h-10 flex items-center justify-center" style={{ flexShrink: 0, opacity: 1 }}>
-                      <IconComponent />
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
+              const renderRow = (row: typeof PLATFORM_DATA, rowTotal: number) => (
+                <div className="flex h-1/2">
+                  {row.map((platform) => {
+                    const IconComponent = platform.Icon;
+                    // Calculate icon color with smooth gradient from #FFFFFF to #151515 based on posting frequency
+                    const iconColor = getIconColor(platform.opacity);
 
-            {/* Row 2: Medium (10.5%), LinkedIn (25.5%), Behance (10.5%) = 46.5% */}
-            <div className="flex h-1/2">
-              {PLATFORM_DATA.slice(3, 6).map((platform) => {
-                const IconComponent = platform.Icon;
-                // Calculate icon color with smooth gradient from #FFFFFF to #151515 based on posting frequency
-                const iconColor = getIconColor(platform.opacity);
+                    return (
+                      <Link
+                        key={platform.id}
+                        href={platform.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="h-full flex items-end justify-start p-3 md:p-6 transition-opacity active:opacity-60"
+                        style={{
+                          width: `${(platform.widthPercent / rowTotal) * 100}%`, // Normalize to row total
+                          backgroundColor: `rgba(0, 0, 0, ${platform.opacity})`,
+                          color: iconColor,
+                        }}
+                        aria-label={platform.name}
+                      >
+                        {/* Icon - 40x40px with currentColor fill for flexible color control, opacity 100% */}
+                        <div
+                          className="w-10 h-10 flex items-center justify-center"
+                          style={{ flexShrink: 0, opacity: 1 }}
+                        >
+                          <IconComponent />
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
+              );
 
-                return (
-                  <Link
-                    key={platform.id}
-                    href={platform.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="h-full flex items-end justify-start p-3 md:p-6 transition-opacity active:opacity-60"
-                    style={{
-                      width: `${(platform.widthPercent / 46.5) * 100}%`, // Normalize to row total
-                      backgroundColor: `rgba(0, 0, 0, ${platform.opacity})`,
-                      color: iconColor,
-                    }}
-                    aria-label={platform.name}
-                  >
-                    {/* Icon - 40x40px with currentColor fill for flexible color control, opacity 100% */}
-                    <div className="w-10 h-10 flex items-center justify-center" style={{ flexShrink: 0, opacity: 1 }}>
-                      <IconComponent />
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
+              return (
+                <>
+                  {renderRow(row1, row1Total)}
+                  {renderRow(row2, row2Total)}
+                </>
+              );
+            })()}
           </div>
         </div>
 
