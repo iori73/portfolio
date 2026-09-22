@@ -229,11 +229,12 @@ export default function Footer() {
         {/* Desktop: Single row (h-[80px]) */}
         {/* Mobile: Two rows (h-[160px]) with proper touch targets */}
         <div className="relative w-full h-[160px] md:h-[120px] mt-2 md:mt-4 overflow-hidden">
-          {/* Background gradient */}
+          {/* Background gradient (2026-09-22: aligned to --surface #EFF1F1, was #EAE9E1 —
+              a hardcoded near-duplicate of the old --surface that had already drifted) */}
           <div
             className="absolute inset-0"
             style={{
-              background: 'linear-gradient(180deg, #EAE9E1 0%, #FFFFFF 100%)',
+              background: 'linear-gradient(180deg, #EFF1F1 0%, #FFFFFF 100%)',
             }}
           />
 
