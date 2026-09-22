@@ -93,27 +93,6 @@ const SubstackIcon = () => (
   </svg>
 );
 
-const BehanceIcon = () => (
-  <svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <g clipPath="url(#clip0_552_17871)">
-      <g clipPath="url(#clip1_552_17871)">
-        <path
-          d="M18.1331 14.9453C18.9955 14.9453 19.7827 15.0221 20.4947 15.1741C21.2067 15.3261 21.8147 15.5757 22.3219 15.9229C22.8291 16.2701 23.2227 16.7309 23.5027 17.3069C23.7827 17.8829 23.9219 18.5933 23.9219 19.4397C23.9219 20.3533 23.7139 21.1149 23.2995 21.7245C22.8851 22.3341 22.2707 22.8333 21.4595 23.2221C22.5763 23.5437 23.4099 24.1069 23.9603 24.9101C24.5107 25.7133 24.7859 26.6829 24.7859 27.8173C24.7859 28.7309 24.6083 29.5229 24.2531 30.1917C23.8979 30.8605 23.4195 31.4061 22.8179 31.8285C22.2163 32.2525 21.5315 32.5645 20.7619 32.7677C19.9875 32.9709 19.1891 33.0733 18.3891 33.0717H9.60352V14.9453H18.1331ZM17.6259 22.2813C18.3363 22.2813 18.9203 22.1117 19.3779 21.7741C19.8355 21.4349 20.0643 20.8861 20.0627 20.1245C20.0627 19.7021 19.9859 19.3549 19.8339 19.0845C19.6819 18.8141 19.4787 18.6013 19.2243 18.4493C18.9699 18.2973 18.6787 18.1917 18.3491 18.1325C18.0099 18.0733 17.6659 18.0429 17.3203 18.0445H13.5907V22.2845L17.6259 22.2813ZM17.8547 29.9725C18.2307 29.9741 18.6051 29.9357 18.9715 29.8589C19.3267 29.7821 19.6403 29.6557 19.9107 29.4781C20.1811 29.3005 20.3971 29.0589 20.5587 28.7549C20.7187 28.4509 20.8003 28.0605 20.8003 27.5869C20.8003 26.6573 20.5379 25.9917 20.0131 25.5949C19.4883 25.1965 18.7939 24.9981 17.9315 24.9981H13.5907V29.9741L17.8547 29.9725ZM29.8003 29.5917C30.3411 30.1165 31.1203 30.3789 32.1363 30.3789C32.8643 30.3789 33.4899 30.1965 34.0147 29.8333C34.5395 29.4701 34.8611 29.0845 34.9795 28.6781H38.1523C37.6451 30.2525 36.8659 31.3773 35.8163 32.0541C34.7667 32.7309 33.4979 33.0701 32.0083 33.0701C30.9763 33.0701 30.0451 32.9053 29.2163 32.5757C28.3875 32.2461 27.6851 31.7757 27.1091 31.1661C26.5331 30.5565 26.0883 29.8301 25.7763 28.9837C25.4643 28.1373 25.3075 27.2061 25.3075 26.1917C25.3075 25.2109 25.4675 24.2973 25.7891 23.4509C26.1107 22.6045 26.5683 21.8733 27.1603 21.2557C27.7523 20.6381 28.4595 20.1517 29.2803 19.7965C30.1011 19.4413 31.0115 19.2637 32.0099 19.2637C33.1267 19.2637 34.0995 19.4797 34.9299 19.9117C35.7587 20.3437 36.4403 20.9229 36.9731 21.6509C37.5059 22.3789 37.8915 23.2077 38.1283 24.1389C38.3651 25.0701 38.4499 26.0429 38.3827 27.0589H28.9139C28.9635 28.2221 29.2595 29.0685 29.8003 29.5917ZM33.8755 22.6877C33.4435 22.2141 32.7875 21.9773 31.9075 21.9773C31.3315 21.9773 30.8531 22.0749 30.4739 22.2685C30.0931 22.4637 29.7891 22.7037 29.5603 22.9917C29.3315 23.2797 29.1715 23.5837 29.0787 23.9053C28.9859 24.2269 28.9299 24.5149 28.9139 24.7677H34.7779C34.6067 23.8557 34.3059 23.1613 33.8755 22.6877ZM28.2963 15.8653H35.6227V17.8973H28.2963V15.8653Z"
-          fill="currentColor"
-        />
-      </g>
-    </g>
-    <defs>
-      <clipPath id="clip0_552_17871">
-        <rect width="40" height="40" fill="white" transform="translate(4 4)" />
-      </clipPath>
-      <clipPath id="clip1_552_17871">
-        <rect width="40" height="40" fill="white" transform="translate(4 4)" />
-      </clipPath>
-    </defs>
-  </svg>
-);
-
 // Platform data with width percentage (usage frequency) and opacity (posting frequency)
 // Icon components use fill: currentColor for flexible color control
 const PLATFORM_DATA = [
@@ -126,19 +105,11 @@ const PLATFORM_DATA = [
     opacity: 1.0, // posting frequency (highest)
   },
   {
-    id: 'substack',
-    name: 'Substack',
-    href: 'https://substack.com/@iori67',
-    Icon: SubstackIcon,
-    widthPercent: 15.0, // usage frequency - newly launched 2026-09, primary home for long-form writing going forward
-    opacity: 0.75, // posting frequency - active launch, second only to X
-  },
-  {
     id: 'github',
     name: 'GitHub',
     href: 'https://github.com/iori73',
     Icon: GitHubIcon,
-    widthPercent: 12.0, // usage frequency - adjusted to ensure min 104px width
+    widthPercent: 13.0, // usage frequency - adjusted to ensure min 104px width
     opacity: 0.55, // posting frequency - adjusted to be visually between X and note
   },
   {
@@ -146,8 +117,8 @@ const PLATFORM_DATA = [
     name: 'note',
     href: 'https://note.com/io_73',
     Icon: NoteIcon,
-    widthPercent: 9.0, // adjusted to ensure min 104px width
-    opacity: 0.35, // posting frequency - lowered further as long-form writing migrates to Substack
+    widthPercent: 10.0, // adjusted to ensure min 104px width
+    opacity: 0.35, // posting frequency - lowered as long-form writing migrates to Substack
   },
   {
     id: 'medium',
@@ -162,25 +133,33 @@ const PLATFORM_DATA = [
     name: 'LinkedIn',
     href: 'https://www.linkedin.com/in/iori-kawano-131a4122a/',
     Icon: LinkedInIcon,
-    widthPercent: 21.0, // usage frequency - adjusted to ensure min 104px width
+    widthPercent: 22.0, // usage frequency - adjusted to ensure min 104px width
     opacity: 0.15, // posting frequency
   },
   {
-    id: 'behance',
-    name: 'Behance',
-    href: 'https://www.behance.net/835e5127',
-    Icon: BehanceIcon,
-    widthPercent: 8.0, // adjusted to ensure min 104px width
-    opacity: 0.05, // posting frequency (lowest)
+    // Replaces Behance (2026-09-22, 河野指示): swapped in place of Behance rather than
+    // added as a 7th platform. New primary home for long-form writing, so sized/weighted
+    // second only to X.
+    id: 'substack',
+    name: 'Substack',
+    href: 'https://substack.com/@iori67',
+    Icon: SubstackIcon,
+    widthPercent: 20.0,
+    opacity: 0.75, // posting frequency - active launch, second only to X
   },
 ];
 
 // Helper function to calculate icon color based on posting frequency
-// Creates a smooth gradient from #FFFFFF (X, opacity 1.0) to #151515 (Behance, opacity 0.05)
+// Creates a smooth gradient from #FFFFFF (highest opacity) to #151515 (lowest opacity),
+// spanning whatever range PLATFORM_DATA actually has so removing/adding a platform
+// can't silently compress the gradient (this happened when Behance, opacity 0.05, was removed).
+const PLATFORM_OPACITIES = PLATFORM_DATA.map((p) => p.opacity);
+const MIN_PLATFORM_OPACITY = Math.min(...PLATFORM_OPACITIES);
+const MAX_PLATFORM_OPACITY = Math.max(...PLATFORM_OPACITIES);
+
 const getIconColor = (opacity: number): string => {
-  // Normalize opacity to 0-1 range (0.05 to 1.0)
-  const minOpacity = 0.05;
-  const maxOpacity = 1.0;
+  const minOpacity = MIN_PLATFORM_OPACITY;
+  const maxOpacity = MAX_PLATFORM_OPACITY;
   const normalized = (opacity - minOpacity) / (maxOpacity - minOpacity);
 
   // Start color: #FFFFFF (white) for highest posting frequency
@@ -290,13 +269,14 @@ export default function Footer() {
           </div>
 
           {/* Mobile treemap layout - 2 rows */}
-          {/* Row split is index-based (first 4 / remaining 3); row totals are computed
-              from PLATFORM_DATA below rather than hardcoded, so adding/removing a
-              platform can't silently desync the normalization math. */}
+          {/* Row split is index-based (first half / remaining half, by count) and row
+              totals are computed from PLATFORM_DATA below rather than hardcoded, so
+              adding/removing a platform can't silently desync the normalization math. */}
           <div className="relative md:hidden h-full">
             {(() => {
-              const row1 = PLATFORM_DATA.slice(0, 4);
-              const row2 = PLATFORM_DATA.slice(4);
+              const splitIndex = Math.ceil(PLATFORM_DATA.length / 2);
+              const row1 = PLATFORM_DATA.slice(0, splitIndex);
+              const row2 = PLATFORM_DATA.slice(splitIndex);
               const row1Total = row1.reduce((sum, p) => sum + p.widthPercent, 0);
               const row2Total = row2.reduce((sum, p) => sum + p.widthPercent, 0);
 
