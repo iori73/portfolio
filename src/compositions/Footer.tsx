@@ -83,13 +83,19 @@ const MediumIcon = () => (
   </svg>
 );
 
-// Source: simple-icons (raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/substack.svg), 24x24 viewBox scaled x2 to match this file's 48x48 convention
+// Source: simple-icons (raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/substack.svg), 24x24 viewBox scaled x2 to match this file's 48x48 convention.
+// 2026-09-23: unlike the other icons here, the source glyph runs edge-to-edge in its
+// own viewBox (no built-in padding), so at the same 40x40 render size it read visibly
+// larger/heavier than X/GitHub/etc. Scaled down + centered in a group to match their
+// effective padding instead of changing the shared svg width/height.
 const SubstackIcon = () => (
   <svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path
-      d="M45.078 16.484H2.92V10.812h42.16v5.672zM2.92 21.624V48L24 36.22 45.08 48V21.624H2.92zM45.08 0H2.92v5.672h42.16V0z"
-      fill="currentColor"
-    />
+    <g transform="translate(6, 6) scale(0.75)">
+      <path
+        d="M45.078 16.484H2.92V10.812h42.16v5.672zM2.92 21.624V48L24 36.22 45.08 48V21.624H2.92zM45.08 0H2.92v5.672h42.16V0z"
+        fill="currentColor"
+      />
+    </g>
   </svg>
 );
 

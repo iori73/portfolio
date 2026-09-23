@@ -64,13 +64,17 @@ export default function Home() {
           })}
         >
           <div className="mb-20">
-            <div className="mb-6" ref={ukiyoeImageRef}>
+            {/* The thumbnail's own cream tone sits close to the page ground, so the
+                edge was hard to read (河野, 2026-09-23) — frame it in surface-muted,
+                same token the tag pills below use, so the boundary reads clearly
+                regardless of what color the artwork itself happens to be. */}
+            <div className="mb-6 p-2 rounded-card bg-surface-muted" ref={ukiyoeImageRef}>
               <Image
                 src={locale === 'jp' ? '/work/ukiyoe/thumbnail-jp.webp' : '/work/ukiyoe/thumbnail-en.webp'}
                 alt="Ukiyoe: Layer by Layer"
                 width={600}
                 height={300}
-                className="w-full object-cover rounded-lg"
+                className="w-full object-cover rounded-media"
               />
             </div>
 
@@ -79,10 +83,10 @@ export default function Home() {
                 {t('projects.ukiyoe.title')}
               </h3>
               <div className="flex gap-2">
-                <span className="font-space-grotesk text-label md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
+                <span className="font-space-grotesk text-label leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
                   UI
                 </span>
-                <span className="font-space-grotesk text-label md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
+                <span className="font-space-grotesk text-label leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
                   Context Engineering
                 </span>
               </div>
@@ -124,10 +128,10 @@ export default function Home() {
                 {t('projects.figmaPlugins.title')}
               </h3>
               <div className="flex gap-2">
-                <span className="font-space-grotesk text-label md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
+                <span className="font-space-grotesk text-label leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
                   Figma Plugin
                 </span>
-                <span className="font-space-grotesk text-label md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
+                <span className="font-space-grotesk text-label leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
                   AI Vibe Coding
                 </span>
               </div>
