@@ -95,88 +95,100 @@ const SubstackIcon = () => (
 
 // Platform data with width percentage (usage frequency) and opacity (posting frequency)
 // Icon components use fill: currentColor for flexible color control
+// widthPercent/opacity below (2026-09-23) are derived from 河野's actual usage
+// description, not estimated: X/note/LinkedIn opened daily (equal tier, ~70/wk
+// combined), GitHub used frequently but passively via Claude Code (not actively
+// opened), Substack every 2-3 days, Medium every 4-5 days. Converted to a
+// relative weekly-frequency score (X=note=LinkedIn=7, GitHub=5, Substack=7/2.5,
+// Medium=7/4.5), then widthPercent = that score's share of 100 (Medium floored
+// to 7 for min touch-target width, rest rescaled to still sum to 100), and
+// opacity = that score min-max normalized to [0.15, 1.0].
+// Note: this makes X/note/LinkedIn's opacity identical (all 1.0, solid black) —
+// an honest result of them being reported as equally daily, not a bug.
 const PLATFORM_DATA = [
   {
     id: 'twitter',
     name: 'X',
     href: 'https://twitter.com/iori73wsy',
     Icon: XIcon,
-    widthPercent: 27.0, // usage frequency - adjusted to ensure min 104px width
-    opacity: 1.0, // posting frequency (highest)
-  },
-  {
-    id: 'github',
-    name: 'GitHub',
-    href: 'https://github.com/iori73',
-    Icon: GitHubIcon,
-    widthPercent: 13.0, // usage frequency - adjusted to ensure min 104px width
-    opacity: 0.55, // posting frequency - adjusted to be visually between X and note
+    widthPercent: 22.6,
+    opacity: 1.0,
   },
   {
     id: 'note',
     name: 'note',
     href: 'https://note.com/io_73',
     Icon: NoteIcon,
-    widthPercent: 10.0, // adjusted to ensure min 104px width
-    opacity: 0.35, // posting frequency - lowered as long-form writing migrates to Substack
-  },
-  {
-    id: 'medium',
-    name: 'Medium',
-    href: 'https://medium.com/@iori73',
-    Icon: MediumIcon,
-    widthPercent: 8.0, // adjusted to ensure min 104px width
-    opacity: 0.25, // posting frequency
+    widthPercent: 22.6,
+    opacity: 1.0,
   },
   {
     id: 'linkedin',
     name: 'LinkedIn',
     href: 'https://www.linkedin.com/in/iori-kawano-131a4122a/',
     Icon: LinkedInIcon,
-    widthPercent: 22.0, // usage frequency - adjusted to ensure min 104px width
-    opacity: 0.15, // posting frequency
+    widthPercent: 22.6,
+    opacity: 1.0,
   },
   {
-    // Replaces Behance (2026-09-22, 河野指示): swapped in place of Behance rather than
-    // added as a 7th platform. New primary home for long-form writing, so sized/weighted
-    // second only to X.
+    id: 'github',
+    name: 'GitHub',
+    href: 'https://github.com/iori73',
+    Icon: GitHubIcon,
+    widthPercent: 16.1,
+    opacity: 0.69,
+  },
+  {
     id: 'substack',
     name: 'Substack',
     href: 'https://substack.com/@iori67',
     Icon: SubstackIcon,
-    widthPercent: 20.0,
-    opacity: 0.75, // posting frequency - active launch, second only to X
+    widthPercent: 9.0,
+    opacity: 0.34,
+  },
+  {
+    id: 'medium',
+    name: 'Medium',
+    href: 'https://medium.com/@iori73',
+    Icon: MediumIcon,
+    widthPercent: 7.0, // floored for min touch-target width; raw share was ~5.1%
+    opacity: 0.15,
   },
 ];
 
-// Helper function to calculate icon color based on posting frequency
-// Creates a smooth gradient from #FFFFFF (highest opacity) to #151515 (lowest opacity),
-// spanning whatever range PLATFORM_DATA actually has so removing/adding a platform
-// can't silently compress the gradient (this happened when Behance, opacity 0.05, was removed).
-const PLATFORM_OPACITIES = PLATFORM_DATA.map((p) => p.opacity);
-const MIN_PLATFORM_OPACITY = Math.min(...PLATFORM_OPACITIES);
-const MAX_PLATFORM_OPACITY = Math.max(...PLATFORM_OPACITIES);
+// Helper to pick a contrast-safe icon color for a block of the given posting-frequency
+// opacity (2026-09-23, replaces a smooth white->dark gradient interpolated purely from
+// `opacity`). That gradient could converge with the block's own background at mid-range
+// opacity — e.g. GitHub at opacity 0.55 rendered an icon color and a composited
+// background only ~23 RGB values apart, making the icon effectively invisible. Instead,
+// composite the block's actual background (black at `opacity` over the footer's #EFF1F1
+// ground) and pick whichever of white/dark ink has higher WCAG contrast against it. The
+// "shade = posting frequency" encoding still lives entirely in the background; the icon
+// glyph itself just needs to stay legible at any opacity.
+const FOOTER_GROUND_CHANNEL = 0xef; // #EFF1F1
+const ICON_DARK = { hex: '#151515', channel: 0x15 };
+
+const srgbToLinear = (c: number): number => {
+  const cs = c / 255;
+  return cs <= 0.04045 ? cs / 12.92 : ((cs + 0.055) / 1.055) ** 2.4;
+};
+
+const grayRelativeLuminance = (channel: number): number => {
+  const lin = srgbToLinear(channel);
+  return 0.2126 * lin + 0.7152 * lin + 0.0722 * lin;
+};
+
+const contrastRatio = (l1: number, l2: number): number => {
+  const [lighter, darker] = l1 >= l2 ? [l1, l2] : [l2, l1];
+  return (lighter + 0.05) / (darker + 0.05);
+};
 
 const getIconColor = (opacity: number): string => {
-  const minOpacity = MIN_PLATFORM_OPACITY;
-  const maxOpacity = MAX_PLATFORM_OPACITY;
-  const normalized = (opacity - minOpacity) / (maxOpacity - minOpacity);
-
-  // Start color: #FFFFFF (white) for highest posting frequency
-  // End color: #151515 (dark gray) for lowest posting frequency
-  const startR = 255;
-  const startG = 255;
-  const startB = 255;
-  const endR = 21;
-  const endG = 21;
-  const endB = 21;
-
-  // Linear interpolation
-  const r = Math.round(startR + (endR - startR) * (1 - normalized));
-  const g = Math.round(startG + (endG - startG) * (1 - normalized));
-  const b = Math.round(startB + (endB - startB) * (1 - normalized));
-
-  return `rgb(${r}, ${g}, ${b})`;
+  const bgChannel = FOOTER_GROUND_CHANNEL * (1 - opacity);
+  const bgLum = grayRelativeLuminance(bgChannel);
+  const whiteContrast = contrastRatio(bgLum, 1);
+  const darkContrast = contrastRatio(bgLum, grayRelativeLuminance(ICON_DARK.channel));
+  return whiteContrast >= darkContrast ? '#FFFFFF' : ICON_DARK.hex;
 };
 
 export default function Footer() {
