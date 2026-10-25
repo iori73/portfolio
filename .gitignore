@@ -61,3 +61,4 @@ public/downloads/*
 # （未承認の写真・管理バー・全景）が入るため、リポジトリには絶対に入れない。
 # 公開するのは public/work/**/ に書き出したトリミング済みの図版だけ。
 .capture/
+.nakahatsu-capture.env
