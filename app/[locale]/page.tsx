@@ -153,27 +153,13 @@ export default function Home() {
         </a>
 
         {/* Project 2 - Nakahatsu Shoten */}
-        <div
+        <a
+          href={workCard.href('nakahatsu')}
           className="block mb-16 cursor-pointer hover:opacity-80"
-          role="link"
-          tabIndex={0}
-          onClick={() => {
-            const rect = nakahatsuImageRef.current?.getBoundingClientRect();
-            if (!rect) return;
-            const imageSrc =
-              locale === 'jp' ? '/work/nakahatsu/thumbnail-jp.webp' : '/work/nakahatsu/thumbnail-en.webp';
-            startTransition({ type: 'image', src: imageSrc }, rect, '/work/nakahatsu');
-          }}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              const rect = nakahatsuImageRef.current?.getBoundingClientRect();
-              if (!rect) return;
-              const imageSrc =
-                locale === 'jp' ? '/work/nakahatsu/thumbnail-jp.webp' : '/work/nakahatsu/thumbnail-en.webp';
-              startTransition({ type: 'image', src: imageSrc }, rect, '/work/nakahatsu');
-            }
-          }}
+          onClick={workCard.onClick('nakahatsu', nakahatsuImageRef, {
+            type: 'image',
+            src: locale === 'jp' ? '/work/nakahatsu/thumbnail-jp.webp' : '/work/nakahatsu/thumbnail-en.webp',
+          })}
         >
           <div className="mb-20">
             <div className="mb-6" ref={nakahatsuImageRef}>
@@ -212,7 +198,7 @@ export default function Home() {
               {t('projects.nakahatsu.description2')}
             </p>
           </div>
-        </div>
+        </a>
 
       </section>
     </div>

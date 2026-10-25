@@ -12,7 +12,7 @@ export const SITE_URL = 'https://iori-kawano.vercel.app';
  * 検索に出ていなかったのは、カードが <a href> でなく sitemap も無かったからで、
  * 意図した制御ではなくたまたまだった。
  */
-export const CARD_WORK_SLUGS = ['ukiyoe', 'figma-plugins'] as const;
+export const CARD_WORK_SLUGS = ['ukiyoe', 'figma-plugins', 'nakahatsu'] as const;
 
 /**
  * sitemap に載せる Work。カードを置くものに加えて、

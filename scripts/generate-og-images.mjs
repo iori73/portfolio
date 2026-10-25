@@ -60,4 +60,5 @@ await defaultCard();
 await fromArtwork('public/work/ukiyoe/thumbnail-en.webp', 'ukiyoe.jpg');
 await onSurface('public/work/figma-plugins/pptx-cover.webp', 'figma-plugins.jpg');
 await fromArtwork('public/work/google_ux_design_certificate_project/01.webp', 'google-ux.jpg');
+await fromArtwork('public/work/nakahatsu/thumbnail-en.webp', 'nakahatsu.jpg');
 console.log('done');
