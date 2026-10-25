@@ -109,8 +109,8 @@ const SECTIONS = [
  * `launched` はクライアントサイトが一般公開されたか。判定はサーバー側（page.tsx）。
  *
  * 公開前提の記述はこの3か所しかなく、いずれもこのフラグで切り替わる:
- *   1. 概要 — 海外からまだ買えないという断り
- *   2. 品質 — Lighthouse を載せない理由（未公開の間はプレビューバー越しに描画される）
+ *   1. 概要 — 海外販売は今回の範囲外という断り
+ *   2. 品質 — 「先方による全体の確認はこれから」の一文
  *   3. 振り返り末尾の「現在のステータス」節そのもの（公開後は節ごと出さない）
  *
  * 増やすときは、必ずこのコメントに追記すること。切り替え漏れは
@@ -318,8 +318,19 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
                 <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('nakahatsu.roleTitle')}
                 </h3>
-                <p className={bodyTextClass}>
+                <p className={`mb-4 ${bodyTextClass}`}>
                   {t('nakahatsu.roleText')}
+                </p>
+                <ul className={`list-disc list-inside space-y-2 mb-4 ${bodyTextClass}`}>
+                  <li>{t('nakahatsu.scope1')}</li>
+                  <li>{t('nakahatsu.scope2')}</li>
+                  <li>{t('nakahatsu.scope3')}</li>
+                  <li>{t('nakahatsu.scope4')}</li>
+                  <li>{t('nakahatsu.scope5')}</li>
+                  <li>{t('nakahatsu.scope6')}</li>
+                </ul>
+                <p className={`text-ink-tertiary ${bodyTextClass}`}>
+                  {t('nakahatsu.scopeNote')}
                 </p>
               </div>
 
@@ -369,6 +380,26 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
                     v1 の忠実な姿ではないことを、中初側セッションの実測で確認したため。 */}
                 <p className={`text-ink-secondary ${bodyTextClass}`}>
                   {t('nakahatsu.twoDirectionsText')}
+                </p>
+              </div>
+
+              {/* 8月以降のデザインの動き（About F 案・天祐の縦書き） */}
+              <div className="mb-10 md:mb-14">
+                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
+                  {t('nakahatsu.aboutTitle')}
+                </h3>
+                <p className={`text-ink-secondary ${bodyTextClass}`}>
+                  {t('nakahatsu.aboutText')}
+                </p>
+              </div>
+
+              {/* おいでまっし: 円から四角へのアニメーション */}
+              <div className="mb-10 md:mb-14">
+                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
+                  {t('nakahatsu.motionTitle')}
+                </h3>
+                <p className={`text-ink-secondary ${bodyTextClass}`}>
+                  {t('nakahatsu.motionText')}
                 </p>
               </div>
 

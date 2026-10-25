@@ -1,5 +1,5 @@
 import NakahatsuCaseStudy from './NakahatsuCaseStudy';
-import { isNakahatsuLaunched, LAUNCH_REVALIDATE_SECONDS } from '@/src/lib/nakahatsuLaunch';
+import { isNakahatsuLaunched } from '@/src/lib/nakahatsuLaunch';
 
 /**
  * このページだけサーバーコンポーネントを1枚かぶせている。
@@ -12,7 +12,9 @@ import { isNakahatsuLaunched, LAUNCH_REVALIDATE_SECONDS } from '@/src/lib/nakaha
  *
  * revalidate があるので、デプロイし直さなくても6時間ごとに判定が更新される。
  */
-export const revalidate = LAUNCH_REVALIDATE_SECONDS;
+// Next.js は revalidate をリテラルでしか読めない。値は nakahatsuLaunch.ts の
+// LAUNCH_REVALIDATE_SECONDS（21600 = 6時間）と揃えること。
+export const revalidate = 21600;
 
 export default async function NakahatsuPage() {
   const launched = await isNakahatsuLaunched();
