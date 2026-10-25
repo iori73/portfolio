@@ -391,6 +391,19 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
                 <p className={`text-ink-secondary ${bodyTextClass}`}>
                   {t('nakahatsu.aboutText')}
                 </p>
+                <figure className="mt-8">
+                  <FullSizeImage
+                    src="/work/nakahatsu/about-tenyu.webp"
+                    alt={t('nakahatsu.captionAbout')}
+                    width={1200}
+                    height={675}
+                    visibleLabel={t('common.viewFull')}
+                    openLabel={`${t('common.viewFull')}: ${t('nakahatsu.captionAbout')}`}
+                  />
+                  <figcaption className={captionClass}>
+                    {t('nakahatsu.captionAbout')}
+                  </figcaption>
+                </figure>
               </div>
 
               {/* おいでまっし: 円から四角へのアニメーション */}
@@ -421,7 +434,7 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
                     src="/work/nakahatsu/bilingual.webp"
                     alt="The same hero in Japanese and in English"
                     width={1200}
-                    height={1572}
+                    height={1636}
                     visibleLabel={t('common.viewFull')}
                     openLabel={`${t('common.viewFull')}: ${t('nakahatsu.captionBilingual')}`}
                   />
