@@ -211,11 +211,14 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
                   {t('nakahatsu.subtitle')}
                 </p>
               </div>
-              <div className="flex-shrink-0 w-full md:w-auto">
-                <CTAButton href={SITE_URL} external className="w-full md:w-auto">
-                  {t('common.goToSite')}
-                </CTAButton>
-              </div>
+              {/* 公開前は nakahatsu.jp が旧 WordPress サイトのままなので、リンクは出さない */}
+              {launched && (
+                <div className="flex-shrink-0 w-full md:w-auto">
+                  <CTAButton href={SITE_URL} external className="w-full md:w-auto">
+                    {t('common.goToSite')}
+                  </CTAButton>
+                </div>
+              )}
             </div>
           </div>
 
@@ -293,7 +296,7 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
                 <figure className="mt-8">
                   <FullSizeImage
                     src="/work/nakahatsu/challenges.webp"
-                    alt="Evidence from the previous site: the payment methods, the missing shipping costs, and the sign-up error"
+                    alt={t('nakahatsu.captionChallenges')}
                     width={1200}
                     height={910}
                     visibleLabel={t('common.viewFull')}
@@ -337,7 +340,7 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
               <figure>
                 <FullSizeImage
                   src="/work/nakahatsu/before-after.webp"
-                  alt="The previous WordPress site and EC-CUBE shop next to the new Shopify storefront"
+                  alt={t('nakahatsu.captionBeforeAfter')}
                   visibleLabel={t('common.viewFull')}
                   openLabel={`${t('common.viewFull')}: ${t('nakahatsu.captionBeforeAfter')}`}
                 />
@@ -432,7 +435,7 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
                 <figure>
                   <FullSizeImage
                     src="/work/nakahatsu/bilingual.webp"
-                    alt="The same hero in Japanese and in English"
+                    alt={t('nakahatsu.captionBilingual')}
                     width={1200}
                     height={1636}
                     visibleLabel={t('common.viewFull')}
@@ -484,10 +487,10 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
                     src="/work/nakahatsu/products.webp"
                     /* 原寸画像より実物のコレクションページのほうが情報量が多いので、
                        ここだけサイトを直接開く。SITE_URL のコメント参照。 */
-                    href={`${SITE_URL}collections/all`}
-                    alt="The product grid on the home page"
-                    visibleLabel={t('common.goToSite')}
-                    openLabel={`${t('common.goToSite')}: ${t('nakahatsu.captionProducts')}`}
+                    href={launched ? `${SITE_URL}collections/all` : undefined}
+                    alt={t('nakahatsu.captionProducts')}
+                    visibleLabel={launched ? t('common.goToSite') : t('common.viewFull')}
+                    openLabel={`${launched ? t('common.goToSite') : t('common.viewFull')}: ${t('nakahatsu.captionProducts')}`}
                   />
                   <figcaption className={captionClass}>
                     {t('nakahatsu.captionProducts')}
@@ -501,7 +504,7 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
                 <figure>
                   <FullSizeImage
                     src="/work/nakahatsu/responsive.webp"
-                    alt="The home page at 1440, 768 and 390 pixels wide"
+                    alt={t('nakahatsu.captionResponsive')}
                     visibleLabel={t('common.viewFull')}
                     openLabel={`${t('common.viewFull')}: ${t('nakahatsu.captionResponsive')}`}
                   />
