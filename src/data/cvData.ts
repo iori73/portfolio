@@ -548,6 +548,21 @@ export const cvData: CVData = {
   ],
   projects: [
     {
+      // 個人で受託。/cv ではクライアント実名を使わず業界ラベルで書く（実名を出す案件ページは /work/nakahatsu）
+      id: 'project-nakahatsu',
+      title: {
+        en: 'E-commerce Site for a Food Maker (Personal Contract)',
+        jp: '食品メーカーのECサイト制作（個人受託）',
+      },
+      description: {
+        en: 'Taken on personally and handled end to end by one person: proposal, design, Shopify implementation, Japanese/English/French content, and coordination with the client. In progress and not yet public.',
+        jp: '個人で受託し、提案・デザイン・Shopify 実装・日英仏の多言語対応・先方との進行まで 1 人で担当。進行中・未公開。',
+      },
+      period: { en: '2026 - Present', jp: '2026年 - 現在' },
+      technologies: ['Shopify', 'Design System', 'Multilingual'],
+      link: '/work/nakahatsu',
+    },
+    {
       id: 'project-ukiyoe',
       title: {
         en: 'Ukiyoe: Layer by Layer',
