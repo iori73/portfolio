@@ -156,6 +156,7 @@ const ctxFor = async (w, h, mobile = false) => {
   // 英語版（EN サムネ用。日本語の商品名が混ざらないように）
   await shot(c, { path: '/en/collections/all', name: 'sp-shop-en' });
   await shot(c, { path: '/en' + href, name: 'sp-product-en' });
+  await shot(c, { path: '/fr' + href, name: 'sp-product-fr' }); // 3 言語の並び（日・英・仏）用
   await c.close();
 }
 await browser.close();
