@@ -1318,4 +1318,15 @@ variables / styles はデザインの統一と作業効率のため（現行サ�
 **v5 からの修正（値のズレ）**: surface #fcfbfc→#EFF1F1、ink-tertiary #6b6b73→#565D61、surface-raised・tab 色を追加。コード（globals.css）を正とした。
 **既知の制約**: Figma に Switzer / Helvetica Neue が無いので EN の text style は SF Pro で代用。書体名は Typography の `family/*` 文字列変数に持たせてある。
 
-**次**: 現行サイトのページを Site — JP / Site — EN に再現する（方法と順番は河野さんに確認中）。
+**方針（2026-10-26 河野さん確定）**: 再現は「B: コードから組み立て、変数・スタイルに紐づける」。順番は JP の Home（PC → SP）から。
+参照するコードは `worktree-nakahatsu-case-study-v2`（中初カードがあるのはこちら。このブランチは main 起点）。dev サーバー `localhost:3007` で実測した。
+
+**Site — JP「Home — PC」完成（node 9:9、1280×3770。実機は 3767）**
+- コンポーネント（Components ページ）: Tag / Work Card（JP 文言スタイル。EN 版は未）/ Header/PC / Footer/PC
+- 画像: 浮世絵・中初は元 webp を PNG にして取り込み、プラグインのカード束は実画面を 2x で撮影して取り込み
+- 文言は messages/jp.json と文字数・全文で照合済み（11か所一致）
+- 実機との差: 見出しの書体（Switzer→SF Pro の代用）、高さ +3px、ヘッダーの緑ドットはホバー/アクティブ時のみ表示のため非表示にしてある
+
+**学び**: ① 変数に紐づけたペイントの `opacity` はインスタンスに伝わらない → 透明度つきの色は「アルファ付きの色変数」にする（Color: `tint/ink-*`, `surface/page-glass`）。② Components/Home のフレームには Typography・Layout を Desktop モードに明示指定しないと Mobile のサイズで描かれる。③ Playwright の保存先はワークツリー内の `.playwright-mcp/` のみ許可。
+
+**次**: Home の SP（モバイル）→ About / CV / Blog / Experiment / Podcast Notes / Work 詳細 → EN 版。
