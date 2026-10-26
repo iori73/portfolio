@@ -67,7 +67,7 @@ function FullSizeImage({
          一覧で5つとも同じ名前になり、どれがどの図版か区別できない。図版ごとの名前を
          渡す。頭は可視ラベルと同じ語で始めてある（WCAG 2.5.3 Label in Name）。 */
       aria-label={openLabel}
-      className="group relative block w-full overflow-hidden rounded-lg"
+      className="group relative block w-full overflow-hidden rounded-media"
     >
       <Image src={src} alt={alt} width={width} height={height} className="w-full h-auto" />
       <span className="pointer-events-none absolute bottom-2 right-3 font-space-grotesk text-body-sm text-ink-tertiary opacity-0 transition-opacity group-hover:opacity-100">
@@ -87,7 +87,7 @@ function ColorStop({ hex, label }: { hex: string; label: string }) {
     <div className="flex items-center gap-3">
       <span
         aria-hidden="true"
-        className="h-9 w-9 flex-shrink-0 rounded-full ring-1 ring-black/10"
+        className="h-9 w-9 flex-shrink-0 rounded-full ring-1 ring-line-section"
         style={{ backgroundColor: hex }}
       />
       <div className="min-w-0">
@@ -180,7 +180,7 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
           一致している必要がある（外すと FLIP の着地がズレる）。 */}
       <section className="mb-0 md:mb-12 full-bleed">
         <div className="w-full">
-          <div className="w-full aspect-[8/5] bg-[#F5F5F7] overflow-hidden relative">
+          <div className="w-full aspect-[8/5] bg-surface-muted overflow-hidden relative">
             <Image
               key={language}
               src={language === 'jp' ? '/work/nakahatsu/thumbnail-jp.webp' : '/work/nakahatsu/thumbnail-en.webp'}
@@ -211,14 +211,19 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
                   {t('nakahatsu.subtitle')}
                 </p>
               </div>
-              {/* 公開前は nakahatsu.jp が旧 WordPress サイトのままなので、リンクは出さない */}
-              {launched && (
-                <div className="flex-shrink-0 w-full md:w-auto">
+              {/* 公開前は nakahatsu.jp が旧 WordPress サイトのままなので、リンクは出さない。
+                  ボタンの代わりに状態を出して、他の Work と見出しまわりの並びをそろえる。 */}
+              <div className="flex-shrink-0 w-full md:w-auto">
+                {launched ? (
                   <CTAButton href={SITE_URL} external className="w-full md:w-auto">
                     {t('common.goToSite')}
                   </CTAButton>
-                </div>
-              )}
+                ) : (
+                  <span className="inline-block font-space-grotesk text-label leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
+                    {t('nakahatsu.statusBadge')}
+                  </span>
+                )}
+              </div>
             </div>
           </div>
 
@@ -244,7 +249,7 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
                 {t('common.type')}
               </span>
               <p className="text-body-lg tracking-[0.2px]">
-                {t('common.clientWork')}
+                {t('nakahatsu.typeValue')}
               </p>
             </div>
             <div>
@@ -469,15 +474,15 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
                   {t('nakahatsu.buildText')}
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 mb-6">
-                  <div className="p-6 rounded-lg bg-surface-muted">
+                  <div className="p-5 md:p-6 rounded-xl bg-surface-muted">
                     <p className="text-title-sm font-space-grotesk font-semibold text-ink mb-2">23</p>
                     <p className="text-body-sm text-ink-tertiary">{t('nakahatsu.stat1')}</p>
                   </div>
-                  <div className="p-6 rounded-lg bg-surface-muted">
+                  <div className="p-5 md:p-6 rounded-xl bg-surface-muted">
                     <p className="text-title-sm font-space-grotesk font-semibold text-ink mb-2">12</p>
                     <p className="text-body-sm text-ink-tertiary">{t('nakahatsu.stat2')}</p>
                   </div>
-                  <div className="p-6 rounded-lg bg-surface-muted">
+                  <div className="p-5 md:p-6 rounded-xl bg-surface-muted">
                     <p className="text-title-sm font-space-grotesk font-semibold text-ink mb-2">10</p>
                     <p className="text-body-sm text-ink-tertiary">{t('nakahatsu.stat3')}</p>
                   </div>
@@ -577,7 +582,7 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
 
               {/* 参考文献。「市場の前提」で触れた同業10サイトを、本の巻末注のように
                   ページの最後にまとめる。本文の流れを切らずに出典を示すため。 */}
-              <div className="mt-14 md:mt-20 border-t border-black/10 pt-8">
+              <div className="mt-14 md:mt-20 border-t border-line-section pt-8">
                 <h3 className={`text-title-sm mb-2 ${getHeadingFontClass()}`}>
                   {t('nakahatsu.referencesTitle')}
                 </h3>

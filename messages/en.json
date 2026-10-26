@@ -60,8 +60,8 @@
       "description1": "Moving a 130-year-old brewery off two split systems and onto one Shopify storefront in three languages",
       "description2": "The shop could not take credit cards. Proposal, design in Figma, a design system, and a custom Shopify theme in Japanese, English and French, taken on personally and handled by one person.",
       "timeline": "Mar 2026 - Present",
-      "skills": "UX Research, UI Design, Design System, Shopify Development, Multilingual (JA/EN/FR), Client Coordination",
-      "deliverables": "Proposal, Shopify Theme, Design System, Full-site UI Design"
+      "skills": "UI Design, Shopify",
+      "deliverables": "Shopify Theme"
     }
   },
   "about": {
@@ -442,7 +442,7 @@
   },
   "nakahatsu": {
     "title": "Nakahatsu Shoten Website",
-    "subtitle": "A 130-year-old soy sauce and miso maker in Kanazawa, rebuilt as one Shopify storefront in Japanese, English and French. I took the project on personally and carried it from proposal to implementation.",
+    "subtitle": "A 130-year-old soy sauce maker's Shopify store, in Japanese, English and French",
     "overviewText1": "Nakahatsu Shoten has been brewing soy sauce and miso in Kanazawa since 1896. Online, the business ran two disconnected systems: a WordPress site that told the company story, and an EC-CUBE shop that sold the products. The two had different designs and different navigation, and everything had to be maintained twice.",
     "overviewText2": "The shop was the bigger problem: it could not take credit cards. I wrote the proposal, redesigned the site, and rebuilt it on Shopify as one storefront that reads in Japanese, English and French. Selling to overseas customers is not part of the current scope, so this phase is a domestic shop with three display languages.",
     "overviewText2Live": "The shop was the bigger problem: it could not take credit cards. I wrote the proposal, redesigned the site, and rebuilt it on Shopify as one storefront that reads in Japanese, English and French.",
@@ -504,6 +504,8 @@
     "referencesNote": "The ten businesses behind the market note above. Surveyed in March 2026; all are the companies' own public websites.",
     "swatchBrand": "Enji, up to the cart (brand)",
     "swatchCheckout": "Blue, checkout onward (recognition)",
-    "captionAbout": "The About page at 1440 pixels, Japanese. Two blocks sit side by side, miso on the left and soy sauce on the right. Each is a photograph with the body text running vertically over it and a vertical heading to its right."
+    "captionAbout": "The About page at 1440 pixels, Japanese. Two blocks sit side by side, miso on the left and soy sauce on the right. Each is a photograph with the body text running vertically over it and a vertical heading to its right.",
+    "statusBadge": "In progress, not yet public",
+    "typeValue": "Personal contract"
   }
 }
