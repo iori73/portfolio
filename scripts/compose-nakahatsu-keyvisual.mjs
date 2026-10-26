@@ -5,7 +5,7 @@
  *   node scripts/capture-nakahatsu-screens.mjs
  *   node scripts/compose-nakahatsu-keyvisual.mjs
  *
- * 出力: public/work/nakahatsu/thumbnail-{en,jp}.webp（2000x1250 = 8:5）
+ * 出力: public/work/nakahatsu/thumbnail-{en,jp}.webp（4000x2500 = 8:5。CSS 上は 2000x1250 を 2 倍で撮る）
  *   カードとヒーローの両方に同じ画像を使う（比率は WorkCard / TransitionOverlay と同じ 8:5）。
  *
  * 組み方の理由（docs/design/nakahatsu-keyvisual-rationale.md）:
@@ -88,11 +88,15 @@ const jobs = [
 ];
 
 const browser = await chromium.launch();
-const page = await (await browser.newContext({ viewport: { width: W, height: H }, deviceScaleFactor: 1 })).newPage();
+// 2 倍の解像度で撮る（出力 4000x2500）。1 倍だと、PC・SP の画面の文字がぼやける（河野さんの指摘 2026-10-26）
+const DSF = 2;
+const page = await (await browser.newContext({ viewport: { width: W, height: H }, deviceScaleFactor: DSF })).newPage();
 for (const j of jobs) {
   await page.setContent(html(j.pc, await spScreen(j.sp)), { waitUntil: 'load' });
   const png = await page.screenshot({ type: 'png' });
-  await sharp(png).webp({ quality: 88 }).toFile(OUT + j.out);
-  console.log(j.out.padEnd(22), `${W}x${H}`, 'from', j.pc, '+', j.sp);
+  await sharp(png).webp({ quality: 86 }).toFile(OUT + j.out);
+  // Figma 用（WebP は Figma で描画されないため JPEG。リポジトリには入れない）
+  await sharp(png).jpeg({ quality: 92 }).toFile(KS + j.out.replace('.webp', '.figma.jpg'));
+  console.log(j.out.padEnd(22), `${W * DSF}x${H * DSF}`, 'from', j.pc, '+', j.sp);
 }
 await browser.close();
