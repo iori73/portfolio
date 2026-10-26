@@ -1301,3 +1301,21 @@ headed にすると通る。実機で4パターン総当たりして確認済み
 移転完了後に `scripts/scrape-figma-stats.mjs` の `TARGETS` に追加する。
 それまでは `scripts/fetch-figma-stats.mjs`（手動ヘルパー）で維持。
 
+
+---
+
+## 2026-10-26: Figma portfolio_v6 — 土台（variables / styles / ページ構成）
+
+ファイル: https://www.figma.com/design/r9AUm9XA7iTNGCdpVAQW7U/ （fileKey `r9AUm9XA7iTNGCdpVAQW7U`）
+目的: 現行サイトを Figma に再現し、河野さんが Figma 上で直した細かい指摘を Claude が読んでサイトに反映する。
+variables / styles はデザインの統一と作業効率のため（現行サイトに崩れ・質の低い部分があるため、再現しながら直す前提）。
+
+**作ったもの（土台のみ。サイトのフレームはまだ無い）**
+- Variables 5コレクション・104個: Primitives（生の値・非公開）→ Color（意味付け・alias）、Layout / Typography（Mobile・Desktop の2モード）、Motion。全変数にスコープと WEB code syntax（Primitives は非公開のため code syntax なし）
+- Text styles 18（display〜caption、EN/JP。fontSize は Typography 変数にバインド）、Effect styles 3（elevation-1〜3）
+- ページ: Cover / Getting Started / Foundations / Components / Site — JP / Site — EN / Sandbox / Archive / Notes（`---` は区切り）
+
+**v5 からの修正（値のズレ）**: surface #fcfbfc→#EFF1F1、ink-tertiary #6b6b73→#565D61、surface-raised・tab 色を追加。コード（globals.css）を正とした。
+**既知の制約**: Figma に Switzer / Helvetica Neue が無いので EN の text style は SF Pro で代用。書体名は Typography の `family/*` 文字列変数に持たせてある。
+
+**次**: 現行サイトのページを Site — JP / Site — EN に再現する（方法と順番は河野さんに確認中）。
