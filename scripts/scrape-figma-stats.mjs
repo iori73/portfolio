@@ -1,4 +1,4 @@
-// Automated weekly stats scraper (see .github/workflows/update-figma-stats.yml).
+// Automated daily stats scraper (see .github/workflows/update-figma-stats.yml).
 //
 // A plain HTTP fetch can't do this — Figma Community blocks non-browser
 // requests (see scripts/fetch-figma-stats.mjs). A *headless* browser gets
@@ -22,17 +22,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const STATS_PATH = join(__dirname, '..', 'components', 'work', 'figma-plugins', 'pluginStats.json');
 
 // pluginData.ts id -> where to find it on Figma Community.
-//
-// perfect-markdown is deliberately NOT listed here yet. It currently lives on
-// @iorikawano2, but is slated to move to @io_73 — rather than point at an
-// account it isn't on yet (which would fail this script, loudly, on every
-// single scheduled run until the move happens), it stays manually maintained
-// in pluginStats.json in the meantime. Once the plugin has actually moved to
-// @io_73, add it back here with its resourceId (re-verify the id — a
-// re-publish under the new account could assign a new one; a plain ownership
-// transfer should not).
 const TARGETS = {
   'pptx-to-figma': { profile: 'https://www.figma.com/@io_73', resourceId: '1579722656902401183' },
+  'perfect-markdown': { profile: 'https://www.figma.com/@iorikawano2', resourceId: '1594023679858160179' },
   'bulk-screenshot-importer': { profile: 'https://www.figma.com/@io_73', resourceId: '1609935194251849962' },
   'pinterest-to-figma': { profile: 'https://www.figma.com/@io_73', resourceId: '1678794201557473584' },
 };
