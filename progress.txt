@@ -1335,4 +1335,12 @@ variables / styles はデザインの統一と作業効率のため（現行サ�
 - 画像の高さは `lockAspectRatio()`（1088:680）で解決。インスタンス内の resize / layoutMode 上書きは効かなかった。
 - 学びは lessons.md に記録済み。
 
-**次**: About / CV / Blog / Experiment / Podcast Notes / Work 詳細（PC・SP）→ EN 版。
+**About / CV（JP）完成（2026-10-26）**: Site — JP ページに About — PC / About — SP / CV — PC / CV — SP。
+- About: 写真・見出し・本文・ボタン・「興味・関心」・ドラッグのヒント・相関図（サイトの SVG を取り込み。PC/SP で別々に取得。**円弧上の5つの文字は SVG の textPath のため未取り込み**）。
+- CV: 描画された DOM から構造化データ（職歴・学歴・スキル・プロジェクト）を作って組み立て。高さ PC 5169（実機 5147）/ SP 6452（実機 6468）。
+- 追加コンポーネント: Button/Primary, Drag Hint。Header/PC にタブ別のドット（Dot/experiment|about|cv|blog、通常は不透明度0、アクティブ時に 100%）。
+- 追加スタイル: meta / sub-label / detail/jp / section-label / micro / button/jp（と sp/ 版。sp/button/jp は 19px）。
+- 学び: 非表示にした子はインスタンスから出せない／位置も変えられない → 不透明度0で全部置いておく。
+- 河野さんの提案（フッター凡例のラベルを「幅 = 使用頻度」「濃さ = 投稿頻度」に）は Figma の Footer/SP のインスタンスに入っている。コンポーネントと サイトのコードには未反映（確認待ち）。
+
+**次**: Blog / Experiment / Podcast Notes / Work 詳細5本（PC・SP）→ EN 版。Work 詳細は非常に長い（Nakahatsu だけで PC 9995px）ので、進め方を河野さんに確認する。
