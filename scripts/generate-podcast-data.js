@@ -93,6 +93,14 @@ async function fetchAllPages() {
   }
 
   console.log(`Fetched ${pages.length} pages from Notion`);
+  if (pages.length === 0) {
+    // 0件のまま進むと UMAP が不可解なエラーで落ち、原因が埋もれる（2026-10 に8週間気づけなかった）
+    console.error(
+      'No pages found. The Notion integration likely lost access to the podcast DB ' +
+        '(Notion DB → ••• → Connections → add the integration), or the data source ID changed.'
+    );
+    process.exit(1);
+  }
   return pages;
 }
 
