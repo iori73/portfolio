@@ -1329,4 +1329,10 @@ variables / styles はデザインの統一と作業効率のため（現行サ�
 
 **学び**: ① 変数に紐づけたペイントの `opacity` はインスタンスに伝わらない → 透明度つきの色は「アルファ付きの色変数」にする（Color: `tint/ink-*`, `surface/page-glass`）。② Components/Home のフレームには Typography・Layout を Desktop モードに明示指定しないと Mobile のサイズで描かれる。③ Playwright の保存先はワークツリー内の `.playwright-mcp/` のみ許可。
 
-**次**: Home の SP（モバイル）→ About / CV / Blog / Experiment / Podcast Notes / Work 詳細 → EN 版。
+**Site — JP「Home — SP」完成（2026-10-26、node 12:165、375×2671。実機は 2670）**
+- コンポーネント追加: Header/SP, Footer/SP, Work Card/SP（Work Card は Work Card/PC に改名）
+- **テキストスタイルを PC 用 / SP 用に分割（河野さんの指摘対応）**: 以前は Typography 変数（Mobile/Desktop）に紐づけていて、設定画面が「26」と出るのに描画は 32px で、実機と違って見えた。今は `title-lg/jp`（PC, 32px）と `sp/title-lg/jp`（SP, 26px）が px を直接持つ。説明欄に「PC 32px / SP 26px」。変数 `size/*` は参照用。
+- 画像の高さは `lockAspectRatio()`（1088:680）で解決。インスタンス内の resize / layoutMode 上書きは効かなかった。
+- 学びは lessons.md に記録済み。
+
+**次**: About / CV / Blog / Experiment / Podcast Notes / Work 詳細（PC・SP）→ EN 版。
