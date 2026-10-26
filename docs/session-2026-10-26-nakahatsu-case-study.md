@@ -75,3 +75,8 @@ pnpm exec next dev -p 3007 -H localhost
 - docs/nakahatsu-figures.md に旧サイトの商品価格や「オーナーの肖像」「Instagram 由来」の記述がある（低リスク。必要なら削る）。
 - 未確認の事実: 契約の署名版の内容（個人名義・1人体制・海外販売は対象外）。
 - 未監査: コントラスト比・キーボード/スクリーンリーダー・FR の内容。
+
+## 追記（2026-10-26 午後）判断事項の下ごしらえ
+- 契約書: リポジトリ内の2通はどちらも署名欄が空のドラフト。署名版は GMOサイン側。第7条3項・個人名義（中初商店 対 河野個人）はドラフトで確認。条文は日英表示のみ（FR・海外販売の記載なし）。
+- 公開後の自動更新: `scripts/nakahatsu-launch-watch.sh`（公開を検知 → 本番から撮り直し → ローカル commit → 通知。push しない）。launchd の plist は `~/Desktop/nakahatsu-portfolio-preview/` に置いただけで、未導入。
+- 河野さん向けの1枚: `~/Desktop/nakahatsu-portfolio-preview/00-次にやること.md`（先方への確認文面つき）。
