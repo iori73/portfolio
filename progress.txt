@@ -1311,3 +1311,7 @@ headed にすると通る。実機で4パターン総当たりして確認済み
 - perfect-markdown も自動取得の対象に追加（公開先は @iorikawano2 のまま）。4 本すべて自動化。
 - 実測値で更新: PPTX 15.3k→17.9k / ♡148→187、Perfect Markdown 707→1.1k / ♡13→19、
   Bulk Screenshot 61→71、Pinterest 5→83 / ♡0→2。
+- 追加（同日）: data-freshness-watchdog.yml（毎日、最後の成功が古ければ Issue 自動作成・回復で自動クローズ）。
+  update-podcast-data.yml も同じ直 push 問題があったので PR 経由に変更。
+- 未解決: podcast パイプラインは 9/27 から毎週失敗（"Not enough data points (0)" = Notion から 0 件取得）。
+  NOTION_API_KEY / NOTION_PODCAST_DB_ID の Secrets かDB共有設定の確認が必要。別件。

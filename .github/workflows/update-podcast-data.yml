@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
 
@@ -31,10 +32,20 @@ jobs:
           NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
           NOTION_PODCAST_DB_ID: ${{ secrets.NOTION_PODCAST_DB_ID }}
 
-      - name: Commit updated data
+      - name: Commit updated data via PR and merge
+        # main is protected (PR required), so a direct push is rejected.
         run: |
+          git diff --quiet public/data/podcast-notes.json && { echo "No data changes."; exit 0; }
+          BRANCH="chore/podcast-data-$(date -u +%Y%m%d)"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
           git add public/data/podcast-notes.json
-          git diff --staged --quiet || git commit -m "chore: update podcast data"
-          git push
+          git commit -m "chore: update podcast data"
+          git push --force origin "$BRANCH"
+          gh pr create --base main --head "$BRANCH" \
+            --title "chore: update podcast data ($(date -u +%Y-%m-%d))" \
+            --body "Automated weekly sync from Notion."
+          gh pr merge "$BRANCH" --squash --delete-branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
