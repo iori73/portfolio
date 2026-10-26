@@ -483,7 +483,7 @@
     "stat2": "Products across 3 collections",
     "stat3": "Shipping zones, 47 prefectures",
     "captionProducts": "Part of the product grid. Twelve products in all, across three collections.",
-    "captionResponsive": "The home page at 1440, 768, and 390 pixels.",
+    "captionResponsive": "The home page at 1440 and 390 pixels, drawn at the same scale. The vertical copy stays in place on both.",
     "checkoutTitle": "Where the brand color stops",
     "checkoutText": "The brand color is enji, a deep crimson. It is one of the Kaga Gosai, the five traditional colors of Kanazawa carried down through Kaga yuzen dyeing and Kutani porcelain, so it is rooted in this place. I applied it to checkout as well at first. Checkout draws its links as underlined text in the accent color, and in crimson they did not read as links, which is a risk on the last screen before a purchase completes. So the accent splits: crimson up to the cart, where the job is brand, and blue from checkout onward, where the job is being understood. Branding trades off against conversion, and it is better to draw that line on purpose than to let it fall wherever.",
     "qualityTitle": "Quality",
@@ -504,8 +504,9 @@
     "referencesNote": "The ten businesses behind the market note above. Surveyed in March 2026; all are the companies' own public websites.",
     "swatchBrand": "Enji, up to the cart (brand)",
     "swatchCheckout": "Blue, checkout onward (recognition)",
-    "captionAbout": "The About page at 1440 pixels, Japanese. Two blocks sit side by side, miso on the left and soy sauce on the right. Each is a photograph with the body text running vertically over it and a vertical heading to its right.",
+    "captionAbout": "The About page at 1440 pixels, Japanese: the miso block. The body text runs vertically over a photograph, and the heading stands vertically to its right.",
     "statusBadge": "In progress, not yet public",
-    "typeValue": "Personal contract"
+    "typeValue": "Personal contract",
+    "heroAlt": "The new Nakahatsu Shoten site on a desktop and a phone: the home page hero, and a product page."
   }
 }

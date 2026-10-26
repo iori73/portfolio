@@ -196,6 +196,7 @@ async function capture() {
     const limit = Math.min(HOME_SAFE_MAX_CSS, band ? band - 24 : HOME_SAFE_MAX_CSS);
     console.log(`home ${lang} 1440: 写真の帯 ${band && Math.round(band)}css → 切り出し上限 ${Math.round(limit)}css`);
     await page.screenshot({ path: RAW + `hero-${lang}-1440.png` }); // 1440x900（thumbnail / bilingual 用）
+    if (lang === 'en') await stitch(page, Math.min(limit, 1474), 2, 900, 'home-en-1440-top.png'); // before-after（EN）の After 用
     if (lang === 'ja') {
       await stitch(page, Math.min(limit, 1474), 2, 900, 'home-ja-1440-top.png'); // before-after の After 用
       // 商品グリッド（見出し + 2 行）
@@ -272,7 +273,11 @@ const svgText = (text, w, size, weight, fill) => Buffer.from(
   `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${size + 10}"><text x="0" y="${size}" font-family="Hiragino Sans, Noto Sans JP, Helvetica Neue, Helvetica, Arial, sans-serif" font-size="${size}" font-weight="${weight}" letter-spacing="0.3" fill="${fill}">${text}</text></svg>`);
 const label = (t, w, s = 26) => svgText(t, w, s, 500, INK);
 const sublabel = (t, w, s = 20) => svgText(t, w, s, 400, INK_MUTED);
-const canvas = (w, h) => sharp({ create: { width: w, height: h, channels: 3, background: BG } });
+const canvas = (w, h) => sharp({ create: { width: w, height: h, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } });
+// 角を丸める（rounded-media = 8px 相当。1200 幅の図では 10px）
+const round = (buf, w, h, r = 10) => sharp(buf)
+  .composite([{ input: Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><rect width="${w}" height="${h}" rx="${r}" ry="${r}"/></svg>`), blend: 'dest-in' }])
+  .png().toBuffer();
 async function write(name, pipeline) {
   await pipeline.webp({ quality: 82 }).toFile(OUT + name);
   const m = await sharp(OUT + name).metadata();
@@ -295,14 +300,14 @@ async function compose() {
     const ec = await panelAbs(OLD_DIR + 'shop-top-desktop.png', { w: 1440, h: 1440 / asp }, Math.round(colW), Math.round(leftH));
     const nowH = 1440 / (colW / panelH);
     assertSafe(nowH, 'before-after / after');
-    const now = await panel('home-ja-1440-top.png', { w: 1440, h: nowH }, Math.round(colW), Math.round(panelH));
     const rx = Math.round(PAD + colW + GAP);
     // 説明文は本文とキャプションに任せる。画像には、言語別の短いラベルだけ。
     for (const [lang, before, after] of [['en', 'Before', 'After'], ['jp', 'リニューアル前', 'リニューアル後']]) {
+      const now = await round(await panel(`home-${lang === 'jp' ? 'ja' : 'en'}-1440-top.png`, { w: 1440, h: nowH }, Math.round(colW), Math.round(panelH)), Math.round(colW), Math.round(panelH));
       await write(`before-after-${lang}.webp`, canvas(W, H).composite([
         { input: label(before, colW), left: PAD, top: PAD },
-        { input: wp, left: PAD, top: PAD + LABEL_H },
-        { input: ec, left: PAD, top: Math.round(PAD + LABEL_H + leftH + 14) },
+        { input: await round(wp, Math.round(colW), Math.round(leftH)), left: PAD, top: PAD + LABEL_H },
+        { input: await round(ec, Math.round(colW), Math.round(leftH)), left: PAD, top: Math.round(PAD + LABEL_H + leftH + 14) },
         { input: label(after, colW), left: rx, top: PAD },
         { input: now, left: rx, top: PAD + LABEL_H },
       ]));
@@ -321,24 +326,28 @@ async function compose() {
     const rx = PAD + colW + GAP;
     await write('bilingual.webp', canvas(W, H).composite([
       { input: label('日本語', colW), left: PAD, top },
-      { input: ja, left: PAD, top: top + LABEL_H },
+      { input: await round(ja, colW, panelH), left: PAD, top: top + LABEL_H },
       { input: label('English', colW), left: rx, top },
-      { input: en, left: rx, top: top + LABEL_H },
+      { input: await round(en, colW, panelH), left: rx, top: top + LABEL_H },
     ]));
   }
 
-  // responsive: 1440 / 768 / 390 を同じ縮尺で（ヒーロー + お知らせ）
+  // responsive: 1440 と 390 を同じ縮尺で（ヒーロー + お知らせ）。768 は載せない（3枚だと 390 の画面が小さすぎて読めない）
   {
-    const W = 1200, H = 675, PAD = 32, GAP = 26, LABEL_H = 52;
-    const widths = [1440, 768, 390];
+    const W = 1200, H = 675, PAD = 32, GAP = 48, LABEL_H = 52;
+    const widths = [1440, 390];
     const k = (W - PAD * 2 - GAP * 2) / widths.reduce((a, b) => a + b, 0);
     const parts = [];
     let x = PAD;
     for (const w of widths) {
       const file = `home-ja-${w}-hero-news.png`;
       const m = await sharp(RAW + file).metadata();
-      const outW = Math.round(w * k), outH = Math.round((m.height / D) * k);
-      const img = await sharp(RAW + file).resize(outW, outH, { fit: 'fill' }).png().toBuffer();
+      // 最初の1画面だけ（PC は 900css、SP は 844css）。下端で文字が切れない高さ。縮尺は両方そろえる
+      const cssH = Math.min(m.height / D, w === 390 ? 844 : 900);
+      const outW = Math.round(w * k), outH = Math.round(cssH * k);
+      const img = await round(
+        await sharp(RAW + file).extract({ left: 0, top: 0, width: m.width, height: Math.round(cssH * D) })
+          .resize(outW, outH, { fit: 'fill' }).png().toBuffer(), outW, outH);
       if (outH > H - PAD - LABEL_H - 4) throw new Error(`responsive ${w}: 縦が足りない（${outH}）`);
       parts.push({ input: label(w + 'px', outW, 24), left: Math.round(x), top: PAD + 2 });
       parts.push({ input: img, left: Math.round(x), top: PAD + LABEL_H });
@@ -352,8 +361,16 @@ async function compose() {
     .extract({ left: 0, top: 80 * D, width: 1440 * D, height: 810 * D }).resize(1200, 675));
 
   // about-tenyu（新規）: About の天祐醤油・味噌（PC、JA）
-  await write('about-tenyu.webp', sharp(RAW + 'about-tenyu-ja-1440.png')
-    .extract({ left: 0, top: 80 * D, width: 1440 * D, height: 810 * D }).resize(1200, 675));
+  // 天祐味噌のブロック（写真 + 縦書きの本文 + 縦書きの見出し）を、切れ目なく大きく。
+  {
+    const x = 700, y = 180, w = 700, h = 480; // css px（隣の醤油の見出しを入れない位置から）
+    const outH = 675, outW = Math.round((w / h) * outH);
+    const block = await round(
+      await sharp(RAW + 'about-tenyu-ja-1440.png')
+        .extract({ left: x * D, top: y * D, width: w * D, height: h * D }).resize(outW, outH).png().toBuffer(),
+      outW, outH, 12);
+    await write('about-tenyu.webp', canvas(1200, 675).composite([{ input: block, left: Math.round((1200 - outW) / 2), top: 0 }]));
+  }
 
   // challenges: 旧サイトの画面3枚（支払い方法 / 送料・引き渡し時期 / 会員登録エラー）。
   // 素材は 2026-10-26 に旧図版から切り出した .capture/nakahatsu/challenge-{a,b,c}.png（元は旧サイトの
@@ -366,7 +383,7 @@ async function compose() {
       const cw = Math.round(1136 * s), ch = Math.round(322 * s);
       const x0 = Math.round((W - cw) / 2);
       const top = Math.round((H - (ah + GAP + ch)) / 2);
-      const rs = (f, w, h) => sharp(f).resize(w, h, { fit: 'fill' }).png().toBuffer();
+      const rs = async (f, w, h) => round(await sharp(f).resize(w, h, { fit: 'fill' }).png().toBuffer(), w, h, 14);
       await write('challenges.webp', canvas(W, H).composite([
         { input: await rs(need[0], aw, ah), left: x0, top },
         { input: await rs(need[1], aw, ah), left: x0 + cw - aw, top },

@@ -1475,3 +1475,15 @@ Shopify のパスワードページは Shopify 側テンプレートなので、
 - oidemashi / FR / SP の About 図版は未撮影
 - 契約事実の確認（個人名義の請負・海外販売は範囲外・節数 23 / 商品 12 / 区画 10 / パス 7 / 指摘 43 / 引き継ぎ 13 ページ）は未検証のまま
 - 公開条件: クライアントサイト公開後に本人 GO で push → merge
+
+## 2026-10-26 午後 デザインの統一とキービジュアルの作り直し（河野さんの指摘を受けて）
+- 指摘: トップの3枚のカードの比率・枠が不統一、サムネが画面の切り取り、DS が効いていない。→ 実測で事実。
+- 直したこと:
+  - `WorkCard.tsx` に3枚を集約（8:5、`p-2 rounded-card bg-surface-muted` の枠、`rounded-media`、タグ `text-label`）。figma-plugins のカード・ヒーロー・遷移も 8:5 に。`scripts/verify-work-cards.mjs` で EN/JP × 1440/768/390 全項目が一致。
+  - 中初のサムネ/ヒーローを新作（平らな単色の地に PC と SP の別画面。影・グラデーションなし）。
+  - 図版: 英文の焼き込みを廃止、bilingual・challenges を 16:9 に、responsive は 2 画面に、about-tenyu は味噌ブロックを大きく、地は透明に。before-after は言語別。
+  - ページ本体: 見出しまわりを ukiyoe と同じ並び（公開前はボタンの代わりに「進行中・未公開」）、トークン化（hero 背景、図版の角、情報カード、区切り線、下線色）、focus-visible、hero の alt。
+  - DS に 5.7（Work カード）・5.8（図版・ヒーロー）を追加。5.1 のタグを実装（py-1）に合わせた。
+- 参照: `docs/design/nakahatsu-keyvisual-rationale.md`（Figma の14社の分析。見たのは各社 1〜3 枚の PC のみ）。
+- 検証: `pnpm build` 通過、独立監査（結論を見せずに実施）で major 4 件・minor を指摘 → 対応済み（Figma デッキの拡大、図版の可読性・地、ベゼルを細く、EN の After を英語画面に）。
+- 未了・要判断: Figma の14社のうち好みの会社（共通点で決めた）。figma-plugins のヒーローは 8:5 になり、1440 で 1 画面目にタイトルが入らない（ukiyoe と同じ作り）。キャプション `md:text-body-base`（ukiyoe 由来の旧書き方）は DS の負債として残した。products・about-tenyu の画面は日本語のまま（EN ページにも日本語の画面）。

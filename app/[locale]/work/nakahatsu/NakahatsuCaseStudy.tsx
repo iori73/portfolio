@@ -184,7 +184,7 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
             <Image
               key={language}
               src={language === 'jp' ? '/work/nakahatsu/thumbnail-jp.webp' : '/work/nakahatsu/thumbnail-en.webp'}
-              alt={t('nakahatsu.title')}
+              alt={t('nakahatsu.heroAlt')}
               fill
               sizes="(min-width: 768px) 1280px, 100vw"
               className="object-cover"

@@ -34,10 +34,10 @@ const OUT = join(ROOT, 'public', 'work', 'nakahatsu') + '/';
 const W = 2000;
 const H = 1250;
 const GROUND = '#E8E4DB'; // 平らな単色。ページの地（冷たい灰）と、先方の写真の暗さの両方から離す
-const BEZEL = '#1C1C1C';
+const BEZEL = '#262626'; // 黒に近いが、純黒ではない。縁を細く、ページの静けさを壊さない
 
-const PC = { screenW: 1240, bezel: 16, x: 150 };
-const SP = { screenW: 330, bezel: 14, gap: 90 };
+const PC = { screenW: 1240, bezel: 12, x: 140 }; // 左右の余白が等しくなる位置
+const SP = { screenW: 330, bezel: 11, gap: 90 };
 
 const dataUrl = (f) => 'data:image/png;base64,' + readFileSync(KS + f).toString('base64');
 
