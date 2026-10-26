@@ -255,7 +255,7 @@ Tailwind デフォルトスペーシングを使用。カスタム変数は定�
 ### 5.1 タグ
 
 ```tsx
-<span className="font-space-grotesk text-label px-3 py-1.5 rounded-lg bg-surface-muted text-ink-tertiary">
+<span className="font-space-grotesk text-label leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
   Tag Name
 </span>
 ```

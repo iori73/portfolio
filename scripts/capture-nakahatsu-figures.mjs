@@ -269,7 +269,7 @@ async function panelAbs(path, { x = 0, y = 0, w, h }, outW, outH) {
     .resize(outW, outH, { fit: 'fill' }).png().toBuffer();
 }
 const svgText = (text, w, size, weight, fill) => Buffer.from(
-  `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${size + 10}"><text x="0" y="${size}" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="${size}" font-weight="${weight}" letter-spacing="0.3" fill="${fill}">${text}</text></svg>`);
+  `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${size + 10}"><text x="0" y="${size}" font-family="Hiragino Sans, Noto Sans JP, Helvetica Neue, Helvetica, Arial, sans-serif" font-size="${size}" font-weight="${weight}" letter-spacing="0.3" fill="${fill}">${text}</text></svg>`);
 const label = (t, w, s = 26) => svgText(t, w, s, 500, INK);
 const sublabel = (t, w, s = 20) => svgText(t, w, s, 400, INK_MUTED);
 const canvas = (w, h) => sharp({ create: { width: w, height: h, channels: 3, background: BG } });
@@ -280,11 +280,8 @@ async function write(name, pipeline) {
 }
 
 async function compose() {
-  // thumbnails 2000x1250（8:5。FLIP 遷移が依存するので変えない）
-  for (const lang of ['jp', 'en']) {
-    const src = `hero-${lang === 'jp' ? 'ja' : 'en'}-1440.png`;
-    await write(`thumbnail-${lang}.webp`, sharp(RAW + src).resize(2000, 1250));
-  }
+  // thumbnail-{jp,en}.webp（カードとヒーロー。8:5）は scripts/compose-nakahatsu-keyvisual.mjs が作る。
+  // 先方サイトのファーストビューの切り取りをそのまま出さず、PC と SP の画面を平らな地に置いた表紙にしてある。
 
   // before-after: 旧 WordPress + 旧 EC-CUBE | 新ストア（ヒーロー + お知らせ + About の見出し）
   {
@@ -300,33 +297,33 @@ async function compose() {
     assertSafe(nowH, 'before-after / after');
     const now = await panel('home-ja-1440-top.png', { w: 1440, h: nowH }, Math.round(colW), Math.round(panelH));
     const rx = Math.round(PAD + colW + GAP);
-    await write('before-after.webp', canvas(W, H).composite([
-      { input: label('Before', colW), left: PAD, top: PAD },
-      { input: sublabel('WordPress site + EC-CUBE shop, run as two systems', colW), left: PAD, top: PAD + 34 },
-      { input: wp, left: PAD, top: PAD + LABEL_H },
-      { input: ec, left: PAD, top: Math.round(PAD + LABEL_H + leftH + 14) },
-      { input: label('After', colW), left: rx, top: PAD },
-      { input: sublabel('One Shopify storefront, redesigned and bilingual', colW), left: rx, top: PAD + 34 },
-      { input: now, left: rx, top: PAD + LABEL_H },
-    ]));
+    // 説明文は本文とキャプションに任せる。画像には、言語別の短いラベルだけ。
+    for (const [lang, before, after] of [['en', 'Before', 'After'], ['jp', 'リニューアル前', 'リニューアル後']]) {
+      await write(`before-after-${lang}.webp`, canvas(W, H).composite([
+        { input: label(before, colW), left: PAD, top: PAD },
+        { input: wp, left: PAD, top: PAD + LABEL_H },
+        { input: ec, left: PAD, top: Math.round(PAD + LABEL_H + leftH + 14) },
+        { input: label(after, colW), left: rx, top: PAD },
+        { input: now, left: rx, top: PAD + LABEL_H },
+      ]));
+    }
   }
 
-  // bilingual: 同じヒーローの JA / EN（FR は hero-fr-1440.png に撮ってあるので必要なら足す）
+  // bilingual: 同じヒーローの JA / EN を左右に並べる（16:9。FR は hero-fr-1440.png に撮ってある）
+  // ラベルは各言語の自称。どちらの言語のページでも、そのまま読める。
   {
-    const W = 1200, PAD = 32, GAP = 28, LABEL_H = 62;
-    const colW = W - PAD * 2;
+    const W = 1200, H = 675, PAD = 32, GAP = 28, LABEL_H = 44;
+    const colW = Math.round((W - PAD * 2 - GAP) / 2);
     const panelH = Math.round(900 * (colW / 1440));
-    const H = PAD + (LABEL_H + panelH) * 2 + GAP + PAD;
+    const top = Math.round((H - (LABEL_H + panelH)) / 2);
     const ja = await panel('hero-ja-1440.png', { w: 1440, h: 900 }, colW, panelH);
     const en = await panel('hero-en-1440.png', { w: 1440, h: 900 }, colW, panelH);
-    const row2 = PAD + LABEL_H + panelH + GAP;
+    const rx = PAD + colW + GAP;
     await write('bilingual.webp', canvas(W, H).composite([
-      { input: label('Japanese', colW), left: PAD, top: PAD },
-      { input: sublabel('Tagline and brand name both set vertically', colW), left: PAD, top: PAD + 34 },
-      { input: ja, left: PAD, top: PAD + LABEL_H },
-      { input: label('English', colW), left: PAD, top: row2 },
-      { input: sublabel('The tagline turns horizontal. "Founded in 1896" stays vertical, and so does the brush-lettered name.', colW), left: PAD, top: row2 + 34 },
-      { input: en, left: PAD, top: row2 + LABEL_H },
+      { input: label('日本語', colW), left: PAD, top },
+      { input: ja, left: PAD, top: top + LABEL_H },
+      { input: label('English', colW), left: rx, top },
+      { input: en, left: rx, top: top + LABEL_H },
     ]));
   }
 
@@ -358,7 +355,27 @@ async function compose() {
   await write('about-tenyu.webp', sharp(RAW + 'about-tenyu-ja-1440.png')
     .extract({ left: 0, top: 80 * D, width: 1440 * D, height: 810 * D }).resize(1200, 675));
 
-  // challenges.webp は旧サイトの画面（現行テーマではない）なので、このスクリプトでは触らない。
+  // challenges: 旧サイトの画面3枚（支払い方法 / 送料・引き渡し時期 / 会員登録エラー）。
+  // 素材は 2026-10-26 に旧図版から切り出した .capture/nakahatsu/challenge-{a,b,c}.png（元は旧サイトの
+  // tradelaw / entry のスクリーンショット）。説明の英文は画像に焼き込まない。
+  {
+    const need = ['a', 'b', 'c'].map((k) => RAW + `challenge-${k}.png`);
+    if (need.every((f) => existsSync(f))) {
+      const W = 1200, H = 675, GAP = 24, s = 0.923;
+      const aw = Math.round(548 * s), ah = Math.round(331 * s);
+      const cw = Math.round(1136 * s), ch = Math.round(322 * s);
+      const x0 = Math.round((W - cw) / 2);
+      const top = Math.round((H - (ah + GAP + ch)) / 2);
+      const rs = (f, w, h) => sharp(f).resize(w, h, { fit: 'fill' }).png().toBuffer();
+      await write('challenges.webp', canvas(W, H).composite([
+        { input: await rs(need[0], aw, ah), left: x0, top },
+        { input: await rs(need[1], aw, ah), left: x0 + cw - aw, top },
+        { input: await rs(need[2], cw, ch), left: x0, top: top + ah + GAP },
+      ]));
+    } else {
+      console.log('challenges.webp: 素材（challenge-{a,b,c}.png）が無いので触らない');
+    }
+  }
 }
 
 if (DO_CAPTURE) await capture();

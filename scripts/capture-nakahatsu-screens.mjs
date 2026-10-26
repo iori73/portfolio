@@ -153,6 +153,9 @@ const ctxFor = async (w, h, mobile = false) => {
   const href = await p.evaluate(() => document.querySelector('a[href*="/products/"]')?.getAttribute('href'));
   await p.close();
   await shot(c, { path: href, name: 'sp-product' });
+  // 英語版（EN サムネ用。日本語の商品名が混ざらないように）
+  await shot(c, { path: '/en/collections/all', name: 'sp-shop-en' });
+  await shot(c, { path: '/en' + href, name: 'sp-product-en' });
   await c.close();
 }
 await browser.close();

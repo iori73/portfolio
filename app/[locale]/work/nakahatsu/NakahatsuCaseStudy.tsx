@@ -67,7 +67,7 @@ function FullSizeImage({
          一覧で5つとも同じ名前になり、どれがどの図版か区別できない。図版ごとの名前を
          渡す。頭は可視ラベルと同じ語で始めてある（WCAG 2.5.3 Label in Name）。 */
       aria-label={openLabel}
-      className="group relative block w-full overflow-hidden rounded-media"
+      className="group relative block w-full overflow-hidden rounded-media focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2"
     >
       <Image src={src} alt={alt} width={width} height={height} className="w-full h-auto" />
       <span className="pointer-events-none absolute bottom-2 right-3 font-space-grotesk text-body-sm text-ink-tertiary opacity-0 transition-opacity group-hover:opacity-100">
@@ -184,7 +184,7 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
             <Image
               key={language}
               src={language === 'jp' ? '/work/nakahatsu/thumbnail-jp.webp' : '/work/nakahatsu/thumbnail-en.webp'}
-              alt="Nakahatsu Shoten Website"
+              alt={t('nakahatsu.title')}
               fill
               sizes="(min-width: 768px) 1280px, 100vw"
               className="object-cover"
@@ -296,14 +296,13 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
                   <li>{t('nakahatsu.challenge5')}</li>
                 </ul>
                 {/* 箇条書きだけだと主張の裏付けがないため、旧サイトからの証拠を添える。
-                    パネル内は日本語のサイトのスクショなので日本語のまま。
-                    16:9 ではなく 1200x910。パネル3段構成の実寸に合わせている。 */}
+                    パネル内は旧サイト（日本語）の画面なので日本語のまま。説明の文は画像に焼き込まない。 */}
                 <figure className="mt-8">
                   <FullSizeImage
                     src="/work/nakahatsu/challenges.webp"
                     alt={t('nakahatsu.captionChallenges')}
                     width={1200}
-                    height={910}
+                    height={675}
                     visibleLabel={t('common.viewFull')}
                     openLabel={`${t('common.viewFull')}: ${t('nakahatsu.captionChallenges')}`}
                   />
@@ -344,7 +343,7 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
 
               <figure>
                 <FullSizeImage
-                  src="/work/nakahatsu/before-after.webp"
+                  src={`/work/nakahatsu/before-after-${language === 'jp' ? 'jp' : 'en'}.webp`}
                   alt={t('nakahatsu.captionBeforeAfter')}
                   visibleLabel={t('common.viewFull')}
                   openLabel={`${t('common.viewFull')}: ${t('nakahatsu.captionBeforeAfter')}`}
@@ -442,7 +441,7 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
                     src="/work/nakahatsu/bilingual.webp"
                     alt={t('nakahatsu.captionBilingual')}
                     width={1200}
-                    height={1636}
+                    height={675}
                     visibleLabel={t('common.viewFull')}
                     openLabel={`${t('common.viewFull')}: ${t('nakahatsu.captionBilingual')}`}
                   />
@@ -599,7 +598,7 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
                         href={site.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-ink-secondary underline decoration-black/20 underline-offset-4 transition-colors hover:text-ink hover:decoration-current"
+                        className="text-ink-secondary underline decoration-line-section underline-offset-4 transition-colors hover:text-ink hover:decoration-current"
                       >
                         {site.name}
                       </a>

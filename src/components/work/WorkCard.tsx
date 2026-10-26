@@ -62,7 +62,9 @@ export default function WorkCard({
   const { jpFontSize } = useJPFontSize();
 
   return (
-    <a data-work-card href={href} className="block mb-16 cursor-pointer hover:opacity-80" onClick={onClick}>
+    <a data-work-card href={href} className="block mb-16 cursor-pointer rounded-card hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2"
+      onClick={onClick}
+    >
       <div className="mb-20">
         {/* サムネの絵の地色は、ページの地に近いことがある（2026-09-23 河野）。
             縁がはっきり読めるよう、タグと同じ surface-muted の枠で囲む。 */}
