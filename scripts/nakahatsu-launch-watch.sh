@@ -49,3 +49,8 @@ Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
 fi
 mkdir -p "$(dirname "$STATE")"
 touch "$STATE"
+
+# 公開（push・merge）の前に、先方の一言の書面OKが要る。記録（.capture/nakahatsu/client-ok）が無ければ促す
+if [ ! -f ".capture/nakahatsu/client-ok" ]; then
+  notify "先方の掲載OKがまだ記録されていません。00-次にやること.md の文面で先方に確認してください（OKが記録されるまで push しない）。"
+fi
