@@ -1448,3 +1448,30 @@ Shopify のパスワードページは Shopify 側テンプレートなので、
    （※ この URL は自動切替の対象外。リンク先は公開前後で変わらないため）
 2. 写真帯の最終選定後に、トップページ由来の図版を撮り直す（前項から継続）
 3. merge の条件は変わらず: クライアントサイトの一般公開後、本人 GO で main へ
+
+---
+
+## 2026-10-26 — 中初ケーススタディ v2（origin/main f74a32a 基準で作り直し。ローカルのみ・未 push）
+
+ブランチ `worktree-nakahatsu-case-study-v2`（worktree: `~/dev/portfolio/.claude/worktrees/nakahatsu-case-study-v2`）。
+旧ブランチ `worktree-nakahatsu-case-study` のプロトタイプ11コミットを cherry-pick し、その上に5コミットを追加。
+**push / merge はしていない。merge = 公開**（下記）。引き継ぎは `docs/session-2026-10-26-nakahatsu-case-study.md`。
+
+### 追加した内容（旧ブランチ分に対する差分）
+- `layout.tsx` で `buildPageMetadata`（title / canonical / og:image / hreflang）
+- `siteRoutes.ts` の `CARD_WORK_SLUGS` に `nakahatsu` を追加 → **カードとサイトマップが同時に出る**
+- OG 画像 `public/og/nakahatsu.jpg`（`generate-og-images.mjs` に1行）
+- トップのカードを `useWorkCardLink` 経由の `<a href>` に
+- JP/EN 本文を採用レビュワー向けに書き直し（`nakahatsu.*` / `projects.nakahatsu`）、About 図版を追加
+- 図版を現行ライブテーマから撮り直し（2026-10-25/26）。再実行可能な `scripts/capture-nakahatsu-figures.mjs`
+- CV に `project-nakahatsu`（業界ラベルで匿名、個人契約、`/work/nakahatsu` へリンク）
+
+### 検証
+- `pnpm build` 通過（42ページ）。tsc は d3 / podcast-notes の既存エラーのみ
+- `pnpm lint` は main でも失敗（`eslint-config-next` が依存に無い。追加していない）
+
+### 未決・やっていないこと
+- 河野の判断待ち: CV の実名 vs 業界ラベル / 旧 worktree 登録の修復 / 公開後の図版自動更新のスケジュール
+- oidemashi / FR / SP の About 図版は未撮影
+- 契約事実の確認（個人名義の請負・海外販売は範囲外・節数 23 / 商品 12 / 区画 10 / パス 7 / 指摘 43 / 引き継ぎ 13 ページ）は未検証のまま
+- 公開条件: クライアントサイト公開後に本人 GO で push → merge

@@ -839,3 +839,33 @@ headless フラグを疑う。
 4. **3幅を同じ CSS 深さで切ると、内容の高さが違う分どこかが必ず途中で切れる。**
    倍率だけ共有し、深さはパネルごとにセクション境界で決める。境界で切れば
    フェードは要らない
+
+---
+
+## `pnpm lint` は main でも壊れている（2026-10-26）
+
+`eslint-config-next` が dependencies に無いため、`pnpm lint` は変更に関係なく失敗する。
+**lint の失敗を自分の変更のせいにしない**。origin/main の worktree で同じコマンドを回して比べれば切り分けられる。
+直すには新規パッケージ追加になるので、CLAUDE.md の「確認が必要な操作」に該当する（未対応）。
+
+## dev サーバーを `127.0.0.1` で開くと next-intl ミドルウェアがリダイレクトループする（2026-10-26）
+
+`next dev -H localhost` で起動し、`http://localhost:3007` で開く。`127.0.0.1` はロケール判定のリダイレクトが
+終わらない。画面が出ないときはまずホスト名を疑う。
+
+## cherry-pick で progress.txt / lessons.md / docs が衝突したら「両方残す」（2026-10-26）
+
+これらは追記専用の記録で、衝突は双方が末尾に足したことで起きる。どちらかを選ぶと記録が消える。
+両方を残し、日付順に並べる。
+
+## パスワード付きストアを撮る手順に、認証情報を埋め込まない（2026-10-26）
+
+`scripts/capture-nakahatsu-figures.mjs` は環境変数 `NAKAHATSU_STORE_URL` / `NAKAHATSU_STORE_PASSWORD`、
+または gitignore 済みの `.nakahatsu-capture.env` から読む。public リポジトリなのでスクリプトに直書きしない。
+手順の説明は `docs/nakahatsu-figures.md`（コミット済み）に置く。
+
+## `CARD_WORK_SLUGS` がカードとサイトマップを同時に決める（2026-10-26）
+
+`nakahatsu` を足した時点で、トップのカードと `/sitemap.xml` の両方に出る。公開判定（`isNakahatsuLaunched()`）は
+本文の言い回しだけを切り替え、**カード・サイトマップの出し分けはしない**。
+したがって「公開を待つ」手段は、このブランチを merge しないことだけ。別のゲートは無い。
