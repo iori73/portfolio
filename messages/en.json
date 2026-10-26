@@ -97,8 +97,8 @@
     "liberalArts": "Liberal arts"
   },
   "footer": {
-    "legendSize": "Each size = how often I use",
-    "legendColor": "Shades of color = how often I post"
+    "legendSize": "Width = how often I use",
+    "legendColor": "Shade = how often I post"
   },
   "notFound": {
     "message": "This page could not be found.",

@@ -97,8 +97,8 @@
     "liberalArts": "リベラルアーツ"
   },
   "footer": {
-    "legendSize": "各サイズ = 使用頻度",
-    "legendColor": "色の濃淡 = 投稿頻度"
+    "legendSize": "幅 = 使用頻度",
+    "legendColor": "濃さ = 投稿頻度"
   },
   "notFound": {
     "message": "このページは見つかりませんでした。",
