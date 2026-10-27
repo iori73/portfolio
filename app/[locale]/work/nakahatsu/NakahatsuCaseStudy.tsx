@@ -567,7 +567,7 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
                   [
                     ['aiLeverageTitle', 'aiLeverageText'],
                     ['aiLimitTitle', 'aiLimitText'],
-                    ['clientLearningTitle', 'clientLearningText'],
+                    // clientLearning（先方の活動についての記述）は、根拠が見つかるまで出さない（台帳 #未確認）
                     ['copyTitle', 'copyText'],
                     // 「現在のステータス」は未公開であることの説明なので、
                     // 公開された時点で書く意味がなくなる。節ごと出さない。
