@@ -1315,3 +1315,9 @@ headed にすると通る。実機で4パターン総当たりして確認済み
   update-podcast-data.yml も同じ直 push 問題があったので PR 経由に変更。
 - 未解決: podcast パイプラインは 9/27 から毎週失敗（"Not enough data points (0)" = Notion から 0 件取得）。
   NOTION_API_KEY / NOTION_PODCAST_DB_ID の Secrets かDB共有設定の確認が必要。別件。
+
+## Podcast 同期の復旧（2026-10-27）
+- [x] Notion 連携を DB に再共有（河野）→ 同期再開。PR #76: 更新ワークフローを PR 方式・毎日・失敗時 Issue に、
+      鮮度チェック（podcast-freshness.yml）追加、データを 215→301 件（最新 2026-10-26）に更新。merge 済み。
+- [ ] セキュリティ強化（別PRで順次）: translate.ts 削除（要確認）/ img route の SSRF・SVG 対策 / CSP を nonce 化（Report-Only から）/
+      Dependabot・CodeQL・pnpm audit / 情報漏えいの小修正。河野さん作業: GitHub の secret scanning・push protection、Vercel Firewall。

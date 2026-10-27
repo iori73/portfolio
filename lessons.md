@@ -756,3 +756,10 @@ headless フラグを疑う。
 「最後の成功」が許容日数（Figma 3日 / Podcast 10日）を超えたら Issue を1件だけ立て、回復で自動クローズする。
 失敗通知（失敗した run 内で立てる Issue）は run 自体が動かないと出ないので、「成功が無いこと」を外から見る。
 新しい定期更新ジョブを足したら、watchdog の LIST にも1行足す。
+
+### [2026-10-27] Podcast が古いまま: 原因は「Notion 共有切れ」と「保護ブランチへの bot 直 push」の二重
+
+**状況**: `/experiment/podcast-notes/all` が 215 件・最新 2026-06-10 のまま（Notion は 300 件超）。
+**原因が2つあり、片方を直しても反映されなかった**: (1) Notion 連携 `podcast-notes20260319` が DB に共有されていない（`object_not_found`、CI は「0件→UMAPエラー」で原因が埋もれた）。(2) main が PR 必須なのに更新ワークフローが直 push（GH013）。
+**教訓**: 症状（古い）から原因を1つに決めない。パイプラインを最後まで流して、実際に反映されるまで確認する。
+**防止**: `scripts/generate-podcast-data.js` は 0 件で明示エラー終了。`update-podcast-data.yml` は毎日・PR 経由・失敗時 Issue。`podcast-freshness.yml` は「Notion の3日以上前のページが公開データに無い」を毎日検査（原因でなく結果を見る）。本番ドメインは Vercel Security Checkpoint が bot に 429 を返すので、比較先は main 上の JSON。
