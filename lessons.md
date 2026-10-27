@@ -771,3 +771,8 @@ headless フラグを疑う。
 ## 2026-10-27: Figma 再現パイプライン — lazy-load 画像と、画面で切れるテキスト
 - 画像が lazy-load のページ（Airline）は、抽出の前に最後までスクロールして全部読み込ませる。しないと全面スクリーンショットで画像が空白になる。`complete && naturalWidth>0` で確認する。
 - カード一覧の説明文など、CSS の line-clamp で画面では数行に切れているテキストは、DOM には全文が入っている。抽出するとそのまま長い文が入るので、Figma では `textTruncation=ENDING` と `maxLines` で画面と同じ見た目にする（高さが過大になるのを防ぐ）。
+
+## 2026-10-27: Figma 再現パイプライン — canvas と、N 枠の中の自動レイアウト枠
+- `<canvas>`（Podcast Notes のヒーロー）は抽出で灰色のプレースホルダーになる。canvas だけを撮るには、`html,body,main,main *{background:transparent !important}` と `main *{visibility:hidden} main canvas{visibility:visible}` を当ててから `canvas.screenshot({omitBackground:true})`。背景を透明にしないと、ページの背景色が PNG に焼き込まれて、暗い背景に載せたときに明るい四角が出る。
+- 絶対配置の枠（レイアウト無し）の子に自動レイアウト枠（V/H）を入れるとき、幅を固定してやらないと、中身の長さに合わせて広がる（Podcast Notes のエピソード一覧で、長いタイトルが 1 行で突き抜けた）。子を追加した後に `layoutSizingHorizontal=FIXED` と `resize(w)` をする。ビルダーの NONE 親の分岐に入れた。
+- Figma の別ページに置いたアップロード済みノード（`placedOnNodeId`）は、後で消えることがある（Sandbox の SVG が消えていた）。複製元はそのノードでなく、完成フレーム内のノードにする。
