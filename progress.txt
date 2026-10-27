@@ -1315,3 +1315,16 @@ headed にすると通る。実機で4パターン総当たりして確認済み
   update-podcast-data.yml も同じ直 push 問題があったので PR 経由に変更。
 - 未解決: podcast パイプラインは 9/27 から毎週失敗（"Not enough data points (0)" = Notion から 0 件取得）。
   NOTION_API_KEY / NOTION_PODCAST_DB_ID の Secrets かDB共有設定の確認が必要。別件。
+
+## 2026-10-27: レジュメ・デッキに Accenture の新しい案件を反映（acn-ops の草案から）
+
+- 草案: 仕事PC の acn-ops が作った `Iori-Kawano-Resume-EN-2026-10.pdf`。差分は Accenture の欄（案件3件追加・数字追加）と
+  YUMEMI（正社員）の概要の短縮だけ。期間・事実・機密区分は acn-ops に聞き直した。
+- cvData: Accenture に 交通（2026-08）・金融（2026-05〜06）・小売（2026-04〜06）を追加。概要を5領域に。
+  大学は Led→Owned（UI/UX 担当がもう1名いた）、resumeLine に「2.5週間、4組織6名」。
+  航空の resumeLine は「multi-platform、light/dark、targeting WCAG AA」（9プラットフォームは特定されうるので外した。
+  WCAG AA は検証記録がないので targeting）。YUMEMI 正社員の概要は「Joined full-time after graduating.」だけに。
+- ぼかし: ビルマ語→第2言語、鉄道会社→交通事業者、家電量販店→小売事業者、GA4→analytics。数字の羅列（399変数等）は外した。
+- 未確認: 交通・金融は acn-ops 側の機密区分が internal_only。河野さんの判断で業界ラベルのみで掲載。上長確認は未実施。
+- レイアウト: EN レジュメのコンパクト表示の行間・余白、JP の詳細表示の案件間の余白を少し詰めて1ページ目に収めた。
+  デッキは 8→9 ページ（2ページ目 Accenture、3ページ目 YUMEMI 正社員）。
