@@ -2,7 +2,7 @@ name: Update Podcast Data
 
 on:
   schedule:
-    - cron: '0 0 * * 0'  # 毎週日曜 0時 (UTC)
+    - cron: '0 0 * * *'  # 毎日 0時 (UTC)
   workflow_dispatch:       # 手動実行も可能
 
 jobs:
@@ -11,6 +11,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      issues: write
     steps:
       - uses: actions/checkout@v4
 
@@ -32,20 +33,34 @@ jobs:
           NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
           NOTION_PODCAST_DB_ID: ${{ secrets.NOTION_PODCAST_DB_ID }}
 
-      - name: Commit updated data via PR and merge
-        # main is protected (PR required), so a direct push is rejected.
+      # main は「PR必須」ルールセットで保護されているため、直接 push はできない（GH013）。
+      # データ更新は PR を作ってそのままマージする。承認は不要・必須チェックなし。
+      - name: Open PR and merge updated data
         run: |
-          git diff --quiet public/data/podcast-notes.json && { echo "No data changes."; exit 0; }
-          BRANCH="chore/podcast-data-$(date -u +%Y%m%d)"
+          # generatedAt だけが変わった場合は更新なし扱いにする
+          git diff --quiet -I '"generatedAt"' -- public/data/podcast-notes.json && exit 0
+          BRANCH="chore/podcast-data-$(date -u +%Y%m%d-%H%M%S)"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout -b "$BRANCH"
+          git switch -c "$BRANCH"
           git add public/data/podcast-notes.json
           git commit -m "chore: update podcast data"
-          git push --force origin "$BRANCH"
+          git push -u origin "$BRANCH"
           gh pr create --base main --head "$BRANCH" \
-            --title "chore: update podcast data ($(date -u +%Y-%m-%d))" \
-            --body "Automated weekly sync from Notion."
+            --title "chore: update podcast data" \
+            --body "Automated sync from the Notion podcast DB (${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
           gh pr merge "$BRANCH" --squash --delete-branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # 静かに古いまま放置しないための通知。同題の open Issue があれば重複して作らない。
+      - name: Open an issue if the sync failed
+        if: failure()
+        run: |
+          TITLE="Podcast data sync failed"
+          if [ -z "$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number')" ]; then
+            gh issue create --title "$TITLE" \
+              --body "The scheduled Notion → site podcast sync failed, so public/data/podcast-notes.json was NOT updated. Common causes: the Notion integration lost access to the DB (DB → ••• → Connections), the data source ID changed, or the PR could not be merged. Failed run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
