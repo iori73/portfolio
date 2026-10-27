@@ -1376,3 +1376,6 @@ variables / styles はデザインの統一と作業効率のため（現行サ�
 - 位置（Site — JP）: Gym 74600、Airline 84200、Blog 95000、Podcast Notes 106500、Experiment PC/SP 112300（x=0 / 1400）。重なっていた Experiment PC（CV PC と）、Ukiyoe SP（Nakahatsu SP と）、Figma Plugins SP（Ukiyoe SP と）を移動: Experiment PC→y112300、Ukiyoe SP→y26100、Figma Plugins SP→y60000。
 - 各ページのテキスト数は計画と一致（Gym 97/93、Airline 67/63、Blog 22/22、Podcast Notes 133/126、Experiment SP 15）。
 - 残り: Header/Footer インスタンスの付与、Nakahatsu PC の nav スタイル修正、EN 版（JP が確定してから）。
+
+追記 (2026-10-27): Header/Footer インスタンスを、Work 6 本・Blog・Experiment・Podcast Notes の PC/SP 全 18 フレームに付与（Home/About/CV と同じ方式: Footer は末尾でレイアウトに入り、Header は絶対配置 0,0）。アクティブは Blog=Blog、Experiment / Podcast Notes=Experiment（nav/active + Dot/<名前> の opacity=1）。Work 系は無し。ページ枠の左右パディングを 0 にし、本文枠は固定幅（PC 1104 / SP 327）で中央寄せにして、フッターを全幅にした。Nakahatsu PC のサイドナビ 4 項目に nav スタイルを適用。フッター追加でフレームが伸びたので Ukiyoe PC→y24700、Figma Plugins PC→y41000、Ukiyoe SP→y26300、Google UX SP→y44400 に動かし、重なりゼロを確認。
+- JP の再現はこれで完了（Home/About/CV/Experiment/Podcast Notes/Blog/Work 6 本、PC+SP）。EN 版は未着手（注釈は JP フレームだけに付ける運用のため、必要になってから）。
