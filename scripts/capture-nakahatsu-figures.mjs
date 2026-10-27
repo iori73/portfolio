@@ -288,26 +288,24 @@ async function compose() {
   // thumbnail-{jp,en}.webp（カードとヒーロー。8:5）は scripts/compose-nakahatsu-keyvisual.mjs が作る。
   // 先方サイトのファーストビューの切り取りをそのまま出さず、PC と SP の画面を平らな地に置いた表紙にしてある。
 
-  // before-after: 旧 WordPress + 旧 EC-CUBE | 新ストア（ヒーロー + お知らせ + About の見出し）
+  // before-after: 旧サイトのトップ（WordPress）と、新サイトのトップを、同じ幅・同じ範囲で並べる。
+  // 以前は、旧側にショップ（EC-CUBE）のページを混ぜていて、トップ対トップでなかった（河野さんの指摘 2026-10-27）。
+  // ショップが別システムだったことは、本文で述べる。
   {
     const W = 1200, H = 675, PAD = 32, GAP = 32, LABEL_H = 68;
     const colW = (W - PAD * 2 - GAP) / 2;
     const panelH = H - PAD - LABEL_H - PAD;
-    const leftH = (panelH - 14) / 2;
-    const asp = colW / leftH;
-    for (const f of ['top-desktop.png', 'shop-top-desktop.png']) if (!existsSync(OLD_DIR + f)) throw new Error(`旧サイトの画像が無い: ${OLD_DIR + f}（NAKAHATSU_OLD_SCREENSHOTS）`);
-    const wp = await panelAbs(OLD_DIR + 'top-desktop.png', { w: 1440, h: 1440 / asp }, Math.round(colW), Math.round(leftH));
-    const ec = await panelAbs(OLD_DIR + 'shop-top-desktop.png', { w: 1440, h: 1440 / asp }, Math.round(colW), Math.round(leftH));
-    const nowH = 1440 / (colW / panelH);
-    assertSafe(nowH, 'before-after / after');
+    if (!existsSync(OLD_DIR + 'top-desktop.png')) throw new Error(`旧サイトの画像が無い: ${OLD_DIR + 'top-desktop.png'}（NAKAHATSU_OLD_SCREENSHOTS）`);
+    const cropH = 1440 / (colW / panelH);
+    assertSafe(cropH, 'before-after / after');
     const rx = Math.round(PAD + colW + GAP);
+    const before0 = await round(await panelAbs(OLD_DIR + 'top-desktop.png', { w: 1440, h: cropH }, Math.round(colW), Math.round(panelH)), Math.round(colW), Math.round(panelH));
     // 説明文は本文とキャプションに任せる。画像には、言語別の短いラベルだけ。
     for (const [lang, before, after] of [['en', 'Before', 'After'], ['jp', 'リニューアル前', 'リニューアル後']]) {
-      const now = await round(await panel(`home-${lang === 'jp' ? 'ja' : 'en'}-1440-top.png`, { w: 1440, h: nowH }, Math.round(colW), Math.round(panelH)), Math.round(colW), Math.round(panelH));
+      const now = await round(await panel(`home-${lang === 'jp' ? 'ja' : 'en'}-1440-top.png`, { w: 1440, h: cropH }, Math.round(colW), Math.round(panelH)), Math.round(colW), Math.round(panelH));
       await write(`before-after-${lang}.webp`, canvas(W, H).composite([
         { input: label(before, colW), left: PAD, top: PAD },
-        { input: await round(wp, Math.round(colW), Math.round(leftH)), left: PAD, top: PAD + LABEL_H },
-        { input: await round(ec, Math.round(colW), Math.round(leftH)), left: PAD, top: Math.round(PAD + LABEL_H + leftH + 14) },
+        { input: before0, left: PAD, top: PAD + LABEL_H },
         { input: label(after, colW), left: rx, top: PAD },
         { input: now, left: rx, top: PAD + LABEL_H },
       ]));

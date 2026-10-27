@@ -127,7 +127,7 @@ const UkiyoePage: React.FC = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
+              <span className="text-body font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
                 Timeline
               </span>
               <p className="text-body-lg tracking-[0.2px]">
@@ -135,7 +135,7 @@ const UkiyoePage: React.FC = () => {
               </p>
             </div>
             <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
+              <span className="text-body font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
                 My Skills
               </span>
               <p className="text-body-lg tracking-[0.2px]">
@@ -143,7 +143,7 @@ const UkiyoePage: React.FC = () => {
               </p>
             </div>
             <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
+              <span className="text-body font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
                 Type
               </span>
               <p className="text-body-lg tracking-[0.2px]">
@@ -151,7 +151,7 @@ const UkiyoePage: React.FC = () => {
               </p>
             </div>
             <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
+              <span className="text-body font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
                 Deliverables
               </span>
               <p className="text-body-lg tracking-[0.2px]">

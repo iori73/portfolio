@@ -31,6 +31,12 @@ const SURVEYED_SITES = [
   { name: '寧楽醗酵', url: 'https://narahakko.theshop.jp/' },
 ] as const;
 
+/** ヒストリーページを参考にした老舗6社（2026年4月初旬。docs/research の記録）。 */
+const HERITAGE_COMPANIES = ['サントリー', '任天堂', '虎屋', '月桂冠', 'ヤマサ', 'キッコーマン'] as const;
+
+/** ムードボードで比べた3つの方向性（docs/research/MOODBOARD.md）。 */
+const MOODBOARD_DIRECTIONS = ['A 蔵の静けさ', 'B 金沢の日常', 'C 発酵ラボ'] as const;
+
 /**
  * 本文図版。ハンドオフ §5.2 の仕様どおり 16:9 / 1200x675 で、器と画像の比率が
  * 一致しているので切れも歪みもない。ただし中身が比較パネル（2枚並置・3幅並置）
@@ -229,7 +235,7 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
+              <span className="text-body font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
                 {t('common.timeline')}
               </span>
               <p className="text-body-lg tracking-[0.2px]">
@@ -237,7 +243,7 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
               </p>
             </div>
             <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
+              <span className="text-body font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
                 {t('common.mySkills')}
               </span>
               <p className="text-body-lg tracking-[0.2px]">
@@ -245,7 +251,7 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
               </p>
             </div>
             <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
+              <span className="text-body font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
                 {t('common.type')}
               </span>
               <p className="text-body-lg tracking-[0.2px]">
@@ -253,7 +259,7 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
               </p>
             </div>
             <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
+              <span className="text-body font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
                 {t('common.deliverables')}
               </span>
               <p className="text-body-lg tracking-[0.2px]">
@@ -336,9 +342,15 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
                   <li>{t('nakahatsu.scope5')}</li>
                   <li>{t('nakahatsu.scope6')}</li>
                 </ul>
-                <p className={`text-ink-tertiary ${bodyTextClass}`}>
-                  {t('nakahatsu.scopeNote')}
+                <p className={`mb-4 text-ink-tertiary ${bodyTextClass}`}>
+                  {t('nakahatsu.aiNote')}
                 </p>
+                {/* 公開前の状態の説明。公開後は事実でなくなるので出さない（docs/nakahatsu-after-launch.md） */}
+                {!launched && (
+                  <p className={`text-ink-tertiary ${bodyTextClass}`}>
+                    {t('nakahatsu.scopeNote')}
+                  </p>
+                )}
               </div>
 
               <figure>
@@ -387,6 +399,16 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
                     v1 の忠実な姿ではないことを、中初側セッションの実測で確認したため。 */}
                 <p className={`text-ink-secondary ${bodyTextClass}`}>
                   {t('nakahatsu.twoDirectionsText')}
+                </p>
+              </div>
+
+              {/* 判断の事例: 実在しない写真を載せない（2026-10-12） */}
+              <div className="mb-10 md:mb-14">
+                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
+                  {t('nakahatsu.photosTitle')}
+                </h3>
+                <p className={`text-ink-secondary ${bodyTextClass}`}>
+                  {t('nakahatsu.photosText')}
                 </p>
               </div>
 
@@ -472,20 +494,6 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
                 <p className={`mb-4 text-ink-secondary ${bodyTextClass}`}>
                   {t('nakahatsu.buildText')}
                 </p>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 mb-6">
-                  <div className="p-5 md:p-6 rounded-xl bg-surface-muted">
-                    <p className="text-title-sm font-space-grotesk font-semibold text-ink mb-2">23</p>
-                    <p className="text-body-sm text-ink-tertiary">{t('nakahatsu.stat1')}</p>
-                  </div>
-                  <div className="p-5 md:p-6 rounded-xl bg-surface-muted">
-                    <p className="text-title-sm font-space-grotesk font-semibold text-ink mb-2">12</p>
-                    <p className="text-body-sm text-ink-tertiary">{t('nakahatsu.stat2')}</p>
-                  </div>
-                  <div className="p-5 md:p-6 rounded-xl bg-surface-muted">
-                    <p className="text-title-sm font-space-grotesk font-semibold text-ink mb-2">10</p>
-                    <p className="text-body-sm text-ink-tertiary">{t('nakahatsu.stat3')}</p>
-                  </div>
-                </div>
                 <figure>
                   <FullSizeImage
                     src="/work/nakahatsu/products.webp"
@@ -605,6 +613,28 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
                     </li>
                   ))}
                 </ol>
+                <h3 className={`text-title-sm mt-8 mb-2 ${getHeadingFontClass()}`}>
+                  {t('nakahatsu.heritageTitle')}
+                </h3>
+                <p className={`mb-3 text-body-sm text-ink-tertiary ${getBodyFontClass()}`}>
+                  {t('nakahatsu.heritageNote')}
+                </p>
+                <ul className="flex flex-wrap gap-x-6 gap-y-2 text-body-sm text-ink-secondary">
+                  {HERITAGE_COMPANIES.map((name) => (
+                    <li key={name}>{name}</li>
+                  ))}
+                </ul>
+                <h3 className={`text-title-sm mt-8 mb-2 ${getHeadingFontClass()}`}>
+                  {t('nakahatsu.moodboardTitle')}
+                </h3>
+                <p className={`mb-3 text-body-sm text-ink-tertiary ${getBodyFontClass()}`}>
+                  {t('nakahatsu.moodboardNote')}
+                </p>
+                <ul className="flex flex-wrap gap-x-6 gap-y-2 text-body-sm text-ink-secondary">
+                  {MOODBOARD_DIRECTIONS.map((name) => (
+                    <li key={name}>{name}</li>
+                  ))}
+                </ul>
               </div>
             </section>
           </div>

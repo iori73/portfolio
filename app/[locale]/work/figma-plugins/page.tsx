@@ -58,13 +58,13 @@ export default function FigmaPluginsPage() {
 
           <div className="grid grid-cols-2 gap-6 mt-8 max-w-md">
             <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
+              <span className="text-body font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
                 Total tools
               </span>
               <p className="text-body-lg tracking-[0.2px]">{plugins.length}</p>
             </div>
             <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
+              <span className="text-body font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
                 Users
               </span>
               <p className="text-body-lg tracking-[0.2px]">{formatUsers(totalUsers)}+</p>
