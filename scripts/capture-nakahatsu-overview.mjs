@@ -47,6 +47,23 @@ const PAGES = [
   { name: 'shipping', path: '/policies/shipping-policy', cap: null },
   { name: 'login', path: '/account/login', cap: null },
 ];
+/**
+ * final で撮る範囲（CSS px、上端からの y0〜y1）。review の全高画像を目で見て決めた（2026-10-27）。
+ *   - フッター（会社の電話・FAX・住所、地図）は含めない → 各ページの y1 はフッターの手前
+ *   - ホームは 1500 まで（それより下に、人物写真と「Sample」透かしの写真がある）
+ *   - About は、人物写真の区間（約 1800〜5600 と 7200 以降）を避けて 2 区間
+ *   - ログイン（Shopify 側の画面）、空のカート、お知らせ一覧（短すぎる）は撮らない
+ */
+const FINAL = [
+  { name: 'home', y0: 0, y1: 1500 },
+  { name: 'shop', y0: 0, y1: 1200 },
+  { name: 'product', y0: 0, y1: 1340 },
+  { name: 'about-top', page: 'about', y0: 0, y1: 1560 },
+  { name: 'about-tenyu', page: 'about', y0: 5640, y1: 7100 },
+  { name: 'faq', y0: 0, y1: 1080 },
+  { name: 'contact', y0: 0, y1: 1090 },
+  { name: 'shipping', y0: 0, y1: 1920 },
+];
 let CAPS = {};
 try { CAPS = JSON.parse(readFileSync(join(ROOT, '.capture', 'nakahatsu', 'ov', 'caps.json'), 'utf8')); } catch {}
 
@@ -114,10 +131,17 @@ for (const p of PAGES) {
     }
   }
   const total = await page.evaluate(() => Math.ceil(document.documentElement.scrollHeight));
-  const cap = MODE === 'final' ? (CAPS[p.name] ?? p.cap ?? total) : (p.home ? Math.min(total, 3000) : total);
-  const h = Math.min(total, cap);
-  await page.screenshot({ path: OUT + p.name + '.png', fullPage: true, clip: { x: 0, y: 0, width: 1440, height: h } });
-  console.log(p.name.padEnd(10), 'total', total, 'shot', h);
+  if (MODE === 'final') {
+    for (const r of FINAL.filter((f) => (f.page || f.name) === p.name)) {
+      const y1 = Math.min(total, r.y1);
+      await page.screenshot({ path: OUT + r.name + '.png', fullPage: true, clip: { x: 0, y: r.y0, width: 1440, height: y1 - r.y0 } });
+      console.log(r.name.padEnd(12), `y ${r.y0}-${y1} (total ${total})`);
+    }
+  } else {
+    const h = p.home ? Math.min(total, 3000) : total;
+    await page.screenshot({ path: OUT + p.name + '.png', fullPage: true, clip: { x: 0, y: 0, width: 1440, height: h } });
+    console.log(p.name.padEnd(10), 'total', total, 'shot', h);
+  }
   await page.close();
 }
 await browser.close();

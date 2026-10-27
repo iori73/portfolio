@@ -1513,3 +1513,8 @@ Shopify のパスワードページは Shopify 側テンプレートなので、
 - 「Suika Yamada 型」を「SY型」に置換（Figma のラベル・評価枠、Desktop の資料、この記録）。
 - 既存の Work を SY型に変換する agent を追加: `.claude/agents/sy-case-study-converter.md`（棚卸し→台帳→Figma 4枚→河野さんの注釈→承認後にサイト反映、の手順。push・削除・未確認の主張を禁止）。
 - 主要画面の一覧画像: 素材の撮影スクリプト `scripts/capture-nakahatsu-overview.mjs`（review は撮影済み、人物写真・Instagram の帯の位置を確認する段階）。
+
+## 2026-10-27 夜(6) 主要画面の一覧画像（JP）
+- 撮影: `scripts/capture-nakahatsu-overview.mjs final`（ホーム・ショップ・商品・About 2区間・FAQ・お問い合わせ・配送ポリシーの8枚、dpr 2）。人物写真（ホーム1500px より下、About の中ほど）、「Sample」透かし、フッターの住所・地図は、範囲を切って避けた。review の全高画像を目で見て決めた。ログイン・空のカート・お知らせ一覧は撮らない。
+- 構図: `scripts/compose-nakahatsu-overview.mjs` → `.capture/nakahatsu/ov/overview-jp.png`（2400x1500、地は透明、3列・列ごとにずらして下端がはみ出す）。サイト用に `public/work/nakahatsu/overview-jp.webp` を保存（ページにはまだ組み込んでいない）。
+- Figma: 「主要画面の一覧（JP）」（295:363、SY型の右）。EN 版（/en の画面）はまだ。
