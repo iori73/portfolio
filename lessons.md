@@ -762,3 +762,8 @@ headless フラグを疑う。
 ## 2026-10-27: Figma 再現パイプライン — SP ページ枠の幅と、装飾の複製
 - builder の最初のバッチはページ枠を常に 1280 幅で作っていた。SP は 375 のはずが 1280 になり、本文（FILL 幅）が広がる。MODE が sp なら 375 で作る（修正済み）。作った後に気づいたら `resize(375, h)`。
 - PC と SP で同じ装飾（Figma Plugins のヒーローのカード束）は、SP 用に抽出・計画・組み立てをやり直さず、PC のノードを `clone()` して `rescale(375/1280)` する。複製後は `layoutSizingHorizontal = FIXED` に直す（FILL のままだと潰れて幅 110px になる）。
+
+## 2026-10-27: Figma 再現パイプライン — SVG <img> の PNG 化に CSS zoom を使わない
+- `<img src=*.svg>` を高解像度の PNG にするとき、ページに `document.documentElement.style.zoom=2` をかけて要素スクリーンショットを撮ると、要素ではなくページ左上が撮れた（座標が zoom で狂う）。
+- 正しくは、新しいブラウザコンテキスト（`deviceScaleFactor: 2`）で `<img>` を `setContent` し、実際の表示サイズ（CSS px）を指定して要素スクリーンショットを撮る。撮った画像は目で必ず確認する（今回は最初に気づかずアップロードし、ヒーローが崩れて発覚）。
+- Playwright の `path` は MCP サーバーの cwd 相対で、ワークツリーではなくメイン checkout の `.playwright-mcp/` に保存されることがある。保存先を `find` で確認してからコピーする。
