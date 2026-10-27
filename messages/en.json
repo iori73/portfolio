@@ -478,7 +478,7 @@
     "captionBilingual": "The same hero in Japanese and in English.",
     "solutionIntro": "The result is one Shopify store that covers the whole site. I started from an existing Shopify theme and made the layout and sections for this site.",
     "buildTitle": "What I handled",
-    "buildText": "The pages are the home page, product, collection, search, About, contact, the news list and articles, FAQ, 404, policies and customer accounts. The twelve products and the shipping table were migrated from the old site. I grouped the shipping rates into ten zones from the old table, and the client agreed to them in August 2026. Sign-in is set up for Shopify accounts as well as Google and Facebook.",
+    "buildText": "The pages are the home page, product, collection, search, About, contact, the news list and articles, FAQ, 404, policies and customer accounts. The twelve products and the shipping table were migrated from the old site. I grouped the shipping rates into ten zones from the old table, and the client agreed to them in August 2026. Sign-in works with Shopify accounts as well as Google and Facebook, and I have tested it.",
     "captionProducts": "Part of the product list. The products were migrated from the old site.",
     "captionResponsive": "The home page at 1440 and 390 pixels, drawn at the same scale. The vertical copy stays in place on both.",
     "checkoutTitle": "Where the brand color stops",

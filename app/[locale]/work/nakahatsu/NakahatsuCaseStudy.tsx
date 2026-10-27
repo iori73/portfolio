@@ -225,7 +225,7 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
                     {t('common.goToSite')}
                   </CTAButton>
                 ) : (
-                  <span className="inline-block font-space-grotesk text-label leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
+                  <span className={`inline-block text-body ${getBodyFontClass()} leading-[1.3] px-4 py-1.5 rounded-lg bg-surface-muted text-ink-secondary`}>
                     {t('nakahatsu.statusBadge')}
                   </span>
                 )}
