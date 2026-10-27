@@ -742,3 +742,17 @@ system Chrome (`channel: 'chrome'`) でも結果は同じ — ブラウザの種
 同じ判定ロジックが使われている可能性があるので、403 で詰まったら真っ先に
 headless フラグを疑う。
 `**/` 系はプロジェクト内、`~/` 系は指定したパスのみ、と役割が分かれている。
+
+## 保護された main に bot が直 push すると、定期ジョブが「静かに」毎回失敗する
+**事象**: Figma 統計の自動更新が 9/21〜10/19 の 5 回連続で失敗し、サイトの数値が約 1 ヶ月古いままだった。
+**根本原因**: スクレイプ自体は成功。`main` に「Changes must be made through a pull request」ルールが
+後から入り、ワークフローの `git push` が GH013 で拒否された。Issue は立っていたが気づかれなかった。
+**対処**: ワークフロー内で `chore/...` ブランチを push → `gh pr create` → `gh pr merge --squash`。
+承認 0・必須チェックなしのルールならこれで通る。リポジトリ設定
+「Allow GitHub Actions to create and approve pull requests」が必要。
+**教訓**: ブランチ保護を入れたら、main へ直 push する定期ジョブ（`git push` を含む workflow）を全て洗う。
+`gh run list --workflow=<name>` で直近の成否を見れば、静かな失敗はすぐ分かる。
+**再発防止（2026-10-26）**: `data-freshness-watchdog.yml` を追加。毎日、各データ更新ワークフローの
+「最後の成功」が許容日数（Figma 3日 / Podcast 10日）を超えたら Issue を1件だけ立て、回復で自動クローズする。
+失敗通知（失敗した run 内で立てる Issue）は run 自体が動かないと出ないので、「成功が無いこと」を外から見る。
+新しい定期更新ジョブを足したら、watchdog の LIST にも1行足す。
