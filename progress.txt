@@ -1518,3 +1518,4 @@ Shopify のパスワードページは Shopify 側テンプレートなので、
 - 撮影: `scripts/capture-nakahatsu-overview.mjs final`（ホーム・ショップ・商品・About 2区間・FAQ・お問い合わせ・配送ポリシーの8枚、dpr 2）。人物写真（ホーム1500px より下、About の中ほど）、「Sample」透かし、フッターの住所・地図は、範囲を切って避けた。review の全高画像を目で見て決めた。ログイン・空のカート・お知らせ一覧は撮らない。
 - 構図: `scripts/compose-nakahatsu-overview.mjs` → `.capture/nakahatsu/ov/overview-jp.png`（2400x1500、地は透明、3列・列ごとにずらして下端がはみ出す）。サイト用に `public/work/nakahatsu/overview-jp.webp` を保存（ページにはまだ組み込んでいない）。
 - Figma: 「主要画面の一覧（JP）」（295:363、SY型の右）。EN 版（/en の画面）はまだ。
+- Figma に編集可能版: 「主要画面の一覧（JP・編集可）」（300:363）。8枚を別々の角丸の矩形（画像の塗り）にし、影・枠線・列（auto layout）は Figma の機能。1枚PNG版（295:363）は、そのまま残してある。画面の中身は画像のまま（ストアがパスワード保護で、Figma への実画面取り込みができないため）。
