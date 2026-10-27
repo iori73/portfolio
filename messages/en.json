@@ -460,7 +460,7 @@
     "scope2": "Research, requirements, and UI design in Figma for desktop and mobile",
     "scope3": "Design system, with color and spacing values kept the same in Figma and in code",
     "scope4": "Shopify implementation: customizing an existing theme, migrating products, and setting up shipping and checkout",
-    "scope5": "Japanese, English and French display (the contract covers Japanese and English; I added French)",
+    "scope5": "Japanese, English and French display (the contract covers Japanese and English; the client asked for French to be added)",
     "scope6": "Client coordination: meetings, written requests, reviews, and revisions",
     "scopeNote": "Enabling payments, moving the domain and registering six more products are steps only the client can take, so they remain with the client.",
     "captionBeforeAfter": "Before: the top page of the WordPress company site. After: the new top page. The shop was a separate system (EC-CUBE).",
@@ -470,15 +470,15 @@
     "twoDirectionsTitle": "Showing two versions side by side",
     "twoDirectionsText": "Because we had agreed to keep the existing design, I made two versions: v1 reproduced the existing site and v2 was the redesign. When I shared them side by side in April, the client replied that v2 was easy to see, with a clean structure that included the purchase path (summarised). After that I worked mainly on v2.",
     "aboutTitle": "Changes since August",
-    "aboutText": "The version in the store now is not the one from August. The changes are on both the home page and the About page. For the home page's \"About Nakahatsu Shoten\" block I laid out several options, and the client chose the one with three tall photographs of the building. On the About page I rebuilt the two brewing sections, tenyu soy sauce and tenyu miso, with the body text laid over a photograph. When the screen is wide enough the Japanese text runs vertically, and English and French stay horizontal.",
+    "aboutText": "The version in the store now is not the one from August. The changes are on both the home page and the About page, and the About page changed the most. For the home page's \"About Nakahatsu Shoten\" block I laid out several options, and the client chose the one with three tall photographs of the building. On the About page I rebuilt the two brewing sections, tenyu soy sauce and tenyu miso, with the body text laid over a photograph. When the screen is wide enough the Japanese text runs vertically, and English and French stay horizontal.",
     "motionTitle": "The \"Oidemashi\" heading",
-    "motionText": "The \"Oidemashi\" heading (a Kanazawa way of saying welcome) starts with a small round photograph of the shop, which grows and becomes a rectangle. For visitors who ask for reduced motion, and when scripts are off, it is shown as a rectangle from the start.",
+    "motionText": "The \"Oidemashi\" heading (a Kanazawa way of saying welcome) starts with a small round photograph of the two people who make the products, which grows and becomes a rectangle. I made it to introduce them, who are special to this shop, quietly and gracefully. For visitors who ask for reduced motion, and when scripts are off, it is shown as a rectangle from the start.",
     "dsTitle": "Design system and code",
-    "dsText": "I built a design system first, covering colors, spacing, type styles and shared parts, and assembled the screens from it. The color and spacing values are kept the same in Figma and in code by script. The vertical spacing of the About page is a single value, 120 px on desktop and 72 px on mobile.",
+    "dsText": "I built a design system first, covering colors, spacing, type styles and shared parts, and assembled the screens from it. When the values in Figma and in code drift apart, I look at the site to fix something and find that Figma no longer matches it. So a script keeps the color and spacing values the same in both.",
     "captionBilingual": "The same hero in Japanese and in English.",
     "solutionIntro": "The result is one Shopify store that covers the whole site. I started from an existing Shopify theme and made the layout and sections for this site.",
     "buildTitle": "What I handled",
-    "buildText": "The pages are the home page, product, collection, search, About, contact, the news list and articles, FAQ, 404, policies and customer accounts. The twelve products and the shipping table were migrated from the old site. I grouped the shipping rates into ten zones from the old table, and the client agreed to them in August 2026. Sign-in works with Shopify accounts as well as Google and Facebook, and I have tested it.",
+    "buildText": "The pages are the home page, product, collection, search, About, contact, the news list and articles, FAQ, 404, policies and customer accounts. The twelve products and the shipping table were migrated from the old site. I grouped the shipping rates into ten zones from the old table, and the client agreed to them in August 2026. Sign-in works with Shopify accounts as well as Google and Facebook (Meta). I issued a client ID and a client secret for each, set them in Shopify's customer account settings, and tested the sign-in.",
     "captionProducts": "Part of the product list. The products were migrated from the old site.",
     "captionResponsive": "The home page at 1440 and 390 pixels, drawn at the same scale. The vertical copy stays in place on both.",
     "checkoutTitle": "Where the brand color stops",
@@ -505,7 +505,7 @@
     "statusBadge": "In progress, not yet public",
     "typeValue": "Personal contract",
     "heroAlt": "The new Nakahatsu Shoten site on a desktop and a phone: the home page hero, and a product page.",
-    "aiNote": "I used AI (Claude) for implementation and translation. The English is Shopify's machine translation, which I revised. The French is based on a draft from Claude. The client has not yet reviewed either.",
+    "aiNote": "I used AI (Claude) for implementation and translation, and also for the design work in Figma. I made the early-stage designs by hand and shared them, and had AI apply the existing design system and evaluate and improve the designs against design principles and usability. The aim was to save time and to keep quality up. The English is Shopify's machine translation, which I revised. The French is based on a draft from Claude. The client has not yet reviewed either.",
     "photosTitle": "No photos that do not exist",
     "photosText": "The history section first held placeholder images: generic old photographs with specific captions, such as the area around Tenma-cho at the time of founding. Publishing captions for photographs that do not exist seemed risky, so in October I stopped showing the placeholders and the timeline. At the October 6 meeting, because the client had few documents and photos, we decided to keep the history section simple and to use a photo of the founder. The client supplied it, and it was placed on October 21.",
     "heritageTitle": "Six long-established companies whose history pages I studied",
@@ -559,6 +559,122 @@
     "creditAi": "AI (Claude)",
     "creditAiText": "Help with implementation and translation.",
     "moreTitle": "In more detail",
+    "moreText": "The ten similar sites I surveyed, the six long-established companies, the moodboards and how I checked the work are in the detailed version.",
+    "moreLink": "Read the detailed version"
+  },
+  "nakahatsuSy": {
+    "kicker": "Rebuilding a Shopify store",
+    "title": "Nakahatsu Shoten Website",
+    "meta": [
+      [
+        "Client",
+        [
+          "Soy sauce and miso maker",
+          "Nakahatsu Shoten"
+        ]
+      ],
+      [
+        "Role",
+        [
+          "Proposal and research",
+          "UI design",
+          "Shopify implementation",
+          "Client coordination"
+        ]
+      ],
+      [
+        "Date",
+        [
+          "From March 2026",
+          "In progress, not yet public"
+        ]
+      ],
+      [
+        "Team",
+        [
+          "Design and implementation: 1 person (with AI)",
+          "Client contact: the family who run the company"
+        ]
+      ]
+    ],
+    "overviewCatch": "Making a company site and a shop into one store.",
+    "overview": [
+      "Nakahatsu Shoten makes soy sauce and miso in Kanazawa. It was founded in 1896 as a food retailer and later moved into brewing.",
+      "The company site ran on WordPress and the shop on EC-CUBE, as two separate systems. I took the project on as an individual, through an introduction from an acquaintance, and handle the proposal, the design, the Shopify implementation, and display in Japanese, English and French. This phase is a domestic shop; selling overseas is outside the scope."
+    ],
+    "processCatch": "From \"keep the existing design\" to a design that carries the client's strengths.",
+    "process": [
+      "The first agreement was to keep the existing design and skip wireframes. After that I proposed a redesign. From the client's daily posts on Instagram, I sensed a shop that welcomes people from Japan and abroad, of every age, and values its relationships with them. I wanted the site to express that strength fully, and to convey the history and the people behind it.",
+      "In the proposal I explained the reasons for the change, together with how much I respect what the client does."
+    ],
+    "steps": [
+      {
+        "h": "Sorting out the state of the existing site",
+        "p": [
+          "The shop could not take credit cards; the only ways to pay were bank transfer, postal transfer and cash on delivery. The site was in Japanese only, with no official translation, so a visitor who could not read Japanese had to rely on machine translation. What buyers want to know before purchase was only partly written on the legal notice page.",
+          "Because the company site and the shop were separate systems, the design and the updates were both done twice."
+        ],
+        "fig": "challenges",
+        "cap": "From the previous site: the list of payment methods, how shipping and delivery were described, and the sign-up error."
+      },
+      {
+        "h": "Showing two versions side by side",
+        "p": [
+          "I made one version that reproduced the existing site (v1) and one redesign (v2), and shared them side by side. The client replied that v2 was easy to see, with a clean structure that included the purchase path (summarised). I have worked mainly on v2 since."
+        ],
+        "fig": "before-after",
+        "cap": "Before: the top page of the WordPress company site. After: the new top page. The shop was a separate system (EC-CUBE)."
+      },
+      {
+        "h": "Rebuilding About and the home page",
+        "p": [
+          "In the later part of the work, the About page changed the most. I laid the body text over a photograph for the two brewing sections, tenyu soy sauce and tenyu miso. When the screen is wide enough, the Japanese text runs vertically.",
+          "For the home page's \"About Nakahatsu Shoten\" block I laid out several options, and the client chose the one with three tall photographs of the building."
+        ],
+        "fig": "about-tenyu",
+        "cap": "The About page in Japanese: the miso block. The body text runs vertically over a photograph, and the heading stands vertically to its right."
+      },
+      {
+        "h": "Showing it in three languages",
+        "p": [
+          "The site was Japanese only. It can now be read in English and French too. The contract covers Japanese and English; the client asked for French to be added, because they had heard that many visitors come from France.",
+          "The English is Shopify's machine translation, which I revised. The French is based on a draft from Claude. The client has not yet reviewed either."
+        ],
+        "fig": "bilingual",
+        "cap": "The same hero in Japanese and in English."
+      },
+      {
+        "h": "Where the brand color stops, and keeping values in sync",
+        "p": [
+          "The brand's enji red runs up to the cart. From checkout onward I use Shopify's standard blue. I chose to draw the line between how the brand looks and how easy it is to buy.",
+          "When the values in Figma and in code drift apart, I look at the site to fix something and find that Figma no longer matches it. So a script keeps the color and spacing values the same in both."
+        ],
+        "fig": "responsive",
+        "cap": "The home page at 1440 and 390 pixels, drawn at the same scale. The vertical copy stays in place on both."
+      }
+    ],
+    "statusCatch": "Not yet public. No figures yet.",
+    "status": [
+      "The client's site has not launched, so there are no sales or conversion figures. After launch I plan to look at unique users, sales and purchase completion, and word-of-mouth feedback. These are not metrics agreed with the client. I also hope to see more visitors from French-speaking regions."
+    ],
+    "credit": [
+      [
+        "Me",
+        "Proposal, research, design in Figma, implementation on Shopify, and coordination with the client"
+      ],
+      [
+        "The client",
+        "The Japanese copy, photographs, enabling payment, and switching the domain"
+      ],
+      [
+        "Old site and existing work",
+        "12 products and shipping information, migrated from the old site; the Shopify theme, an existing one that I customized"
+      ],
+      [
+        "AI (Claude)",
+        "Help with implementation and translation. In Figma, I made the early-stage designs myself, and had AI apply the existing design system and evaluate and improve the designs against design principles and usability"
+      ]
+    ],
     "moreText": "The ten similar sites I surveyed, the six long-established companies, the moodboards and how I checked the work are in the detailed version.",
     "moreLink": "Read the detailed version"
   }
