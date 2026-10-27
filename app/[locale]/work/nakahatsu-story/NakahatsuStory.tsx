@@ -40,7 +40,7 @@ const NakahatsuStory: React.FC<{ launched: boolean; motionVideo: string | null }
     }
   }, [transitionState.phase, endTransition]);
 
-  const body = `${getBodyFontClass()} tracking-[0.2px] text-body-lg text-ink`;
+  const body = `${getBodyFontClass()} tracking-[0.2px] text-body-lg text-ink [text-wrap:pretty]`;
   const h2 = `text-title-lg text-ink ${getHeadingFontClass()}`;
   const caption = 'mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk';
   const label = 'text-body font-space-grotesk font-semibold text-ink-tertiary mb-2 block';
@@ -73,7 +73,7 @@ const NakahatsuStory: React.FC<{ launched: boolean; motionVideo: string | null }
   const Section = ({ title, texts, children }: { title: string; texts: string[]; children?: React.ReactNode }) => (
     <section className="mt-20 md:mt-28">
       <h2 className={`${h2} mb-6`}>{title}</h2>
-      <div className="max-w-[640px] space-y-4">
+      <div className="space-y-4">
         {texts.map((text) => (
           <p key={text} className={body}>
             {text}
@@ -107,7 +107,7 @@ const NakahatsuStory: React.FC<{ launched: boolean; motionVideo: string | null }
         <h1 className={`text-headline text-ink mb-3 ${getHeadingFontClass()}`}>{t('title')}</h1>
         <p className={`text-title text-ink-secondary ${getHeadingFontClass()}`}>{t('subtitle')}</p>
 
-        <div className="mt-10 max-w-[640px] space-y-4">
+        <div className="mt-10 space-y-4">
           <p className={body}>{t('intro1')}</p>
           <p className={body}>{t('intro2')}</p>
         </div>
@@ -164,7 +164,7 @@ const NakahatsuStory: React.FC<{ launched: boolean; motionVideo: string | null }
           <Figure src="/work/nakahatsu/responsive.webp" alt={tc('captionResponsive')} cap={tc('captionResponsive')} />
         </Section>
 
-        <section className="mt-24 md:mt-32 max-w-[640px]">
+        <section className="mt-24 md:mt-32">
           <h2 className={`${h2} mb-6`}>{t('closingTitle')}</h2>
           <p className={body}>{t('closingText')}</p>
         </section>
@@ -180,11 +180,11 @@ const NakahatsuStory: React.FC<{ launched: boolean; motionVideo: string | null }
             ))}
           </dl>
           {launched ? null : (
-            <p className={`mt-6 ${getBodyFontClass()} text-body text-ink-tertiary max-w-[640px]`}>{tc('scopeNote')}</p>
+            <p className={`mt-6 ${getBodyFontClass()} text-body text-ink-tertiary`}>{tc('scopeNote')}</p>
           )}
         </section>
 
-        <section className="mt-20 md:mt-28 max-w-[640px]">
+        <section className="mt-20 md:mt-28">
           <h2 className={`${h2} mb-6`}>{t('moreTitle')}</h2>
           <p className={`${body} mb-6`}>{t('moreText')}</p>
           <CTAButton href={localePath('/work/nakahatsu', language)}>{t('moreLink')}</CTAButton>
