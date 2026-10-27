@@ -448,7 +448,7 @@
     "overviewText2Live": "I took the project on as an individual, through an introduction from an acquaintance. It is a domestic shop shown in Japanese, English and French. Selling overseas is outside the scope.",
     "challengeTitle": "Before the rebuild",
     "challenge1": "The shop could not take credit cards. The only ways to pay were bank transfer, postal transfer and cash on delivery.",
-    "challenge2": "The site was in Japanese only, with prices in yen only. A visitor who could not read Japanese could not tell what was being sold.",
+    "challenge2": "The site was in Japanese only, with no official translation. A visitor who could not read Japanese had to rely on the browser's machine translation, with no guarantee that the product and purchasing information would come across as intended. Prices were in yen only.",
     "challenge3": "When I tried it in March, the confirmation email for a new account took about two hours to arrive. Registering again in the meantime showed \"This email address cannot be used\".",
     "challenge4": "The purchase path was split between WordPress and the shop. The designs could not be unified, and updates had to be done twice.",
     "challenge5": "What buyers want to know before purchase, such as shipping fees, payment methods and returns, was only partly written on the legal notice page, and not where customers would naturally look.",
