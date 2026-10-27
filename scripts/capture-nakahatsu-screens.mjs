@@ -132,8 +132,20 @@ const ctxFor = async (w, h, mobile = false) => {
   return c;
 };
 
+const MODE = process.argv[2] || 'default'; // default | discover | more
+
+if (MODE === 'discover') {
+  // どんなページがあるかを、ホームのリンクから一覧する（撮影はしない）
+  const c = await ctxFor(1440, 900);
+  const page = await openPage(c, '/');
+  const links = await page.evaluate(() => [...new Set([...document.querySelectorAll('a[href^="/"]')].map((a) => a.getAttribute('href').split('?')[0]))].sort());
+  console.log(links.join('\n'));
+  await browser.close();
+  process.exit(0);
+}
+
 // PC 1440x900
-{
+if (MODE === 'default') {
   const c = await ctxFor(1440, 900);
   await shot(c, { path: '/', name: 'pc-home-top', home: true });
   await shot(c, { path: '/en/', name: 'pc-home-top-en', home: true });
@@ -142,7 +154,7 @@ const ctxFor = async (w, h, mobile = false) => {
   await c.close();
 }
 // SP 390x844
-{
+if (MODE === 'default') {
   const c = await ctxFor(390, 844, true);
   await shot(c, { path: '/', name: 'sp-home-top', home: true });
   await shot(c, { path: '/en/', name: 'sp-home-top-en', home: true });
@@ -158,6 +170,28 @@ const ctxFor = async (w, h, mobile = false) => {
   await shot(c, { path: '/en' + href, name: 'sp-product-en' });
   await shot(c, { path: '/fr' + href, name: 'sp-product-fr' }); // 3 言語の並び（日・英・仏）用
   await c.close();
+}
+// 別バリエーション用の画面（node scripts/capture-nakahatsu-screens.mjs more）
+if (MODE === 'more') {
+  const MISO = '/products/%E5%A4%A9%E7%A5%90-%E7%B1%B3%E7%B3%80%E5%91%B3%E5%99%8C-%E7%B2%92-800g';
+  const pc = await ctxFor(1440, 900);
+  await shot(pc, { path: '/fr/', name: 'pc-home-top-fr', home: true });
+  await shot(pc, { path: '/pages/faq', name: 'pc-faq' });
+  await shot(pc, { path: '/pages/contact', name: 'pc-contact' });
+  await shot(pc, { path: '/blogs/news', name: 'pc-news' });
+  await shot(pc, { path: '/blogs/news/renewal-announcement-2026', name: 'pc-news-article' });
+  await shot(pc, { path: MISO, name: 'pc-product-miso' });
+  await shot(pc, { path: '/policies/shipping-policy', name: 'pc-shipping' });
+  await shot(pc, { path: '/cart', name: 'pc-cart' });
+  await pc.close();
+  const sp = await ctxFor(390, 844, true);
+  await shot(sp, { path: '/fr/', name: 'sp-home-top-fr', home: true });
+  await shot(sp, { path: '/pages/faq', name: 'sp-faq' });
+  await shot(sp, { path: '/pages/contact', name: 'sp-contact' });
+  await shot(sp, { path: '/blogs/news', name: 'sp-news' });
+  await shot(sp, { path: MISO, name: 'sp-product-miso' });
+  await shot(sp, { path: '/cart', name: 'sp-cart' });
+  await sp.close();
 }
 await browser.close();
 console.log('done');
