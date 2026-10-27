@@ -1365,3 +1365,5 @@ variables / styles はデザインの統一と作業効率のため（現行サ�
 追記 (2026-10-27): Work — Ukiyoe — SP（Site — JP、x=1400,y=24600）と Work — Figma Plugins — PC（Site — JP、x=0,y=40800、フレーム 39:628）を再現。Figma Plugins PC はヒーローのカード束（装飾）・概要・4 ツールカードまで目視で一致。次: Figma Plugins SP、Google UX、Gym、Airline、Blog、Podcast Notes、Experiment SP。
 
 追記 (2026-10-27): Work — Figma Plugins — SP（Site — JP、x=1400,y=40800、フレーム 41:628）を再現。テキスト 82・画像 12（PC と同数）、フォント欠落なし。ヒーローのカード束は PC のものを複製して 375/1280 に縮小（作り直さない）。残り: Google UX、Gym、Airline、Blog、Podcast Notes（各 PC/SP）、Experiment SP、Experiment PC の位置修正、Header/Footer インスタンスの付与。
+
+追記 (2026-10-27): Work — Google UX — PC（44:628、0,44000、高さ30123、テキスト49・画像37）と SP（45:628、1400,44000、テキスト31・画像37）を再現。いずれもフォント欠落なし。次の空き y は 74600。次: Gym、Airline、Blog、Podcast Notes、Experiment SP。
