@@ -767,3 +767,7 @@ headless フラグを疑う。
 - `<img src=*.svg>` を高解像度の PNG にするとき、ページに `document.documentElement.style.zoom=2` をかけて要素スクリーンショットを撮ると、要素ではなくページ左上が撮れた（座標が zoom で狂う）。
 - 正しくは、新しいブラウザコンテキスト（`deviceScaleFactor: 2`）で `<img>` を `setContent` し、実際の表示サイズ（CSS px）を指定して要素スクリーンショットを撮る。撮った画像は目で必ず確認する（今回は最初に気づかずアップロードし、ヒーローが崩れて発覚）。
 - Playwright の `path` は MCP サーバーの cwd 相対で、ワークツリーではなくメイン checkout の `.playwright-mcp/` に保存されることがある。保存先を `find` で確認してからコピーする。
+
+## 2026-10-27: Figma 再現パイプライン — lazy-load 画像と、画面で切れるテキスト
+- 画像が lazy-load のページ（Airline）は、抽出の前に最後までスクロールして全部読み込ませる。しないと全面スクリーンショットで画像が空白になる。`complete && naturalWidth>0` で確認する。
+- カード一覧の説明文など、CSS の line-clamp で画面では数行に切れているテキストは、DOM には全文が入っている。抽出するとそのまま長い文が入るので、Figma では `textTruncation=ENDING` と `maxLines` で画面と同じ見た目にする（高さが過大になるのを防ぐ）。
