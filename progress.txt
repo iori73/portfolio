@@ -1504,7 +1504,12 @@ Shopify のパスワードページは Shopify 側テンプレートなので、
 - takram 型ページの本文が折り返していたのは、私が本文幅を 640px に絞っていたため。外して、`text-wrap: pretty` に。
 - 課題3の「3月に」を「1か月目に」に（JP/EN とも、本文と Figma）。他の絶対日付の相対表記化は河野さんの判断待ち。
 
-## 2026-10-27 夜(4) Suika Yamada 型を Figma に追加（4枚）
+## 2026-10-27 夜(4) SY型を Figma に追加（4枚）
 - 参考: suikayamada.studio.site の wazuka / kinoquest / yamatokobo / airregi を読み取りで学習（構成・配置だけを借り、文章・画像は写していない）。型: 小見出し→作品名→メタ2×2（Client/Role/Date/Team）、Overview→Process→Credit の2カラム、Process は番号付き小節＋図（キャプションなし）、終わりは Credit。
 - Figma: 「Label — Yamada-style」の下に4枚（JP/EN × PC/SP。PC は 287:363 / 288:363、SP は 287:610 / 288:610）。文体は です・ます調のまま。takram 型は残してある。
 - 図の説明は、レイヤー名（「図: …」）に入れた（この人の型にキャプションがないため）。サイトのページはまだ作っていない（Figma の注釈で直したあと）。
+
+## 2026-10-27 夜(5) 表記の統一と、SY型への変換 agent
+- 「Suika Yamada 型」を「SY型」に置換（Figma のラベル・評価枠、Desktop の資料、この記録）。
+- 既存の Work を SY型に変換する agent を追加: `.claude/agents/sy-case-study-converter.md`（棚卸し→台帳→Figma 4枚→河野さんの注釈→承認後にサイト反映、の手順。push・削除・未確認の主張を禁止）。
+- 主要画面の一覧画像: 素材の撮影スクリプト `scripts/capture-nakahatsu-overview.mjs`（review は撮影済み、人物写真・Instagram の帯の位置を確認する段階）。
