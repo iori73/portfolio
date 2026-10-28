@@ -42,7 +42,7 @@ export default function NoteCard({ episode, isHighlighted, bodyFontClass, headin
           ? 'border-line-section shadow-md ring-1'
           : 'border-line-subtle hover:border-line-section hover:shadow-sm'
       }`}
-      style={isHighlighted ? { ringColor: color + '40' } : undefined}
+      style={isHighlighted ? ({ ringColor: color + '40' } as React.CSSProperties) : undefined}
     >
       <button
         onClick={() => setIsExpanded(!isExpanded)}
