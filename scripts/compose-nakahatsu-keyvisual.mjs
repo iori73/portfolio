@@ -47,7 +47,8 @@ const SP_KEEP_CSS = 783;
 async function spScreen(f) {
   const img = sharp(KS + f);
   const { width, height } = await img.metadata();
-  const keep = Math.min(height, SP_KEEP_CSS * 2);
+  // 素材の倍率は 2 とは限らない（NAKAHATSU_DPR で 3 にしたとき）。幅から倍率を求める
+  const keep = Math.min(height, Math.round(SP_KEEP_CSS * (width / 390)));
   const top = await img.extract({ left: 0, top: 0, width, height: keep }).png().toBuffer();
   const out = await sharp({ create: { width, height, channels: 3, background: '#ffffff' } })
     .composite([{ input: top, left: 0, top: 0 }])
@@ -97,6 +98,8 @@ for (const j of jobs) {
   await sharp(png).webp({ quality: 86 }).toFile(OUT + j.out);
   // Figma 用（WebP は Figma で描画されないため JPEG。リポジトリには入れない）
   await sharp(png).jpeg({ quality: 92 }).toFile(KS + j.out.replace('.webp', '.figma.jpg'));
+  // Figma 用の無劣化版（PNG）。JPEG の圧縮のざらつきを避ける（河野さんの「もっと画質良く」2026-10-28）
+  await sharp(png).toFile(KS + j.out.replace('.webp', '.figma.png'));
   console.log(j.out.padEnd(22), `${W * DSF}x${H * DSF}`, 'from', j.pc, '+', j.sp);
 }
 await browser.close();

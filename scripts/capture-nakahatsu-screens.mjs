@@ -127,7 +127,7 @@ const storageState = await a.storageState();
 await a.close();
 
 const ctxFor = async (w, h, mobile = false) => {
-  const c = await browser.newContext({ storageState, viewport: { width: w, height: h }, deviceScaleFactor: 2, isMobile: mobile, hasTouch: mobile });
+  const c = await browser.newContext({ storageState, viewport: { width: w, height: h }, deviceScaleFactor: Number(process.env.NAKAHATSU_DPR || 2), isMobile: mobile, hasTouch: mobile });
   await c.route(/preview_bar|preview-bar|shopifycloud\/preview/, (r) => r.abort());
   return c;
 };

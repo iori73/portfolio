@@ -151,10 +151,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                 <figure aria-label={s.cap} className="overflow-hidden rounded-media md:grid md:grid-cols-2">
                   <Swatch c={palette.colors[0]} rows={palette.rows} className="md:row-span-2 md:min-h-[460px]" />
                   <Swatch c={palette.colors[1]} rows={palette.rows} className="md:min-h-[230px]" />
-                  <div className="md:grid md:grid-cols-2">
-                    <Swatch c={palette.colors[2]} rows={palette.rows} className="md:min-h-[230px]" />
-                    <Swatch c={palette.colors[3]} rows={palette.rows} className="md:min-h-[230px]" />
-                  </div>
+                  <Swatch c={palette.colors[2]} rows={palette.rows} className="md:min-h-[230px]" />
                 </figure>
               ) : (
                 <div className={`flex justify-center`}>
