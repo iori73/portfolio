@@ -288,6 +288,24 @@ async function compose() {
   // thumbnail-{jp,en}.webp（カードとヒーロー。8:5）は scripts/compose-nakahatsu-keyvisual.mjs が作る。
   // 先方サイトのファーストビューの切り取りをそのまま出さず、PC と SP の画面を平らな地に置いた表紙にしてある。
 
+  // bilingual-3lang: 同じヒーローの日本語・English・Français を横に並べる（SY型のケーススタディ用。16:9）。
+  // 他の図には触れないよう、`--bilingual3` のときだけ、この図だけを作って終わる。
+  {
+    const W = 1200, H = 675, PAD = 32, GAP = 24, LABEL_H = 44;
+    const colW = Math.round((W - PAD * 2 - GAP * 2) / 3);
+    const panelH = Math.round(900 * (colW / 1440));
+    const top = Math.round((H - (LABEL_H + panelH)) / 2);
+    const parts = [];
+    for (const [i, [file, name]] of [['hero-ja-1440.png', '日本語'], ['hero-en-1440.png', 'English'], ['hero-fr-1440.png', 'Français']].entries()) {
+      const left = PAD + i * (colW + GAP);
+      parts.push({ input: label(name, colW), left, top });
+      parts.push({ input: await round(await panel(file, { w: 1440, h: 900 }, colW, panelH), colW, panelH), left, top: top + LABEL_H });
+    }
+    await write('bilingual-3lang.webp', canvas(W, H).composite(parts));
+    await canvas(W, H).composite(parts).png().toFile('/Users/iorikawano/.claude/jobs/5567ddb3/tmp/bilingual-3lang.png');
+    if (args.has('--bilingual3')) return;
+  }
+
   // before-after: 旧サイトのトップ（WordPress）と、新サイトのトップを、同じ幅・同じ範囲で並べる。
   // 以前は、旧側にショップ（EC-CUBE）のページを混ぜていて、トップ対トップでなかった（河野さんの指摘 2026-10-27）。
   // ショップが別システムだったことは、本文で述べる。

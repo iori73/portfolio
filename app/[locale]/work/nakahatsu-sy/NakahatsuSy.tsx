@@ -24,9 +24,36 @@ type Meta = [string, string[]];
 type Step = { h: string; p: string[]; fig: string; cap: string };
 type Credit = [string, string];
 
+type PaletteColor = { name: string; hex: string; rgb: string; use: string; fg: string };
+type Palette = { rows: string[]; colors: PaletteColor[] };
+
 const LABEL = 'text-body font-space-grotesk font-semibold text-ink-tertiary';
 
-const NakahatsuSy: React.FC<{ launched: boolean }> = ({ launched }) => {
+/**
+ * 色の見本（1色=1枚）。地の色と文字の色は、色そのものが内容なので、値（HEX）をそのまま使う。
+ * CMYK・PANTONE は、Web の案件に定義がないため載せない（HEX から計算できる RGB のみ）。
+ */
+function Swatch({ c, rows, className }: { c: PaletteColor; rows: string[]; className?: string }) {
+  const light = c.hex.toUpperCase() === '#F9FAF5';
+  return (
+    <div
+      className={`flex flex-col gap-6 p-6 md:p-10 ${light ? 'ring-1 ring-inset ring-black/10' : ''} ${className ?? ''}`}
+      style={{ backgroundColor: c.hex, color: c.fg }}
+    >
+      <p className="font-space-grotesk text-body tracking-[0.12em]">{c.name}</p>
+      <dl className="grid grid-cols-[5rem_minmax(0,1fr)] gap-x-4 gap-y-3 text-body">
+        <dt className="opacity-80">{rows[0]}</dt>
+        <dd className="font-space-grotesk">{c.hex}</dd>
+        <dt className="opacity-80">{rows[1]}</dt>
+        <dd className="font-space-grotesk">{c.rgb}</dd>
+        <dt className="opacity-80">{rows[2]}</dt>
+        <dd>{c.use}</dd>
+      </dl>
+    </div>
+  );
+}
+
+const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
   const t = useTranslations('nakahatsuSy');
   const tc = useTranslations('nakahatsu');
   const language = useLocale();
@@ -44,6 +71,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = ({ launched }) => {
   const meta = t.raw('meta') as Meta[];
   const steps = t.raw('steps') as Step[];
   const credit = t.raw('credit') as Credit[];
+  const palette = t.raw('palette') as Palette;
   const body = `${getBodyFontClass()} tracking-[0.2px] text-body-lg text-ink [text-wrap:pretty]`;
   const catchLine = `text-title text-ink ${getHeadingFontClass()} [text-wrap:balance]`;
 
@@ -117,25 +145,31 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = ({ launched }) => {
                   ))}
                 </div>
               </div>
-              {/* 全幅と中央寄せ（760）を交互に。キャプションは置かず、alt に説明を入れる。 */}
-              <div className={`flex justify-center`}>
-                <div className={`w-full overflow-hidden rounded-media bg-surface-muted ${i % 2 === 1 ? 'md:w-[760px]' : ''}`}>
-                  <Image src={`/work/nakahatsu/${s.fig === 'before-after' ? `before-after-${language === 'jp' ? 'jp' : 'en'}` : s.fig}.webp`} alt={s.cap} width={1200} height={675} className="h-auto w-full" />
+              {/* 全幅と中央寄せ（760）を交互に。キャプションは置かず、alt に説明を入れる。
+                  色の図（palette）は画像でなく、文字として組む（HEX・RGB・使う場所を、読み上げでも読める） */}
+              {s.fig === 'palette' ? (
+                <figure aria-label={s.cap} className="overflow-hidden rounded-media md:grid md:grid-cols-2">
+                  <Swatch c={palette.colors[0]} rows={palette.rows} className="md:row-span-2 md:min-h-[460px]" />
+                  <Swatch c={palette.colors[1]} rows={palette.rows} className="md:min-h-[230px]" />
+                  <div className="md:grid md:grid-cols-2">
+                    <Swatch c={palette.colors[2]} rows={palette.rows} className="md:min-h-[230px]" />
+                    <Swatch c={palette.colors[3]} rows={palette.rows} className="md:min-h-[230px]" />
+                  </div>
+                </figure>
+              ) : (
+                <div className={`flex justify-center`}>
+                  <div className={`w-full overflow-hidden rounded-media bg-surface-muted ${i % 2 === 1 ? 'md:w-[760px]' : ''}`}>
+                    <Image src={`/work/nakahatsu/${s.fig === 'before-after' ? `before-after-${language === 'jp' ? 'jp' : 'en'}` : s.fig}.webp`} alt={s.cap} width={1200} height={675} className="h-auto w-full" />
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           ))}
         </div>
 
-        {/* 公開前は、数字がないことを明記する。公開後は、この節を数字に置き換える。 */}
-        {!launched && (
-          <Row label="Status">
-            <p className={catchLine}>{t('statusCatch')}</p>
-            {(t.raw('status') as string[]).map((p) => (
-              <p key={p} className={body}>{p}</p>
-            ))}
-          </Row>
-        )}
+        {/* Status（公開前・数字なし・見ていく指標）の節は、河野さんの判断で外した（2026-10-28、Figma の注釈）。
+            ただの希望なので、ページには載せない。文言は messages の statusCatch / status と、
+            Figma の退避枠に残してある。公開後に数字が出たら、この位置に実績の節として足す。 */}
 
         <Row label="Credit">
           {credit.map(([who, what]) => (

@@ -4,6 +4,7 @@
  *
  *   node scripts/capture-nakahatsu-overview.mjs review   # 全高の確認用（dpr 1。映ってはいけないものを探す）
  *   node scripts/capture-nakahatsu-overview.mjs final    # 採用する高さで撮る（dpr 2）
+ *   NAKAHATSU_ONLY=about-tenyu node scripts/capture-nakahatsu-overview.mjs final   # 1 枚だけ撮り直す
  *
  *   出力: .capture/nakahatsu/ov/{review|final}/*.png（gitignore 済み）
  *
@@ -114,7 +115,9 @@ await auth.close();
 const ctx = await browser.newContext({ storageState, viewport: { width: 1440, height: 900 }, deviceScaleFactor: MODE === 'final' ? 2 : 1 });
 await ctx.route(/preview_bar|preview-bar|shopifycloud\/preview/, (r) => r.abort());
 
+const ONLY = (process.env.NAKAHATSU_ONLY || '').split(',').filter(Boolean); // 例: about-tenyu（final の出力名）
 for (const p of PAGES) {
+  if (ONLY.length && !RANGES.some((r) => (r.page || r.name) === p.name && ONLY.includes(r.name))) continue;
   const page = await ctx.newPage();
   page.setDefaultTimeout(30000);
   await page.goto(BASE + LANG + p.path, { waitUntil: 'load' });
@@ -136,6 +139,22 @@ for (const p of PAGES) {
     scrollTo(0, 0);
   });
   await page.waitForTimeout(900);
+  // 表示演出の要素（.is-js）は、1 つずつ画面の中央に送って止まる。About の天祐の縦書き本文は、
+  // 写真が出た（is-in）後、しばらく画面内にあると clip-path で右から現れる（is-in-p）。
+  // 上の速い送りだけでは本文の段階が始まらず、写真の上の文字がない画像になった（2026-10-28）。
+  await page.evaluate(async () => {
+    for (const el of document.querySelectorAll('.is-js')) {
+      el.scrollIntoView({ block: 'center' });
+      await new Promise((r) => setTimeout(r, 1500));
+    }
+    scrollTo(0, 0);
+  });
+  await page.evaluate(() => Promise.race([
+    Promise.all(document.getAnimations().filter((a) => a.effect?.getTiming().iterations !== Infinity).map((a) => a.finished.catch(() => {}))),
+    new Promise((r) => setTimeout(r, 8000)),
+  ]));
+  await page.waitForFunction(() => [...document.querySelectorAll('.nkv2-pa__tenyu-col-vertical')].every((e) => getComputedStyle(e).clipPath === 'inset(0px)'), null, { timeout: 10000 });
+  await page.waitForTimeout(300);
   if (p.home) {
     for (let i = 0; i < 6; i++) {
       await page.evaluate(() => document.querySelectorAll('.nkv2-hero__dot')[0]?.click());
@@ -145,7 +164,7 @@ for (const p of PAGES) {
   }
   const total = await page.evaluate(() => Math.ceil(document.documentElement.scrollHeight));
   if (MODE === 'final') {
-    for (const r of RANGES.filter((f) => (f.page || f.name) === p.name)) {
+    for (const r of RANGES.filter((f) => (f.page || f.name) === p.name && (!ONLY.length || ONLY.includes(f.name)))) {
       const y1 = Math.min(total, r.y1);
       await page.screenshot({ path: OUT + r.name + '.png', fullPage: true, clip: { x: 0, y: r.y0, width: 1440, height: y1 - r.y0 } });
       console.log(r.name.padEnd(12), `y ${r.y0}-${y1} (total ${total})`);

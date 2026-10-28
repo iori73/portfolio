@@ -577,23 +577,20 @@
         "Role",
         [
           "Proposal and research",
-          "UI design",
-          "Shopify implementation",
-          "Client coordination"
+          "Site design",
+          "Shopify implementation"
         ]
       ],
       [
         "Date",
         [
-          "From March 2026",
-          "In progress, not yet public"
+          "March to October 2026"
         ]
       ],
       [
         "Team",
         [
-          "Design and implementation: 1 person (with AI)",
-          "Client contact: the family who run the company"
+          "Design and implementation: 1 person"
         ]
       ]
     ],
@@ -602,10 +599,10 @@
       "Nakahatsu Shoten makes soy sauce and miso in Kanazawa. It was founded in 1896 as a food retailer and later moved into brewing.",
       "The company site ran on WordPress and the shop on EC-CUBE, as two separate systems. I took the project on as an individual, through an introduction from an acquaintance, and handle the proposal, the design, the Shopify implementation, and display in Japanese, English and French. This phase is a domestic shop; selling overseas is outside the scope."
     ],
-    "processCatch": "From \"keep the existing design\" to a design that carries the client's strengths.",
+    "processCatch": "From \"keep the existing design\" to a design that carries Nakahatsu Shoten's strengths.",
     "process": [
-      "The first agreement was to keep the existing design and skip wireframes. After that I proposed a redesign. From the client's daily posts on Instagram, I sensed a shop that welcomes people from Japan and abroad, of every age, and values its relationships with them. I wanted the site to express that strength fully, and to convey the history and the people behind it.",
-      "In the proposal I explained the reasons for the change, together with how much I respect what the client does."
+      "The first agreement was to keep the existing design and skip wireframes. After that I proposed a redesign. The reason was that, from Nakahatsu Shoten's daily posts on Instagram, I sensed a shop that welcomes people from Japan and abroad, of every age, and values its relationships with them. I wanted the site to express that strength fully, and to convey the history and the people behind it.",
+      "In the proposal I explained the reasons for the change, together with how much I respect what Nakahatsu Shoten does."
     ],
     "steps": [
       {
@@ -620,7 +617,7 @@
       {
         "h": "Showing two versions side by side",
         "p": [
-          "I made one version that reproduced the existing site (v1) and one redesign (v2), and shared them side by side. The client replied that v2 was easy to see, with a clean structure that included the purchase path (summarised). I have worked mainly on v2 since."
+          "I made one version that reproduced the existing site (v1) and one redesign (v2), and shared them side by side. Nakahatsu Shoten replied that v2 was easy to see, with a clean structure that included the purchase path (summarised). I have worked mainly on v2 since."
         ],
         "fig": "before-after",
         "cap": "Before: the top page of the WordPress company site. After: the new top page. The shop was a separate system (EC-CUBE)."
@@ -629,7 +626,7 @@
         "h": "Rebuilding About and the home page",
         "p": [
           "In the later part of the work, the About page changed the most. I laid the body text over a photograph for the two brewing sections, tenyu soy sauce and tenyu miso. When the screen is wide enough, the Japanese text runs vertically.",
-          "For the home page's \"About Nakahatsu Shoten\" block I laid out several options, and the client chose the one with three tall photographs of the building."
+          "For the home page's \"About Nakahatsu Shoten\" block I laid out several options, and Nakahatsu Shoten chose the one with three tall photographs of the building."
         ],
         "fig": "about-tenyu",
         "cap": "The About page in Japanese: the miso block. The body text runs vertically over a photograph, and the heading stands vertically to its right."
@@ -637,11 +634,10 @@
       {
         "h": "Showing it in three languages",
         "p": [
-          "The site was Japanese only. It can now be read in English and French too. The contract covers Japanese and English; the client asked for French to be added, because they had heard that many visitors come from France.",
-          "The English is Shopify's machine translation, which I revised. The French is based on a draft from Claude. The client has not yet reviewed either."
+          "The site was Japanese only. It can now be read in English and French too. The contract covers Japanese and English; Nakahatsu Shoten asked for French to be added, because many visits to the site come from France."
         ],
-        "fig": "bilingual",
-        "cap": "The same hero in Japanese and in English."
+        "fig": "bilingual-3lang",
+        "cap": "The same hero in Japanese, English and French."
       },
       {
         "h": "Where the brand color stops, and keeping values in sync",
@@ -649,8 +645,8 @@
           "The brand's enji red runs up to the cart. From checkout onward I use Shopify's standard blue. I chose to draw the line between how the brand looks and how easy it is to buy.",
           "When the values in Figma and in code drift apart, I look at the site to fix something and find that Figma no longer matches it. So a script keeps the color and spacing values the same in both."
         ],
-        "fig": "responsive",
-        "cap": "The home page at 1440 and 390 pixels, drawn at the same scale. The vertical copy stays in place on both."
+        "fig": "palette",
+        "cap": "The brand's enji, and the Shopify standard blue used from checkout onward. The theme colors sumi brown and washi. Each color shows its HEX, RGB and where it is used."
       }
     ],
     "statusCatch": "Not yet public. No figures yet.",
@@ -659,23 +655,56 @@
     ],
     "credit": [
       [
-        "Me",
-        "Proposal, research, design in Figma, implementation on Shopify, and coordination with the client"
+        "Iori Kawano",
+        "Proposal, research, site design, and implementation on Shopify"
       ],
       [
-        "The client",
+        "Nakahatsu Shoten",
         "The Japanese copy, photographs, enabling payment, and switching the domain"
       ],
       [
         "Old site and existing work",
         "12 products and shipping information, migrated from the old site; the Shopify theme, an existing one that I customized"
-      ],
-      [
-        "AI (Claude)",
-        "Help with implementation and translation. In Figma, I made the early-stage designs myself, and had AI apply the existing design system and evaluate and improve the designs against design principles and usability"
       ]
     ],
     "moreText": "The ten similar sites I surveyed, the six long-established companies, the moodboards and how I checked the work are in the detailed version.",
-    "moreLink": "Read the detailed version"
+    "moreLink": "Read the detailed version",
+    "palette": {
+      "rows": [
+        "HEX",
+        "RGB",
+        "USE"
+      ],
+      "colors": [
+        {
+          "name": "Enji",
+          "hex": "#8B2252",
+          "rgb": "R:139 G:34 B:82",
+          "use": "Up to the cart. The brand color",
+          "fg": "#FFFFFF"
+        },
+        {
+          "name": "Shopify standard blue",
+          "hex": "#005BD3",
+          "rgb": "R:0 G:91 B:211",
+          "use": "From checkout onward. The link color",
+          "fg": "#FFFFFF"
+        },
+        {
+          "name": "Sumi brown",
+          "hex": "#3B2A1A",
+          "rgb": "R:59 G:42 B:26",
+          "use": "Theme color. Sumi brown",
+          "fg": "#FFFFFF"
+        },
+        {
+          "name": "Washi",
+          "hex": "#F9FAF5",
+          "rgb": "R:249 G:250 B:245",
+          "use": "Theme color. The washi background",
+          "fg": "#241E17"
+        }
+      ]
+    }
   }
 }
