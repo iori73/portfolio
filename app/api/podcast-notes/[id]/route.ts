@@ -25,6 +25,8 @@ const MAX_BLOCKS_PER_SECTION = 40;
 const MAX_BLOCK_TEXT = 2000;
 const MAX_CHILD_REQUESTS = 20;
 
+const PODCAST_DATA_SOURCE_ID = '1db26482-6e0c-8160-ad77-000b12e41365';
+
 function extractRichText(richText: { plain_text?: string }[] | undefined): string {
   if (!richText || !Array.isArray(richText)) return '';
   return richText.map((t) => t.plain_text || '').join('');
@@ -263,6 +265,14 @@ export async function GET(
   try {
     // Fetch page properties
     const page = await notion.pages.retrieve({ page_id: id }) as Record<string, unknown>;
+
+    // 連携が見えるページなら何でも id で取れてしまうのを防ぐ：podcast DB のページだけ返す。
+    // （一覧側 scripts/generate-podcast-data.js と同じデータソース ID）
+    const parent = page.parent as { data_source_id?: string } | undefined;
+    if (parent?.data_source_id?.replace(/-/g, '') !== PODCAST_DATA_SOURCE_ID.replace(/-/g, '')) {
+      return NextResponse.json({ error: 'Episode not found' }, { status: 404 });
+    }
+
     const props = page.properties as Record<string, Record<string, unknown>>;
 
     const rawCategory = (props.Category as { select?: { name?: string } })?.select?.name ?? null;
