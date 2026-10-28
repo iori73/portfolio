@@ -1530,3 +1530,9 @@ Shopify のパスワードページは Shopify 側テンプレートなので、
 - 調査（採用担当の視点。Web 検索）: 目安は 1 作品 800〜1,500 字、画面 3〜5 枚、構成は「背景・課題・制約 → 検討した案と選ばなかった理由 → 結果」。トーンと AI の書き方は根拠が確認できなかった。
 - SY型を `/work/nakahatsu-sy`（noindex）としてサイトに作った。文言は messages の nakahatsuSy。Figma の SY-style 4枚（287:363 / 287:610 / 288:363 / 288:610）を同じ文言で作り直し。日本語本文 1,453 字。
 - 回答: 人物写真は載せない（動画は入れない）／「43件・204画面」は SY型に足さない／日付は月数表記を控えめに／書面 OK は近く送る／Figma とサイトは常に同期（メモリに記録）。
+
+## 2026-10-28 B2/B3/B8/B4 の続き
+- B3 英語版の主要画面: `NAKAHATSU_LANG_PREFIX=/en node scripts/capture-nakahatsu-overview.mjs final` で8枚（英語版は行数が違うので範囲を別に決めた）→ `compose-nakahatsu-overview.mjs` で合成 → `public/work/nakahatsu/overview-en.webp`。Figma に編集可能版（332:363）。
+- B2 使い方の5パターンを Figma に並べた（333:363）: A 冒頭に大きな1枚（推奨）／B ヒーロー置換／C Status の前／D カード・共有サムネ／E Overview の中。
+- B8 先方への依頼文を作り直した: ~/Desktop/nakahatsu-portfolio-preview/先方への依頼文（2026-10-28版）.md（人物写真は載せない、先方とのやり取りの要旨を載せる、と明記）。
+- B4 日付: 詳しい版から、読み手に要らない絶対日付を削った（4月・5月・8月・10月 など）。メタ欄の「2026年3月〜」は残す。Figma の詳しい版（JP/EN×PC/SP）も同じ。takram型の Figma フレームには古い日付が残っている。

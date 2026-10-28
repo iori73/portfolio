@@ -22,7 +22,8 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const require = createRequire(join(ROOT, 'package.json'));
 const { chromium } = require('playwright');
 const MODE = process.argv[2] || 'review';
-const OUT = join(ROOT, '.capture', 'nakahatsu', 'ov', MODE) + '/';
+const LANG = process.env.NAKAHATSU_LANG_PREFIX || ''; // '' = 日本語、'/en' = 英語
+const OUT = join(ROOT, '.capture', 'nakahatsu', 'ov', MODE + (LANG ? '-' + LANG.replace('/', '') : '')) + '/';
 mkdirSync(OUT, { recursive: true });
 
 for (const line of (existsSync(join(ROOT, '.nakahatsu-capture.env')) ? readFileSync(join(ROOT, '.nakahatsu-capture.env'), 'utf8') : '').split('\n')) {
@@ -64,6 +65,18 @@ const FINAL = [
   { name: 'contact', y0: 0, y1: 1090 },
   { name: 'shipping', y0: 0, y1: 1920 },
 ];
+/** 英語版（/en）の範囲。英文は行数が違い、フッターの位置がずれるので別に決めた（2026-10-28）。 */
+const FINAL_EN = [
+  { name: 'home', y0: 0, y1: 1500 },
+  { name: 'shop', y0: 0, y1: 1250 },
+  { name: 'product', y0: 0, y1: 1420 },
+  { name: 'about-top', page: 'about', y0: 0, y1: 1560 },
+  { name: 'about-tenyu', page: 'about', y0: 5540, y1: 7040 },
+  { name: 'faq', y0: 0, y1: 1070 },
+  { name: 'contact', y0: 0, y1: 1100 },
+  { name: 'shipping', y0: 0, y1: 2110 },
+];
+const RANGES = LANG === '/en' ? FINAL_EN : FINAL;
 let CAPS = {};
 try { CAPS = JSON.parse(readFileSync(join(ROOT, '.capture', 'nakahatsu', 'ov', 'caps.json'), 'utf8')); } catch {}
 
@@ -104,7 +117,7 @@ await ctx.route(/preview_bar|preview-bar|shopifycloud\/preview/, (r) => r.abort(
 for (const p of PAGES) {
   const page = await ctx.newPage();
   page.setDefaultTimeout(30000);
-  await page.goto(BASE + p.path, { waitUntil: 'load' });
+  await page.goto(BASE + LANG + p.path, { waitUntil: 'load' });
   await page.waitForFunction(KURA_DONE, null, { timeout: 20000 }).catch(() => {});
   await page.waitForTimeout(1200);
   if (await page.evaluate(() => !!document.querySelector('input[name="password"]'))) throw new Error(`パスワードページ: ${p.path}`);
@@ -132,7 +145,7 @@ for (const p of PAGES) {
   }
   const total = await page.evaluate(() => Math.ceil(document.documentElement.scrollHeight));
   if (MODE === 'final') {
-    for (const r of FINAL.filter((f) => (f.page || f.name) === p.name)) {
+    for (const r of RANGES.filter((f) => (f.page || f.name) === p.name)) {
       const y1 = Math.min(total, r.y1);
       await page.screenshot({ path: OUT + r.name + '.png', fullPage: true, clip: { x: 0, y: r.y0, width: 1440, height: y1 - r.y0 } });
       console.log(r.name.padEnd(12), `y ${r.y0}-${y1} (total ${total})`);

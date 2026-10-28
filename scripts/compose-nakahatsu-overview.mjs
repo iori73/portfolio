@@ -16,8 +16,9 @@ import { fileURLToPath } from 'node:url';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const require = createRequire(join(ROOT, 'package.json'));
 const { chromium } = require('playwright');
-const SRC = join(ROOT, '.capture', 'nakahatsu', 'ov', 'final') + '/';
-const OUT = join(ROOT, '.capture', 'nakahatsu', 'ov', 'overview-jp.png');
+const LANG = process.env.NAKAHATSU_LANG_PREFIX || '';
+const SRC = join(ROOT, '.capture', 'nakahatsu', 'ov', 'final' + (LANG ? '-' + LANG.replace('/', '') : '')) + '/';
+const OUT = join(ROOT, '.capture', 'nakahatsu', 'ov', LANG ? 'overview-en.png' : 'overview-jp.png');
 
 const W = 2400, H = 1500, COL_W = 640, GAP = 48;
 const X0 = (W - (COL_W * 3 + GAP * 2)) / 2;
