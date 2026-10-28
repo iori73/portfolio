@@ -1542,3 +1542,6 @@ Shopify のパスワードページは Shopify 側テンプレートなので、
 ## 2026-10-28 Figma の幅を Fill/Hug に直した
 - SY-style 4枚: 本文の列・メタの項目・図・文字の固定幅を Fill / Hug に変更（番号「1.」の折り返しも解消）。ラベル列と空きだけ固定のまま。図の矩形に重なっていた余分な塗り（黒20%）を除去。英語版 PC のメタ4項目を、日本語版（河野さん修正）と同じ横一列に。SP は 2×2 のまま。
 - メモリ feedback_figma_autolayout_fill_not_fixed と、agent 定義（sy-case-study-converter）に作り方を追記。
+
+## 2026-10-28 最新状況の記録
+- 引き継ぎ資料: docs/session-2026-10-28-nakahatsu-sy-handoff.md（別セッションは、まずこれを読む）。メインは Figma の SY型 JP PC（287:363）。サイト /jp/work/nakahatsu-sy と同期。
