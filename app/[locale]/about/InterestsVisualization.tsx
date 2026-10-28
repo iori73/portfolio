@@ -81,7 +81,7 @@ const InterestsVisualization: React.FC = () => {
 
     const g = svg.append('g').attr('transform', `scale(${scaleFactor})`);
 
-    const root = d3.hierarchy(data);
+    const root = d3.hierarchy<InterestNode>(data);
     const links = root.links();
     const nodes = root.descendants();
     const mainCategories = nodes.filter((d) => d.depth === 1);
@@ -115,7 +115,7 @@ const InterestsVisualization: React.FC = () => {
       .attr('stroke-opacity', 0.4)
       .attr('stroke-width', (d) => (d.source.depth === 0 ? 2 : 1));
 
-    const node = g.append('g').selectAll('.node').data(nodes).join('g').attr('class', 'node').call(drag(simulation));
+    const node = g.append('g').selectAll('.node').data(nodes).join('g').attr('class', 'node').call(drag(simulation) as any);
 
     node
       .append('circle')
@@ -154,10 +154,10 @@ const InterestsVisualization: React.FC = () => {
 
     simulation.on('tick', () => {
       link
-        .attr('x1', (d) => d.source.x)
-        .attr('y1', (d) => d.source.y)
-        .attr('x2', (d) => d.target.x)
-        .attr('y2', (d) => d.target.y);
+        .attr('x1', (d) => d.source.x ?? 0)
+        .attr('y1', (d) => d.source.y ?? 0)
+        .attr('x2', (d) => d.target.x ?? 0)
+        .attr('y2', (d) => d.target.y ?? 0);
 
       node.attr('transform', (d) => `translate(${d.x},${d.y})`);
 

@@ -197,7 +197,7 @@ export default function ConceptB() {
       {/* Plugin cards grid */}
       <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
         {plugins.map((plugin) => (
-          <PluginCard key={plugin.id} plugin={plugin} variant="conceptB" />
+          <PluginCard key={plugin.id} plugin={plugin} />
         ))}
       </div>
     </section>

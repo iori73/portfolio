@@ -59,7 +59,7 @@ function extractPageMetadata(page: {
     | { url?: string }
     | { number?: number }
   >;
-}): Omit<Episode, 'embedding2d' | 'cluster' | 'summary' | 'keyLearnings'> {
+}): Omit<Episode, 'embedding2d' | 'cluster'> {
   const props = page.properties;
   const rawCategory = (props.Category as { select?: { name?: string } })?.select?.name ?? null;
   const category = rawCategory ? normalizeCategoryName(rawCategory) : null;
@@ -79,7 +79,7 @@ function extractPageMetadata(page: {
     // same canonical-artwork intent already applied to the aggregation below.
     podcastCover: PRE_COVER.get(podcastName) || page.cover?.external?.url || page.cover?.file?.url || '',
     category,
-    tags: [category].filter(Boolean),
+    tags: [category].filter((t): t is string => Boolean(t)),
     date: releaseProp?.date?.start || (page.created_time?.split('T')[0] ?? ''),
     url: urlProp?.url || '',
     durationMinutes: durationProp?.number ?? 0,

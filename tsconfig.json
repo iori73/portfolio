@@ -23,5 +23,5 @@
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/compositions/Footer.tsx"],
-  "exclude": ["node_modules", "_archive", ".claude", "src/figma"]
+  "exclude": ["node_modules", "_archive", ".claude", "src/figma", "i18n.ts"]
 }
