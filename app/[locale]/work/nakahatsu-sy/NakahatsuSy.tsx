@@ -51,7 +51,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = ({ launched }) => {
   const Row = ({ label, children }: { label: string; children: React.ReactNode }) => (
     <section className="flex flex-col gap-4 md:flex-row md:gap-8">
       <p className={`${LABEL} md:w-[280px] md:shrink-0`}>{label}</p>
-      <div className="flex flex-col gap-4 md:w-[520px]">{children}</div>
+      <div className="flex min-w-0 flex-col gap-4 md:flex-1">{children}</div>
     </section>
   );
 
@@ -79,12 +79,12 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = ({ launched }) => {
         <header className="flex flex-col gap-5 md:gap-6">
           <p className={`${getBodyFontClass()} text-body text-ink-tertiary`}>{t('kicker')}</p>
           <h1 className={`text-headline text-ink ${getHeadingFontClass()}`}>{t('title')}</h1>
-          <dl className="mt-4 grid grid-cols-2 gap-x-8 gap-y-8">
+          <dl className="mt-4 grid grid-cols-2 gap-x-8 gap-y-8 md:grid-cols-4">
             {meta.map(([label, values]) => (
               <div key={label} className="flex flex-col gap-2">
                 <dt className={LABEL}>{label}</dt>
                 {values.map((v) => (
-                  <dd key={v} className={`${getBodyFontClass()} text-body-lg tracking-[0.2px] text-ink`}>{v}</dd>
+                  <dd key={v} className={`${getBodyFontClass()} text-body-lg tracking-[0.2px] text-ink [text-wrap:balance]`}>{v}</dd>
                 ))}
               </div>
             ))}
@@ -109,7 +109,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = ({ launched }) => {
             <div key={s.h} className="flex flex-col gap-10 md:gap-10">
               <div className="flex flex-col md:flex-row md:gap-8">
                 <div className="hidden md:block md:w-[280px] md:shrink-0" aria-hidden="true" />
-                <div className="flex flex-col gap-3 md:w-[520px]">
+                <div className="flex min-w-0 flex-col gap-3 md:flex-1">
                   <p className={`text-title text-ink-tertiary ${getHeadingFontClass()}`}>{i + 1}.</p>
                   <h2 className={`text-title-sm text-ink ${getHeadingFontClass()}`}>{s.h}</h2>
                   {s.p.map((p) => (
