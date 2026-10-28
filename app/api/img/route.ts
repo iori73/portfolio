@@ -38,12 +38,18 @@ export async function GET(request: NextRequest) {
   }
 
   try {
+    // redirect:'manual' — 許可ドメインがリダイレクトで別ホストへ飛ばす経路（SSRF / オープンプロキシ）を塞ぐ
     const response = await fetch(url, {
       headers: { 'User-Agent': 'Mozilla/5.0' },
+      redirect: 'manual',
     });
+    if (response.status >= 300 && response.status < 400) {
+      return NextResponse.json({ error: 'Redirect not allowed' }, { status: 502 });
+    }
 
     const contentType = response.headers.get('content-type') || '';
-    if (!contentType.startsWith('image/')) {
+    // SVG は自オリジンから配信するとスクリプトが走り得るので拒否（ラスター画像のみ）
+    if (!contentType.startsWith('image/') || contentType.startsWith('image/svg')) {
       return NextResponse.json({ error: 'Not an image' }, { status: 400 });
     }
 
@@ -61,6 +67,7 @@ export async function GET(request: NextRequest) {
       headers: {
         'Content-Type': contentType,
         'Cache-Control': 'public, max-age=3600',
+        'X-Content-Type-Options': 'nosniff',
       },
     });
   } catch {
