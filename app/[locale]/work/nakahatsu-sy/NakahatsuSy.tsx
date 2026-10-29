@@ -167,6 +167,14 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                   </div>
                 </div>
               )}
+              {/* 2案を並べる: 旧サイトとの比べの図のあとに、v1（既存サイトを再現した案）と v2（リデザイン案）のトップを並べた図を足す */}
+              {s.fig === 'before-after' && (
+                <div className="flex justify-center">
+                  <div className="w-full overflow-hidden rounded-media bg-surface-muted md:w-[760px]">
+                    <Image src={`/work/nakahatsu/v1-v2-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('v1v2Alt')} width={1520} height={776} className="h-auto w-full" />
+                  </div>
+                </div>
+              )}
               {/* 3つの言語: ヒーローの図のあとに、スマートフォン幅の商品ページ（文字の部分）を並べた図を足す。住所・フッターは写さない */}
               {s.fig === 'bilingual-3lang' && (
                 <div className="flex justify-center">

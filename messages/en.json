@@ -625,8 +625,7 @@
       {
         "h": "Rebuilding About and the home page",
         "p": [
-          "The old About page was mostly text, with photographs sized to sit beside it. In the new About page, each section carries a photograph or a figure, placed large, that matches what the section wants to say. The brewers are shown through photographs of their work, the ingredients through a map of where they come from, the method through product and brewing photographs, and the history since 1896 through the founder's photograph, so that each point can be seen at a glance. White and dark backgrounds alternate, so the scene changes as you read on, and the page can be read to the end as one story.",
-          "In the tenyu soy sauce and tenyu miso sections, the products are shown in large photographs with the body text laid over them. When the screen is wide enough, the Japanese text runs vertically, so that the makers' care comes across through both the photograph and the type. On the home page, the \"About Nakahatsu Shoten\" block went from one photograph to three tall photographs of the building, so that the space comes across better. It is the option that Nakahatsu Shoten chose from several."
+          "The old About page was mostly text, with photographs sized to sit beside it. In the new About page, each section carries a photograph or a figure, placed large, that matches what the section wants to say. The brewers are shown through photographs of their work, and the ingredients through a map of where they come from, so that each point can be seen at a glance. The page can be read to the end as one story."
         ],
         "fig": "about-tenyu",
         "cap": "The About page in Japanese: the miso block. The body text runs vertically over a photograph, and the heading stands vertically to its right."
@@ -700,6 +699,7 @@
       ]
     },
     "overviewFigAlt": "The main screens of the new site. The upper part shows desktop-width screens such as the home page, the product list, a product page and the About page, and the lower part shows smartphone-width screens of the home page, the product list and a product page.",
-    "bilingualTextAlt": "The text part of a product page, shown side by side at smartphone width in Japanese, English and French: the product name, price, description and ingredient list, each in its own language."
+    "bilingualTextAlt": "The text part of a product page, shown side by side at smartphone width in Japanese, English and French: the product name, price, description and ingredient list, each in its own language.",
+    "v1v2Alt": "The top screens of v1 and v2 side by side. On the left, v1 reproduces the structure of the existing site; on the right, v2 is the redesign."
   }
 }
