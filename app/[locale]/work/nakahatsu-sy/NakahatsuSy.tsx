@@ -126,6 +126,13 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
           ))}
         </Row>
 
+        {/* 主要画面の一覧（PC とスマートフォン）。Figma の Overview 直下の図と同じ。キャプションは置かず、alt に説明を入れる */}
+        <div className="flex justify-center">
+          <div className="w-full overflow-hidden rounded-media bg-surface-muted md:w-[760px]">
+            <Image src={`/work/nakahatsu/overview-pcsp-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('overviewFigAlt')} width={2400} height={2140} className="h-auto w-full" />
+          </div>
+        </div>
+
         <div className="flex flex-col gap-16 md:gap-20">
           <Row label="Process">
             <p className={catchLine}>{t('processCatch')}</p>
@@ -157,6 +164,14 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                 <div className={`flex justify-center`}>
                   <div className={`w-full overflow-hidden rounded-media bg-surface-muted ${i % 2 === 1 ? 'md:w-[760px]' : ''}`}>
                     <Image src={`/work/nakahatsu/${s.fig === 'before-after' ? `before-after-${language === 'jp' ? 'jp' : 'en'}` : s.fig}.webp`} alt={s.cap} width={1200} height={675} className="h-auto w-full" />
+                  </div>
+                </div>
+              )}
+              {/* 3つの言語: ヒーローの図のあとに、スマートフォン幅の商品ページ（文字の部分）を並べた図を足す。住所・フッターは写さない */}
+              {s.fig === 'bilingual-3lang' && (
+                <div className="flex justify-center">
+                  <div className="w-full overflow-hidden rounded-media bg-surface-muted md:w-[760px]">
+                    <Image src="/work/nakahatsu/bilingual-text.webp" alt={t('bilingualTextAlt')} width={1024} height={448} className="h-auto w-full" />
                   </div>
                 </div>
               )}

@@ -698,6 +698,8 @@
           "fg": "#241E17"
         }
       ]
-    }
+    },
+    "overviewFigAlt": "The main screens of the new site. The upper part shows desktop-width screens such as the home page, the product list, a product page and the About page, and the lower part shows smartphone-width screens of the home page, the product list and a product page.",
+    "bilingualTextAlt": "The text part of a product page, shown side by side at smartphone width in Japanese, English and French: the product name, price, description and ingredient list, each in its own language."
   }
 }
