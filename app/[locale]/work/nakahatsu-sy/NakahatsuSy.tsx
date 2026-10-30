@@ -259,7 +259,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                     <Image src="/work/nakahatsu/about-rejected.webp" alt={t('aboutRejAlt')} width={1024} height={318} className="h-auto w-full" />
                   </div>
                 </div>
-              ) : (
+              ) : s.fig === 'bilingual-3lang' ? null /* ヒーローの3言語の図は、注釈「見せない」（2026-10-30）で外した。下の商品一覧の図だけ出す */ : (
                 <div className={`flex justify-center`}>
                   <div className={`w-full overflow-hidden rounded-media bg-surface-muted ${i % 2 === 1 ? 'md:w-[760px]' : ''}`}>
                     <Image src={`/work/nakahatsu/${s.fig === 'before-after' ? `before-after-${language === 'jp' ? 'jp' : 'en'}` : s.fig}.webp`} alt={s.cap} width={1200} height={675} className="h-auto w-full" />
