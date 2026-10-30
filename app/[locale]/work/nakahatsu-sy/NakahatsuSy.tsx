@@ -53,6 +53,61 @@ function Swatch({ c, rows, className }: { c: PaletteColor; rows: string[]; class
   );
 }
 
+type SystemFig = {
+  before: string; after: string; k1: string; k2: string; c1: string; c1b: string; c2: string; pages: string[]; lang: string;
+};
+
+/**
+ * 小節1の図。2つのシステム（WordPress と EC-CUBE）が Shopify の1つのストアになる前後。
+ * 画像でなく文字として組む（読み上げでも読め、SP では縦に積む）。Figma の同名の図と同じ内容。
+ */
+function SystemFigure({ label, f }: { label: string; f: SystemFig }) {
+  const sys = (k: string, n: string) => (
+    <div className="flex flex-col gap-1 rounded-lg border border-line-section bg-surface-muted px-4 py-3 md:flex-1 md:justify-center md:py-4">
+      <p className="text-caption text-ink-tertiary">{k}</p>
+      <p className="font-space-grotesk text-title-sm font-bold text-ink">{n}</p>
+    </div>
+  );
+  return (
+    <figure
+      aria-label={label}
+      className="flex w-full flex-col gap-4 rounded-media border border-line-section bg-white p-4 md:w-[760px] md:flex-row md:gap-5 md:px-10 md:py-9"
+    >
+      <div className="flex flex-col gap-3 md:w-[250px] md:shrink-0">
+        <p className="font-space-grotesk text-caption font-bold text-ink-tertiary">{f.before}</p>
+        <div className="flex flex-col gap-3 md:flex-1">
+          {sys(f.k1, 'WordPress')}
+          {sys(f.k2, 'EC-CUBE')}
+        </div>
+        <p className="text-body text-ink">{f.c1}</p>
+        <p className="text-body text-ink-tertiary">{f.c1b}</p>
+      </div>
+      <p aria-hidden="true" className="self-center text-title text-ink-tertiary md:pb-16">
+        <span className="md:hidden">↓</span>
+        <span className="hidden md:inline">→</span>
+      </p>
+      <div className="flex flex-col gap-3 md:min-w-0 md:flex-1">
+        <p className="font-space-grotesk text-caption font-bold text-ink-tertiary">{f.after}</p>
+        <div className="flex flex-col justify-center gap-3 rounded-lg border border-[#8B2252] bg-[#F5E8ED] px-4 py-4 md:flex-1 md:px-5">
+          <p className="font-space-grotesk text-title-sm font-bold text-[#8B2252]">Shopify</p>
+          <ul className="flex flex-wrap gap-2">
+            {f.pages.map((p) => (
+              <li key={p} className="rounded-md border border-[#8B2252] bg-white px-3 py-1.5 text-body text-ink">{p}</li>
+            ))}
+          </ul>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-caption text-ink-tertiary">{f.lang}</span>
+            {['JP', 'EN', 'FR'].map((l) => (
+              <span key={l} className="rounded-md bg-[#8B2252] px-3 py-1.5 font-space-grotesk text-body font-bold text-white">{l}</span>
+            ))}
+          </div>
+        </div>
+        <p className="text-body text-ink">{f.c2}</p>
+      </div>
+    </figure>
+  );
+}
+
 const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
   const t = useTranslations('nakahatsuSy');
   const tc = useTranslations('nakahatsu');
@@ -128,8 +183,8 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
 
         {/* 主要画面の一覧（PC とスマートフォン）。Figma の Overview 直下の図と同じ。キャプションは置かず、alt に説明を入れる */}
         <div className="flex justify-center">
-          <div className="w-full overflow-hidden rounded-media bg-surface-muted md:w-[760px]">
-            <Image src={`/work/nakahatsu/overview-pcsp-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('overviewFigAlt')} width={2400} height={2140} className="h-auto w-full" />
+          <div className="w-full md:w-[760px]">
+            <Image src={`/work/nakahatsu/overview-pcsp-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('overviewFigAlt')} width={2400} height={1446} className="h-auto w-full" />
           </div>
         </div>
 
@@ -160,6 +215,10 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                   <Swatch c={palette.colors[1]} rows={palette.rows} className="md:min-h-[230px]" />
                   <Swatch c={palette.colors[2]} rows={palette.rows} className="md:min-h-[230px]" />
                 </figure>
+              ) : s.fig === 'challenges' ? (
+                <div className="flex justify-center">
+                  <SystemFigure label={s.cap} f={t.raw('systemFig') as SystemFig} />
+                </div>
               ) : (
                 <div className={`flex justify-center`}>
                   <div className={`w-full overflow-hidden rounded-media bg-surface-muted ${i % 2 === 1 ? 'md:w-[760px]' : ''}`}>
@@ -171,15 +230,19 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
               {s.fig === 'before-after' && (
                 <div className="flex justify-center">
                   <div className="w-full overflow-hidden rounded-media bg-surface-muted md:w-[760px]">
-                    <Image src={`/work/nakahatsu/v1-v2-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('v1v2Alt')} width={1520} height={776} className="h-auto w-full" />
+                    <div aria-hidden="true" className="grid grid-cols-2 gap-[4%] px-[3.3%] pt-[2.4%] font-space-grotesk text-caption font-bold text-ink-tertiary">
+                      <p>{t('v1Label')}</p>
+                      <p>{t('v2Label')}</p>
+                    </div>
+                    <Image src={`/work/nakahatsu/v1-v2-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('v1v2Alt')} width={1520} height={804} className="-mt-[1.2%] h-auto w-full" />
                   </div>
                 </div>
               )}
               {/* 3つの言語: ヒーローの図のあとに、スマートフォン幅の商品ページ（文字の部分）を並べた図を足す。住所・フッターは写さない */}
               {s.fig === 'bilingual-3lang' && (
                 <div className="flex justify-center">
-                  <div className="w-full overflow-hidden rounded-media bg-surface-muted md:w-[760px]">
-                    <Image src="/work/nakahatsu/bilingual-text.webp" alt={t('bilingualTextAlt')} width={1024} height={448} className="h-auto w-full" />
+                  <div className="w-full md:w-[760px]">
+                    <Image src="/work/nakahatsu/bilingual-text.webp" alt={t('bilingualTextAlt')} width={1560} height={757} className="h-auto w-full" />
                   </div>
                 </div>
               )}

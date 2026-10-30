@@ -612,12 +612,12 @@
           "Because the company site and the shop were separate systems, the design and the updates were both done twice."
         ],
         "fig": "challenges",
-        "cap": "From the previous site: the list of payment methods, how shipping and delivery were described, and the sign-up error."
+        "cap": "The company-introduction site and the shop ran on two systems (WordPress and EC-CUBE); they became one Shopify store."
       },
       {
         "h": "Showing two versions side by side",
         "p": [
-          "I made one version that reproduced the existing site (v1) and one redesign (v2), and shared them side by side. Nakahatsu Shoten replied that v2 was easy to see, with a clean structure that included the purchase path (summarised). I have worked mainly on v2 since."
+          "I made one version that reproduced the structure of the existing site in Shopify theme code (v1) and one redesign (v2), and shared them side by side. Nakahatsu Shoten replied that v2 was easy to see, with a clean structure that included the purchase path (summarised). I have worked mainly on v2 since."
         ],
         "fig": "before-after",
         "cap": "Before: the top page of the WordPress company site. After: the new top page. The shop was a separate system (EC-CUBE)."
@@ -699,7 +699,28 @@
       ]
     },
     "overviewFigAlt": "The main screens of the new site. The upper part shows desktop-width screens such as the home page, the product list, a product page and the About page, and the lower part shows smartphone-width screens of the home page, the product list and a product page.",
-    "bilingualTextAlt": "The text part of a product page, shown side by side at smartphone width in Japanese, English and French: the product name, price, description and ingredient list, each in its own language.",
-    "v1v2Alt": "The top screens of v1 and v2 side by side. On the left, v1 reproduces the structure of the existing site; on the right, v2 is the redesign."
+    "bilingualTextAlt": "The product list section of the top page in Japanese, English and French, side by side. The heading and the soy sauce product names appear in each language.",
+    "v1v2Alt": "The top screens of v1 and v2 side by side. On the left, v1 reproduces the structure of the existing site; on the right, v2 is the redesign.",
+    "systemFig": {
+      "before": "Before the redesign",
+      "after": "After the redesign",
+      "k1": "Company introduction",
+      "k2": "Shop",
+      "c1": "Two systems ran separately",
+      "c1b": "Design and updates were done twice",
+      "c2": "One store: design and updates in one place",
+      "pages": [
+        "Home",
+        "About",
+        "News",
+        "Shop (products and cart)",
+        "FAQ",
+        "Contact",
+        "Policies"
+      ],
+      "lang": "3 languages"
+    },
+    "v1Label": "v1 (reproduces the existing site)",
+    "v2Label": "v2 (redesign)"
   }
 }
