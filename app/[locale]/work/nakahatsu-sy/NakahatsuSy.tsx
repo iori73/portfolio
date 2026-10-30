@@ -163,18 +163,29 @@ function ParallaxVideo({ label, note }: { label: string; note: string }) {
 type RejFig = { lead: string; groups: [string, string][]; note: string; alts: string[] };
 
 /** 没にした About の案（醸造家として）8案。グループごとに、左に説明、右に画像（スマートフォンは説明のあとに2列）。人物の写真は灰色に置換済み。 */
-/** ローディングアニメーションの録画。無音・ループ。動きを減らす設定のときは自動再生せず、ポスターだけ出す。 */
+/** ローディングアニメーションの録画。無音。画面に入ったら1回だけ再生。動きを減らす設定のときは自動再生せず、コントロールを出す。 */
 function LoadingVideo({ label }: { label: string }) {
   const ref = React.useRef<HTMLVideoElement>(null);
   useEffect(() => {
     const v = ref.current;
     if (!v) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      v.pause();
       v.controls = true;
-    } else {
-      v.play().catch(() => {});
+      return;
     }
+    // 画面に半分以上入ったときに、先頭から1回だけ再生する（ループしない。終わったら最後のコマで止まる）
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          v.currentTime = 0;
+          v.play().catch(() => {});
+          io.disconnect();
+        }
+      },
+      { threshold: 0.5 },
+    );
+    io.observe(v);
+    return () => io.disconnect();
   }, []);
   return (
     <video
@@ -186,11 +197,35 @@ function LoadingVideo({ label }: { label: string }) {
       width={1280}
       height={720}
       muted
-      loop
       playsInline
-      autoPlay
       preload="metadata"
     />
+  );
+}
+
+type IterFig = { lead: string; groups: [string, string][]; note: string; alts: string[] };
+
+/** トップページの About の節の、没にした案9案（A 7案、B 2案）。RejectedFigure と同じ作り。顔・Sample・住所は写っていない。 */
+function TopIterFigure({ f }: { f: IterFig }) {
+  const sets = [[1, 2, 3, 4, 5, 6, 7], [8, 9]];
+  return (
+    <figure aria-label={f.lead} className="flex w-full flex-col gap-6 rounded-media bg-surface-muted p-4 md:gap-7 md:p-8">
+      <p className="text-caption text-ink-secondary">{f.lead}</p>
+      {sets.map((set, gi) => (
+        <div key={f.groups[gi][0]} className="flex flex-col gap-3 md:flex-row md:gap-6">
+          <div className="flex flex-col gap-1 md:w-[260px] md:shrink-0">
+            <p className="text-caption font-bold text-ink">{f.groups[gi][0]}</p>
+            <p className="text-caption text-ink-secondary">{f.groups[gi][1]}</p>
+          </div>
+          <div className={`grid min-w-0 flex-1 grid-cols-2 gap-2 bg-white p-2 md:gap-4 md:p-4 ${set.length > 2 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
+            {set.map((n) => (
+              <Image key={n} src={`/work/nakahatsu/top-iter-${n}.webp`} alt={f.alts[n - 1]} width={1024} height={720} className="h-auto w-full rounded" />
+            ))}
+          </div>
+        </div>
+      ))}
+      <p className="text-caption text-ink-tertiary">{f.note}</p>
+    </figure>
   );
 }
 
@@ -283,6 +318,9 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
           </dl>
         </header>
 
+        {/* ローディングアニメーション（ライブテーマのトップを開いた瞬間を録画）。本文の最初。キャプションは置かず、aria-label に説明を入れる。Figma の Overview 直前と同じ */}
+        <LoadingVideo label={t('loadingVideoAlt')} />
+
         <Row label="Overview">
           <p className={catchLine}>{t('overviewCatch')}</p>
           {(t.raw('overview') as string[]).map((p) => (
@@ -313,7 +351,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
           </div>
           {/* 上の図のあとに、投稿そのものの見た目（SP 幅のスクリーンショット）を並べた図。人物が写る写真は灰色に置き換え、載せない投稿は文字の枠。Figma の Instagram の図の下と同じ */}
           {(() => {
-            const shots = t.raw('igShots') as { dates: string[]; alts: string[]; textCard: string; note: string };
+            const shots = t.raw('igShots') as { dates: string[]; alts: string[]; urls: string[]; linkLabel: string; textCard: string; note: string };
             const files = ['muji', 'fest', 'overseas'];
             return (
               <figure className="flex w-full flex-col gap-4 rounded-media bg-surface-muted p-3 md:px-12 md:pb-6 md:pt-8">
@@ -321,7 +359,9 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                   {files.map((f, k) => (
                     <div key={f} className="flex min-w-0 flex-col gap-1.5">
                       <p className="font-space-grotesk text-caption font-bold text-ink-tertiary">{shots.dates[k]}</p>
-                      <Image src={`/work/nakahatsu/ig-shot-${f}.webp`} alt={shots.alts[k]} width={780} height={1210} className="h-auto w-full rounded-md" />
+                      <a href={shots.urls[k]} target="_blank" rel="noopener noreferrer" aria-label={`${shots.dates[k]} ${shots.linkLabel}`} className="block min-h-11 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+                        <Image src={`/work/nakahatsu/ig-shot-${f}.webp`} alt={shots.alts[k]} width={780} height={1210} className="h-auto w-full rounded-md" />
+                      </a>
                     </div>
                   ))}
                   <div className="flex min-w-0 flex-col gap-1.5">
@@ -361,19 +401,22 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                 </div>
               ) : s.fig === 'about-tenyu' ? (
                 <div className="flex flex-col items-center gap-10 md:gap-12">
-                  {/* About の前後、トップの前後（縦長）、没にした About の案。キャプションは置かず、alt に説明を入れる */}
+                  {/* トップの前後、トップの軌跡（没案）、About の文章、About の前後、パララックス、没にした About の案。Figma の Step 3 と同じ順。キャプションは置かず、alt に説明を入れる */}
+                  <div className="w-full">
+                    <BeforeAfterLabels before={t('beforeLabel')} after={t('afterLabel')} />
+                    <Image src={`/work/nakahatsu/top-ba-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('topBaAlt')} width={1520} height={975} className="h-auto w-full" />
+                  </div>
+                  <TopIterFigure f={t.raw('topIter') as IterFig} />
+                  <div className="flex w-full flex-col md:flex-row md:gap-8">
+                    <div className="hidden md:block md:w-[280px] md:shrink-0" aria-hidden="true" />
+                    <p className={`${body} min-w-0 md:flex-1`}>{t('aboutText')}</p>
+                  </div>
                   <div className="w-full">
                     <BeforeAfterLabels before={t('beforeLabel')} after={t('afterLabel')} />
                     <Image src={`/work/nakahatsu/about-ba-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('aboutBaAlt')} width={1520} height={1756} className="h-auto w-full" />
                   </div>
                   {/* About「醸造家として」のパララックスの録画。About の前後の図の直後。キャプションは置かず、aria-label に説明を入れる */}
                   <ParallaxVideo label={t('parallaxVideoAlt')} note={t('parallaxVideoNote')} />
-                  <div className="w-full">
-                    <BeforeAfterLabels before={t('beforeLabel')} after={t('afterLabel')} />
-                    <Image src={`/work/nakahatsu/top-ba-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('topBaAlt')} width={1520} height={975} className="h-auto w-full" />
-                  </div>
-                  {/* ローディングアニメーション（ライブテーマのトップを開いた瞬間を録画）。キャプションは置かず、aria-label に説明を入れる */}
-                  <LoadingVideo label={t('loadingVideoAlt')} />
                   <RejectedFigure f={t.raw('rejFig') as RejFig} />
                 </div>
               ) : s.fig === 'bilingual-3lang' ? null /* ヒーローの3言語の図は、注釈「見せない」（2026-10-30）で外した。下の商品一覧の図だけ出す */ : (
@@ -430,6 +473,14 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                 <div className="flex justify-center">
                   <div className="w-full">
                     <Image src="/work/nakahatsu/bilingual-text.webp" alt={t('bilingualTextAlt')} width={1560} height={757} className="h-auto w-full" />
+                  </div>
+                </div>
+              )}
+              {/* ヒーロー節を、スマートフォン幅で、3言語並べた図（商品一覧の図の下）。Figma の Step/4 の最後と同じ */}
+              {s.fig === 'bilingual-3lang' && (
+                <div className="flex justify-center">
+                  <div className="w-full">
+                    <Image src={`/work/nakahatsu/hero-sp-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('heroSpAlt')} width={2176} height={1400} className="h-auto w-full" />
                   </div>
                 </div>
               )}

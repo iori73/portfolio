@@ -625,7 +625,7 @@
       {
         "h": "A major redesign of the home page and About page",
         "p": [
-          "The old About page was mostly text, with photographs sized to sit beside it. In the new About page, each section carries a photograph or a figure, placed large, that matches what the section wants to say. The brewers are shown through photographs of their work, and the ingredients through a map of where they come from, so that each point can be seen at a glance. The page can be read to the end as one story."
+          "The old home page opened with a large photograph of the shop's signboard, with the menu laid over the left of it. The new home page opens with photographs of the brewing work instead, and three of them switch in turn. The header carries a language switch (Japanese, English and French) and the cart, and the news sits right below it. A loading animation plays when the page opens."
         ],
         "fig": "about-tenyu",
         "cap": "The About page in Japanese: the miso block. The body text runs vertically over a photograph, and the heading stands vertically to its right."
@@ -759,6 +759,12 @@
       ]
     },
     "igShots": {
+      "urls": [
+        "https://www.instagram.com/p/C6jV4KcpRUE/",
+        "https://www.instagram.com/p/DAGvMehSTKZ/",
+        "https://www.instagram.com/p/DH-fmgmR7uD/"
+      ],
+      "linkLabel": "Open the Instagram post (new tab)",
       "dates": [
         "May 2024",
         "September 2024",
@@ -777,6 +783,33 @@
     "v1v2FullNote": "Photos of people and sample (placeholder) images are replaced with gray boxes.",
     "loadingVideoAlt": "A recording of the loading animation. A yellow ring appears on a dark screen, the Tenyu logo fades in inside it, and the screen changes to the top page hero. About 7 seconds.",
     "parallaxVideoAlt": "A recording of the As Brewers section of the About page while scrolling. The photos move slightly inside their frames.",
-    "parallaxVideoNote": "Photos of people are replaced with gray boxes."
+    "parallaxVideoNote": "Photos of people are replaced with gray boxes.",
+    "aboutText": "Next, the About page. The old About page was mostly text, with photographs sized to sit beside it. In the new About page, each section carries a photograph or a figure, placed large, that matches what the section wants to say. The brewers are shown through photographs of their work, and the ingredients through a map of where they come from, so that each point can be seen at a glance. The page can be read to the end as one story.",
+    "topIter": {
+      "lead": "I redesigned the About section of the home page twice. There are nine designs I did not use, in two directions. The one I used places two photographs of the building side by side.",
+      "groups": [
+        [
+          "A. First round: photographs of ingredients (7 designs)",
+          "The heading is 「100年変わらない自然製法」, which means natural methods unchanged for 100 years. The designs place photographs of the ingredients and the barrel staggered, in curved bands, or cut into circles."
+        ],
+        [
+          "B. Second round: photographs of the building (2 designs)",
+          "The heading became 「中初商店について」, which means About Nakahatsu Shoten, and the photographs show the inside of the building. One design staggers four photographs; the other places three photographs at the same size."
+        ]
+      ],
+      "note": "The design I used is not shown in this figure.",
+      "alts": [
+        "Design A-1",
+        "Design A-2",
+        "Design A-3",
+        "Design A-4",
+        "Design A-5",
+        "Design A-6",
+        "Design A-7",
+        "Design B-1, four building photographs staggered",
+        "Design B-2, three building photographs side by side"
+      ]
+    },
+    "heroSpAlt": "The hero section at phone width in Japanese, English and French."
   }
 }
