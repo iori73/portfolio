@@ -126,6 +126,32 @@ function BeforeAfterLabels({ before, after }: { before: string; after: string })
   );
 }
 
+type RejFig = { lead: string; groups: [string, string][]; note: string; alts: string[] };
+
+/** 没にした About の案（醸造家として）8案。グループごとに、左に説明、右に画像（スマートフォンは説明のあとに2列）。人物の写真は灰色に置換済み。 */
+function RejectedFigure({ f }: { f: RejFig }) {
+  const sets = [[1, 2], [3, 4, 5], [6, 7, 8]];
+  return (
+    <figure aria-label={f.lead} className="flex w-full flex-col gap-6 rounded-media bg-surface-muted p-4 md:gap-7 md:p-8">
+      <p className="text-caption text-ink-secondary">{f.lead}</p>
+      {sets.map((set, gi) => (
+        <div key={f.groups[gi][0]} className="flex flex-col gap-3 md:flex-row md:gap-6">
+          <div className="flex flex-col gap-1 md:w-[260px] md:shrink-0">
+            <p className="text-caption font-bold text-ink">{f.groups[gi][0]}</p>
+            <p className="text-caption text-ink-secondary">{f.groups[gi][1]}</p>
+          </div>
+          <div className={`grid min-w-0 flex-1 grid-cols-2 gap-2 md:gap-4 ${set.length === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
+            {set.map((n) => (
+              <Image key={n} src={`/work/nakahatsu/about-rej-${n}.webp`} alt={f.alts[n - 1]} width={900} height={560} className="h-auto w-full rounded" />
+            ))}
+          </div>
+        </div>
+      ))}
+      <p className="text-caption text-ink-tertiary">{f.note}</p>
+    </figure>
+  );
+}
+
 const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
   const t = useTranslations('nakahatsuSy');
   const tc = useTranslations('nakahatsu');
@@ -247,17 +273,15 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
               ) : s.fig === 'about-tenyu' ? (
                 <div className="flex flex-col items-center gap-10 md:gap-12">
                   {/* About の前後、トップの前後（縦長）、没にした About の案。キャプションは置かず、alt に説明を入れる */}
-                  <div className="w-full md:w-[760px]">
+                  <div className="w-full">
                     <BeforeAfterLabels before={t('beforeLabel')} after={t('afterLabel')} />
                     <Image src={`/work/nakahatsu/about-ba-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('aboutBaAlt')} width={1520} height={1756} className="h-auto w-full" />
                   </div>
-                  <div className="w-full md:w-[760px]">
+                  <div className="w-full">
                     <BeforeAfterLabels before={t('beforeLabel')} after={t('afterLabel')} />
                     <Image src={`/work/nakahatsu/top-ba-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('topBaAlt')} width={1520} height={975} className="h-auto w-full" />
                   </div>
-                  <div className="w-full overflow-hidden rounded-media bg-surface-muted md:w-[760px]">
-                    <Image src="/work/nakahatsu/about-rejected.webp" alt={t('aboutRejAlt')} width={1024} height={318} className="h-auto w-full" />
-                  </div>
+                  <RejectedFigure f={t.raw('rejFig') as RejFig} />
                 </div>
               ) : s.fig === 'bilingual-3lang' ? null /* ヒーローの3言語の図は、注釈「見せない」（2026-10-30）で外した。下の商品一覧の図だけ出す */ : (
                 <div className={`flex justify-center`}>
@@ -269,7 +293,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
               {/* 2案を並べる: 旧サイトとの比べの図のあとに、v1（既存サイトを再現した案）と v2（リデザイン案）のトップを並べた図を足す */}
               {s.fig === 'before-after' && (
                 <div className="flex justify-center">
-                  <div className="w-full overflow-hidden rounded-media bg-surface-muted md:w-[760px]">
+                  <div className="w-full overflow-hidden rounded-media bg-surface-muted">
                     <div aria-hidden="true" className="relative h-9 font-space-grotesk text-caption font-bold text-ink-tertiary">
                       <p className="absolute left-[3.2%] top-3">{t('v1Label')}</p>
                       <p className="absolute left-[57.4%] top-3">{t('v2Label')}</p>
@@ -280,7 +304,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
               )}
               {s.fig === 'before-after' && (
                 <div className="flex justify-center">
-                  <div className="w-full overflow-hidden rounded-media bg-surface-muted md:w-[760px]">
+                  <div className="w-full overflow-hidden rounded-media bg-surface-muted">
                     <div aria-hidden="true" className="relative h-9 font-space-grotesk text-caption font-bold text-ink-tertiary">
                       <p className="absolute left-[3.2%] top-3">{t('v1Label')}</p>
                       <p className="absolute left-[57.4%] top-3">{t('v2Label')}</p>
@@ -298,7 +322,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
               {/* 3つの言語: ヒーローの図のあとに、スマートフォン幅の商品ページ（文字の部分）を並べた図を足す。住所・フッターは写さない */}
               {s.fig === 'bilingual-3lang' && (
                 <div className="flex justify-center">
-                  <div className="w-full md:w-[760px]">
+                  <div className="w-full">
                     <Image src="/work/nakahatsu/bilingual-text.webp" alt={t('bilingualTextAlt')} width={1560} height={757} className="h-auto w-full" />
                   </div>
                 </div>
