@@ -126,9 +126,74 @@ function BeforeAfterLabels({ before, after }: { before: string; after: string })
   );
 }
 
+/** About「醸造家として」のパララックスの録画。無音・ループ。動きを減らす設定のときは自動再生せず、コントロールを出す。人物の写真は灰色の置き換え画像。 */
+function ParallaxVideo({ label, note }: { label: string; note: string }) {
+  const ref = React.useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      v.pause();
+      v.controls = true;
+    } else {
+      v.play().catch(() => {});
+    }
+  }, []);
+  return (
+    <figure className="flex w-full flex-col gap-2">
+      <video
+        ref={ref}
+        aria-label={label}
+        className="w-full rounded-media bg-black"
+        src="/work/nakahatsu/about-parallax.mp4"
+        poster="/work/nakahatsu/about-parallax-poster.webp"
+        width={1280}
+        height={720}
+        muted
+        loop
+        playsInline
+        autoPlay
+        preload="metadata"
+      />
+      <p className="text-caption text-ink-tertiary">{note}</p>
+    </figure>
+  );
+}
+
 type RejFig = { lead: string; groups: [string, string][]; note: string; alts: string[] };
 
 /** 没にした About の案（醸造家として）8案。グループごとに、左に説明、右に画像（スマートフォンは説明のあとに2列）。人物の写真は灰色に置換済み。 */
+/** ローディングアニメーションの録画。無音・ループ。動きを減らす設定のときは自動再生せず、ポスターだけ出す。 */
+function LoadingVideo({ label }: { label: string }) {
+  const ref = React.useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      v.pause();
+      v.controls = true;
+    } else {
+      v.play().catch(() => {});
+    }
+  }, []);
+  return (
+    <video
+      ref={ref}
+      aria-label={label}
+      className="w-full rounded-media bg-black"
+      src="/work/nakahatsu/loading-anim.mp4"
+      poster="/work/nakahatsu/loading-anim-poster.webp"
+      width={1280}
+      height={720}
+      muted
+      loop
+      playsInline
+      autoPlay
+      preload="metadata"
+    />
+  );
+}
+
 function RejectedFigure({ f }: { f: RejFig }) {
   const sets = [[1, 2], [3, 4, 5], [6, 7, 8]];
   return (
@@ -301,10 +366,14 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                     <BeforeAfterLabels before={t('beforeLabel')} after={t('afterLabel')} />
                     <Image src={`/work/nakahatsu/about-ba-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('aboutBaAlt')} width={1520} height={1756} className="h-auto w-full" />
                   </div>
+                  {/* About「醸造家として」のパララックスの録画。About の前後の図の直後。キャプションは置かず、aria-label に説明を入れる */}
+                  <ParallaxVideo label={t('parallaxVideoAlt')} note={t('parallaxVideoNote')} />
                   <div className="w-full">
                     <BeforeAfterLabels before={t('beforeLabel')} after={t('afterLabel')} />
                     <Image src={`/work/nakahatsu/top-ba-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('topBaAlt')} width={1520} height={975} className="h-auto w-full" />
                   </div>
+                  {/* ローディングアニメーション（ライブテーマのトップを開いた瞬間を録画）。キャプションは置かず、aria-label に説明を入れる */}
+                  <LoadingVideo label={t('loadingVideoAlt')} />
                   <RejectedFigure f={t.raw('rejFig') as RejFig} />
                 </div>
               ) : s.fig === 'bilingual-3lang' ? null /* ヒーローの3言語の図は、注釈「見せない」（2026-10-30）で外した。下の商品一覧の図だけ出す */ : (
