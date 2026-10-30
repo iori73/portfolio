@@ -81,7 +81,7 @@ function SystemFigure({ label, f }: { label: string; f: SystemFig }) {
     </div>
   );
   return (
-    <figure aria-label={label} className="flex w-full flex-col gap-3 bg-white p-4 md:w-[760px] md:gap-5 md:px-8 md:py-7">
+    <figure aria-label={label} className="flex w-full flex-col gap-3 bg-white p-4 md:w-full md:gap-5 md:px-8 md:py-7">
       {row(
         f.before,
         <>
@@ -227,7 +227,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
 
         {/* 主要画面の一覧（PC とスマートフォン）。Figma の Overview 直下の図と同じ。キャプションは置かず、alt に説明を入れる */}
         <div className="flex justify-center">
-          <div className="w-full md:w-[760px]">
+          <div className="w-full">
             <Image src={`/work/nakahatsu/overview-pcsp-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('overviewFigAlt')} width={2400} height={1446} className="h-auto w-full" />
           </div>
         </div>
@@ -241,8 +241,8 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
           </Row>
           {/* Process の導入のあとに、Instagram の投稿から見た先方の活動（Figma の Process 直下の図と同じ。PC は横4枚、スマートフォンは2列） */}
           <div className="flex justify-center">
-            <div className="w-full md:w-[760px]">
-              <Image src={`/work/nakahatsu/ig-posts-${language === 'jp' ? 'jp' : 'en'}-pc.webp`} alt={t('igAlt')} width={1520} height={language === 'jp' ? 487 : 518} className="hidden h-auto w-full md:block" />
+            <div className="w-full">
+              <Image src={`/work/nakahatsu/ig-posts-${language === 'jp' ? 'jp' : 'en'}-pc.webp`} alt={t('igAlt')} width={1523} height={414} className="hidden h-auto w-full md:block" />
               <Image src={`/work/nakahatsu/ig-posts-${language === 'jp' ? 'jp' : 'en'}-sp.webp`} alt={t('igAlt')} width={654} height={language === 'jp' ? 893 : 981} className="block h-auto w-full md:hidden" />
             </div>
           </div>
