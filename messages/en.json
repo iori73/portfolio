@@ -702,13 +702,10 @@
     "bilingualTextAlt": "The product list section of the top page in Japanese, English and French, side by side. The heading and the soy sauce product names appear in each language.",
     "v1v2Alt": "The top screens of v1 and v2 side by side. On the left, v1 reproduces the structure of the existing site; on the right, v2 is the redesign.",
     "systemFig": {
-      "before": "Before the redesign",
-      "after": "After the redesign",
+      "before": "Before",
+      "after": "After",
       "k1": "Company introduction",
       "k2": "Shop",
-      "c1": "Two systems ran separately",
-      "c1b": "Design and updates were done twice",
-      "c2": "One store: design and updates in one place",
       "pages": [
         "Home",
         "About",
@@ -718,9 +715,17 @@
         "Contact",
         "Policies"
       ],
-      "lang": "3 languages"
+      "lang": "3 languages",
+      "d1": "Two systems ran separately. Design and updates were done twice.",
+      "d2": "One store: design and updates in one place.",
+      "langAlt": "Japanese, English and French"
     },
     "v1Label": "v1 (reproduces the existing site)",
-    "v2Label": "v2 (redesign)"
+    "v2Label": "v2 (redesign)",
+    "beforeLabel": "Before",
+    "afterLabel": "After",
+    "aboutBaAlt": "The old About page (left) and the redesigned About page (right), side by side as tall screenshots. The old page is mostly text with small photos. The new page has a large header background, the logo, a map of where the ingredients come from, and photos of the process.",
+    "topBaAlt": "The old top page (left) and the redesigned top page (right), side by side as tall screenshots. In the new one, the news and the introduction follow the hero.",
+    "aboutRejAlt": "Two rejected designs for the As Brewers section of the About page, laid out with illustrations and vertical text."
   }
 }

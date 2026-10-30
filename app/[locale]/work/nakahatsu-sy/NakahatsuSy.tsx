@@ -54,57 +54,75 @@ function Swatch({ c, rows, className }: { c: PaletteColor; rows: string[]; class
 }
 
 type SystemFig = {
-  before: string; after: string; k1: string; k2: string; c1: string; c1b: string; c2: string; pages: string[]; lang: string;
+  before: string; after: string; k1: string; k2: string; d1: string; d2: string; pages: string[]; lang: string; langAlt: string;
 };
 
 /**
  * 小節1の図。2つのシステム（WordPress と EC-CUBE）が Shopify の1つのストアになる前後。
+ * 参考にした図の型: モノクロで平らな薄灰色の面、左に行ラベル（細い縦線で区切る）、白い小さな箱に細い線、細い接続。
  * 画像でなく文字として組む（読み上げでも読め、SP では縦に積む）。Figma の同名の図と同じ内容。
+ * ロゴ・言語アイコンは Figma の素材置き場（437:779）から書き出したもの。
  */
 function SystemFigure({ label, f }: { label: string; f: SystemFig }) {
-  const sys = (k: string, n: string) => (
-    <div className="flex flex-col gap-1 rounded-lg border border-line-section bg-surface-muted px-4 py-3 md:flex-1 md:justify-center md:py-4">
-      <p className="text-caption text-ink-tertiary">{k}</p>
-      <p className="font-space-grotesk text-title-sm font-bold text-ink">{n}</p>
+  const box = 'flex items-center gap-3 rounded-[3px] border border-ink/70 bg-white px-3.5 py-3';
+  const sys = (logo: string, k: string, n: string) => (
+    <div className={`${box} md:flex-1`}>
+      <Image src={`/work/nakahatsu/logo-${logo}.png`} alt="" width={32} height={32} className="h-8 w-8 shrink-0" />
+      <div className="flex flex-col">
+        <p className="text-caption leading-tight text-ink-tertiary">{k}</p>
+        <p className="font-space-grotesk text-body-lg font-bold leading-tight text-ink">{n}</p>
+      </div>
+    </div>
+  );
+  const row = (name: string, children: React.ReactNode) => (
+    <div className="flex flex-col gap-2 md:flex-row md:gap-5">
+      <p className="font-space-grotesk text-caption font-bold text-ink md:w-[112px] md:shrink-0 md:border-r md:border-ink/15 md:pr-4">{name}</p>
+      <div className="flex min-w-0 flex-col gap-3 rounded-md bg-[#F4F4F5] p-3.5 md:flex-1 md:px-5 md:py-[18px]">{children}</div>
     </div>
   );
   return (
-    <figure
-      aria-label={label}
-      className="flex w-full flex-col gap-4 rounded-media border border-line-section bg-white p-4 md:w-[760px] md:flex-row md:gap-5 md:px-10 md:py-9"
-    >
-      <div className="flex flex-col gap-3 md:w-[250px] md:shrink-0">
-        <p className="font-space-grotesk text-caption font-bold text-ink-tertiary">{f.before}</p>
-        <div className="flex flex-col gap-3 md:flex-1">
-          {sys(f.k1, 'WordPress')}
-          {sys(f.k2, 'EC-CUBE')}
-        </div>
-        <p className="text-body text-ink">{f.c1}</p>
-        <p className="text-body text-ink-tertiary">{f.c1b}</p>
-      </div>
-      <p aria-hidden="true" className="self-center text-title text-ink-tertiary md:pb-16">
-        <span className="md:hidden">↓</span>
-        <span className="hidden md:inline">→</span>
-      </p>
-      <div className="flex flex-col gap-3 md:min-w-0 md:flex-1">
-        <p className="font-space-grotesk text-caption font-bold text-ink-tertiary">{f.after}</p>
-        <div className="flex flex-col justify-center gap-3 rounded-lg border border-[#8B2252] bg-[#F5E8ED] px-4 py-4 md:flex-1 md:px-5">
-          <p className="font-space-grotesk text-title-sm font-bold text-[#8B2252]">Shopify</p>
+    <figure aria-label={label} className="flex w-full flex-col gap-3 bg-white p-4 md:w-[760px] md:gap-5 md:px-8 md:py-7">
+      {row(
+        f.before,
+        <>
+          <div className="flex flex-col gap-2.5 md:flex-row">
+            {sys('wordpress', f.k1, 'WordPress')}
+            {sys('eccube', f.k2, 'EC-CUBE')}
+          </div>
+          <p className="text-caption text-ink-tertiary">{f.d1}</p>
+        </>,
+      )}
+      <p aria-hidden="true" className="text-center text-title text-ink-tertiary">↓</p>
+      {row(
+        f.after,
+        <>
+          <div className={box}>
+            <Image src="/work/nakahatsu/logo-shopify.png" alt="" width={32} height={32} className="h-8 w-8 shrink-0" />
+            <p className="font-space-grotesk text-title-sm font-bold text-ink">Shopify</p>
+          </div>
           <ul className="flex flex-wrap gap-2">
             {f.pages.map((p) => (
-              <li key={p} className="rounded-md border border-[#8B2252] bg-white px-3 py-1.5 text-body text-ink">{p}</li>
+              <li key={p} className="rounded-[3px] border border-ink/70 bg-white px-2.5 py-1.5 text-caption text-ink">{p}</li>
             ))}
           </ul>
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex items-center gap-3">
             <span className="text-caption text-ink-tertiary">{f.lang}</span>
-            {['JP', 'EN', 'FR'].map((l) => (
-              <span key={l} className="rounded-md bg-[#8B2252] px-3 py-1.5 font-space-grotesk text-body font-bold text-white">{l}</span>
-            ))}
+            <Image src="/work/nakahatsu/lang-icons.png" alt={f.langAlt} width={691} height={81} className="h-5 w-auto" />
           </div>
-        </div>
-        <p className="text-body text-ink">{f.c2}</p>
-      </div>
+          <p className="text-caption text-ink-tertiary">{f.d2}</p>
+        </>,
+      )}
     </figure>
+  );
+}
+
+/** 前後の図の上に置くラベル（位置は図の中の2枚のページに合わせる）。 */
+function BeforeAfterLabels({ before, after }: { before: string; after: string }) {
+  return (
+    <div aria-hidden="true" className="relative h-8 font-space-grotesk text-caption font-bold text-ink-tertiary">
+      <p className="absolute left-[3.2%] top-2">{before}</p>
+      <p className="absolute left-[57.4%] top-2">{after}</p>
+    </div>
   );
 }
 
@@ -219,6 +237,21 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                 <div className="flex justify-center">
                   <SystemFigure label={s.cap} f={t.raw('systemFig') as SystemFig} />
                 </div>
+              ) : s.fig === 'about-tenyu' ? (
+                <div className="flex flex-col items-center gap-10 md:gap-12">
+                  {/* About の前後、トップの前後（縦長）、没にした About の案。キャプションは置かず、alt に説明を入れる */}
+                  <div className="w-full md:w-[760px]">
+                    <BeforeAfterLabels before={t('beforeLabel')} after={t('afterLabel')} />
+                    <Image src={`/work/nakahatsu/about-ba-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('aboutBaAlt')} width={1520} height={1756} className="h-auto w-full" />
+                  </div>
+                  <div className="w-full md:w-[760px]">
+                    <BeforeAfterLabels before={t('beforeLabel')} after={t('afterLabel')} />
+                    <Image src={`/work/nakahatsu/top-ba-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('topBaAlt')} width={1520} height={975} className="h-auto w-full" />
+                  </div>
+                  <div className="w-full overflow-hidden rounded-media bg-surface-muted md:w-[760px]">
+                    <Image src="/work/nakahatsu/about-rejected.webp" alt={t('aboutRejAlt')} width={1024} height={318} className="h-auto w-full" />
+                  </div>
+                </div>
               ) : (
                 <div className={`flex justify-center`}>
                   <div className={`w-full overflow-hidden rounded-media bg-surface-muted ${i % 2 === 1 ? 'md:w-[760px]' : ''}`}>
@@ -230,11 +263,11 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
               {s.fig === 'before-after' && (
                 <div className="flex justify-center">
                   <div className="w-full overflow-hidden rounded-media bg-surface-muted md:w-[760px]">
-                    <div aria-hidden="true" className="grid grid-cols-2 gap-[4%] px-[3.3%] pt-[2.4%] font-space-grotesk text-caption font-bold text-ink-tertiary">
-                      <p>{t('v1Label')}</p>
-                      <p>{t('v2Label')}</p>
+                    <div aria-hidden="true" className="relative h-9 font-space-grotesk text-caption font-bold text-ink-tertiary">
+                      <p className="absolute left-[3.2%] top-3">{t('v1Label')}</p>
+                      <p className="absolute left-[57.4%] top-3">{t('v2Label')}</p>
                     </div>
-                    <Image src={`/work/nakahatsu/v1-v2-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('v1v2Alt')} width={1520} height={804} className="-mt-[1.2%] h-auto w-full" />
+                    <Image src={`/work/nakahatsu/v1-v2-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('v1v2Alt')} width={1520} height={975} className="h-auto w-full" />
                   </div>
                 </div>
               )}
