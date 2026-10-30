@@ -81,7 +81,7 @@ function SystemFigure({ label, f }: { label: string; f: SystemFig }) {
     </div>
   );
   return (
-    <figure aria-label={label} className="flex w-full flex-col gap-3 bg-white p-4 md:w-full md:gap-5 md:px-8 md:py-7">
+    <figure aria-label={label} className="flex w-full flex-col gap-3 bg-white p-4 md:w-[760px] md:gap-5 md:px-8 md:py-7">
       {row(
         f.before,
         <>
@@ -140,7 +140,7 @@ function RejectedFigure({ f }: { f: RejFig }) {
             <p className="text-caption font-bold text-ink">{f.groups[gi][0]}</p>
             <p className="text-caption text-ink-secondary">{f.groups[gi][1]}</p>
           </div>
-          <div className={`grid min-w-0 flex-1 grid-cols-2 gap-2 md:gap-4 ${set.length === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
+          <div className={`grid min-w-0 flex-1 grid-cols-2 gap-2 bg-white p-2 md:gap-4 md:p-4 ${set.length === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
             {set.map((n) => (
               <Image key={n} src={`/work/nakahatsu/about-rej-${n}.webp`} alt={f.alts[n - 1]} width={900} height={560} className="h-auto w-full rounded" />
             ))}
