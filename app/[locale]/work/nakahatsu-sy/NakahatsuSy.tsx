@@ -271,6 +271,14 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                   </div>
                 </div>
               )}
+              {/* 色の図のあとに、ストアのテーマの文字・サイズ・色・余白の図（デザインシステム）。Figma の Step/5 の下と同じ */}
+              {s.fig === 'palette' && (
+                <div className="flex justify-center">
+                  <div className="w-full md:w-[760px]">
+                    <Image src={`/work/nakahatsu/design-system-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('dsAlt')} width={1024} height={814} className="h-auto w-full" />
+                  </div>
+                </div>
+              )}
               {/* 3つの言語: ヒーローの図のあとに、スマートフォン幅の商品ページ（文字の部分）を並べた図を足す。住所・フッターは写さない */}
               {s.fig === 'bilingual-3lang' && (
                 <div className="flex justify-center">
