@@ -382,6 +382,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                 <div className="flex min-w-0 flex-col gap-3 md:flex-1">
                   <p className={`text-title text-ink-tertiary ${getHeadingFontClass()}`}>{i + 1}.</p>
                   <h2 className={`text-title-sm text-ink ${getHeadingFontClass()}`}>{s.h}</h2>
+                  {s.fig === 'about-tenyu' && <h3 className={`text-body-lg font-medium text-ink ${getHeadingFontClass()}`}>{t('topSub')}</h3>}
                   {s.p.map((p) => (
                     <p key={p} className={body}>{p}</p>
                   ))}
@@ -409,7 +410,10 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                   <TopIterFigure f={t.raw('topIter') as IterFig} />
                   <div className="flex w-full flex-col md:flex-row md:gap-8">
                     <div className="hidden md:block md:w-[280px] md:shrink-0" aria-hidden="true" />
-                    <p className={`${body} min-w-0 md:flex-1`}>{t('aboutText')}</p>
+                    <div className="flex min-w-0 flex-col gap-3 md:flex-1">
+                      <h3 className={`text-body-lg font-medium text-ink ${getHeadingFontClass()}`}>{t('aboutSub')}</h3>
+                      <p className={body}>{t('aboutText')}</p>
+                    </div>
                   </div>
                   <div className="w-full">
                     <BeforeAfterLabels before={t('beforeLabel')} after={t('afterLabel')} />
@@ -457,7 +461,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                       <p className="absolute left-[3.2%] top-3">{t('v1Label')}</p>
                       <p className="absolute left-[57.4%] top-3">{t('v2Label')}</p>
                     </div>
-                    <Image src={`/work/nakahatsu/v1-v2-full-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('v1v2FullAlt')} width={1520} height={language === 'jp' ? 4930 : 4760} className="h-auto w-full" />
+                    <Image src={`/work/nakahatsu/v1-v2-full-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('v1v2FullAlt')} width={1520} height={language === 'jp' ? 3136 : 3194} className="h-auto w-full" />
                     <p className="px-6 pb-4 text-caption text-ink-tertiary">{t('v1v2FullNote')}</p>
                   </div>
                 </div>
@@ -465,7 +469,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
               {/* 色の図のあとに、ストアのテーマの文字・サイズ・色・余白の図（デザインシステム）。Figma の Step/5 の下と同じ */}
               {s.fig === 'palette' && (
                 <div className="w-full overflow-hidden rounded-media">
-                  <Image src={`/work/nakahatsu/design-system-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('dsAlt')} width={1088} height={701} className="h-auto w-full" />
+                  <Image src={`/work/nakahatsu/design-system-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('dsAlt')} width={language === 'jp' ? 1378 : 1449} height={1024} className="h-auto w-full" />
                 </div>
               )}
               {/* 3つの言語: ヒーローの図のあとに、スマートフォン幅の商品ページ（文字の部分）を並べた図を足す。住所・フッターは写さない */}

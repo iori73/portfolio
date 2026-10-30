@@ -625,7 +625,7 @@
       {
         "h": "A major redesign of the home page and About page",
         "p": [
-          "The old home page opened with a large photograph of the shop's signboard, with the menu laid over the left of it. The new home page opens with photographs of the brewing work instead, and three of them switch in turn. The header carries a language switch (Japanese, English and French) and the cart, and the news sits right below it. A loading animation plays when the page opens."
+          "In the hero section, the changes are a larger logo and a short message that continues from 天の恵み (\"the blessings of heaven\"). The photographs are a carousel of three images both before and after, and the three images are the same; the figure differs only in when the screenshot was taken. The header carries a language switch (Japanese, English and French) and the cart. For people who visit the site often, I moved the news from the lower part of the old site to just below the hero."
         ],
         "fig": "about-tenyu",
         "cap": "The About page in Japanese: the miso block. The body text runs vertically over a photograph, and the heading stands vertically to its right."
@@ -784,7 +784,7 @@
     "loadingVideoAlt": "A recording of the loading animation. A yellow ring appears on a dark screen, the Tenyu logo fades in inside it, and the screen changes to the top page hero. About 7 seconds.",
     "parallaxVideoAlt": "A recording of the As Brewers section of the About page while scrolling. The photos move slightly inside their frames.",
     "parallaxVideoNote": "Photos of people are replaced with gray boxes.",
-    "aboutText": "Next, the About page. The old About page was mostly text, with photographs sized to sit beside it. In the new About page, each section carries a photograph or a figure, placed large, that matches what the section wants to say. The brewers are shown through photographs of their work, and the ingredients through a map of where they come from, so that each point can be seen at a glance. The page can be read to the end as one story.",
+    "aboutText": "The old About page was mostly text, with photographs sized to sit beside it. In the new About page, each section carries a photograph or a figure, placed large, that matches what the section wants to say. The brewers are shown through photographs of their work, and the ingredients through a map of where they come from, so that each point can be seen at a glance. The page can be read to the end as one story.",
     "topIter": {
       "lead": "I redesigned the About section of the home page twice. There are nine designs I did not use, in two directions. The one I used places two photographs of the building side by side.",
       "groups": [
@@ -810,6 +810,8 @@
         "Design B-2, three building photographs side by side"
       ]
     },
-    "heroSpAlt": "The hero section at phone width in Japanese, English and French."
+    "heroSpAlt": "The hero section at phone width in Japanese, English and French.",
+    "topSub": "Home page",
+    "aboutSub": "About page"
   }
 }
