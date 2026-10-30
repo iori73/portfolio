@@ -213,6 +213,13 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
               <p key={p} className={body}>{p}</p>
             ))}
           </Row>
+          {/* Process の導入のあとに、Instagram の投稿から見た先方の活動（Figma の Process 直下の図と同じ。PC は横4枚、スマートフォンは2列） */}
+          <div className="flex justify-center">
+            <div className="w-full md:w-[760px]">
+              <Image src={`/work/nakahatsu/ig-posts-${language === 'jp' ? 'jp' : 'en'}-pc.webp`} alt={t('igAlt')} width={1520} height={language === 'jp' ? 487 : 518} className="hidden h-auto w-full md:block" />
+              <Image src={`/work/nakahatsu/ig-posts-${language === 'jp' ? 'jp' : 'en'}-sp.webp`} alt={t('igAlt')} width={654} height={language === 'jp' ? 893 : 981} className="block h-auto w-full md:hidden" />
+            </div>
+          </div>
           {steps.map((s, i) => (
             <div key={s.h} className="flex flex-col gap-10 md:gap-10">
               <div className="flex flex-col md:flex-row md:gap-8">
@@ -271,12 +278,21 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                   </div>
                 </div>
               )}
+              {s.fig === 'before-after' && (
+                <div className="flex justify-center">
+                  <div className="w-full overflow-hidden rounded-media bg-surface-muted md:w-[760px]">
+                    <div aria-hidden="true" className="relative h-9 font-space-grotesk text-caption font-bold text-ink-tertiary">
+                      <p className="absolute left-[3.2%] top-3">{t('v1Label')}</p>
+                      <p className="absolute left-[57.4%] top-3">{t('v2Label')}</p>
+                    </div>
+                    <Image src={`/work/nakahatsu/v1-v2-tall-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('v1v2TallAlt')} width={1520} height={1444} className="h-auto w-full" />
+                  </div>
+                </div>
+              )}
               {/* 色の図のあとに、ストアのテーマの文字・サイズ・色・余白の図（デザインシステム）。Figma の Step/5 の下と同じ */}
               {s.fig === 'palette' && (
-                <div className="flex justify-center">
-                  <div className="w-full md:w-[760px]">
-                    <Image src={`/work/nakahatsu/design-system-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('dsAlt')} width={1024} height={814} className="h-auto w-full" />
-                  </div>
+                <div className="w-full overflow-hidden rounded-media">
+                  <Image src={`/work/nakahatsu/design-system-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('dsAlt')} width={1088} height={701} className="h-auto w-full" />
                 </div>
               )}
               {/* 3つの言語: ヒーローの図のあとに、スマートフォン幅の商品ページ（文字の部分）を並べた図を足す。住所・フッターは写さない */}
