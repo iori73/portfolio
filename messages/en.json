@@ -757,6 +757,23 @@
         "Design C-2, a larger work photo (small products)",
         "Design C-3, a larger work photo (large products)"
       ]
-    }
+    },
+    "igShots": {
+      "dates": [
+        "May 2024",
+        "September 2024",
+        "April 2025",
+        "March 2026"
+      ],
+      "alts": [
+        "A screenshot of an Instagram post by Nakahatsu Shoten (May 2024). The Ishikawa Good Products corner at the Muji store in Nonoichi, with bottles of soy sauce on the shelves.",
+        "A screenshot of an Instagram post by Nakahatsu Shoten (September 2024). The booklet of the fermentation culture and arts festival in Kanazawa and a magazine page lie on a red tray.",
+        "A screenshot of an Instagram post by Nakahatsu Shoten (April 2025). A post about overseas visitors trying miso making. The photo of people is replaced with a gray box."
+      ],
+      "textCard": "The post of nursery school children in a visiting miso-making class. No screenshot is shown because people appear in it.",
+      "note": "Source: Nakahatsu Shoten's Instagram posts (dates are posting dates). Photos of people are replaced with gray boxes."
+    },
+    "v1v2FullAlt": "The top pages of v1 and v2 side by side, from the top down to the Instagram section. On the left, v1 reproduces the structure of the existing site; on the right, v2 is the redesign. v2 continues from the hero through the news, the company introduction, three photos, our commitment, the product list, a welcome message and the customers section to Instagram.",
+    "v1v2FullNote": "Photos of people and sample (placeholder) images are replaced with gray boxes."
   }
 }

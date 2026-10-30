@@ -246,6 +246,30 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
               <Image src={`/work/nakahatsu/ig-posts-${language === 'jp' ? 'jp' : 'en'}-sp.webp`} alt={t('igAlt')} width={654} height={language === 'jp' ? 893 : 981} className="block h-auto w-full md:hidden" />
             </div>
           </div>
+          {/* 上の図のあとに、投稿そのものの見た目（SP 幅のスクリーンショット）を並べた図。人物が写る写真は灰色に置き換え、載せない投稿は文字の枠。Figma の Instagram の図の下と同じ */}
+          {(() => {
+            const shots = t.raw('igShots') as { dates: string[]; alts: string[]; textCard: string; note: string };
+            const files = ['muji', 'fest', 'overseas'];
+            return (
+              <figure className="flex w-full flex-col gap-4 rounded-media bg-surface-muted p-3 md:px-12 md:pb-6 md:pt-8">
+                <div className="grid grid-cols-2 gap-x-2 gap-y-4 md:grid-cols-4 md:gap-4">
+                  {files.map((f, k) => (
+                    <div key={f} className="flex min-w-0 flex-col gap-1.5">
+                      <p className="font-space-grotesk text-caption font-bold text-ink-tertiary">{shots.dates[k]}</p>
+                      <Image src={`/work/nakahatsu/ig-shot-${f}.webp`} alt={shots.alts[k]} width={780} height={1210} className="h-auto w-full rounded-md" />
+                    </div>
+                  ))}
+                  <div className="flex min-w-0 flex-col gap-1.5">
+                    <p className="font-space-grotesk text-caption font-bold text-ink-tertiary">{shots.dates[3]}</p>
+                    <div className="flex flex-1 items-center rounded-md bg-white p-3 md:p-4">
+                      <p className="text-caption text-ink-secondary">{shots.textCard}</p>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-caption text-ink-tertiary">{shots.note}</p>
+              </figure>
+            );
+          })()}
           {steps.map((s, i) => (
             <div key={s.h} className="flex flex-col gap-10 md:gap-10">
               <div className="flex flex-col md:flex-row md:gap-8">
@@ -310,6 +334,19 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                       <p className="absolute left-[57.4%] top-3">{t('v2Label')}</p>
                     </div>
                     <Image src={`/work/nakahatsu/v1-v2-tall-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('v1v2TallAlt')} width={1520} height={1444} className="h-auto w-full" />
+                  </div>
+                </div>
+              )}
+              {/* さらに長い版: Instagram の節まで。人物が写る写真と見本（Sample）の画像は、灰色の四角に置き換えてある。Figma の長尺図の下と同じ */}
+              {s.fig === 'before-after' && (
+                <div className="flex justify-center">
+                  <div className="w-full overflow-hidden rounded-media bg-surface-muted">
+                    <div aria-hidden="true" className="relative h-9 font-space-grotesk text-caption font-bold text-ink-tertiary">
+                      <p className="absolute left-[3.2%] top-3">{t('v1Label')}</p>
+                      <p className="absolute left-[57.4%] top-3">{t('v2Label')}</p>
+                    </div>
+                    <Image src={`/work/nakahatsu/v1-v2-full-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('v1v2FullAlt')} width={1520} height={language === 'jp' ? 4930 : 4760} className="h-auto w-full" />
+                    <p className="px-6 pb-4 text-caption text-ink-tertiary">{t('v1v2FullNote')}</p>
                   </div>
                 </div>
               )}
