@@ -1638,3 +1638,11 @@ Shopify のパスワードページは Shopify 側テンプレートなので、
 ## 2026-11-01 河野さんのコピー用ファイル（cOQENVBn0c3tmjCZkKMQyx）: 本文の図の PC を編集できるレイヤーに、サムネ案の評価
 - 本文の図 2031:5475（Container/Figure main screens）: 一枚の画像だった PC 8枚（2段）を、1枚ずつの画像レイヤー（Row/PC screens = 2033:2）に分けた。元画像は .capture/nakahatsu/ov/review の 8ページ（1440幅の上 912px）。元の一枚画像は非表示（Archive/Image/Main screens flat）で残した。
 - サムネ: 現在の「PC 1 + SP 1」は情報量が少ないので、変更に賛成。3案（2031:5364 / 5434 / 5459）のうち、5434（ヒーロー全体が見える、レンガ積み）を推す。サムネの比は 8:5（WORK_THUMB_ASPECT）なので、1088x760 から上下を切る必要がある。EN のサムネは EN の撮影から作り直しが必要。サイトへの反映は河野さんの確認後。
+
+## 2026-11-01 サムネ案2（仮）を 8:5 に作り直し、EN 版を EN の画面で作成（河野さんのコピー用ファイル）
+- 案2（2031:5434）は 1088x760（約1.43）で、サムネの比 8:5 と合わなかった。切り落とさず、スケール 0.85（PC 484x302、SP 148x320、間隔 20）・7列・2段に組み直した。1088x680 ちょうど、ヒーロー全体が見える。JP = 2038:2、EN = 2038:11（同じ配置）。
+- 段1: SP About | PC Top（3列）| PC Product（3列）。段2: PC Shop（3列）| SP 商品 | SP FAQ | SP Top | SP Contact。
+- EN 版は EN の画面に差し替え。PC は ov/review-en の home/product/shop、SP は ks の sp-home-top-en / sp-product-en と、新規に撮影した EN の About/Contact/FAQ（390幅・3倍、jobs/…/ensp3）。EN の味噌の SP は無いので、EN の醤油の商品ページを使った。
+- 学び: upload_assets は、特定のノード（2038:18）だけ応答が返らず固まった。ノードを指定せず新規フレームにアップロードし、use_figma で fills を移して仮フレームを消すと通った。応答が固まっても、別URLで再送すると「already submitted」になる場合がある（反映の有無は fills の imageHash で確認する）。
+- 注意: 前の候補のレイヤー名が、中身と入れ替わっていた（Top/Product/FAQ の SP）。新しい2枠では中身に合わせて直した。
+- サイトのサムネ（thumbnail-jp/en.webp）への反映は、河野さんの確認後。
