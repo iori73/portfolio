@@ -81,7 +81,7 @@ function SystemFigure({ label, f }: { label: string; f: SystemFig }) {
     </div>
   );
   return (
-    <figure aria-label={label} className="flex w-full flex-col gap-3 bg-white p-4 md:w-[760px] md:gap-5 md:px-8 md:py-7">
+    <figure aria-label={label} className="flex w-full flex-col gap-3 rounded-media border border-line-subtle bg-white p-4 md:w-[760px] md:gap-5 md:px-8 md:py-7">
       {row(
         f.before,
         <>
@@ -126,7 +126,7 @@ function BeforeAfterLabels({ before, after }: { before: string; after: string })
   );
 }
 
-/** About「醸造家として」のパララックスの録画。無音・ループ。動きを減らす設定のときは自動再生せず、コントロールを出す。人物の写真は灰色の置き換え画像。 */
+/** About「醸造家として」のパララックスの録画。無音・ループ。動きを減らす設定のときは自動再生せず、コントロールを出す。実物の写真のまま（先方の許可を取ってから公開する。2026-11-01 河野の指示）。 */
 function ParallaxVideo({ label, note }: { label: string; note: string }) {
   const ref = React.useRef<HTMLVideoElement>(null);
   useEffect(() => {
@@ -155,7 +155,7 @@ function ParallaxVideo({ label, note }: { label: string; note: string }) {
         autoPlay
         preload="metadata"
       />
-      <p className="text-caption text-ink-tertiary">{note}</p>
+      {note ? <p className="text-caption text-ink-tertiary">{note}</p> : null}
     </figure>
   );
 }
@@ -209,7 +209,7 @@ type IterFig = { lead: string; groups: [string, string][]; note: string; alts: s
 function TopIterFigure({ f }: { f: IterFig }) {
   const sets = [[1, 2, 3, 4, 5, 6, 7], [8, 9]];
   return (
-    <figure aria-label={f.lead} className="flex w-full flex-col gap-6 rounded-media bg-surface-muted p-4 md:gap-7 md:p-8">
+    <figure aria-label={f.lead} className="flex w-full flex-col gap-6 rounded-media border border-line-subtle bg-white p-4 md:gap-7 md:p-8">
       <p className="text-caption text-ink-secondary">{f.lead}</p>
       {sets.map((set, gi) => (
         <div key={f.groups[gi][0]} className="flex flex-col gap-3 md:flex-row md:gap-6">
@@ -232,7 +232,7 @@ function TopIterFigure({ f }: { f: IterFig }) {
 function RejectedFigure({ f }: { f: RejFig }) {
   const sets = [[1, 2], [3, 4, 5], [6, 7, 8]];
   return (
-    <figure aria-label={f.lead} className="flex w-full flex-col gap-6 rounded-media bg-surface-muted p-4 md:gap-7 md:p-8">
+    <figure aria-label={f.lead} className="flex w-full flex-col gap-6 rounded-media border border-line-subtle bg-white p-4 md:gap-7 md:p-8">
       <p className="text-caption text-ink-secondary">{f.lead}</p>
       {sets.map((set, gi) => (
         <div key={f.groups[gi][0]} className="flex flex-col gap-3 md:flex-row md:gap-6">
@@ -469,7 +469,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
               {/* 色の図のあとに、ストアのテーマの文字・サイズ・色・余白の図（デザインシステム）。Figma の Step/5 の下と同じ */}
               {s.fig === 'palette' && (
                 <div className="w-full overflow-hidden rounded-media">
-                  <Image src={`/work/nakahatsu/design-system-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('dsAlt')} width={2176} height={language === 'jp' ? 1266 : 1302} className="h-auto w-full" />
+                  <Image src={`/work/nakahatsu/design-system-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('dsAlt')} width={2176} height={language === 'jp' ? 1326 : 1362} className="h-auto w-full" />
                 </div>
               )}
               {/* 3つの言語: ヒーローの図のあとに、スマートフォン幅の商品ページ（文字の部分）を並べた図を足す。住所・フッターは写さない */}

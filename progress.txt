@@ -1664,3 +1664,12 @@ Shopify のパスワードページは Shopify 側テンプレートなので、
 - 動画: 実物の写真のままの About パラレックス動画を撮影（tmp の parallax_real/about-parallax.mp4）。サイトは、先方の許可が出るまで灰色版のまま。許可取りはデイリーボードに追加（nakahatsu-video-permission-2026-11-01）。
 - 先方向け PDF を再生成。
 - 未了: 背景色の方針（河野さんと相談中。灰色でそろえるか、役割で分けるか）。変更済みの Figma の背景色は、方針が決まるまで暫定。
+
+## 2026-11-01（続き2）図の背景を役割で3種類に分けた／動画を実物に／EN の図を JP の最新版に
+- 河野さんの決定: 背景は役割で分ける案（yes）、動画は許可を待たずにサイトへ入れる（yes。ローカルのみ）。結果を見て違和感があれば河野さんが指摘する。
+- 背景の役割: 灰（変数 Color/surface/muted）＝先方のストア画面・前後の比較・Instagram・ローディング・3言語のスマホ図。白＋細い線（変数 Color/border/subtle）＝私が作った過程の図（システム図、About の過程、没案）。生成り（#F4F3F1）＝先方のブランドを説明するデザインシステムの図（河野さんの色のまま）。JP と EN の両方に適用。
+- サイト: 過程の図（RejectedFigure、TopIterFigure、SystemFigure）を bg-white + border-line-subtle に。灰色の図は従来どおり bg-surface-muted。
+- 動画: 実物のパララックス動画（about-parallax.mp4、約 0.7MB、ポスターは 3.0 秒のコマ）に差し替え。灰色版は tmp の parallax_real/backup/。注記は空文字にして非表示（messages の parallaxVideoNote）。Figma の注記も削除。
+- EN: 動画の枠を JP と同じに（灰の背景なし、1088 幅、バッジ削除）。5つの手順の番号と見出しを横並び（Row/Step heading）に。
+- デザインシステムの図: 河野さんが直した JP（点線つきのミニ図、1280 の括弧、色見本の枠）を、EN の図に複製し直して英語の文字に差し替え（新 606:767）。サイトの design-system-jp/en.webp も更新（2176x1326 / 2176x1362）。
+- 先方向け PDF を再生成。型の検査: NakahatsuSy.tsx のエラーは 0。
