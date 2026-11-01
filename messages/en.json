@@ -698,7 +698,7 @@
         }
       ]
     },
-    "overviewFigAlt": "The main screens of the new site. The upper part shows desktop-width screens such as the home page, the product list, a product page and the About page, and the lower part shows smartphone-width screens of the home page, the product list and a product page.",
+    "overviewFigAlt": "The main screens of the new site. The upper part shows eight desktop-width screens in two rows: the home page, About, News, a product page, the product list, the shipping policy, Contact and the FAQ. The lower part shows six smartphone-width screens: the home page, About, the product list, a product page, Contact and the FAQ.",
     "bilingualTextAlt": "The product list section of the top page in Japanese, English and French, side by side. The heading and the soy sauce product names appear in each language.",
     "v1v2Alt": "The top screens of v1 and v2 side by side. On the left, v1 reproduces the structure of the existing site; on the right, v2 is the redesign.",
     "systemFig": {

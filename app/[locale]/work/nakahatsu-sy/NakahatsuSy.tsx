@@ -331,7 +331,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
         {/* 主要画面の一覧（PC とスマートフォン）。Figma の Overview 直下の図と同じ。キャプションは置かず、alt に説明を入れる */}
         <div className="flex justify-center">
           <div className="w-full">
-            <Image src={`/work/nakahatsu/overview-pcsp-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('overviewFigAlt')} width={language === 'jp' ? 2176 : 2400} height={language === 'jp' ? 1312 : 1446} className="h-auto w-full" />
+            <Image src={`/work/nakahatsu/overview-pcsp-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('overviewFigAlt')} width={2176} height={1312} className="h-auto w-full" />
           </div>
         </div>
 
@@ -342,15 +342,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
               <p key={p} className={body}>{p}</p>
             ))}
           </Row>
-          {/* Process の導入のあとに、Instagram の投稿から見た先方の活動（Figma の Process 直下の図と同じ。PC は横4枚、スマートフォンは2列） */}
-          {language !== 'jp' && (
-          <div className="flex justify-center">
-            <div className="w-full">
-              <Image src={`/work/nakahatsu/ig-posts-${language === 'jp' ? 'jp' : 'en'}-pc.webp`} alt={t('igAlt')} width={1523} height={414} className="hidden h-auto w-full md:block" />
-              <Image src={`/work/nakahatsu/ig-posts-${language === 'jp' ? 'jp' : 'en'}-sp.webp`} alt={t('igAlt')} width={654} height={language === 'jp' ? 893 : 981} className="block h-auto w-full md:hidden" />
-            </div>
-          </div>
-          )}
+          {/* Instagram の投稿カードの図（ig-posts-*.webp）は、Figma の v2 で非表示にしたため載せない（JP は 2026-11-01 に、EN も同日に外した。画像ファイルは残してある） */}
           {/* 上の図のあとに、投稿そのものの見た目（SP 幅のスクリーンショット）を並べた図。人物が写る写真は灰色に置き換え、載せない投稿は文字の枠。Figma の Instagram の図の下と同じ */}
           {(() => {
             const shots = t.raw('igShots') as { dates: string[]; alts: string[]; urls: string[]; linkLabel: string; textCard: string; note: string };
@@ -432,29 +424,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                   </div>
                 </div>
               )}
-              {/* 2案を並べる: 旧サイトとの比べの図のあとに、v1（既存サイトを再現した案）と v2（リデザイン案）のトップを並べた図を足す */}
-              {s.fig === 'before-after' && language !== 'jp' && (
-                <div className="flex justify-center">
-                  <div className="w-full overflow-hidden rounded-media bg-[var(--nk-surface)]">
-                    <div aria-hidden="true" className="relative h-9 font-space-grotesk text-caption font-bold text-ink-tertiary">
-                      <p className="absolute left-[3.2%] top-3">{t('v1Label')}</p>
-                      <p className="absolute left-[57.4%] top-3">{t('v2Label')}</p>
-                    </div>
-                    <Image src={`/work/nakahatsu/v1-v2-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('v1v2Alt')} width={1520} height={975} className="h-auto w-full" />
-                  </div>
-                </div>
-              )}
-              {s.fig === 'before-after' && language !== 'jp' && (
-                <div className="flex justify-center">
-                  <div className="w-full overflow-hidden rounded-media bg-[var(--nk-surface)]">
-                    <div aria-hidden="true" className="relative h-9 font-space-grotesk text-caption font-bold text-ink-tertiary">
-                      <p className="absolute left-[3.2%] top-3">{t('v1Label')}</p>
-                      <p className="absolute left-[57.4%] top-3">{t('v2Label')}</p>
-                    </div>
-                    <Image src={`/work/nakahatsu/v1-v2-tall-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('v1v2TallAlt')} width={1520} height={1444} className="h-auto w-full" />
-                  </div>
-                </div>
-              )}
+              {/* v1/v2 の 1500px の図（v1-v2-*.webp）と縦長の図（v1-v2-tall-*.webp）は、Figma の v2 で非表示にしたため載せない（JP・EN とも 2026-11-01。画像ファイルは残してある） */}
               {/* さらに長い版: Instagram の節まで。人物が写る写真と見本（Sample）の画像は、灰色の四角に置き換えてある。Figma の長尺図の下と同じ */}
               {s.fig === 'before-after' && (
                 <div className="flex justify-center">
@@ -474,14 +444,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                   <Image src={`/work/nakahatsu/design-system-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('dsAlt')} width={2176} height={language === 'jp' ? 1326 : 1362} className="h-auto w-full" />
                 </div>
               )}
-              {/* 3つの言語: ヒーローの図のあとに、スマートフォン幅の商品ページ（文字の部分）を並べた図を足す。住所・フッターは写さない */}
-              {s.fig === 'bilingual-3lang' && language !== 'jp' && (
-                <div className="flex justify-center">
-                  <div className="w-full">
-                    <Image src="/work/nakahatsu/bilingual-text.webp" alt={t('bilingualTextAlt')} width={1560} height={757} className="h-auto w-full" />
-                  </div>
-                </div>
-              )}
+              {/* 3つの言語の商品一覧の図（bilingual-text.webp）は、Figma の v2 で非表示にしたため載せない（JP・EN とも 2026-11-01。画像ファイルは残してある） */}
               {/* ヒーロー節を、スマートフォン幅で、3言語並べた図（商品一覧の図の下）。Figma の Step/4 の最後と同じ */}
               {s.fig === 'bilingual-3lang' && (
                 <div className="flex justify-center">
