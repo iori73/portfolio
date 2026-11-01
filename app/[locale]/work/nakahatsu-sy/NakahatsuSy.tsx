@@ -331,7 +331,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
         {/* 主要画面の一覧（PC とスマートフォン）。Figma の Overview 直下の図と同じ。キャプションは置かず、alt に説明を入れる */}
         <div className="flex justify-center">
           <div className="w-full">
-            <Image src={`/work/nakahatsu/overview-pcsp-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('overviewFigAlt')} width={2400} height={1446} className="h-auto w-full" />
+            <Image src={`/work/nakahatsu/overview-pcsp-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('overviewFigAlt')} width={language === 'jp' ? 2176 : 2400} height={language === 'jp' ? 1312 : 1446} className="h-auto w-full" />
           </div>
         </div>
 
