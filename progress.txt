@@ -1673,3 +1673,9 @@ Shopify のパスワードページは Shopify 側テンプレートなので、
 - EN: 動画の枠を JP と同じに（灰の背景なし、1088 幅、バッジ削除）。5つの手順の番号と見出しを横並び（Row/Step heading）に。
 - デザインシステムの図: 河野さんが直した JP（点線つきのミニ図、1280 の括弧、色見本の枠）を、EN の図に複製し直して英語の文字に差し替え（新 606:767）。サイトの design-system-jp/en.webp も更新（2176x1326 / 2176x1362）。
 - 先方向け PDF を再生成。型の検査: NakahatsuSy.tsx のエラーは 0。
+
+## 2026-11-01（続き3）図の背景と線を、先方サイトの DS の色に変更（河野さんの指摘）
+- 指摘: 図の色は、Figma ファイルの色ではなく、サイト（先方）の DS を踏襲すべき。確認: 先方テーマ nkv2-custom.css で、面 surface=#F0F0F0、罫線 border=#DAD6CE。#F4F3F1 は surface-soft（丸い写真の背景・ホバー用）で、図の背景用ではない。
+- Figma: 変数コレクション Nakahatsu（surface=#F0F0F0、border=#DAD6CE）を新規作成。JP/EN の PC・SP の4枚で、図の背景 61 か所と線 16 か所を、ポートフォリオ共通の変数（Color/surface/muted など）からこの変数に結び付け直した。デザインシステムの図の地も #F0F0F0 に。
+- サイト: ページのルートに CSS 変数 --nk-surface / --nk-border を定義し、図の背景・線をそれに変更（bg-[var(--nk-surface)]、border-[var(--nk-border)]）。ポートフォリオ共通のトークンは変えていない。design-system-jp/en.webp も書き出し直し。先方向け PDF を再生成。
+- 注意: ページ冒頭の 8:5 のヒーロー枠は、ほかの作品と同じ bg-surface-muted のまま（図ではないので）。

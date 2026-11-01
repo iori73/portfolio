@@ -77,11 +77,11 @@ function SystemFigure({ label, f }: { label: string; f: SystemFig }) {
   const row = (name: string, children: React.ReactNode) => (
     <div className="flex flex-col gap-2 md:flex-row md:gap-5">
       <p className="font-space-grotesk text-caption font-bold text-ink md:w-[112px] md:shrink-0 md:border-r md:border-ink/15 md:pr-4">{name}</p>
-      <div className="flex min-w-0 flex-col gap-3 rounded-md bg-[#F4F4F5] p-3.5 md:flex-1 md:px-5 md:py-[18px]">{children}</div>
+      <div className="flex min-w-0 flex-col gap-3 rounded-md bg-[var(--nk-surface)] p-3.5 md:flex-1 md:px-5 md:py-[18px]">{children}</div>
     </div>
   );
   return (
-    <figure aria-label={label} className="flex w-full flex-col gap-3 rounded-media border border-line-subtle bg-white p-4 md:w-[760px] md:gap-5 md:px-8 md:py-7">
+    <figure aria-label={label} className="flex w-full flex-col gap-3 rounded-media border border-[var(--nk-border)] bg-white p-4 md:w-[760px] md:gap-5 md:px-8 md:py-7">
       {row(
         f.before,
         <>
@@ -209,7 +209,7 @@ type IterFig = { lead: string; groups: [string, string][]; note: string; alts: s
 function TopIterFigure({ f }: { f: IterFig }) {
   const sets = [[1, 2, 3, 4, 5, 6, 7], [8, 9]];
   return (
-    <figure aria-label={f.lead} className="flex w-full flex-col gap-6 rounded-media border border-line-subtle bg-white p-4 md:gap-7 md:p-8">
+    <figure aria-label={f.lead} className="flex w-full flex-col gap-6 rounded-media border border-[var(--nk-border)] bg-white p-4 md:gap-7 md:p-8">
       <p className="text-caption text-ink-secondary">{f.lead}</p>
       {sets.map((set, gi) => (
         <div key={f.groups[gi][0]} className="flex flex-col gap-3 md:flex-row md:gap-6">
@@ -232,7 +232,7 @@ function TopIterFigure({ f }: { f: IterFig }) {
 function RejectedFigure({ f }: { f: RejFig }) {
   const sets = [[1, 2], [3, 4, 5], [6, 7, 8]];
   return (
-    <figure aria-label={f.lead} className="flex w-full flex-col gap-6 rounded-media border border-line-subtle bg-white p-4 md:gap-7 md:p-8">
+    <figure aria-label={f.lead} className="flex w-full flex-col gap-6 rounded-media border border-[var(--nk-border)] bg-white p-4 md:gap-7 md:p-8">
       <p className="text-caption text-ink-secondary">{f.lead}</p>
       {sets.map((set, gi) => (
         <div key={f.groups[gi][0]} className="flex flex-col gap-3 md:flex-row md:gap-6">
@@ -283,7 +283,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
   );
 
   return (
-    <div className="font-sans my-24 md:mt-28 md:mb-16">
+    <div className="font-sans my-24 [--nk-border:#dad6ce] [--nk-surface:#f0f0f0] md:mt-28 md:mb-16">
       <BackToTopButton />
 
       {/* aspect-[8/5] は TransitionOverlay 側の比率と一致させる（ほかの作品と同じ）。 */}
@@ -354,7 +354,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
             const shots = t.raw('igShots') as { dates: string[]; alts: string[]; urls: string[]; linkLabel: string; textCard: string; note: string };
             const files = ['muji', 'fest', 'overseas'];
             return (
-              <figure className="flex w-full flex-col gap-4 rounded-media bg-surface-muted p-3 md:px-12 md:pb-6 md:pt-8">
+              <figure className="flex w-full flex-col gap-4 rounded-media bg-[var(--nk-surface)] p-3 md:px-12 md:pb-6 md:pt-8">
                 <div className="grid grid-cols-2 gap-x-2 gap-y-4 md:grid-cols-4 md:gap-4">
                   {files.map((f, k) => (
                     <div key={f} className="flex min-w-0 flex-col gap-1.5">
@@ -425,7 +425,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                 </div>
               ) : s.fig === 'bilingual-3lang' ? null /* ヒーローの3言語の図は、注釈「見せない」（2026-10-30）で外した。下の商品一覧の図だけ出す */ : (
                 <div className={`flex justify-center`}>
-                  <div className={`w-full overflow-hidden rounded-media bg-surface-muted ${i % 2 === 1 ? 'md:w-[760px]' : ''}`}>
+                  <div className={`w-full overflow-hidden rounded-media bg-[var(--nk-surface)] ${i % 2 === 1 ? 'md:w-[760px]' : ''}`}>
                     <Image src={`/work/nakahatsu/${s.fig === 'before-after' ? `before-after-${language === 'jp' ? 'jp' : 'en'}` : s.fig}.webp`} alt={s.cap} width={1200} height={675} className="h-auto w-full" />
                   </div>
                 </div>
@@ -433,7 +433,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
               {/* 2案を並べる: 旧サイトとの比べの図のあとに、v1（既存サイトを再現した案）と v2（リデザイン案）のトップを並べた図を足す */}
               {s.fig === 'before-after' && (
                 <div className="flex justify-center">
-                  <div className="w-full overflow-hidden rounded-media bg-surface-muted">
+                  <div className="w-full overflow-hidden rounded-media bg-[var(--nk-surface)]">
                     <div aria-hidden="true" className="relative h-9 font-space-grotesk text-caption font-bold text-ink-tertiary">
                       <p className="absolute left-[3.2%] top-3">{t('v1Label')}</p>
                       <p className="absolute left-[57.4%] top-3">{t('v2Label')}</p>
@@ -444,7 +444,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
               )}
               {s.fig === 'before-after' && (
                 <div className="flex justify-center">
-                  <div className="w-full overflow-hidden rounded-media bg-surface-muted">
+                  <div className="w-full overflow-hidden rounded-media bg-[var(--nk-surface)]">
                     <div aria-hidden="true" className="relative h-9 font-space-grotesk text-caption font-bold text-ink-tertiary">
                       <p className="absolute left-[3.2%] top-3">{t('v1Label')}</p>
                       <p className="absolute left-[57.4%] top-3">{t('v2Label')}</p>
@@ -456,7 +456,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
               {/* さらに長い版: Instagram の節まで。人物が写る写真と見本（Sample）の画像は、灰色の四角に置き換えてある。Figma の長尺図の下と同じ */}
               {s.fig === 'before-after' && (
                 <div className="flex justify-center">
-                  <div className="w-full overflow-hidden rounded-media bg-surface-muted">
+                  <div className="w-full overflow-hidden rounded-media bg-[var(--nk-surface)]">
                     <div aria-hidden="true" className="relative h-9 font-space-grotesk text-caption font-bold text-ink-tertiary">
                       <p className="absolute left-[3.2%] top-3">{t('v1Label')}</p>
                       <p className="absolute left-[57.4%] top-3">{t('v2Label')}</p>
