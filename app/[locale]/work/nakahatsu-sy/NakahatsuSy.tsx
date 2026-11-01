@@ -343,12 +343,14 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
             ))}
           </Row>
           {/* Process の導入のあとに、Instagram の投稿から見た先方の活動（Figma の Process 直下の図と同じ。PC は横4枚、スマートフォンは2列） */}
+          {language !== 'jp' && (
           <div className="flex justify-center">
             <div className="w-full">
               <Image src={`/work/nakahatsu/ig-posts-${language === 'jp' ? 'jp' : 'en'}-pc.webp`} alt={t('igAlt')} width={1523} height={414} className="hidden h-auto w-full md:block" />
               <Image src={`/work/nakahatsu/ig-posts-${language === 'jp' ? 'jp' : 'en'}-sp.webp`} alt={t('igAlt')} width={654} height={language === 'jp' ? 893 : 981} className="block h-auto w-full md:hidden" />
             </div>
           </div>
+          )}
           {/* 上の図のあとに、投稿そのものの見た目（SP 幅のスクリーンショット）を並べた図。人物が写る写真は灰色に置き換え、載せない投稿は文字の枠。Figma の Instagram の図の下と同じ */}
           {(() => {
             const shots = t.raw('igShots') as { dates: string[]; alts: string[]; urls: string[]; linkLabel: string; textCard: string; note: string };
@@ -431,7 +433,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                 </div>
               )}
               {/* 2案を並べる: 旧サイトとの比べの図のあとに、v1（既存サイトを再現した案）と v2（リデザイン案）のトップを並べた図を足す */}
-              {s.fig === 'before-after' && (
+              {s.fig === 'before-after' && language !== 'jp' && (
                 <div className="flex justify-center">
                   <div className="w-full overflow-hidden rounded-media bg-[var(--nk-surface)]">
                     <div aria-hidden="true" className="relative h-9 font-space-grotesk text-caption font-bold text-ink-tertiary">
@@ -442,7 +444,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                   </div>
                 </div>
               )}
-              {s.fig === 'before-after' && (
+              {s.fig === 'before-after' && language !== 'jp' && (
                 <div className="flex justify-center">
                   <div className="w-full overflow-hidden rounded-media bg-[var(--nk-surface)]">
                     <div aria-hidden="true" className="relative h-9 font-space-grotesk text-caption font-bold text-ink-tertiary">
@@ -473,7 +475,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                 </div>
               )}
               {/* 3つの言語: ヒーローの図のあとに、スマートフォン幅の商品ページ（文字の部分）を並べた図を足す。住所・フッターは写さない */}
-              {s.fig === 'bilingual-3lang' && (
+              {s.fig === 'bilingual-3lang' && language !== 'jp' && (
                 <div className="flex justify-center">
                   <div className="w-full">
                     <Image src="/work/nakahatsu/bilingual-text.webp" alt={t('bilingualTextAlt')} width={1560} height={757} className="h-auto w-full" />
