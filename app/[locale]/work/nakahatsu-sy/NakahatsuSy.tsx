@@ -340,7 +340,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
   );
 
   return (
-    <div className="font-sans my-24 [--nk-border:#dad6ce] [--nk-surface:#f0f0f0] md:mt-28 md:mb-16">
+    <div className="font-sans mt-[var(--site-header-height)] mb-24 [--nk-border:#dad6ce] [--nk-surface:#f0f0f0] md:mb-16">
       <BackToTopButton />
 
       {/* aspect-[8/5] は TransitionOverlay 側の比率と一致させる（ほかの作品と同じ）。 */}
