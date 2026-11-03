@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import BackToTopButton from '@/src/compositions/BackToTopButton';
 import { useTranslations, useLocale } from 'next-intl';
+import WorkMetaGrid from '@/src/components/work/WorkMetaGrid';
 import { useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
 import { CTAButton } from '@/components/ui/cta-button';
 import { usePageTransition } from '@/src/contexts/TransitionContext';
@@ -233,40 +234,15 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div>
-              <span className="text-body font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
-                {t('common.timeline')}
-              </span>
-              <p className="text-body-lg tracking-[0.2px]">
-                {t('projects.nakahatsu.timeline')}
-              </p>
-            </div>
-            <div>
-              <span className="text-body font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
-                {t('common.mySkills')}
-              </span>
-              <p className="text-body-lg tracking-[0.2px]">
-                {t('projects.nakahatsu.skills')}
-              </p>
-            </div>
-            <div>
-              <span className="text-body font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
-                {t('common.type')}
-              </span>
-              <p className="text-body-lg tracking-[0.2px]">
-                {t('nakahatsu.typeValue')}
-              </p>
-            </div>
-            <div>
-              <span className="text-body font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
-                {t('common.deliverables')}
-              </span>
-              <p className="text-body-lg tracking-[0.2px]">
-                {t('projects.nakahatsu.deliverables')}
-              </p>
-            </div>
-          </div>
+          <WorkMetaGrid
+            labelClassName="text-body"
+            items={[
+              { label: t('common.timeline'), value: t('projects.nakahatsu.timeline') },
+              { label: t('common.mySkills'), value: t('projects.nakahatsu.skills') },
+              { label: t('common.type'), value: t('nakahatsu.typeValue') },
+              { label: t('common.deliverables'), value: t('projects.nakahatsu.deliverables') },
+            ]}
+          />
         </div>
       </section>
 

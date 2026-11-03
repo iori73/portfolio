@@ -42,6 +42,13 @@ Iori Kawano の個人ポートフォリオサイト。バイリンガル（EN/JP
 - デザイントークンは [design-system.md](docs/architecture/design-system.md) に従う
 - セマンティックカラートークン（`text-ink`, `bg-surface-muted`, `border-line-section`）を優先使用
 
+### 作品ページの共通部品（新しい作品でも必ず使う）
+- **背景**: `app/[locale]/work/layout.tsx` が work/ 配下の全ページを白（`--background`）にする。作品ページ側で背景を決めない。ページ最上部の余白は `mt-[var(--site-header-height)]`（ヘッダーとヒーローの間に隙間を作らない）。
+- **メタ情報**（Timeline / My Skills / Type / Deliverables）: 自分で `grid` を組まず `src/components/work/WorkMetaGrid.tsx` を使う。lg 以上は、いちばん長い値の列だけが縮み、短い値が1文字だけ折り返すのを防ぐ（余裕がないときは均等4列に戻る）。
+- **日本語の折り返し**: 日本語は単語の途中でも折れ、「リング」だけが次の行に残ることがある。狭い列（メタ情報・短い説明・見出し）で気になる文言は、`messages/*.json` の折り返したい位置に `¦`（U+00A6）を書く。表示は `softBreaks()`（`src/lib/softBreaks.tsx`。`WorkMetaGrid` は内部で使用）。`¦` を含む文言は `¦` と空白の位置でだけ折れる。1つの区切りは列の幅（1024px 以上で約 240px ≒ 全角 11 文字）に収める。本文の長い段落には使わない。例: `"UI、コンテキスト¦エンジニアリング"`。
+- **側面メニュー（サイドバー）**: 項目の文言は、本文の見出しと同じ翻訳キーから出す（直書きしない）。JP のページは日本語、EN は英語。小見出し（h3）が多いページは、開いている節の下にだけ小見出しを出す（`ukiyoe/page.tsx` の `SUBSECTIONS`）。
+- **動画・録画**: 先方の写真や人物が写る素材は、公開前に先方の許可が要る。
+
 ---
 
 ## デザイン/スタイル規約

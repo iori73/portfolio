@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import BackToTopButton from '@/src/compositions/BackToTopButton';
 import { useTranslations, useLocale } from 'next-intl';
+import WorkMetaGrid from '@/src/components/work/WorkMetaGrid';
 import { useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
 import { MoveUpRight } from 'lucide-react';
 import { CTAButton } from '@/components/ui/cta-button';
@@ -23,6 +24,26 @@ const SECTIONS = [
   'technical',
   'reflection',
 ] as const;
+
+/** 側面メニューに出す小見出し。開いている節（親）の下にだけ表示する。文言は本文の h3 と同じ翻訳キー */
+const SUBSECTIONS: Record<string, { id: string; key: string }[]> = {
+  research: [
+    { id: 'cultural-immersion', key: 'ukiyoe.culturalResearchTitle' },
+    { id: 'color-analysis', key: 'ukiyoe.colorAnalysisTitle' },
+    { id: 'printing-process', key: 'ukiyoe.printingProcessTitle' },
+  ],
+  'design-process': [
+    { id: 'top-page-design', key: 'ukiyoe.topPageDesignTitle' },
+    { id: 'timeline-design', key: 'ukiyoe.timelineDesignTitle' },
+    { id: 'motifs', key: 'ukiyoe.motifsTitle' },
+    { id: 'color-system', key: 'ukiyoe.colorSystemTitle' },
+    { id: 'logo-design', key: 'ukiyoe.logoDesignTitle' },
+  ],
+  reflection: [
+    { id: 'learnings', key: 'ukiyoe.learningsTitle' },
+    { id: 'future', key: 'ukiyoe.futureTitle' },
+  ],
+};
 
 const UkiyoePage: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('overview');
@@ -71,6 +92,37 @@ const UkiyoePage: React.FC = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [activeSection]);
+
+  const [activeSub, setActiveSub] = useState<string>('');
+  useEffect(() => {
+    const ids = Object.values(SUBSECTIONS).flat().map((x) => x.id);
+    const onScroll = () => {
+      let cur = '';
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= 150) cur = id;
+      }
+      setActiveSub(cur);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const subButtonClass = (subId: string) =>
+    activeSub === subId
+      ? 'text-left text-body-sm font-switzer text-ink'
+      : 'text-left text-body-sm font-switzer text-ink opacity-50 hover:opacity-80';
+
+  const navItems: { id: string; label: string }[] = [
+    { id: 'overview', label: t('work.overview') },
+    { id: 'research', label: t('ukiyoe.sectionResearch') },
+    { id: 'design-process', label: t('work.designProcess') },
+    { id: 'hand-coloring', label: t('ukiyoe.handColoringTitle') },
+    { id: 'ai-craft', label: t('ukiyoe.aiCraftTitle') },
+    { id: 'technical', label: t('ukiyoe.sectionTechnical') },
+    { id: 'reflection', label: t('work.reflection') },
+  ];
 
   const sidebarButtonClass = (sectionId: string) =>
     activeSection === sectionId
@@ -125,41 +177,15 @@ const UkiyoePage: React.FC = () => {
             </div>
           </div>
 
-          {/* lg 以上: Timeline・Type・Deliverables は内容の幅、Skills が残りを使う（Deliverables が 1 文字だけ折り返さないように）。日本語は文節の切れ目で折る */}
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-[auto_minmax(0,1fr)_auto_auto] gap-6 lg:gap-x-8 [word-break:auto-phrase]">
-            <div>
-              <span className="text-body font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
-                Timeline
-              </span>
-              <p className="text-body-lg tracking-[0.2px]">
-                {t('projects.ukiyoe.timeline')}
-              </p>
-            </div>
-            <div>
-              <span className="text-body font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
-                My Skills
-              </span>
-              <p className="text-body-lg tracking-[0.2px]">
-                {t('projects.ukiyoe.skills')}
-              </p>
-            </div>
-            <div>
-              <span className="text-body font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
-                Type
-              </span>
-              <p className="text-body-lg tracking-[0.2px]">
-                {t('common.personalProject')}
-              </p>
-            </div>
-            <div>
-              <span className="text-body font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
-                Deliverables
-              </span>
-              <p className="text-body-lg tracking-[0.2px]">
-                {t('projects.ukiyoe.deliverables')}
-              </p>
-            </div>
-          </div>
+          <WorkMetaGrid
+            labelClassName="text-body"
+            items={[
+              { label: 'Timeline', value: t('projects.ukiyoe.timeline') },
+              { label: 'My Skills', value: t('projects.ukiyoe.skills') },
+              { label: 'Type', value: t('common.personalProject') },
+              { label: 'Deliverables', value: t('projects.ukiyoe.deliverables') },
+            ]}
+          />
         </div>
       </section>
 
@@ -219,7 +245,7 @@ const UkiyoePage: React.FC = () => {
 
               {/* Cultural Immersion */}
               <div className="mb-10 md:mb-14">
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
+                <h3 id="cultural-immersion" className={`scroll-mt-32 text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.culturalResearchTitle')}
                 </h3>
                 <p className={`mb-6 text-ink-secondary ${bodyTextClass}`}>
@@ -241,7 +267,7 @@ const UkiyoePage: React.FC = () => {
 
               {/* Color Extraction & Analysis */}
               <div className="mb-10 md:mb-14">
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
+                <h3 id="color-analysis" className={`scroll-mt-32 text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.colorAnalysisTitle')}
                 </h3>
                 <p className={`mb-6 text-ink-secondary ${bodyTextClass}`}>
@@ -259,7 +285,7 @@ const UkiyoePage: React.FC = () => {
 
               {/* Printing Process Study */}
               <div>
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
+                <h3 id="printing-process" className={`scroll-mt-32 text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.printingProcessTitle')}
                 </h3>
                 <p className={`mb-6 text-ink-secondary ${bodyTextClass}`}>
@@ -282,7 +308,7 @@ const UkiyoePage: React.FC = () => {
 
               {/* Top Page: Layer Animation */}
               <div className="mb-12 md:mb-20">
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
+                <h3 id="top-page-design" className={`scroll-mt-32 text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.topPageDesignTitle')}
                 </h3>
                 <div className={`mb-6 text-ink-secondary ${bodyTextClass} space-y-4`}>
@@ -308,7 +334,7 @@ const UkiyoePage: React.FC = () => {
 
               {/* Timeline: Artwork Gallery */}
               <div className="mb-12 md:mb-20">
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
+                <h3 id="timeline-design" className={`scroll-mt-32 text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.timelineDesignTitle')}
                 </h3>
                 <div className={`mb-6 text-ink-secondary ${bodyTextClass} space-y-4`}>
@@ -331,7 +357,7 @@ const UkiyoePage: React.FC = () => {
 
               {/* Design Motifs: Kushi-Dango */}
               <div className="mb-12 md:mb-20">
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
+                <h3 id="motifs" className={`scroll-mt-32 text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.motifsTitle')}
                 </h3>
                 <div className={`mb-6 text-ink-secondary ${bodyTextClass} space-y-4`}>
@@ -349,7 +375,7 @@ const UkiyoePage: React.FC = () => {
 
               {/* Color System & Period Ratios */}
               <div className="mb-12 md:mb-20">
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
+                <h3 id="color-system" className={`scroll-mt-32 text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.colorSystemTitle')}
                 </h3>
                 <div className={`mb-6 text-ink-secondary ${bodyTextClass} space-y-4`}>
@@ -367,7 +393,7 @@ const UkiyoePage: React.FC = () => {
 
               {/* Logo Design */}
               <div>
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
+                <h3 id="logo-design" className={`scroll-mt-32 text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.logoDesignTitle')}
                 </h3>
                 <p className={`mb-6 text-ink-secondary ${bodyTextClass}`}>
@@ -479,7 +505,7 @@ const UkiyoePage: React.FC = () => {
                 {t('work.reflection')}
               </h2>
               <div className="mb-10 md:mb-14">
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
+                <h3 id="learnings" className={`scroll-mt-32 text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.learningsTitle')}
                 </h3>
                 <div className={`text-ink-secondary ${bodyTextClass} space-y-4`}>
@@ -489,7 +515,7 @@ const UkiyoePage: React.FC = () => {
                 </div>
               </div>
               <div>
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
+                <h3 id="future" className={`scroll-mt-32 text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.futureTitle')}
                 </h3>
                 <p className={`text-ink-secondary ${bodyTextClass}`}>
@@ -499,57 +525,28 @@ const UkiyoePage: React.FC = () => {
             </section>
           </div>
 
-          {/* Sidebar — 7 items */}
+          {/* Sidebar — 7 items。開いている節の下にだけ小見出しを出す */}
           <div className="hidden md:flex md:w-[20%] pl-4 pt-12 items-start justify-center">
             <nav className="sticky top-24">
               <ul className="space-y-3">
-                <li>
-                  <button onClick={() => scrollToSection('overview')} className={sidebarButtonClass('overview')}>
-                    {t('work.overview')}
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => scrollToSection('research')} className={sidebarButtonClass('research')}>
-                    {t('ukiyoe.sectionResearch')}
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => scrollToSection('design-process')}
-                    className={sidebarButtonClass('design-process')}
-                  >
-                    {t('work.designProcess')}
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => scrollToSection('hand-coloring')}
-                    className={sidebarButtonClass('hand-coloring')}
-                  >
-                    {t('ukiyoe.handColoringTitle')}
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => scrollToSection('ai-craft')}
-                    className={sidebarButtonClass('ai-craft')}
-                  >
-                    {t('ukiyoe.aiCraftTitle')}
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => scrollToSection('technical')} className={sidebarButtonClass('technical')}>
-                    {t('ukiyoe.sectionTechnical')}
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => scrollToSection('reflection')}
-                    className={sidebarButtonClass('reflection')}
-                  >
-                    {t('work.reflection')}
-                  </button>
-                </li>
+                {navItems.map((it) => (
+                  <li key={it.id}>
+                    <button onClick={() => scrollToSection(it.id)} className={sidebarButtonClass(it.id)}>
+                      {it.label}
+                    </button>
+                    {activeSection === it.id && SUBSECTIONS[it.id] ? (
+                      <ul className="mt-2 ml-3 space-y-2 border-l border-line-section pl-3">
+                        {SUBSECTIONS[it.id].map((sub) => (
+                          <li key={sub.id}>
+                            <button onClick={() => scrollToSection(sub.id)} className={subButtonClass(sub.id)}>
+                              {t(sub.key)}
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </li>
+                ))}
               </ul>
             </nav>
           </div>

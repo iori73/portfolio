@@ -1778,3 +1778,8 @@ Shopify のパスワードページは Shopify 側テンプレートなので、
 ## 2026-11-03（続き）ukiyoe のメタ情報の列の間隔を 2rem に
 - 河野さんが DevTools で lg の列の間隔を 1rem → 2rem にして「こちらのほうがよいか」と相談。見た目は 2rem のほうがよい。ただし Skills が 3 行になり「リング」だけが残るため、JP の skills の文言「コンテキスト」と「エンジニアリング」の間にゼロ幅スペース（U+200B）を入れ、そこで折れるようにした。
 - 変更: app/[locale]/work/ukiyoe/page.tsx（lg:gap-x-8）、messages/jp.json（projects.ukiyoe.skills）。結果（JP、1024px 以上）: Timeline・Type・Deliverables は 1 行、Skills は「UI、コンテキスト」「エンジニアリング」の 2 行。
+
+## 2026-11-03（続き）ukiyoe の側面メニューに小見出し／折り返しの工夫を共通化
+- ukiyoe: 側面メニューに、開いている節の下にだけ小見出し（h3）を出すようにした（リサーチ 3、デザインプロセス 5、振り返り 2。`SUBSECTIONS`、h3 に id、スクロール位置で現在の小見出しを強調）。文言は本文の h3 と同じ翻訳キー。JP/EN で動作確認。
+- 折り返しの工夫の共通化: `src/lib/softBreaks.tsx`（`¦` で折れる位置を指定。`¦` を含む文言はその位置と空白でだけ折れる）、`src/components/work/WorkMetaGrid.tsx`（メタ情報の表。lg 以上は最長の列だけ縮む）。ukiyoe・airline・gym・google_ux・nakahatsu の 5 ページに適用。airline の JP の timeline・deliverables に `¦` を入れた。ルールは CLAUDE.md「作品ページの共通部品」と lessons.md。
+- 予告: 河野さんが About のパララックス動画（スクロール速度が一定で機械的）を撮り直す。共有されたら、about-parallax.mp4 とポスターを差し替える（要: 人物が写る動画は公開前に先方の許可）。
