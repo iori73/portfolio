@@ -193,7 +193,7 @@ const UkiyoePage: React.FC = () => {
       <div className="max-w-7xl w-full mx-auto">
         <div className="flex flex-col md:flex-row justify-between">
           {/* Main Content */}
-          <div className="md:w-[80%]">
+          <div className="md:w-[78%]">
 
             {/* 1. Overview */}
             <section id="overview" className="w-full mx-auto py-12 md:py-16 text-ink-secondary scroll-mt-32">
@@ -526,7 +526,7 @@ const UkiyoePage: React.FC = () => {
           </div>
 
           {/* Sidebar — 7 items。開いている節の下にだけ小見出しを出す */}
-          <div className="hidden md:flex md:w-[20%] pl-4 pt-12 items-start justify-center">
+          <div className="hidden md:flex md:w-[22%] pl-8 pt-12 items-start justify-center">
             <nav className="sticky top-24">
               <ul className="space-y-3">
                 {navItems.map((it) => (
