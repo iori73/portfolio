@@ -126,7 +126,7 @@ const UkiyoePage: React.FC = () => {
           </div>
 
           {/* lg 以上: Timeline・Type・Deliverables は内容の幅、Skills が残りを使う（Deliverables が 1 文字だけ折り返さないように）。日本語は文節の切れ目で折る */}
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-[auto_minmax(0,1fr)_auto_auto] gap-6 lg:gap-x-4 [word-break:auto-phrase]">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-[auto_minmax(0,1fr)_auto_auto] gap-6 lg:gap-x-8 [word-break:auto-phrase]">
             <div>
               <span className="text-body font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
                 Timeline

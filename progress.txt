@@ -1774,3 +1774,7 @@ Shopify のパスワードページは Shopify 側テンプレートなので、
 - ポートフォリオは引き続きローカルのみ・未push・未merge。先方の書面 OK、人物が写る動画の許可、Sample 写真の差し替えが未了。
 
 - 訂正（2026-11-03）: 小麦の写真は確定（別セッション nakahatsu notion comments reply の報告。河野さんが先方提供版 mat-wheat-client.webp を使い、v3 には戻さないと決定）。先方サイトの PR #46〜48 は main にマージ済みで本番反映済み（同じく別セッションの報告）。
+
+## 2026-11-03（続き）ukiyoe のメタ情報の列の間隔を 2rem に
+- 河野さんが DevTools で lg の列の間隔を 1rem → 2rem にして「こちらのほうがよいか」と相談。見た目は 2rem のほうがよい。ただし Skills が 3 行になり「リング」だけが残るため、JP の skills の文言「コンテキスト」と「エンジニアリング」の間にゼロ幅スペース（U+200B）を入れ、そこで折れるようにした。
+- 変更: app/[locale]/work/ukiyoe/page.tsx（lg:gap-x-8）、messages/jp.json（projects.ukiyoe.skills）。結果（JP、1024px 以上）: Timeline・Type・Deliverables は 1 行、Skills は「UI、コンテキスト」「エンジニアリング」の 2 行。
