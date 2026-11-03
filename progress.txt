@@ -1752,3 +1752,9 @@ Shopify のパスワードページは Shopify 側テンプレートなので、
 - 変更: 各作品ページの上余白 `my-24 md:mt-28 md:mb-16` を `mt-[var(--site-header-height)] mb-24 md:mb-16` に（airline-design-system、figma-plugins、google_ux_design_certificate_project、gym_crowd_status_dashboard、nakahatsu-story、ukiyoe、nakahatsu、nakahatsu-sy）。背景が白になると、ヘッダー下の余白が白い隙間に見えるため。
 - 確認: 8 ページ × PC(1440)・SP(393) で body は rgb(255,255,255)、ヘッダー下端とヒーロー上端が 72px で一致、ページエラー 0。work 配下の型エラーなし（d3 の型の既存エラーのみ）。トップ・About・CV・Blog は変えていない（灰色のまま）。
 - 未確認: 図やカードが灰色の背景を前提にしていた作品の、白の上での見え方（ukiyoe は 1 枚だけ目視）。push・merge はしていない。
+
+## 2026-11-03（続き）浮世絵ページのメタ情報で「ト」だけ折り返す問題
+- 原因: 4 列が同じ幅（239px）で、Deliverables「インタラクティブWebサイト」が 274px あり、1 文字（ト）だけ折り返していた。4 つ全部を 1 行にすると 1089px 必要で、ページ幅（約 1028px）を超えるため不可能。
+- 対応（app/[locale]/work/ukiyoe/page.tsx のみ）: lg 以上で grid-cols を [auto_minmax(0,1fr)_auto_auto]、列の間隔を 16px に。日本語は word-break:auto-phrase で文節の切れ目で折る。
+- 結果（1100px 以上、JP）: Timeline・Type・Deliverables は 1 行、Skills は「UI、」と「コンテキストエンジニアリング」の 2 行。英語は全部 1 行。1024〜1099px は Skills が 3 行、800px 以下は従来どおり。
+- 他の作品のメタ情報の折り返しは未確認。
