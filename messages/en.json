@@ -730,6 +730,28 @@
     "dsAlt": "The design system of the store theme. Fonts: Shippori Mincho for headings and body, Noto Serif JP for accents, Roboto for Latin text. It lists the type sizes, the colors (text, yellow accent, border, surface, bengara) and the spacing from 8 to 80 px.",
     "v1v2TallAlt": "The top pages of v1 and v2 side by side, as longer screenshots. On the left, v1 reproduces the structure of the existing site; on the right, v2 is the redesign. v2 continues from the hero through the news, the company introduction and three photos to the heading of the brewing section.",
     "igAlt": "Four activities seen in the Instagram posts of Nakahatsu Shoten. May 2024: a permanent spot in the Ishikawa Good Products corner at Muji. September 2024: a fermentation culture and arts festival venue in Kanazawa. April 2025 and February 2026: overseas visitors try making miso. March 2026: nursery school children in a visiting miso-making class. The source is the shop's Instagram posts.",
+    "iterFig": {
+      "lead": "The process section went through five forms before reaching the current ring of five circles. They are listed in time order.",
+      "groups": [
+        ["1. Around Oct 12: photo and text side by side", "I started with a large work photo on the left and the client's text on the right. The minutes of the Oct 6 meeting say the brewer section had too much text and felt heavy, so I would offer several layouts with large photos and white space."],
+        ["2. Around Oct 14: products and logo", "The logo and product images sit on the left, with a purple watercolor in the lower right. This is also the 'current' layout I showed the client. The process photos had not arrived yet (the client gathered them on Oct 25)."],
+        ["3. Two of the three forms I showed the client, not chosen", "A places the five circles on a circle, joined by a thin line. B places them in a straight line. I showed the client these two together with the current layout."],
+        ["4. Exploring the ring", "To refine the ring, I looked up the Japanese plum-blossom crest (umebachi mon), gathered the five circles like that crest, and made four variations of the lines and the dot."],
+        ["5. Final: a ring with lines from the center", "The client chose the ring and asked to shorten its last part. I showed three options as videos, and the client liked the third, with five lines growing from a center circle. I applied it on Nov 2."]
+      ],
+      "note": "Photos showing people are replaced with gray. The text inside the images is the client's Japanese text.",
+      "alts": [
+        "Around Oct 12. A work photo on the left (gray, because it shows a person) and the Japanese text on the right.",
+        "Around Oct 14. The Tenyu logo and the soy sauce and miso products on the left, text on the right, a purple watercolor in the lower right.",
+        "Option A, not chosen. Five circles on a circle, joined by a thin line. The mashing photo is gray.",
+        "Option B, not chosen. Five circles in a straight line. The mashing photo is gray.",
+        "Ring exploration 1. Five circles gathered like the crest, with a dot at the end of a line.",
+        "Ring exploration 2. Five circles gathered like the crest, with a dot at the center.",
+        "Ring exploration 3. Five circles gathered like the crest, with the dot in a different place.",
+        "Ring exploration 4. Five circles gathered like the crest, with a center dot and the dot in a different place.",
+        "Final. A ring with five lines growing from a purple center circle. The mashing photo is gray because it shows a person."
+      ]
+    },
     "ringFig": {
       "lead": "For the process photos, I prepared three ways to show them (the current layout, a circular ring, and a straight line), and the client chose the ring. They then asked to shorten the last part of the ring, so I showed three options as videos. The client replied that they liked the third one, where lines grow from the center. The store site now uses that form.",
       "title": "Our Brewing Process",

@@ -160,6 +160,7 @@ function ParallaxVideo({ label, note }: { label: string; note: string }) {
   );
 }
 
+type IterProcFig = { lead: string; groups: [string, string][]; note: string; alts: string[] };
 type RingFig = { lead: string; title: string; leadText: string; rest: string[]; note: string; alt: string };
 type RejFig = { lead: string; groups: [string, string][]; note: string; alts: string[] };
 
@@ -221,6 +222,31 @@ function TopIterFigure({ f }: { f: IterFig }) {
           <div className={`grid min-w-0 flex-1 grid-cols-2 gap-2 bg-white p-2 md:gap-4 md:p-4 ${set.length > 2 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
             {set.map((n) => (
               <Image key={n} src={`/work/nakahatsu/top-iter-${n}.webp`} alt={f.alts[n - 1]} width={1024} height={720} className="h-auto w-full rounded" />
+            ))}
+          </div>
+        </div>
+      ))}
+      <p className="text-caption text-ink-tertiary">{f.note}</p>
+    </figure>
+  );
+}
+
+/** 製法へのこだわりの変遷（5 場面）。「醸造家として」の没案の図（RejectedFigure）の置き換え。RejectedFigure と同じ作り。人物が写る部分は灰色に置き換えてある */
+function ProcessIterationsFigure({ f }: { f: IterProcFig }) {
+  const sets = [[1], [2], [3, 4], [5, 6, 7, 8], [9]];
+  const ratio: Record<number, number> = { 1: 583, 2: 630, 3: 750, 4: 633, 5: 750, 6: 750, 7: 750, 8: 750, 9: 750 };
+  return (
+    <figure aria-label={f.lead} className="flex w-full flex-col gap-6 rounded-media border border-[var(--nk-border)] bg-white p-4 md:gap-7 md:p-8">
+      <p className="text-caption text-ink-secondary">{f.lead}</p>
+      {sets.map((set, gi) => (
+        <div key={f.groups[gi][0]} className="flex flex-col gap-3 md:flex-row md:gap-6">
+          <div className="flex flex-col gap-1 md:w-[260px] md:shrink-0">
+            <p className="text-caption font-bold text-ink">{f.groups[gi][0]}</p>
+            <p className="text-caption text-ink-secondary">{f.groups[gi][1]}</p>
+          </div>
+          <div className={`grid min-w-0 flex-1 gap-2 bg-white p-2 md:gap-4 md:p-4 ${set.length === 1 ? 'grid-cols-1 justify-items-center' : 'grid-cols-2'}`}>
+            {set.map((n) => (
+              <Image key={n} src={`/work/nakahatsu/process-iter-${n}.webp`} alt={f.alts[n - 1]} width={1200} height={ratio[n]} className={`h-auto w-full rounded ${set.length === 1 ? 'md:max-w-[520px]' : ''}`} />
             ))}
           </div>
         </div>
@@ -436,7 +462,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                   </div>
                   {/* About「醸造家として」のパララックスの録画。About の前後の図の直後。キャプションは置かず、aria-label に説明を入れる */}
                   <ParallaxVideo label={t('parallaxVideoAlt')} note={t('parallaxVideoNote')} />
-                  <ProcessRingFigure f={t.raw('ringFig') as RingFig} lang={language} headingClass={getHeadingFontClass()} bodyClass={body} />
+                  <ProcessIterationsFigure f={t.raw('iterFig') as IterProcFig} />
                 </div>
               ) : s.fig === 'bilingual-3lang' ? null /* ヒーローの3言語の図は、注釈「見せない」（2026-10-30）で外した。下の商品一覧の図だけ出す */ : (
                 <div className={`flex justify-center`}>
