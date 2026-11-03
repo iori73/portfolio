@@ -165,7 +165,7 @@ type RingFig = { lead: string; title: string; leadText: string; rest: string[]; 
 type RejFig = { lead: string; groups: [string, string][]; note: string; alts: string[] };
 
 /** 没にした About の案（醸造家として）8案。グループごとに、左に説明、右に画像（スマートフォンは説明のあとに2列）。人物の写真は灰色に置換済み。 */
-/** ローディングアニメーションの録画。無音。画面に入ったら1回だけ再生。動きを減らす設定のときは自動再生せず、コントロールを出す。 */
+/** ローディングアニメーションの録画。無音。画面に入ったら先頭から再生し、繰り返す（2026-11-03 河野の指示でループに変更）。動きを減らす設定のときは自動再生せず、コントロールを出す。 */
 function LoadingVideo({ label }: { label: string }) {
   const ref = React.useRef<HTMLVideoElement>(null);
   useEffect(() => {
@@ -175,7 +175,7 @@ function LoadingVideo({ label }: { label: string }) {
       v.controls = true;
       return;
     }
-    // 画面に半分以上入ったときに、先頭から1回だけ再生する（ループしない。終わったら最後のコマで止まる）
+    // 画面に半分以上入ったときに、先頭から再生を始める（以後はループ）
     const io = new IntersectionObserver(
       (entries) => {
         if (entries.some((e) => e.isIntersecting)) {
@@ -199,6 +199,7 @@ function LoadingVideo({ label }: { label: string }) {
       width={1280}
       height={720}
       muted
+      loop
       playsInline
       preload="metadata"
     />

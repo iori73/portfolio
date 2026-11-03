@@ -1730,3 +1730,7 @@ Shopify のパスワードページは Shopify 側テンプレートなので、
 - サイト: public/work/nakahatsu/process-iter-1..9.webp（1200 幅）、NakahatsuSy.tsx に ProcessIterationsFigure を追加し RejectedFigure と同じ作りで差し替え。messages/jp.json と en.json に iterFig を追加。ringFig、rejFig と、各画像は消していない（表示しない）。
 - 確認: dev サーバー（3105）で JP/EN × PC/SP を撮影。画像 9 枚とも読み込み OK、エラー 0、旧 8 案の画像は出ない。Figma の JP PC と EN SP も目視。
 - 注意: 先方の写真・Figma の画面が載るため、公開前に先方の掲載許可が要る。push・merge はしていない。
+
+## 2026-11-03（続き）ローディング動画をループ再生に変更
+- 河野さんの指示「ここ、やっぱリピートにして」。本文の最初（Overview の直前）のローディングアニメーションの動画（LoadingVideo、loading-anim.mp4）に loop を追加。画面に入ったら先頭から再生を始め、以後は繰り返す。動きを減らす設定のときは、これまでどおり自動再生せずコントロールを出す。
+- 変更: app/[locale]/work/nakahatsu-sy/NakahatsuSy.tsx のみ。push・merge はしていない。
