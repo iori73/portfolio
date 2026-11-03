@@ -1745,3 +1745,10 @@ Shopify のパスワードページは Shopify 側テンプレートなので、
 - 背景を白にしたため、ヘッダー（高さ 4.5rem = 72px）とヒーロー画像の間の余白（上マージン 5rem など）が白く見えていた。河野さんが DevTools で 72px にすると解消することを確認。
 - 対応: NakahatsuSy.tsx のページのラッパーを、上マージン mt-[var(--site-header-height)]（PC・SP とも）、下マージン mb-24（md は mb-16）に変更。
 - 確認: ヘッダーの下端とヒーローの上端が、PC（1440）・SP（393）とも 72px で一致。
+
+## 2026-11-03（続き）work/ 配下の全ページの背景を白（--background）に
+- 河野さんの指示「他の work も背景白に」。中初（sy）だけだった処理を共通化。
+- 追加: app/[locale]/work/layout.tsx（共通レイアウト）と src/components/work/WorkBackground.tsx（work を開いている間だけ body の背景を hsl(var(--background)) にし、離れると元に戻す）。NakahatsuSy.tsx の個別処理は外した。
+- 変更: 各作品ページの上余白 `my-24 md:mt-28 md:mb-16` を `mt-[var(--site-header-height)] mb-24 md:mb-16` に（airline-design-system、figma-plugins、google_ux_design_certificate_project、gym_crowd_status_dashboard、nakahatsu-story、ukiyoe、nakahatsu、nakahatsu-sy）。背景が白になると、ヘッダー下の余白が白い隙間に見えるため。
+- 確認: 8 ページ × PC(1440)・SP(393) で body は rgb(255,255,255)、ヘッダー下端とヒーロー上端が 72px で一致、ページエラー 0。work 配下の型エラーなし（d3 の型の既存エラーのみ）。トップ・About・CV・Blog は変えていない（灰色のまま）。
+- 未確認: 図やカードが灰色の背景を前提にしていた作品の、白の上での見え方（ukiyoe は 1 枚だけ目視）。push・merge はしていない。

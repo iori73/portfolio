@@ -304,15 +304,6 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
   const t = useTranslations('nakahatsuSy');
   const tc = useTranslations('nakahatsu');
   const language = useLocale();
-
-  // このページの間だけ、背景を白（--background）にする。Figma の白い土台と合わせるため（2026-11-03 河野の提案）。ほかのページは、これまでの --surface のまま。
-  useEffect(() => {
-    const prev = document.body.style.backgroundColor;
-    document.body.style.backgroundColor = 'hsl(var(--background))';
-    return () => {
-      document.body.style.backgroundColor = prev;
-    };
-  }, []);
   const { getBodyFontClass } = useBodyFont();
   const { getHeadingFontClass } = useHeadingFont();
   const { state: transitionState, endTransition } = usePageTransition();

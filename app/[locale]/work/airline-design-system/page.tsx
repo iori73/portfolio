@@ -100,7 +100,7 @@ const AirlineDesignSystemPage: React.FC = () => {
   const bodyTextClass = `${getBodyFontClass()} tracking-[0.2px] text-body-lg`;
 
   return (
-    <div className="font-sans my-24 md:mt-28 md:mb-16">
+    <div className="font-sans mt-[var(--site-header-height)] mb-24 md:mb-16">
       <BackToTopButton />
 
       {/* Hero */}

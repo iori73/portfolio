@@ -30,7 +30,7 @@ export default function FigmaPluginsPage() {
   const totalUsers = plugins.reduce((sum, p) => sum + (p.users ?? 0), 0);
 
   return (
-    <div className={`my-24 md:mt-28 md:mb-16 ${getBodyFontClass()}`}>
+    <div className={`mt-[var(--site-header-height)] mb-24 md:mb-16 ${getBodyFontClass()}`}>
       <BackToTopButton />
 
       {/* Hero */}

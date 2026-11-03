@@ -179,7 +179,7 @@ const NakahatsuCaseStudy: React.FC<{ launched: boolean }> = ({ launched }) => {
   const captionClass = 'mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk';
 
   return (
-    <div className="font-sans my-24 md:mt-28 md:mb-16">
+    <div className="font-sans mt-[var(--site-header-height)] mb-24 md:mb-16">
       <BackToTopButton />
 
       {/* Hero. aspect-[8/5] は TransitionOverlay 側にハードコードされた比率と

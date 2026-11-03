@@ -112,7 +112,7 @@ const GymDashboardPage: React.FC = () => {
   }, [activeSection]);
 
   return (
-    <div className="font-sans my-24 md:mt-28 md:mb-16">
+    <div className="font-sans mt-[var(--site-header-height)] mb-24 md:mb-16">
       <BackToTopButton />
       {/* Hero Section - Animated */}
       <section className="mb-0 md:mb-8 -mx-6 md:mx-0">

@@ -85,7 +85,7 @@ const NakahatsuStory: React.FC<{ launched: boolean; motionVideo: string | null }
   );
 
   return (
-    <div className="font-sans my-24 md:mt-28 md:mb-16">
+    <div className="font-sans mt-[var(--site-header-height)] mb-24 md:mb-16">
       <BackToTopButton />
 
       {/* aspect-[8/5] は TransitionOverlay 側の比率と一致させる（詳しい版と同じ）。 */}
