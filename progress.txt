@@ -1767,3 +1767,8 @@ Shopify のパスワードページは Shopify 側テンプレートなので、
 - 中初 sy: messages に nakahatsuSy.rowLabels（JP: 概要/プロセス/クレジット、EN: Overview/Process/Credit）を追加し、行ラベルを日本語化（JP）。側面メニュー（1440px 以上で、本文の右の余白に固定、現在の節を強調）を追加。項目は 概要 / 5 つのステップの見出し / クレジット。各節に id（overview、process、step-1〜5、credit）。
 - Figma（portfolio_v5、Pages）: JP の v2 4 枚のうち PC 568:736・SP 568:1738 の行ラベル 3 つを日本語に（568:776/805/1727、568:1774/1783/2241）。PC 2 枚（JP 568:736、EN 568:2252）に Sidebar を追加（JP 690:767、EN 690:775。右の余白、x=1200、フレームの右端からはみ出す。サイトの 1440px 以上の配置と同じ。現在の節は 1 つ目のステップを例に強調）。PC の 2 枚は clipsContent を false に。SP には側面メニューなし（サイトも 1440px 未満は非表示）。
 - 未決定: meta の英語ラベル（Client、Role、Date、Team、ukiyoe の Timeline・My Skills・Type・Deliverables）を JP で日本語にするか。gym・google_ux の見出しを JP で日本語にするか（本文が英語のため見送り）。
+
+## 2026-11-03 現在地まとめ（他のセッションが最新状況で話せるようにするための記録）
+- 全体の最新状況は docs/session-2026-10-28-nakahatsu-sy-handoff.md の冒頭「2026-11-03 追記」。非公開の iori73/portfolio-context の projects/nakahatsu/README.md、プロジェクトメモリ project_nakahatsu_case_study_state、二拠点デイリーボードの項目にも同じ内容を反映。
+- 11-03 の作業: 製法の変遷の図（5場面）、work/ 全ページの背景を白、ヒーロー隙間の解消、ローディング動画のループ、ukiyoe のメタ折り返し、側面メニューと見出しの文言そろえ（中初 sy に側面メニュー追加）。コミットは a9444b7 → 99fe01f → 8424595 → c566488 → 746f714 → 41a7b67 → e28276c → cca0009。
+- ポートフォリオは引き続きローカルのみ・未push・未merge。先方の書面 OK、人物が写る動画の許可、Sample 写真の差し替え、小麦の写真の最新版の決定が未了。
