@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 import BackToTopButton from '@/src/compositions/BackToTopButton';
 import { useTranslations, useLocale } from 'next-intl';
@@ -14,16 +14,8 @@ import PrintingProcessStudy from '@/components/work/ukiyoe/PrintingProcessStudy'
 import TopPageProcessShowcase from '@/components/work/ukiyoe/TopPageProcessShowcase';
 import TopPageEvolutionGrid from '@/components/work/ukiyoe/TopPageEvolutionGrid';
 import { usePageTransition } from '@/src/contexts/TransitionContext';
-
-const SECTIONS = [
-  'overview',
-  'research',
-  'design-process',
-  'hand-coloring',
-  'ai-craft',
-  'technical',
-  'reflection',
-] as const;
+import WorkShell from '@/src/components/work/WorkShell';
+import WorkSidebar, { type SidebarItem } from '@/src/components/work/WorkSidebar';
 
 /** 側面メニューに出す小見出し。開いている節（親）の下にだけ表示する。文言は本文の h3 と同じ翻訳キー */
 const SUBSECTIONS: Record<string, { id: string; key: string }[]> = {
@@ -46,7 +38,6 @@ const SUBSECTIONS: Record<string, { id: string; key: string }[]> = {
 };
 
 const UkiyoePage: React.FC = () => {
-  const [activeSection, setActiveSection] = useState<string>('overview');
   const t = useTranslations();
   const language = useLocale();
   const { getBodyFontClass } = useBodyFont();
@@ -61,60 +52,8 @@ const UkiyoePage: React.FC = () => {
     }
   }, [transitionState.phase, endTransition]);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      let currentSection = activeSection;
-      for (const id of SECTIONS) {
-        const element = document.getElementById(id);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 150) {
-            currentSection = id;
-          }
-        }
-      }
-      if (currentSection !== activeSection) {
-        setActiveSection(currentSection);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [activeSection]);
-
-  const [activeSub, setActiveSub] = useState<string>('');
-  useEffect(() => {
-    const ids = Object.values(SUBSECTIONS).flat().map((x) => x.id);
-    const onScroll = () => {
-      let cur = '';
-      for (const id of ids) {
-        const el = document.getElementById(id);
-        if (el && el.getBoundingClientRect().top <= 150) cur = id;
-      }
-      setActiveSub(cur);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  const subButtonClass = (subId: string) =>
-    activeSub === subId
-      ? 'text-left text-body-sm font-switzer text-ink'
-      : 'text-left text-body-sm font-switzer text-ink opacity-50 hover:opacity-80';
-
-  const navItems: { id: string; label: string }[] = [
+  /** 側面メニュー（共通の WorkSidebar）。文言は本文の見出しと同じ翻訳キー。小見出しは開いている節の下にだけ出る */
+  const baseItems: { id: string; label: string }[] = [
     { id: 'overview', label: t('work.overview') },
     { id: 'research', label: t('ukiyoe.sectionResearch') },
     { id: 'design-process', label: t('work.designProcess') },
@@ -123,11 +62,10 @@ const UkiyoePage: React.FC = () => {
     { id: 'technical', label: t('ukiyoe.sectionTechnical') },
     { id: 'reflection', label: t('work.reflection') },
   ];
-
-  const sidebarButtonClass = (sectionId: string) =>
-    activeSection === sectionId
-      ? 'text-left text-title font-switzer transition-transform duration-900 scale-110'
-      : 'text-left text-title-sm font-switzer transition-transform duration-900 scale-100 opacity-50';
+  const sidebarItems: SidebarItem[] = baseItems.map((it) => ({
+    ...it,
+    subs: SUBSECTIONS[it.id]?.map((sub) => ({ id: sub.id, label: t(sub.key) })),
+  }));
 
   const bodyTextClass = `${getBodyFontClass()} tracking-[0.2px] text-body-lg`;
 
@@ -189,11 +127,8 @@ const UkiyoePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Main Content + Sidebar */}
-      <div className="max-w-7xl w-full mx-auto">
-        <div className="flex flex-col md:flex-row justify-between">
-          {/* Main Content */}
-          <div className="md:w-[78%]">
+      {/* 本文 + 側面メニュー（全作品ページで共通の枠。寸法は WorkShell） */}
+      <WorkShell sidebar={<WorkSidebar items={sidebarItems} ariaLabel={language === 'jp' ? 'このページの目次' : 'On this page'} />}>
 
             {/* 1. Overview */}
             <section id="overview" className="w-full mx-auto py-12 md:py-16 text-ink-secondary scroll-mt-32">
@@ -523,35 +458,7 @@ const UkiyoePage: React.FC = () => {
                 </p>
               </div>
             </section>
-          </div>
-
-          {/* Sidebar — 7 items。開いている節の下にだけ小見出しを出す */}
-          <div className="hidden md:flex md:w-[22%] pl-8 pt-12 items-start justify-center">
-            <nav className="sticky top-24">
-              <ul className="space-y-3">
-                {navItems.map((it) => (
-                  <li key={it.id}>
-                    <button onClick={() => scrollToSection(it.id)} className={sidebarButtonClass(it.id)}>
-                      {it.label}
-                    </button>
-                    {activeSection === it.id && SUBSECTIONS[it.id] ? (
-                      <ul className="mt-2 ml-3 space-y-2 border-l border-line-section pl-3">
-                        {SUBSECTIONS[it.id].map((sub) => (
-                          <li key={sub.id}>
-                            <button onClick={() => scrollToSection(sub.id)} className={subButtonClass(sub.id)}>
-                              {t(sub.key)}
-                            </button>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : null}
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </div>
+      </WorkShell>
     </div>
   );
 };

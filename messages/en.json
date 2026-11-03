@@ -730,6 +730,23 @@
     "aboutBaAlt": "The old About page (left) and the redesigned About page (right), side by side as tall screenshots. The old page is mostly text with small photos. The new page has a large header background, the logo, a map of where the ingredients come from, and photos of the process.",
     "topBaAlt": "The old top page (left) and the redesigned top page (right), side by side as tall screenshots. In the new one, the news and the introduction follow the hero.",
     "aboutRejAlt": "Two rejected designs for the As Brewers section of the About page, laid out with illustrations and vertical text.",
+    "videoPause": "Pause video",
+    "videoPlay": "Play video",
+    "dsFig": {
+      "fontsTitle": "Fonts",
+      "fonts": [
+        { "role": "Headings and body", "name": "Shippori Mincho", "text": ["Based on the No. 5 Mincho of the Tokyo Tsukiji Type Foundry, a Meiji era type, it is a Mincho with a strong Japanese feel. It expresses the character of Nakahatsu Shoten, founded in 1896 (Meiji 29) and long rooted in its community.", "The old site's Ryumin stops showing when the Adobe contract ends, and the OS-bundled Yu Mincho takes over. Then the text looks different on each device. Shippori Mincho's font data is built into the site, so it looks the same everywhere."] },
+        { "role": "Accent", "name": "Noto Serif JP", "text": ["Made together by Adobe and Google. I use it for small headings and labels. My moodboard gave the balance of dignity and readability as the reason."] },
+        { "role": "Latin", "name": "Roboto", "text": ["A sans serif made by Google for screens. I use it for the small Latin labels at the top of pages and for blog dates. The aim is to keep small Latin letters easy to read on screen."] }
+      ],
+      "sizesTitle": "Type sizes (size/line height, weight)",
+      "sizes": ["Heading 32/48, 700", "Subheading 20/32, 500", "Body 16/24, 400", "Button 13/19.5, 400"],
+      "colorsTitle": "Colors",
+      "colors": [["Text", "#21272A"], ["Accent (yellow)", "#F4CD00"], ["Border", "#DAD6CE"], ["Surface", "#F0F0F0"], ["Bengara", "#BC655C"]],
+      "spacingTitle": "Spacing (px)　/　Max content width 1280",
+      "spacing": [8, 16, 24, 40, 80],
+      "maxWidth": "1280"
+    },
     "dsAlt": "The design system of the store theme. Fonts: Shippori Mincho for headings and body, Noto Serif JP for accents, Roboto for Latin text. It lists the type sizes, the colors (text, yellow accent, border, surface, bengara) and the spacing from 8 to 80 px.",
     "v1v2TallAlt": "The top pages of v1 and v2 side by side, as longer screenshots. On the left, v1 reproduces the structure of the existing site; on the right, v2 is the redesign. v2 continues from the hero through the news, the company introduction and three photos to the heading of the brewing section.",
     "igAlt": "Four activities seen in the Instagram posts of Nakahatsu Shoten. May 2024: a permanent spot in the Ishikawa Good Products corner at Muji. September 2024: a fermentation culture and arts festival venue in Kanazawa. April 2025 and February 2026: overseas visitors try making miso. March 2026: nursery school children in a visiting miso-making class. The source is the shop's Instagram posts.",

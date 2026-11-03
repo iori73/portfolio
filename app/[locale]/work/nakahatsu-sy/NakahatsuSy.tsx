@@ -7,6 +7,12 @@ import { useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
 import { CTAButton } from '@/components/ui/cta-button';
 import { usePageTransition } from '@/src/contexts/TransitionContext';
 import { localePath } from '@/src/data/siteRoutes';
+import WorkShell from '@/src/components/work/WorkShell';
+import WorkSidebar, { type SidebarItem } from '@/src/components/work/WorkSidebar';
+import LineArrow from '@/src/components/work/LineArrow';
+import ControlledVideo from '@/src/components/work/ControlledVideo';
+import BeforeAfterPair from '@/src/components/work/BeforeAfterPair';
+import DesignSystemFigure, { type DesignSystemData } from '@/src/components/work/DesignSystemFigure';
 
 /**
  * 中初ケーススタディの「SY型」。
@@ -92,7 +98,7 @@ function SystemFigure({ label, f }: { label: string; f: SystemFig }) {
           <p className="text-caption text-ink-tertiary">{f.d1}</p>
         </>,
       )}
-      <p aria-hidden="true" className="text-center text-title text-ink-tertiary">↓</p>
+      <div className="flex justify-center"><LineArrow direction="down" /></div>
       {row(
         f.after,
         <>
@@ -116,46 +122,12 @@ function SystemFigure({ label, f }: { label: string; f: SystemFig }) {
   );
 }
 
-/** 前後の図の上に置くラベル（位置は図の中の2枚のページに合わせる）。 */
-function BeforeAfterLabels({ before, after }: { before: string; after: string }) {
-  return (
-    <div aria-hidden="true" className="relative h-8 font-space-grotesk text-caption font-bold text-ink-tertiary">
-      <p className="absolute left-[3.2%] top-2">{before}</p>
-      <p className="absolute left-[57.4%] top-2">{after}</p>
-    </div>
-  );
-}
-
-/** About「醸造家として」のパララックスの録画。無音・ループ。動きを減らす設定のときは自動再生せず、コントロールを出す。実物の写真のまま（先方の許可を取ってから公開する。2026-11-01 河野の指示）。 */
-function ParallaxVideo({ label, note }: { label: string; note: string }) {
-  const ref = React.useRef<HTMLVideoElement>(null);
-  useEffect(() => {
-    const v = ref.current;
-    if (!v) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      v.pause();
-      v.controls = true;
-    } else {
-      v.play().catch(() => {});
-    }
-  }, []);
+/** About「醸造家として」のパララックスの録画。無音・ループ。止められるボタンつき（ControlledVideo）。実物の写真のまま（先方の許可を取ってから公開する。2026-11-01 河野の指示）。 */
+function ParallaxVideo({ label, note, pauseLabel, playLabel }: { label: string; note: string; pauseLabel: string; playLabel: string }) {
   return (
     <figure className="flex w-full flex-col gap-2">
-      <video
-        ref={ref}
-        aria-label={label}
-        className="w-full rounded-media bg-black"
-        src="/work/nakahatsu/about-parallax.mp4"
-        poster="/work/nakahatsu/about-parallax-poster.webp"
-        width={1280}
-        height={720}
-        muted
-        loop
-        playsInline
-        autoPlay
-        preload="metadata"
-      />
-      {note ? <p className="text-caption text-ink-tertiary">{note}</p> : null}
+      <ControlledVideo src="/work/nakahatsu/about-parallax.mp4" poster="/work/nakahatsu/about-parallax-poster.webp" label={label} pauseLabel={pauseLabel} playLabel={playLabel} width={1280} height={720} />
+      {note ? <p className="text-body-sm text-ink-tertiary">{note}</p> : null}
     </figure>
   );
 }
@@ -165,69 +137,43 @@ type RingFig = { lead: string; title: string; leadText: string; rest: string[]; 
 type RejFig = { lead: string; groups: [string, string][]; note: string; alts: string[] };
 
 /** 没にした About の案（醸造家として）8案。グループごとに、左に説明、右に画像（スマートフォンは説明のあとに2列）。人物の写真は灰色に置換済み。 */
-/** ローディングアニメーションの録画。無音。画面に入ったら先頭から再生し、繰り返す（2026-11-03 河野の指示でループに変更）。動きを減らす設定のときは自動再生せず、コントロールを出す。 */
-function LoadingVideo({ label }: { label: string }) {
-  const ref = React.useRef<HTMLVideoElement>(null);
-  useEffect(() => {
-    const v = ref.current;
-    if (!v) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      v.controls = true;
-      return;
-    }
-    // 画面に半分以上入ったときに、先頭から再生を始める（以後はループ）
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          v.currentTime = 0;
-          v.play().catch(() => {});
-          io.disconnect();
-        }
-      },
-      { threshold: 0.5 },
-    );
-    io.observe(v);
-    return () => io.disconnect();
-  }, []);
-  return (
-    <video
-      ref={ref}
-      aria-label={label}
-      className="w-full rounded-media bg-black"
-      src="/work/nakahatsu/loading-anim.mp4"
-      poster="/work/nakahatsu/loading-anim-poster.webp"
-      width={1280}
-      height={720}
-      muted
-      loop
-      playsInline
-      preload="metadata"
-    />
-  );
+/** ローディングアニメーションの録画。無音・ループ。画面に入ったら先頭から再生。止められるボタンつき（ControlledVideo）。 */
+function LoadingVideo({ label, pauseLabel, playLabel }: { label: string; pauseLabel: string; playLabel: string }) {
+  return <ControlledVideo src="/work/nakahatsu/loading-anim.mp4" poster="/work/nakahatsu/loading-anim-poster.webp" label={label} pauseLabel={pauseLabel} playLabel={playLabel} width={1280} height={720} startWhenVisible />;
 }
 
 type IterFig = { lead: string; groups: [string, string][]; note: string; alts: string[] };
 
-/** トップページの About の節の、没にした案9案（A 7案、B 2案）。RejectedFigure と同じ作り。顔・Sample・住所は写っていない。 */
+/**
+ * トップページの About の節の、没にした案9案（A 7案、B 2案）。Figma の `Figure/Iteration process Home About section`（568:1067）と同じ作り:
+ * 外枠は図全体に1つ。グループごとに、見出し → 説明 → 画像の縦並び。画像は1枚ずつ細い枠線つき（A は 4 列、B は 3 列）。
+ * 顔・Sample・住所は写っていない。
+ */
+const TOP_ITER_DIMS: Record<number, [number, number]> = {
+  1: [1024, 718], 2: [1024, 718], 3: [1024, 718], 4: [1024, 718], 5: [1024, 781], 6: [1024, 781], 7: [1024, 814], 8: [1024, 690], 9: [1024, 671],
+};
 function TopIterFigure({ f }: { f: IterFig }) {
-  const sets = [[1, 2, 3, 4, 5, 6, 7], [8, 9]];
+  const groups = [
+    { ids: [1, 2, 3, 4, 5, 6, 7], cols: 'md:grid-cols-4' },
+    { ids: [8, 9], cols: 'md:grid-cols-3' },
+  ];
   return (
-    <figure aria-label={f.lead} className="flex w-full flex-col gap-6 rounded-media border border-[var(--nk-border)] bg-white p-4 md:gap-7 md:p-8">
-      <p className="text-caption text-ink-secondary">{f.lead}</p>
-      {sets.map((set, gi) => (
-        <div key={f.groups[gi][0]} className="flex flex-col gap-3 md:flex-row md:gap-6">
-          <div className="flex flex-col gap-1 md:w-[260px] md:shrink-0">
-            <p className="text-caption font-bold text-ink">{f.groups[gi][0]}</p>
-            <p className="text-caption text-ink-secondary">{f.groups[gi][1]}</p>
+    <figure aria-label={f.lead} className="flex w-full flex-col gap-7 rounded-media border border-[var(--nk-border)] bg-white p-4 md:p-8">
+      <p className="text-body text-ink-secondary">{f.lead}</p>
+      {groups.map((g, gi) => (
+        <div key={f.groups[gi][0]} className="flex flex-col gap-6">
+          <div className="flex flex-col gap-1">
+            <p className="text-body font-bold text-ink-tertiary">{f.groups[gi][0]}</p>
+            <p className="text-body-sm text-ink">{f.groups[gi][1]}</p>
           </div>
-          <div className={`grid min-w-0 flex-1 grid-cols-2 gap-2 bg-white p-2 md:gap-4 md:p-4 ${set.length > 2 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
-            {set.map((n) => (
-              <Image key={n} src={`/work/nakahatsu/top-iter-${n}.webp`} alt={f.alts[n - 1]} width={1024} height={720} className="h-auto w-full rounded" />
+          <div className={`grid grid-cols-2 items-start gap-3 md:gap-4 ${g.cols}`}>
+            {g.ids.map((n) => (
+              <Image key={n} src={`/work/nakahatsu/top-iter-${n}.webp`} alt={f.alts[n - 1]} width={TOP_ITER_DIMS[n][0]} height={TOP_ITER_DIMS[n][1]} className="h-auto w-full border border-line-section" />
             ))}
           </div>
         </div>
       ))}
-      <p className="text-caption text-ink-tertiary">{f.note}</p>
+      <p className="text-body-sm text-ink-tertiary">{f.note}</p>
     </figure>
   );
 }
@@ -238,12 +184,12 @@ function ProcessIterationsFigure({ f }: { f: IterProcFig }) {
   const ratio: Record<number, number> = { 1: 583, 2: 630, 3: 750, 4: 633, 5: 750, 6: 750, 7: 750, 8: 750, 9: 750 };
   return (
     <figure aria-label={f.lead} className="flex w-full flex-col gap-6 rounded-media border border-[var(--nk-border)] bg-white p-4 md:gap-7 md:p-8">
-      <p className="text-caption text-ink-secondary">{f.lead}</p>
+      <p className="text-body text-ink-secondary">{f.lead}</p>
       {sets.map((set, gi) => (
         <div key={f.groups[gi][0]} className="flex flex-col gap-3 md:flex-row md:gap-6">
           <div className="flex flex-col gap-1 md:w-[260px] md:shrink-0">
-            <p className="text-caption font-bold text-ink">{f.groups[gi][0]}</p>
-            <p className="text-caption text-ink-secondary">{f.groups[gi][1]}</p>
+            <p className="text-body font-bold text-ink">{f.groups[gi][0]}</p>
+            <p className="text-body-sm text-ink-secondary">{f.groups[gi][1]}</p>
           </div>
           <div className={`grid min-w-0 flex-1 gap-2 bg-white p-2 md:gap-4 md:p-4 ${set.length === 1 ? 'grid-cols-1 justify-items-center' : 'grid-cols-2'}`}>
             {set.map((n) => (
@@ -252,7 +198,7 @@ function ProcessIterationsFigure({ f }: { f: IterProcFig }) {
           </div>
         </div>
       ))}
-      <p className="text-caption text-ink-tertiary">{f.note}</p>
+      <p className="text-body-sm text-ink-tertiary">{f.note}</p>
     </figure>
   );
 }
@@ -261,7 +207,7 @@ function ProcessIterationsFigure({ f }: { f: IterProcFig }) {
 function ProcessRingFigure({ f, lang, headingClass, bodyClass }: { f: RingFig; lang: string; headingClass: string; bodyClass: string }) {
   return (
     <figure aria-label={f.alt} className="flex w-full flex-col gap-6 rounded-media border border-[var(--nk-border)] bg-white p-4 md:gap-7 md:p-8">
-      <p className="text-caption text-ink-secondary">{f.lead}</p>
+      <p className="text-body text-ink-secondary">{f.lead}</p>
       <div className="flex flex-col items-center gap-6 md:flex-row md:gap-10">
         <Image src={`/work/nakahatsu/process-ring-${lang === 'jp' ? 'jp' : 'en'}.webp`} alt={f.alt} width={1440} height={1442} className="h-auto w-full max-w-[420px] md:w-[46%]" />
         <div className="flex min-w-0 flex-1 flex-col gap-4">
@@ -272,7 +218,7 @@ function ProcessRingFigure({ f, lang, headingClass, bodyClass }: { f: RingFig; l
           ))}
         </div>
       </div>
-      <p className="text-caption text-ink-tertiary">{f.note}</p>
+      <p className="text-body-sm text-ink-tertiary">{f.note}</p>
     </figure>
   );
 }
@@ -281,12 +227,12 @@ function RejectedFigure({ f }: { f: RejFig }) {
   const sets = [[1, 2], [3, 4, 5], [6, 7, 8]];
   return (
     <figure aria-label={f.lead} className="flex w-full flex-col gap-6 rounded-media border border-[var(--nk-border)] bg-white p-4 md:gap-7 md:p-8">
-      <p className="text-caption text-ink-secondary">{f.lead}</p>
+      <p className="text-body text-ink-secondary">{f.lead}</p>
       {sets.map((set, gi) => (
         <div key={f.groups[gi][0]} className="flex flex-col gap-3 md:flex-row md:gap-6">
           <div className="flex flex-col gap-1 md:w-[260px] md:shrink-0">
-            <p className="text-caption font-bold text-ink">{f.groups[gi][0]}</p>
-            <p className="text-caption text-ink-secondary">{f.groups[gi][1]}</p>
+            <p className="text-body font-bold text-ink">{f.groups[gi][0]}</p>
+            <p className="text-body-sm text-ink-secondary">{f.groups[gi][1]}</p>
           </div>
           <div className={`grid min-w-0 flex-1 grid-cols-2 gap-2 bg-white p-2 md:gap-4 md:p-4 ${set.length === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
             {set.map((n) => (
@@ -295,7 +241,7 @@ function RejectedFigure({ f }: { f: RejFig }) {
           </div>
         </div>
       ))}
-      <p className="text-caption text-ink-tertiary">{f.note}</p>
+      <p className="text-body-sm text-ink-tertiary">{f.note}</p>
     </figure>
   );
 }
@@ -315,29 +261,13 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
     }
   }, [transitionState.phase, endTransition]);
 
-  const [activeId, setActiveId] = React.useState('overview');
-  useEffect(() => {
-    const ids = ['overview', 'step-1', 'step-2', 'step-3', 'step-4', 'step-5', 'credit'];
-    const onScroll = () => {
-      let cur = 'overview';
-      for (const id of ids) {
-        const el = document.getElementById(id);
-        if (el && el.getBoundingClientRect().top <= 260) cur = id;
-      }
-      setActiveId(cur);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
   const meta = t.raw('meta') as Meta[];
   const steps = t.raw('steps') as Step[];
   const credit = t.raw('credit') as Credit[];
   const palette = t.raw('palette') as Palette;
   const rl = t.raw('rowLabels') as { overview: string; process: string; credit: string };
-  /** 側面メニュー（PC・幅1440px 以上）。項目は本文の見出しと同じ文言（概要・各ステップの見出し・クレジット）。Figma の Sidebar と同じ */
-  const tocItems: { id: string; label: string }[] = [
+  /** 側面メニュー（共通の WorkSidebar。1280px 以上）。項目は本文の見出しと同じ文言（概要・各ステップの見出し・クレジット）。Figma の Sidebar と同じ */
+  const sidebarItems: SidebarItem[] = [
     { id: 'overview', label: rl.overview },
     ...steps.map((st, i) => ({ id: `step-${i + 1}`, label: st.h })),
     { id: 'credit', label: rl.credit },
@@ -357,23 +287,6 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
     <div className="font-sans mt-[var(--site-header-height)] mb-24 [--nk-border:#dad6ce] [--nk-surface:#f0f0f0] md:mb-16">
       <BackToTopButton />
 
-      <nav aria-label={language === 'jp' ? 'このページの目次' : 'On this page'} className="fixed top-28 left-[calc(50%+560px)] z-30 hidden w-[136px] min-[1440px]:block">
-        <ul className="flex flex-col gap-3">
-          {tocItems.map((it) => (
-            <li key={it.id}>
-              <button
-                type="button"
-                onClick={() => document.getElementById(it.id)?.scrollIntoView({ behavior: 'smooth' })}
-                aria-current={activeId === it.id ? 'true' : undefined}
-                className={`${getBodyFontClass()} text-left text-body-sm leading-snug [word-break:auto-phrase] transition-opacity ${activeId === it.id ? 'font-medium text-ink' : 'text-ink opacity-50 hover:opacity-80'}`}
-              >
-                {it.label}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </nav>
-
       {/* aspect-[8/5] は TransitionOverlay 側の比率と一致させる（ほかの作品と同じ）。 */}
       <section className="mb-0 md:mb-12 full-bleed">
         <div className="w-full aspect-[8/5] bg-surface-muted overflow-hidden relative">
@@ -389,7 +302,8 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
         </div>
       </section>
 
-      <div className="mx-auto flex w-full max-w-[1088px] flex-col gap-24 pt-6 md:gap-40 md:pt-8">
+      <WorkShell sidebar={<WorkSidebar items={sidebarItems} ariaLabel={language === 'jp' ? 'このページの目次' : 'On this page'} />}>
+      <div className="flex w-full flex-col gap-24 pt-6 md:gap-40 md:pt-8">
         {/* 冒頭: 小見出し → 作品名 → メタ2×2 */}
         <header className="flex flex-col gap-5 md:gap-6">
           <p className={`${getBodyFontClass()} text-body text-ink-tertiary`}>{t('kicker')}</p>
@@ -407,7 +321,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
         </header>
 
         {/* ローディングアニメーション（ライブテーマのトップを開いた瞬間を録画）。本文の最初。キャプションは置かず、aria-label に説明を入れる。Figma の Overview 直前と同じ */}
-        <LoadingVideo label={t('loadingVideoAlt')} />
+        <LoadingVideo label={t('loadingVideoAlt')} pauseLabel={t('videoPause')} playLabel={t('videoPlay')} />
 
         <Row id="overview" label={rl.overview}>
           <p className={catchLine}>{t('overviewCatch')}</p>
@@ -485,10 +399,11 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
               ) : s.fig === 'about-tenyu' ? (
                 <div className="flex flex-col items-center gap-10 md:gap-12">
                   {/* トップの前後、トップの軌跡（没案）、About の文章、About の前後、パララックス、没にした About の案。Figma の Step 3 と同じ順。キャプションは置かず、alt に説明を入れる */}
-                  <div className="w-full">
-                    <BeforeAfterLabels before={t('beforeLabel')} after={t('afterLabel')} />
-                    <Image src={`/work/nakahatsu/top-ba-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('topBaAlt')} width={1520} height={975} className="h-auto w-full" />
-                  </div>
+                  <BeforeAfterPair
+                    label={t('topBaAlt')}
+                    before={{ src: `/work/nakahatsu/top-ba-${language === 'jp' ? 'jp' : 'en'}-l.webp`, width: 600, height: 975, label: t('beforeLabel') }}
+                    after={{ src: `/work/nakahatsu/top-ba-${language === 'jp' ? 'jp' : 'en'}-r.webp`, width: 600, height: 975, label: t('afterLabel') }}
+                  />
                   <TopIterFigure f={t.raw('topIter') as IterFig} />
                   <div className="flex w-full flex-col md:flex-row md:gap-8">
                     <div className="hidden md:block md:w-[280px] md:shrink-0" aria-hidden="true" />
@@ -497,13 +412,24 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                       <p className={body}>{t('aboutText')}</p>
                     </div>
                   </div>
-                  <div className="w-full">
-                    <BeforeAfterLabels before={t('beforeLabel')} after={t('afterLabel')} />
-                    <Image src={`/work/nakahatsu/about-ba-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('aboutBaAlt')} width={1520} height={1756} className="h-auto w-full" />
-                  </div>
+                  <BeforeAfterPair
+                    label={t('aboutBaAlt')}
+                    before={{ src: `/work/nakahatsu/about-ba-${language === 'jp' ? 'jp' : 'en'}-l.webp`, width: 600, height: 1756, label: t('beforeLabel') }}
+                    after={{ src: `/work/nakahatsu/about-ba-${language === 'jp' ? 'jp' : 'en'}-r.webp`, width: 600, height: 1756, label: t('afterLabel') }}
+                  />
                   {/* About「醸造家として」のパララックスの録画。About の前後の図の直後。キャプションは置かず、aria-label に説明を入れる */}
-                  <ParallaxVideo label={t('parallaxVideoAlt')} note={t('parallaxVideoNote')} />
+                  <ParallaxVideo label={t('parallaxVideoAlt')} note={t('parallaxVideoNote')} pauseLabel={t('videoPause')} playLabel={t('videoPlay')} />
                   <ProcessIterationsFigure f={t.raw('iterFig') as IterProcFig} />
+                </div>
+              ) : s.fig === 'before-after' ? (
+                <div className="flex justify-center">
+                  <div className="w-full overflow-hidden rounded-media bg-[var(--nk-surface)] p-4 md:w-[760px] md:p-8">
+                    <BeforeAfterPair
+                      label={s.cap}
+                      before={{ src: `/work/nakahatsu/before-after-${language === 'jp' ? 'jp' : 'en'}-l.webp`, width: 553, height: 577, label: t('beforeLabel') }}
+                      after={{ src: `/work/nakahatsu/before-after-${language === 'jp' ? 'jp' : 'en'}-r.webp`, width: 553, height: 577, label: t('afterLabel') }}
+                    />
+                  </div>
                 </div>
               ) : s.fig === 'bilingual-3lang' ? null /* ヒーローの3言語の図は、注釈「見せない」（2026-10-30）で外した。下の商品一覧の図だけ出す */ : (
                 <div className={`flex justify-center`}>
@@ -516,21 +442,19 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
               {/* さらに長い版: Instagram の節まで。人物が写る写真と見本（Sample）の画像は、灰色の四角に置き換えてある。Figma の長尺図の下と同じ */}
               {s.fig === 'before-after' && (
                 <div className="flex justify-center">
-                  <div className="w-full overflow-hidden rounded-media bg-[var(--nk-surface)]">
-                    <div aria-hidden="true" className="relative h-9 font-space-grotesk text-caption font-bold text-ink-tertiary">
-                      <p className="absolute left-[3.2%] top-3">{t('v1Label')}</p>
-                      <p className="absolute left-[57.4%] top-3">{t('v2Label')}</p>
-                    </div>
-                    <Image src={`/work/nakahatsu/v1-v2-full-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('v1v2FullAlt')} width={1520} height={language === 'jp' ? 3136 : 3194} className="h-auto w-full" />
-                    <p className="px-6 pb-4 text-caption text-ink-tertiary">{t('v1v2FullNote')}</p>
+                  <div className="w-full overflow-hidden rounded-media bg-[var(--nk-surface)] p-4 md:p-8">
+                    <BeforeAfterPair
+                      label={t('v1v2FullAlt')}
+                      before={{ src: `/work/nakahatsu/v1-v2-full-${language === 'jp' ? 'jp' : 'en'}-l.webp`, width: 600, height: language === 'jp' ? 3136 : 3194, label: t('v1Label') }}
+                      after={{ src: `/work/nakahatsu/v1-v2-full-${language === 'jp' ? 'jp' : 'en'}-r.webp`, width: 600, height: language === 'jp' ? 3136 : 3194, label: t('v2Label') }}
+                    />
+                    <p className="pt-4 text-body-sm text-ink-tertiary">{t('v1v2FullNote')}</p>
                   </div>
                 </div>
               )}
               {/* 色の図のあとに、ストアのテーマの文字・サイズ・色・余白の図（デザインシステム）。Figma の Step/5 の下と同じ */}
               {s.fig === 'palette' && (
-                <div className="w-full overflow-hidden rounded-media">
-                  <Image src={`/work/nakahatsu/design-system-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('dsAlt')} width={2176} height={language === 'jp' ? 1326 : 1362} className="h-auto w-full" />
-                </div>
+                <DesignSystemFigure f={t.raw('dsFig') as DesignSystemData} label={t('dsAlt')} />
               )}
               {/* 3つの言語の商品一覧の図（bilingual-text.webp）は、Figma の v2 で非表示にしたため載せない（JP・EN とも 2026-11-01。画像ファイルは残してある） */}
               {/* ヒーロー節を、スマートフォン幅で、3言語並べた図（商品一覧の図の下）。Figma の Step/4 の最後と同じ */}
@@ -563,6 +487,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
           <CTAButton href={localePath('/work/nakahatsu', language)}>{t('moreLink')}</CTAButton>
         </section>
       </div>
+      </WorkShell>
     </div>
   );
 };
