@@ -1,6 +1,27 @@
-# 中初商店ケーススタディ: 引き継ぎ（最新は 2026-11-03 の節）
+# 中初商店ケーススタディ: 引き継ぎ（最新は 2026-11-03 夜の節）
 
-## 2026-11-03 追記（最新。下の古い記述と食い違う場合は、この節が正）
+## 2026-11-03 夜 追記（最新。下の「2026-11-03 追記」より新しい。食い違う場合はここが正）
+最新コミットは worktree で `git log -1`（`f3be0e0` 時点。ローカルのみ・未push・未merge）。
+
+### 作品ページの共通部品（`src/components/work/`。ルールは CLAUDE.md「作品ページの共通部品」、lessons.md）
+- `WorkShell` + `WorkSidebar`: 本文 最大1088px + 間隔40px + サイドバー200px（1280px 以上のみ）。ukiyoe と中初 sy で、幅・文字サイズ（15px）・間隔を実測して一致を確認。サイドバーの項目は本文の見出しと同じ翻訳キー。小見出しは開いている節の下にだけ（ukiyoe の `SUBSECTIONS`）。ukiyoe のサイドバーは、これまで 768px 以上で出ていたが、1280px 以上のみになった。
+- `WorkMetaGrid`（メタ情報）と `¦`（折り返し位置の記法。`src/lib/softBreaks.tsx`）。airline の JP の日付・成果物に使用。
+- `BeforeAfterPair` + `LineArrow`（前後の図。2枚の画像 + 実線の矢印をコードで）、`DesignSystemFigure`（デザインシステムの図を画像→コードに。`next/font` で Shippori Mincho・Noto Serif JP・Roboto を、この図にだけ読み込む）、`ControlledVideo`（左下に一時停止/再生ボタン。「動きを減らす」設定では自動再生しない）。
+- work/ 全ページの背景は白（`app/[locale]/work/layout.tsx`）。
+
+### 中初 sy の変更
+- 前後の図4種（top-ba、about-ba、before-after、v1-v2-full）を、`-l`/`-r` の2枚に切り出し（元の画像は残してある）+ 矢印はコード。before-after の焼き込みラベルは外して、コードの文字に。デザインシステムの図は、messages の `dsFig`（JP/EN）から組む。構造図の「↓」も実線の矢印に。
+- トップのイテレーションの図（A 7案・B 2案）は、Figma `568:1067` に合わせて作り直し（外枠は図全体に1つ、見出し→説明→画像、画像ごとに細い枠、A は4列・B は3列）。図のタイトルは `text-body`（約17px）、説明は `text-body-sm`。
+- 側面メニューは共通の `WorkSidebar`（項目: 概要 / 5つのステップの見出し / クレジット。行ラベルは JP で 概要・プロセス・クレジット）。Figma の Sidebar は JP PC `690:767`、EN PC `690:775`。
+- About のパララックス動画は 8.3 秒にカット（素材へのこだわりの白い部分は動画で見せない。元は `~/.claude/jobs/5567ddb3/tmp/parallax/about-parallax-original.mp4` とコミット履歴）。ローディング動画とあわせて、2つとも停止ボタンつき。
+- Figma: 前後の矢印（21本）を点線から実線に（PC 太さ2、SP 1.5）。v2 フレームの背景は白。
+
+### 未対応・判断待ち
+- **サムネイルの画質（大きい画面で、黄色のロゴの環などが荒い）**: サムネイル（Figma コピー `cOQENVBn0c3tmjCZkKMQyx` の JP `2057:751`、EN `2057:760`）の素材の画像が 700〜1000px 幅と小さく、書き出しを大きくしても画質は上がらない。高解像度にするには、ストアの画面を高い解像度（3倍）で撮り直して、Figma のサムネイルを組み直し、書き出し直す必要がある。ストアは今もパスワードページへ転送されるため、パスワードを使わないルールの私は撮れない。選択肢: 河野さんが撮り直した画像（3倍）を共有する／ローカルのプレビューで撮る。ローディング動画（1280x720）の黄色い環も同じ理由で粗い（録画の撮り直しが必要）。
+- meta の英語ラベル（Client・Role・Timeline など）を JP で日本語にするか。ukiyoe の JP 見出し「リサーチと発見」「技術面のポイント」は私の仮訳。
+- 先方の書面 OK、人物が写る動画の許可、Sample 写真の差し替え、イントロの案 A（GO 待ち）。小麦の写真は確定（先方提供版）。
+
+## 2026-11-03 追記（夜の追記より前の内容）
 
 作業ブランチ `worktree-nakahatsu-case-study-v2`（worktree `~/dev/portfolio/.claude/worktrees/nakahatsu-case-study-v2`）。**ローカルのみ・未push・未merge**（リポジトリ `iori73/portfolio` は公開で、push は実質の公開。先方の書面 OK と、人物が写る動画の許可が取れるまで、push・merge しない）。最新コミットは `git log -1`。プレビューは `pnpm exec next dev -p 3007 -H localhost`。
 
