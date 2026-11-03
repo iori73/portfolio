@@ -1758,3 +1758,12 @@ Shopify のパスワードページは Shopify 側テンプレートなので、
 - 対応（app/[locale]/work/ukiyoe/page.tsx のみ）: lg 以上で grid-cols を [auto_minmax(0,1fr)_auto_auto]、列の間隔を 16px に。日本語は word-break:auto-phrase で文節の切れ目で折る。
 - 結果（1100px 以上、JP）: Timeline・Type・Deliverables は 1 行、Skills は「UI、」と「コンテキストエンジニアリング」の 2 行。英語は全部 1 行。1024〜1099px は Skills が 3 行、800px 以下は従来どおり。
 - 他の作品のメタ情報の折り返しは未確認。
+
+## 2026-11-03（続き）側面メニューと本文の見出しの文言をそろえた／中初 sy に側面メニューを追加
+- 河野さんの指摘: 側面メニュー（sidebar）と本文の見出しで文言が違う。JP のときの見出しが英語・日本語でばらばら。中初 sy にも側面メニューを入れる（Figma もサイトも）。
+- 調べた結果（JP/EN、PC 1440）: ukiyoe は側面メニューが英語の直書き（Technical ↔ 本文 Technical Highlights、Hand-Coloring ↔ レイヤーの手塗り、AI & Craft ↔ AIは…）、本文の見出しも JP で英語（Overview、Research & Discovery、Design Process、Technical Highlights、Reflection）。airline-design-system と nakahatsu は JP で日本語、EN で英語にそろっていた。gym_crowd_status_dashboard と google_ux_design_certificate_project は、本文そのものが JP でも英語のため、見出しも英語のまま（今回は触っていない）。
+- 方針: 側面メニューの文言は、本文の見出しと同じ翻訳キーから出す。JP は日本語、EN は英語。
+- ukiyoe: 本文の h2 と側面メニューを、work.overview / work.designProcess / work.reflection / ukiyoe.handColoringTitle / ukiyoe.aiCraftTitle と、新規 ukiyoe.sectionResearch（JP「リサーチと発見」）/ ukiyoe.sectionTechnical（JP「技術面のポイント」）に統一。JP の語は私の仮訳（河野さんの確認待ち）。
+- 中初 sy: messages に nakahatsuSy.rowLabels（JP: 概要/プロセス/クレジット、EN: Overview/Process/Credit）を追加し、行ラベルを日本語化（JP）。側面メニュー（1440px 以上で、本文の右の余白に固定、現在の節を強調）を追加。項目は 概要 / 5 つのステップの見出し / クレジット。各節に id（overview、process、step-1〜5、credit）。
+- Figma（portfolio_v5、Pages）: JP の v2 4 枚のうち PC 568:736・SP 568:1738 の行ラベル 3 つを日本語に（568:776/805/1727、568:1774/1783/2241）。PC 2 枚（JP 568:736、EN 568:2252）に Sidebar を追加（JP 690:767、EN 690:775。右の余白、x=1200、フレームの右端からはみ出す。サイトの 1440px 以上の配置と同じ。現在の節は 1 つ目のステップを例に強調）。PC の 2 枚は clipsContent を false に。SP には側面メニューなし（サイトも 1440px 未満は非表示）。
+- 未決定: meta の英語ラベル（Client、Role、Date、Team、ukiyoe の Timeline・My Skills・Type・Deliverables）を JP で日本語にするか。gym・google_ux の見出しを JP で日本語にするか（本文が英語のため見送り）。

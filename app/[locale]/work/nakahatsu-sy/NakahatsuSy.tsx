@@ -315,16 +315,39 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
     }
   }, [transitionState.phase, endTransition]);
 
+  const [activeId, setActiveId] = React.useState('overview');
+  useEffect(() => {
+    const ids = ['overview', 'step-1', 'step-2', 'step-3', 'step-4', 'step-5', 'credit'];
+    const onScroll = () => {
+      let cur = 'overview';
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= 260) cur = id;
+      }
+      setActiveId(cur);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   const meta = t.raw('meta') as Meta[];
   const steps = t.raw('steps') as Step[];
   const credit = t.raw('credit') as Credit[];
   const palette = t.raw('palette') as Palette;
+  const rl = t.raw('rowLabels') as { overview: string; process: string; credit: string };
+  /** 側面メニュー（PC・幅1440px 以上）。項目は本文の見出しと同じ文言（概要・各ステップの見出し・クレジット）。Figma の Sidebar と同じ */
+  const tocItems: { id: string; label: string }[] = [
+    { id: 'overview', label: rl.overview },
+    ...steps.map((st, i) => ({ id: `step-${i + 1}`, label: st.h })),
+    { id: 'credit', label: rl.credit },
+  ];
   const body = `${getBodyFontClass()} tracking-[0.2px] text-body-lg text-ink [text-wrap:pretty]`;
   const catchLine = `text-title text-ink ${getHeadingFontClass()} [text-wrap:balance]`;
 
   /** PC は「ラベル | 本文」の2カラム、SP は縦に積む。 */
-  const Row = ({ label, children }: { label: string; children: React.ReactNode }) => (
-    <section className="flex flex-col gap-4 md:flex-row md:gap-8">
+  const Row = ({ id, label, children }: { id?: string; label: string; children: React.ReactNode }) => (
+    <section id={id} className="flex scroll-mt-28 flex-col gap-4 md:flex-row md:gap-8">
       <p className={`${LABEL} md:w-[280px] md:shrink-0`}>{label}</p>
       <div className="flex min-w-0 flex-col gap-4 md:flex-1">{children}</div>
     </section>
@@ -333,6 +356,23 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
   return (
     <div className="font-sans mt-[var(--site-header-height)] mb-24 [--nk-border:#dad6ce] [--nk-surface:#f0f0f0] md:mb-16">
       <BackToTopButton />
+
+      <nav aria-label={language === 'jp' ? 'このページの目次' : 'On this page'} className="fixed top-28 left-[calc(50%+560px)] z-30 hidden w-[136px] min-[1440px]:block">
+        <ul className="flex flex-col gap-3">
+          {tocItems.map((it) => (
+            <li key={it.id}>
+              <button
+                type="button"
+                onClick={() => document.getElementById(it.id)?.scrollIntoView({ behavior: 'smooth' })}
+                aria-current={activeId === it.id ? 'true' : undefined}
+                className={`${getBodyFontClass()} text-left text-body-sm leading-snug [word-break:auto-phrase] transition-opacity ${activeId === it.id ? 'font-medium text-ink' : 'text-ink opacity-50 hover:opacity-80'}`}
+              >
+                {it.label}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
       {/* aspect-[8/5] は TransitionOverlay 側の比率と一致させる（ほかの作品と同じ）。 */}
       <section className="mb-0 md:mb-12 full-bleed">
@@ -369,7 +409,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
         {/* ローディングアニメーション（ライブテーマのトップを開いた瞬間を録画）。本文の最初。キャプションは置かず、aria-label に説明を入れる。Figma の Overview 直前と同じ */}
         <LoadingVideo label={t('loadingVideoAlt')} />
 
-        <Row label="Overview">
+        <Row id="overview" label={rl.overview}>
           <p className={catchLine}>{t('overviewCatch')}</p>
           {(t.raw('overview') as string[]).map((p) => (
             <p key={p} className={body}>{p}</p>
@@ -384,7 +424,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
         </div>
 
         <div className="flex flex-col gap-16 md:gap-20">
-          <Row label="Process">
+          <Row id="process" label={rl.process}>
             <p className={catchLine}>{t('processCatch')}</p>
             {(t.raw('process') as string[]).map((p) => (
               <p key={p} className={body}>{p}</p>
@@ -418,7 +458,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
             );
           })()}
           {steps.map((s, i) => (
-            <div key={s.h} className="flex flex-col gap-10 md:gap-10">
+            <div key={s.h} id={`step-${i + 1}`} className="flex scroll-mt-28 flex-col gap-10 md:gap-10">
               <div className="flex flex-col md:flex-row md:gap-8">
                 <div className="hidden md:block md:w-[280px] md:shrink-0" aria-hidden="true" />
                 <div className="flex min-w-0 flex-col gap-3 md:flex-1">
@@ -509,7 +549,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
             ただの希望なので、ページには載せない。文言は messages の statusCatch / status と、
             Figma の退避枠に残してある。公開後に数字が出たら、この位置に実績の節として足す。 */}
 
-        <Row label="Credit">
+        <Row id="credit" label={rl.credit}>
           {credit.map(([who, what]) => (
             <div key={who} className="flex flex-col gap-1 md:flex-row md:gap-6">
               <p className={`${getBodyFontClass()} text-body-sm text-ink-tertiary md:w-[140px] md:shrink-0`}>{who}</p>

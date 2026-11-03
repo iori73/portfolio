@@ -310,6 +310,8 @@
     "logoDesignTitle": "Logo Design",
     "logoDesignText1": "The first version, a kaleidoscope of repeated faces, looked decorative but didn't actually capture what makes ukiyo-e ukiyo-e, so I went back to research. Asking an AI model to summarize ukiyo-e's compositional grammar, then checking the answer against real prints, turned up four traits that kept recurring: bold foreground cropping, diagonal dynamism, an unconventional mixed-perspective deformation, and a deliberate awareness of the frame and negative space. This is the same visual logic later inherited by the Impressionists.",
     "logoDesignText2": "The mark applies the first of those traits directly: instead of centering the main shape, it's cropped in close and pushed off-axis, the way a print crops a bridge or a branch until it runs off the frame. Inside a hanko-style double-square seal, a circle, a diagonal cut, and a small offset window interlock without ever overlapping: one line, one pass, one impression. It isn't a portrait of any single print; it's the printing logic itself, reduced to a mark small enough for a favicon and legible enough for a full page.",
+    "sectionResearch": "Research & Discovery",
+    "sectionTechnical": "Technical Highlights",
     "handColoringTitle": "Hand-Coloring the Layers",
     "handColoringText1": "The core animation on this site shows color layers stacking to form a complete print, just as a real Edo-period printer would have pressed each woodblock in sequence. To build this, I needed images of each individual color layer: the red pigment areas on one layer, green foliage on another, gold accents on a third.",
     "handColoringText2": "These assets do not exist in any dataset. I tried AI image generation, but it could not produce layers with the color accuracy and edge precision required to align and stack convincingly. So I did what a printer would have done: I separated the colors by hand.",
@@ -594,6 +596,7 @@
         ]
       ]
     ],
+    "rowLabels": { "overview": "Overview", "process": "Process", "credit": "Credit" },
     "overviewCatch": "Making a company site and a shop into one store.",
     "overview": [
       "Nakahatsu Shoten makes soy sauce and miso in Kanazawa. It was founded in 1896 as a food retailer and later moved into brewing.",

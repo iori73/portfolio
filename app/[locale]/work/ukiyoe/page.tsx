@@ -172,7 +172,7 @@ const UkiyoePage: React.FC = () => {
             {/* 1. Overview */}
             <section id="overview" className="w-full mx-auto py-12 md:py-16 text-ink-secondary scroll-mt-32">
               <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
-                Overview
+                {t('work.overview')}
               </h2>
               <p className={`mb-4 ${bodyTextClass}`}>{t('ukiyoe.overviewText1')}</p>
               <p className={`mb-6 ${bodyTextClass}`}>{t('ukiyoe.overviewText2')}</p>
@@ -211,7 +211,7 @@ const UkiyoePage: React.FC = () => {
             {/* 2. Research & Discovery */}
             <section id="research" className="py-12 md:py-20 scroll-mt-32">
               <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
-                Research &amp; Discovery
+                {t('ukiyoe.sectionResearch')}
               </h2>
               <p className={`mb-10 md:mb-14 text-ink-secondary ${bodyTextClass}`}>
                 {t('ukiyoe.researchIntro')}
@@ -274,7 +274,7 @@ const UkiyoePage: React.FC = () => {
             {/* 3. Design Process */}
             <section id="design-process" className="py-12 md:py-20 scroll-mt-32">
               <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
-                Design Process
+                {t('work.designProcess')}
               </h2>
               <p className={`mb-10 md:mb-14 text-ink-secondary ${bodyTextClass}`}>
                 {t('ukiyoe.designProcessIntro')}
@@ -431,7 +431,7 @@ const UkiyoePage: React.FC = () => {
             {/* 6. Technical Highlights */}
             <section id="technical" className="py-12 md:py-20 scroll-mt-32">
               <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
-                Technical Highlights
+                {t('ukiyoe.sectionTechnical')}
               </h2>
               <p className={`mb-10 md:mb-14 text-ink-secondary ${bodyTextClass}`}>
                 {t('ukiyoe.technicalIntro')}
@@ -476,7 +476,7 @@ const UkiyoePage: React.FC = () => {
             {/* 7. Reflection */}
             <section id="reflection" className="py-12 md:py-20 scroll-mt-32">
               <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
-                Reflection
+                {t('work.reflection')}
               </h2>
               <div className="mb-10 md:mb-14">
                 <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
@@ -505,12 +505,12 @@ const UkiyoePage: React.FC = () => {
               <ul className="space-y-3">
                 <li>
                   <button onClick={() => scrollToSection('overview')} className={sidebarButtonClass('overview')}>
-                    Overview
+                    {t('work.overview')}
                   </button>
                 </li>
                 <li>
                   <button onClick={() => scrollToSection('research')} className={sidebarButtonClass('research')}>
-                    Research
+                    {t('ukiyoe.sectionResearch')}
                   </button>
                 </li>
                 <li>
@@ -518,7 +518,7 @@ const UkiyoePage: React.FC = () => {
                     onClick={() => scrollToSection('design-process')}
                     className={sidebarButtonClass('design-process')}
                   >
-                    Design Process
+                    {t('work.designProcess')}
                   </button>
                 </li>
                 <li>
@@ -526,7 +526,7 @@ const UkiyoePage: React.FC = () => {
                     onClick={() => scrollToSection('hand-coloring')}
                     className={sidebarButtonClass('hand-coloring')}
                   >
-                    Hand-Coloring
+                    {t('ukiyoe.handColoringTitle')}
                   </button>
                 </li>
                 <li>
@@ -534,12 +534,12 @@ const UkiyoePage: React.FC = () => {
                     onClick={() => scrollToSection('ai-craft')}
                     className={sidebarButtonClass('ai-craft')}
                   >
-                    AI &amp; Craft
+                    {t('ukiyoe.aiCraftTitle')}
                   </button>
                 </li>
                 <li>
                   <button onClick={() => scrollToSection('technical')} className={sidebarButtonClass('technical')}>
-                    Technical
+                    {t('ukiyoe.sectionTechnical')}
                   </button>
                 </li>
                 <li>
@@ -547,7 +547,7 @@ const UkiyoePage: React.FC = () => {
                     onClick={() => scrollToSection('reflection')}
                     className={sidebarButtonClass('reflection')}
                   >
-                    Reflection
+                    {t('work.reflection')}
                   </button>
                 </li>
               </ul>
