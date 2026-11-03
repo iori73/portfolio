@@ -160,6 +160,7 @@ function ParallaxVideo({ label, note }: { label: string; note: string }) {
   );
 }
 
+type RingFig = { lead: string; title: string; leadText: string; rest: string[]; note: string; alt: string };
 type RejFig = { lead: string; groups: [string, string][]; note: string; alts: string[] };
 
 /** 没にした About の案（醸造家として）8案。グループごとに、左に説明、右に画像（スマートフォンは説明のあとに2列）。人物の写真は灰色に置換済み。 */
@@ -224,6 +225,26 @@ function TopIterFigure({ f }: { f: IterFig }) {
           </div>
         </div>
       ))}
+      <p className="text-caption text-ink-tertiary">{f.note}</p>
+    </figure>
+  );
+}
+
+/** 製法へのこだわりの「5 つの丸の環」。「醸造家として」の没案の図（RejectedFigure）の置き換え。仕込みの丸は、人物が写るため灰色。文章は先方の原稿のまま */
+function ProcessRingFigure({ f, lang, headingClass, bodyClass }: { f: RingFig; lang: string; headingClass: string; bodyClass: string }) {
+  return (
+    <figure aria-label={f.alt} className="flex w-full flex-col gap-6 rounded-media border border-[var(--nk-border)] bg-white p-4 md:gap-7 md:p-8">
+      <p className="text-caption text-ink-secondary">{f.lead}</p>
+      <div className="flex flex-col items-center gap-6 md:flex-row md:gap-10">
+        <Image src={`/work/nakahatsu/process-ring-${lang === 'jp' ? 'jp' : 'en'}.webp`} alt={f.alt} width={1440} height={1442} className="h-auto w-full max-w-[420px] md:w-[46%]" />
+        <div className="flex min-w-0 flex-1 flex-col gap-4">
+          <h4 className={`text-body-lg font-medium text-ink ${headingClass}`}>{f.title}</h4>
+          <p className={`${bodyClass} font-medium`}>{f.leadText}</p>
+          {f.rest.map((p) => (
+            <p key={p} className={bodyClass}>{p}</p>
+          ))}
+        </div>
+      </div>
       <p className="text-caption text-ink-tertiary">{f.note}</p>
     </figure>
   );
@@ -415,7 +436,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                   </div>
                   {/* About「醸造家として」のパララックスの録画。About の前後の図の直後。キャプションは置かず、aria-label に説明を入れる */}
                   <ParallaxVideo label={t('parallaxVideoAlt')} note={t('parallaxVideoNote')} />
-                  <RejectedFigure f={t.raw('rejFig') as RejFig} />
+                  <ProcessRingFigure f={t.raw('ringFig') as RingFig} lang={language} headingClass={getHeadingFontClass()} bodyClass={body} />
                 </div>
               ) : s.fig === 'bilingual-3lang' ? null /* ヒーローの3言語の図は、注釈「見せない」（2026-10-30）で外した。下の商品一覧の図だけ出す */ : (
                 <div className={`flex justify-center`}>

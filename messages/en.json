@@ -730,6 +730,18 @@
     "dsAlt": "The design system of the store theme. Fonts: Shippori Mincho for headings and body, Noto Serif JP for accents, Roboto for Latin text. It lists the type sizes, the colors (text, yellow accent, border, surface, bengara) and the spacing from 8 to 80 px.",
     "v1v2TallAlt": "The top pages of v1 and v2 side by side, as longer screenshots. On the left, v1 reproduces the structure of the existing site; on the right, v2 is the redesign. v2 continues from the hero through the news, the company introduction and three photos to the heading of the brewing section.",
     "igAlt": "Four activities seen in the Instagram posts of Nakahatsu Shoten. May 2024: a permanent spot in the Ishikawa Good Products corner at Muji. September 2024: a fermentation culture and arts festival venue in Kanazawa. April 2025 and February 2026: overseas visitors try making miso. March 2026: nursery school children in a visiting miso-making class. The source is the shop's Instagram posts.",
+    "ringFig": {
+      "lead": "For the process photos, I prepared three ways to show them (the current layout, a circular ring, and a straight line), and the client chose the ring. They then asked to shorten the last part of the ring, so I showed three options as videos. The client replied that they liked the third one, where lines grow from the center. The store site now uses that form.",
+      "title": "Our Brewing Process",
+      "leadText": "Both the soy sauce and the miso that bear the Tenyu name (\"a gift from heaven\") are made without a single food additive.",
+      "rest": [
+        "Adding nothing extra. Using only carefully chosen ingredients. Brewing in the oldest, most natural way possible. Since our founding, that is what we have committed to so that you can eat with peace of mind.",
+        "From preparing the grain to making kōji, mashing, fermenting, aging, pressing, and finishing: every step happens in our own brewery, under our own care.",
+        "We listen to the soy sauce and miso as they brew. We take the time that mass production cannot afford, and we keep working by hand."
+      ],
+      "note": "Photos showing people are replaced with a gray circle. The English text is my translation of the client's Japanese text, not yet checked by the client.",
+      "alt": "The five brewing steps shown as round photos arranged in a ring. Five lines grow from a purple circle at the center. Clockwise from the top: preparation, kōji making, mashing, fermenting and aging, and pressing. The mashing photo shows a person, so it is a gray circle."
+    },
     "rejFig": {
       "lead": "I made eight designs for the As Brewers section, in three different directions. The one I adopted has no photo or illustration, only a heading and body text on a black band.",
       "groups": [
