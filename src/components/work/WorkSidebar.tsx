@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 export type SidebarItem = { id: string; label: string; subs?: { id: string; label: string }[] };
 
 /**
- * 作品ページの側面メニュー（サイドバー）。全作品ページで同じ見た目・同じ動きにする（幅 200px、文字サイズ、強調、小見出しの出し方）。
+ * 作品ページの側面メニュー（サイドバー）。全作品ページで同じ見た目・同じ動きにする（幅 224px、文字サイズ（見出し 18px・小見出し 15px）、強調、小見出しの出し方）。
  * - 項目の文言は、本文の見出しと同じ翻訳キーから出す（ページ側で `label` に渡す）。
  * - 開いている節（スクロール位置）の下にだけ、小見出し（subs）を出す。
  * - 各項目の `id` は、本文の節・見出しの `id` と同じにする（`scroll-mt-28` 以上を付ける）。
@@ -50,7 +50,7 @@ export default function WorkSidebar({ items, ariaLabel }: { items: SidebarItem[]
               type="button"
               onClick={() => go(it.id)}
               aria-current={activeId === it.id ? 'true' : undefined}
-              className={`text-left text-body-sm font-medium leading-snug text-ink transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none ${activeId === it.id ? 'translate-x-[3px] opacity-100' : 'opacity-50 hover:opacity-80'}`}
+              className={`text-left text-body font-medium leading-snug text-ink transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none ${activeId === it.id ? 'translate-x-[3px] opacity-100' : 'opacity-50 hover:opacity-80'}`}
             >
               {it.label}
             </button>
@@ -69,7 +69,7 @@ export default function WorkSidebar({ items, ariaLabel }: { items: SidebarItem[]
                           type="button"
                           onClick={() => go(s.id)}
                           aria-current={activeSub === s.id ? 'true' : undefined}
-                          className={`text-left text-caption leading-snug text-ink transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none ${activeSub === s.id ? 'translate-x-[3px] opacity-100' : 'opacity-50 hover:opacity-80'}`}
+                          className={`text-left text-body-sm leading-snug text-ink transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none ${activeSub === s.id ? 'translate-x-[3px] opacity-100' : 'opacity-50 hover:opacity-80'}`}
                         >
                           {s.label}
                         </button>

@@ -1826,3 +1826,10 @@ Shopify のパスワードページは Shopify 側テンプレートなので、
 - 原因: sy だけ、節の見出しに小さい補助ラベル用の書式（text-body・太字・灰色の <p>）を使っていた。ほかの作品は <h2 class="text-title-lg">、その下の小見出しは <h3 class="text-title">。
 - サイト（NakahatsuSy.tsx）: Row の見出しを <h2 text-title-lg>（PC 32px / SP 26px、weight 500、黒）に。各手順の見出しを <h2 text-title-sm> から <h3 text-title>（PC 24px / SP 21px）に。計測（ukiyoe と同じ値）: h2 32/26px、h3 24/21px、weight 500、Noto Sans JP。横あふれ 0。
 - Figma（v2 の JP/EN、PC/SP の4フレーム）: 節の見出し（Overview / Process / Credit。JP は 概要 / プロセス / クレジット）を 32px（SP 26px）・Medium・本文の黒・行の高さ 120% に（EN は SF Pro）。手順の見出しと番号を 24px（SP 21px）に。デザインシステム図の中の小さなラベル（フォント、色など）は触っていない。
+
+## 2026-11-04 サイドバーの文字を大きく（全作品ページ共通）
+- 河野さんの指摘: サイドバーの文字が、本文の見出しや本文に比べて小さい（EN も JP も）。
+- 原因: 見出し 15px・小見出し 13px。本文は 21px、見出しは 24px / 32px（PC）だった。
+- 対応: WorkSidebar の見出しを text-body（PC 18px / 太さ Medium）、小見出しを text-body-sm（15px）に。文字が大きくなって折り返しが増えるため、WorkShell のサイドバー幅を 200px → 224px に（本文 1088 + 間隔 40 + サイドバー 224 = 1352px。1280px では本文 968px）。
+- 確認（localhost:3007、1440px / 1280px）: JP・EN の sy と ukiyoe の4ページで、サイドバー 224px、間隔 40px、見出し 18px、横あふれ 0。折り返しは sy EN が 1,2,2,2,2,2,1 行、ukiyoe JP の最長が 3 行（「ハンドカラーリング…」）。
+- Figma（v2 のサイドバー JP 690:767 / EN 690:775）: 幅 136→224px、文字 14→18px・Medium・行の高さ 137.5%、本文との間隔を 40px（x=1224）に。Figma の行数がサイトの実測と一致。
