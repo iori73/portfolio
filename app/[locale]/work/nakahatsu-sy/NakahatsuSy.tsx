@@ -82,7 +82,7 @@ function SystemFigure({ label, f }: { label: string; f: SystemFig }) {
   );
   const row = (name: string, children: React.ReactNode) => (
     <div className="flex flex-col gap-2 md:flex-row md:gap-5">
-      <p className="font-space-grotesk text-caption font-bold text-ink md:w-[112px] md:shrink-0 md:border-r md:border-ink/15 md:pr-4">{name}</p>
+      <p className="font-space-grotesk text-caption font-bold text-ink md:w-[112px] md:shrink-0">{name}</p>
       <div className="flex min-w-0 flex-col gap-3 rounded-md bg-[var(--nk-surface)] p-3.5 md:flex-1 md:px-5 md:py-[18px]">{children}</div>
     </div>
   );
@@ -113,7 +113,19 @@ function SystemFigure({ label, f }: { label: string; f: SystemFig }) {
           </ul>
           <div className="flex items-center gap-3">
             <span className="text-caption text-ink-tertiary">{f.lang}</span>
-            <Image src="/work/nakahatsu/lang-icons.png" alt={f.langAlt} width={691} height={81} className="h-5 w-auto" />
+            {/* 本物のサイトの言語切り替え（旗16px＋JP｜EN｜FR。この図では下線は付けない）と同じ形。画像でなく部品として組む */}
+            <ul aria-label={f.langAlt} className="flex items-center">
+              {[
+                { code: 'JP', flag: 'ja', current: true },
+                { code: 'EN', flag: 'us', current: false },
+                { code: 'FR', flag: 'fr', current: false },
+              ].map((l, i) => (
+                <li key={l.code} className={`relative flex items-center gap-2 px-1 py-0.5 ${i > 0 ? 'ml-1 pl-2 before:absolute before:left-0 before:top-1/2 before:h-4 before:w-px before:-translate-y-1/2 before:bg-ink/35' : ''}`}>
+                  <Image src={`/work/nakahatsu/flag-${l.flag}.svg`} alt="" width={16} height={16} className="h-4 w-4 shrink-0 rounded-full shadow-[0_0_0_1px_var(--nk-border)]" />
+                  <span className={`font-space-grotesk text-caption text-ink ${l.current ? 'font-semibold' : ''}`}>{l.code}</span>
+                </li>
+              ))}
+            </ul>
           </div>
           <p className="text-caption text-ink-tertiary">{f.d2}</p>
         </>,

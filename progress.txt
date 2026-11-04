@@ -1860,3 +1860,10 @@ Shopify のパスワードページは Shopify 側テンプレートなので、
 - 河野さんの指摘: サイドバーに項目が出ているので、本文の見出しの上の「2.」などの番号は不要。
 - サイト: NakahatsuSy.tsx のステップ見出しから `{i + 1}.` の段落を削除（JP・EN とも。id の step-N とサイドバーはそのまま）。
 - Figma: v2 の4フレーム（568:736 JP PC、568:1738 JP スマホ、568:2252 EN PC、568:2780 EN スマホ）の「Row/Step heading」内の番号テキスト20個を非表示にした（削除はしていない）。
+
+## 2026-11-04 夜（続き2）ステップ1の図: 言語切り替えを部品に、ロゴの背景を透明に、縦の棒を削除、説明文を Figma に合わせた
+- 河野さんの指示: (1) 3言語の画像（lang-icons.png）は画像でなく本物のサイトのように実装。(2) WordPress / EC-CUBE / Shopify のロゴの背景を透明に。(3) 行ラベル（リニューアル前／後）の右の縦の棒を削除（Figma も）。(4) JP に下線は不要。(5) 説明文は Figma の言葉に。
+- サイト（NakahatsuSy.tsx）: 言語を `<ul>`（旗 16px の丸＋JP/EN/FR。いまの言語＝JP は太字のみ、下線なし）で組んだ。旗は中初テーマの flag-ja/us/fr.svg を public/work/nakahatsu/ にコピー。lang-icons.png は参照しなくなった（ファイルは残してある）。行ラベルの `md:border-r` を削除。
+- ロゴ: logo-wordpress/eccube/shopify.png の薄灰色（#f5f5f5）を透明に（元は tmp/logo_bak に退避）。
+- 文言: jp.json の systemFig d1/d2 を「2つのシステムが別々に動いており、更新が二重になっていた」「1つのストアに全ての更新を集約」に。en.json も同じ意味に（Two systems ran separately, and updates were done twice / All updates consolidated into one store）。
+- Figma: v2 の図4つ（568:907、568:2399、568:1882、568:2924）の Line/Divider を非表示、EN の説明文2か所（568:2418、568:2491）とスマホの4か所を新しい文言に。Figma の言語の行・WordPress/Shopify のロゴはすでにベクター。EC-CUBE のロゴだけ画像（背景の扱いは未確認）。

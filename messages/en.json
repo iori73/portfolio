@@ -719,8 +719,8 @@
         "Policies"
       ],
       "lang": "3 languages",
-      "d1": "Two systems ran separately. Design and updates were done twice.",
-      "d2": "One store: design and updates in one place.",
+      "d1": "Two systems ran separately, and updates were done twice",
+      "d2": "All updates consolidated into one store",
       "langAlt": "Japanese, English and French"
     },
     "v1Label": "v1 (reproduces the existing site)",
