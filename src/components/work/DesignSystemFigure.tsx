@@ -73,9 +73,13 @@ export default function DesignSystemFigure({ f, label }: { f: DesignSystemData; 
                 </li>
               ))}
             </ul>
-            <div className="flex flex-col items-center gap-1.5" aria-hidden="true">
-              <span className="block h-[102px] w-32 border border-dashed border-ink/60 bg-white" />
-              <span className="block h-2 w-32 border-x border-b border-ink/60" />
+            {/* 本文の最大幅の図（Figma 586:861 の型）: 画面（1440x1024 の比率）を実線の枠で、内側の 1280 幅を点線のガイドで示し、
+                ガイドの幅に合わせた目盛りの下に「1280」。地は透明（図の面の色が見える）。 */}
+            <div className="flex w-36 flex-col items-center gap-1" aria-hidden="true">
+              <span className="relative block h-[102px] w-full rounded-[2px] border-2 border-[#212629]">
+                <span className="absolute inset-y-0 left-[6px] right-[6px] border-x border-dashed border-[#21272a]" />
+              </span>
+              <span className="block h-2 w-32 border-x border-b border-[#6b665c]" />
               <span className="text-body-sm text-ink-tertiary">{f.maxWidth}</span>
             </div>
           </div>
