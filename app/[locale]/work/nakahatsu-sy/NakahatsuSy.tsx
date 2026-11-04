@@ -369,7 +369,6 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
             <div key={s.h} id={`step-${i + 1}`} className="flex scroll-mt-28 flex-col gap-10 md:gap-10">
               <div className="flex flex-col">
                 <div className="flex min-w-0 flex-col gap-3">
-                  <p className={`text-title text-ink-tertiary ${getHeadingFontClass()}`}>{i + 1}.</p>
                   <h3 className={`text-title text-ink ${getHeadingFontClass()}`}>{s.h}</h3>
                   {s.fig === 'about-tenyu' && <h3 className={`text-body-lg font-medium text-ink ${getHeadingFontClass()}`}>{t('topSub')}</h3>}
                   {s.p.map((p) => (
