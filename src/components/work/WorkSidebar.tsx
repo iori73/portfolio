@@ -44,29 +44,40 @@ export default function WorkSidebar({ items, ariaLabel }: { items: SidebarItem[]
       <ul className="flex flex-col gap-3">
         {items.map((it) => (
           <li key={it.id}>
+            {/* 切り替わりをやわらかくする: 太さは固定（切り替わりで文字幅・折り返しが動かないように）、
+                濃さと 3px の横移動を 300ms で変える。「動きを減らす」設定では動かさない。 */}
             <button
               type="button"
               onClick={() => go(it.id)}
               aria-current={activeId === it.id ? 'true' : undefined}
-              className={`text-left text-body-sm leading-snug transition-opacity ${activeId === it.id ? 'font-medium text-ink' : 'text-ink opacity-50 hover:opacity-80'}`}
+              className={`text-left text-body-sm font-medium leading-snug text-ink transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none ${activeId === it.id ? 'translate-x-[3px] opacity-100' : 'opacity-50 hover:opacity-80'}`}
             >
               {it.label}
             </button>
-            {activeId === it.id && it.subs?.length ? (
-              <ul className="ml-1 mt-2 flex flex-col gap-2 border-l border-line-section pl-3">
-                {it.subs.map((s) => (
-                  <li key={s.id}>
-                    <button
-                      type="button"
-                      onClick={() => go(s.id)}
-                      aria-current={activeSub === s.id ? 'true' : undefined}
-                      className={`text-left text-caption leading-snug transition-opacity ${activeSub === s.id ? 'text-ink' : 'text-ink opacity-50 hover:opacity-80'}`}
-                    >
-                      {s.label}
-                    </button>
-                  </li>
-                ))}
-              </ul>
+            {/* 小見出しは、開いている節の下にだけ。grid の行の高さ 0fr→1fr で、すっと開閉する */}
+            {it.subs?.length ? (
+              <div
+                className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out motion-reduce:transition-none ${activeId === it.id ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
+                inert={activeId !== it.id}
+                aria-hidden={activeId !== it.id}
+              >
+                <div className="min-h-0 overflow-hidden">
+                  <ul className="ml-1 mt-2 flex flex-col gap-2 border-l border-line-section pl-3">
+                    {it.subs.map((s) => (
+                      <li key={s.id}>
+                        <button
+                          type="button"
+                          onClick={() => go(s.id)}
+                          aria-current={activeSub === s.id ? 'true' : undefined}
+                          className={`text-left text-caption leading-snug text-ink transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none ${activeSub === s.id ? 'translate-x-[3px] opacity-100' : 'opacity-50 hover:opacity-80'}`}
+                        >
+                          {s.label}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             ) : null}
           </li>
         ))}

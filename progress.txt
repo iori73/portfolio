@@ -1808,3 +1808,10 @@ Shopify のパスワードページは Shopify 側テンプレートなので、
 - 方法: ローカルのプレビュー（shopify theme dev、パスワードなし）を、ページの時間を 1/16 に遅くして（CDP Animation.setPlaybackRate、setTimeout の遅延 ×16、動画の再生速度 1/16）、dpr 2（2560x1440）のスクリーンショットを連続で撮り、実際の時刻（経過 × 1/16）で 30fps に揃えた。画面の大きさは 1280x720 のままなのでレイアウトは変わらない。
 - 結果: public/work/nakahatsu/loading-anim.mp4 を 1280x720（約 190KB）→ 2560x1440、6.8 秒、30fps（約 0.95MB）。poster も 2560 幅から作り直し。環の縁がくっきり（旧は階段状ににじむ）。旧版は job の tmp（loadvid/loading-anim.orig.mp4）に残る。
 - スクリプト: job の tmp の loadvid/rec_slow.mjs, install_hi.sh。画面録画の CDP スクリーンキャストは CSS ピクセル（1280x720）までしか出ないので使えない。仮想時間（setVirtualTimePolicy）は読み込みで固まる。
+
+## 2026-11-04 サイドバーの切り替えに、やわらかい動きを追加／河野さんの決定
+- 河野さんの指摘: スクロールで見出しのフォーカスが変わるとき、サイドバーが機械的に切り替わる。subtle な transition を入れてほしい。
+- 対応（src/components/work/WorkSidebar.tsx、全作品ページ共通）: 太さは固定（font-medium）にして、濃さ（opacity 1 ↔ 0.5）と 3px の横移動を 300ms ease-out で変える。太さの切り替えをやめたのは、切り替わる瞬間に文字幅が変わって折り返しが動くため。小見出しは、grid の行の高さ 0fr→1fr と opacity で、すっと開閉（閉じている間は inert / aria-hidden でキーボードが入らない）。motion-reduce では動かさない。
+- 確認（localhost:3007、1440px）: 切り替え 100ms 後の濃さが 0.69〜0.81 の途中値、小見出しの高さが 0→92→160px と開く、閉じた状態は 0px（行間は元のまま）。ukiyoe（小見出しあり）と nakahatsu-sy の両方。
+- 河野さんの決定: (1) JP ページでも、メタ情報の英語ラベル（Client / Role / Timeline / My Skills / Type / Deliverables）はずっと英語のまま。日本語にしない。(2) ukiyoe の JP 見出し「リサーチと発見」「技術面のポイント」は OK。(3) sy の Figma のサイドバー用フレーム（幅 1280）は、このままで問題なし。
+- メモ: 前回の報告の「冒頭の巻物の演出（A案）」は、記録（docs/progress/メモリ/テーマのリポジトリ）に見つからなかった。私の言い方が不正確だった可能性があり、河野さんに「どこ」と聞かれて確認中。
