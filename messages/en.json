@@ -565,7 +565,7 @@
     "moreLink": "Read the detailed version"
   },
   "nakahatsuSy": {
-    "kicker": "Rebuilding a Shopify store",
+    "kicker": "Opening a Shopify store",
     "title": "Nakahatsu Shoten Website",
     "meta": [
       [
@@ -839,7 +839,7 @@
     "v1v2FullNote": "Photos of people and sample (placeholder) images are replaced with gray boxes.",
     "loadingVideoAlt": "A recording of the loading animation. A yellow ring appears on a dark screen, the Tenyu logo fades in inside it, and the screen changes to the top page hero. About 7 seconds.",
     "parallaxVideoAlt": "A recording of the As Brewers section of the About page while scrolling. The photos move slightly inside their frames.",
-    "parallaxVideoNote": "",
+    "parallaxVideoNote": "I applied a parallax effect to the As Brewers section of the About page. As you scroll, the photos shift slightly inside their frames.",
     "aboutText": "The old About page was mostly text, with photographs sized to sit beside it. In the new About page, each section carries a photograph or a figure, placed large, that matches what the section wants to say. The brewers are shown through photographs of their work, and the ingredients through a map of where they come from, so that each point can be seen at a glance. The page can be read to the end as one story.",
     "topIter": {
       "lead": "I redesigned the About section of the home page twice. There are nine designs I did not use, in two directions. The one I used places two photographs of the building side by side.",

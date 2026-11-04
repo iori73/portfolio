@@ -135,11 +135,12 @@ function SystemFigure({ label, f }: { label: string; f: SystemFig }) {
 }
 
 /** About「醸造家として」のパララックスの録画。無音・ループ。止められるボタンつき（ControlledVideo）。実物の写真のまま（先方の許可を取ってから公開する。2026-11-01 河野の指示）。 */
-function ParallaxVideo({ label, note, pauseLabel, playLabel }: { label: string; note: string; pauseLabel: string; playLabel: string }) {
+function ParallaxVideo({ label, note, noteClass, pauseLabel, playLabel }: { label: string; note: string; noteClass: string; pauseLabel: string; playLabel: string }) {
   return (
-    <figure className="flex w-full flex-col gap-2">
+    <figure className="flex w-full flex-col gap-3">
+      {/* 動画の解説は、動画の上に1〜2文で置く（2026-11-04 河野の指示） */}
+      {note ? <p className={noteClass}>{note}</p> : null}
       <ControlledVideo src="/work/nakahatsu/about-parallax.mp4" poster="/work/nakahatsu/about-parallax-poster.webp" label={label} pauseLabel={pauseLabel} playLabel={playLabel} width={1280} height={720} />
-      {note ? <p className="text-body-sm text-ink-tertiary">{note}</p> : null}
     </figure>
   );
 }
@@ -421,7 +422,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                     after={{ src: `/work/nakahatsu/about-ba-${language === 'jp' ? 'jp' : 'en'}-r.webp`, width: 600, height: 1756, label: t('afterLabel') }}
                   />
                   {/* About「醸造家として」のパララックスの録画。About の前後の図の直後。キャプションは置かず、aria-label に説明を入れる */}
-                  <ParallaxVideo label={t('parallaxVideoAlt')} note={t('parallaxVideoNote')} pauseLabel={t('videoPause')} playLabel={t('videoPlay')} />
+                  <ParallaxVideo label={t('parallaxVideoAlt')} note={t('parallaxVideoNote')} noteClass={body} pauseLabel={t('videoPause')} playLabel={t('videoPlay')} />
                   <ProcessIterationsFigure f={t.raw('iterFig') as IterProcFig} />
                 </div>
               ) : s.fig === 'before-after' ? null /* ステップ2の上側の「リニューアル前→後」の図（before-after-*）は、Figma の v2 で非表示にしたため載せない（2026-11-04。画像ファイルは残してある）。下の v1/v2 の長い図だけ出す */ : s.fig === 'bilingual-3lang' ? null /* ヒーローの3言語の図は、注釈「見せない」（2026-10-30）で外した。下の商品一覧の図だけ出す */ : (

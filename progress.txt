@@ -1867,3 +1867,8 @@ Shopify のパスワードページは Shopify 側テンプレートなので、
 - ロゴ: logo-wordpress/eccube/shopify.png の薄灰色（#f5f5f5）を透明に（元は tmp/logo_bak に退避）。
 - 文言: jp.json の systemFig d1/d2 を「2つのシステムが別々に動いており、更新が二重になっていた」「1つのストアに全ての更新を集約」に。en.json も同じ意味に（Two systems ran separately, and updates were done twice / All updates consolidated into one store）。
 - Figma: v2 の図4つ（568:907、568:2399、568:1882、568:2924）の Line/Divider を非表示、EN の説明文2か所（568:2418、568:2491）とスマホの4か所を新しい文言に。Figma の言語の行・WordPress/Shopify のロゴはすでにベクター。EC-CUBE のロゴだけ画像（背景の扱いは未確認）。
+
+## 2026-11-04 夜（続き3）小見出し「Shopify ストア開設」／動画の上の説明文／3ページ比較の SY 列を撮り直し
+- 小見出し: jp「Shopify ストアの作り直し」→「Shopify ストア開設」、en「Rebuilding a Shopify store」→「Opening a Shopify store」。Figma v2 の4フレーム（568:747、568:1748、568:2262、568:2790）も同じに。
+- 動画の説明文: About「醸造家として」のパララックスの動画の上に、1〜2文を置いた（jp「About ページの「醸造家として」の節に、パララックス効果を適用しました。スクロールに合わせて、写真が枠の中で少しずれて動きます。」／en は同じ意味）。ParallaxVideo は note を動画の上に出し、書体は本文と同じ（noteClass で渡す）。Figma は4フレームの「Video/Parallax As Brewers」の直前に Text/Video note（739:767、740:767、740:768、740:769）。
+- Figma の「3ページ比較」718:767 の SY 列（718:776）は、古い画像（番号・棒・上側の図つき）のままだったため、現在のサイトを 1280px で撮り直して差し替え（8枚、最後の1枚は高さ 77、列の高さ 16877）。Figma のアップロードが 503/504 で不安定なため、失敗分は再送。
