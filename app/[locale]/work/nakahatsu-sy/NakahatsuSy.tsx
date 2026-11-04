@@ -278,7 +278,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
   /** 見出し（ラベル）は本文の上に縦に並べる（ほかの作品ページと同じ。PC もスマホも同じ並び）。 */
   const Row = ({ id, label, children }: { id?: string; label: string; children: React.ReactNode }) => (
     <section id={id} className="flex scroll-mt-28 flex-col gap-4 md:gap-6">
-      <p className={LABEL}>{label}</p>
+      <h2 className={`text-title-lg ${getHeadingFontClass()}`}>{label}</h2>
       <div className="flex min-w-0 flex-col gap-4">{children}</div>
     </section>
   );
@@ -376,7 +376,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
               <div className="flex flex-col">
                 <div className="flex min-w-0 flex-col gap-3">
                   <p className={`text-title text-ink-tertiary ${getHeadingFontClass()}`}>{i + 1}.</p>
-                  <h2 className={`text-title-sm text-ink ${getHeadingFontClass()}`}>{s.h}</h2>
+                  <h3 className={`text-title text-ink ${getHeadingFontClass()}`}>{s.h}</h3>
                   {s.fig === 'about-tenyu' && <h3 className={`text-body-lg font-medium text-ink ${getHeadingFontClass()}`}>{t('topSub')}</h3>}
                   {s.p.map((p) => (
                     <p key={p} className={body}>{p}</p>

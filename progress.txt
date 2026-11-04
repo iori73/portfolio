@@ -1820,3 +1820,9 @@ Shopify のパスワードページは Shopify 側テンプレートなので、
 - 河野さんの指摘: ほかの作品ページは見出しの下に本文が来るのに、nakahatsu-sy だけ「見出し | 本文」の横並び。縦並びにすべき。
 - サイト（NakahatsuSy.tsx）: Row を常に縦（ラベル → 本文、間隔 PC 24px / SP 16px）。各ステップ・「上の図のあとの小見出し」の左の 280px の空き列と、末尾「他の作品を見る」の左の 312px の字下げを外した。本文は 1088px の全幅に流れる。確認: 1440px と 393px で、ラベルと本文の x が同じ（56 / 24）、横あふれ 0。
 - Figma（v2 の JP 568:736、EN 568:2252 の PC フレームだけ）: ラベル付きの行（Overview / Process / Credit）を VERTICAL・間隔 24、ラベルと本文を FILL に。ステップ行のラベル列の空き枠（Spacer/Label column）は非表示（JP 6、EN 6）。568:1050 の行（JP のトップ・About 見直し）も同様。文章は全幅に流れ直ることを確認。SP は元から縦なので変更なし。
+
+## 2026-11-04 nakahatsu-sy: 節の見出しを他の作品と同じ大きさ・書式に（サイトと Figma）
+- 河野さんの指摘: 見出し（概要など）が、なぜか小さい。他のワークと同じにしたい。
+- 原因: sy だけ、節の見出しに小さい補助ラベル用の書式（text-body・太字・灰色の <p>）を使っていた。ほかの作品は <h2 class="text-title-lg">、その下の小見出しは <h3 class="text-title">。
+- サイト（NakahatsuSy.tsx）: Row の見出しを <h2 text-title-lg>（PC 32px / SP 26px、weight 500、黒）に。各手順の見出しを <h2 text-title-sm> から <h3 text-title>（PC 24px / SP 21px）に。計測（ukiyoe と同じ値）: h2 32/26px、h3 24/21px、weight 500、Noto Sans JP。横あふれ 0。
+- Figma（v2 の JP/EN、PC/SP の4フレーム）: 節の見出し（Overview / Process / Credit。JP は 概要 / プロセス / クレジット）を 32px（SP 26px）・Medium・本文の黒・行の高さ 120% に（EN は SF Pro）。手順の見出しと番号を 24px（SP 21px）に。デザインシステム図の中の小さなラベル（フォント、色など）は触っていない。
