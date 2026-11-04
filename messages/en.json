@@ -754,10 +754,10 @@
       "lead": "The process section went through five forms before reaching the current ring of five circles. They are listed in time order.",
       "groups": [
         ["1. Around Oct 12: photo and text side by side", "I started with a large work photo on the left and the client's text on the right. The minutes of the Oct 6 meeting say the brewer section had too much text and felt heavy, so I would offer several layouts with large photos and white space."],
-        ["2. Around Oct 14: products and logo", "The logo and product images sit on the left, with a purple watercolor in the lower right. This is also the 'current' layout I showed the client. The process photos had not arrived yet (the client gathered them on Oct 25)."],
-        ["3. Two of the three forms I showed the client, not chosen", "A places the five circles on a circle, joined by a thin line. B places them in a straight line. I showed the client these two together with the current layout."],
-        ["4. Exploring the ring", "To refine the ring, I looked up the Japanese plum-blossom crest (umebachi mon), gathered the five circles like that crest, and made four variations of the lines and the dot."],
-        ["5. Final: a ring with lines from the center", "The client chose the ring and asked to shorten its last part. I showed three options as videos, and the client liked the third, with five lines growing from a center circle. I applied it on Nov 2."]
+        ["2. Around Oct 14: products and logo", "Respecting the packaging of the soy sauce and miso, this layout puts the purple background and the logo front and center. It is also the 'current' layout I showed the client. The process photos had not arrived yet (the client gathered them on Oct 25)."],
+        ["3. Two of the three forms I showed the client, not chosen", "Respecting the client's text, I proposed design patterns that make each step easy to understand, built from the process photos the client shared with me. A places the five circles on a circle, joined by a thin line. B places them in a straight line. I showed the client these two together with the current layout."],
+        ["4. Adding animation", "I added animation to the two options that were not chosen (the circle and the straight line), so that the flow of the steps comes across."],
+        ["5. Final: a ring with lines from the center", "Following the client's own idea, we settled on a design with animation based on the umebachi mon, the plum-blossom crest tied to Kanazawa. The client asked to shorten the last part of the ring, so I showed three options as videos, and the third, with five lines growing from a center circle, was chosen. I applied it on Nov 2."]
       ],
       "note": "The original photos showing people are not used here; other photos from the client stand in (kōji rice for the Oct 12 option, and a crop of only the hands and rice for the mashing circle). The text inside the images is the client's Japanese text.",
       "alts": [
@@ -765,11 +765,15 @@
         "Around Oct 14. The Tenyu logo and the soy sauce and miso products on the left, text on the right, a purple watercolor in the lower right.",
         "Option A, not chosen. Five circles on a circle, joined by a thin line. The mashing circle is a photo of hands and rice.",
         "Option B, not chosen. Five circles in a straight line. The mashing circle is a photo of hands and rice.",
-        "Ring exploration 1. Five circles gathered like the crest, with a dot at the end of a line.",
-        "Ring exploration 2. Five circles gathered like the crest, with a dot at the center.",
-        "Ring exploration 3. Five circles gathered like the crest, with the dot in a different place.",
-        "Ring exploration 4. Five circles gathered like the crest, with a center dot and the dot in a different place.",
+        "Ring exploration 1. Five circles gathered together,with a dot at the end of a line.",
+        "Ring exploration 2. Five circles gathered together,with a dot at the center.",
+        "Ring exploration 3. Five circles gathered together,with the dot in a different place.",
+        "Ring exploration 4. Five circles gathered together,with a center dot and the dot in a different place.",
         "Final. A ring with five lines growing from a purple center circle. The mashing circle is a photo of hands and rice."
+      ],
+      "videoAlts": [
+        "A video of option A, not chosen, with animation added. The five circles appear one after another along the ring while a small dot traces the ring.",
+        "A video of option B, not chosen, with animation added. The five circles appear one after another from the left on a straight line while a small dot travels along it."
       ]
     },
     "ringFig": {

@@ -192,8 +192,9 @@ function TopIterFigure({ f }: { f: IterFig }) {
 }
 
 /** 製法へのこだわりの変遷（5 場面）。「醸造家として」の没案の図（RejectedFigure）の置き換え。RejectedFigure と同じ作り。人物が写る部分は灰色に置き換えてある */
-function ProcessIterationsFigure({ f }: { f: IterProcFig }) {
-  const sets = [[1], [2], [3, 4], [5, 6, 7, 8], [9]];
+function ProcessIterationsFigure({ f, lang, pauseLabel, playLabel }: { f: IterProcFig & { videoAlts: string[] }; lang: string; pauseLabel: string; playLabel: string }) {
+  // 4. は、選ばれなかった2つ（円・一直線）にアニメーションを加えた2つ。直線（'vb'）は動画。円（7）の動画は、点の軌道を直したあとに差し替える（2026-11-04 河野の注釈）。
+  const sets: (number | 'vb')[][] = [[1], [2], [3, 4], [7, 'vb'], [9]];
   const ratio: Record<number, number> = { 1: 583, 2: 630, 3: 750, 4: 633, 5: 750, 6: 750, 7: 750, 8: 750, 9: 750 };
   return (
     <figure aria-label={f.lead} className="flex w-full flex-col gap-6 rounded-media border border-[var(--nk-border)] bg-white p-4 md:gap-7 md:p-8">
@@ -205,9 +206,23 @@ function ProcessIterationsFigure({ f }: { f: IterProcFig }) {
             <p className="text-body-sm text-ink-secondary">{f.groups[gi][1]}</p>
           </div>
           <div className={`grid min-w-0 flex-1 gap-2 bg-white p-2 md:gap-4 md:p-4 ${set.length === 1 ? 'grid-cols-1 justify-items-center' : 'grid-cols-2'}`}>
-            {set.map((n) => (
-              <Image key={n} src={`/work/nakahatsu/process-iter-${n}.webp`} alt={f.alts[n - 1]} width={1200} height={ratio[n]} className={`h-auto w-full rounded ${set.length === 1 ? 'md:max-w-[520px]' : ''}`} />
-            ))}
+            {set.map((n) =>
+              n === 'vb' ? (
+                <ControlledVideo
+                  key="vb"
+                  src={`/work/nakahatsu/ring-b-${lang === 'jp' ? 'jp' : 'en'}.mp4`}
+                  poster={`/work/nakahatsu/ring-b-${lang === 'jp' ? 'jp' : 'en'}-poster.webp`}
+                  label={f.videoAlts[1]}
+                  pauseLabel={pauseLabel}
+                  playLabel={playLabel}
+                  width={1280}
+                  height={676}
+                  startWhenVisible
+                />
+              ) : (
+                <Image key={n} src={`/work/nakahatsu/process-iter-${n}.webp`} alt={f.alts[n - 1]} width={1200} height={ratio[n]} className={`h-auto w-full rounded ${set.length === 1 ? 'md:max-w-[520px]' : ''}`} />
+              ),
+            )}
           </div>
         </div>
       ))}
@@ -423,7 +438,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                   />
                   {/* About「醸造家として」のパララックスの録画。About の前後の図の直後。キャプションは置かず、aria-label に説明を入れる */}
                   <ParallaxVideo label={t('parallaxVideoAlt')} note={t('parallaxVideoNote')} noteClass={body} pauseLabel={t('videoPause')} playLabel={t('videoPlay')} />
-                  <ProcessIterationsFigure f={t.raw('iterFig') as IterProcFig} />
+                  <ProcessIterationsFigure f={t.raw('iterFig') as IterProcFig & { videoAlts: string[] }} lang={language} pauseLabel={t('videoPause')} playLabel={t('videoPlay')} />
                 </div>
               ) : s.fig === 'before-after' ? null /* ステップ2の上側の「リニューアル前→後」の図（before-after-*）は、Figma の v2 で非表示にしたため載せない（2026-11-04。画像ファイルは残してある）。下の v1/v2 の長い図だけ出す */ : s.fig === 'bilingual-3lang' ? null /* ヒーローの3言語の図は、注釈「見せない」（2026-10-30）で外した。下の商品一覧の図だけ出す */ : (
                 <div className={`flex justify-center`}>
