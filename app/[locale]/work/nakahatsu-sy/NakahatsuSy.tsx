@@ -345,10 +345,10 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
             ))}
           </Row>
           {/* Instagram の投稿カードの図（ig-posts-*.webp）は、Figma の v2 で非表示にしたため載せない（JP は 2026-11-01 に、EN も同日に外した。画像ファイルは残してある） */}
-          {/* 上の図のあとに、投稿そのものの見た目（SP 幅のスクリーンショット）を並べた図。人物が写る写真は灰色に置き換え、載せない投稿は文字の枠。Figma の Instagram の図の下と同じ */}
+          {/* 上の図のあとに、投稿そのものの見た目（SP 幅のスクリーンショット）を並べた図。海外の投稿は5枚目（英語の手書きのノート）、一番右は園児の投稿（2026-11-04 に Figma に合わせた）。Figma の Instagram の図の下と同じ */}
           {(() => {
             const shots = t.raw('igShots') as { dates: string[]; alts: string[]; urls: string[]; linkLabel: string; textCard: string; note: string };
-            const files = ['muji', 'fest', 'overseas'];
+            const files = ['muji', 'fest', 'overseas', 'kids'];
             return (
               <figure className="flex w-full flex-col gap-4 rounded-media bg-[var(--nk-surface)] p-3 md:px-12 md:pb-6 md:pt-8">
                 <div className="grid grid-cols-2 gap-x-2 gap-y-4 md:grid-cols-4 md:gap-4">
@@ -360,12 +360,6 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                       </a>
                     </div>
                   ))}
-                  <div className="flex min-w-0 flex-col gap-1.5">
-                    <p className="font-space-grotesk text-caption font-bold text-ink-tertiary">{shots.dates[3]}</p>
-                    <div className="flex flex-1 items-center rounded-md bg-white p-3 md:p-4">
-                      <p className="text-caption text-ink-secondary">{shots.textCard}</p>
-                    </div>
-                  </div>
                 </div>
                 <p className="text-caption text-ink-tertiary">{shots.note}</p>
               </figure>
@@ -419,17 +413,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                   <ParallaxVideo label={t('parallaxVideoAlt')} note={t('parallaxVideoNote')} pauseLabel={t('videoPause')} playLabel={t('videoPlay')} />
                   <ProcessIterationsFigure f={t.raw('iterFig') as IterProcFig} />
                 </div>
-              ) : s.fig === 'before-after' ? (
-                <div className="flex justify-center">
-                  <div className="w-full overflow-hidden rounded-media bg-[var(--nk-surface)] p-4 md:w-[760px] md:p-8">
-                    <BeforeAfterPair
-                      label={s.cap}
-                      before={{ src: `/work/nakahatsu/before-after-${language === 'jp' ? 'jp' : 'en'}-l.webp`, width: 553, height: 577, label: t('beforeLabel') }}
-                      after={{ src: `/work/nakahatsu/before-after-${language === 'jp' ? 'jp' : 'en'}-r.webp`, width: 553, height: 577, label: t('afterLabel') }}
-                    />
-                  </div>
-                </div>
-              ) : s.fig === 'bilingual-3lang' ? null /* ヒーローの3言語の図は、注釈「見せない」（2026-10-30）で外した。下の商品一覧の図だけ出す */ : (
+              ) : s.fig === 'before-after' ? null /* ステップ2の上側の「リニューアル前→後」の図（before-after-*）は、Figma の v2 で非表示にしたため載せない（2026-11-04。画像ファイルは残してある）。下の v1/v2 の長い図だけ出す */ : s.fig === 'bilingual-3lang' ? null /* ヒーローの3言語の図は、注釈「見せない」（2026-10-30）で外した。下の商品一覧の図だけ出す */ : (
                 <div className={`flex justify-center`}>
                   <div className={`w-full overflow-hidden rounded-media bg-[var(--nk-surface)] ${i % 2 === 1 ? 'md:w-[760px]' : ''}`}>
                     <Image src={`/work/nakahatsu/${s.fig === 'before-after' ? `before-after-${language === 'jp' ? 'jp' : 'en'}` : s.fig}.webp`} alt={s.cap} width={1200} height={675} className="h-auto w-full" />
