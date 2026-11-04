@@ -275,11 +275,11 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
   const body = `${getBodyFontClass()} tracking-[0.2px] text-body-lg text-ink [text-wrap:pretty]`;
   const catchLine = `text-title text-ink ${getHeadingFontClass()} [text-wrap:balance]`;
 
-  /** PC は「ラベル | 本文」の2カラム、SP は縦に積む。 */
+  /** 見出し（ラベル）は本文の上に縦に並べる（ほかの作品ページと同じ。PC もスマホも同じ並び）。 */
   const Row = ({ id, label, children }: { id?: string; label: string; children: React.ReactNode }) => (
-    <section id={id} className="flex scroll-mt-28 flex-col gap-4 md:flex-row md:gap-8">
-      <p className={`${LABEL} md:w-[280px] md:shrink-0`}>{label}</p>
-      <div className="flex min-w-0 flex-col gap-4 md:flex-1">{children}</div>
+    <section id={id} className="flex scroll-mt-28 flex-col gap-4 md:gap-6">
+      <p className={LABEL}>{label}</p>
+      <div className="flex min-w-0 flex-col gap-4">{children}</div>
     </section>
   );
 
@@ -373,9 +373,8 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
           })()}
           {steps.map((s, i) => (
             <div key={s.h} id={`step-${i + 1}`} className="flex scroll-mt-28 flex-col gap-10 md:gap-10">
-              <div className="flex flex-col md:flex-row md:gap-8">
-                <div className="hidden md:block md:w-[280px] md:shrink-0" aria-hidden="true" />
-                <div className="flex min-w-0 flex-col gap-3 md:flex-1">
+              <div className="flex flex-col">
+                <div className="flex min-w-0 flex-col gap-3">
                   <p className={`text-title text-ink-tertiary ${getHeadingFontClass()}`}>{i + 1}.</p>
                   <h2 className={`text-title-sm text-ink ${getHeadingFontClass()}`}>{s.h}</h2>
                   {s.fig === 'about-tenyu' && <h3 className={`text-body-lg font-medium text-ink ${getHeadingFontClass()}`}>{t('topSub')}</h3>}
@@ -405,9 +404,8 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                     after={{ src: `/work/nakahatsu/top-ba-${language === 'jp' ? 'jp' : 'en'}-r.webp`, width: 600, height: 975, label: t('afterLabel') }}
                   />
                   <TopIterFigure f={t.raw('topIter') as IterFig} />
-                  <div className="flex w-full flex-col md:flex-row md:gap-8">
-                    <div className="hidden md:block md:w-[280px] md:shrink-0" aria-hidden="true" />
-                    <div className="flex min-w-0 flex-col gap-3 md:flex-1">
+                  <div className="flex w-full flex-col">
+                    <div className="flex min-w-0 flex-col gap-3">
                       <h3 className={`text-body-lg font-medium text-ink ${getHeadingFontClass()}`}>{t('aboutSub')}</h3>
                       <p className={body}>{t('aboutText')}</p>
                     </div>
@@ -482,7 +480,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
           ))}
         </Row>
 
-        <section className="flex flex-col items-start gap-4 md:ml-[312px]">
+        <section className="flex flex-col items-start gap-4">
           <p className={body}>{t('moreText')}</p>
           <CTAButton href={localePath('/work/nakahatsu', language)}>{t('moreLink')}</CTAButton>
         </section>
