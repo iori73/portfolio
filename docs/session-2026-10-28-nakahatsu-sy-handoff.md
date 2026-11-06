@@ -31,12 +31,13 @@
 8. push・merge・PR は、指示があるまでしない（公開リポジトリ。merge＝公開）。
 9. Sample 透かしの写真の差し替えは、先方の最終確認が要る（今はできない）。
 
-**Claude が進められる**
-- Figma スマホ版（JP SP `568:1738`、EN SP `568:2780`）に、振り返り・もっと詳しく・デザインシステムの図の調整（PC のみ反映済み）。
-- `732:1000` の他の場面の文言（注釈つきの元。河野さんの注釈を含むので要相談）。
-- 比較フレーム `718:767` の SY 列の画像を撮り直し、凡例を付ける。
-- EN ページの目視確認（FB-2 後は JP のみ目視。EN は撮影のみ）。
-- 変更のたびに、先方用 PDF を作り直す（`~/.claude/jobs/5567ddb3/tmp/mkclientpdf.mjs`、dev サーバー `localhost:3007` が必要）。
+**Claude が進められる（2026-11-06 夜に全部実施済み）**
+- 済み: Figma スマホ版（JP SP `568:1738`、EN SP `568:2780`）に、振り返り・もっと詳しく・デザインシステムの図の調整（背景なし・17px・間隔）を反映。
+- 済み: 注釈つきの元 `732:1000` の文言をサイトと同じに（旧4の動画の組は3の行へ移動、旧4の場面と下の注記は非表示で Archive）。
+- 済み: 比較フレーム `718:767` の SY 列（`sy_0〜sy_7`）を最新のサイト（JP、1280px、高さ16860）で撮り直し、凡例（赤枠の意味）を追加。
+- 済み: EN ページの目視確認（概要・製法の変遷・デザインシステム・振り返り）。問題なし。
+- 済み: 先方用 PDF を作り直し、**軽量版**（`先方に見せる資料（掲載予定のページ）_軽量版.pdf`、約2.1MB、Ghostscript で画像を170ppiに）も同じ内容で作り直し。**PDF のタイトルブロック（作品名・Client/Role/Date/Team）が、`header` を全部隠す CSS のせいで抜けていたのを修正**（`~/.claude/jobs/5567ddb3/tmp/mkclientpdf.mjs`）。
+- これから: 河野さんの FB-3 が来たら、サイト → Figma（portfolio_v5 の PC・SP、JP・EN）→ PDF（通常版と軽量版）の順に直す。軽量版は `gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.6 -dNOPAUSE -dQUIET -dBATCH -dDownsampleColorImages=true -dColorImageResolution=170 -dColorImageDownsampleThreshold=1.0 -dAutoFilterColorImages=false -dColorImageFilter=/DCTEncode -dJPEGQ=80 -sOutputFile=<軽量版> <通常版>`。
 
 ### 記録の場所（全部この内容に更新済み）
 リポジトリ `docs/session-2026-10-28-nakahatsu-sy-handoff.md`（この節）、`progress.txt`、`lessons.md`、非公開 `iori73/portfolio-context`（`projects/nakahatsu/README.md`、同じ内容）、プロジェクトメモリ（`project_nakahatsu_case_study_state`、`feedback_sy_wording_1106`、`feedback_figma_only_portfolio_v5`、`feedback_dont_ask_obvious`）、`~/Desktop/nakahatsu-portfolio-preview/`（`00-最新状況（まずここ）.md`、`00-次にやること.md`、`claims-ledger.md`）、二拠点デイリーボード（`portfolio-case-study-decisions-2026-10-26`、`nakahatsu-state-2026-11-01-night`、`portfolio-client-ok-2026-10-26`）。
