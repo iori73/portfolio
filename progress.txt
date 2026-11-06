@@ -1335,3 +1335,18 @@ headed にすると通る。実機で4パターン総当たりして確認済み
 - 残り: @figma/code-connect（devDep、デプロイされない）経由の zod3/glob/minimatch、adm-zip の symlink 件（修正版なし）
 - 検証: build 成功、tsc エラーは main と同じ60件（既存）、next start でページ・API を確認
 - deepsec の AI レビューは有料のため実施しない（河野さん判断）。雛形は branch worktree-deepsec-init に残置
+
+## 2026-11-06: セキュリティの穴をふさぐ（Bot Protection を Challenge にしなくて済むように）
+
+- 方針: 検索・AI 検索・リクルーターの目に触れるよう、Vercel の Bot Protection は Log のままにする。
+  守りは Firewall ではなくコード側に持たせる。
+- next の更新は PR #108（15.5.29）と重なったため、マージ時に #108 側の package.json / lockfile を採用した。
+- `/api/podcast-notes/[id]`: 親が NOTION_PODCAST_DB_ID のページ以外は 404。以前は Notion 連携が読めるページなら
+  ID さえ分かれば何でも返せた。
+- `/api/img`: リダイレクトを追わない（許可ドメインの迂回を防ぐ）、ラスター画像だけ（SVG 不可）、
+  `default-src 'none'; sandbox` の CSP（next.config で全体の CSP より優先させる）、s-maxage で CDN キャッシュ。
+  サイト内からの利用はゼロ。削除するかは河野さんの判断待ち。
+- `/api/translate`（pages router）: 未使用・本番で 500 のまま、誰でも POST でディスク書き込み＋外部中継できる作りだった。
+  410 を返すだけにした（ファイルは残す）。
+- `/api/articles`: エラー時に error.message を返していたのを一般文言に。
+- 未確認: Notion 連携の権限が「読み取りのみ・ポッドキャスト DB だけ共有」になっているか（河野さん側）。
