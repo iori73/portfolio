@@ -206,7 +206,7 @@ function ProcessIterationsFigure({ f, lang, pauseLabel, playLabel }: { f: IterPr
             <p className="text-body font-bold text-ink">{f.groups[gi][0]}</p>
             <p className="text-body-sm text-ink-secondary">{f.groups[gi][1]}</p>
           </div>
-          <div className={`grid min-w-0 flex-1 gap-2 bg-white p-2 md:gap-4 md:p-4 ${set.length === 1 ? 'grid-cols-1 justify-items-center' : 'grid-cols-2'}`}>
+          <div className={`grid min-w-0 flex-1 gap-2 bg-white p-2 md:gap-4 md:p-4 ${set.length === 1 ? 'grid-cols-1 justify-items-start' : 'grid-cols-2'}`}>
             {set.map((n) =>
               typeof n === 'string' ? (
                 <ControlledVideo
@@ -221,7 +221,7 @@ function ProcessIterationsFigure({ f, lang, pauseLabel, playLabel }: { f: IterPr
                   startWhenVisible
                 />
               ) : (
-                <Image key={n} src={`/work/nakahatsu/process-iter-${n}.webp`} alt={f.alts[n - 1]} width={1200} height={ratio[n]} className={`h-auto w-full rounded ${set.length === 1 ? 'md:max-w-[520px]' : ''}`} />
+                <Image key={n} src={`/work/nakahatsu/process-iter-${n}.webp`} alt={f.alts[n - 1]} width={1200} height={ratio[n]} className={`h-auto w-full rounded ${set.length === 1 ? 'md:max-w-[560px]' : ''}`} />
               ),
             )}
           </div>
@@ -294,12 +294,14 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
   const steps = t.raw('steps') as Step[];
   const credit = t.raw('credit') as Credit[];
   const palette = t.raw('palette') as Palette;
-  const rl = t.raw('rowLabels') as { overview: string; process: string; credit: string };
+  const rl = t.raw('rowLabels') as { overview: string; process: string; credit: string; more: string };
   /** 側面メニュー（共通の WorkSidebar。1280px 以上）。項目は本文の見出しと同じ文言（概要・各ステップの見出し・クレジット）。Figma の Sidebar と同じ */
   const sidebarItems: SidebarItem[] = [
     { id: 'overview', label: rl.overview },
-    ...steps.map((st, i) => ({ id: `step-${i + 1}`, label: st.h })),
+    // 見出し（プロセス）＞ 小見出し（各ステップ）の2段。ukiyoe と同じ構造
+    { id: 'process', label: rl.process, subs: steps.map((st, i) => ({ id: `step-${i + 1}`, label: st.h })) },
     { id: 'credit', label: rl.credit },
+    { id: 'more', label: rl.more },
   ];
   const body = `${getBodyFontClass()} tracking-[0.2px] text-body-lg text-ink [text-wrap:pretty]`;
   const catchLine = `text-title text-ink ${getHeadingFontClass()} [text-wrap:balance]`;
@@ -399,7 +401,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
               <div className="flex flex-col">
                 <div className="flex min-w-0 flex-col gap-3">
                   <h3 className={`text-title text-ink ${getHeadingFontClass()}`}>{s.h}</h3>
-                  {s.fig === 'about-tenyu' && <h3 className={`text-body-lg font-medium text-ink ${getHeadingFontClass()}`}>{t('topSub')}</h3>}
+                  {s.fig === 'about-tenyu' && <h4 id="step-3-top" className={`scroll-mt-28 text-body-lg font-medium text-ink ${getHeadingFontClass()}`}>{t('topSub')}</h4>}
                   {s.p.map((p) => (
                     <p key={p} className={body}>{p}</p>
                   ))}
@@ -428,7 +430,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                   <TopIterFigure f={t.raw('topIter') as IterFig} />
                   <div className="flex w-full flex-col">
                     <div className="flex min-w-0 flex-col gap-3">
-                      <h3 className={`text-body-lg font-medium text-ink ${getHeadingFontClass()}`}>{t('aboutSub')}</h3>
+                      <h4 id="step-3-about" className={`scroll-mt-28 text-body-lg font-medium text-ink ${getHeadingFontClass()}`}>{t('aboutSub')}</h4>
                       <p className={body}>{t('aboutText')}</p>
                     </div>
                   </div>
@@ -439,6 +441,9 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                   />
                   {/* About「醸造家として」のパララックスの録画。About の前後の図の直後。キャプションは置かず、aria-label に説明を入れる */}
                   <ParallaxVideo label={t('parallaxVideoAlt')} note={t('parallaxVideoNote')} noteClass={body} pauseLabel={t('videoPause')} playLabel={t('videoPlay')} />
+                  <div className="flex w-full flex-col">
+                    <h4 id="step-3-process" className={`scroll-mt-28 text-body-lg font-medium text-ink ${getHeadingFontClass()}`}>{t('processSub')}</h4>
+                  </div>
                   <ProcessIterationsFigure f={t.raw('iterFig') as IterProcFig & { videoAlts: string[] }} lang={language} pauseLabel={t('videoPause')} playLabel={t('videoPlay')} />
                 </div>
               ) : s.fig === 'before-after' ? null /* ステップ2の上側の「リニューアル前→後」の図（before-after-*）は、Figma の v2 で非表示にしたため載せない（2026-11-04。画像ファイルは残してある）。下の v1/v2 の長い図だけ出す */ : s.fig === 'bilingual-3lang' ? null /* ヒーローの3言語の図は、注釈「見せない」（2026-10-30）で外した。下の商品一覧の図だけ出す */ : (
@@ -492,10 +497,12 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
           ))}
         </Row>
 
-        <section className="flex flex-col items-start gap-4">
+        <Row id="more" label={rl.more}>
           <p className={body}>{t('moreText')}</p>
-          <CTAButton href={localePath('/work/nakahatsu', language)}>{t('moreLink')}</CTAButton>
-        </section>
+          <div className="flex items-start">
+            <CTAButton href={localePath('/work/nakahatsu', language)}>{t('moreLink')}</CTAButton>
+          </div>
+        </Row>
       </div>
       </WorkShell>
     </div>

@@ -445,7 +445,7 @@
   "nakahatsu": {
     "title": "Nakahatsu Shoten Website",
     "subtitle": "A Kanazawa soy sauce and miso maker's company site and shop, rebuilt as one Shopify store",
-    "overviewText1": "Nakahatsu Shoten (株式会社中初商店) makes soy sauce and miso in Kanazawa. It was founded in 1896 as a food retailer and later moved into brewing. Online, the business ran two separate systems: a WordPress site for the company and an EC-CUBE shop. The designs and navigation did not match, and updates had to be made in two places.",
+    "overviewText1": "Nakahatsu Shoten (株式会社中初商店) is a soy sauce and miso brewery in Kanazawa. It was founded in 1896 as a food retailer and later moved into brewing. Online, the business ran two separate systems: a WordPress site for the company and an EC-CUBE shop. The designs and navigation did not match, and updates had to be made in two places.",
     "overviewText2": "I took the project on as an individual, through an introduction from an acquaintance. This phase is a domestic shop shown in Japanese, English and French. Selling overseas is outside the scope.",
     "overviewText2Live": "I took the project on as an individual, through an introduction from an acquaintance. It is a domestic shop shown in Japanese, English and French. Selling overseas is outside the scope.",
     "challengeTitle": "Before the rebuild",
@@ -596,10 +596,10 @@
         ]
       ]
     ],
-    "rowLabels": { "overview": "Overview", "process": "Process", "credit": "Credit" },
+    "rowLabels": { "overview": "Overview", "process": "Process", "credit": "Credit", "more": "More detail" },
     "overviewCatch": "Making a company site and a shop into one store.",
     "overview": [
-      "Nakahatsu Shoten makes soy sauce and miso in Kanazawa. It was founded in 1896 as a food retailer and later moved into brewing.",
+      "Nakahatsu Shoten is a soy sauce and miso brewery in Kanazawa. It was founded in 1896 as a food retailer and later moved into brewing.",
       "The company site ran on WordPress and the shop on EC-CUBE, as two separate systems. I took the project on as an individual, through an introduction from an acquaintance, and handle the proposal, the design, the Shopify implementation, and display in Japanese, English and French. This phase is a domestic shop; selling overseas is outside the scope."
     ],
     "processCatch": "From \"keep the existing design\" to a design that carries Nakahatsu Shoten's strengths.",
@@ -872,6 +872,7 @@
     },
     "heroSpAlt": "The hero section at phone width in Japanese, English and French.",
     "topSub": "Home page",
-    "aboutSub": "About page"
+    "aboutSub": "About page",
+    "processSub": "Our Brewing Process"
   }
 }
