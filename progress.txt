@@ -1328,3 +1328,10 @@ headed にすると通る。実機で4パターン総当たりして確認済み
 - 未確認: 交通・金融は acn-ops 側の機密区分が internal_only。河野さんの判断で業界ラベルのみで掲載。上長確認は未実施。
 - レイアウト: EN レジュメのコンパクト表示の行間・余白、JP の詳細表示の案件間の余白を少し詰めて1ページ目に収めた。
   デッキは 8→9 ページ（2ページ目 Accenture、3ページ目 YUMEMI 正社員）。
+
+## 2026-11-06 依存パッケージの脆弱性対応 — PR #108（fix/dependabot-vulns）
+- Dependabot 61件のうち、Next.js の critical RCE 3件（Image Optimization API ほか）が本番に該当していた → next 15.5.29 に更新
+- zod 3→4（アプリ内で未使用）、csv-parse 6→7（/api/gym-stats のみ、動作確認済み）、lockfile を semver 範囲内で更新
+- 残り: @figma/code-connect（devDep、デプロイされない）経由の zod3/glob/minimatch、adm-zip の symlink 件（修正版なし）
+- 検証: build 成功、tsc エラーは main と同じ60件（既存）、next start でページ・API を確認
+- deepsec の AI レビューは有料のため実施しない（河野さん判断）。雛形は branch worktree-deepsec-init に残置
