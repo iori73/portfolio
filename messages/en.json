@@ -470,7 +470,7 @@
     "researchTitle": "Research",
     "researchText": "Besides the ten similar sites, I looked at the history pages of six long-established companies, the geography and history of the neighborhood, and three moodboard directions. What I found was that the company's history from 1896, the origin of its name and its sense of place existed only as text on the site.",
     "twoDirectionsTitle": "Showing two versions side by side",
-    "twoDirectionsText": "Because we had agreed to keep the existing design, I made two versions: v1 reproduced the existing site and v2 was the redesign. When I shared them side by side, the client replied that v2 was easy to see, with a clean structure that included the purchase path (summarised). After that I worked mainly on v2.",
+    "twoDirectionsText": "Because we had agreed to keep the existing design, I made two versions: v1 reproduced the existing site and v2 was the redesign. When I shared them side by side, the client replied that v2 was easy to see, with a clean structure that included the purchase path. After that I worked mainly on v2.",
     "aboutTitle": "Changes since August",
     "aboutText": "The version in the store now is not the one from August. The changes are on both the home page and the About page, and the About page changed the most. For the home page's \"About Nakahatsu Shoten\" block I laid out several options, and the client chose the one with three tall photographs of the building. On the About page I rebuilt the two brewing sections, tenyu soy sauce and tenyu miso, with the body text laid over a photograph. When the screen is wide enough the Japanese text runs vertically, and English and French stay horizontal.",
     "motionTitle": "The \"Oidemashi\" heading",
@@ -620,7 +620,7 @@
       {
         "h": "Showing two versions side by side",
         "p": [
-          "I made one version that reproduced the structure of the existing site in Shopify theme code (v1) and one redesign (v2), and shared them side by side. Nakahatsu Shoten replied that v2 was easy to see, with a clean structure that included the purchase path (summarised). I have worked mainly on v2 since."
+          "I made one version that reproduced the structure of the existing site in Shopify theme code (v1) and one redesign (v2), and shared them side by side. Nakahatsu Shoten replied that v2 was easy to see, with a clean structure that included the purchase path. I worked mainly on v2 after that."
         ],
         "fig": "before-after",
         "cap": "Before: the top page of the WordPress company site. After: the new top page. The shop was a separate system (EC-CUBE)."
@@ -628,7 +628,7 @@
       {
         "h": "Reworking the home page and About page",
         "p": [
-          "In the hero section, the changes are a larger logo and a short message that continues from 天の恵み (\"the blessings of heaven\"). The photographs are a carousel of three images both before and after, and the three images are the same; the figure differs only in when the screenshot was taken. The header carries a language switch (Japanese, English and French) and the cart. For people who visit the site often, I moved the news from the lower part of the old site to just below the hero."
+          "In the hero section, the changes are a larger logo and a short message that continues from 天の恵み (\"the blessings of heaven\"). The photographs are a carousel of three images both before and after, and the three images are the same (the figure shows the signboard photo both before and after). The header carries a language switch (Japanese, English and French) and the cart. For people who visit the site often, I moved the news from the lower part of the old site to just below the hero."
         ],
         "fig": "about-tenyu",
         "cap": "The About page in Japanese: the miso block. The body text runs vertically over a photograph, and the heading stands vertically to its right."
