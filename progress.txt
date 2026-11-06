@@ -1329,11 +1329,18 @@ headed にすると通る。実機で4パターン総当たりして確認済み
 - レイアウト: EN レジュメのコンパクト表示の行間・余白、JP の詳細表示の案件間の余白を少し詰めて1ページ目に収めた。
   デッキは 8→9 ページ（2ページ目 Accenture、3ページ目 YUMEMI 正社員）。
 
+## 2026-11-06 依存パッケージの脆弱性対応 — PR #108（fix/dependabot-vulns）
+- Dependabot 61件のうち、Next.js の critical RCE 3件（Image Optimization API ほか）が本番に該当していた → next 15.5.29 に更新
+- zod 3→4（アプリ内で未使用）、csv-parse 6→7（/api/gym-stats のみ、動作確認済み）、lockfile を semver 範囲内で更新
+- 残り: @figma/code-connect（devDep、デプロイされない）経由の zod3/glob/minimatch、adm-zip の symlink 件（修正版なし）
+- 検証: build 成功、tsc エラーは main と同じ60件（既存）、next start でページ・API を確認
+- deepsec の AI レビューは有料のため実施しない（河野さん判断）。雛形は branch worktree-deepsec-init に残置
+
 ## 2026-11-06: セキュリティの穴をふさぐ（Bot Protection を Challenge にしなくて済むように）
 
 - 方針: 検索・AI 検索・リクルーターの目に触れるよう、Vercel の Bot Protection は Log のままにする。
   守りは Firewall ではなくコード側に持たせる。
-- next 15.5.23 → 15.5.28: critical 3件（Image Optimization API などの RCE）と high 1件（Server Actions の DoS）を解消。
+- next の更新は PR #108（15.5.29）と重なったため、マージ時に #108 側の package.json / lockfile を採用した。
 - `/api/podcast-notes/[id]`: 親が NOTION_PODCAST_DB_ID のページ以外は 404。以前は Notion 連携が読めるページなら
   ID さえ分かれば何でも返せた。
 - `/api/img`: リダイレクトを追わない（許可ドメインの迂回を防ぐ）、ラスター画像だけ（SVG 不可）、
@@ -1342,5 +1349,4 @@ headed にすると通る。実機で4パターン総当たりして確認済み
 - `/api/translate`（pages router）: 未使用・本番で 500 のまま、誰でも POST でディスク書き込み＋外部中継できる作りだった。
   410 を返すだけにした（ファイルは残す）。
 - `/api/articles`: エラー時に error.message を返していたのを一般文言に。
-- 残り（本番では届かない）: sharp（画像最適化オフ）、browserslist/postcss 等（ビルド時のみ）、zod（未使用）、csv-parse（Vercel では読まない）。
 - 未確認: Notion 連携の権限が「読み取りのみ・ポッドキャスト DB だけ共有」になっているか（河野さん側）。
