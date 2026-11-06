@@ -1328,3 +1328,8 @@ headed にすると通る。実機で4パターン総当たりして確認済み
 - 未確認: 交通・金融は acn-ops 側の機密区分が internal_only。河野さんの判断で業界ラベルのみで掲載。上長確認は未実施。
 - レイアウト: EN レジュメのコンパクト表示の行間・余白、JP の詳細表示の案件間の余白を少し詰めて1ページ目に収めた。
   デッキは 8→9 ページ（2ページ目 Accenture、3ページ目 YUMEMI 正社員）。
+
+## 2026-11-06 deepsec（Vercel の脆弱性スキャナ）導入 — branch worktree-deepsec-init
+- `npx deepsec init --scaffold-only` で .deepsec/ を作成。project id を portfolio に変更、INFO.md に脅威モデルを記入
+- 無料の pattern scan（`pnpm deepsec scan`）実行: 138ファイル / 264候補（パターン一致のみ、真偽未判定）
+- 未実施: 有料の AI レビュー（`pnpm deepsec process`）。支払い方法（Vercel AI Gateway / 自分の Claude ログイン）と上限額を河野さんが決めてから
