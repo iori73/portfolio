@@ -596,11 +596,12 @@
         ]
       ]
     ],
-    "rowLabels": { "overview": "Overview", "process": "Process", "credit": "Credit", "more": "More detail" },
-    "overviewCatch": "Making a company site and a shop into one store.",
+    "rowLabels": { "overview": "Overview", "process": "Process", "reflection": "Reflection", "credit": "Credit", "more": "More detail" },
+    "overviewCatch": "Two separate sites, made into one.",
     "overview": [
       "Nakahatsu Shoten is a soy sauce and miso brewery in Kanazawa. It was founded in 1896 as a food retailer and later moved into brewing.",
-      "The company site ran on WordPress and the shop on EC-CUBE, as two separate systems. I took the project on as an individual, through an introduction from an acquaintance, and handle the proposal, the design, the Shopify implementation, and display in Japanese, English and French. This phase is a domestic shop; selling overseas is outside the scope."
+      "Through an introduction from an acquaintance, I heard that Nakahatsu Shoten wanted a newly designed website. When I looked at the existing sites, the company site ran on WordPress and the shop on EC-CUBE, as two separate systems. So I proposed bringing them together on Shopify. I judged that, with expansion overseas in mind, Shopify would let the client manage and run the site on their own with relative ease.",
+      "I took the project on as an individual and handle the proposal, the design, the Shopify implementation, and display in Japanese, English and French. This phase is a domestic shop; selling overseas is outside the scope."
     ],
     "processCatch": "From \"keep the existing design\" to a design that carries Nakahatsu Shoten's strengths.",
     "process": [
@@ -636,7 +637,7 @@
       {
         "h": "Showing it in three languages",
         "p": [
-          "The site was Japanese only. It can now be read in English and French too. The contract covers Japanese and English; Nakahatsu Shoten asked for French to be added, because many visits to the site come from France."
+          "The site was Japanese only. It can now be read in English and French too. It started with Japanese and English; Nakahatsu Shoten asked for French to be added, because many visits to the site come from France."
         ],
         "fig": "bilingual-3lang",
         "cap": "The same hero in Japanese, English and French."
@@ -644,8 +645,7 @@
       {
         "h": "The brand color, and keeping values in sync",
         "p": [
-          "The brand color is enji, a deep crimson. It is one of the Kaga Gosai, the five traditional colors of Kanazawa, and it is rooted in the culture of this place.",
-          "When the values in Figma and in code drift apart, I look at the site to fix something and find that Figma no longer matches it. So a script keeps the color and spacing values the same in both."
+          "The brand color is enji, a deep crimson. It is one of the Kaga Gosai, the five traditional colors of Kanazawa, and it is rooted in the culture of this place."
         ],
         "fig": "palette",
         "cap": "The brand's enji, and the theme colors sumi brown and washi. Each color shows its HEX, RGB and where it is used."
@@ -751,15 +751,14 @@
     "v1v2TallAlt": "The top pages of v1 and v2 side by side, as longer screenshots. On the left, v1 reproduces the structure of the existing site; on the right, v2 is the redesign. v2 continues from the hero through the news, the company introduction and three photos to the heading of the brewing section.",
     "igAlt": "Four activities seen in the Instagram posts of Nakahatsu Shoten. May 2024: a permanent spot in the Ishikawa Good Products corner at Muji. September 2024: a fermentation culture and arts festival venue in Kanazawa. April 2025 and February 2026: overseas visitors try making miso. March 2026: nursery school children in a visiting miso-making class. The source is the shop's Instagram posts.",
     "iterFig": {
-      "lead": "The process section went through five forms before reaching the current ring of five circles. They are listed in time order.",
+      "lead": "The process section went through five designs before reaching the current ring of five circles.",
       "groups": [
-        ["1. Around Oct 12: photo and text side by side", "I started with a large work photo on the left and the client's text on the right. The minutes of the Oct 6 meeting say the brewer section had too much text and felt heavy, so I would offer several layouts with large photos and white space."],
-        ["2. Around Oct 14: products and logo", "Respecting the packaging of the soy sauce and miso, this layout puts the purple background and the logo front and center. It is also the 'current' layout I showed the client. The process photos had not arrived yet (the client gathered them on Oct 25)."],
-        ["3. Two of the three forms I showed the client, not chosen", "Respecting the client's text, I proposed design patterns that make each step easy to understand, built from the process photos the client shared with me. A places the five circles on a circle, joined by a thin line. B places them in a straight line. I showed the client these two together with the current layout."],
-        ["4. Adding animation", "I added animation to the two options that were not chosen (the circle and the straight line), so that the flow of the steps comes across."],
-        ["5. Final: a ring with lines from the center", "Following the client's own idea, we settled on a design with animation based on the umebachi mon, the plum-blossom crest tied to Kanazawa. The client asked to shorten the last part of the ring, so I showed three options as videos, and the third, with five lines growing from a center circle, was chosen. I applied it on Nov 2."]
+        ["1. Photo and text side by side", "I started with a large work photo on the left and the client's text on the right. The section had a lot of text and felt heavy, so I decided to offer several layouts with large photos and white space."],
+        ["2. Products and logo", "Respecting the packaging of the soy sauce and miso, this layout puts the purple background and the logo front and center. It is also the 'current' layout I showed the client. The process photos had not arrived yet."],
+        ["3. Two of the three forms I showed the client, not chosen", "Respecting the client's text, I proposed design patterns that make each step easy to understand, built from the process photos the client shared with me. A places the five circles on a circle, joined by a thin line. B places them in a straight line. I animated both so that the flow of the steps comes across. I showed the client these two together with the current layout."],
+        ["4. Final: a ring with lines from the center", "Following the client's own idea, we settled on a design with animation based on the umebachi mon, the plum-blossom crest tied to Kanazawa. The client asked to shorten the last part of the ring, so I showed three options as videos, and the third, with five lines growing from a center circle, was chosen. I applied it to the site."]
       ],
-      "note": "The photo in the Oct 12 option was swapped from the original photo showing people to another photo from the client (kōji rice). The mashing circle shows a person at work. The text inside the images is the client's Japanese text.",
+      "note": "",
       "alts": [
         "Around Oct 12. A photo of kōji rice on the left (standing in for the photo used at the time) and the Japanese text on the right.",
         "Around Oct 14. The Tenyu logo and the soy sauce and miso products on the left, text on the right, a purple watercolor in the lower right.",
@@ -846,7 +845,7 @@
     "parallaxVideoNote": "I applied a parallax effect to the As Brewers section of the About page. As you scroll, the photos shift slightly inside their frames.",
     "aboutText": "The old About page was mostly text, with photographs sized to sit beside it. In the new About page, each section carries a photograph or a figure, placed large, that matches what the section wants to say. The brewers are shown through photographs of their work, and the ingredients through a map of where they come from, so that each point can be seen at a glance. The page can be read to the end as one story.",
     "topIter": {
-      "lead": "I redesigned the About section of the home page twice. There are nine designs I did not use, in two directions. The one I used places two photographs of the building side by side.",
+      "lead": "I redesigned the About section of the home page twice, in two directions. The first round was based on my own proposal. The second came from the client's wish to use the building photographs simply. The one I used places three photographs of the building side by side at the same size.",
       "groups": [
         [
           "A. First round: photographs of ingredients (7 designs)",
@@ -857,7 +856,7 @@
           "The heading became 「中初商店について」, which means About Nakahatsu Shoten, and the photographs show the inside of the building. One design staggers four photographs; the other places three photographs at the same size."
         ]
       ],
-      "note": "The design I used is not shown in this figure.",
+      "note": "",
       "alts": [
         "Design A-1",
         "Design A-2",
@@ -873,6 +872,10 @@
     "heroSpAlt": "The hero section at phone width in Japanese, English and French.",
     "topSub": "Home page",
     "aboutSub": "About page",
-    "processSub": "Our Brewing Process"
+    "processSub": "Our Brewing Process",
+    "reflection": [
+      ["What only became possible with AI", "Shopify was a platform I had never touched before this project. I could not have carried it this far as one person without AI assistance. Working in a technology you are new to, and keeping the tasks moving, are two of the places where AI helps most."],
+      ["What AI could not stand in for", "There were things AI could not stand in for: design judgment, imagining the experience someone will have, and finding the format and the form that carry what matters most. The generic design AI produces will not give a first-time visitor the experience they hoped for, let alone more than that."]
+    ]
   }
 }

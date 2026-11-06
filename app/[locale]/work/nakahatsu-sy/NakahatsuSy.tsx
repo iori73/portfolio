@@ -186,15 +186,15 @@ function TopIterFigure({ f }: { f: IterFig }) {
           </div>
         </div>
       ))}
-      <p className="text-body-sm text-ink-tertiary">{f.note}</p>
+      {f.note ? <p className="text-body-sm text-ink-tertiary">{f.note}</p> : null}
     </figure>
   );
 }
 
 /** 製法へのこだわりの変遷（5 場面）。「醸造家として」の没案の図（RejectedFigure）の置き換え。RejectedFigure と同じ作り。人物が写る部分は灰色に置き換えてある */
 function ProcessIterationsFigure({ f, lang, pauseLabel, playLabel }: { f: IterProcFig & { videoAlts: string[] }; lang: string; pauseLabel: string; playLabel: string }) {
-  // 4. は、選ばれなかった2つ（円・一直線）にアニメーションを加えた2つ。どちらも動画（'va' 円・'vb' 一直線）。円は点の軌道を、環に沿って各円の出現に合わせ、搾りの手前で止まるように直した（2026-11-06）。
-  const sets: (number | 'va' | 'vb')[][] = [[1], [2], [3, 4], ['va', 'vb'], [9]];
+  // 3. は、選ばれなかった2つ（円・一直線）。流れが伝わるよう、2つともアニメーション（動画。'va' 円・'vb' 一直線）で見せる（2026-11-06 河野の指示で、旧4を3に統合）。円は点の軌道を、環に沿って各円の出現に合わせ、搾りの手前で止まるように直した。
+  const sets: (number | 'va' | 'vb')[][] = [[1], [2], ['va', 'vb'], [9]];
   const videos = { va: { name: 'ring-a', alt: f.videoAlts[0], height: 800 }, vb: { name: 'ring-b', alt: f.videoAlts[1], height: 676 } } as const;
   const ratio: Record<number, number> = { 1: 583, 2: 630, 3: 750, 4: 633, 5: 750, 6: 750, 7: 750, 8: 750, 9: 750 };
   return (
@@ -227,7 +227,7 @@ function ProcessIterationsFigure({ f, lang, pauseLabel, playLabel }: { f: IterPr
           </div>
         </div>
       ))}
-      <p className="text-body-sm text-ink-tertiary">{f.note}</p>
+      {f.note ? <p className="text-body-sm text-ink-tertiary">{f.note}</p> : null}
     </figure>
   );
 }
@@ -294,12 +294,14 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
   const steps = t.raw('steps') as Step[];
   const credit = t.raw('credit') as Credit[];
   const palette = t.raw('palette') as Palette;
-  const rl = t.raw('rowLabels') as { overview: string; process: string; credit: string; more: string };
+  const rl = t.raw('rowLabels') as { overview: string; process: string; reflection: string; credit: string; more: string };
+  const reflection = t.raw('reflection') as [string, string][];
   /** 側面メニュー（共通の WorkSidebar。1280px 以上）。項目は本文の見出しと同じ文言（概要・各ステップの見出し・クレジット）。Figma の Sidebar と同じ */
   const sidebarItems: SidebarItem[] = [
     { id: 'overview', label: rl.overview },
     // 見出し（プロセス）＞ 小見出し（各ステップ）の2段。ukiyoe と同じ構造
     { id: 'process', label: rl.process, subs: steps.map((st, i) => ({ id: `step-${i + 1}`, label: st.h })) },
+    { id: 'reflection', label: rl.reflection, subs: reflection.map(([h], i) => ({ id: `reflection-${i + 1}`, label: h })) },
     { id: 'credit', label: rl.credit },
     { id: 'more', label: rl.more },
   ];
@@ -422,11 +424,13 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
               ) : s.fig === 'about-tenyu' ? (
                 <div className="flex flex-col items-center gap-10 md:gap-12">
                   {/* トップの前後、トップの軌跡（没案）、About の文章、About の前後、パララックス、没にした About の案。Figma の Step 3 と同じ順。キャプションは置かず、alt に説明を入れる */}
-                  <BeforeAfterPair
-                    label={t('topBaAlt')}
-                    before={{ src: `/work/nakahatsu/top-ba-${language === 'jp' ? 'jp' : 'en'}-l.webp`, width: 600, height: 975, label: t('beforeLabel') }}
-                    after={{ src: `/work/nakahatsu/top-ba-${language === 'jp' ? 'jp' : 'en'}-r.webp`, width: 600, height: 975, label: t('afterLabel') }}
-                  />
+                  <div className="w-full overflow-hidden rounded-media bg-[var(--nk-surface)] p-4 md:p-8">
+                    <BeforeAfterPair
+                      label={t('topBaAlt')}
+                      before={{ src: `/work/nakahatsu/top-ba-${language === 'jp' ? 'jp' : 'en'}-l.webp`, width: 600, height: 879, label: t('beforeLabel') }}
+                      after={{ src: `/work/nakahatsu/top-ba-${language === 'jp' ? 'jp' : 'en'}-r.webp`, width: 600, height: 879, label: t('afterLabel') }}
+                    />
+                  </div>
                   <TopIterFigure f={t.raw('topIter') as IterFig} />
                   <div className="flex w-full flex-col">
                     <div className="flex min-w-0 flex-col gap-3">
@@ -434,11 +438,13 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                       <p className={body}>{t('aboutText')}</p>
                     </div>
                   </div>
-                  <BeforeAfterPair
-                    label={t('aboutBaAlt')}
-                    before={{ src: `/work/nakahatsu/about-ba-${language === 'jp' ? 'jp' : 'en'}-l.webp`, width: 600, height: 1756, label: t('beforeLabel') }}
-                    after={{ src: `/work/nakahatsu/about-ba-${language === 'jp' ? 'jp' : 'en'}-r.webp`, width: 600, height: 1756, label: t('afterLabel') }}
-                  />
+                  <div className="w-full overflow-hidden rounded-media bg-[var(--nk-surface)] p-4 md:p-8">
+                    <BeforeAfterPair
+                      label={t('aboutBaAlt')}
+                      before={{ src: `/work/nakahatsu/about-ba-${language === 'jp' ? 'jp' : 'en'}-l.webp`, width: 600, height: 1125, label: t('beforeLabel') }}
+                      after={{ src: `/work/nakahatsu/about-ba-${language === 'jp' ? 'jp' : 'en'}-r.webp`, width: 600, height: 1660, label: t('afterLabel') }}
+                    />
+                  </div>
                   {/* About「醸造家として」のパララックスの録画。About の前後の図の直後。キャプションは置かず、aria-label に説明を入れる */}
                   <ParallaxVideo label={t('parallaxVideoAlt')} note={t('parallaxVideoNote')} noteClass={body} pauseLabel={t('videoPause')} playLabel={t('videoPlay')} />
                   <div className="flex w-full flex-col">
@@ -460,8 +466,8 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                   <div className="w-full overflow-hidden rounded-media bg-[var(--nk-surface)] p-4 md:p-8">
                     <BeforeAfterPair
                       label={t('v1v2FullAlt')}
-                      before={{ src: `/work/nakahatsu/v1-v2-full-${language === 'jp' ? 'jp' : 'en'}-l.webp`, width: 600, height: language === 'jp' ? 3136 : 3194, label: t('v1Label') }}
-                      after={{ src: `/work/nakahatsu/v1-v2-full-${language === 'jp' ? 'jp' : 'en'}-r.webp`, width: 600, height: language === 'jp' ? 3136 : 3194, label: t('v2Label') }}
+                      before={{ src: `/work/nakahatsu/v1-v2-full-${language === 'jp' ? 'jp' : 'en'}-l.webp`, width: 600, height: 2538, label: t('v1Label') }}
+                      after={{ src: `/work/nakahatsu/v1-v2-full-${language === 'jp' ? 'jp' : 'en'}-r.webp`, width: 600, height: language === 'jp' ? 3040 : 3098, label: t('v2Label') }}
                     />
                     <p className="pt-4 text-body-sm text-ink-tertiary">{t('v1v2FullNote')}</p>
                   </div>
@@ -487,6 +493,18 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
         {/* Status（公開前・数字なし・見ていく指標）の節は、河野さんの判断で外した（2026-10-28、Figma の注釈）。
             ただの希望なので、ページには載せない。文言は messages の statusCatch / status と、
             Figma の退避枠に残してある。公開後に数字が出たら、この位置に実績の節として足す。 */}
+
+        {/* 振り返り（見出し＞小見出し2つ）。詳しい版と同じ文（最後の長い横線は「、」に）。ポートフォリオを読む人に、AI の使い方の線引きを伝える */}
+        <Row id="reflection" label={rl.reflection}>
+          <div className="flex flex-col gap-8">
+            {reflection.map(([h, p], i) => (
+              <div key={h} id={`reflection-${i + 1}`} className="flex scroll-mt-28 flex-col gap-3">
+                <h3 className={`text-title text-ink ${getHeadingFontClass()}`}>{h}</h3>
+                <p className={body}>{p}</p>
+              </div>
+            ))}
+          </div>
+        </Row>
 
         <Row id="credit" label={rl.credit}>
           {credit.map(([who, what]) => (
