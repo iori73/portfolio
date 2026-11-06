@@ -1,0 +1,14 @@
+{
+  "tags": [
+    "github-actions",
+    "nextjs",
+    "node",
+    "react"
+  ],
+  "sentinels": [
+    "next.config.mjs",
+    "package.json"
+  ],
+  "detectedAt": "2026-11-06T04:28:40.738Z",
+  "rootPath": "/Users/iorikawano/dev/portfolio/.claude/worktrees/deepsec-init"
+}
