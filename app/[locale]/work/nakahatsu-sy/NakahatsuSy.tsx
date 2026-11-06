@@ -193,8 +193,9 @@ function TopIterFigure({ f }: { f: IterFig }) {
 
 /** 製法へのこだわりの変遷（5 場面）。「醸造家として」の没案の図（RejectedFigure）の置き換え。RejectedFigure と同じ作り。人物が写る部分は灰色に置き換えてある */
 function ProcessIterationsFigure({ f, lang, pauseLabel, playLabel }: { f: IterProcFig & { videoAlts: string[] }; lang: string; pauseLabel: string; playLabel: string }) {
-  // 4. は、選ばれなかった2つ（円・一直線）にアニメーションを加えた2つ。直線（'vb'）は動画。円（7）の動画は、点の軌道を直したあとに差し替える（2026-11-04 河野の注釈）。
-  const sets: (number | 'vb')[][] = [[1], [2], [3, 4], [7, 'vb'], [9]];
+  // 4. は、選ばれなかった2つ（円・一直線）にアニメーションを加えた2つ。どちらも動画（'va' 円・'vb' 一直線）。円は点の軌道を、環に沿って各円の出現に合わせ、搾りの手前で止まるように直した（2026-11-06）。
+  const sets: (number | 'va' | 'vb')[][] = [[1], [2], [3, 4], ['va', 'vb'], [9]];
+  const videos = { va: { name: 'ring-a', alt: f.videoAlts[0], height: 800 }, vb: { name: 'ring-b', alt: f.videoAlts[1], height: 676 } } as const;
   const ratio: Record<number, number> = { 1: 583, 2: 630, 3: 750, 4: 633, 5: 750, 6: 750, 7: 750, 8: 750, 9: 750 };
   return (
     <figure aria-label={f.lead} className="flex w-full flex-col gap-6 rounded-media border border-[var(--nk-border)] bg-white p-4 md:gap-7 md:p-8">
@@ -207,16 +208,16 @@ function ProcessIterationsFigure({ f, lang, pauseLabel, playLabel }: { f: IterPr
           </div>
           <div className={`grid min-w-0 flex-1 gap-2 bg-white p-2 md:gap-4 md:p-4 ${set.length === 1 ? 'grid-cols-1 justify-items-center' : 'grid-cols-2'}`}>
             {set.map((n) =>
-              n === 'vb' ? (
+              typeof n === 'string' ? (
                 <ControlledVideo
-                  key="vb"
-                  src={`/work/nakahatsu/ring-b-${lang === 'jp' ? 'jp' : 'en'}.mp4`}
-                  poster={`/work/nakahatsu/ring-b-${lang === 'jp' ? 'jp' : 'en'}-poster.webp`}
-                  label={f.videoAlts[1]}
+                  key={n}
+                  src={`/work/nakahatsu/${videos[n].name}-${lang === 'jp' ? 'jp' : 'en'}.mp4`}
+                  poster={`/work/nakahatsu/${videos[n].name}-${lang === 'jp' ? 'jp' : 'en'}-poster.webp`}
+                  label={videos[n].alt}
                   pauseLabel={pauseLabel}
                   playLabel={playLabel}
                   width={1280}
-                  height={676}
+                  height={videos[n].height}
                   startWhenVisible
                 />
               ) : (
