@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import BackToTopButton from '@/src/compositions/BackToTopButton';
 import { useTranslations } from 'next-intl';
+import WorkMetaGrid from '@/src/components/work/WorkMetaGrid';
 import { useJPFontSize, useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
 
 const GoogleUXDesignCertificateProject: React.FC = () => {
@@ -64,7 +65,7 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
   }, [activeSection]);
 
   return (
-    <div className="font-sans my-24 md:mt-28 md:mb-16">
+    <div className="font-sans mt-[var(--site-header-height)] mb-24 md:mb-16">
       <BackToTopButton />
       {/* 
         Hero Section 
@@ -109,32 +110,14 @@ const GoogleUXDesignCertificateProject: React.FC = () => {
             {t('googleUXProject.description')}
           </p>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">Timeline</span>
-              <p className="text-body-lg tracking-[0.2px]">{t('projects.googleUX.timeline')}</p>
-            </div>
-            <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">My Role</span>
-              <p className="text-body-lg tracking-[0.2px]">{t('googleUXProject.role')}</p>
-            </div>
-            <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">Team</span>
-              <p className="text-body-lg tracking-[0.2px]">{t('common.solo')}</p>
-            </div>
-            <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
-                Deliverables
-              </span>
-              <p className="text-body-lg tracking-[0.2px]">
-                {t('googleUXProject.secondaryResearch')}
-                <br />
-                {t('googleUXProject.storyboard')}
-                <br />
-                {t('common.prototype')}
-              </p>
-            </div>
-          </div>
+          <WorkMetaGrid
+            items={[
+              { label: 'Timeline', value: t('projects.googleUX.timeline') },
+              { label: 'My Role', value: t('googleUXProject.role') },
+              { label: 'Team', value: t('common.solo') },
+              { label: 'Deliverables', value: [t('googleUXProject.secondaryResearch'), t('googleUXProject.storyboard'), t('common.prototype')] },
+            ]}
+          />
         </div>
       </section>
 

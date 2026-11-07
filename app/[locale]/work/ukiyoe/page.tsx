@@ -1,8 +1,9 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 import BackToTopButton from '@/src/compositions/BackToTopButton';
 import { useTranslations, useLocale } from 'next-intl';
+import WorkMetaGrid from '@/src/components/work/WorkMetaGrid';
 import { useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
 import { MoveUpRight } from 'lucide-react';
 import { CTAButton } from '@/components/ui/cta-button';
@@ -13,19 +14,30 @@ import PrintingProcessStudy from '@/components/work/ukiyoe/PrintingProcessStudy'
 import TopPageProcessShowcase from '@/components/work/ukiyoe/TopPageProcessShowcase';
 import TopPageEvolutionGrid from '@/components/work/ukiyoe/TopPageEvolutionGrid';
 import { usePageTransition } from '@/src/contexts/TransitionContext';
+import WorkShell from '@/src/components/work/WorkShell';
+import WorkSidebar, { type SidebarItem } from '@/src/components/work/WorkSidebar';
 
-const SECTIONS = [
-  'overview',
-  'research',
-  'design-process',
-  'hand-coloring',
-  'ai-craft',
-  'technical',
-  'reflection',
-] as const;
+/** 側面メニューに出す小見出し。開いている節（親）の下にだけ表示する。文言は本文の h3 と同じ翻訳キー */
+const SUBSECTIONS: Record<string, { id: string; key: string }[]> = {
+  research: [
+    { id: 'cultural-immersion', key: 'ukiyoe.culturalResearchTitle' },
+    { id: 'color-analysis', key: 'ukiyoe.colorAnalysisTitle' },
+    { id: 'printing-process', key: 'ukiyoe.printingProcessTitle' },
+  ],
+  'design-process': [
+    { id: 'top-page-design', key: 'ukiyoe.topPageDesignTitle' },
+    { id: 'timeline-design', key: 'ukiyoe.timelineDesignTitle' },
+    { id: 'motifs', key: 'ukiyoe.motifsTitle' },
+    { id: 'color-system', key: 'ukiyoe.colorSystemTitle' },
+    { id: 'logo-design', key: 'ukiyoe.logoDesignTitle' },
+  ],
+  reflection: [
+    { id: 'learnings', key: 'ukiyoe.learningsTitle' },
+    { id: 'future', key: 'ukiyoe.futureTitle' },
+  ],
+};
 
 const UkiyoePage: React.FC = () => {
-  const [activeSection, setActiveSection] = useState<string>('overview');
   const t = useTranslations();
   const language = useLocale();
   const { getBodyFontClass } = useBodyFont();
@@ -40,47 +52,25 @@ const UkiyoePage: React.FC = () => {
     }
   }, [transitionState.phase, endTransition]);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      let currentSection = activeSection;
-      for (const id of SECTIONS) {
-        const element = document.getElementById(id);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 150) {
-            currentSection = id;
-          }
-        }
-      }
-      if (currentSection !== activeSection) {
-        setActiveSection(currentSection);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [activeSection]);
-
-  const sidebarButtonClass = (sectionId: string) =>
-    activeSection === sectionId
-      ? 'text-left text-title font-switzer transition-transform duration-900 scale-110'
-      : 'text-left text-title-sm font-switzer transition-transform duration-900 scale-100 opacity-50';
+  /** 側面メニュー（共通の WorkSidebar）。文言は本文の見出しと同じ翻訳キー。小見出しは開いている節の下にだけ出る */
+  const baseItems: { id: string; label: string }[] = [
+    { id: 'overview', label: t('work.overview') },
+    { id: 'research', label: t('ukiyoe.sectionResearch') },
+    { id: 'design-process', label: t('work.designProcess') },
+    { id: 'hand-coloring', label: t('ukiyoe.handColoringTitle') },
+    { id: 'ai-craft', label: t('ukiyoe.aiCraftTitle') },
+    { id: 'technical', label: t('ukiyoe.sectionTechnical') },
+    { id: 'reflection', label: t('work.reflection') },
+  ];
+  const sidebarItems: SidebarItem[] = baseItems.map((it) => ({
+    ...it,
+    subs: SUBSECTIONS[it.id]?.map((sub) => ({ id: sub.id, label: t(sub.key) })),
+  }));
 
   const bodyTextClass = `${getBodyFontClass()} tracking-[0.2px] text-body-lg`;
 
   return (
-    <div className="font-sans my-24 md:mt-28 md:mb-16">
+    <div className="font-sans mt-[var(--site-header-height)] mb-24 md:mb-16">
       <BackToTopButton />
 
       {/* Hero */}
@@ -89,8 +79,10 @@ const UkiyoePage: React.FC = () => {
           <div className="w-full aspect-[8/5] bg-[#F8F5F0] overflow-hidden relative">
             <Image
               key={language}
-              src={language === 'jp' ? '/work/ukiyoe/thumbnail-jp.webp' : '/work/ukiyoe/thumbnail-en.webp'}
-              alt="Ukiyoe - Layer by Layer"
+              /* The live site's hero (2026-11-07, direction A), captured without the
+                 site's own header so it doesn't read as a second nav inside this page. */
+              src={language === 'jp' ? '/work/ukiyoe/hero-site-jp.webp' : '/work/ukiyoe/hero-site-en.webp'}
+              alt={language === 'jp' ? '浮世絵の技法変遷 — 作品サイトのトップ' : 'Evolution of Ukiyo-e Techniques — the site\'s top page'}
               fill
               sizes="(min-width: 768px) 1280px, 100vw"
               className="object-cover"
@@ -125,53 +117,25 @@ const UkiyoePage: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
-                Timeline
-              </span>
-              <p className="text-body-lg tracking-[0.2px]">
-                {t('projects.ukiyoe.timeline')}
-              </p>
-            </div>
-            <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
-                My Skills
-              </span>
-              <p className="text-body-lg tracking-[0.2px]">
-                {t('projects.ukiyoe.skills')}
-              </p>
-            </div>
-            <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
-                Type
-              </span>
-              <p className="text-body-lg tracking-[0.2px]">
-                {t('common.personalProject')}
-              </p>
-            </div>
-            <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
-                Deliverables
-              </span>
-              <p className="text-body-lg tracking-[0.2px]">
-                {t('projects.ukiyoe.deliverables')}
-              </p>
-            </div>
-          </div>
+          <WorkMetaGrid
+            labelClassName="text-body"
+            items={[
+              { label: 'Timeline', value: t('projects.ukiyoe.timeline') },
+              { label: 'My Skills', value: t('projects.ukiyoe.skills') },
+              { label: 'Type', value: t('common.personalProject') },
+              { label: 'Deliverables', value: t('projects.ukiyoe.deliverables') },
+            ]}
+          />
         </div>
       </section>
 
-      {/* Main Content + Sidebar */}
-      <div className="max-w-7xl w-full mx-auto">
-        <div className="flex flex-col md:flex-row justify-between">
-          {/* Main Content */}
-          <div className="md:w-[80%]">
+      {/* 本文 + 側面メニュー（全作品ページで共通の枠。寸法は WorkShell） */}
+      <WorkShell sidebar={<WorkSidebar items={sidebarItems} ariaLabel={language === 'jp' ? 'このページの目次' : 'On this page'} />}>
 
             {/* 1. Overview */}
             <section id="overview" className="w-full mx-auto py-12 md:py-16 text-ink-secondary scroll-mt-32">
               <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
-                Overview
+                {t('work.overview')}
               </h2>
               <p className={`mb-4 ${bodyTextClass}`}>{t('ukiyoe.overviewText1')}</p>
               <p className={`mb-6 ${bodyTextClass}`}>{t('ukiyoe.overviewText2')}</p>
@@ -210,7 +174,7 @@ const UkiyoePage: React.FC = () => {
             {/* 2. Research & Discovery */}
             <section id="research" className="py-12 md:py-20 scroll-mt-32">
               <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
-                Research &amp; Discovery
+                {t('ukiyoe.sectionResearch')}
               </h2>
               <p className={`mb-10 md:mb-14 text-ink-secondary ${bodyTextClass}`}>
                 {t('ukiyoe.researchIntro')}
@@ -218,7 +182,7 @@ const UkiyoePage: React.FC = () => {
 
               {/* Cultural Immersion */}
               <div className="mb-10 md:mb-14">
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
+                <h3 id="cultural-immersion" className={`scroll-mt-32 text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.culturalResearchTitle')}
                 </h3>
                 <p className={`mb-6 text-ink-secondary ${bodyTextClass}`}>
@@ -230,7 +194,7 @@ const UkiyoePage: React.FC = () => {
                     alt="Cultural research across 25+ reference sites"
                     width={1200}
                     height={675}
-                    className="w-full h-auto rounded-lg"
+                    className="w-full h-auto rounded-lg border border-line-section overflow-hidden"
                   />
                   <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
                     {t('ukiyoe.captionResearch')}
@@ -240,14 +204,14 @@ const UkiyoePage: React.FC = () => {
 
               {/* Color Extraction & Analysis */}
               <div className="mb-10 md:mb-14">
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
+                <h3 id="color-analysis" className={`scroll-mt-32 text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.colorAnalysisTitle')}
                 </h3>
                 <p className={`mb-6 text-ink-secondary ${bodyTextClass}`}>
                   {t('ukiyoe.colorAnalysisText')}
                 </p>
                 <figure>
-                  <div className="rounded-lg overflow-hidden">
+                  <div className="rounded-lg border border-line-section overflow-hidden">
                     <ColorAnalysisGrid locale={language} />
                   </div>
                   <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
@@ -258,7 +222,7 @@ const UkiyoePage: React.FC = () => {
 
               {/* Printing Process Study */}
               <div>
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
+                <h3 id="printing-process" className={`scroll-mt-32 text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.printingProcessTitle')}
                 </h3>
                 <p className={`mb-6 text-ink-secondary ${bodyTextClass}`}>
@@ -273,7 +237,7 @@ const UkiyoePage: React.FC = () => {
             {/* 3. Design Process */}
             <section id="design-process" className="py-12 md:py-20 scroll-mt-32">
               <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
-                Design Process
+                {t('work.designProcess')}
               </h2>
               <p className={`mb-10 md:mb-14 text-ink-secondary ${bodyTextClass}`}>
                 {t('ukiyoe.designProcessIntro')}
@@ -281,7 +245,7 @@ const UkiyoePage: React.FC = () => {
 
               {/* Top Page: Layer Animation */}
               <div className="mb-12 md:mb-20">
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
+                <h3 id="top-page-design" className={`scroll-mt-32 text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.topPageDesignTitle')}
                 </h3>
                 <div className={`mb-6 text-ink-secondary ${bodyTextClass} space-y-4`}>
@@ -307,7 +271,7 @@ const UkiyoePage: React.FC = () => {
 
               {/* Timeline: Artwork Gallery */}
               <div className="mb-12 md:mb-20">
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
+                <h3 id="timeline-design" className={`scroll-mt-32 text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.timelineDesignTitle')}
                 </h3>
                 <div className={`mb-6 text-ink-secondary ${bodyTextClass} space-y-4`}>
@@ -330,7 +294,7 @@ const UkiyoePage: React.FC = () => {
 
               {/* Design Motifs: Kushi-Dango */}
               <div className="mb-12 md:mb-20">
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
+                <h3 id="motifs" className={`scroll-mt-32 text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.motifsTitle')}
                 </h3>
                 <div className={`mb-6 text-ink-secondary ${bodyTextClass} space-y-4`}>
@@ -348,7 +312,7 @@ const UkiyoePage: React.FC = () => {
 
               {/* Color System & Period Ratios */}
               <div className="mb-12 md:mb-20">
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
+                <h3 id="color-system" className={`scroll-mt-32 text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.colorSystemTitle')}
                 </h3>
                 <div className={`mb-6 text-ink-secondary ${bodyTextClass} space-y-4`}>
@@ -366,7 +330,7 @@ const UkiyoePage: React.FC = () => {
 
               {/* Logo Design */}
               <div>
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
+                <h3 id="logo-design" className={`scroll-mt-32 text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.logoDesignTitle')}
                 </h3>
                 <p className={`mb-6 text-ink-secondary ${bodyTextClass}`}>
@@ -381,7 +345,7 @@ const UkiyoePage: React.FC = () => {
                     alt="Logo design: a seal mark built on bold cropping and off-center placement"
                     width={1200}
                     height={675}
-                    className="w-full h-auto rounded-lg"
+                    className="w-full h-auto rounded-lg border border-line-section overflow-hidden"
                   />
                   <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
                     {t('ukiyoe.captionLogo')}
@@ -407,7 +371,7 @@ const UkiyoePage: React.FC = () => {
                   playsInline
                   muted
                   loop
-                  className="w-full md:w-[40%] md:mx-auto h-auto rounded-lg bg-black"
+                  className="w-full md:w-[56%] md:mx-auto h-auto rounded-lg border border-line-section bg-black"
                 />
                 <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
                   {t('ukiyoe.captionHandColoring')}
@@ -430,42 +394,42 @@ const UkiyoePage: React.FC = () => {
             {/* 6. Technical Highlights */}
             <section id="technical" className="py-12 md:py-20 scroll-mt-32">
               <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
-                Technical Highlights
+                {t('ukiyoe.sectionTechnical')}
               </h2>
               <p className={`mb-10 md:mb-14 text-ink-secondary ${bodyTextClass}`}>
                 {t('ukiyoe.technicalIntro')}
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-                <div className="p-5 md:p-6 rounded-xl bg-surface-muted flex flex-col">
+                <div className="p-5 md:p-6 rounded-xl bg-surface-raised border border-line-section flex flex-col">
                   <h4 className={`text-title text-ink mb-4 ${getHeadingFontClass()}`}>
                     {t('ukiyoe.techFeature1Title')}
                   </h4>
-                  <p className={`text-ink-secondary ${getBodyFontClass()} text-body-sm md:text-body-base tracking-[0.2px]`}>
+                  <p className={`text-ink-secondary ${getBodyFontClass()} text-body-base tracking-[0.2px]`}>
                     {t('ukiyoe.techFeature1Text')}
                   </p>
                 </div>
-                <div className="p-5 md:p-6 rounded-xl bg-surface-muted flex flex-col">
+                <div className="p-5 md:p-6 rounded-xl bg-surface-raised border border-line-section flex flex-col">
                   <h4 className={`text-title text-ink mb-4 ${getHeadingFontClass()}`}>
                     {t('ukiyoe.techFeature2Title')}
                   </h4>
-                  <p className={`text-ink-secondary ${getBodyFontClass()} text-body-sm md:text-body-base tracking-[0.2px]`}>
+                  <p className={`text-ink-secondary ${getBodyFontClass()} text-body-base tracking-[0.2px]`}>
                     {t('ukiyoe.techFeature2Text')}
                   </p>
                 </div>
-                <div className="p-5 md:p-6 rounded-xl bg-surface-muted flex flex-col">
+                <div className="p-5 md:p-6 rounded-xl bg-surface-raised border border-line-section flex flex-col">
                   <h4 className={`text-title text-ink mb-4 ${getHeadingFontClass()}`}>
                     {t('ukiyoe.techFeature3Title')}
                   </h4>
-                  <p className={`text-ink-secondary ${getBodyFontClass()} text-body-sm md:text-body-base tracking-[0.2px]`}>
+                  <p className={`text-ink-secondary ${getBodyFontClass()} text-body-base tracking-[0.2px]`}>
                     {t('ukiyoe.techFeature3Text')}
                   </p>
                 </div>
-                <div className="p-5 md:p-6 rounded-xl bg-surface-muted flex flex-col">
+                <div className="p-5 md:p-6 rounded-xl bg-surface-raised border border-line-section flex flex-col">
                   <h4 className={`text-title text-ink mb-4 ${getHeadingFontClass()}`}>
                     {t('ukiyoe.techFeature4Title')}
                   </h4>
-                  <p className={`text-ink-secondary ${getBodyFontClass()} text-body-sm md:text-body-base tracking-[0.2px]`}>
+                  <p className={`text-ink-secondary ${getBodyFontClass()} text-body-base tracking-[0.2px]`}>
                     {t('ukiyoe.techFeature4Text')}
                   </p>
                 </div>
@@ -475,20 +439,20 @@ const UkiyoePage: React.FC = () => {
             {/* 7. Reflection */}
             <section id="reflection" className="py-12 md:py-20 scroll-mt-32">
               <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
-                Reflection
+                {t('work.reflection')}
               </h2>
               <div className="mb-10 md:mb-14">
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
+                <h3 id="learnings" className={`scroll-mt-32 text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.learningsTitle')}
                 </h3>
                 <div className={`text-ink-secondary ${bodyTextClass} space-y-4`}>
                   <p>{t('ukiyoe.learningsText1')}</p>
                   <p>{t('ukiyoe.learningsText2')}</p>
-                  <p>{t('ukiyoe.learningsText3')}</p>
+                  {/* learningsText3 restated aiCraftText3 ("AI can't craft") almost word for word; not rendered. */}
                 </div>
               </div>
               <div>
-                <h3 className={`text-title mb-4 ${getHeadingFontClass()}`}>
+                <h3 id="future" className={`scroll-mt-32 text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.futureTitle')}
                 </h3>
                 <p className={`text-ink-secondary ${bodyTextClass}`}>
@@ -496,64 +460,7 @@ const UkiyoePage: React.FC = () => {
                 </p>
               </div>
             </section>
-          </div>
-
-          {/* Sidebar — 7 items */}
-          <div className="hidden md:flex md:w-[20%] pl-4 pt-12 items-start justify-center">
-            <nav className="sticky top-24">
-              <ul className="space-y-3">
-                <li>
-                  <button onClick={() => scrollToSection('overview')} className={sidebarButtonClass('overview')}>
-                    Overview
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => scrollToSection('research')} className={sidebarButtonClass('research')}>
-                    Research
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => scrollToSection('design-process')}
-                    className={sidebarButtonClass('design-process')}
-                  >
-                    Design Process
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => scrollToSection('hand-coloring')}
-                    className={sidebarButtonClass('hand-coloring')}
-                  >
-                    Hand-Coloring
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => scrollToSection('ai-craft')}
-                    className={sidebarButtonClass('ai-craft')}
-                  >
-                    AI &amp; Craft
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => scrollToSection('technical')} className={sidebarButtonClass('technical')}>
-                    Technical
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => scrollToSection('reflection')}
-                    className={sidebarButtonClass('reflection')}
-                  >
-                    Reflection
-                  </button>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </div>
+      </WorkShell>
     </div>
   );
 };

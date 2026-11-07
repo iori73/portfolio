@@ -12,7 +12,7 @@ export const SITE_URL = 'https://iori-kawano.vercel.app';
  * 検索に出ていなかったのは、カードが <a href> でなく sitemap も無かったからで、
  * 意図した制御ではなくたまたまだった。
  */
-export const CARD_WORK_SLUGS = ['ukiyoe', 'figma-plugins'] as const;
+export const CARD_WORK_SLUGS = ['ukiyoe', 'figma-plugins', 'nakahatsu'] as const;
 
 /**
  * sitemap に載せる Work。カードを置くものに加えて、
@@ -36,6 +36,9 @@ export const INDEXED_WORK_SLUGS = [
 export const ARCHIVED_WORK_SLUGS = [
   'airline-design-system',
   'gym_crowd_status_dashboard',
+  // 中初商店の旧版2つ（2026-11-07）。公開ページは /work/nakahatsu（旧 SY 型）
+  'nakahatsu-detail',
+  'nakahatsu-story',
 ] as const;
 
 /** Work 以外で sitemap に載せるページ。 */

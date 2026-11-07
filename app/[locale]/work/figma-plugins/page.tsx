@@ -30,13 +30,13 @@ export default function FigmaPluginsPage() {
   const totalUsers = plugins.reduce((sum, p) => sum + (p.users ?? 0), 0);
 
   return (
-    <div className={`my-24 md:mt-28 md:mb-16 ${getBodyFontClass()}`}>
+    <div className={`mt-[var(--site-header-height)] mb-24 md:mb-16 ${getBodyFontClass()}`}>
       <BackToTopButton />
 
       {/* Hero */}
       <section className="mb-0 md:mb-12 full-bleed">
         <div className="w-full">
-          <div className="w-full aspect-[5/2] bg-surface-raised overflow-hidden relative">
+          <div className="w-full aspect-[8/5] bg-surface-raised overflow-hidden relative">
             <PluginCardDeckThumb maxScale={PLUGIN_DECK_HERO_MAX_SCALE} />
           </div>
         </div>
@@ -58,13 +58,13 @@ export default function FigmaPluginsPage() {
 
           <div className="grid grid-cols-2 gap-6 mt-8 max-w-md">
             <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
+              <span className="text-body font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
                 Total tools
               </span>
               <p className="text-body-lg tracking-[0.2px]">{plugins.length}</p>
             </div>
             <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
+              <span className="text-body font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
                 Users
               </span>
               <p className="text-body-lg tracking-[0.2px]">{formatUsers(totalUsers)}+</p>

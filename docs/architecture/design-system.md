@@ -3,7 +3,7 @@
 > このドキュメントはポートフォリオサイトのデザインシステムの**唯一の真実**です。
 > コードの現状を正確に反映します。理想や過去の計画は記載しません。
 >
-> **最終更新: 2026-03-13**
+> **最終更新: 2026-10-26**（5.7 Work カード・5.8 図版を追加）
 
 ---
 
@@ -255,7 +255,7 @@ Tailwind デフォルトスペーシングを使用。カスタム変数は定�
 ### 5.1 タグ
 
 ```tsx
-<span className="font-space-grotesk text-label px-3 py-1.5 rounded-lg bg-surface-muted text-ink-tertiary">
+<span className="font-space-grotesk text-label leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
   Tag Name
 </span>
 ```
@@ -304,12 +304,38 @@ className="text-left text-heading-sm font-switzer transition-transform duration-
 
 ### 5.6 画像スタイル
 
+角丸は**トークン `rounded-media`**（`--radius-media` = 8px）。影は付けない（河野さんの美意識で、ドロップシャドウの多用は NG）。
+`rounded-lg` や `style={{ borderRadius }}` を直書きしない。
+
 ```tsx
-<Image
-  style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.1)', borderRadius: '8px' }}
-  className="w-full h-auto"
-/>
+<Image className="w-full h-auto rounded-media" />
 ```
+
+### 5.7 Work カード（トップ）
+
+**3枚とも `src/components/work/WorkCard.tsx` を通す。** 個別に JSX を書かない。
+`scripts/verify-work-cards.mjs` が 1440 / 768 / 390px で全カードの数値を比べ、1つでも違えば失敗する。
+
+| 項目 | 値 | トークン / 根拠 |
+|---|---|---|
+| サムネの比率 | **8:5** | 詳細ページのヒーロー `aspect-[8/5]`、`TransitionOverlay.tsx` の `heightRatio = 5/8` と同じ。3か所一緒に変える |
+| 外枠 | `p-2 rounded-card bg-surface-muted` | 絵の地色がページの地に近くても縁が読める（2026-09-23 河野の決定） |
+| 画像の角丸 | `rounded-media`（8px） | |
+| タグ | `font-space-grotesk text-label px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary` | `md:` でサイズを変えない（`text-label` が自動でレスポンシブ） |
+| ノード型のサムネ | `thumbClassName="bg-surface-raised"` | 図版を組むもの（figma-plugins のデッキ）だけ |
+
+出典: NN/g「Consistency and Standards」（https://www.nngroup.com/articles/ten-usability-heuristics/）、NN/g「Cards」の
+"using a consistent visual treatment of items that will be compared"（https://www.nngroup.com/articles/cards-component/）。
+**8:5 を選んだ理由（行き先のヒーローと同じ比率にして、カードが行き先を予告する）は出典のない推論。**
+
+### 5.8 ケーススタディの図版とヒーロー
+
+- ヒーロー: 全幅、`aspect-[8/5]`、地色は `bg-surface-muted` か `bg-surface-raised`（任意の16進数を書かない）
+- 本文の図版: **16:9（1200×675）**。縦長にしたいときは、別の図に分けるか、並べて16:9に収める
+- 図版の角丸: `rounded-media`。キャプションは `figcaption`（`font-space-grotesk`）
+- 画像の中に文字を焼き込まない（言語で読めなくなる）。必要なら `-en` / `-jp` を別ファイルにする
+- 情報カード（`p-5 md:p-6 rounded-xl bg-surface-muted`）は ukiyoe と同じ寸法
+- 区切り線は `border-line-section`（`border-black/10` を使わない）
 
 ---
 
