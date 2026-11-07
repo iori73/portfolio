@@ -1,0 +1,39 @@
+name: Podcast Freshness Check
+
+# 同期ジョブ（update-podcast-data.yml）が「成功したのに反映されていない」ケースや、
+# ジョブ自体が動かないケースも拾うため、結果（本番サイトの鮮度）を独立に監視する。
+on:
+  schedule:
+    - cron: '0 12 * * *'  # 毎日 12時 (UTC) = 同期ジョブの12時間後
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Compare Notion with the live site
+        run: node scripts/check-podcast-freshness.mjs
+        env:
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_PODCAST_DB_ID: ${{ secrets.NOTION_PODCAST_DB_ID }}
+
+      # 同題の open Issue があれば重複して作らない。
+      - name: Open an issue if the site is stale
+        if: failure()
+        run: |
+          TITLE="Podcast notes site is out of sync with Notion"
+          if [ -z "$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number')" ]; then
+            gh issue create --title "$TITLE" \
+              --body "The daily freshness check found the live site behind the Notion podcast DB. Check the Notion integration connection, the Update Podcast Data workflow, and the latest deploy. Failed run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

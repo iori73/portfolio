@@ -974,3 +974,71 @@ headless フラグを疑う。
 - PDF を作るときの CSS で、サイトのナビを消すつもりで `header` を全部 `display:none` にしていたため、**作品ページ自身の `<header>`（作品名・Client/Role/Date/Team）まで消えていた**。古い PDF も同じだった。固定・追従する header（`position: fixed/sticky`）だけを隠す。
 - 作り直したら、**先頭の数百 px を画像に書き出して目で確認する**（`pdftoppm -r 72` と `magick -crop`）。`pdftotext` の文字の有無だけでは、順序や抜けは分からない。
 - 軽量版は Ghostscript（170ppi、JPEGQ 80）。通常版を作り直したら、軽量版も必ず作り直す（2つを同じ内容に保つ）。
+
+## [2026-10-26] Figma: モード付き変数に紐づけたテキストスタイルは、パネルの数字が実際とずれて見える
+
+**事象**: portfolio_v6 で、テキストスタイルのフォントサイズを Typography 変数（Mobile / Desktop の2モード）に紐づけた。Home — PC は Desktop モードを指定していて描画は 32px だったが、スタイルの設定画面・インスペクタは `title-lg/jp · 26/120` と表示した。実機（32px）と食い違って見え、河野さんが「サイトと Figma が違う」と指摘した。
+
+**根本原因**: スタイルの設定画面は、変数の**先頭モード**（Mobile）の値を基準値として出す。描画はフレームのモードで決まるので、画面の数字と描画が別物になる。Desktop を先頭にしても、今度は SP で同じ食い違いが逆向きに起きるだけ。
+
+**対処**: テキストスタイルを PC 用（`title-lg/jp`）と SP 用（`sp/title-lg/jp`）に分け、どちらも px を直接持たせる（変数に紐づけない）。説明欄に `PC 32px / SP 26px` と書く。変数（`size/*`）は参照用に残す。
+
+**やってはいけないこと**: 表示される数字と描画が違う仕組みを、「モードで切り替わるから正しい」と説明して済ませる。見る人の読み違いが、そのまま指摘のずれになる。
+
+**もう1つ**: 変数に紐づけたペイントの `opacity` はインスタンスに伝わらない。透明度つきの色は、アルファ付きの色変数にする。インスタンス内の `resize()` / 子の `layoutMode` の上書きは効かないことがある（画像の高さは `lockAspectRatio()` で、レイアウトの違いは別コンポーネントで解決した）。
+
+**適用範囲**: Figma で、モード付き変数をテキストスタイルやコンポーネントに使う全プロジェクト。
+
+## 保護された main に bot が直 push すると、定期ジョブが「静かに」毎回失敗する
+**事象**: Figma 統計の自動更新が 9/21〜10/19 の 5 回連続で失敗し、サイトの数値が約 1 ヶ月古いままだった。
+**根本原因**: スクレイプ自体は成功。`main` に「Changes must be made through a pull request」ルールが
+後から入り、ワークフローの `git push` が GH013 で拒否された。Issue は立っていたが気づかれなかった。
+**対処**: ワークフロー内で `chore/...` ブランチを push → `gh pr create` → `gh pr merge --squash`。
+承認 0・必須チェックなしのルールならこれで通る。リポジトリ設定
+「Allow GitHub Actions to create and approve pull requests」が必要。
+**教訓**: ブランチ保護を入れたら、main へ直 push する定期ジョブ（`git push` を含む workflow）を全て洗う。
+`gh run list --workflow=<name>` で直近の成否を見れば、静かな失敗はすぐ分かる。
+**再発防止（2026-10-26）**: `data-freshness-watchdog.yml` を追加。毎日、各データ更新ワークフローの
+「最後の成功」が許容日数（Figma 3日 / Podcast 10日）を超えたら Issue を1件だけ立て、回復で自動クローズする。
+失敗通知（失敗した run 内で立てる Issue）は run 自体が動かないと出ないので、「成功が無いこと」を外から見る。
+新しい定期更新ジョブを足したら、watchdog の LIST にも1行足す。
+
+## 2026-10-27: Figma 再現パイプライン — SP ページ枠の幅と、装飾の複製
+- builder の最初のバッチはページ枠を常に 1280 幅で作っていた。SP は 375 のはずが 1280 になり、本文（FILL 幅）が広がる。MODE が sp なら 375 で作る（修正済み）。作った後に気づいたら `resize(375, h)`。
+- PC と SP で同じ装飾（Figma Plugins のヒーローのカード束）は、SP 用に抽出・計画・組み立てをやり直さず、PC のノードを `clone()` して `rescale(375/1280)` する。複製後は `layoutSizingHorizontal = FIXED` に直す（FILL のままだと潰れて幅 110px になる）。
+
+## 2026-10-27: Figma 再現パイプライン — SVG <img> の PNG 化に CSS zoom を使わない
+- `<img src=*.svg>` を高解像度の PNG にするとき、ページに `document.documentElement.style.zoom=2` をかけて要素スクリーンショットを撮ると、要素ではなくページ左上が撮れた（座標が zoom で狂う）。
+- 正しくは、新しいブラウザコンテキスト（`deviceScaleFactor: 2`）で `<img>` を `setContent` し、実際の表示サイズ（CSS px）を指定して要素スクリーンショットを撮る。撮った画像は目で必ず確認する（今回は最初に気づかずアップロードし、ヒーローが崩れて発覚）。
+- Playwright の `path` は MCP サーバーの cwd 相対で、ワークツリーではなくメイン checkout の `.playwright-mcp/` に保存されることがある。保存先を `find` で確認してからコピーする。
+
+## 2026-10-27: Figma 再現パイプライン — lazy-load 画像と、画面で切れるテキスト
+- 画像が lazy-load のページ（Airline）は、抽出の前に最後までスクロールして全部読み込ませる。しないと全面スクリーンショットで画像が空白になる。`complete && naturalWidth>0` で確認する。
+- カード一覧の説明文など、CSS の line-clamp で画面では数行に切れているテキストは、DOM には全文が入っている。抽出するとそのまま長い文が入るので、Figma では `textTruncation=ENDING` と `maxLines` で画面と同じ見た目にする（高さが過大になるのを防ぐ）。
+
+## 2026-10-27: Figma 再現パイプライン — canvas と、N 枠の中の自動レイアウト枠
+- `<canvas>`（Podcast Notes のヒーロー）は抽出で灰色のプレースホルダーになる。canvas だけを撮るには、`html,body,main,main *{background:transparent !important}` と `main *{visibility:hidden} main canvas{visibility:visible}` を当ててから `canvas.screenshot({omitBackground:true})`。背景を透明にしないと、ページの背景色が PNG に焼き込まれて、暗い背景に載せたときに明るい四角が出る。
+- 絶対配置の枠（レイアウト無し）の子に自動レイアウト枠（V/H）を入れるとき、幅を固定してやらないと、中身の長さに合わせて広がる（Podcast Notes のエピソード一覧で、長いタイトルが 1 行で突き抜けた）。子を追加した後に `layoutSizingHorizontal=FIXED` と `resize(w)` をする。ビルダーの NONE 親の分岐に入れた。
+- Figma の別ページに置いたアップロード済みノード（`placedOnNodeId`）は、後で消えることがある（Sandbox の SVG が消えていた）。複製元はそのノードでなく、完成フレーム内のノードにする。
+
+### [2026-10-27] Podcast が古いまま: 原因は「Notion 共有切れ」と「保護ブランチへの bot 直 push」の二重
+
+**状況**: `/experiment/podcast-notes/all` が 215 件・最新 2026-06-10 のまま（Notion は 300 件超）。
+**原因が2つあり、片方を直しても反映されなかった**: (1) Notion 連携 `podcast-notes20260319` が DB に共有されていない（`object_not_found`、CI は「0件→UMAPエラー」で原因が埋もれた）。(2) main が PR 必須なのに更新ワークフローが直 push（GH013）。
+**教訓**: 症状（古い）から原因を1つに決めない。パイプラインを最後まで流して、実際に反映されるまで確認する。
+**防止**: `scripts/generate-podcast-data.js` は 0 件で明示エラー終了。`update-podcast-data.yml` は毎日・PR 経由・失敗時 Issue。`podcast-freshness.yml` は「Notion の3日以上前のページが公開データに無い」を毎日検査（原因でなく結果を見る）。本番ドメインは Vercel Security Checkpoint が bot に 429 を返すので、比較先は main 上の JSON。
+
+## 別環境で作った PDF の「収まり」は、レイアウトの手本にならない
+**事象**: acn-ops の草案 PDF は案件が3件増えても1ページに収まっていたが、cvData に同じ文を入れて生成すると EN で 27px、
+JP で 16px、デッキで 138px あふれた。
+**根本原因**: 草案はサイトの書体（Switzer 等）が読み込まれず、代わりの書体で詰まって描画されていた。
+**教訓**: 外から来た PDF は「文面の差分」だけを取り込み、収まりは必ずこのリポジトリの生成スクリプトで確かめる。
+`pdftotext -layout` を空白正規化して diff すると、文面の差だけが残る。
+
+## 2026-11-06: next.config の headers() は、ルートで付けたヘッダーを上書きする
+
+- 事象: `/api/img` のレスポンスに `Content-Security-Policy: default-src 'none'; sandbox` を付けたのに、
+  実際には全体の CSP（`'unsafe-inline'` を含む）しか出ていなかった。
+- 原因: `next.config` の `headers()`（`source: '/(.*)'`）が、ルートハンドラーで付けた同じキーのヘッダーを上書きする。
+- 対処: `headers()` の配列の**後ろ**に `source: '/api/img'` の規則を足す。後ろの規則が同じキーを上書きする。
+- 教訓: セキュリティヘッダーはコードを読むだけで済ませず、`curl -D -` で実際の応答を見て確かめる。

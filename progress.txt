@@ -1897,3 +1897,148 @@ Shopify のパスワードページは Shopify 側テンプレートなので、
 - 2026-11-07 13:00 河野さんが LINE（オープンチャット「河野さん、中初商店 (4)」）で、先方に掲載許可の依頼を送信した。添付は `先方に見せる資料（掲載予定のページ）_軽量版.pdf`（11-07 12:54 にいまのサイトから作り直した版、約2.1MB）。送った文面の確認項目は3つ: ①中初商店様の Instagram の投稿の写真（出典と投稿へのリンクを付ける）②新旧のサイトの画面③制作の過程の画像（没にしたデザイン案を含む）。「写真は公開済みのものに限る」「金額・個人情報・非公開の情報は載せない」「掲載はサイトの一般公開後」「控えたい点・修正点があれば知らせてほしい」も書いた。注意: 送った文面には、動画2本、先方の返信の要旨、契約書の条文は入っていない（PDF には動画の静止画と要旨が載っている）。返事が来たら、動画と要旨も含めて OK かを、返事の文面で確認する。LINE のファイルの保存期限は 11-14 13:00。返事待ち。返事のスクリーンショットは Notion か progress.txt に残す（根拠になる）。
 
 - 2026-11-07 契約書（`~/Downloads/0000001_業務委託契約書_中初商店.pdf`、GMOサイン）を読んで第7条3項を確認した。原文: 「乙は、本業務の実績をポートフォリオとして使用できるものとする。」（乙＝河野さん）。第7条1項: 成果物の著作権は報酬の完済をもって甲（先方）に帰属。第8条: 本契約に関連して知り得た相手方の秘密情報（事業上の情報・顧客情報・技術情報）は第三者に開示しない（公知の情報は除く）。契約終了後も2年間存続。解釈: 実績としてポートフォリオに載せること自体は、7-3 が根拠になる。ただし、先方の Instagram の写真の使用、先方の返信の引用、非公開情報は 7-3 の文面からは読み取れないので、書面の OK（11-07 13:00 に依頼済み）を取る。金額・顧客情報・非公開の情報は第8条のため載せない。決定（河野さん 11-07）: 詳細版のどの内容を SY に入れるかは、いまの SY（localhost:3007/jp/work/nakahatsu-sy）のままでよい。FB-3 は無し。CLAUDE.md の人物素材の規定は 11-04/11-06 の判断に合わせて直した。
+
+
+## 2026-10-26: Figma portfolio_v6 — 土台（variables / styles / ページ構成）
+
+ファイル: https://www.figma.com/design/r9AUm9XA7iTNGCdpVAQW7U/ （fileKey `r9AUm9XA7iTNGCdpVAQW7U`）
+目的: 現行サイトを Figma に再現し、河野さんが Figma 上で直した細かい指摘を Claude が読んでサイトに反映する。
+variables / styles はデザインの統一と作業効率のため（現行サイトに崩れ・質の低い部分があるため、再現しながら直す前提）。
+
+**作ったもの（土台のみ。サイトのフレームはまだ無い）**
+- Variables 5コレクション・104個: Primitives（生の値・非公開）→ Color（意味付け・alias）、Layout / Typography（Mobile・Desktop の2モード）、Motion。全変数にスコープと WEB code syntax（Primitives は非公開のため code syntax なし）
+- Text styles 18（display〜caption、EN/JP。fontSize は Typography 変数にバインド）、Effect styles 3（elevation-1〜3）
+- ページ: Cover / Getting Started / Foundations / Components / Site — JP / Site — EN / Sandbox / Archive / Notes（`---` は区切り）
+
+**v5 からの修正（値のズレ）**: surface #fcfbfc→#EFF1F1、ink-tertiary #6b6b73→#565D61、surface-raised・tab 色を追加。コード（globals.css）を正とした。
+**既知の制約**: Figma に Switzer / Helvetica Neue が無いので EN の text style は SF Pro で代用。書体名は Typography の `family/*` 文字列変数に持たせてある。
+
+**方針（2026-10-26 河野さん確定）**: 再現は「B: コードから組み立て、変数・スタイルに紐づける」。順番は JP の Home（PC → SP）から。
+参照するコードは `worktree-nakahatsu-case-study-v2`（中初カードがあるのはこちら。このブランチは main 起点）。dev サーバー `localhost:3007` で実測した。
+
+**Site — JP「Home — PC」完成（node 9:9、1280×3770。実機は 3767）**
+- コンポーネント（Components ページ）: Tag / Work Card（JP 文言スタイル。EN 版は未）/ Header/PC / Footer/PC
+- 画像: 浮世絵・中初は元 webp を PNG にして取り込み、プラグインのカード束は実画面を 2x で撮影して取り込み
+- 文言は messages/jp.json と文字数・全文で照合済み（11か所一致）
+- 実機との差: 見出しの書体（Switzer→SF Pro の代用）、高さ +3px、ヘッダーの緑ドットはホバー/アクティブ時のみ表示のため非表示にしてある
+
+**学び**: ① 変数に紐づけたペイントの `opacity` はインスタンスに伝わらない → 透明度つきの色は「アルファ付きの色変数」にする（Color: `tint/ink-*`, `surface/page-glass`）。② Components/Home のフレームには Typography・Layout を Desktop モードに明示指定しないと Mobile のサイズで描かれる。③ Playwright の保存先はワークツリー内の `.playwright-mcp/` のみ許可。
+
+**Site — JP「Home — SP」完成（2026-10-26、node 12:165、375×2671。実機は 2670）**
+- コンポーネント追加: Header/SP, Footer/SP, Work Card/SP（Work Card は Work Card/PC に改名）
+- **テキストスタイルを PC 用 / SP 用に分割（河野さんの指摘対応）**: 以前は Typography 変数（Mobile/Desktop）に紐づけていて、設定画面が「26」と出るのに描画は 32px で、実機と違って見えた。今は `title-lg/jp`（PC, 32px）と `sp/title-lg/jp`（SP, 26px）が px を直接持つ。説明欄に「PC 32px / SP 26px」。変数 `size/*` は参照用。
+- 画像の高さは `lockAspectRatio()`（1088:680）で解決。インスタンス内の resize / layoutMode 上書きは効かなかった。
+- 学びは lessons.md に記録済み。
+
+**About / CV（JP）完成（2026-10-26）**: Site — JP ページに About — PC / About — SP / CV — PC / CV — SP。
+- About: 写真・見出し・本文・ボタン・「興味・関心」・ドラッグのヒント・相関図（サイトの SVG を取り込み。PC/SP で別々に取得。**円弧上の5つの文字は SVG の textPath のため未取り込み**）。
+- CV: 描画された DOM から構造化データ（職歴・学歴・スキル・プロジェクト）を作って組み立て。高さ PC 5169（実機 5147）/ SP 6452（実機 6468）。
+- 追加コンポーネント: Button/Primary, Drag Hint。Header/PC にタブ別のドット（Dot/experiment|about|cv|blog、通常は不透明度0、アクティブ時に 100%）。
+- 追加スタイル: meta / sub-label / detail/jp / section-label / micro / button/jp（と sp/ 版。sp/button/jp は 19px）。
+- 学び: 非表示にした子はインスタンスから出せない／位置も変えられない → 不透明度0で全部置いておく。
+- 河野さんの提案（フッター凡例のラベルを「幅 = 使用頻度」「濃さ = 投稿頻度」に）は Figma の Footer/SP のインスタンスに入っている。コンポーネントと サイトのコードには未反映（確認待ち）。
+
+**次**: Blog / Experiment / Podcast Notes / Work 詳細5本（PC・SP）→ EN 版。Work 詳細は非常に長い（Nakahatsu だけで PC 9995px）ので、進め方を河野さんに確認する。
+
+## 2026-10-26: Figma プラグイン統計が古い問題を修正（毎日同期 + PR経由マージ）
+
+- 原因: update-figma-stats.yml が 9/21 以降ずっと失敗していた。スクレイプは成功していたが、
+  `main` の保護ルール（PR必須）に bot の直 `git push` が弾かれ、pluginStats.json が更新されなかった。
+- ワークフローを「ブランチ push → PR 作成 → squash マージ」に変更。cron を毎週月曜 → **毎日 04:00 UTC** に。
+- Actions の「PR 作成・承認を許可」設定（can_approve_pull_request_reviews）を true に変更（リポジトリ設定）。
+- perfect-markdown も自動取得の対象に追加（公開先は @iorikawano2 のまま）。4 本すべて自動化。
+- 実測値で更新: PPTX 15.3k→17.9k / ♡148→187、Perfect Markdown 707→1.1k / ♡13→19、
+  Bulk Screenshot 61→71、Pinterest 5→83 / ♡0→2。
+- 追加（同日）: data-freshness-watchdog.yml（毎日、最後の成功が古ければ Issue 自動作成・回復で自動クローズ）。
+  update-podcast-data.yml も同じ直 push 問題があったので PR 経由に変更。
+- 未解決: podcast パイプラインは 9/27 から毎週失敗（"Not enough data points (0)" = Notion から 0 件取得）。
+  NOTION_API_KEY / NOTION_PODCAST_DB_ID の Secrets かDB共有設定の確認が必要。別件。
+
+## 2026-10-27: Figma v6 — Work 詳細の再現（コードから組む。汎用パイプライン）
+
+河野さんの選択（「2 a」）: Work 詳細はコードから組み、変数・スタイルに紐づける。
+
+**パイプライン（再利用できる。ファイルは job の tmp にある。リポジトリには入れていない）**
+1. 抽出: ブラウザで `window.__extract()`（位置・書体・色・画像・SVG を持つ木）。`.playwright-mcp/extract-lib.js` を `addScriptTag` で読み込む。
+2. 画像: curl で取得 → sips で PNG → `upload_assets` → curl で POST（imageHash を得る）。SVG の `<img>` は CSS が効かないのでブラウザで描画した PNG を使う。
+3. 計画: Python で、位置から縦/横の自動レイアウト・余白・整列を判定。テキストは PC/SP のスタイルに、色は変数に最近傍で割り当て。
+4. 分割: 1 回 30KB 程度の ops に分け、`use_figma` で組み立て（親のパスで続きを追加）。
+5. 検証: テキスト全部の長さ+チェックサムを計画と照合（誤字・欠落の検出）、画像 hash の有効性、高さ。
+
+**完成**: Experiment — PC（本体のみ）、Work — Nakahatsu — PC / SP、Work — Ukiyoe — PC（いずれも JP、Site — JP ページ）。
+**見つけた不具合**: 絶対位置の子だけを持つ枠の中身が作られない → 修正済み（Ukiyoe PC は手で補った）。ナビのスタイル名は `nav` / `nav/active`（言語サフィックスなし）。
+**既知の差**: 動画（Ukiyoe の手塗りタイムラプス）は灰色のプレースホルダー。書体は SF Pro 代用。ヘッダー/フッターのインスタンスはまだ付けていない（最後にまとめて付ける）。
+
+追記 (2026-10-27): Work — Ukiyoe — SP（Site — JP、x=1400,y=24600）と Work — Figma Plugins — PC（Site — JP、x=0,y=40800、フレーム 39:628）を再現。Figma Plugins PC はヒーローのカード束（装飾）・概要・4 ツールカードまで目視で一致。次: Figma Plugins SP、Google UX、Gym、Airline、Blog、Podcast Notes、Experiment SP。
+
+追記 (2026-10-27): Work — Figma Plugins — SP（Site — JP、x=1400,y=40800、フレーム 41:628）を再現。テキスト 82・画像 12（PC と同数）、フォント欠落なし。ヒーローのカード束は PC のものを複製して 375/1280 に縮小（作り直さない）。残り: Google UX、Gym、Airline、Blog、Podcast Notes（各 PC/SP）、Experiment SP、Experiment PC の位置修正、Header/Footer インスタンスの付与。
+
+追記 (2026-10-27): Work — Google UX — PC（44:628、0,44000、高さ30123、テキスト49・画像37）と SP（45:628、1400,44000、テキスト31・画像37）を再現。いずれもフォント欠落なし。次の空き y は 74600。次: Gym、Airline、Blog、Podcast Notes、Experiment SP。
+
+追記 (2026-10-27): Work — Gym — PC（48:628、0,74600、高さ6600、テキスト97・画像7）と SP（52:628、1400,74600、高さ9181、テキスト93・画像7）を再現。SVG の <img> は、別コンテキスト（deviceScaleFactor 2）で img を表示して要素スクリーンショットで PNG 化（CSS zoom は要素撮影の位置がずれるので使わない）。ヒーローのスタッツカードは PC のノードを複製して SP 幅に縮小。次の空き y は 84200。次: Airline、Blog、Podcast Notes、Experiment SP。
+
+追記 (2026-10-27): Work — Airline — PC（56:628、0,84200、テキスト67・画像7）と SP（57:628、1400,84200、テキスト63・画像7）、Blog — PC（59:628、0,95000、高さ1944）と SP（60:628、1400,95000、高さ1974）を再現（いずれも Site — JP）。Blog の note カードは記事全文が DOM にあり画面では3行で切れるので、説明文は textTruncation=ENDING / maxLines=3 にした。lazy-load 画像は、抽出前にページを最後までスクロールして読み込ませる（Airline で空白になった）。次の空き y は 106500。残り: Podcast Notes、Experiment SP（JP）、Experiment PC の位置修正、Header/Footer インスタンス付与、EN 版。
+
+追記 (2026-10-27): Work — Gym / Airline、Blog、Experiment — Podcast Notes、Experiment — SP を再現（JP、いずれも PC/SP。Experiment — PC は位置修正済み）。Podcast Notes のヒーローは canvas で、DOM から取れないため、canvas だけを透過 PNG で撮って画像として入れた（背景を透明にしてから撮る）。
+- 位置（Site — JP）: Gym 74600、Airline 84200、Blog 95000、Podcast Notes 106500、Experiment PC/SP 112300（x=0 / 1400）。重なっていた Experiment PC（CV PC と）、Ukiyoe SP（Nakahatsu SP と）、Figma Plugins SP（Ukiyoe SP と）を移動: Experiment PC→y112300、Ukiyoe SP→y26100、Figma Plugins SP→y60000。
+- 各ページのテキスト数は計画と一致（Gym 97/93、Airline 67/63、Blog 22/22、Podcast Notes 133/126、Experiment SP 15）。
+- 残り: Header/Footer インスタンスの付与、Nakahatsu PC の nav スタイル修正、EN 版（JP が確定してから）。
+
+追記 (2026-10-27): Header/Footer インスタンスを、Work 6 本・Blog・Experiment・Podcast Notes の PC/SP 全 18 フレームに付与（Home/About/CV と同じ方式: Footer は末尾でレイアウトに入り、Header は絶対配置 0,0）。アクティブは Blog=Blog、Experiment / Podcast Notes=Experiment（nav/active + Dot/<名前> の opacity=1）。Work 系は無し。ページ枠の左右パディングを 0 にし、本文枠は固定幅（PC 1104 / SP 327）で中央寄せにして、フッターを全幅にした。Nakahatsu PC のサイドナビ 4 項目に nav スタイルを適用。フッター追加でフレームが伸びたので Ukiyoe PC→y24700、Figma Plugins PC→y41000、Ukiyoe SP→y26300、Google UX SP→y44400 に動かし、重なりゼロを確認。
+- JP の再現はこれで完了（Home/About/CV/Experiment/Podcast Notes/Blog/Work 6 本、PC+SP）。EN 版は未着手（注釈は JP フレームだけに付ける運用のため、必要になってから）。
+
+## Podcast 同期の復旧（2026-10-27）
+- [x] Notion 連携を DB に再共有（河野）→ 同期再開。PR #76: 更新ワークフローを PR 方式・毎日・失敗時 Issue に、
+      鮮度チェック（podcast-freshness.yml）追加、データを 215→301 件（最新 2026-10-26）に更新。merge 済み。
+- セキュリティ強化（別PRで順次。2026-11-07 時点の状況に更新）:
+  - [x] 依存パッケージの脆弱性（Dependabot アラート）: PR #108 で next 15.5.29（critical RCE 3件）・zod 4・csv-parse 7。
+  - [x] `/api/img` の SSRF・SVG 対策: PR #111（リダイレクトを追わない・ラスターのみ・専用 CSP `default-src 'none'; sandbox`）。
+  - [x] `/api/translate`: PR #111 で 410 を返すだけに（ファイルは残置）。
+  - [x] 情報漏えいの小修正: PR #111 で `/api/articles` のエラーを一般文言に、`/api/podcast-notes/[id]` に親 DB チェック。
+  - [ ] `pages/api/translate.ts` と `/api/img` の削除（河野さん判断待ち。サイト内からの利用はゼロ）。
+  - [ ] CSP の nonce 化（全体の CSP はまだ `'unsafe-inline'` / `'unsafe-eval'` を許可。Report-Only から段階導入）。
+  - [ ] CI に CodeQL・`pnpm audit`、Dependabot の設定ファイル（.github/dependabot.yml）。
+  - [ ] devDep 経由で残るアラート（@figma/code-connect 経由の zod3/glob/minimatch、adm-zip は修正版なし）。
+  - [ ] 河野さん作業: GitHub の secret scanning・push protection、Notion 連携を読み取りのみ・ポッドキャスト DB だけに（未確認）。
+        Vercel の Bot Protection は検索・リクルーター向けに Log のまま（2026-11-06 の方針。守りはコード側）。
+
+## 2026-10-27: レジュメ・デッキに Accenture の新しい案件を反映（acn-ops の草案から）
+
+- 草案: 仕事PC の acn-ops が作った `Iori-Kawano-Resume-EN-2026-10.pdf`。差分は Accenture の欄（案件3件追加・数字追加）と
+  YUMEMI（正社員）の概要の短縮だけ。期間・事実・機密区分は acn-ops に聞き直した。
+- cvData: Accenture に 交通（2026-08）・金融（2026-05〜06）・小売（2026-04〜06）を追加。概要を5領域に。
+  大学は Led→Owned（UI/UX 担当がもう1名いた）、resumeLine に「2.5週間、4組織6名」。
+  航空の resumeLine は「multi-platform、light/dark、targeting WCAG AA」（9プラットフォームは特定されうるので外した。
+  WCAG AA は検証記録がないので targeting）。YUMEMI 正社員の概要は「Joined full-time after graduating.」だけに。
+- ぼかし: ビルマ語→第2言語、鉄道会社→交通事業者、家電量販店→小売事業者、GA4→analytics。数字の羅列（399変数等）は外した。
+- 未確認: 交通・金融は acn-ops 側の機密区分が internal_only。河野さんの判断で業界ラベルのみで掲載。上長確認は未実施。
+- レイアウト: EN レジュメのコンパクト表示の行間・余白、JP の詳細表示の案件間の余白を少し詰めて1ページ目に収めた。
+  デッキは 8→9 ページ（2ページ目 Accenture、3ページ目 YUMEMI 正社員）。
+
+## 2026-11-06 依存パッケージの脆弱性対応 — PR #108（fix/dependabot-vulns）
+- Dependabot 61件のうち、Next.js の critical RCE 3件（Image Optimization API ほか）が本番に該当していた → next 15.5.29 に更新
+- zod 3→4（アプリ内で未使用）、csv-parse 6→7（/api/gym-stats のみ、動作確認済み）、lockfile を semver 範囲内で更新
+- 残り: @figma/code-connect（devDep、デプロイされない）経由の zod3/glob/minimatch、adm-zip の symlink 件（修正版なし）
+- 検証: build 成功、tsc エラーは main と同じ60件（既存）、next start でページ・API を確認
+- deepsec の AI レビューは有料のため実施しない（河野さん判断）。雛形は branch worktree-deepsec-init に残置
+
+## 2026-11-06: セキュリティの穴をふさぐ（Bot Protection を Challenge にしなくて済むように）
+
+- 方針: 検索・AI 検索・リクルーターの目に触れるよう、Vercel の Bot Protection は Log のままにする。
+  守りは Firewall ではなくコード側に持たせる。
+- next の更新は PR #108（15.5.29）と重なったため、マージ時に #108 側の package.json / lockfile を採用した。
+- `/api/podcast-notes/[id]`: 親が NOTION_PODCAST_DB_ID のページ以外は 404。以前は Notion 連携が読めるページなら
+  ID さえ分かれば何でも返せた。
+- `/api/img`: リダイレクトを追わない（許可ドメインの迂回を防ぐ）、ラスター画像だけ（SVG 不可）、
+  `default-src 'none'; sandbox` の CSP（next.config で全体の CSP より優先させる）、s-maxage で CDN キャッシュ。
+  サイト内からの利用はゼロ。削除するかは河野さんの判断待ち。
+- `/api/translate`（pages router）: 未使用・本番で 500 のまま、誰でも POST でディスク書き込み＋外部中継できる作りだった。
+  410 を返すだけにした（ファイルは残す）。
+- `/api/articles`: エラー時に error.message を返していたのを一般文言に。
+- 未確認: Notion 連携の権限が「読み取りのみ・ポッドキャスト DB だけ共有」になっているか（河野さん側）。
+
+## 2026-11-07: 使われていない API を2つ削除
+
+- `/api/img`（画像の中継）と `/api/translate`（pages router の翻訳中継）を削除。どちらもサイト内からの利用はゼロ。
+  #111 で守りを固めて残していたが、河野さんの OK で削除。`pages/` フォルダもこれで無くなった（App Router のみ）。
+- next.config の `/api/img` 専用 CSP も削除。
