@@ -152,7 +152,7 @@ export async function GET(request: NextRequest) {
 
   if (!NOTION_API_KEY || !NOTION_DB_ID) {
     return NextResponse.json(
-      { error: 'Podcast notes API not configured' },
+      { error: 'Podcast notes API not configured (missing NOTION_API_KEY or NOTION_PODCAST_DB_ID)' },
       { status: 503 }
     );
   }

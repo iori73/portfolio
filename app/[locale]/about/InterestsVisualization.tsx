@@ -11,6 +11,9 @@ interface InterestNode {
   children?: InterestNode[];
 }
 
+// Hierarchy nodes are mutated in place by the force simulation (x, y, fx, fy, ...).
+type SimNode = d3.HierarchyNode<InterestNode> & d3.SimulationNodeDatum;
+
 interface InterestData {
   name: string;
   children: InterestNode[];
@@ -83,7 +86,7 @@ const InterestsVisualization: React.FC = () => {
 
     const root = d3.hierarchy<InterestNode>(data);
     const links = root.links();
-    const nodes = root.descendants();
+    const nodes: SimNode[] = root.descendants();
     const mainCategories = nodes.filter((d) => d.depth === 1);
 
     const simulation = d3
@@ -115,7 +118,7 @@ const InterestsVisualization: React.FC = () => {
       .attr('stroke-opacity', 0.4)
       .attr('stroke-width', (d) => (d.source.depth === 0 ? 2 : 1));
 
-    const node = g.append('g').selectAll('.node').data(nodes).join('g').attr('class', 'node').call(drag(simulation) as any);
+    const node = g.append('g').selectAll<SVGGElement, SimNode>('.node').data(nodes).join('g').attr('class', 'node').call(drag(simulation));
 
     node
       .append('circle')
@@ -166,25 +169,26 @@ const InterestsVisualization: React.FC = () => {
       });
     });
 
-    function drag(simulation: d3.Simulation<any, any>) {
-      function dragstarted(event: any) {
+    function drag(simulation: d3.Simulation<SimNode, undefined>) {
+      type DragEvent = d3.D3DragEvent<SVGGElement, SimNode, SimNode>;
+      function dragstarted(event: DragEvent) {
         if (!event.active) simulation.alphaTarget(0.3).restart();
         event.subject.fx = event.subject.x;
         event.subject.fy = event.subject.y;
       }
 
-      function dragged(event: any) {
+      function dragged(event: DragEvent) {
         event.subject.fx = event.x;
         event.subject.fy = event.y;
       }
 
-      function dragended(event: any) {
+      function dragended(event: DragEvent) {
         if (!event.active) simulation.alphaTarget(0);
         event.subject.fx = null;
         event.subject.fy = null;
       }
 
-      return d3.drag<SVGGElement, unknown>().on('start', dragstarted).on('drag', dragged).on('end', dragended);
+      return d3.drag<SVGGElement, SimNode, SimNode>().on('start', dragstarted).on('drag', dragged).on('end', dragended);
     }
   };
 

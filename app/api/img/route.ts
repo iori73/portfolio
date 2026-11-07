@@ -23,6 +23,10 @@ function isAllowedUrl(urlString: string): boolean {
 
 const MAX_RESPONSE_SIZE = 10 * 1024 * 1024; // 10MB
 
+// Raster formats only. SVG can carry <script>, and served from this origin it would
+// run under the site's CSP (which allows inline scripts) — a stored-XSS vector.
+const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/avif'];
+
 export async function GET(request: NextRequest) {
   const ip = request.headers.get('x-forwarded-for')?.split(',')[0] ?? 'unknown';
   const { success } = rateLimit(ip, { limit: 30, windowMs: 60_000 });
@@ -38,18 +42,18 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    // redirect:'manual' — 許可ドメインがリダイレクトで別ホストへ飛ばす経路（SSRF / オープンプロキシ）を塞ぐ
+    // Do not follow redirects: an allowed host redirecting elsewhere would otherwise
+    // turn this into a proxy for any URL, bypassing ALLOWED_DOMAINS.
     const response = await fetch(url, {
       headers: { 'User-Agent': 'Mozilla/5.0' },
-      redirect: 'manual',
+      redirect: 'error',
     });
-    if (response.status >= 300 && response.status < 400) {
-      return NextResponse.json({ error: 'Redirect not allowed' }, { status: 502 });
+    if (!response.ok) {
+      return NextResponse.json({ error: 'Failed to fetch' }, { status: 502 });
     }
 
-    const contentType = response.headers.get('content-type') || '';
-    // SVG は自オリジンから配信するとスクリプトが走り得るので拒否（ラスター画像のみ）
-    if (!contentType.startsWith('image/') || contentType.startsWith('image/svg')) {
+    const contentType = (response.headers.get('content-type') || '').split(';')[0].trim().toLowerCase();
+    if (!ALLOWED_TYPES.includes(contentType)) {
       return NextResponse.json({ error: 'Not an image' }, { status: 400 });
     }
 
@@ -66,8 +70,13 @@ export async function GET(request: NextRequest) {
     return new NextResponse(buffer, {
       headers: {
         'Content-Type': contentType,
-        'Cache-Control': 'public, max-age=3600',
+        // Even if a file is mislabelled, the browser must not run anything in it.
+        // (next.config.mjs sets the same CSP for /api/img so the site-wide one cannot win.)
+        'Content-Security-Policy': "default-src 'none'; sandbox",
         'X-Content-Type-Options': 'nosniff',
+        // s-maxage lets Vercel's CDN answer repeats, so floods of the same URL do not
+        // invoke the function (the in-memory rate limiter is per-instance only).
+        'Cache-Control': 'public, max-age=3600, s-maxage=86400',
       },
     });
   } catch {
