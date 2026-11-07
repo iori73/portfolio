@@ -763,3 +763,18 @@ headless フラグを疑う。
 **原因が2つあり、片方を直しても反映されなかった**: (1) Notion 連携 `podcast-notes20260319` が DB に共有されていない（`object_not_found`、CI は「0件→UMAPエラー」で原因が埋もれた）。(2) main が PR 必須なのに更新ワークフローが直 push（GH013）。
 **教訓**: 症状（古い）から原因を1つに決めない。パイプラインを最後まで流して、実際に反映されるまで確認する。
 **防止**: `scripts/generate-podcast-data.js` は 0 件で明示エラー終了。`update-podcast-data.yml` は毎日・PR 経由・失敗時 Issue。`podcast-freshness.yml` は「Notion の3日以上前のページが公開データに無い」を毎日検査（原因でなく結果を見る）。本番ドメインは Vercel Security Checkpoint が bot に 429 を返すので、比較先は main 上の JSON。
+
+## 別環境で作った PDF の「収まり」は、レイアウトの手本にならない
+**事象**: acn-ops の草案 PDF は案件が3件増えても1ページに収まっていたが、cvData に同じ文を入れて生成すると EN で 27px、
+JP で 16px、デッキで 138px あふれた。
+**根本原因**: 草案はサイトの書体（Switzer 等）が読み込まれず、代わりの書体で詰まって描画されていた。
+**教訓**: 外から来た PDF は「文面の差分」だけを取り込み、収まりは必ずこのリポジトリの生成スクリプトで確かめる。
+`pdftotext -layout` を空白正規化して diff すると、文面の差だけが残る。
+
+## 2026-11-06: next.config の headers() は、ルートで付けたヘッダーを上書きする
+
+- 事象: `/api/img` のレスポンスに `Content-Security-Policy: default-src 'none'; sandbox` を付けたのに、
+  実際には全体の CSP（`'unsafe-inline'` を含む）しか出ていなかった。
+- 原因: `next.config` の `headers()`（`source: '/(.*)'`）が、ルートハンドラーで付けた同じキーのヘッダーを上書きする。
+- 対処: `headers()` の配列の**後ろ**に `source: '/api/img'` の規則を足す。後ろの規則が同じキーを上書きする。
+- 教訓: セキュリティヘッダーはコードを読むだけで済ませず、`curl -D -` で実際の応答を見て確かめる。

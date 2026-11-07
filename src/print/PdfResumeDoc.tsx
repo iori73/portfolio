@@ -68,17 +68,17 @@ function CompactEntry({ work, lang }: { work: WorkExperience; lang: 'en' | 'jp' 
   const body = bodyFontClass(lang);
 
   return (
-    <div className="pdf-block mb-2.5">
+    <div className="pdf-block mb-2">
       <EntryHeader work={work} lang={lang} />
-      <p className={`text-body-sm ${body} text-ink-secondary leading-[1.45] mt-0.5`}>
+      <p className={`text-body-sm ${body} text-ink-secondary leading-[1.4] mt-0.5`}>
         {work.summary[lang]}
       </p>
       {work.projects && work.projects.length > 0 && (
-        <ul className="mt-1">
+        <ul className="mt-0.5">
           {work.projects.map((project) => (
             <li
               key={project.id}
-              className={`text-body-sm ${body} text-ink-secondary leading-[1.45] pl-3 relative`}
+              className={`text-body-sm ${body} text-ink-secondary leading-[1.4] pl-3 relative`}
             >
               <span className="absolute left-0 text-ink-tertiary" aria-hidden="true">
                 ·
@@ -123,8 +123,8 @@ function DetailedEntry({
           RESUME_BLOCKS.includes(b.labelKey),
         );
         return (
-          <div key={project.id} className="pdf-block border-l-2 border-line-subtle pl-3 mb-2">
-            <div className="mb-0.5">
+          <div key={project.id} className="pdf-block border-l-2 border-line-subtle pl-3 mb-1.5">
+            <div>
               <span className="font-space-grotesk text-caption font-semibold text-ink-tertiary uppercase tracking-[0.06em]">
                 {project.label[lang]}
               </span>
@@ -132,7 +132,7 @@ function DetailedEntry({
                 {formatProjectPeriod(project.period, lang)}
               </span>
             </div>
-            <p className={`text-body-sm ${body} text-ink-secondary leading-[1.5] mb-1`}>
+            <p className={`text-body-sm ${body} text-ink-secondary leading-[1.5] mb-0.5`}>
               {project.summary[lang]}
             </p>
             {blocks.map(({ labelKey, items }) => (

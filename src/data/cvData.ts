@@ -121,17 +121,48 @@ export const cvData: CVData = {
       startDate: '2025-12',
       endDate: 'Present',
       summary: {
-        en: 'Design system for a major airline across mobile apps and web, and a university alumni app.',
-        jp: '大手航空会社向けデザインシステム（モバイルアプリ・Web）と、大学OB・OG向け校友アプリ。',
+        en: 'Design system, proposal, and mockup work across aviation, education, retail, finance, and transportation.',
+        jp: '航空、教育、小売、金融、交通の各領域で、デザインシステム、提案、モック制作に従事。',
       },
       projects: [
+        {
+          id: 'acn-transportation',
+          label: { en: 'Transportation', jp: '交通' },
+          period: { start: '2026-08', end: '2026-08' },
+          summary: {
+            en: "Supported an RFP proposal for a transport operator's app redesign: VoC and analytics review, as-is/to-be information architecture, and concept direction.",
+            jp: '交通事業者のアプリ刷新に向けたRFP提案を支援。VoC・アナリティクスの分析、現状／将来の情報設計（IA）、コンセプト方向性の検討を担当。',
+          },
+        },
+        {
+          id: 'acn-finance',
+          label: { en: 'Finance', jp: '金融' },
+          period: { start: '2026-05', end: '2026-06' },
+          summary: {
+            en: 'Designed the procedure-selection home of a banking app so one layout holds in Japanese and a second language; created the account-inquiry icon set and merged components into the existing design system.',
+            jp: '銀行アプリの手続き選択ホームを設計。日本語と第2言語の両方で同一レイアウトが成立する構造とし、口座照会アイコンの制作と既存デザインシステムへのコンポーネント統合も担当。',
+          },
+        },
+        {
+          id: 'acn-retail',
+          label: { en: 'Retail', jp: '小売' },
+          period: { start: '2026-04', end: '2026-06' },
+          summary: {
+            en: "Led UI mockups for an inbound-tourist area app (map, trip plan, membership wallet) and supported a proposal for a retailer's e-commerce renewal.",
+            jp: '訪日客向けエリアアプリ（地図・プラン・会員証ウォレット）のUIモックを主担当し、小売事業者のEC刷新提案を支援。',
+          },
+        },
         {
           id: 'acn-university',
           label: { en: 'University', jp: '大学' },
           period: { start: '2026-04', end: '2026-04' },
           summary: {
-            en: 'Led Figma prototype design for a university alumni app. Designed full-screen flows from LINE-integrated onboarding through donation program participation and completion.',
-            jp: '大学OB・OG向け校友アプリのFigmaプロトタイプ設計を主導。LINE連携オンボーディングから寄付プログラム参加・完了まで全画面フローを設計。',
+            en: 'Owned the Figma prototype design for a university alumni app. Designed full-screen flows from LINE-integrated onboarding through donation program participation and completion.',
+            jp: '大学OB・OG向け校友アプリのFigmaプロトタイプ設計を担当。LINE連携オンボーディングから寄付プログラム参加・完了まで全画面フローを設計。',
+          },
+          resumeLine: {
+            en: 'Owned the Figma prototype design for an alumni donation app in 2.5 weeks, with a team of 6 across 4 organizations.',
+            jp: '校友向け寄付アプリのFigmaプロトタイプ設計を2.5週間で担当。4組織6名のチームで推進。',
           },
         },
         {
@@ -143,8 +174,8 @@ export const cvData: CVData = {
             jp: '航空会社のデザインシステムのトークン基盤とツールを構築。カラー・タイポグラフィ・スペーシングを対象に、マルチテーマ対応の2層トークンアーキテクチャを設計し、トークンの自動セットアップ・デザインLint修正・変数マイグレーションを担うFigmaプラグイン群を開発。「Lint→Migrate」の順序設計により、手作業の再バインドを大幅に削減した。',
           },
           resumeLine: {
-            en: "Built the design system's token foundation, along with the tooling that supports its day-to-day use.",
-            jp: 'デザインシステムのトークン基盤と、その運用を支えるツールを構築。',
+            en: 'Built the token foundation of a multi-platform design system, with light/dark modes and targeting WCAG AA, along with the tooling that supports its day-to-day use.',
+            jp: 'マルチプラットフォームのデザインシステムのトークン基盤を構築。ライト／ダークモードに対応し、WCAG AAを目標とした。日常運用を支えるツールも整備。',
           },
         },
       ],
@@ -164,8 +195,8 @@ export const cvData: CVData = {
       startDate: '2025-04',
       endDate: '2025-11',
       summary: {
-        en: 'Joined full-time after graduating. Contributed to the UI renewal of a video learning platform for skilled-trade workers in the housing construction industry, and continued the smart home voice notification work.',
-        jp: '大学卒業後、正社員として参画。住宅建設業界の技能職向け動画学習プラットフォームのUIリニューアルに参画し、スマートホーム音声通知の設計を継続。',
+        en: 'Joined full-time after graduating.',
+        jp: '大学卒業後、正社員として参画。',
       },
       projects: [
         {

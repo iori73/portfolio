@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-const TOTAL = 8;
+const TOTAL = 9;
 
 /** Section label in the shared caps style. */
 function Kicker({ children }: { children: React.ReactNode }) {
@@ -104,14 +104,18 @@ export default async function PrintPortfolioPage({
         </div>
       </PdfPage>
 
-      {/* ── 2–4. Résumé ──────────────────────────────────────────────
+      {/* ── 2–5. Résumé ──────────────────────────────────────────────
           Page breaks are explicit rather than auto-flowed so the baked footer
           numbers stay correct; the generator asserts no page overflows. */}
       <PdfPage n={2} total={TOTAL} lang={lang} kicker={labels.workExperience}>
-        <PdfExperience lang={lang} labels={labels} ids={['work-accenture-song', 'work-yumemi']} />
+        <PdfExperience lang={lang} labels={labels} ids={['work-accenture-song']} />
       </PdfPage>
 
       <PdfPage n={3} total={TOTAL} lang={lang} kicker={labels.workExperience}>
+        <PdfExperience lang={lang} labels={labels} ids={['work-yumemi']} heading={false} />
+      </PdfPage>
+
+      <PdfPage n={4} total={TOTAL} lang={lang} kicker={labels.workExperience}>
         <PdfExperience
           lang={lang}
           labels={labels}
@@ -121,7 +125,7 @@ export default async function PrintPortfolioPage({
         />
       </PdfPage>
 
-      <PdfPage n={4} total={TOTAL} lang={lang} kicker={labels.workExperience}>
+      <PdfPage n={5} total={TOTAL} lang={lang} kicker={labels.workExperience}>
         <PdfExperience
           lang={lang}
           labels={labels}
@@ -135,12 +139,12 @@ export default async function PrintPortfolioPage({
         <PdfExperience lang={lang} labels={labels} ids={['work-kibidango']} heading={false} />
       </PdfPage>
 
-      <PdfPage n={5} total={TOTAL} lang={lang} kicker={labels.education}>
+      <PdfPage n={6} total={TOTAL} lang={lang} kicker={labels.education}>
         <PdfEducationSkills lang={lang} labels={labels} />
       </PdfPage>
 
-      {/* ── 6. Airline — overview ────────────────────────────────── */}
-      <PdfPage n={6} total={TOTAL} lang={lang} kicker={caseKicker} id="cs-airline">
+      {/* ── 7. Airline — overview ────────────────────────────────── */}
+      <PdfPage n={7} total={TOTAL} lang={lang} kicker={caseKicker} id="cs-airline">
         <Kicker>{a('type')}</Kicker>
         <h2 className="text-headline mb-2">{a('title')}</h2>
         <p className={`text-body-lg ${body} text-ink-secondary leading-[1.6] mb-5`}>{a('subtitle')}</p>
@@ -178,8 +182,8 @@ export default async function PrintPortfolioPage({
         </div>
       </PdfPage>
 
-      {/* ── 7. Airline — design process ──────────────────────────── */}
-      <PdfPage n={7} total={TOTAL} lang={lang} kicker={caseKicker}>
+      {/* ── 8. Airline — design process ──────────────────────────── */}
+      <PdfPage n={8} total={TOTAL} lang={lang} kicker={caseKicker}>
         <Kicker>{t('work.designProcess')}</Kicker>
         <p className={`text-body ${body} text-ink-secondary leading-[1.6] mb-5`}>
           {a('designProcessIntro')}
@@ -223,8 +227,8 @@ export default async function PrintPortfolioPage({
         </div>
       </PdfPage>
 
-      {/* ── 8. Airline — solution & impact ───────────────────────── */}
-      <PdfPage n={8} total={TOTAL} lang={lang} kicker={caseKicker}>
+      {/* ── 9. Airline — solution & impact ───────────────────────── */}
+      <PdfPage n={9} total={TOTAL} lang={lang} kicker={caseKicker}>
         <Kicker>{t('work.solution')}</Kicker>
         <p className={`text-body ${body} text-ink-secondary leading-[1.6] mb-4`}>{a('solutionIntro')}</p>
 
