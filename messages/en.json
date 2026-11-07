@@ -293,7 +293,7 @@
     "topPageDesignHeroAlt": "Collage of the top page design history",
     "topPageDesignStepAlt": "Top page design process step {step}",
     "topPageDesignHeroCaption": "A collage-style visual bringing together the design history of the top page.",
-    "topPageDesignText1": "The core concept was to let you, the user, experience how a woodblock print comes together, layer by layer. I began by separating actual ukiyoe prints into individual color layers using Adobe Fresco, hand-painting each layer to match the original pigment colors. This was one of the most labor-intensive parts of the project; AI tools at the time could not generate these layers with the necessary precision.",
+    "topPageDesignText1": "The core concept was to let visitors experience how a woodblock print comes together, block by block. The colour layers this needed were hand-painted from actual ukiyoe prints (the process is covered in \"Hand-Coloring the Layers\" below).",
     "topPageDesignText2": "I then converted these layers into SVG format. On the site's top page, I arranged them in an isometric perspective inspired by the flattened spatial composition characteristic of Japanese painting. I explored multiple approaches, from simple vertical stacking to a media-player-style timeline control, before settling on scroll-driven isometric animation.",
     "topPageDesignText3": "A key design challenge was storytelling. Raw layer animations without context would confuse first-time visitors. I iterated on the accompanying text sections, balancing educational depth with visual clarity.",
     "timelineDesignTitle": "Timeline: Artwork Gallery",

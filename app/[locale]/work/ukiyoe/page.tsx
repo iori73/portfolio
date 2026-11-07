@@ -79,8 +79,10 @@ const UkiyoePage: React.FC = () => {
           <div className="w-full aspect-[8/5] bg-[#F8F5F0] overflow-hidden relative">
             <Image
               key={language}
-              src={language === 'jp' ? '/work/ukiyoe/thumbnail-jp.webp' : '/work/ukiyoe/thumbnail-en.webp'}
-              alt="Ukiyoe - Layer by Layer"
+              /* The live site's hero (2026-11-07, direction A), captured without the
+                 site's own header so it doesn't read as a second nav inside this page. */
+              src={language === 'jp' ? '/work/ukiyoe/hero-site-jp.webp' : '/work/ukiyoe/hero-site-en.webp'}
+              alt={language === 'jp' ? '浮世絵の技法変遷 — 作品サイトのトップ' : 'Evolution of Ukiyo-e Techniques — the site\'s top page'}
               fill
               sizes="(min-width: 768px) 1280px, 100vw"
               className="object-cover"
@@ -192,7 +194,7 @@ const UkiyoePage: React.FC = () => {
                     alt="Cultural research across 25+ reference sites"
                     width={1200}
                     height={675}
-                    className="w-full h-auto rounded-lg"
+                    className="w-full h-auto rounded-lg border border-line-section overflow-hidden"
                   />
                   <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
                     {t('ukiyoe.captionResearch')}
@@ -209,7 +211,7 @@ const UkiyoePage: React.FC = () => {
                   {t('ukiyoe.colorAnalysisText')}
                 </p>
                 <figure>
-                  <div className="rounded-lg overflow-hidden">
+                  <div className="rounded-lg border border-line-section overflow-hidden">
                     <ColorAnalysisGrid locale={language} />
                   </div>
                   <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
@@ -343,7 +345,7 @@ const UkiyoePage: React.FC = () => {
                     alt="Logo design: a seal mark built on bold cropping and off-center placement"
                     width={1200}
                     height={675}
-                    className="w-full h-auto rounded-lg"
+                    className="w-full h-auto rounded-lg border border-line-section overflow-hidden"
                   />
                   <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
                     {t('ukiyoe.captionLogo')}
@@ -369,7 +371,7 @@ const UkiyoePage: React.FC = () => {
                   playsInline
                   muted
                   loop
-                  className="w-full md:w-[40%] md:mx-auto h-auto rounded-lg bg-black"
+                  className="w-full md:w-[56%] md:mx-auto h-auto rounded-lg border border-line-section bg-black"
                 />
                 <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
                   {t('ukiyoe.captionHandColoring')}
@@ -399,35 +401,35 @@ const UkiyoePage: React.FC = () => {
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-                <div className="p-5 md:p-6 rounded-xl bg-surface-muted flex flex-col">
+                <div className="p-5 md:p-6 rounded-xl bg-surface-raised border border-line-section flex flex-col">
                   <h4 className={`text-title text-ink mb-4 ${getHeadingFontClass()}`}>
                     {t('ukiyoe.techFeature1Title')}
                   </h4>
-                  <p className={`text-ink-secondary ${getBodyFontClass()} text-body-sm md:text-body-base tracking-[0.2px]`}>
+                  <p className={`text-ink-secondary ${getBodyFontClass()} text-body-base tracking-[0.2px]`}>
                     {t('ukiyoe.techFeature1Text')}
                   </p>
                 </div>
-                <div className="p-5 md:p-6 rounded-xl bg-surface-muted flex flex-col">
+                <div className="p-5 md:p-6 rounded-xl bg-surface-raised border border-line-section flex flex-col">
                   <h4 className={`text-title text-ink mb-4 ${getHeadingFontClass()}`}>
                     {t('ukiyoe.techFeature2Title')}
                   </h4>
-                  <p className={`text-ink-secondary ${getBodyFontClass()} text-body-sm md:text-body-base tracking-[0.2px]`}>
+                  <p className={`text-ink-secondary ${getBodyFontClass()} text-body-base tracking-[0.2px]`}>
                     {t('ukiyoe.techFeature2Text')}
                   </p>
                 </div>
-                <div className="p-5 md:p-6 rounded-xl bg-surface-muted flex flex-col">
+                <div className="p-5 md:p-6 rounded-xl bg-surface-raised border border-line-section flex flex-col">
                   <h4 className={`text-title text-ink mb-4 ${getHeadingFontClass()}`}>
                     {t('ukiyoe.techFeature3Title')}
                   </h4>
-                  <p className={`text-ink-secondary ${getBodyFontClass()} text-body-sm md:text-body-base tracking-[0.2px]`}>
+                  <p className={`text-ink-secondary ${getBodyFontClass()} text-body-base tracking-[0.2px]`}>
                     {t('ukiyoe.techFeature3Text')}
                   </p>
                 </div>
-                <div className="p-5 md:p-6 rounded-xl bg-surface-muted flex flex-col">
+                <div className="p-5 md:p-6 rounded-xl bg-surface-raised border border-line-section flex flex-col">
                   <h4 className={`text-title text-ink mb-4 ${getHeadingFontClass()}`}>
                     {t('ukiyoe.techFeature4Title')}
                   </h4>
-                  <p className={`text-ink-secondary ${getBodyFontClass()} text-body-sm md:text-body-base tracking-[0.2px]`}>
+                  <p className={`text-ink-secondary ${getBodyFontClass()} text-body-base tracking-[0.2px]`}>
                     {t('ukiyoe.techFeature4Text')}
                   </p>
                 </div>
@@ -446,7 +448,7 @@ const UkiyoePage: React.FC = () => {
                 <div className={`text-ink-secondary ${bodyTextClass} space-y-4`}>
                   <p>{t('ukiyoe.learningsText1')}</p>
                   <p>{t('ukiyoe.learningsText2')}</p>
-                  <p>{t('ukiyoe.learningsText3')}</p>
+                  {/* learningsText3 restated aiCraftText3 ("AI can't craft") almost word for word; not rendered. */}
                 </div>
               </div>
               <div>
