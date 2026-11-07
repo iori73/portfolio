@@ -1316,6 +1316,21 @@ headed にすると通る。実機で4パターン総当たりして確認済み
 - 未解決: podcast パイプラインは 9/27 から毎週失敗（"Not enough data points (0)" = Notion から 0 件取得）。
   NOTION_API_KEY / NOTION_PODCAST_DB_ID の Secrets かDB共有設定の確認が必要。別件。
 
+## Podcast 同期の復旧（2026-10-27）
+- [x] Notion 連携を DB に再共有（河野）→ 同期再開。PR #76: 更新ワークフローを PR 方式・毎日・失敗時 Issue に、
+      鮮度チェック（podcast-freshness.yml）追加、データを 215→301 件（最新 2026-10-26）に更新。merge 済み。
+- セキュリティ強化（別PRで順次。2026-11-07 時点の状況に更新）:
+  - [x] 依存パッケージの脆弱性（Dependabot アラート）: PR #108 で next 15.5.29（critical RCE 3件）・zod 4・csv-parse 7。
+  - [x] `/api/img` の SSRF・SVG 対策: PR #111（リダイレクトを追わない・ラスターのみ・専用 CSP `default-src 'none'; sandbox`）。
+  - [x] `/api/translate`: PR #111 で 410 を返すだけに（ファイルは残置）。
+  - [x] 情報漏えいの小修正: PR #111 で `/api/articles` のエラーを一般文言に、`/api/podcast-notes/[id]` に親 DB チェック。
+  - [ ] `pages/api/translate.ts` と `/api/img` の削除（河野さん判断待ち。サイト内からの利用はゼロ）。
+  - [ ] CSP の nonce 化（全体の CSP はまだ `'unsafe-inline'` / `'unsafe-eval'` を許可。Report-Only から段階導入）。
+  - [ ] CI に CodeQL・`pnpm audit`、Dependabot の設定ファイル（.github/dependabot.yml）。
+  - [ ] devDep 経由で残るアラート（@figma/code-connect 経由の zod3/glob/minimatch、adm-zip は修正版なし）。
+  - [ ] 河野さん作業: GitHub の secret scanning・push protection、Notion 連携を読み取りのみ・ポッドキャスト DB だけに（未確認）。
+        Vercel の Bot Protection は検索・リクルーター向けに Log のまま（2026-11-06 の方針。守りはコード側）。
+
 ## 2026-10-27: レジュメ・デッキに Accenture の新しい案件を反映（acn-ops の草案から）
 
 - 草案: 仕事PC の acn-ops が作った `Iori-Kawano-Resume-EN-2026-10.pdf`。差分は Accenture の欄（案件3件追加・数字追加）と
