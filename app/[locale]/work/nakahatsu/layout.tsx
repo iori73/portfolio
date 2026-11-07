@@ -1,6 +1,11 @@
 import type { Metadata } from 'next';
 import { buildPageMetadata } from '@/src/lib/pageMetadata';
 
+/**
+ * 中初商店ケーススタディの公開ページ（2026-11-07 から、旧 SY 型のページがこの URL）。
+ * 以前の詳しい版は nakahatsu-detail に移して、本番では到達不能にしてある
+ * （siteRoutes.ts の ARCHIVED_WORK_SLUGS）。
+ */
 export async function generateMetadata({
   params,
 }: {

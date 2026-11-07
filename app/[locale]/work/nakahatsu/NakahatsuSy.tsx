@@ -4,9 +4,7 @@ import Image from 'next/image';
 import BackToTopButton from '@/src/compositions/BackToTopButton';
 import { useTranslations, useLocale } from 'next-intl';
 import { useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
-import { CTAButton } from '@/components/ui/cta-button';
 import { usePageTransition } from '@/src/contexts/TransitionContext';
-import { localePath } from '@/src/data/siteRoutes';
 import WorkShell from '@/src/components/work/WorkShell';
 import WorkSidebar, { type SidebarItem } from '@/src/components/work/WorkSidebar';
 import LineArrow from '@/src/components/work/LineArrow';
@@ -294,7 +292,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
   const steps = t.raw('steps') as Step[];
   const credit = t.raw('credit') as Credit[];
   const palette = t.raw('palette') as Palette;
-  const rl = t.raw('rowLabels') as { overview: string; process: string; reflection: string; credit: string; more: string };
+  const rl = t.raw('rowLabels') as { overview: string; process: string; reflection: string; credit: string };
   const reflection = t.raw('reflection') as [string, string][];
   /** 側面メニュー（共通の WorkSidebar。1280px 以上）。項目は本文の見出しと同じ文言（概要・各ステップの見出し・クレジット）。Figma の Sidebar と同じ */
   const sidebarItems: SidebarItem[] = [
@@ -303,7 +301,6 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
     { id: 'process', label: rl.process, subs: steps.map((st, i) => ({ id: `step-${i + 1}`, label: st.h })) },
     { id: 'reflection', label: rl.reflection, subs: reflection.map(([h], i) => ({ id: `reflection-${i + 1}`, label: h })) },
     { id: 'credit', label: rl.credit },
-    { id: 'more', label: rl.more },
   ];
   const body = `${getBodyFontClass()} tracking-[0.2px] text-body-lg text-ink [text-wrap:pretty]`;
   const catchLine = `text-title text-ink ${getHeadingFontClass()} [text-wrap:balance]`;
@@ -513,13 +510,6 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
               <p className={`${getBodyFontClass()} text-body-sm tracking-[0.2px] text-ink`}>{what}</p>
             </div>
           ))}
-        </Row>
-
-        <Row id="more" label={rl.more}>
-          <p className={body}>{t('moreText')}</p>
-          <div className="flex items-start">
-            <CTAButton href={localePath('/work/nakahatsu', language)}>{t('moreLink')}</CTAButton>
-          </div>
         </Row>
       </div>
       </WorkShell>

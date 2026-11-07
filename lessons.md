@@ -1042,3 +1042,8 @@ JP で 16px、デッキで 138px あふれた。
 - 原因: `next.config` の `headers()`（`source: '/(.*)'`）が、ルートハンドラーで付けた同じキーのヘッダーを上書きする。
 - 対処: `headers()` の配列の**後ろ**に `source: '/api/img'` の規則を足す。後ろの規則が同じキーを上書きする。
 - 教訓: セキュリティヘッダーはコードを読むだけで済ませず、`curl -D -` で実際の応答を見て確かめる。
+
+## 2026-11-07: main を取り込んだあと、`pnpm install` で Playwright のブラウザが合わなくなった
+- main に @types/d3 などが入っていて、worktree の node_modules が古く、tsc が d3 の型エラーを出した。`pnpm install --frozen-lockfile` で直るが、**Playwright のバージョンも上がり、入っていたブラウザ（chromium_headless_shell-1254）と合わなくなった**。ダウンロード（npx playwright install）はせず、すでにある `~/Library/Caches/ms-playwright/chromium-*` を executablePath で指定する（cmp_shot.mjs / mkclientpdf.mjs と同じ）。
+- 本番ビルド（next build）は、開発サーバー（next dev）と同じ `.next` を使うので、先に dev を止め、確認後に dev を再起動する。
+- ルートの入れ替え（A→B）は、`git mv` で2か所を入れ替えたあと、①各 layout.tsx の metadata／archive ②siteRoutes.ts ③ページ内のリンク（CTA）④撮影・PDF スクリプトの URL ⑤Figma を順に直す。本番モードで 200/404 と sitemap を curl で確かめる。

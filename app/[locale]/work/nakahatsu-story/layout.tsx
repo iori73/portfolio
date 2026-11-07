@@ -1,31 +1,24 @@
+import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { buildPageMetadata } from '@/src/lib/pageMetadata';
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
 /**
- * 詳しい版（/work/nakahatsu）の別バージョン。内容が重なるので、検索に出さない
- * （noindex）。canonical は詳しい版に向ける。
+ * アーカイブ扱いの、中初商店ケーススタディの旧・読みやすい版（2026-11-07 に非公開）。
+ * **本番では到達不能にしてある。** 公開ページは /work/nakahatsu（旧 SY 型）。
+ *
+ * ソースは残してある。見せる判断に戻ったらこの layout.tsx を消して、
+ * src/data/siteRoutes.ts の ARCHIVED_WORK_SLUGS から外す。
+ *
+ * デプロイしたビルドで確認したいとき: ENABLE_ARCHIVED_WORK=1
+ * ローカル（NODE_ENV !== production）では常に見られる。
  */
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-  return {
-    ...buildPageMetadata({
-      path: '/work/nakahatsu',
-      locale,
-      title: { en: 'Nakahatsu Shoten Website (short version)', jp: '中初商店 ウェブサイト制作（読みやすい版）' },
-      description: {
-        en: 'A short version of the Nakahatsu Shoten case study: the decisions, one figure each.',
-        jp: '中初商店ケーススタディの読みやすい版。判断ごとに図を1枚。',
-      },
-      image: 'nakahatsu.jpg',
-    }),
-    robots: { index: false, follow: false },
-  };
-}
+export default function ArchivedNakahatsuStoryLayout({ children }: { children: React.ReactNode }) {
+  if (process.env.NODE_ENV === 'production' && process.env.ENABLE_ARCHIVED_WORK !== '1') {
+    notFound();
+  }
 
-export default function NakahatsuStoryLayout({ children }: { children: React.ReactNode }) {
-  return children;
+  return <>{children}</>;
 }

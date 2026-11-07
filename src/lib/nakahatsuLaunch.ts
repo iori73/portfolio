@@ -2,7 +2,7 @@
  * サーバー専用。クライアントコンポーネントから import しないこと。
  * （`server-only` パッケージはこのリポジトリに入っていないため、
  *   機械的な保証ではなく規約で守る。呼び出し元は
- *   `app/[locale]/work/nakahatsu/page.tsx` の1か所だけ。）
+ *   `app/[locale]/work/nakahatsu/page.tsx`（公開ページ）と、非公開の旧版 `nakahatsu-detail/page.tsx`。）
  *
  * 中初商店のサイトが一般公開されたかを判定する。
  *

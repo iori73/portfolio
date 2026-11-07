@@ -217,3 +217,7 @@
 
 ### 2026-11-07 契約書 第7条3項の確認と決定
 2026-11-07 契約書（`~/Downloads/0000001_業務委託契約書_中初商店.pdf`、GMOサイン）を読んで第7条3項を確認した。原文: 「乙は、本業務の実績をポートフォリオとして使用できるものとする。」（乙＝河野さん）。第7条1項: 成果物の著作権は報酬の完済をもって甲（先方）に帰属。第8条: 本契約に関連して知り得た相手方の秘密情報（事業上の情報・顧客情報・技術情報）は第三者に開示しない（公知の情報は除く）。契約終了後も2年間存続。解釈: 実績としてポートフォリオに載せること自体は、7-3 が根拠になる。ただし、先方の Instagram の写真の使用、先方の返信の引用、非公開情報は 7-3 の文面からは読み取れないので、書面の OK（11-07 13:00 に依頼済み）を取る。金額・顧客情報・非公開の情報は第8条のため載せない。決定（河野さん 11-07）: 詳細版のどの内容を SY に入れるかは、いまの SY（localhost:3007/jp/work/nakahatsu-sy）のままでよい。FB-3 は無し。CLAUDE.md の人物素材の規定は 11-04/11-06 の判断に合わせて直した。
+
+
+### 2026-11-07 公開の準備（URL の入れ替え・main 取り込み）
+2026-11-07 公開の準備: ①main（34コミット先）を取り込んだ（衝突は lessons.md と progress.txt だけ。両方残して解消。コミット c2fa057）。②URL を入れ替えた: いまの SY のページが `/work/nakahatsu`（`app/[locale]/work/nakahatsu/`、旧 `nakahatsu-sy`）。旧・詳しい版は `nakahatsu-detail`、旧・読みやすい版は `nakahatsu-story` に移し、どちらも既存の archive の仕組み（layout.tsx が本番で notFound()。siteRoutes.ts の ARCHIVED_WORK_SLUGS に追加）で非公開にした。ソースは削除していない。ENABLE_ARCHIVED_WORK=1 で確認できる。③SY ページから「もっと詳しく」の節（詳しい版へのリンク）とサイドバー項目を外した。Figma（portfolio_v5）の4フレームでも、Section/More detail（814:767 / 814:782 / 829:785 / 829:818）とサイドバー項目 Item/More（813:770 / 813:774）を非表示にして Archive/ を付けた。④確認: tsc 0件、eslint エラー0件、next build 成功。本番モード（next start）で /jp/work/nakahatsu=200、nakahatsu-detail / nakahatsu-story / nakahatsu-sy=404、sitemap は nakahatsu のみ、トップのカードは /jp/work/nakahatsu。PDF は新しい URL から作り直しても、先方に送った版と本文が同じ（差分なし）。注意: public/work/nakahatsu/ の画像・動画は URL を直接知っていれば見られる（静的ファイル）。旧版専用の画像も含む。
