@@ -743,8 +743,6 @@ system Chrome (`channel: 'chrome'`) でも結果は同じ — ブラウザの種
 headless フラグを疑う。
 `**/` 系はプロジェクト内、`~/` 系は指定したパスのみ、と役割が分かれている。
 
----
-
 ## [2026-10-26] Figma: モード付き変数に紐づけたテキストスタイルは、パネルの数字が実際とずれて見える
 
 **事象**: portfolio_v6 で、テキストスタイルのフォントサイズを Typography 変数（Mobile / Desktop の2モード）に紐づけた。Home — PC は Desktop モードを指定していて描画は 32px だったが、スタイルの設定画面・インスペクタは `title-lg/jp · 26/120` と表示した。実機（32px）と食い違って見え、河野さんが「サイトと Figma が違う」と指摘した。
@@ -758,6 +756,20 @@ headless フラグを疑う。
 **もう1つ**: 変数に紐づけたペイントの `opacity` はインスタンスに伝わらない。透明度つきの色は、アルファ付きの色変数にする。インスタンス内の `resize()` / 子の `layoutMode` の上書きは効かないことがある（画像の高さは `lockAspectRatio()` で、レイアウトの違いは別コンポーネントで解決した）。
 
 **適用範囲**: Figma で、モード付き変数をテキストスタイルやコンポーネントに使う全プロジェクト。
+
+## 保護された main に bot が直 push すると、定期ジョブが「静かに」毎回失敗する
+**事象**: Figma 統計の自動更新が 9/21〜10/19 の 5 回連続で失敗し、サイトの数値が約 1 ヶ月古いままだった。
+**根本原因**: スクレイプ自体は成功。`main` に「Changes must be made through a pull request」ルールが
+後から入り、ワークフローの `git push` が GH013 で拒否された。Issue は立っていたが気づかれなかった。
+**対処**: ワークフロー内で `chore/...` ブランチを push → `gh pr create` → `gh pr merge --squash`。
+承認 0・必須チェックなしのルールならこれで通る。リポジトリ設定
+「Allow GitHub Actions to create and approve pull requests」が必要。
+**教訓**: ブランチ保護を入れたら、main へ直 push する定期ジョブ（`git push` を含む workflow）を全て洗う。
+`gh run list --workflow=<name>` で直近の成否を見れば、静かな失敗はすぐ分かる。
+**再発防止（2026-10-26）**: `data-freshness-watchdog.yml` を追加。毎日、各データ更新ワークフローの
+「最後の成功」が許容日数（Figma 3日 / Podcast 10日）を超えたら Issue を1件だけ立て、回復で自動クローズする。
+失敗通知（失敗した run 内で立てる Issue）は run 自体が動かないと出ないので、「成功が無いこと」を外から見る。
+新しい定期更新ジョブを足したら、watchdog の LIST にも1行足す。
 
 ## 2026-10-27: Figma 再現パイプライン — SP ページ枠の幅と、装飾の複製
 - builder の最初のバッチはページ枠を常に 1280 幅で作っていた。SP は 375 のはずが 1280 になり、本文（FILL 幅）が広がる。MODE が sp なら 375 で作る（修正済み）。作った後に気づいたら `resize(375, h)`。
@@ -776,3 +788,18 @@ headless フラグを疑う。
 - `<canvas>`（Podcast Notes のヒーロー）は抽出で灰色のプレースホルダーになる。canvas だけを撮るには、`html,body,main,main *{background:transparent !important}` と `main *{visibility:hidden} main canvas{visibility:visible}` を当ててから `canvas.screenshot({omitBackground:true})`。背景を透明にしないと、ページの背景色が PNG に焼き込まれて、暗い背景に載せたときに明るい四角が出る。
 - 絶対配置の枠（レイアウト無し）の子に自動レイアウト枠（V/H）を入れるとき、幅を固定してやらないと、中身の長さに合わせて広がる（Podcast Notes のエピソード一覧で、長いタイトルが 1 行で突き抜けた）。子を追加した後に `layoutSizingHorizontal=FIXED` と `resize(w)` をする。ビルダーの NONE 親の分岐に入れた。
 - Figma の別ページに置いたアップロード済みノード（`placedOnNodeId`）は、後で消えることがある（Sandbox の SVG が消えていた）。複製元はそのノードでなく、完成フレーム内のノードにする。
+
+## 別環境で作った PDF の「収まり」は、レイアウトの手本にならない
+**事象**: acn-ops の草案 PDF は案件が3件増えても1ページに収まっていたが、cvData に同じ文を入れて生成すると EN で 27px、
+JP で 16px、デッキで 138px あふれた。
+**根本原因**: 草案はサイトの書体（Switzer 等）が読み込まれず、代わりの書体で詰まって描画されていた。
+**教訓**: 外から来た PDF は「文面の差分」だけを取り込み、収まりは必ずこのリポジトリの生成スクリプトで確かめる。
+`pdftotext -layout` を空白正規化して diff すると、文面の差だけが残る。
+
+## 2026-11-06: next.config の headers() は、ルートで付けたヘッダーを上書きする
+
+- 事象: `/api/img` のレスポンスに `Content-Security-Policy: default-src 'none'; sandbox` を付けたのに、
+  実際には全体の CSP（`'unsafe-inline'` を含む）しか出ていなかった。
+- 原因: `next.config` の `headers()`（`source: '/(.*)'`）が、ルートハンドラーで付けた同じキーのヘッダーを上書きする。
+- 対処: `headers()` の配列の**後ろ**に `source: '/api/img'` の規則を足す。後ろの規則が同じキーを上書きする。
+- 教訓: セキュリティヘッダーはコードを読むだけで済ませず、`curl -D -` で実際の応答を見て確かめる。
