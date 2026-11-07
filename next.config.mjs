@@ -10,6 +10,8 @@ try {
 }
 
 /** @type {import('next').NextConfig} */
+const isDev = process.env.NODE_ENV !== 'production';
+
 const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
@@ -63,11 +65,18 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com",
+              // 'unsafe-eval' は dev（React の差分表示）だけ。本番は不要なので外す。
+              // 'unsafe-inline' は Next のインライン hydration スクリプトのため当面残す
+              // （外すには nonce 方式にしてページを動的化する必要がある。別途検討）。
+              `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://va.vercel-scripts.com`,
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: https:",
-              "connect-src 'self' https://api.notion.com https://rss2json.com https://api.rss2json.com https://note.com",
+              // ブラウザから直接呼ぶのは Medium 用の rss2json のみ（Notion / note は server 経由）
+              "connect-src 'self' https://api.rss2json.com",
+              "object-src 'none'",
+              "base-uri 'self'",
+              "form-action 'self'",
               "frame-ancestors 'none'",
             ].join('; '),
           },
