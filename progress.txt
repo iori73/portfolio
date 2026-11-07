@@ -1390,6 +1390,21 @@ variables / styles はデザインの統一と作業効率のため（現行サ�
 追記 (2026-10-27): Header/Footer インスタンスを、Work 6 本・Blog・Experiment・Podcast Notes の PC/SP 全 18 フレームに付与（Home/About/CV と同じ方式: Footer は末尾でレイアウトに入り、Header は絶対配置 0,0）。アクティブは Blog=Blog、Experiment / Podcast Notes=Experiment（nav/active + Dot/<名前> の opacity=1）。Work 系は無し。ページ枠の左右パディングを 0 にし、本文枠は固定幅（PC 1104 / SP 327）で中央寄せにして、フッターを全幅にした。Nakahatsu PC のサイドナビ 4 項目に nav スタイルを適用。フッター追加でフレームが伸びたので Ukiyoe PC→y24700、Figma Plugins PC→y41000、Ukiyoe SP→y26300、Google UX SP→y44400 に動かし、重なりゼロを確認。
 - JP の再現はこれで完了（Home/About/CV/Experiment/Podcast Notes/Blog/Work 6 本、PC+SP）。EN 版は未着手（注釈は JP フレームだけに付ける運用のため、必要になってから）。
 
+## Podcast 同期の復旧（2026-10-27）
+- [x] Notion 連携を DB に再共有（河野）→ 同期再開。PR #76: 更新ワークフローを PR 方式・毎日・失敗時 Issue に、
+      鮮度チェック（podcast-freshness.yml）追加、データを 215→301 件（最新 2026-10-26）に更新。merge 済み。
+- セキュリティ強化（別PRで順次。2026-11-07 時点の状況に更新）:
+  - [x] 依存パッケージの脆弱性（Dependabot アラート）: PR #108 で next 15.5.29（critical RCE 3件）・zod 4・csv-parse 7。
+  - [x] `/api/img` の SSRF・SVG 対策: PR #111（リダイレクトを追わない・ラスターのみ・専用 CSP `default-src 'none'; sandbox`）。
+  - [x] `/api/translate`: PR #111 で 410 を返すだけに（ファイルは残置）。
+  - [x] 情報漏えいの小修正: PR #111 で `/api/articles` のエラーを一般文言に、`/api/podcast-notes/[id]` に親 DB チェック。
+  - [ ] `pages/api/translate.ts` と `/api/img` の削除（河野さん判断待ち。サイト内からの利用はゼロ）。
+  - [ ] CSP の nonce 化（全体の CSP はまだ `'unsafe-inline'` / `'unsafe-eval'` を許可。Report-Only から段階導入）。
+  - [ ] CI に CodeQL・`pnpm audit`、Dependabot の設定ファイル（.github/dependabot.yml）。
+  - [ ] devDep 経由で残るアラート（@figma/code-connect 経由の zod3/glob/minimatch、adm-zip は修正版なし）。
+  - [ ] 河野さん作業: GitHub の secret scanning・push protection、Notion 連携を読み取りのみ・ポッドキャスト DB だけに（未確認）。
+        Vercel の Bot Protection は検索・リクルーター向けに Log のまま（2026-11-06 の方針。守りはコード側）。
+
 ## 2026-10-27: レジュメ・デッキに Accenture の新しい案件を反映（acn-ops の草案から）
 
 - 草案: 仕事PC の acn-ops が作った `Iori-Kawano-Resume-EN-2026-10.pdf`。差分は Accenture の欄（案件3件追加・数字追加）と
@@ -1424,3 +1439,9 @@ variables / styles はデザインの統一と作業効率のため（現行サ�
   410 を返すだけにした（ファイルは残す）。
 - `/api/articles`: エラー時に error.message を返していたのを一般文言に。
 - 未確認: Notion 連携の権限が「読み取りのみ・ポッドキャスト DB だけ共有」になっているか（河野さん側）。
+
+## 2026-11-07: 使われていない API を2つ削除
+
+- `/api/img`（画像の中継）と `/api/translate`（pages router の翻訳中継）を削除。どちらもサイト内からの利用はゼロ。
+  #111 で守りを固めて残していたが、河野さんの OK で削除。`pages/` フォルダもこれで無くなった（App Router のみ）。
+- next.config の `/api/img` 専用 CSP も削除。
