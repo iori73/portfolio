@@ -82,15 +82,6 @@ const nextConfig = {
           },
         ],
       },
-      {
-        // The image proxy serves third-party bytes from this origin. The site-wide CSP
-        // above allows inline scripts, so it must not apply here: a later matching rule
-        // overrides the same header key, and this one forbids any active content.
-        source: '/api/img',
-        headers: [
-          { key: 'Content-Security-Policy', value: "default-src 'none'; sandbox" },
-        ],
-      },
     ];
   },
 }
