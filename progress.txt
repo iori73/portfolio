@@ -2044,3 +2044,13 @@ variables / styles はデザインの統一と作業効率のため（現行サ�
 - next.config の `/api/img` 専用 CSP も削除。
 
 - 2026-11-07 公開の準備: ①main（34コミット先）を取り込んだ（衝突は lessons.md と progress.txt だけ。両方残して解消。コミット c2fa057）。②URL を入れ替えた: いまの SY のページが `/work/nakahatsu`（`app/[locale]/work/nakahatsu/`、旧 `nakahatsu-sy`）。旧・詳しい版は `nakahatsu-detail`、旧・読みやすい版は `nakahatsu-story` に移し、どちらも既存の archive の仕組み（layout.tsx が本番で notFound()。siteRoutes.ts の ARCHIVED_WORK_SLUGS に追加）で非公開にした。ソースは削除していない。ENABLE_ARCHIVED_WORK=1 で確認できる。③SY ページから「もっと詳しく」の節（詳しい版へのリンク）とサイドバー項目を外した。Figma（portfolio_v5）の4フレームでも、Section/More detail（814:767 / 814:782 / 829:785 / 829:818）とサイドバー項目 Item/More（813:770 / 813:774）を非表示にして Archive/ を付けた。④確認: tsc 0件、eslint エラー0件、next build 成功。本番モード（next start）で /jp/work/nakahatsu=200、nakahatsu-detail / nakahatsu-story / nakahatsu-sy=404、sitemap は nakahatsu のみ、トップのカードは /jp/work/nakahatsu。PDF は新しい URL から作り直しても、先方に送った版と本文が同じ（差分なし）。注意: public/work/nakahatsu/ の画像・動画は URL を直接知っていれば見られる（静的ファイル）。旧版専用の画像も含む。
+
+## 2026-11-07: 中初商店のケーススタディを、いったん非公開に戻した
+
+- #119 で /work/nakahatsu を公開したが、先方への掲載許可の依頼（11-07 13:00）は返事待ちで、依頼文で
+  「掲載はサイトの一般公開後」と約束している。nakahatsu.jp に新サイトの印（nkv2-）もまだ無い。河野さんの判断で非公開に。
+- やり方: siteRoutes.ts で `nakahatsu` を CARD_WORK_SLUGS から ARCHIVED_WORK_SLUGS へ。nakahatsu/layout.tsx に
+  他のアーカイブと同じ本番ゲート（notFound、ENABLE_ARCHIVED_WORK=1 で解除）と noindex。トップのカードは CARD_WORK_SLUGS に連動。
+- 公開に戻すとき: OK を `.capture/nakahatsu/client-ok` に記録し、先方サイトの公開を確認してから、siteRoutes.ts の1行を戻す
+  （ページ・トップのカード・sitemap がそろって戻る）。
+- 注意: public/work/nakahatsu/ の画像は静的ファイルなので、URL を知っていれば見られる（ページ・カード・sitemap からは辿れない）。
