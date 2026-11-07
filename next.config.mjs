@@ -14,10 +14,10 @@ const isDev = process.env.NODE_ENV !== 'production';
 
 const nextConfig = {
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false,
   },
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   images: {
     // Kept unoptimized on purpose: all served assets are pre-converted to
