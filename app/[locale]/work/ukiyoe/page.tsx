@@ -385,6 +385,40 @@ const UkiyoePage: React.FC = () => {
                 </h3>
                 <div className={`mb-6 text-ink-secondary ${bodyTextClass} space-y-4`}>
                   <p>{t('ukiyoe.langToggleText1')}</p>
+                </div>
+                {/* before / after: the same two states, captured from the live site (old design at /a/timeline) */}
+                <figure className="mb-8 md:mb-10">
+                  <div className="grid grid-cols-2 gap-4 md:gap-8 rounded-lg bg-surface-muted p-4 md:p-8 md:w-[75%] md:mx-auto">
+                    {([
+                      ['before', 'old', 'ukiyoe.langToggleBefore'],
+                      ['now', 'new', 'ukiyoe.langToggleNow'],
+                    ] as const).map(([key, file, label]) => (
+                      <div key={key} className="flex flex-col gap-3 md:gap-4">
+                        <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary">
+                          {t(label)}
+                        </span>
+                        {(['ja', 'en'] as const).map((l) => (
+                          <div key={l} className="flex flex-col gap-1.5">
+                            <Image
+                              src={`/work/ukiyoe/lang-${file}-toggle-${l}.webp`}
+                              alt={`${t(label)} — ${t(l === 'ja' ? 'ukiyoe.langToggleStateJa' : 'ukiyoe.langToggleStateEn')}`}
+                              width={720}
+                              height={384}
+                              className="w-full h-auto rounded-md"
+                            />
+                            <span className="text-body-sm text-ink-tertiary">
+                              {t(l === 'ja' ? 'ukiyoe.langToggleStateJa' : 'ukiyoe.langToggleStateEn')}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                  <figcaption className="mt-3 md:w-[75%] md:mx-auto text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
+                    {t('ukiyoe.captionLangToggleBefore')}
+                  </figcaption>
+                </figure>
+                <div className={`mb-6 text-ink-secondary ${bodyTextClass} space-y-4`}>
                   <p>{t('ukiyoe.langToggleText2')}</p>
                   <p>{t('ukiyoe.langToggleText3')}</p>
                   <p>{t('ukiyoe.langToggleText4')}</p>
