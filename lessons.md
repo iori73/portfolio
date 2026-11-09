@@ -1047,3 +1047,7 @@ JP で 16px、デッキで 138px あふれた。
 - main に @types/d3 などが入っていて、worktree の node_modules が古く、tsc が d3 の型エラーを出した。`pnpm install --frozen-lockfile` で直るが、**Playwright のバージョンも上がり、入っていたブラウザ（chromium_headless_shell-1254）と合わなくなった**。ダウンロード（npx playwright install）はせず、すでにある `~/Library/Caches/ms-playwright/chromium-*` を executablePath で指定する（cmp_shot.mjs / mkclientpdf.mjs と同じ）。
 - 本番ビルド（next build）は、開発サーバー（next dev）と同じ `.next` を使うので、先に dev を止め、確認後に dev を再起動する。
 - ルートの入れ替え（A→B）は、`git mv` で2か所を入れ替えたあと、①各 layout.tsx の metadata／archive ②siteRoutes.ts ③ページ内のリンク（CTA）④撮影・PDF スクリプトの URL ⑤Figma を順に直す。本番モードで 200/404 と sitemap を curl で確かめる。
+
+## 2026-11-09: 画像を Figma に上げるときは WebP にしない／読むのは worktree のファイル
+- `upload_assets` に WebP を上げると、成功（imageHash が返る）しても、Figma の中では画像が読めず（getSizeAsync が失敗）、塗りが空になった。**JPEG か PNG に変換してから上げる**（ffmpeg -q:v 3）。部品の中の層（id に `;` が入るもの）は upload_assets の nodeIds に渡せないので、上げた画像の imageHash を use_figma で塗りに入れる。
+- portfolio の main のチェックアウト（~/dev/portfolio）は origin/main より古いことがある。作業用の worktree を origin/main から作ったら、**ページやメッセージはその worktree の中のものを読む**（今回、古い page.tsx を読んで、サイドバーの小見出しの仕組みと hero の画像名を見落としかけた）。
