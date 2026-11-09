@@ -7,7 +7,6 @@ import WorkMetaGrid from '@/src/components/work/WorkMetaGrid';
 import { useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
 import { MoveUpRight } from 'lucide-react';
 import { CTAButton } from '@/components/ui/cta-button';
-import ColorSystemViz from '@/components/work/ukiyoe/ColorSystemViz';
 import ColorAnalysisGrid from '@/components/work/ukiyoe/ColorAnalysisGrid';
 import KushiDangoShowcase from '@/components/work/ukiyoe/KushiDangoShowcase';
 import PrintingProcessStudy from '@/components/work/ukiyoe/PrintingProcessStudy';
@@ -30,6 +29,7 @@ const SUBSECTIONS: Record<string, { id: string; key: string }[]> = {
     { id: 'motifs', key: 'ukiyoe.motifsTitle' },
     { id: 'color-system', key: 'ukiyoe.colorSystemTitle' },
     { id: 'logo-design', key: 'ukiyoe.logoDesignTitle' },
+    { id: 'language-toggle', key: 'ukiyoe.langToggleTitle' },
   ],
   reflection: [
     { id: 'learnings', key: 'ukiyoe.learningsTitle' },
@@ -290,6 +290,23 @@ const UkiyoePage: React.FC = () => {
                     {t('ukiyoe.captionTimeline')}
                   </figcaption>
                 </figure>
+                {/* 2026-11 rebuild: eras by technique, prints only, records for every work */}
+                <div className={`mt-10 md:mt-14 mb-6 text-ink-secondary ${bodyTextClass} space-y-4`}>
+                  <p>{t('ukiyoe.timelineDesignText3')}</p>
+                  <p>{t('ukiyoe.timelineDesignText4')}</p>
+                </div>
+                <figure>
+                  <Image
+                    src="/work/ukiyoe/timeline-v2.webp"
+                    alt={t('ukiyoe.captionTimelineV2')}
+                    width={1766}
+                    height={866}
+                    className="w-full h-auto"
+                  />
+                  <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
+                    {t('ukiyoe.captionTimelineV2')}
+                  </figcaption>
+                </figure>
               </div>
 
               {/* Design Motifs: Kushi-Dango */}
@@ -321,7 +338,15 @@ const UkiyoePage: React.FC = () => {
                   <p>{t('ukiyoe.colorSystemViz')}</p>
                 </div>
                 <figure>
-                  <ColorSystemViz locale={language} />
+                  {/* the site's own palette summary (2026-11 rebuild) — replaces the earlier proportion bars */}
+                  <Image
+                    key={language}
+                    src={language === 'jp' ? '/work/ukiyoe/palette-v2-jp.webp' : '/work/ukiyoe/palette-v2-en.webp'}
+                    alt={t('ukiyoe.captionColorSystem')}
+                    width={1320}
+                    height={1120}
+                    className="w-full md:w-[75%] md:mx-auto h-auto rounded-lg"
+                  />
                   <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
                     {t('ukiyoe.captionColorSystem')}
                   </figcaption>
@@ -349,6 +374,31 @@ const UkiyoePage: React.FC = () => {
                   />
                   <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
                     {t('ukiyoe.captionLogo')}
+                  </figcaption>
+                </figure>
+              </div>
+
+              {/* Language toggle: Japanese eyes / foreign eyes (2026-11) */}
+              <div className="mt-12 md:mt-20">
+                <h3 id="language-toggle" className={`scroll-mt-32 text-title mb-4 ${getHeadingFontClass()}`}>
+                  {t('ukiyoe.langToggleTitle')}
+                </h3>
+                <div className={`mb-6 text-ink-secondary ${bodyTextClass} space-y-4`}>
+                  <p>{t('ukiyoe.langToggleText1')}</p>
+                  <p>{t('ukiyoe.langToggleText2')}</p>
+                  <p>{t('ukiyoe.langToggleText3')}</p>
+                  <p>{t('ukiyoe.langToggleText4')}</p>
+                </div>
+                <figure>
+                  <Image
+                    src="/work/ukiyoe/language-toggle-japonisme.webp"
+                    alt={t('ukiyoe.captionLangToggle')}
+                    width={1766}
+                    height={1204}
+                    className="w-full h-auto rounded-lg"
+                  />
+                  <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
+                    {t('ukiyoe.captionLangToggle')}
                   </figcaption>
                 </figure>
               </div>
