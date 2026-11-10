@@ -8,7 +8,6 @@ import { useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
 import { MoveUpRight } from 'lucide-react';
 import { CTAButton } from '@/components/ui/cta-button';
 import ColorAnalysisGrid from '@/components/work/ukiyoe/ColorAnalysisGrid';
-import KushiDangoShowcase from '@/components/work/ukiyoe/KushiDangoShowcase';
 import PrintingProcessStudy from '@/components/work/ukiyoe/PrintingProcessStudy';
 import TopPageProcessShowcase from '@/components/work/ukiyoe/TopPageProcessShowcase';
 import TopPageEvolutionGrid from '@/components/work/ukiyoe/TopPageEvolutionGrid';
@@ -26,7 +25,6 @@ const SUBSECTIONS: Record<string, { id: string; key: string }[]> = {
   'design-process': [
     { id: 'top-page-design', key: 'ukiyoe.topPageDesignTitle' },
     { id: 'timeline-design', key: 'ukiyoe.timelineDesignTitle' },
-    { id: 'motifs', key: 'ukiyoe.motifsTitle' },
     { id: 'color-system', key: 'ukiyoe.colorSystemTitle' },
     { id: 'logo-design', key: 'ukiyoe.logoDesignTitle' },
     { id: 'language-toggle', key: 'ukiyoe.langToggleTitle' },
@@ -280,11 +278,11 @@ const UkiyoePage: React.FC = () => {
                 </div>
                 <figure>
                   <Image
-                    src="/work/ukiyoe/process-timeline.webp"
-                    alt="Timeline page: architecture shift to vertical scroll"
-                    width={1200}
-                    height={675}
-                    className="w-full h-auto"
+                    src={language === 'jp' ? '/work/ukiyoe/timeline-era-v2-jp.webp' : '/work/ukiyoe/timeline-era-v2-en.webp'}
+                    alt={t('ukiyoe.captionTimeline')}
+                    width={1320}
+                    height={language === 'jp' ? 1793 : 2004}
+                    className="w-full h-auto rounded-lg"
                   />
                   <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
                     {t('ukiyoe.captionTimeline')}
@@ -305,24 +303,6 @@ const UkiyoePage: React.FC = () => {
                   />
                   <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
                     {t('ukiyoe.captionTimelineV2')}
-                  </figcaption>
-                </figure>
-              </div>
-
-              {/* Design Motifs: Kushi-Dango */}
-              <div className="mb-12 md:mb-20">
-                <h3 id="motifs" className={`scroll-mt-32 text-title mb-4 ${getHeadingFontClass()}`}>
-                  {t('ukiyoe.motifsTitle')}
-                </h3>
-                <div className={`mb-6 text-ink-secondary ${bodyTextClass} space-y-4`}>
-                  {t('ukiyoe.motifsIntro').split('\n').filter(Boolean).map((paragraph: string, i: number) => (
-                    <p key={i}>{paragraph}</p>
-                  ))}
-                </div>
-                <figure>
-                  <KushiDangoShowcase locale={language} />
-                  <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
-                    {t('ukiyoe.captionMotifs')}
                   </figcaption>
                 </figure>
               </div>
