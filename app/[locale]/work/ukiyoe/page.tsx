@@ -11,6 +11,8 @@ import ColorAnalysisGrid from '@/components/work/ukiyoe/ColorAnalysisGrid';
 import PrintingProcessStudy from '@/components/work/ukiyoe/PrintingProcessStudy';
 import TopPageProcessShowcase from '@/components/work/ukiyoe/TopPageProcessShowcase';
 import TopPageEvolutionGrid from '@/components/work/ukiyoe/TopPageEvolutionGrid';
+import LogoProcessFigure from '@/components/work/ukiyoe/LogoProcessFigure';
+import BeforeAfterPair from '@/src/components/work/BeforeAfterPair';
 import { usePageTransition } from '@/src/contexts/TransitionContext';
 import WorkShell from '@/src/components/work/WorkShell';
 import WorkSidebar, { type SidebarItem } from '@/src/components/work/WorkSidebar';
@@ -31,7 +33,6 @@ const SUBSECTIONS: Record<string, { id: string; key: string }[]> = {
   ],
   reflection: [
     { id: 'learnings', key: 'ukiyoe.learningsTitle' },
-    { id: 'future', key: 'ukiyoe.futureTitle' },
   ],
 };
 
@@ -54,8 +55,8 @@ const UkiyoePage: React.FC = () => {
   const baseItems: { id: string; label: string }[] = [
     { id: 'overview', label: t('work.overview') },
     { id: 'research', label: t('ukiyoe.sectionResearch') },
-    { id: 'design-process', label: t('work.designProcess') },
     { id: 'hand-coloring', label: t('ukiyoe.handColoringTitle') },
+    { id: 'design-process', label: t('work.designProcess') },
     { id: 'ai-craft', label: t('ukiyoe.aiCraftTitle') },
     { id: 'technical', label: t('ukiyoe.sectionTechnical') },
     { id: 'reflection', label: t('work.reflection') },
@@ -188,10 +189,10 @@ const UkiyoePage: React.FC = () => {
                 </p>
                 <figure>
                   <Image
-                    src="/work/ukiyoe/research-site.webp"
-                    alt="Cultural research across 25+ reference sites"
-                    width={1200}
-                    height={675}
+                    src="/work/ukiyoe/research-sites-v2.webp"
+                    alt={t('ukiyoe.captionResearch')}
+                    width={1600}
+                    height={1914}
                     className="w-full h-auto rounded-lg border border-line-section overflow-hidden"
                   />
                   <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
@@ -232,7 +233,32 @@ const UkiyoePage: React.FC = () => {
               </div>
             </section>
 
-            {/* 3. Design Process */}
+            {/* 3. Hand-Coloring the Layers — first on the live site, so first here */}
+            <section id="hand-coloring" className="py-12 md:py-20 scroll-mt-32">
+              <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
+                {t('ukiyoe.handColoringTitle')}
+              </h2>
+              <div className={`mb-10 md:mb-14 text-ink-secondary ${bodyTextClass} space-y-4`}>
+                <p>{t('ukiyoe.handColoringText1')}</p>
+                <p>{t('ukiyoe.handColoringText2')}</p>
+                <p>{t('ukiyoe.handColoringText3')}</p>
+              </div>
+              <figure>
+                <video
+                  src="/work/ukiyoe/sumizuri-timelapse.mp4"
+                  controls
+                  playsInline
+                  muted
+                  loop
+                  className="w-full md:w-[56%] md:mx-auto h-auto rounded-lg border border-line-section bg-black"
+                />
+                <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
+                  {t('ukiyoe.captionHandColoring')}
+                </figcaption>
+              </figure>
+            </section>
+
+            {/* 4. Design Process */}
             <section id="design-process" className="py-12 md:py-20 scroll-mt-32">
               <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
                 {t('work.designProcess')}
@@ -293,18 +319,17 @@ const UkiyoePage: React.FC = () => {
                   <p>{t('ukiyoe.timelineDesignText3')}</p>
                   <p>{t('ukiyoe.timelineDesignText4')}</p>
                 </div>
-                <figure>
-                  <Image
-                    src="/work/ukiyoe/timeline-v2.webp"
-                    alt={t('ukiyoe.captionTimelineV2')}
-                    width={1766}
-                    height={866}
-                    className="w-full h-auto"
+                {/* before / after, both captured from the live site (the first version still runs at /a/timeline) */}
+                <div>
+                  <BeforeAfterPair
+                    label={t('ukiyoe.captionTimelineV2')}
+                    before={{ src: `/work/ukiyoe/timeline-before-${language === 'jp' ? 'jp' : 'en'}.webp`, width: 1000, height: 625, label: t('ukiyoe.timelineBefore') }}
+                    after={{ src: `/work/ukiyoe/timeline-after-${language === 'jp' ? 'jp' : 'en'}.webp`, width: 1000, height: 625, label: t('ukiyoe.timelineAfter') }}
                   />
-                  <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
+                  <p className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
                     {t('ukiyoe.captionTimelineV2')}
-                  </figcaption>
-                </figure>
+                  </p>
+                </div>
               </div>
 
               {/* Color System & Period Ratios */}
@@ -321,10 +346,10 @@ const UkiyoePage: React.FC = () => {
                   {/* the site's own palette summary (2026-11 rebuild) — replaces the earlier proportion bars */}
                   <Image
                     key={language}
-                    src={language === 'jp' ? '/work/ukiyoe/palette-v2-jp.webp' : '/work/ukiyoe/palette-v2-en.webp'}
+                    src={language === 'jp' ? '/work/ukiyoe/palette-v3-jp.webp' : '/work/ukiyoe/palette-v3-en.webp'}
                     alt={t('ukiyoe.captionColorSystem')}
-                    width={1320}
-                    height={1120}
+                    width={980}
+                    height={845}
                     className="w-full md:w-[75%] md:mx-auto h-auto rounded-lg"
                   />
                   <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
@@ -341,13 +366,19 @@ const UkiyoePage: React.FC = () => {
                 <p className={`mb-6 text-ink-secondary ${bodyTextClass}`}>
                   {t('ukiyoe.logoDesignText1')}
                 </p>
+                <figure className="mb-8">
+                  <LogoProcessFigure locale={language} />
+                  <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
+                    {t('ukiyoe.captionLogoProcess')}
+                  </figcaption>
+                </figure>
                 <p className={`mb-6 text-ink-secondary ${bodyTextClass}`}>
                   {t('ukiyoe.logoDesignText2')}
                 </p>
                 <figure>
                   <Image
                     src="/work/ukiyoe/process-logo.webp"
-                    alt="Logo design: a seal mark built on bold cropping and off-center placement"
+                    alt={t('ukiyoe.captionLogo')}
                     width={1200}
                     height={675}
                     className="w-full h-auto rounded-lg border border-line-section overflow-hidden"
@@ -418,31 +449,6 @@ const UkiyoePage: React.FC = () => {
               </div>
             </section>
 
-            {/* 4. Hand-Coloring the Layers */}
-            <section id="hand-coloring" className="py-12 md:py-20 scroll-mt-32">
-              <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
-                {t('ukiyoe.handColoringTitle')}
-              </h2>
-              <div className={`mb-10 md:mb-14 text-ink-secondary ${bodyTextClass} space-y-4`}>
-                <p>{t('ukiyoe.handColoringText1')}</p>
-                <p>{t('ukiyoe.handColoringText2')}</p>
-                <p>{t('ukiyoe.handColoringText3')}</p>
-              </div>
-              <figure>
-                <video
-                  src="/work/ukiyoe/sumizuri-timelapse.mp4"
-                  controls
-                  playsInline
-                  muted
-                  loop
-                  className="w-full md:w-[56%] md:mx-auto h-auto rounded-lg border border-line-section bg-black"
-                />
-                <figcaption className="mt-3 text-body-sm md:text-body-base text-ink-tertiary font-space-grotesk">
-                  {t('ukiyoe.captionHandColoring')}
-                </figcaption>
-              </figure>
-            </section>
-
             {/* 5. AI Can Create, But It Can't Craft */}
             <section id="ai-craft" className="py-12 md:py-20 scroll-mt-32">
               <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
@@ -505,7 +511,7 @@ const UkiyoePage: React.FC = () => {
               <h2 className={`text-title-lg mb-6 ${getHeadingFontClass()}`}>
                 {t('work.reflection')}
               </h2>
-              <div className="mb-10 md:mb-14">
+              <div>
                 <h3 id="learnings" className={`scroll-mt-32 text-title mb-4 ${getHeadingFontClass()}`}>
                   {t('ukiyoe.learningsTitle')}
                 </h3>
@@ -514,14 +520,6 @@ const UkiyoePage: React.FC = () => {
                   <p>{t('ukiyoe.learningsText2')}</p>
                   {/* learningsText3 restated aiCraftText3 ("AI can't craft") almost word for word; not rendered. */}
                 </div>
-              </div>
-              <div>
-                <h3 id="future" className={`scroll-mt-32 text-title mb-4 ${getHeadingFontClass()}`}>
-                  {t('ukiyoe.futureTitle')}
-                </h3>
-                <p className={`text-ink-secondary ${bodyTextClass}`}>
-                  {t('ukiyoe.futureText')}
-                </p>
               </div>
             </section>
       </WorkShell>
