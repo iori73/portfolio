@@ -1,7 +1,8 @@
 <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!-- Logo color: 海松色 Miru-iro #596327 (traditional Japanese seaweed green; "miru" = "to see"). Chosen 2026-11-12. -->
 <rect x="2" y="2" width="48" height="48" rx="24" fill="white"/>
-<rect x="2" y="2" width="48" height="48" rx="24" stroke="black" stroke-width="3"/>
-<circle cx="26" cy="12.87" r="3.86" fill="black"/>
-<circle cx="26" cy="22.14" r="3.86" fill="black"/>
-<rect x="22.14" y="27.55" width="7.73" height="15.45" fill="black"/>
+<rect x="2" y="2" width="48" height="48" rx="24" stroke="#596327" stroke-width="3"/>
+<circle cx="26" cy="12.87" r="3.86" fill="#596327"/>
+<circle cx="26" cy="22.14" r="3.86" fill="#596327"/>
+<rect x="22.14" y="27.55" width="7.73" height="15.45" fill="#596327"/>
 </svg>
