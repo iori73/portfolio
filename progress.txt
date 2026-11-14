@@ -2099,4 +2099,10 @@ variables / styles はデザインの統一と作業効率のため（現行サ�
 - [x] public/icon.svg の黒（外周の線・「i」の点と縦棒）を #596327 に置換。白地は維持。ヘッダーのロゴとファビコンが同じファイルを共有するので両方変わる
 - [x] 選んだ理由と出典を docs/architecture/design-system.md §2.2.1 に記録
 - [x] 確認: ヘッダーと同じ背景 #EFF1F1 で 48px・16px を描画し、判読できることを確認（白地とのコントラスト約 6.6:1）
-- [ ] Figma portfolio_v6 のロゴも同じ色に揃える（未着手）
+- [x] 本番 iori-kawano.vercel.app で反映を確認（PR #143 merge 後、PC jp / SP en、コンソールエラーなし）
+- [x] Figma portfolio_v6 に同期（2026-11-14）: 変数 color/hue/miru（Primitives）→ brand/logo（Color）を追加。
+      Components ページにロゴ部品「Logo」369:1612（public/icon.svg と同じベクター、brand/logo に紐づけ）を作り、
+      Header/PC・Header/SP のロゴをそのインスタンスに置換（使っている 22 画面に反映）。
+      取り込み画面で画像になっていた「Image (Logo)」13 か所（Site — JP 3、Site — EN 2、Archive 8）もインスタンスに置換。
+      今後ロゴの色・形を変えるときは 369:1612 だけ直せば全部に反映される
+- [ ] Site — JP の 103:1726「ukiyoe-timeline — デザイン案 A / B / C（2026-11-06）」は v2 本番（293:27）で決着済みの古い案。Archive へ移すか河野さんに確認中
