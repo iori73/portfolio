@@ -16,12 +16,11 @@ export default function TransitionOverlay() {
     if (state.phase === 'idle' || typeof window === 'undefined') return null;
     const vw = window.innerWidth;
     const isMd = vw >= 768;
-    // The deck hero is a cluster of capped-size cards, not a bleeding photo like
-    // Ukiyoe's — it needs a shorter box (aspect-[8/5] left it swimming in empty
-    // vertical space once maxScale capped its growth). Must match the aspect-ratio
-    // class on the real hero container in work/figma-plugins/page.tsx exactly, or
-    // the overlay and the real DOM disagree the instant the overlay fades out.
-    const heightRatio = state.content.type === 'node' ? 2 / 5 : 5 / 8;
+    // Every Work hero is aspect-[8/5], and so is every card thumbnail (WorkCard).
+    // Must match the aspect-ratio class on the real hero containers
+    // (work/*/page.tsx) exactly, or the overlay and the real DOM disagree the
+    // instant the overlay fades out. (figma-plugins used 5/2 until 2026-10-26.)
+    const heightRatio = 5 / 8;
     return {
       top: isMd ? 112 : 96,
       left: 0,
@@ -109,13 +108,12 @@ export default function TransitionOverlay() {
       {hero && (
         <div
           ref={imageRef}
-          className="page-transition-image"
+          className={`page-transition-image ${state.content.type === 'node' ? 'bg-surface-raised' : ''}`}
           style={{
             top: hero.top,
             left: hero.left,
             width: hero.width,
             height: hero.height,
-            backgroundColor: state.content.type === 'node' ? '#F5F5F7' : undefined,
           }}
         >
           {state.content.type === 'image' ? (

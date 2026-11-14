@@ -3,18 +3,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
 
-const TIMELINE_ERAS = [
-  { year: '1670', opacity: 0.9, height: 116 },
-  { year: '1700', opacity: 0.9, height: 18 },
-  { year: '1720', opacity: 0.8, height: 18 },
-  { year: '1740', opacity: 0.7, height: 18 },
-  { year: '1750', opacity: 0.6, height: 18 },
-  { year: '1765', opacity: 0.5, height: 18 },
-  { year: '1770', opacity: 0.4, height: 18 },
-  { year: '1790', opacity: 0.3, height: 18 },
-  { year: '1800', opacity: 0.2, height: 18 },
-] as const;
-
 interface ArtworkCard {
   image: string;
   title: { ja: string; en: string };
@@ -52,48 +40,6 @@ const ARTWORK_CARDS: ArtworkCard[] = [
     ],
   },
 ];
-
-function TimelineIndicators() {
-  return (
-    <div className="flex flex-col items-end gap-2.5 scale-[0.8] md:scale-100 origin-center">
-      <div className="flex flex-col items-start gap-2.5">
-        {TIMELINE_ERAS.map((era) => (
-          <div
-            key={era.year}
-            className="flex items-center gap-2 justify-end"
-            style={{ opacity: era.opacity }}
-          >
-            <span
-              className="text-[#f5f0e6] text-lg tracking-wider leading-tight"
-              style={{ fontFamily: "'Shippori Mincho', serif", fontWeight: 500 }}
-            >
-              {era.year}
-            </span>
-            <div
-              className="bg-[#f5f0e6] shrink-0"
-              style={{
-                width: 18,
-                height: era.height,
-                borderRadius: 100,
-              }}
-            />
-          </div>
-        ))}
-      </div>
-
-      {/* Separator */}
-      <div className="w-4 border-t border-[#f5f0e6] opacity-50 self-end" />
-
-      {/* Gallery grid icon */}
-      <div className="grid grid-cols-2 grid-rows-2 gap-px opacity-50 self-end" style={{ width: 16, height: 16 }}>
-        <div className="border-2 border-[#f5f0e6]" />
-        <div className="border-2 border-[#f5f0e6]" />
-        <div className="border-2 border-[#f5f0e6]" />
-        <div className="border-2 border-[#f5f0e6]" />
-      </div>
-    </div>
-  );
-}
 
 function ArtworkCardComponent({
   card,
@@ -195,12 +141,12 @@ export default function KushiDangoShowcase({ locale }: { locale: string }) {
       {/* Top: Timeline + Dango composition */}
       <div className="relative w-full overflow-hidden" style={{ aspectRatio: '883 / 552' }}>
         <div className="absolute inset-0 flex">
-          {/* Left: Timeline screenshot */}
+          {/* Left: the current timeline (2026-11 rebuild) — its era ruler is the line-and-dot (skewer and dango) */}
           <div className="relative w-[52%] h-full overflow-hidden">
             <img
-              src="/work/ukiyoe/timeline-showcase-bg.webp"
+              src="/work/ukiyoe/timeline-showcase-v2.webp"
               alt=""
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover object-left-top"
             />
           </div>
           {/* Right: Dango photo */}
@@ -211,11 +157,6 @@ export default function KushiDangoShowcase({ locale }: { locale: string }) {
               className="absolute inset-0 w-full h-full object-cover"
             />
           </div>
-        </div>
-
-        {/* Timeline indicators overlay */}
-        <div className="absolute right-[50%] top-0 bottom-0 flex items-center z-10 pointer-events-none">
-          <TimelineIndicators />
         </div>
       </div>
 

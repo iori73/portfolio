@@ -109,9 +109,9 @@ export default function Header() {
         className="absolute inset-0 pointer-events-none"
         style={{
           backdropFilter: 'blur(40px)',
-          // Tinted to the cream ground (--surface #ebe8de). A white veil here
-          // reads as a separate white bar sitting on top of a warm sheet.
-          background: 'rgba(235,232,222,0.6)',
+          // Tinted to the cool grey ground (--surface #EFF1F1, 2026-09-22). A white
+          // veil here reads as a separate white bar sitting on top of the sheet.
+          background: 'rgba(239,241,241,0.6)',
           // maskImage:
           //   'linear-gradient(180deg, rgba(229, 229, 229, 10) 0%, rgba(229, 229, 229, 0.9) 25%, rgba(229, 229, 229, 0.7) 50%, rgba(229, 229, 229, .5) 70%, rgba(229, 229, 229, 0.1) 90%, rgba(229, 229, 229, 0) 100%)',
           // WebkitMaskImage:

@@ -108,7 +108,9 @@ body {
   font-family: 'Helvetica Neue', 'Helvetica', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #ebe8de;
+  /* var(--surface), not a literal: body previously duplicated the hex directly,
+     which let it drift out of sync with --surface until this 2026-09-22 pass. */
+  background-color: var(--surface);
 }
 
 
@@ -191,17 +193,27 @@ body {
     /* Semantic color tokens */
     --ink: #0A0A0A;
     --ink-secondary: #333333;
-    /* Warm grey, not the old cool #6b6b73: on the cream ground that fell to
-       4.31:1. This holds 4.5:1 on surface, surface-muted and surface-raised. */
-    --ink-tertiary: #635d54;
+    /* Cool grey (2026-09-22: replaced the warm #635d54 that was tuned to the old
+       cream ground). Re-derived at the same HLS lightness, hue shifted to match
+       --surface below, then re-verified: 5.91:1 / 5.18:1 / 6.64:1 on
+       surface / surface-muted / surface-raised — all above the old ratios. */
+    --ink-tertiary: #565D61;
     --ink-muted: rgba(0, 0, 0, 0.56);
-    /* Warm cream ground (seremoni-derived salt #ebe8de). Every neutral below is
-       tuned to it — a cool grey reads as a cold patch on a warm sheet. */
-    --surface: #ebe8de;
-    --surface-muted: #e0dbcb;
-    --surface-raised: #f7f5ee;
-    --line-subtle: #dcd7c8;
-    --line-section: #cdc7b6;
+    /* Cool grey ground (2026-09-22: replaced the warm cream "seremoni-derived
+       salt #ebe8de" — 河野 felt the beige read as generic "AI portfolio" cream).
+       Base is 青鼠 (ao-nezumi) from the note thumbnail ground palette
+       (reference/wa-colors/ground-palette.json in ai-ops), C*0.7 — chosen over
+       the other candidates in that palette (楝/勿忘草/瓶覗/裏柳) for being the
+       closest to true neutral grey. Every neutral below is re-derived from it,
+       preserving each token's original HLS lightness-delta and saturation-ratio
+       to --surface (see /tmp/tune_grays.py-equivalent derivation, 2026-09-22) —
+       a warm neutral left in this family reads as a warm patch on a cool sheet,
+       same failure mode the old comment warned about in the other direction. */
+    --surface: #EFF1F1;
+    --surface-muted: #DFE3E3;
+    --surface-raised: #FEFEFE;
+    --line-subtle: #DBE0E0;
+    --line-section: #CAD0D0;
 
     /* Podcast Notes — category color tokens */
     --podcast-category-technology: #6C5CE7;

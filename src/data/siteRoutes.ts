@@ -37,6 +37,13 @@ export const ARCHIVED_WORK_SLUGS = [
   'airline-design-system',
   'gym_crowd_status_dashboard',
   'proposal-case-study',
+  // 中初商店の旧版2つ（2026-11-07）。公開ページは /work/nakahatsu（旧 SY 型）
+  'nakahatsu-detail',
+  'nakahatsu-story',
+  // 中初商店の公開ページも、いったん非公開（2026-11-07）。先方に掲載許可を依頼中で、
+  // 依頼文で「掲載はサイトの一般公開後」と約束している。OK が来て先方サイトが公開されたら、
+  // ここから外して CARD_WORK_SLUGS に戻す（トップのカード・sitemap・ページがそろって戻る）。
+  'nakahatsu',
 ] as const;
 
 /** Work 以外で sitemap に載せるページ。 */

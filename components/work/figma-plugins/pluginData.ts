@@ -77,6 +77,19 @@ const basePlugins: PluginData[] = [
     users: 36,
     likes: 0,
   },
+  {
+    id: 'pinterest-to-figma',
+    name: 'Pinterest to Figma',
+    type: 'Plugin',
+    category: 'personal',
+    description:
+      'Imports any public Pinterest board into Figma as an image grid, preserving board sections as separate frames, with per-image color-distribution bars, full-size images, carousel pins, and clickable source links.',
+    tags: ['Plugin', 'Import', 'Pinterest'],
+    link: 'https://www.figma.com/community/plugin/1678794201557473584',
+    accentColor: '#E60023',
+    iconImage: '/work/figma-plugins/p2f-icon.webp',
+    thumbnail: '/work/figma-plugins/p2f-cover.webp',
+  },
 ];
 
 // Merge live (fetched) stats over the inline fallbacks.

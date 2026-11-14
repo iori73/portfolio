@@ -177,7 +177,7 @@ const SkillCategoryItem: React.FC<{ category: SkillCategory; lang: 'en' | 'jp' }
         {category.items.map((item) => (
           <span
             key={item.en}
-            className="font-space-grotesk text-label md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary"
+            className="font-space-grotesk text-label leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary"
           >
             {item[lang]}
           </span>
@@ -208,7 +208,7 @@ const ProjectItem: React.FC<{ project: Project; lang: 'en' | 'jp' }> = ({ projec
           {project.technologies.map((tech) => (
             <span
               key={tech}
-              className="font-space-grotesk text-label md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary"
+              className="font-space-grotesk text-label leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary"
             >
               {tech}
             </span>

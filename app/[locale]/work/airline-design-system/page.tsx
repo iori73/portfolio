@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import BackToTopButton from '@/src/compositions/BackToTopButton';
 import { useTranslations, useLocale } from 'next-intl';
+import WorkMetaGrid from '@/src/components/work/WorkMetaGrid';
 import { useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
 import { usePageTransition } from '@/src/contexts/TransitionContext';
 
@@ -100,7 +101,7 @@ const AirlineDesignSystemPage: React.FC = () => {
   const bodyTextClass = `${getBodyFontClass()} tracking-[0.2px] text-body-lg`;
 
   return (
-    <div className="font-sans my-24 md:mt-28 md:mb-16">
+    <div className="font-sans mt-[var(--site-header-height)] mb-24 md:mb-16">
       <BackToTopButton />
 
       {/* Hero */}
@@ -140,40 +141,14 @@ const AirlineDesignSystemPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
-                {t('common.timeline')}
-              </span>
-              <p className="text-body-lg tracking-[0.2px]">
-                {t('projects.airlineDesignSystem.timeline')}
-              </p>
-            </div>
-            <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
-                {t('common.mySkills')}
-              </span>
-              <p className="text-body-lg tracking-[0.2px]">
-                {t('projects.airlineDesignSystem.skills')}
-              </p>
-            </div>
-            <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
-                {t('common.type')}
-              </span>
-              <p className="text-body-lg tracking-[0.2px]">
-                {t('airlineDesignSystem.type')}
-              </p>
-            </div>
-            <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
-                {t('common.deliverables')}
-              </span>
-              <p className="text-body-lg tracking-[0.2px]">
-                {t('projects.airlineDesignSystem.deliverables')}
-              </p>
-            </div>
-          </div>
+          <WorkMetaGrid
+            items={[
+              { label: t('common.timeline'), value: t('projects.airlineDesignSystem.timeline') },
+              { label: t('common.mySkills'), value: t('projects.airlineDesignSystem.skills') },
+              { label: t('common.type'), value: t('airlineDesignSystem.type') },
+              { label: t('common.deliverables'), value: t('projects.airlineDesignSystem.deliverables') },
+            ]}
+          />
         </div>
       </section>
 

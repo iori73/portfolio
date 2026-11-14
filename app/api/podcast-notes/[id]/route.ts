@@ -5,7 +5,7 @@
  * plus `ownNotes`: the sections the author wrote by hand.
  * Transcript is flagged but not returned (too large).
  *
- * Environment: NOTION_API_KEY
+ * Environment: NOTION_API_KEY, NOTION_PODCAST_DB_ID (pages outside this DB return 404)
  */
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -17,6 +17,22 @@ import type { Chapter, NoteBlock, OwnNoteSection } from '@/components/podcast-no
 import { rateLimit } from '@/src/lib/rate-limit';
 
 const NOTION_API_KEY = process.env.NOTION_API_KEY;
+const NOTION_DB_ID = process.env.NOTION_PODCAST_DB_ID;
+
+const normId = (id: string) => id.replace(/-/g, '').toLowerCase();
+
+/**
+ * The integration may be able to read pages outside the podcast DB. Without this
+ * check, anyone who knows a page ID could read that page through this route.
+ * Only pages whose parent is the podcast DB are served.
+ * Covers both parent shapes: `database_id` (legacy) and `data_source_id` (2025-09 API,
+ * which also carries `database_id`).
+ */
+function isPodcastPage(page: Record<string, unknown>): boolean {
+  if (!NOTION_DB_ID) return false;
+  const parent = page.parent as { database_id?: string } | undefined;
+  return !!parent?.database_id && normId(parent.database_id) === normId(NOTION_DB_ID);
+}
 
 // ownNotes の取り込み上限。Notion 側でいくら書かれてもレスポンスと serverless 実行時間が
 // 膨らまないようにする。子ブロック取得のリクエスト数も含めて上限を持たせる。
@@ -251,7 +267,7 @@ export async function GET(
     return NextResponse.json({ error: 'Invalid episode ID' }, { status: 400 });
   }
 
-  if (!NOTION_API_KEY) {
+  if (!NOTION_API_KEY || !NOTION_DB_ID) {
     return NextResponse.json(
       { error: 'Notion API not configured' },
       { status: 503 }
@@ -263,6 +279,10 @@ export async function GET(
   try {
     // Fetch page properties
     const page = await notion.pages.retrieve({ page_id: id }) as Record<string, unknown>;
+    // Same 404 as a missing page, so the response does not reveal whether the ID exists.
+    if (!isPodcastPage(page)) {
+      return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    }
     const props = page.properties as Record<string, Record<string, unknown>>;
 
     const rawCategory = (props.Category as { select?: { name?: string } })?.select?.name ?? null;

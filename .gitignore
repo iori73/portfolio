@@ -56,3 +56,9 @@ public/downloads/*
 !public/downloads/Iori-Kawano-Resume-*.pdf
 # Claude Code の個人用オーバーライド（マシン固有・共有しない）
 .claude/settings.local.json
+
+# ケーススタディ図版の生データ置き場。クライアントサイトの生スクリーンショット
+# （未承認の写真・管理バー・全景）が入るため、リポジトリには絶対に入れない。
+# 公開するのは public/work/**/ に書き出したトリミング済みの図版だけ。
+.capture/
+.nakahatsu-capture.env

@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CTAButton } from '@/components/ui/cta-button';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { useTranslations, useLocale } from 'next-intl';
+import WorkMetaGrid from '@/src/components/work/WorkMetaGrid';
 import { useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
 import { MoveUpRight, Waves, Lightbulb, Boxes, CircleAlert, CircleCheck, Server, Users } from 'lucide-react';
 import GymDashboardHero from '@/components/GymDashboardHero';
@@ -112,7 +113,7 @@ const GymDashboardPage: React.FC = () => {
   }, [activeSection]);
 
   return (
-    <div className="font-sans my-24 md:mt-28 md:mb-16">
+    <div className="font-sans mt-[var(--site-header-height)] mb-24 md:mb-16">
       <BackToTopButton />
       {/* Hero Section - Animated */}
       <section className="mb-0 md:mb-8 -mx-6 md:mx-0">
@@ -155,28 +156,14 @@ const GymDashboardPage: React.FC = () => {
             </span>
           </div> */}
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">Timeline</span>
-              <p className="text-body-lg tracking-[0.2px]">{t('projects.gymDashboard.timeline')}</p>
-            </div>
-            <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">My Skills</span>
-              <p className="text-body-lg tracking-[0.2px]">{t('projects.gymDashboard.skills')}</p>
-            </div>
-            <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">Type</span>
-              <p className="text-body-lg tracking-[0.2px]">{t('common.personalProject')}</p>
-            </div>
-            <div>
-              <span className="text-caption-lg font-space-grotesk font-semibold text-ink-tertiary mb-2 block">
-                Deliverables
-              </span>
-              <p className="text-body-lg tracking-[0.2px]">
-                {t('projects.gymDashboard.deliverables')}
-              </p>
-            </div>
-          </div>
+          <WorkMetaGrid
+            items={[
+              { label: 'Timeline', value: t('projects.gymDashboard.timeline') },
+              { label: 'My Skills', value: t('projects.gymDashboard.skills') },
+              { label: 'Type', value: t('common.personalProject') },
+              { label: 'Deliverables', value: t('projects.gymDashboard.deliverables') },
+            ]}
+          />
         </div>
       </section>
 

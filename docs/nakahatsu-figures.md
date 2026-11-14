@@ -1,0 +1,16 @@
+# Nakahatsu case study figures
+
+Regenerate with `node scripts/capture-nakahatsu-figures.mjs` (needs `NAKAHATSU_STORE_URL`, and `NAKAHATSU_STORE_PASSWORD` while the store is password-protected; both can live in the gitignored `.nakahatsu-capture.env`). Then run `node scripts/generate-og-images.mjs`. Captured 2026-10-25 from the published theme of the dev store (hero pinned to slide 1, intro animation waited out).
+
+| File | Shows | Size | Caption / alt text (facts as displayed) |
+|---|---|---|---|
+| thumbnail-jp.webp | Japanese home page, first screen at 1440x900 | 2000x1250 | Home page in Japanese. A dark photo of a hand working koji. Vertical tagline 天の恵み。自然の摂理に従い、時間と土地の力をいただくこと。 on the left; the 天祐 emblem, 中初商店 and 一八九六年創業 set vertically on the right; nav 中初商店について / お知らせ / オンラインショップ / お問い合わせ; language switch JP, EN, FR; three carousel dots (first active). |
+| thumbnail-en.webp | English home page, same view | 2000x1250 | Same screen in English. Nav About / News / Online Shop / Contact. Tagline "Guided by nature. Perfected by time." is horizontal at bottom left; "Founded in 1896" and 中初商店 stay vertical on the right. Also used for public/og/nakahatsu.jpg. |
+| before-after.webp | Left: old WordPress company site over old EC-CUBE shop. Right: new store home (hero, news bar, start of About) | 1200x675 | Before: two separate systems, a WordPress company site (hero with the 天祐 emblem, "Since 1896") above an EC-CUBE shop (product list, bottles at ¥1,296 / ¥1,080 / ¥540). After: one Shopify storefront in Japanese with a language switch (JP/EN/FR), the hero, a news bar "お知らせ 2026.10.11 オンラインショップを新しくいたしました", and the heading 中初商店について. |
+| bilingual.webp | Same hero in Japanese (top) and English (bottom), 1440px | 1200x1636 | Japanese: tagline and brand name both vertical. English: nav in English, the tagline turns horizontal ("Guided by nature. Perfected by time."), "Founded in 1896" stays vertical and so does the brush-lettered 中初商店. A JP / EN / FR switch is in the header of both. (FR hero is captured in `.capture/nakahatsu/hero-fr-1440.png`, not composed.) |
+| responsive.webp | Home hero + news bar at 1440, 768 and 390px on one scale | 1200x675 | Three widths of the same page. At 1440 the nav sits across the top; at 768 and 390 it collapses to a menu icon. The vertical tagline and the vertical brand stay in place at every width; the news bar "お知らせ" follows the hero. |
+| products.webp | Product grid, PC 1440, JA | 1200x675 | Heading あなたの食卓に、無添加の美味しさ and the first two rows of products on white cards: 天祐 丸大豆本醸造醤油 1000ml / 720ml / 200ml / 1000ml 金澤, then 天祐 米糀味噌 粒 800g / 粒 400g / すり 800g / すり 400g. No prices are shown in the grid. |
+| about-tenyu.webp (NEW) | About page, 天祐醤油 and 天祐味噌 sections, PC 1440, JA | 1200x675 | Two side-by-side blocks, each a photo with vertical body text over it and a vertical heading to its right: 天祐味噌 (headline 一般的な味噌よりも長めの一年以上天然醸造でじっくりと「醗酵・熟成」) and 天祐醤油 (一般的な醤油よりも長めの二年以上…). Below, the heading 中初の成り立ち. |
+| challenges.webp | UNCHANGED. Old-site screens (payment methods, fees, sign-up error) | 1200x910 | Not from the current theme; not re-shot. |
+
+Deliberately not used: the oidemashi section (owner portrait photo, Google Map, scroll-driven; not shot), the About photo band on the home page (Instagram-derived, 1518css and below), "Sample"-watermarked cards (素材/製法, 私たちとお客様), the loading intro.

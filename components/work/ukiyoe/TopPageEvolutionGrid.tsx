@@ -8,7 +8,10 @@ import { X } from 'lucide-react';
 
 const STEPS = Array.from({ length: 9 }, (_, i) => ({
   number: i + 1,
-  image: `/work/ukiyoe/process-toppage/${String(i + 1).padStart(2, '0')}.webp`,
+  // step 9 is the current top page (captured from production 2026-11-10: new language toggle)
+  image: i === 8
+    ? '/work/ukiyoe/process-toppage/09-current.webp'
+    : `/work/ukiyoe/process-toppage/${String(i + 1).padStart(2, '0')}.webp`,
 }));
 
 export default function TopPageEvolutionGrid() {

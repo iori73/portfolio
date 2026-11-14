@@ -50,7 +50,7 @@ export default function EpisodeDetailPage() {
   const t = useTranslations('podcastNotesPage');
   const locale = useLocale();
   const params = useParams();
-  const episodeId = params.id as string;
+  const episodeId = params?.id as string;
   const { getBodyFontClass } = useBodyFont();
   const { getHeadingFontClass } = useHeadingFont();
   const bodyFontClass = getBodyFontClass();

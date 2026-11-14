@@ -1,5 +1,18 @@
 {
-  "pptx-to-figma": { "users": 10200, "likes": 100 },
-  "perfect-markdown": { "users": 707, "likes": 13 },
-  "bulk-screenshot-importer": { "users": 36, "likes": 0 }
+  "pptx-to-figma": {
+    "users": 19000,
+    "likes": 199
+  },
+  "perfect-markdown": {
+    "users": 1100,
+    "likes": 19
+  },
+  "bulk-screenshot-importer": {
+    "users": 72,
+    "likes": 0
+  },
+  "pinterest-to-figma": {
+    "users": 136,
+    "likes": 3
+  }
 }

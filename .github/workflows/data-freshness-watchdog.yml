@@ -1,0 +1,50 @@
+name: Data Freshness Watchdog
+
+# 「自動更新が静かに止まっていた」を防ぐ見張り役。
+# 2026-09-21〜10-26、Figma 統計と Podcast データの更新ワークフローが失敗し続けても
+# 誰も気づかず、サイトの数字が約 1 ヶ月古いままだった（lessons.md 参照）。
+# 各データ更新ワークフローの「最後の成功」が許容日数より古ければ Issue を 1 件だけ立て、
+# 回復したら自動で閉じる。この Watchdog 自体は更新ワークフローとは独立に毎日動く。
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # 毎日 6時 (UTC) = 15時 JST
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      issues: write
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Check last successful run of each data workflow
+        run: |
+          # "workflow-file max_age_days label"
+          while read -r FILE MAX LABEL; do
+            LAST=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow "$FILE" --status success --limit 1 --json createdAt --jq '.[0].createdAt // empty')
+            TITLE="Data stale: $LABEL (auto-update not succeeding)"
+            if [ -z "$LAST" ]; then
+              AGE=9999
+            else
+              AGE=$(( ( $(date -u +%s) - $(date -u -d "$LAST" +%s) ) / 86400 ))
+            fi
+            OPEN=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "\"$TITLE\" in:title" --json number --jq '.[0].number // empty')
+            if [ "$AGE" -gt "$MAX" ]; then
+              echo "STALE: $LABEL last success ${AGE}d ago (limit ${MAX}d)"
+              if [ -z "$OPEN" ]; then
+                gh issue create --repo "$GITHUB_REPOSITORY" --title "$TITLE" \
+                  --body "\`$FILE\` has not succeeded for ${AGE} days (limit: ${MAX}). The site is showing out-of-date $LABEL. Check recent runs: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/workflows/${FILE}"
+              fi
+            else
+              echo "OK: $LABEL last success ${AGE}d ago"
+              if [ -n "$OPEN" ]; then
+                gh issue close "$OPEN" --repo "$GITHUB_REPOSITORY" --comment "Recovered: last success ${AGE}d ago."
+              fi
+            fi
+          done <<'LIST'
+          update-figma-stats.yml 3 Figma plugin stats
+          update-podcast-data.yml 10 Podcast notes data
+          LIST

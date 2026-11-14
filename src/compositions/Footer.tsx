@@ -8,6 +8,8 @@ import { useTranslations } from 'next-intl';
 const XIcon = () => (
   <svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M31.8067 11.8125H35.9434L26.9082 22.1367L37.5371 36.1875H29.2168L22.6953 27.6679L15.2422 36.1875H11.0996L20.7617 25.1425L10.5723 11.8125H19.1035L24.9922 19.5996L31.8067 11.8125ZM30.3536 33.7148H32.6445L17.8555 14.1562H15.3945L30.3536 33.7148Z"
       fill="currentColor"
     />
@@ -81,103 +83,118 @@ const MediumIcon = () => (
   </svg>
 );
 
-const BehanceIcon = () => (
+// Source: simple-icons (raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/substack.svg), 24x24 viewBox scaled x2 to match this file's 48x48 convention.
+// 2026-09-23: unlike the other icons here, the source glyph runs edge-to-edge in its
+// own viewBox (no built-in padding), so at the same 40x40 render size it read visibly
+// larger/heavier than X/GitHub/etc. Scaled down + centered in a group to match their
+// effective padding instead of changing the shared svg width/height.
+const SubstackIcon = () => (
   <svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <g clipPath="url(#clip0_552_17871)">
-      <g clipPath="url(#clip1_552_17871)">
-        <path
-          d="M18.1331 14.9453C18.9955 14.9453 19.7827 15.0221 20.4947 15.1741C21.2067 15.3261 21.8147 15.5757 22.3219 15.9229C22.8291 16.2701 23.2227 16.7309 23.5027 17.3069C23.7827 17.8829 23.9219 18.5933 23.9219 19.4397C23.9219 20.3533 23.7139 21.1149 23.2995 21.7245C22.8851 22.3341 22.2707 22.8333 21.4595 23.2221C22.5763 23.5437 23.4099 24.1069 23.9603 24.9101C24.5107 25.7133 24.7859 26.6829 24.7859 27.8173C24.7859 28.7309 24.6083 29.5229 24.2531 30.1917C23.8979 30.8605 23.4195 31.4061 22.8179 31.8285C22.2163 32.2525 21.5315 32.5645 20.7619 32.7677C19.9875 32.9709 19.1891 33.0733 18.3891 33.0717H9.60352V14.9453H18.1331ZM17.6259 22.2813C18.3363 22.2813 18.9203 22.1117 19.3779 21.7741C19.8355 21.4349 20.0643 20.8861 20.0627 20.1245C20.0627 19.7021 19.9859 19.3549 19.8339 19.0845C19.6819 18.8141 19.4787 18.6013 19.2243 18.4493C18.9699 18.2973 18.6787 18.1917 18.3491 18.1325C18.0099 18.0733 17.6659 18.0429 17.3203 18.0445H13.5907V22.2845L17.6259 22.2813ZM17.8547 29.9725C18.2307 29.9741 18.6051 29.9357 18.9715 29.8589C19.3267 29.7821 19.6403 29.6557 19.9107 29.4781C20.1811 29.3005 20.3971 29.0589 20.5587 28.7549C20.7187 28.4509 20.8003 28.0605 20.8003 27.5869C20.8003 26.6573 20.5379 25.9917 20.0131 25.5949C19.4883 25.1965 18.7939 24.9981 17.9315 24.9981H13.5907V29.9741L17.8547 29.9725ZM29.8003 29.5917C30.3411 30.1165 31.1203 30.3789 32.1363 30.3789C32.8643 30.3789 33.4899 30.1965 34.0147 29.8333C34.5395 29.4701 34.8611 29.0845 34.9795 28.6781H38.1523C37.6451 30.2525 36.8659 31.3773 35.8163 32.0541C34.7667 32.7309 33.4979 33.0701 32.0083 33.0701C30.9763 33.0701 30.0451 32.9053 29.2163 32.5757C28.3875 32.2461 27.6851 31.7757 27.1091 31.1661C26.5331 30.5565 26.0883 29.8301 25.7763 28.9837C25.4643 28.1373 25.3075 27.2061 25.3075 26.1917C25.3075 25.2109 25.4675 24.2973 25.7891 23.4509C26.1107 22.6045 26.5683 21.8733 27.1603 21.2557C27.7523 20.6381 28.4595 20.1517 29.2803 19.7965C30.1011 19.4413 31.0115 19.2637 32.0099 19.2637C33.1267 19.2637 34.0995 19.4797 34.9299 19.9117C35.7587 20.3437 36.4403 20.9229 36.9731 21.6509C37.5059 22.3789 37.8915 23.2077 38.1283 24.1389C38.3651 25.0701 38.4499 26.0429 38.3827 27.0589H28.9139C28.9635 28.2221 29.2595 29.0685 29.8003 29.5917ZM33.8755 22.6877C33.4435 22.2141 32.7875 21.9773 31.9075 21.9773C31.3315 21.9773 30.8531 22.0749 30.4739 22.2685C30.0931 22.4637 29.7891 22.7037 29.5603 22.9917C29.3315 23.2797 29.1715 23.5837 29.0787 23.9053C28.9859 24.2269 28.9299 24.5149 28.9139 24.7677H34.7779C34.6067 23.8557 34.3059 23.1613 33.8755 22.6877ZM28.2963 15.8653H35.6227V17.8973H28.2963V15.8653Z"
-          fill="currentColor"
-        />
-      </g>
+    <g transform="translate(6, 6) scale(0.75)">
+      <path
+        d="M45.078 16.484H2.92V10.812h42.16v5.672zM2.92 21.624V48L24 36.22 45.08 48V21.624H2.92zM45.08 0H2.92v5.672h42.16V0z"
+        fill="currentColor"
+      />
     </g>
-    <defs>
-      <clipPath id="clip0_552_17871">
-        <rect width="40" height="40" fill="white" transform="translate(4 4)" />
-      </clipPath>
-      <clipPath id="clip1_552_17871">
-        <rect width="40" height="40" fill="white" transform="translate(4 4)" />
-      </clipPath>
-    </defs>
   </svg>
 );
 
 // Platform data with width percentage (usage frequency) and opacity (posting frequency)
 // Icon components use fill: currentColor for flexible color control
+// widthPercent/opacity below (2026-09-23) are derived from 河野's actual usage
+// description, not estimated: X/note/LinkedIn opened daily (equal tier, ~70/wk
+// combined), GitHub used frequently but passively via Claude Code (not actively
+// opened), Substack every 2-3 days, Medium every 4-5 days. Converted to a
+// relative weekly-frequency score (X=note=LinkedIn=7, GitHub=5, Substack=7/2.5,
+// Medium=7/4.5), then widthPercent = that score's share of 100 (Medium floored
+// to 7 for min touch-target width, rest rescaled to still sum to 100), and
+// opacity = that score min-max normalized to [0.15, 1.0].
+// Note: this makes X/note/LinkedIn's opacity identical (all 1.0, solid black) —
+// an honest result of them being reported as equally daily, not a bug.
 const PLATFORM_DATA = [
   {
     id: 'twitter',
     name: 'X',
     href: 'https://twitter.com/iori73wsy',
     Icon: XIcon,
-    widthPercent: 29.5, // usage frequency - adjusted to ensure min 104px width
-    opacity: 1.0, // posting frequency (highest)
-  },
-  {
-    id: 'github',
-    name: 'GitHub',
-    href: 'https://github.com/iori73',
-    Icon: GitHubIcon,
-    widthPercent: 13.0, // usage frequency - adjusted to ensure min 104px width
-    opacity: 0.8, // posting frequency - adjusted to be visually between X and note
+    widthPercent: 22.6,
+    opacity: 1.0,
   },
   {
     id: 'note',
     name: 'note',
     href: 'https://note.com/io_73',
     Icon: NoteIcon,
-    widthPercent: 11.0, // adjusted to ensure min 104px width
-    opacity: 0.5, // posting frequency - adjusted lower to account for white background making it appear brighter
-  },
-  {
-    id: 'medium',
-    name: 'Medium',
-    href: 'https://medium.com/@iori73',
-    Icon: MediumIcon,
-    widthPercent: 10.5, // adjusted to ensure min 104px width (10.5% × 1024px = 107.52px)
-    opacity: 0.3, // posting frequency
+    widthPercent: 22.6,
+    opacity: 1.0,
   },
   {
     id: 'linkedin',
     name: 'LinkedIn',
     href: 'https://www.linkedin.com/in/iori-kawano-131a4122a/',
     Icon: LinkedInIcon,
-    widthPercent: 25.5, // usage frequency - adjusted to ensure min 104px width
-    opacity: 0.2, // posting frequency
+    widthPercent: 22.6,
+    opacity: 1.0,
   },
   {
-    id: 'behance',
-    name: 'Behance',
-    href: 'https://www.behance.net/835e5127',
-    Icon: BehanceIcon,
-    widthPercent: 10.5, // adjusted to ensure min 104px width (10.5% × 1024px = 107.52px)
-    opacity: 0.05, // posting frequency (lowest)
+    id: 'github',
+    name: 'GitHub',
+    href: 'https://github.com/iori73',
+    Icon: GitHubIcon,
+    widthPercent: 16.1,
+    opacity: 0.69,
+  },
+  {
+    id: 'substack',
+    name: 'Substack',
+    href: 'https://substack.com/@iori67',
+    Icon: SubstackIcon,
+    widthPercent: 9.0,
+    opacity: 0.34,
+  },
+  {
+    id: 'medium',
+    name: 'Medium',
+    href: 'https://medium.com/@iori73',
+    Icon: MediumIcon,
+    widthPercent: 7.0, // floored for min touch-target width; raw share was ~5.1%
+    opacity: 0.15,
   },
 ];
 
-// Helper function to calculate icon color based on posting frequency
-// Creates a smooth gradient from #FFFFFF (X, opacity 1.0) to #151515 (Behance, opacity 0.05)
+// Helper to pick a contrast-safe icon color for a block of the given posting-frequency
+// opacity (2026-09-23, replaces a smooth white->dark gradient interpolated purely from
+// `opacity`). That gradient could converge with the block's own background at mid-range
+// opacity — e.g. GitHub at opacity 0.55 rendered an icon color and a composited
+// background only ~23 RGB values apart, making the icon effectively invisible. Instead,
+// composite the block's actual background (black at `opacity` over the footer's #EFF1F1
+// ground) and pick whichever of white/dark ink has higher WCAG contrast against it. The
+// "shade = posting frequency" encoding still lives entirely in the background; the icon
+// glyph itself just needs to stay legible at any opacity.
+const FOOTER_GROUND_CHANNEL = 0xef; // #EFF1F1
+const ICON_DARK = { hex: '#151515', channel: 0x15 };
+
+const srgbToLinear = (c: number): number => {
+  const cs = c / 255;
+  return cs <= 0.04045 ? cs / 12.92 : ((cs + 0.055) / 1.055) ** 2.4;
+};
+
+const grayRelativeLuminance = (channel: number): number => {
+  const lin = srgbToLinear(channel);
+  return 0.2126 * lin + 0.7152 * lin + 0.0722 * lin;
+};
+
+const contrastRatio = (l1: number, l2: number): number => {
+  const [lighter, darker] = l1 >= l2 ? [l1, l2] : [l2, l1];
+  return (lighter + 0.05) / (darker + 0.05);
+};
+
 const getIconColor = (opacity: number): string => {
-  // Normalize opacity to 0-1 range (0.05 to 1.0)
-  const minOpacity = 0.05;
-  const maxOpacity = 1.0;
-  const normalized = (opacity - minOpacity) / (maxOpacity - minOpacity);
-
-  // Start color: #FFFFFF (white) for highest posting frequency
-  // End color: #151515 (dark gray) for lowest posting frequency
-  const startR = 255;
-  const startG = 255;
-  const startB = 255;
-  const endR = 21;
-  const endG = 21;
-  const endB = 21;
-
-  // Linear interpolation
-  const r = Math.round(startR + (endR - startR) * (1 - normalized));
-  const g = Math.round(startG + (endG - startG) * (1 - normalized));
-  const b = Math.round(startB + (endB - startB) * (1 - normalized));
-
-  return `rgb(${r}, ${g}, ${b})`;
+  const bgChannel = FOOTER_GROUND_CHANNEL * (1 - opacity);
+  const bgLum = grayRelativeLuminance(bgChannel);
+  const whiteContrast = contrastRatio(bgLum, 1);
+  const darkContrast = contrastRatio(bgLum, grayRelativeLuminance(ICON_DARK.channel));
+  return whiteContrast >= darkContrast ? '#FFFFFF' : ICON_DARK.hex;
 };
 
 export default function Footer() {
@@ -229,11 +246,12 @@ export default function Footer() {
         {/* Desktop: Single row (h-[80px]) */}
         {/* Mobile: Two rows (h-[160px]) with proper touch targets */}
         <div className="relative w-full h-[160px] md:h-[120px] mt-2 md:mt-4 overflow-hidden">
-          {/* Background gradient */}
+          {/* Background gradient (2026-09-22: aligned to --surface #EFF1F1, was #EAE9E1 —
+              a hardcoded near-duplicate of the old --surface that had already drifted) */}
           <div
             className="absolute inset-0"
             style={{
-              background: 'linear-gradient(180deg, #EAE9E1 0%, #FFFFFF 100%)',
+              background: 'linear-gradient(180deg, #EFF1F1 0%, #FFFFFF 100%)',
             }}
           />
 
@@ -269,66 +287,58 @@ export default function Footer() {
           </div>
 
           {/* Mobile treemap layout - 2 rows */}
+          {/* Row split is index-based (first half / remaining half, by count) and row
+              totals are computed from PLATFORM_DATA below rather than hardcoded, so
+              adding/removing a platform can't silently desync the normalization math. */}
           <div className="relative md:hidden h-full">
-            {/* Row 1: X (29.5%), GitHub (13.0%), note (11.0%) = 53.5% */}
-            <div className="flex h-1/2">
-              {PLATFORM_DATA.slice(0, 3).map((platform) => {
-                const IconComponent = platform.Icon;
-                // Calculate icon color with smooth gradient from #FFFFFF to #151515 based on posting frequency
-                const iconColor = getIconColor(platform.opacity);
+            {(() => {
+              const splitIndex = Math.ceil(PLATFORM_DATA.length / 2);
+              const row1 = PLATFORM_DATA.slice(0, splitIndex);
+              const row2 = PLATFORM_DATA.slice(splitIndex);
+              const row1Total = row1.reduce((sum, p) => sum + p.widthPercent, 0);
+              const row2Total = row2.reduce((sum, p) => sum + p.widthPercent, 0);
 
-                return (
-                  <Link
-                    key={platform.id}
-                    href={platform.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="h-full flex items-end justify-start p-3 md:p-6 transition-opacity active:opacity-60"
-                    style={{
-                      width: `${(platform.widthPercent / 53.5) * 100}%`, // Normalize to row total
-                      backgroundColor: `rgba(0, 0, 0, ${platform.opacity})`,
-                      color: iconColor,
-                    }}
-                    aria-label={platform.name}
-                  >
-                    {/* Icon - 40x40px with currentColor fill for flexible color control, opacity 100% */}
-                    <div className="w-10 h-10 flex items-center justify-center" style={{ flexShrink: 0, opacity: 1 }}>
-                      <IconComponent />
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
+              const renderRow = (row: typeof PLATFORM_DATA, rowTotal: number) => (
+                <div className="flex h-1/2">
+                  {row.map((platform) => {
+                    const IconComponent = platform.Icon;
+                    // Calculate icon color with smooth gradient from #FFFFFF to #151515 based on posting frequency
+                    const iconColor = getIconColor(platform.opacity);
 
-            {/* Row 2: Medium (10.5%), LinkedIn (25.5%), Behance (10.5%) = 46.5% */}
-            <div className="flex h-1/2">
-              {PLATFORM_DATA.slice(3, 6).map((platform) => {
-                const IconComponent = platform.Icon;
-                // Calculate icon color with smooth gradient from #FFFFFF to #151515 based on posting frequency
-                const iconColor = getIconColor(platform.opacity);
+                    return (
+                      <Link
+                        key={platform.id}
+                        href={platform.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="h-full flex items-end justify-start p-3 md:p-6 transition-opacity active:opacity-60"
+                        style={{
+                          width: `${(platform.widthPercent / rowTotal) * 100}%`, // Normalize to row total
+                          backgroundColor: `rgba(0, 0, 0, ${platform.opacity})`,
+                          color: iconColor,
+                        }}
+                        aria-label={platform.name}
+                      >
+                        {/* Icon - 40x40px with currentColor fill for flexible color control, opacity 100% */}
+                        <div
+                          className="w-10 h-10 flex items-center justify-center"
+                          style={{ flexShrink: 0, opacity: 1 }}
+                        >
+                          <IconComponent />
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
+              );
 
-                return (
-                  <Link
-                    key={platform.id}
-                    href={platform.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="h-full flex items-end justify-start p-3 md:p-6 transition-opacity active:opacity-60"
-                    style={{
-                      width: `${(platform.widthPercent / 46.5) * 100}%`, // Normalize to row total
-                      backgroundColor: `rgba(0, 0, 0, ${platform.opacity})`,
-                      color: iconColor,
-                    }}
-                    aria-label={platform.name}
-                  >
-                    {/* Icon - 40x40px with currentColor fill for flexible color control, opacity 100% */}
-                    <div className="w-10 h-10 flex items-center justify-center" style={{ flexShrink: 0, opacity: 1 }}>
-                      <IconComponent />
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
+              return (
+                <>
+                  {renderRow(row1, row1Total)}
+                  {renderRow(row2, row2Total)}
+                </>
+              );
+            })()}
           </div>
         </div>
 

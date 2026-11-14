@@ -118,6 +118,7 @@ export async function GET(request: NextRequest) {
     });
   } catch (error: any) {
     console.error('API Error:', error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    // Details stay in the server log; the client gets a generic message.
+    return NextResponse.json({ error: 'Failed to fetch articles' }, { status: 500 });
   }
 }

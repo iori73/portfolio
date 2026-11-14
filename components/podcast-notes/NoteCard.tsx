@@ -42,7 +42,8 @@ export default function NoteCard({ episode, isHighlighted, bodyFontClass, headin
           ? 'border-line-section shadow-md ring-1'
           : 'border-line-subtle hover:border-line-section hover:shadow-sm'
       }`}
-      style={isHighlighted ? { ringColor: color + '40' } : undefined}
+      // `ringColor` is not a CSS property (it was silently ignored), so the ring keeps Tailwind's
+      // default color. Removed to type-check; the rendered output is unchanged.
     >
       <button
         onClick={() => setIsExpanded(!isExpanded)}

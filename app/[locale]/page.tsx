@@ -1,10 +1,13 @@
 'use client';
 import { useRef } from 'react';
-import Image from 'next/image';
 import { useTranslations, useLocale } from 'next-intl';
-import { useJPFontSize, useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
+import WorkCard, { WorkCardImage } from '@/src/components/work/WorkCard';
 import { useWorkCardLink } from '@/src/hooks/useWorkCardLink';
-import PluginCardDeckThumb from '@/components/work/figma-plugins/PluginCardDeckThumb';
+import { CARD_WORK_SLUGS } from '@/src/data/siteRoutes';
+
+/** The Nakahatsu card follows siteRoutes.ts, so un-archiving it there brings the card back. */
+const showNakahatsu = (CARD_WORK_SLUGS as readonly string[]).includes('nakahatsu');
+import PluginCardDeckThumb, { PLUGIN_DECK_HERO_MAX_SCALE } from '@/components/work/figma-plugins/PluginCardDeckThumb';
 // The hero pairs both languages on screen at the same time, so it cannot go
 // through useTranslations — that resolves to the active locale only.
 import enMessages from '@/messages/en.json';
@@ -16,12 +19,10 @@ const jpHero = jpMessages.hero;
 export default function Home() {
   const t = useTranslations();
   const locale = useLocale();
-  const { jpFontSize } = useJPFontSize();
-  const { getBodyFontClass, getBodyFontStyle } = useBodyFont();
-  const { getHeadingFontClass, getHeadingFontStyle } = useHeadingFont();
   const workCard = useWorkCardLink();
   const ukiyoeImageRef = useRef<HTMLDivElement>(null);
   const figmaPluginsImageRef = useRef<HTMLDivElement>(null);
+  const nakahatsuImageRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className="mt-24 md:mt-28 md:mb-16">
@@ -54,98 +55,61 @@ export default function Home() {
         {/* h2: Heading/L_M_120 - 常に英語 */}
         <h2 className="text-headline mb-16">Work</h2>
 
-        {/* Project 0 - Ukiyoe */}
-        <a
+        {/* Work カード。3枚とも WorkCard を通す（比率・枠・角丸・タグを1か所で決める） */}
+        <WorkCard
           href={workCard.href('ukiyoe')}
-          className="block mb-16 cursor-pointer hover:opacity-80"
           onClick={workCard.onClick('ukiyoe', ukiyoeImageRef, {
             type: 'image',
             src: locale === 'jp' ? '/work/ukiyoe/thumbnail-jp.webp' : '/work/ukiyoe/thumbnail-en.webp',
           })}
-        >
-          <div className="mb-20">
-            <div className="mb-6" ref={ukiyoeImageRef}>
-              <Image
-                src={locale === 'jp' ? '/work/ukiyoe/thumbnail-jp.webp' : '/work/ukiyoe/thumbnail-en.webp'}
-                alt="Ukiyoe: Layer by Layer"
-                width={600}
-                height={300}
-                className="w-full object-cover rounded-lg"
-              />
-            </div>
+          thumbRef={ukiyoeImageRef}
+          thumb={
+            <WorkCardImage
+              src={locale === 'jp' ? '/work/ukiyoe/thumbnail-jp.webp' : '/work/ukiyoe/thumbnail-en.webp'}
+              alt="Ukiyoe: Layer by Layer"
+            />
+          }
+          title={t('projects.ukiyoe.title')}
+          tags={['UI', 'Context Engineering']}
+          description1={t('projects.ukiyoe.description1')}
+          description2={t('projects.ukiyoe.description2')}
+        />
 
-            <div className="flex items-center gap-6 mb-4 flex-wrap md:flex-nowrap">
-              <h3 className={`text-title-lg ${getHeadingFontClass()}`}>
-                {t('projects.ukiyoe.title')}
-              </h3>
-              <div className="flex gap-2">
-                <span className="font-space-grotesk text-label md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
-                  UI
-                </span>
-                <span className="font-space-grotesk text-label md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
-                  Context Engineering
-                </span>
-              </div>
-            </div>
-
-            <p className={`mb-2 text-body-lg ${getBodyFontClass()}`}>{t('projects.ukiyoe.description1')}</p>
-            <p
-              className={`${getBodyFontClass()} ${jpFontSize(
-                'text-body',
-                'text-body-lg',
-                'text-body-sm',
-                'text-body',
-              )}`}
-            >
-              {t('projects.ukiyoe.description2')}
-            </p>
-          </div>
-        </a>
-
-        {/* Project 1 - Figma Plugins */}
-        <a
+        <WorkCard
           href={workCard.href('figma-plugins')}
-          className="block mb-16 cursor-pointer hover:opacity-80"
           onClick={workCard.onClick('figma-plugins', figmaPluginsImageRef, {
             type: 'node',
             key: 'figmaPluginsDeck',
           })}
-        >
-          <div className="mb-20">
-            <div
-              className="mb-6 w-full aspect-[2/1] rounded-lg bg-surface-raised overflow-hidden"
-              ref={figmaPluginsImageRef}
-            >
-              <PluginCardDeckThumb />
-            </div>
+          thumbRef={figmaPluginsImageRef}
+          thumb={<PluginCardDeckThumb maxScale={PLUGIN_DECK_HERO_MAX_SCALE} />}
+          thumbClassName="bg-surface-raised"
+          title={t('projects.figmaPlugins.title')}
+          tags={['Figma Plugin', 'AI Vibe Coding']}
+          description1={t('projects.figmaPlugins.description1')}
+          description2={t('projects.figmaPlugins.description2')}
+        />
 
-            <div className="flex items-center gap-6 mb-4 flex-wrap md:flex-nowrap">
-              <h3 className={`text-title-lg ${getHeadingFontClass()}`}>
-                {t('projects.figmaPlugins.title')}
-              </h3>
-              <div className="flex gap-2">
-                <span className="font-space-grotesk text-label md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
-                  Figma Plugin
-                </span>
-                <span className="font-space-grotesk text-label md:text-body-lg leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary">
-                  AI Vibe Coding
-                </span>
-              </div>
-            </div>
-
-            <p className={`mb-2 text-body-lg ${getBodyFontClass()}`}>{t('projects.figmaPlugins.description1')}</p>
-            <p
-              className={`${getBodyFontClass()} ${jpFontSize(
-                'text-body',
-                'text-body-lg',
-                'text-body-sm',
-                'text-body',
-              )}`}
-            >
-              {t('projects.figmaPlugins.description2')}
-            </p>
-          </div>
-        </a>
+        {showNakahatsu && (
+        <WorkCard
+          href={workCard.href('nakahatsu')}
+          onClick={workCard.onClick('nakahatsu', nakahatsuImageRef, {
+            type: 'image',
+            src: locale === 'jp' ? '/work/nakahatsu/thumbnail-jp.webp' : '/work/nakahatsu/thumbnail-en.webp',
+          })}
+          thumbRef={nakahatsuImageRef}
+          thumb={
+            <WorkCardImage
+              src={locale === 'jp' ? '/work/nakahatsu/thumbnail-jp.webp' : '/work/nakahatsu/thumbnail-en.webp'}
+              alt="Nakahatsu Shoten Website"
+            />
+          }
+          title={t('projects.nakahatsu.title')}
+          tags={['Shopify', 'Design System']}
+          description1={t('projects.nakahatsu.description1')}
+          description2={t('projects.nakahatsu.description2')}
+        />
+        )}
 
       </section>
     </div>
