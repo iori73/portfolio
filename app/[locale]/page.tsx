@@ -3,10 +3,6 @@ import { useRef } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import WorkCard, { WorkCardImage } from '@/src/components/work/WorkCard';
 import { useWorkCardLink } from '@/src/hooks/useWorkCardLink';
-import { CARD_WORK_SLUGS } from '@/src/data/siteRoutes';
-
-/** The Nakahatsu card follows siteRoutes.ts, so un-archiving it there brings the card back. */
-const showNakahatsu = (CARD_WORK_SLUGS as readonly string[]).includes('nakahatsu');
 import PluginCardDeckThumb, { PLUGIN_DECK_HERO_MAX_SCALE } from '@/components/work/figma-plugins/PluginCardDeckThumb';
 // The hero pairs both languages on screen at the same time, so it cannot go
 // through useTranslations — that resolves to the active locale only.
@@ -90,7 +86,6 @@ export default function Home() {
           description2={t('projects.figmaPlugins.description2')}
         />
 
-        {showNakahatsu && (
         <WorkCard
           href={workCard.href('nakahatsu')}
           onClick={workCard.onClick('nakahatsu', nakahatsuImageRef, {
@@ -109,7 +104,6 @@ export default function Home() {
           description1={t('projects.nakahatsu.description1')}
           description2={t('projects.nakahatsu.description2')}
         />
-        )}
 
       </section>
     </div>
