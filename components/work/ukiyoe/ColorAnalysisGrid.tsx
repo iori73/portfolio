@@ -142,7 +142,7 @@ export default function ColorAnalysisGrid({ locale }: { locale: string }) {
                 ))}
               </div>
               <p className="mt-3 text-body-sm text-ink-secondary tabular-nums leading-snug">
-                <span className="mr-1.5 inline-flex h-5 w-5 items-center justify-center border border-ink/40 text-[13px] leading-none align-[-3px]">{era.num}</span>
+                <span className="mr-1.5 inline-flex h-5 w-5 items-center justify-center border border-ink/40 text-caption leading-none align-[-3px]">{era.num}</span>
                 {era.years}
               </p>
               <p className="mt-1 mb-2 text-body leading-snug text-ink md:min-h-[2lh]">{jp ? era.ja : era.en}</p>
