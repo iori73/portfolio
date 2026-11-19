@@ -2083,3 +2083,65 @@ variables / styles はデザインの統一と作業効率のため（現行サ�
 - タイムライン: 最初の版の画像（process-timeline.webp、45 Works）→ 今の /timeline の 1 時代（錦絵の成熟）を本番から（timeline-era-v2-jp/en.webp）。キャプションも今の版に。
 - トップページの変遷 9 枚目: 本番の今のトップ（新しい言語切り替え）09-current.webp に。
 - 「デザインモチーフ：串団子」の節を削除（河野さん: 今のサイトに団子のモチーフは無い）。サイドバーの項目、AI の節の「串団子のナビゲーションモチーフ」も言語切り替えに置き換え。部品ファイルと文言キーは残した（削除は許可を取ってから）。
+
+### 2026-11-10 — ukiyoe ケーススタディ: 河野さんの Figma 注釈 16 件（portfolio_v6 312:1604）を反映
+- 文: 導入（「サイト制作の前に、様々な観点で浮世絵について調べました」）、顔料→色材（藍・紅は染料、ベロ藍・丹は顔料）、「2回のパッチ修正」を外す、タイムラインのキャプションは河野さんの文言、CC0 に「誰でも自由に使えるよう公開している画像」と説明、「選ぶ基準は私が…Claude Code」と「短い説明は…」の2文を削除、「色が増えていく」系の言い回しを「色の多様化」に（サイトの見出しも ukiyoe-timeline PR #11）。
+- 図: タイムラインの作り直しを前後の比較（/a/timeline と /timeline、BeforeAfterPair）に。ロゴの節に作業場（floating-world 1399:6404）の記録から「最初の案ができるまで」（5 段階の SVG）と「作り直し」（Google の AI の答え → マーク → favicon 用）の図。文も記録に合わせて直した（「AI モデル」→「Google の AI」、「検証」→「見比べて傾向をつかむ」、favicon の調整）。
+- リサーチのコラージュ: 元データ floating-world 1307:3179 に最近の参考サイト 11 件（美術館のコレクション 6、ジャポニスム・雨の資料 5）を足して書き出し（research-sites-v2.webp）。数は「35以上」。NGA（404）と東大リポジトリ（503）は撮れず外した。
+- 構成: 「レイヤーの手塗り」をリサーチの直後へ（サイトで最初に出てくる）。「今後の方向性」を削除。技術カード 3 を「言語切り替えの模様」に、導入文を伝統色名の CSS 変数に。
+- カラーシステムの画像は PR #11 のコードから撮った palette-v3（見出し「色の多様化」）。#11 を先に merge する必要がある。
+
+### 2026-11-12 — ukiyoe: 色の割合の測定結果と、確かめた和題を反映
+- カラーシステムの「割合は検証中」→ 全103点で測ったが紙の焼けが金/茶に数えられた（約4割）ので見せていない、と結果を書いた（ukiyoe-timeline PR #12 の docs/specs/color-proportions-2026-11-12.md）。
+- 色彩分析の図の代替テキストを、確かめた和題に（例: 天狗をとりひしぐ荒武者、芝居狂言舞台顔見せ大浮絵）。
+
+## ロゴの色を海松色（みるいろ）#596327 に変更（2026-11-12）
+- [x] public/icon.svg の黒（外周の線・「i」の点と縦棒）を #596327 に置換。白地は維持。ヘッダーのロゴとファビコンが同じファイルを共有するので両方変わる
+- [x] 選んだ理由と出典を docs/architecture/design-system.md §2.2.1 に記録
+- [x] 確認: ヘッダーと同じ背景 #EFF1F1 で 48px・16px を描画し、判読できることを確認（白地とのコントラスト約 6.6:1）
+- [x] 本番 iori-kawano.vercel.app で反映を確認（PR #143 merge 後、PC jp / SP en、コンソールエラーなし）
+- [x] Figma portfolio_v6 に同期（2026-11-14）: 変数 color/hue/miru（Primitives）→ brand/logo（Color）を追加。
+      Components ページにロゴ部品「Logo」369:1612（public/icon.svg と同じベクター、brand/logo に紐づけ）を作り、
+      Header/PC・Header/SP のロゴをそのインスタンスに置換（使っている 22 画面に反映）。
+      取り込み画面で画像になっていた「Image (Logo)」13 か所（Site — JP 3、Site — EN 2、Archive 8）もインスタンスに置換。
+      今後ロゴの色・形を変えるときは 369:1612 だけ直せば全部に反映される
+- [x] Site — JP の 103:1726「ukiyoe-timeline — デザイン案 A / B / C（2026-11-06）」（v2 本番 293:27 で決着済みの古い案）を Archive へ移動（2026-11-14、河野さん OK）
+
+- 2026-11-18: 先方サイトの公開と書面 OK を受け、中初ケーススタディを再公開する PR（#120 の変更を戻す）。河野さんの指示で作成。
+- 2026-11-18: #157 を merge（83db130）。本番で /jp・/en とも 200、noindex なし、トップのカードと sitemap を確認。以下の 11-14 区切りの「中初は非公開」「公開 PR は未」は、この時点で解消済み。
+
+---
+
+## 2026-11-14 区切り — ポートフォリオ（サイト・Figma）の現在地（3 セッションの進捗を合わせた）
+
+3 つのセッション（ロゴ担当 irocore miruiro color logo／中初担当 portfolio-中初-Figma注釈FB／浮世絵担当 ukiyoe case-study page redesign）から集めた現在地。
+ここから再開するときは、この節だけ読めばよい。
+
+### サイト（main・本番 iori-kawano.vercel.app）
+- 本番は最新。ロゴ海松色 #596327（#143）、浮世絵ケーススタディ（#126〜#132、#141。#141 は 11-14 に JP/EN の本番で確認済み）
+- 中初 /work/nakahatsu は非公開のまま（#120。本番 404、トップのカードなし）
+- 開いている PR（2026-11-14 時点、すべて河野さんの merge 待ち、または意図的な保留）
+  - Dependabot #135（minor/patch 4件）・#136（@figma/code-connect 2.1）・#137（tailwind-merge 3.7）: チェックはすべて通過、merge 可
+  - Dependabot #138（react-resizable-panels 4）: v4 の名前の変更（PanelGroup→Group、PanelResizeHandle→Separator）に components/ui/resizable.tsx を合わせた（どこからも使われていない部品）。チェックはすべて通過
+  - Dependabot #139（TypeScript 6）: TS 6 は CSS の読み込みに型の宣言が必要（TS2882）→ src/types/css.d.ts を追加。手元で型チェック・本番ビルド OK。CI の失敗は Google Fonts 取得の一時エラーで、再実行した
+  - #60 提案ケーススタディ（本番では 404）: 掲載許可待ちで意図的に保留。main とぶつかっていたのを解消（中初の項目と両方残す）。本番ビルドで /jp・/en とも 404、sitemap に載らないことを確認。閉じるか保留かは河野さんの判断
+- 浮世絵サイト側: ukiyoe-timeline #12（トップの時代の入口、和題103点の照合、色の割合の記録、注釈アイコン）が merge 待ち
+
+### Figma
+- portfolio_v6（r9AUm9XA7iTNGCdpVAQW7U）＝サイト全体の画面
+  - ロゴは部品「Logo」369:1612（変数 brand/logo → color/hue/miru）。ヘッダー 22 画面と取り込み画面の 13 か所はすべてこのインスタンス
+  - 浮世絵: ukiyoe-timeline ページ 293:27 が本番と同期。Site JP 342:1604/343:1604、EN 344:2/345:2 は #141 まで反映。古いフレームと 103:1726（デザイン案 A/B/C）は Archive
+- portfolio_v5 ＝中初だけ（v2 の JP/EN、PC/SP、比較フレーム）。中初は v6 に置かない
+- floating-world（KfbKROQ1hvrrR9ZVJ3bEn4）: 参考サイトのコラージュ 1307:3179 は 36 サイト
+
+### 待っているもの（再開のきっかけ）
+- 中初: 先方の書面 OK は 11-10 に取得済み。公開は先方サイトの一般公開（DNS 切替）の後。DNS の作業方法 A/B と日程は先方の返事待ち（DNS 手順の LINE は河野さんが送る）。「私たちとお客様」の写真の確定待ち
+- 浮世絵: #12 の merge
+- #60: 掲載許可
+
+### 再開したときの To Do
+- 中初: 先方サイト公開後に公開 PR（nakahatsu を ARCHIVED_WORK_SLUGS から外す）→ 河野さんの GO で merge → 本番で 200 を確認。写真の確定後に図版の撮り直し（Sample 透かしを外す）と、必要なら Figma v5 の更新
+- 浮世絵: #12 の merge 後に本番確認（JP/EN × PC/SP）と Figma 293:27 の同期。判断がつかない和題 6 点（和国美人あそび、花岡都、相合傘三幅対 秋の時雨、見て飛ぶ、寛政三美人、富士川雪景）。色の割合を出すなら色票つきの画像か別館の画像が要る（docs/specs/color-proportions-2026-11-12.md）。Archive の旧 312:1604 の注釈16件を解決済みにする
+- 河野さんの許可待ちの削除: 浮世絵の不要ファイル（KushiDangoShowcase.tsx、messages の motifs*、palette-v2-*、process-timeline、timeline-v2、research-site.webp、旧 public/work/ukiyoe/artworks/）
+- 片付け（許可を取ってから）: 使い終わった worktree — deepsec-init、figma-stats-daily-sync、figma-v6-foundations、fix-podcast-sync、resume-en-2026-10、ukiyoe-case-accuracy、ukiyoe-case-study-v2、logo-miruiro、Documents/portfolio 側の 3 つ（中身が空の detached）。中初の nakahatsu-case-study-v2（push しない決まり、未コミットの progress と handoff あり）と hide-nakahatsu は中初が終わるまで残す
+- 河野さんの手元の main（~/dev/portfolio）は origin より 28 コミット遅れている → `git -C ~/dev/portfolio pull`

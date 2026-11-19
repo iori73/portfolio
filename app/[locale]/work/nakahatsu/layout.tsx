@@ -1,10 +1,5 @@
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 import { buildPageMetadata } from '@/src/lib/pageMetadata';
-import { ARCHIVED_WORK_SLUGS } from '@/src/data/siteRoutes';
-
-// Held back until the client's written OK arrives (see ARCHIVED_WORK_SLUGS).
-const isArchived = (ARCHIVED_WORK_SLUGS as readonly string[]).includes('nakahatsu');
 
 /**
  * 中初商店ケーススタディの公開ページ（2026-11-07 から、旧 SY 型のページがこの URL）。
@@ -17,7 +12,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const meta = buildPageMetadata({
+  return buildPageMetadata({
     path: '/work/nakahatsu',
     locale,
     title: { en: 'Nakahatsu Shoten Website', jp: '中初商店 ウェブサイト制作' },
@@ -27,14 +22,8 @@ export async function generateMetadata({
     },
     image: 'nakahatsu.jpg',
   });
-  return isArchived ? { ...meta, robots: { index: false, follow: false } } : meta;
 }
 
 export default function NakahatsuLayout({ children }: { children: React.ReactNode }) {
-  // Same gate as the other archived work pages: 404 in production unless
-  // ENABLE_ARCHIVED_WORK=1; always visible locally.
-  if (isArchived && process.env.NODE_ENV === 'production' && process.env.ENABLE_ARCHIVED_WORK !== '1') {
-    notFound();
-  }
   return children;
 }
