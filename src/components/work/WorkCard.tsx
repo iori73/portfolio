@@ -76,11 +76,11 @@ export default function WorkCard({
 
         <div className="flex items-center gap-6 mb-4 flex-wrap md:flex-nowrap">
           <h3 className={`text-title-lg ${getHeadingFontClass()}`}>{title}</h3>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             {tags.map((tag) => (
               <span
                 key={tag}
-                className="font-space-grotesk text-label leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary"
+                className="font-space-grotesk text-body leading-[1.3] px-3.5 py-1.5 rounded-lg bg-surface-muted text-ink-tertiary"
               >
                 {tag}
               </span>
