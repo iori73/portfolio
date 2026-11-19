@@ -44,15 +44,15 @@ const ERAS: Era[] = [
     num: '一', years: '1670–1700', ja: '墨摺絵', en: 'Sumizuri-e',
     slots: ['sumi', 'hada'],
     works: [
-      { file: '01-1942.60', ja: '菱川師宣「吉原の体」', en: 'Hishikawa Moronobu, Scene in the Yoshiwara' },
-      { file: '01-1925.1689', ja: '菱川師宣「上野花見の躰」', en: 'Hishikawa Moronobu, Flower-Viewing Party with Crest-Bearing Curtain' },
+      { file: '01-1942.60', ja: '菱川師宣「吉原の体 吉原風景」', en: 'Hishikawa Moronobu, Scene in the Yoshiwara' },
+      { file: '01-1925.1689', ja: '菱川師宣「上野花見の躰 幕の内の花見」', en: 'Hishikawa Moronobu, Flower-Viewing Party with Crest-Bearing Curtain' },
     ],
   },
   {
     num: '二', years: '1700–1720', ja: '丹絵', en: 'Tan-e',
     slots: ['sumi', 'tan', 'kin', 'midori', 'hada'],
     works: [
-      { file: '02-1925.1726', ja: '鳥居清倍「坂田金時と天狗の相撲」', en: 'Torii Kiyomasu I, Sakata Kintoki Wrestling with a Tengu' },
+      { file: '02-1925.1726', ja: '鳥居清倍「天狗をとりひしぐ荒武者」', en: 'Torii Kiyomasu I, Sakata Kintoki Wrestling with a Tengu' },
       { file: '02-JP3075', ja: '鳥居清忠「二代目市川團十郎の暫」', en: 'Torii Kiyotada, Ichikawa Danjūrō II in the Scene “Wait a Moment” (Shibaraku)' },
     ],
   },
@@ -60,7 +60,7 @@ const ERAS: Era[] = [
     num: '三', years: '1720–1744', ja: '紅絵・漆絵', en: 'Beni-e and urushi-e',
     slots: ['sumi', 'beni', 'kin', 'midori', 'hada'],
     works: [
-      { file: '03-1925.2285', ja: '奥村政信「芝居狂言舞台顔見世大浮絵」', en: 'Okumura Masanobu, Large Perspective Picture of the Kaomise' },
+      { file: '03-1925.2285', ja: '奥村政信「芝居狂言舞台顔見せ大浮絵」', en: 'Okumura Masanobu, Large Perspective Picture of the Kaomise' },
       { file: '03-JP1308', ja: '奥村政信「中村富十郎の騎馬武者」', en: 'Okumura Masanobu, The Actor Nakamuro Tomijuro as a Mounted Warrior' },
     ],
   },
