@@ -1,0 +1,49 @@
+name: Responsive QA
+
+# 全ルート × 端末幅（320〜1024px）× jp/en で、横スクロール・壊れた画像・コンソールエラーを検査する。
+# 2026-11-20: 中初のページがスマホで 390px → 461px に広がった不具合を、自動で防ぐために追加。
+# 基準と読み方は docs/qa/PRODUCTION-QA.md。
+
+on:
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  responsive:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Build
+        run: pnpm build
+
+      - name: Start server
+        run: |
+          pnpm start -p 3000 &
+          for i in $(seq 1 60); do
+            curl -sf http://localhost:3000/ > /dev/null && break
+            sleep 2
+          done
+
+      - name: Responsive QA
+        # podcast-notes は Notion の環境変数が要るので CI では除く
+        env:
+          BASE: http://localhost:3000
+          ROUTES: ',/about,/blog,/cv,/experiment,/work/nakahatsu,/work/figma-plugins,/work/ukiyoe,/work/google_ux_design_certificate_project'
+        run: pnpm qa:responsive

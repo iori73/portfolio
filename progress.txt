@@ -2149,3 +2149,6 @@ variables / styles はデザインの統一と作業効率のため（現行サ�
 - 2026-11-19: トップの Work カードの並びを新しい順（中初 → Figma Plugins → 浮世絵）に変更（河野さん指示）。カードのタグ（Figma Plugin 等）を text-label(14/15px) → text-body(17/18px) に。
 - 2026-11-19: 全ページ（JP/EN×13ページ）×4幅（375/768/1280/1920）で 14px 未満の文字を調査（.capture/scan-small-text.mjs、Chrome 実機）。本文・日付・出典・フッター・ラベルの 13px は --text-size-xs を 13→14px にして解消。About の "You can drag me"（スマホ 11px）を 14px に、ukiyoe の時代番号を 13→14px に。残りは飾りのみ（プラグインカードの縮小イラスト 7〜13px、ukiyoe の ◆ 印 8px aria-hidden、About の円周上の SVG 文字 12px）で意図的に据え置き。
 - 2026-11-19: #159（minor/patch 8件）と #149（区切りドキュメント）を merge。#137（tailwind-merge 3）は Tailwind 4 向けで本サイトは 3.4 のため close（ignore major）。#136・#138・#139 は main を取り込んで競合を解消し（#138 は lock を再生成、#139 は TS6、#136 は code-connect 2）、CI 通過後に merge。Vercel プレビューの失敗は Google Fonts 取得の一時エラーで、vercel redeploy で解消。
+
+- 2026-11-20: iPhone 13 で中初ページの左右に余白（ページ 390→461px）。原因は DesignSystemFigure の 1 列 grid の最小幅（lessons.md 2026-11-20）。`grid-cols-1` と `flex-wrap` で解消。
+- 2026-11-20: 再発防止として `pnpm qa:responsive`（scripts/qa-responsive.mjs）と CI（.github/workflows/qa-responsive.yml）、基準書 docs/qa/PRODUCTION-QA.md を追加。全ルート×6 幅（320〜1024）×jp/en で、横スクロール・壊れた画像・コンソールエラー・拡大禁止を失敗に、タップ目標 24px 未満と文字の切れを警告にする。ローカルで 108 件、横あふれ 0。CV の LinkedIn リンクのタップ目標（20px）を py-3 で 44px 級に。
