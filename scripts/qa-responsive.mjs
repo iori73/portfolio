@@ -52,16 +52,31 @@ for (const locale of LOCALES) {
       });
       const page = await ctx.newPage();
       const problems = [];
-      page.on('console', (m) => { if (m.type() === 'error') problems.push(`console: ${m.text().slice(0, 160)}`); });
+      // Vercel の解析スクリプトは Vercel 上にしか無い（localhost では 404 / ブロックされる）。サイトの不具合ではないので除く
+      const local = new URL(BASE).hostname === 'localhost';
+      const vendorOnly = (u) => {
+        if (!local) return false;
+        const x = new URL(u);
+        return x.hostname === 'va.vercel-scripts.com' || x.pathname.startsWith('/_vercel/');
+      };
+      page.on('console', (m) => {
+        if (m.type() !== 'error') return;
+        const t = m.text();
+        if (t.startsWith('Failed to load resource')) return; // URL が無いので、下の response / requestfailed で拾う
+        if (local && t.includes('/_vercel/')) return;
+        problems.push(`console: ${t.slice(0, 160)}`);
+      });
       page.on('pageerror', (e) => problems.push(`pageerror: ${String(e.message).slice(0, 160)}`));
       page.on('requestfailed', (r) => {
         const err = r.failure()?.errorText ?? '';
-        // 動画の再生中断（ERR_ABORTED）は正常。解析スクリプトは開発環境ではブロックされる
+        // 動画の再生中断（ERR_ABORTED）は正常
         if (err.includes('ERR_ABORTED') && r.resourceType() === 'media') return;
-        if (new URL(r.url()).hostname === 'va.vercel-scripts.com' && new URL(BASE).hostname === 'localhost') return;
+        if (vendorOnly(r.url())) return;
         problems.push(`requestfailed: ${r.url().slice(0, 120)} ${err}`);
       });
-      page.on('response', (r) => { if (r.status() >= 400) problems.push(`http ${r.status()}: ${r.url().slice(0, 120)}`); });
+      page.on('response', (r) => {
+        if (r.status() >= 400 && !vendorOnly(r.url())) problems.push(`http ${r.status()}: ${r.url().slice(0, 120)}`);
+      });
 
       try {
         const res = await page.goto(BASE + path, { waitUntil: 'networkidle', timeout: 60000 });
