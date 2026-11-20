@@ -53,22 +53,22 @@ export default function Home() {
 
         {/* Work カード。3枚とも WorkCard を通す（比率・枠・角丸・タグを1か所で決める） */}
         <WorkCard
-          href={workCard.href('ukiyoe')}
-          onClick={workCard.onClick('ukiyoe', ukiyoeImageRef, {
+          href={workCard.href('nakahatsu')}
+          onClick={workCard.onClick('nakahatsu', nakahatsuImageRef, {
             type: 'image',
-            src: locale === 'jp' ? '/work/ukiyoe/thumbnail-jp.webp' : '/work/ukiyoe/thumbnail-en.webp',
+            src: locale === 'jp' ? '/work/nakahatsu/thumbnail-jp.webp' : '/work/nakahatsu/thumbnail-en.webp',
           })}
-          thumbRef={ukiyoeImageRef}
+          thumbRef={nakahatsuImageRef}
           thumb={
             <WorkCardImage
-              src={locale === 'jp' ? '/work/ukiyoe/thumbnail-jp.webp' : '/work/ukiyoe/thumbnail-en.webp'}
-              alt="Ukiyoe: Layer by Layer"
+              src={locale === 'jp' ? '/work/nakahatsu/thumbnail-jp.webp' : '/work/nakahatsu/thumbnail-en.webp'}
+              alt="Nakahatsu Shoten Website"
             />
           }
-          title={t('projects.ukiyoe.title')}
-          tags={['UI', 'Context Engineering']}
-          description1={t('projects.ukiyoe.description1')}
-          description2={t('projects.ukiyoe.description2')}
+          title={t('projects.nakahatsu.title')}
+          tags={['Shopify', 'Design System']}
+          description1={t('projects.nakahatsu.description1')}
+          description2={t('projects.nakahatsu.description2')}
         />
 
         <WorkCard
@@ -87,22 +87,22 @@ export default function Home() {
         />
 
         <WorkCard
-          href={workCard.href('nakahatsu')}
-          onClick={workCard.onClick('nakahatsu', nakahatsuImageRef, {
+          href={workCard.href('ukiyoe')}
+          onClick={workCard.onClick('ukiyoe', ukiyoeImageRef, {
             type: 'image',
-            src: locale === 'jp' ? '/work/nakahatsu/thumbnail-jp.webp' : '/work/nakahatsu/thumbnail-en.webp',
+            src: locale === 'jp' ? '/work/ukiyoe/thumbnail-jp.webp' : '/work/ukiyoe/thumbnail-en.webp',
           })}
-          thumbRef={nakahatsuImageRef}
+          thumbRef={ukiyoeImageRef}
           thumb={
             <WorkCardImage
-              src={locale === 'jp' ? '/work/nakahatsu/thumbnail-jp.webp' : '/work/nakahatsu/thumbnail-en.webp'}
-              alt="Nakahatsu Shoten Website"
+              src={locale === 'jp' ? '/work/ukiyoe/thumbnail-jp.webp' : '/work/ukiyoe/thumbnail-en.webp'}
+              alt="Ukiyoe: Layer by Layer"
             />
           }
-          title={t('projects.nakahatsu.title')}
-          tags={['Shopify', 'Design System']}
-          description1={t('projects.nakahatsu.description1')}
-          description2={t('projects.nakahatsu.description2')}
+          title={t('projects.ukiyoe.title')}
+          tags={['UI', 'Context Engineering']}
+          description1={t('projects.ukiyoe.description1')}
+          description2={t('projects.ukiyoe.description2')}
         />
 
       </section>

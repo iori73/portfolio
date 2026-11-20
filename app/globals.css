@@ -181,7 +181,7 @@ body {
 
     /* Typography size tokens — mobile-first, overridden at 768px.
        Raised to align with Apple HIG (Body 17 / Callout 16 / Subheadline 15 / Caption 12–13). */
-    --text-size-xs: 13px;
+    --text-size-xs: 14px;
     --text-size-sm: 14px;
     --text-size-base: 17px;
     --text-size-lg: 19px;
@@ -261,7 +261,7 @@ body {
 
   @media (min-width: 768px) {
     :root {
-      --text-size-xs: 13px;
+      --text-size-xs: 14px;
       --text-size-sm: 15px;
       --text-size-base: 18px;
       --text-size-lg: 21px;

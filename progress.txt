@@ -2145,3 +2145,7 @@ variables / styles はデザインの統一と作業効率のため（現行サ�
 - 河野さんの許可待ちの削除: 浮世絵の不要ファイル（KushiDangoShowcase.tsx、messages の motifs*、palette-v2-*、process-timeline、timeline-v2、research-site.webp、旧 public/work/ukiyoe/artworks/）
 - 片付け（許可を取ってから）: 使い終わった worktree — deepsec-init、figma-stats-daily-sync、figma-v6-foundations、fix-podcast-sync、resume-en-2026-10、ukiyoe-case-accuracy、ukiyoe-case-study-v2、logo-miruiro、Documents/portfolio 側の 3 つ（中身が空の detached）。中初の nakahatsu-case-study-v2（push しない決まり、未コミットの progress と handoff あり）と hide-nakahatsu は中初が終わるまで残す
 - 河野さんの手元の main（~/dev/portfolio）は origin より 28 コミット遅れている → `git -C ~/dev/portfolio pull`
+
+- 2026-11-19: トップの Work カードの並びを新しい順（中初 → Figma Plugins → 浮世絵）に変更（河野さん指示）。カードのタグ（Figma Plugin 等）を text-label(14/15px) → text-body(17/18px) に。
+- 2026-11-19: 全ページ（JP/EN×13ページ）×4幅（375/768/1280/1920）で 14px 未満の文字を調査（.capture/scan-small-text.mjs、Chrome 実機）。本文・日付・出典・フッター・ラベルの 13px は --text-size-xs を 13→14px にして解消。About の "You can drag me"（スマホ 11px）を 14px に、ukiyoe の時代番号を 13→14px に。残りは飾りのみ（プラグインカードの縮小イラスト 7〜13px、ukiyoe の ◆ 印 8px aria-hidden、About の円周上の SVG 文字 12px）で意図的に据え置き。
+- 2026-11-19: #159（minor/patch 8件）と #149（区切りドキュメント）を merge。#137（tailwind-merge 3）は Tailwind 4 向けで本サイトは 3.4 のため close（ignore major）。#136・#138・#139 は main を取り込んで競合を解消し（#138 は lock を再生成、#139 は TS6、#136 は code-connect 2）、CI 通過後に merge。Vercel プレビューの失敗は Google Fonts 取得の一時エラーで、vercel redeploy で解消。
