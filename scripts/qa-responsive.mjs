@@ -58,7 +58,7 @@ for (const locale of LOCALES) {
         const err = r.failure()?.errorText ?? '';
         // 動画の再生中断（ERR_ABORTED）は正常。解析スクリプトは開発環境ではブロックされる
         if (err.includes('ERR_ABORTED') && r.resourceType() === 'media') return;
-        if (r.url().includes('va.vercel-scripts.com') && BASE.includes('localhost')) return;
+        if (new URL(r.url()).hostname === 'va.vercel-scripts.com' && new URL(BASE).hostname === 'localhost') return;
         problems.push(`requestfailed: ${r.url().slice(0, 120)} ${err}`);
       });
       page.on('response', (r) => { if (r.status() >= 400) problems.push(`http ${r.status()}: ${r.url().slice(0, 120)}`); });
