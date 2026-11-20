@@ -36,6 +36,7 @@ export const INDEXED_WORK_SLUGS = [
 export const ARCHIVED_WORK_SLUGS = [
   'airline-design-system',
   'gym_crowd_status_dashboard',
+  'proposal-case-study',
   // 中初商店の旧版2つ（2026-11-07）。公開ページは /work/nakahatsu（旧 SY 型）
   'nakahatsu-detail',
   'nakahatsu-story',
