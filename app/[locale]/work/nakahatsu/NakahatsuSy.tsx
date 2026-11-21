@@ -494,6 +494,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
         {/* 振り返り（見出し＞小見出し2つ）。詳しい版と同じ文（最後の長い横線は「、」に）。ポートフォリオを読む人に、AI の使い方の線引きを伝える */}
         <Row id="reflection" label={rl.reflection}>
           <div className="flex flex-col gap-8">
+            <p className={body}>{t('reflectionLead')}</p>
             {reflection.map(([h, p], i) => (
               <div key={h} id={`reflection-${i + 1}`} className="flex scroll-mt-28 flex-col gap-3">
                 <h3 className={`text-title text-ink ${getHeadingFontClass()}`}>{h}</h3>

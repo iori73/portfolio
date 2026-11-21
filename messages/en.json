@@ -890,6 +890,7 @@
     "topSub": "Home page",
     "aboutSub": "About page",
     "processSub": "Our Brewing Process",
+    "reflectionLead": "The new site (Shopify) went live on the night of November 16, 2026. Four days after launch, the client's owner told us the site had changed into something they were satisfied with, and that some people had already made purchases, so they could feel the effect. The old site (WordPress and EC-CUBE) did not collect analytics or detailed figures, so there is no before-and-after comparison; all I can state is the fact that a purchase was made within four days of launch.",
     "reflection": [
       ["What only became possible with AI", "Shopify was a platform I had never touched before this project. I could not have carried it this far as one person without AI assistance. Working in a technology you are new to, and keeping the tasks moving, are two of the places where AI helps most."],
       ["What AI could not stand in for", "There were things AI could not stand in for: design judgment, imagining the experience someone will have, and finding the format and the form that carry what matters most. The generic design AI produces will not give a first-time visitor the experience they hoped for, let alone more than that."]
