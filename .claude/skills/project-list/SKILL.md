@@ -34,8 +34,8 @@ user-invocable: true
 ```
 | ID | プロジェクト名 | クライアント | ステータス | 期間 | 役割 | 主要スキル |
 |----|-------------|-----------|----------|------|------|----------|
-| ana | ANA Digital DS | ANA | completed | 2025/11-2026/03 | DS設計・実装 | Figma Plugin, Token Arch |
-| waseda | 早稲田寄付アプリ | 早稲田大学 | completed | 2026/04 | UI/UX主担当 | Figma Proto, Rapid Iter |
+| airline-ds | 航空会社 デジタル DS | 航空会社 | completed | 2025/11-2026/03 | DS設計・実装 | Figma Plugin, Token Arch |
+| alumni-app | 大学寄付アプリ | 国内の大学 | completed | 2026/04 | UI/UX主担当 | Figma Proto, Rapid Iter |
 ...
 
 合計: 8プロジェクト（active: 2, completed: 4, archived: 1, paused: 0）

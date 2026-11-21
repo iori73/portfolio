@@ -13,10 +13,10 @@ Notion exportファイルからプロジェクト履歴を抽出し、projects.j
 - Notion export は `Documents/work/notion-export/extracted/` 配下に展開されている
 - 各 export ディレクトリは HTML 形式のファイルを含む
 - 既知のマッピング（portfolio-materials.md より）:
-  - `export_1/` → パナソニック関連（62 HTML, 95+画像）
-  - `export_2/` → ネクストステージ関連（151 HTML, 50+議事録）
+  - `export_1/` → 大手電機関連（62 HTML, 95+画像）
+  - `export_2/` → 建築テック関連（151 HTML, 50+議事録）
   - `export_3/` → ANA関連（113 HTML）
-  - `export_4/` → 早稲田関連（1 HTML）
+  - `export_4/` → 大学関連（1 HTML）
 
 ## 引数
 
