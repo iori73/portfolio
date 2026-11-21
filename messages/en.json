@@ -609,7 +609,7 @@
       [
         "Team",
         [
-          "Design and implementation: 1 person"
+          "Design and implementation"
         ]
       ]
     ],
@@ -617,20 +617,20 @@
     "overviewCatch": "Two separate sites, made into one.",
     "overview": [
       "Nakahatsu Shoten is a soy sauce and miso brewery in Kanazawa. It was founded in 1896 as a food retailer and later moved into brewing.",
-      "Through an introduction from an acquaintance, I heard that Nakahatsu Shoten wanted a newly designed website. When I looked at the existing sites, the company site ran on WordPress and the shop on EC-CUBE, as two separate systems. So I proposed bringing them together on Shopify. I judged that, with expansion overseas in mind, Shopify would let the client manage and run the site on their own with relative ease.",
-      "I took the project on as an individual and handle the proposal, the design, the Shopify implementation, and display in Japanese, English and French. This phase is a domestic shop; selling overseas is outside the scope."
+      "Through an acquaintance, I heard that Nakahatsu Shoten wanted a new website. The existing sites ran on two separate systems: WordPress for the company and EC-CUBE for the shop. I proposed bringing them together on Shopify. With expansion overseas in mind, I judged that the client could manage and run it on their own more easily.",
+      "I took the project on as an individual: proposal, design, Shopify implementation, and display in Japanese, English and French. This phase is a domestic shop; selling overseas is out of scope."
     ],
     "processCatch": "From \"keep the existing design\" to a design that carries Nakahatsu Shoten's strengths.",
     "process": [
-      "The first agreement was to keep the existing design and skip wireframes. After that I proposed a redesign. The reason was that, from Nakahatsu Shoten's daily posts on Instagram, I sensed a shop that welcomes people from Japan and abroad, of every age, and values its relationships with them. I wanted the site to express that strength fully, and to convey the history and the people behind it.",
+      "The first agreement was to keep the existing design and skip wireframes. I then proposed a redesign. From Nakahatsu Shoten's daily Instagram posts, I sensed a shop that welcomes people of every age, from Japan and abroad, and values its relationships with them. I wanted the site to put that strength first and convey the history and the people behind it.",
       "In the proposal I explained the reasons for the change, together with how much I respect what Nakahatsu Shoten does."
     ],
     "steps": [
       {
         "h": "Sorting out the state of the existing site",
         "p": [
-          "The shop could not take credit cards; the only ways to pay were bank transfer, postal transfer and cash on delivery. The site was in Japanese only, with no official translation, so a visitor who could not read Japanese had to rely on machine translation. What buyers want to know before purchase was only partly written on the legal notice page.",
-          "Because the company site and the shop were separate systems, the design and the updates were both done twice."
+          "The shop could not take credit cards; payment was by bank transfer, postal transfer or cash on delivery. The site was in Japanese only, with no official translation. What buyers want to know before purchase was only partly on the legal notice page.",
+          "The company site and the shop were separate systems, so design and updates were done twice."
         ],
         "fig": "challenges",
         "cap": "The company-introduction site and the shop ran on two systems (WordPress and EC-CUBE); they became one Shopify store."
@@ -638,7 +638,7 @@
       {
         "h": "Showing two versions side by side",
         "p": [
-          "I made one version that reproduced the structure of the existing site in Shopify theme code (v1) and one redesign (v2), and shared them side by side. Nakahatsu Shoten replied that v2 was easy to see, with a clean structure that included the purchase path. I worked mainly on v2 after that."
+          "I built one version that reproduced the existing site's structure in Shopify theme code (v1) and one redesign (v2), and shared them side by side. Nakahatsu Shoten replied that v2 was easy to see, with a clean structure that included the purchase path. I worked mainly on v2 from then on."
         ],
         "fig": "before-after",
         "cap": "Before: the top page of the WordPress company site. After: the new top page. The shop was a separate system (EC-CUBE)."
@@ -646,7 +646,7 @@
       {
         "h": "Reworking the home page and About page",
         "p": [
-          "In the hero section, the changes are a larger logo and a short message that continues from 天の恵み (\"the blessings of heaven\"). The photographs are a carousel of three images both before and after, and the three images are the same (the figure shows the signboard photo both before and after). The header carries a language switch (Japanese, English and French) and the cart. For people who visit the site often, I moved the news from the lower part of the old site to just below the hero."
+          "In the hero, the changes are a larger logo and a short message continuing from 天の恵み (\"the blessings of heaven\"). The photographs are the same carousel of three images before and after (the figure shows the signboard photo in both). The header carries a language switch (Japanese, English, French) and the cart. For frequent visitors, I moved the news from the lower part of the old site to just below the hero."
         ],
         "fig": "about-tenyu",
         "cap": "The About page in Japanese: the miso block. The body text runs vertically over a photograph, and the heading stands vertically to its right."
@@ -654,7 +654,7 @@
       {
         "h": "Showing it in three languages",
         "p": [
-          "The site was Japanese only. It can now be read in English and French too. It started with Japanese and English; Nakahatsu Shoten asked for French to be added, because many visits to the site come from France."
+          "The site was Japanese only. It can now be read in English and French too. It started as Japanese and English; Nakahatsu Shoten asked to add French because many visits come from France."
         ],
         "fig": "bilingual-3lang",
         "cap": "The same hero in Japanese, English and French."
@@ -662,7 +662,7 @@
       {
         "h": "The brand color, and keeping values in sync",
         "p": [
-          "The brand color is enji, a deep crimson. It is one of the Kaga Gosai, the five traditional colors of Kanazawa, and it is rooted in the culture of this place."
+          "The brand color is enji, a deep crimson. It is one of the Kaga Gosai, the five traditional colors of Kanazawa, and is rooted in the culture of this place."
         ],
         "fig": "palette",
         "cap": "The brand's enji, and the theme colors sumi brown and washi. Each color shows its HEX, RGB and where it is used."
@@ -726,15 +726,7 @@
       "after": "After",
       "k1": "Company introduction",
       "k2": "Shop",
-      "pages": [
-        "Home",
-        "About",
-        "News",
-        "Shop (products and cart)",
-        "FAQ",
-        "Contact",
-        "Policies"
-      ],
+      "pages": ["Home", "FAQ", "Policies", "Shop", "About", "Contact", "News"],
       "lang": "3 languages",
       "d1": "Two systems ran separately, and updates were done twice",
       "d2": "All updates consolidated into one store",
@@ -747,14 +739,18 @@
     "aboutBaAlt": "The old About page (left) and the redesigned About page (right), side by side as tall screenshots. The old page is mostly text with small photos. The new page has a large header background, the logo, a map of where the ingredients come from, and photos of the process.",
     "topBaAlt": "The old top page (left) and the redesigned top page (right), side by side as tall screenshots. In the new one, the news and the introduction follow the hero.",
     "aboutRejAlt": "Two rejected designs for the As Brewers section of the About page, laid out with illustrations and vertical text.",
+    "zoomOpen": "View larger",
+    "zoomClose": "Close",
+    "tocOpen": "Open the table of contents",
+    "tocTitle": "On this page",
     "videoPause": "Pause video",
     "videoPlay": "Play video",
     "dsFig": {
       "fontsTitle": "Fonts",
       "fonts": [
-        { "role": "Headings and body", "name": "Shippori Mincho", "text": ["Based on the No. 5 Mincho of the Tokyo Tsukiji Type Foundry, a Meiji era type, it is a Mincho with a strong Japanese feel. It expresses the character of Nakahatsu Shoten, founded in 1896 (Meiji 29) and long rooted in its community.", "The old site's Ryumin stops showing when the Adobe contract ends, and the OS-bundled Yu Mincho takes over. Then the text looks different on each device. Shippori Mincho's font data is built into the site, so it looks the same everywhere."] },
+        { "role": "Headings and body", "name": "Shippori Mincho", "text": ["Based on the No. 5 Mincho of the Tokyo Tsukiji Type Foundry, a Meiji era type, it is a Mincho with a strong Japanese feel. It expresses the character of Nakahatsu Shoten, founded in 1896 (Meiji 29) and long rooted in its community.", "The old site's Ryumin stops showing when the Adobe contract ends, and the OS-bundled Yu Mincho takes over, so the text looks different on each device. Shippori Mincho's font data is built into the site, so it looks the same everywhere."] },
         { "role": "Accent", "name": "Noto Serif JP", "text": ["Made together by Adobe and Google. I use it for small headings and labels. My moodboard gave the balance of dignity and readability as the reason."] },
-        { "role": "Latin", "name": "Roboto", "text": ["A sans serif made by Google for screens. I use it for the small Latin labels at the top of pages and for blog dates. The aim is to keep small Latin letters easy to read on screen."] }
+        { "role": "Latin", "name": "Roboto", "text": ["A sans serif made by Google for screens. I use it for the small Latin labels at the top of pages and for blog dates, to keep small Latin letters easy to read on screen."] }
       ],
       "sizesTitle": "Type sizes (size/line height, weight)",
       "sizes": ["Heading 32/48, 700", "Subheading 20/32, 500", "Body 16/24, 400", "Button 13/19.5, 400"],
@@ -770,10 +766,10 @@
     "iterFig": {
       "lead": "The process section went through five designs before reaching the current ring of five circles.",
       "groups": [
-        ["1. Photo and text side by side", "I started with a large work photo on the left and the client's text on the right. The section had a lot of text and felt heavy, so I decided to offer several layouts with large photos and white space."],
-        ["2. Products and logo", "Respecting the packaging of the soy sauce and miso, this layout puts the purple background and the logo front and center. It is also the 'current' layout I showed the client. The process photos had not arrived yet."],
-        ["3. Two of the three forms I showed the client, not chosen", "Respecting the client's text, I proposed design patterns that make each step easy to understand, built from the process photos the client shared with me. A places the five circles on a circle, joined by a thin line. B places them in a straight line. I animated both so that the flow of the steps comes across. I showed the client these two together with the current layout."],
-        ["4. Final: a ring with lines from the center", "Following the client's own idea, we settled on a design with animation based on the umebachi mon, the plum-blossom crest tied to Kanazawa. The client asked to shorten the last part of the ring, so I showed three options as videos, and the third, with five lines growing from a center circle, was chosen. I applied it to the site."]
+        ["1. Photo and text side by side", "I started with a large work photo on the left and the client's text on the right. The text was long and felt heavy, so I offered several layouts built on large photos and white space."],
+        ["2. Products and logo", "Respecting the packaging, this layout puts the purple background and the logo front and center. It is also the 'current' layout I showed the client. The process photos had not yet arrived."],
+        ["3. Two of the three forms I showed the client, not chosen", "Respecting the client's text, I proposed designs that make each step easy to understand, using the process photos the client shared. A places the five circles on a ring, joined by a thin line; B places them in a straight line. I animated both so the flow comes across, and showed them to the client with the current layout."],
+        ["4. Final: a ring with lines from the center", "Following the client's own idea, we settled on an animated design based on the umebachi mon, the plum-blossom crest tied to Kanazawa. The client asked to shorten the last part of the ring, so I showed three options as videos, and the third, with five lines growing from a center circle, was chosen. It is now on the site."]
       ],
       "note": "",
       "alts": [
@@ -839,6 +835,12 @@
         "https://www.instagram.com/p/DH-fmgmR7uD/",
         "https://www.instagram.com/p/DWEbo3MGDyp/"
       ],
+      "captions": [
+        "The Ishikawa Good Products corner at a Muji store, with soy sauce on the shelves.",
+        "The booklet and a magazine page for the fermentation culture and arts festival in Kanazawa.",
+        "Overseas visitors trying miso making.",
+        "A visiting miso-making class at a nursery school."
+      ],
       "linkLabel": "Open the Instagram post (new tab)",
       "dates": [
         "May 2024",
@@ -859,10 +861,10 @@
     "v1v2FullNote": "Photos of people and sample (placeholder) images are replaced with gray boxes.",
     "loadingVideoAlt": "A recording of the loading animation. A yellow ring appears on a dark screen, the Tenyu logo fades in inside it, and the screen changes to the top page hero. About 7 seconds.",
     "parallaxVideoAlt": "A recording of the As Brewers section of the About page while scrolling. The photos move slightly inside their frames.",
-    "parallaxVideoNote": "I applied a parallax effect to the As Brewers section of the About page. As you scroll, the photos shift slightly inside their frames.",
-    "aboutText": "The old About page was mostly text, with photographs sized to sit beside it. In the new About page, each section carries a photograph or a figure, placed large, that matches what the section wants to say. The brewers are shown through photographs of their work, and the ingredients through a map of where they come from, so that each point can be seen at a glance. The page can be read to the end as one story.",
+    "parallaxVideoNote": "I added a parallax effect to the As Brewers section of the About page. As you scroll, the photos shift slightly inside their frames.",
+    "aboutText": "The old About page was mostly text, with photographs only beside it. In the new About page, each section carries a large photograph or figure that matches its message: the brewers through photographs of their work, the ingredients through a map of where they come from. The page reads to the end as one story.",
     "topIter": {
-      "lead": "I redesigned the About section of the home page twice, in two directions. The first round was based on my own proposal. The second came from the client's wish to use the building photographs simply. The one I used places three photographs of the building side by side at the same size.",
+      "lead": "I redesigned the About section of the home page twice. The first round was based on my own proposal; the second came from the client's wish to use the building photographs simply. The one I used places three photographs of the building side by side at the same size.",
       "groups": [
         [
           "A. First round: photographs of ingredients (7 designs)",
@@ -892,8 +894,8 @@
     "processSub": "Our Brewing Process",
     "reflectionLead": "The new site (Shopify) went live on the night of November 16, 2026. Four days after launch, the client's owner told us the site had changed into something they were satisfied with, and that some people had already made purchases, so they could feel the effect. The old site (WordPress and EC-CUBE) did not collect analytics or detailed figures, so there is no before-and-after comparison; all I can state is the fact that a purchase was made within four days of launch.",
     "reflection": [
-      ["What only became possible with AI", "Shopify was a platform I had never touched before this project. I could not have carried it this far as one person without AI assistance. Working in a technology you are new to, and keeping the tasks moving, are two of the places where AI helps most."],
-      ["What AI could not stand in for", "There were things AI could not stand in for: design judgment, imagining the experience someone will have, and finding the format and the form that carry what matters most. The generic design AI produces will not give a first-time visitor the experience they hoped for, let alone more than that."]
+      ["What only became possible with AI", "I took on Shopify, a platform I had never used. I could not have carried it through alone without AI assistance. Working in a new technology and keeping tasks moving are two of the places where AI helps most."],
+      ["What AI could not stand in for", "There were things AI could not stand in for: design judgment, imagining the experience someone will have, and finding the format and form that carry what matters most. Generic AI-made design will not give a first-time visitor the experience they hoped for, let alone more."]
     ]
   }
 }

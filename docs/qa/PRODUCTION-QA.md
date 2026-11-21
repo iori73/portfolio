@@ -23,6 +23,7 @@ WIDTHS=320,390 ROUTES=/work/nakahatsu pnpm qa:responsive # 絞り込み
 | コンソールエラー、読み込み失敗、HTTP 4xx/5xx | **失敗** | Next.js 本番チェックリスト |
 | 壊れた画像 | **失敗** | |
 | viewport meta が拡大を禁止（`maximum-scale`, `user-scalable=no`） | **失敗** | web.dev Responsive basics |
+| 90°回した縦横比の違う要素（例: 矢印の svg の `rotate-90`）。レイアウトの箱と見た目がずれて、隣の面に重なる | **失敗** | 2026-11-22 の実例（SP の下向き矢印が灰色の面に重なった）。縦長の部品は最初から縦長に作る |
 | タップ目標が 24×24px 未満（文中リンクは除く） | 警告 | WCAG 2.2 SC 2.5.8 |
 | 文字が枠で切れている可能性 | 警告（装飾の誤検知あり。`sr-only` は除外済み） | WCAG 2.2 SC 1.4.12 |
 
@@ -83,6 +84,7 @@ WIDTHS=320,390 ROUTES=/work/nakahatsu pnpm qa:responsive # 絞り込み
 | 幅なし画像 | `max-width:100%` が無い画像・動画が列を超える。 |
 | `100vw` | スクロールバー込みの幅。`100%` を使う（一般知識。出典は未確認）。 |
 | `100vh` と iOS Safari | ツールバーで下が隠れる。`svh` / `dvh` を使う（MDN length で確認）。 |
+| **回した要素・焼き込んだ画像** | `rotate-90` は見た目だけ回り、レイアウトの箱は回る前のまま（隣と重なる）。画像に焼き込んだ角丸・文字は、CSS で消せず、SP で縮んで読めない。コードで作る／書き出す前に外す。 |
 | `position:fixed` と `transform` | 祖先に `transform` / `filter` があると、fixed の基準がその祖先になる（MDN position で確認）。 |
 | 文字サイズの自動拡大 | `text-size-adjust`。全体に `none` は使わない（MDN）。 |
 

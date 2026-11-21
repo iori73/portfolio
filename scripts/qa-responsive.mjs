@@ -12,6 +12,7 @@
  *   1. 横スクロール（WCAG 2.2 SC 1.4.10 Reflow。320 CSS px を下限にする）。原因の要素を列挙する
  *   2. コンソールエラー・未処理の例外・失敗したリクエスト（画像・フォント・CSP）
  *   3. viewport meta が拡大を禁止している（maximum-scale / user-scalable=no）
+ *   3b. 90°回した縦横比の違う要素（回すとレイアウトの箱が合わず、隣の面に重なる。例: 矢印の svg の rotate-90）
  * 警告（失敗にしない）:
  *   4. タップ目標が 24x24 CSS px 未満（WCAG 2.2 SC 2.5.8。文中のリンクは除く）
  *
@@ -146,12 +147,28 @@ for (const locale of LOCALES) {
               clipped.push(`${el.tagName.toLowerCase()}.${String(el.className).split(/\s+/).slice(0, 2).join('.')} ${el.clientHeight}<${el.scrollHeight}`);
             }
           }
-          return { vw, sw, culprits: culprits.slice(0, 6), meta, small: small.slice(0, 5), nSmall: small.length, broken, clipped: clipped.slice(0, 4), nClipped: clipped.length };
+          // 90°回した縦横比の違う要素（例: 矢印の svg を rotate-90 で下向きにしたもの）。レイアウト上の箱は回る前のままなので、
+          // 見た目だけが隣の面（灰色の背景など）に重なる。縦長の部品は、最初から縦長の形で作る（2026-11-22 に実際に起きた）。
+          const rotated = [];
+          for (const el of document.querySelectorAll('body *')) {
+            const tf = getComputedStyle(el).transform;
+            if (!tf || tf === 'none') continue;
+            const mm = tf.match(/matrix\(([^)]+)\)/);
+            if (!mm) continue;
+            const [ma, mb] = mm[1].split(',').map(Number);
+            if (Math.abs(ma) < 0.01 && Math.abs(Math.abs(mb) - 1) < 0.01) {
+              const cs = getComputedStyle(el);
+              const lw = parseFloat(cs.width), lh = parseFloat(cs.height);
+              if (Math.abs(lw - lh) > 2) rotated.push(`${el.tagName.toLowerCase()}.${String(el.className.baseVal ?? el.className).split(/\s+/).slice(0, 3).join('.')} ${Math.round(lw)}x${Math.round(lh)}`);
+            }
+          }
+          return { vw, sw, culprits: culprits.slice(0, 6), meta, small: small.slice(0, 5), nSmall: small.length, broken, clipped: clipped.slice(0, 4), nClipped: clipped.length, rotated: rotated.slice(0, 4) };
         });
 
         if (r.sw > r.vw) problems.push(`横スクロール: scrollWidth ${r.sw} > ${r.vw}。原因: ${r.culprits.join(' | ') || '(特定できず)'}`);
         if (/maximum-scale|user-scalable\s*=\s*(no|0)/i.test(r.meta)) problems.push(`viewport meta が拡大を禁止: ${r.meta}`);
         if (r.broken.length) problems.push(`壊れた画像: ${r.broken.join(', ')}`);
+        if (r.rotated.length) problems.push(`90°回した非正方形の要素（レイアウトの箱と見た目がずれて、隣と重なる）: ${r.rotated.join(', ')}`);
         if (r.nClipped) warnings.push(`${path} @${w}: 文字が枠で切れている可能性 ${r.nClipped}件 例: ${r.clipped.join(', ')}`);
         if (r.nSmall) warnings.push(`${path} @${w}: タップ目標 24px 未満 ${r.nSmall}件 例: ${r.small.join(', ')}`);
       } catch (e) {

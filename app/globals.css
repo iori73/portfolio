@@ -483,3 +483,21 @@ body {
   opacity: 0.5;
   pointer-events: none;
 }
+
+/* 中初の作品ページ（data-sharp）: 角丸なし。高級感・研ぎ澄まされた印象のため（2026-11-22 河野の指示。動画だけでなく画像・図の枠・ボタンなど全部）。
+   丸そのもの（rounded-full: 旗・一時停止ボタン・ロゴの丸）だけは残す。 */
+[data-sharp] *:not(.rounded-full) {
+  border-radius: 0;
+}
+
+/* スマートフォンの目次（WorkMobileToc）が開くときの動き */
+@keyframes toc-in {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+}

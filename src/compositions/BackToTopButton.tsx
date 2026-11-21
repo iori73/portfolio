@@ -7,7 +7,7 @@ import { useMenu } from '@/src/contexts/MenuContext';
  * BackToTopButton:
  * - On mobile (below md):
  *    - 48×48 circle (w-12 h-12)
- *    - position: bottom-8 right-8
+ *    - position: bottom-4 right-4 (1rem。内容に重なりにくい。2026-11-22 河野の指示)
  *    - when scrolled: 50% opacity
  * - On md+:
  *    - 64×64 circle (w-16 h-16)
@@ -41,8 +41,10 @@ export default function BackToTopButton() {
       aria-label="Back to top"
       className={`
         fixed
-        bottom-8
-        right-8
+        bottom-4
+        right-4
+        md:bottom-8
+        md:right-8
         w-12 h-12 md:w-16 md:h-16
         flex items-center justify-center
         rounded-full

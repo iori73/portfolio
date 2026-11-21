@@ -10,6 +10,7 @@ import WorkSidebar, { type SidebarItem } from '@/src/components/work/WorkSidebar
 import LineArrow from '@/src/components/work/LineArrow';
 import ControlledVideo from '@/src/components/work/ControlledVideo';
 import BeforeAfterPair from '@/src/components/work/BeforeAfterPair';
+import WorkMobileToc from '@/src/components/work/WorkMobileToc';
 import DesignSystemFigure, { type DesignSystemData } from '@/src/components/work/DesignSystemFigure';
 
 /**
@@ -68,9 +69,11 @@ type SystemFig = {
  * ロゴ・言語アイコンは Figma の素材置き場（437:779）から書き出したもの。
  */
 function SystemFigure({ label, f }: { label: string; f: SystemFig }) {
-  const box = 'flex items-center gap-3 rounded-[3px] border border-ink/70 bg-white px-3.5 py-3';
+  // 河野さんが Figma で直した形（2026-11-22）: 外枠なし。線は薄いグレー。リニューアル後は、白いカード1枚に
+  // Shopify・言語の旗・ページのタグをまとめる（「3言語」の文字は置かない）。PC は、左に Shopify と旗、右にタグ。
+  const card = 'border border-black/10 bg-white';
   const sys = (logo: string, k: string, n: string) => (
-    <div className={`${box} md:flex-1`}>
+    <div className={`${card} flex items-center gap-3 px-3.5 py-3 md:flex-1`}>
       <Image src={`/work/nakahatsu/logo-${logo}.png`} alt="" width={32} height={32} className="h-8 w-8 shrink-0" />
       <div className="flex flex-col">
         <p className="text-caption leading-tight text-ink-tertiary">{k}</p>
@@ -81,11 +84,11 @@ function SystemFigure({ label, f }: { label: string; f: SystemFig }) {
   const row = (name: string, children: React.ReactNode) => (
     <div className="flex flex-col gap-2 md:flex-row md:gap-5">
       <p className="font-space-grotesk text-caption font-bold text-ink md:w-[112px] md:shrink-0">{name}</p>
-      <div className="flex min-w-0 flex-col gap-3 rounded-md bg-[var(--nk-surface)] p-3.5 md:flex-1 md:px-5 md:py-[18px]">{children}</div>
+      <div className="flex min-w-0 flex-col gap-3 bg-[var(--nk-surface)] p-3.5 md:flex-1 md:px-5 md:py-[18px]">{children}</div>
     </div>
   );
   return (
-    <figure aria-label={label} className="flex w-full flex-col gap-3 rounded-media border border-[var(--nk-border)] bg-white p-4 md:w-[760px] md:gap-5 md:px-8 md:py-7">
+    <figure aria-label={label} className="flex w-full flex-col gap-3 md:w-[760px] md:gap-5">
       {row(
         f.before,
         <>
@@ -96,38 +99,62 @@ function SystemFigure({ label, f }: { label: string; f: SystemFig }) {
           <p className="text-caption text-ink-tertiary">{f.d1}</p>
         </>,
       )}
-      <div className="flex justify-center"><LineArrow direction="down" /></div>
+      {/* 矢印は縦長の形で描く（LineArrow）。上下の面に触れないよう、上下に余白をとる */}
+      <div className="flex justify-center py-1"><LineArrow direction="down" /></div>
       {row(
         f.after,
         <>
-          <div className={box}>
-            <Image src="/work/nakahatsu/logo-shopify.png" alt="" width={32} height={32} className="h-8 w-8 shrink-0" />
-            <p className="font-space-grotesk text-title-sm font-bold text-ink">Shopify</p>
-          </div>
-          <ul className="flex flex-wrap gap-2">
-            {f.pages.map((p) => (
-              <li key={p} className="rounded-[3px] border border-ink/70 bg-white px-2.5 py-1.5 text-caption text-ink">{p}</li>
-            ))}
-          </ul>
-          <div className="flex items-center gap-3">
-            <span className="text-caption text-ink-tertiary">{f.lang}</span>
-            {/* 本物のサイトの言語切り替え（旗16px＋JP｜EN｜FR。この図では下線は付けない）と同じ形。画像でなく部品として組む */}
-            <ul aria-label={f.langAlt} className="flex items-center">
-              {[
-                { code: 'JP', flag: 'ja', current: true },
-                { code: 'EN', flag: 'us', current: false },
-                { code: 'FR', flag: 'fr', current: false },
-              ].map((l, i) => (
-                <li key={l.code} className={`relative flex items-center gap-2 px-1 py-0.5 ${i > 0 ? 'ml-1 pl-2 before:absolute before:left-0 before:top-1/2 before:h-4 before:w-px before:-translate-y-1/2 before:bg-ink/35' : ''}`}>
-                  <Image src={`/work/nakahatsu/flag-${l.flag}.svg`} alt="" width={16} height={16} className="h-4 w-4 shrink-0 rounded-full shadow-[0_0_0_1px_var(--nk-border)]" />
-                  <span className={`font-space-grotesk text-caption text-ink ${l.current ? 'font-semibold' : ''}`}>{l.code}</span>
-                </li>
+          <div className={`${card} flex flex-col gap-4 p-3.5 md:grid md:grid-cols-[auto_minmax(0,1fr)] md:items-start md:gap-x-8 md:px-5 md:py-4`}>
+            <div className="flex flex-col gap-3">
+              <div className="flex items-center gap-3">
+                <Image src="/work/nakahatsu/logo-shopify.png" alt="" width={32} height={32} className="h-8 w-8 shrink-0" />
+                <p className="font-space-grotesk text-title-sm font-bold text-ink">Shopify</p>
+              </div>
+              {/* 本物のサイトの言語切り替え（旗16px＋JP｜EN｜FR。この図では下線は付けない）と同じ形。画像でなく部品として組む */}
+              <ul aria-label={f.langAlt} className="flex items-center">
+                {[
+                  { code: 'JP', flag: 'ja', current: true },
+                  { code: 'EN', flag: 'us', current: false },
+                  { code: 'FR', flag: 'fr', current: false },
+                ].map((l, i) => (
+                  <li key={l.code} className={`relative flex items-center gap-2 px-1 py-0.5 ${i > 0 ? 'ml-1 pl-2 before:absolute before:left-0 before:top-1/2 before:h-4 before:w-px before:-translate-y-1/2 before:bg-ink/35' : ''}`}>
+                    <Image src={`/work/nakahatsu/flag-${l.flag}.svg`} alt="" width={16} height={16} className="h-4 w-4 shrink-0 rounded-full shadow-[0_0_0_1px_var(--nk-border)]" />
+                    <span className={`font-space-grotesk text-caption text-ink ${l.current ? 'font-semibold' : ''}`}>{l.code}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <ul className="flex flex-wrap gap-2">
+              {f.pages.map((p) => (
+                <li key={p} className="border border-black/10 bg-white px-2.5 py-1.5 text-caption text-ink">{p}</li>
               ))}
             </ul>
           </div>
           <p className="text-caption text-ink-tertiary">{f.d2}</p>
         </>,
       )}
+    </figure>
+  );
+}
+
+/**
+ * ヒーローを3言語で並べた図。画像1枚に言語名を焼き込むと、スマートフォンでは文字が 7px ほどになり、何語か読めない
+ * （2026-11-22 河野の指摘）ので、言語名はコードの文字（14px 以上）にし、画面だけを3枚の画像にした。
+ */
+function HeroSpFigure({ lang, alt }: { lang: 'jp' | 'en'; alt: string }) {
+  const langs = [
+    { n: 1, name: '日本語', code: 'ja' },
+    { n: 2, name: 'English', code: 'en' },
+    { n: 3, name: 'Français', code: 'fr' },
+  ];
+  return (
+    <figure aria-label={alt} className="grid w-full grid-cols-3 gap-2 md:max-w-[880px] md:gap-8">
+      {langs.map((l) => (
+        <div key={l.n} className="flex min-w-0 flex-col gap-2 md:gap-3">
+          <p lang={l.code} className="text-body-sm font-semibold text-ink md:text-body">{l.name}</p>
+          <Image src={`/work/nakahatsu/hero-sp-${lang}-${l.n}.webp`} alt="" width={560} height={1212} className="h-auto w-full" />
+        </div>
+      ))}
     </figure>
   );
 }
@@ -204,7 +231,7 @@ function ProcessIterationsFigure({ f, lang, pauseLabel, playLabel }: { f: IterPr
             <p className="text-body font-bold text-ink">{f.groups[gi][0]}</p>
             <p className="text-body-sm text-ink-secondary">{f.groups[gi][1]}</p>
           </div>
-          <div className={`grid min-w-0 flex-1 gap-2 bg-white p-2 md:gap-4 md:p-4 ${set.length === 1 ? 'grid-cols-1 justify-items-start' : 'grid-cols-2'}`}>
+          <div className={`grid min-w-0 flex-1 gap-2 bg-white p-2 md:gap-4 md:p-4 ${set.length === 1 ? 'grid-cols-1 justify-items-start' : 'grid-cols-1 items-start md:grid-cols-2'}`}>
             {set.map((n) =>
               typeof n === 'string' ? (
                 <ControlledVideo
@@ -314,8 +341,9 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
   );
 
   return (
-    <div className="font-sans mt-[var(--site-header-height)] mb-24 [--nk-border:#dad6ce] [--nk-surface:#f0f0f0] md:mb-16">
+    <div data-sharp className="font-sans mt-[var(--site-header-height)] mb-24 [--nk-border:#dad6ce] [--nk-surface:#f0f0f0] md:mb-16">
       <BackToTopButton />
+      <WorkMobileToc items={sidebarItems} ariaLabel={t('tocTitle')} openLabel={t('tocOpen')} />
 
       {/* aspect-[8/5] は TransitionOverlay 側の比率と一致させる（ほかの作品と同じ）。 */}
       <section className="mb-0 md:mb-12 full-bleed">
@@ -358,14 +386,12 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
           {(t.raw('overview') as string[]).map((p) => (
             <p key={p} className={body}>{p}</p>
           ))}
-        </Row>
-
-        {/* 主要画面の一覧（PC とスマートフォン）。Figma の Overview 直下の図と同じ。キャプションは置かず、alt に説明を入れる */}
-        <div className="flex justify-center">
-          <div className="w-full">
+          {/* 主要画面の一覧（PC とスマートフォン）。概要の節の中に置く（概要とプロセスの中間に置くと、どちらの図か曖昧になる。2026-11-22 河野の指摘）。
+              文章のすぐ下に付け、プロセスとの間は節の間隔（gap-24/40）で離す。キャプションは置かず、alt に説明を入れる */}
+          <div className="mt-4 w-full md:mt-8">
             <Image src={`/work/nakahatsu/overview-pcsp-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('overviewFigAlt')} width={2176} height={1312} className="h-auto w-full" />
           </div>
-        </div>
+        </Row>
 
         <div className="flex flex-col gap-16 md:gap-20">
           <Row id="process" label={rl.process}>
@@ -377,7 +403,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
           {/* Instagram の投稿カードの図（ig-posts-*.webp）は、Figma の v2 で非表示にしたため載せない（JP は 2026-11-01 に、EN も同日に外した。画像ファイルは残してある） */}
           {/* 上の図のあとに、投稿そのものの見た目（SP 幅のスクリーンショット）を並べた図。海外の投稿は5枚目（英語の手書きのノート）、一番右は園児の投稿（2026-11-04 に Figma に合わせた）。Figma の Instagram の図の下と同じ */}
           {(() => {
-            const shots = t.raw('igShots') as { dates: string[]; alts: string[]; urls: string[]; linkLabel: string; textCard: string; note: string };
+            const shots = t.raw('igShots') as { dates: string[]; alts: string[]; captions: string[]; urls: string[]; linkLabel: string; textCard: string; note: string };
             const files = ['muji', 'fest', 'overseas', 'kids'];
             return (
               <figure className="flex w-full flex-col gap-4 rounded-media bg-[var(--nk-surface)] p-3 md:px-12 md:pb-6 md:pt-8">
@@ -386,8 +412,10 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                     <div key={f} className="flex min-w-0 flex-col gap-1.5">
                       <p className="font-space-grotesk text-caption font-bold text-ink-tertiary">{shots.dates[k]}</p>
                       <a href={shots.urls[k]} target="_blank" rel="noopener noreferrer" aria-label={`${shots.dates[k]} ${shots.linkLabel}`} className="block min-h-11 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
-                        <Image src={`/work/nakahatsu/ig-shot-${f}.webp`} alt={shots.alts[k]} width={780} height={1210} className="h-auto w-full rounded-md" />
+                        <Image src={`/work/nakahatsu/ig-shot-${f}.webp`} alt={shots.alts[k]} width={780} height={1210} className="h-auto w-full" />
                       </a>
+                      {/* 何の投稿かは、画像だけでは分からないので、1文で添える */}
+                      <p className="text-caption text-ink-secondary [text-wrap:pretty]">{shots.captions[k]}</p>
                     </div>
                   ))}
                 </div>
@@ -460,8 +488,10 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
               {/* さらに長い版: Instagram の節まで。人物が写る写真と見本（Sample）の画像は、灰色の四角に置き換えてある。Figma の長尺図の下と同じ */}
               {s.fig === 'before-after' && (
                 <div className="flex justify-center">
-                  <div className="w-full overflow-hidden rounded-media bg-[var(--nk-surface)] p-4 md:p-8">
+                  <div className="w-full overflow-hidden rounded-media bg-[var(--nk-surface)] p-3 md:p-8">
                     <BeforeAfterPair
+                      sideBySideOnMobile
+                      zoom={{ openLabel: t('zoomOpen'), closeLabel: t('zoomClose') }}
                       label={t('v1v2FullAlt')}
                       before={{ src: `/work/nakahatsu/v1-v2-full-${language === 'jp' ? 'jp' : 'en'}-l.webp`, width: 600, height: 2538, label: t('v1Label') }}
                       after={{ src: `/work/nakahatsu/v1-v2-full-${language === 'jp' ? 'jp' : 'en'}-r.webp`, width: 600, height: language === 'jp' ? 3040 : 3098, label: t('v2Label') }}
@@ -477,11 +507,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
               {/* 3つの言語の商品一覧の図（bilingual-text.webp）は、Figma の v2 で非表示にしたため載せない（JP・EN とも 2026-11-01。画像ファイルは残してある） */}
               {/* ヒーロー節を、スマートフォン幅で、3言語並べた図（商品一覧の図の下）。Figma の Step/4 の最後と同じ */}
               {s.fig === 'bilingual-3lang' && (
-                <div className="flex justify-center">
-                  <div className="w-full">
-                    <Image src={`/work/nakahatsu/hero-sp-${language === 'jp' ? 'jp' : 'en'}.webp`} alt={t('heroSpAlt')} width={2176} height={1400} className="h-auto w-full" />
-                  </div>
-                </div>
+                <HeroSpFigure lang={language === 'jp' ? 'jp' : 'en'} alt={t('heroSpAlt')} />
               )}
             </div>
           ))}

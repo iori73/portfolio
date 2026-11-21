@@ -57,7 +57,7 @@ export default function DesignSystemFigure({ f, label }: { f: DesignSystemData; 
           <p className={section}>{f.colorsTitle}</p>
           <ul className="grid grid-cols-2 gap-x-6 gap-y-6">
             {f.colors.map(([name, hex]) => (
-              <li key={hex} className="flex items-center gap-4">
+              <li key={hex} className="flex items-center gap-2 md:gap-4">
                 <span aria-hidden="true" className="h-14 w-14 shrink-0 border border-[#dad6ce]" style={{ backgroundColor: hex }} />
                 <span className="flex flex-col gap-1">
                   <span className="text-body text-ink">{name}</span>
