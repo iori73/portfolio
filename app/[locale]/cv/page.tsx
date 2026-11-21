@@ -335,7 +335,7 @@ export default function CVPage() {
             href={linkedInData.profileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className={`text-body ${getBodyFontClass()} hover:opacity-80`}
+            className={`inline-block py-3 break-all text-body ${getBodyFontClass()} hover:opacity-80`}
           >
             {linkedInData.profileUrl} →
           </a>

@@ -11,6 +11,7 @@
     "scrape:figma-stats": "node scripts/scrape-figma-stats.mjs",
     "generate:pdf": "node scripts/generate-portfolio-pdf.mjs --locale all",
     "lint": "next lint",
+    "qa:responsive": "node scripts/qa-responsive.mjs",
     "generate:podcast-data": "node scripts/generate-podcast-data.js",
     "generate:podcast-data:quick": "node scripts/generate-podcast-data.js --skip-embeddings --metadata-only"
   },

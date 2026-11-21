@@ -29,7 +29,7 @@ export default function DesignSystemFigure({ f, label }: { f: DesignSystemData; 
   const fontClass = [shippori.className, notoSerif.className, roboto.className];
   const section = 'text-body-lg font-medium text-ink';
   return (
-    <figure aria-label={label} className="grid w-full gap-12 md:grid-cols-2 md:gap-10">
+    <figure aria-label={label} className="grid w-full grid-cols-1 gap-12 md:grid-cols-2 md:gap-10">
       <div className="flex flex-col gap-10">
         <p className={section}>{f.fontsTitle}</p>
         {f.fonts.map((ft, i) => (
@@ -69,8 +69,8 @@ export default function DesignSystemFigure({ f, label }: { f: DesignSystemData; 
         </div>
         <div className="flex flex-col gap-6">
           <p className={section}>{f.spacingTitle}</p>
-          <div className="flex items-end justify-between gap-6">
-            <ul className="flex items-end gap-6">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <ul className="flex flex-wrap items-end gap-6">
               {f.spacing.map((n) => (
                 <li key={n} className="flex flex-col items-center gap-3">
                   <span aria-hidden="true" className="block bg-ink" style={{ width: n, height: n }} />

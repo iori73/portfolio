@@ -96,6 +96,11 @@ Iori Kawano の個人ポートフォリオサイト。バイリンガル（EN/JP
 `document.documentElement.scrollHeight` と対象要素の実座標を測れば、DOM に実体があるのか
 レンダリング上の錯覚（iOS のラバーバンド等）なのかが1回で確定する。詳細は lessons.md 参照。
 
+### 画面を変えたら `pnpm qa:responsive`（2026-11-20）
+作品ページ・図・レイアウトを足したり直したりしたら、PR の前に `pnpm qa:responsive` を流す（全ルート × 320〜1024px × jp/en。横スクロール・壊れた画像・コンソールエラーが 0 であること。PR では CI も同じものを走らせる）。
+「ある幅で目視した」では足りない。中初のページが iPhone で 390→461px に広がった不具合（grid の1列の最小幅が中身で決まっていた）は、これで見つかる。
+基準・端末幅・チェックリストは [docs/qa/PRODUCTION-QA.md](docs/qa/PRODUCTION-QA.md)。スマホの grid は `grid-cols-1`、横に並ぶ部品は `flex-wrap`。
+
 ---
 
 ## プロジェクト情報データソース

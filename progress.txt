@@ -2149,3 +2149,23 @@ variables / styles はデザインの統一と作業効率のため（現行サ�
 - 2026-11-19: トップの Work カードの並びを新しい順（中初 → Figma Plugins → 浮世絵）に変更（河野さん指示）。カードのタグ（Figma Plugin 等）を text-label(14/15px) → text-body(17/18px) に。
 - 2026-11-19: 全ページ（JP/EN×13ページ）×4幅（375/768/1280/1920）で 14px 未満の文字を調査（.capture/scan-small-text.mjs、Chrome 実機）。本文・日付・出典・フッター・ラベルの 13px は --text-size-xs を 13→14px にして解消。About の "You can drag me"（スマホ 11px）を 14px に、ukiyoe の時代番号を 13→14px に。残りは飾りのみ（プラグインカードの縮小イラスト 7〜13px、ukiyoe の ◆ 印 8px aria-hidden、About の円周上の SVG 文字 12px）で意図的に据え置き。
 - 2026-11-19: #159（minor/patch 8件）と #149（区切りドキュメント）を merge。#137（tailwind-merge 3）は Tailwind 4 向けで本サイトは 3.4 のため close（ignore major）。#136・#138・#139 は main を取り込んで競合を解消し（#138 は lock を再生成、#139 は TS6、#136 は code-connect 2）、CI 通過後に merge。Vercel プレビューの失敗は Google Fonts 取得の一時エラーで、vercel redeploy で解消。
+
+- 2026-11-20: iPhone 13 で中初ページの左右に余白（ページ 390→461px）。原因は DesignSystemFigure の 1 列 grid の最小幅（lessons.md 2026-11-20）。`grid-cols-1` と `flex-wrap` で解消。
+- 2026-11-20: 再発防止として `pnpm qa:responsive`（scripts/qa-responsive.mjs）と CI（.github/workflows/qa-responsive.yml）、基準書 docs/qa/PRODUCTION-QA.md を追加。全ルート×6 幅（320〜1024）×jp/en で、横スクロール・壊れた画像・コンソールエラー・拡大禁止を失敗に、タップ目標 24px 未満と文字の切れを警告にする。ローカルで 108 件、横あふれ 0。CV の LinkedIn リンクのタップ目標（20px）を py-3 で 44px 級に。
+
+## 2026-11-21 最新状況（別のセッションは、まずこの節を読む）
+### 本番・PR
+- 本番 iori-kawano.vercel.app: 中初 /work/nakahatsu は公開中（#157、11-18）。トップのカードは新しい順（#162 merge 済み）。main にはデータ更新の自動 PR（#165〜#168）が入っただけ。
+- 開いている PR: #164（スマホの左右余白 390→461px の修正 + スマホ表示の自動検査 + CI + docs/qa/PRODUCTION-QA.md。チェックはすべて通過。河野さんの確認と merge 待ち）、#163（docs・skills・PDF スクリプトの取引先名を業種ラベルに。チェック通過。merge 待ち）、#60（提案ケーススタディ。本番は 404 の意図的な保留）。
+- 実機確認用のプレビュー: https://portfolio-git-qa-responsive-yoriss67s-projects.vercel.app/jp/work/nakahatsu （JP）、/work/nakahatsu （EN）。Chrome での 320〜768px の検査は横あふれ 0。iPhone Safari・Android の実機は未確認（河野さんの目視待ち）。
+### ローカルのみ（未 push・未 merge。公開は河野さんの判断）
+- worktree nakahatsu-case-study-v2 のブランチ nakahatsu-reflection-launch（28709b3）: 振り返りの見出しの下に、公開4日後の先方の言葉と「旧サイトは集計しておらず前後比較はできない」旨の3文を追記（messages/jp.json・en.json の nakahatsuSy.reflectionLead、NakahatsuSy.tsx）。先方の発言を claims-ledger に記録してから公開する。
+### 河野さんの判断・操作（未了）
+1. #164 の確認 → merge。merge 後は Claude が `BASE=https://iori-kawano.vercel.app pnpm qa:responsive` で本番を確認し、Figma の SP（portfolio_v6 395:1559）を取り込み直す。
+2. #163 の merge。
+3. git の履歴に残る取引先名の書き換え: 書き換え済みの履歴を、河野さんが push_rewritten.sh で force-push する（私は force push を拒否される）。refs/pull/* は force push で消えないので、GitHub Support への削除依頼かリポジトリの作り直しを決める。#60 は、清書版ブランチ proposal-case-study-clean から新しい PR を作り、旧 #60 と旧ブランチを河野さんが閉じる／消す案（a）か、force push を許可する案（b）。
+4. DNS 手順書の LINE を先方へ（河野さん）。`git -C ~/dev/portfolio pull`。
+5. 実機（iPhone Safari・Android Chrome）で、プレビューの中初ページを1回スクロールして確認。
+### 決まりごと（2026-11-20）
+- 取引先の固有名（案件名・社名）は、コード・コミット・PR・docs・skills・スクリプトのどこにも書かない。業種ラベルにする。PDF の漏れ検査用の名前一覧は、git 管理外の scripts/client-denylist.local.json（このマシンの worktree にだけある）。
+- 画面を変えたら `pnpm qa:responsive` を先に流す（CLAUDE.md）。基準は docs/qa/PRODUCTION-QA.md。
