@@ -6,7 +6,7 @@ export type SidebarItem = { id: string; label: string; short?: string; subs?: { 
 
 /**
  * 作品ページの側面メニュー（サイドバー）。全作品ページで同じ見た目・同じ動きにする（幅 224px、文字サイズ（見出し 18px・小見出し 15px）、強調、小見出しの出し方）。
- * - 項目の文言は、本文の見出しと同じ翻訳キーから出す（ページ側で `label` に渡す）。
+ * - 項目の文言は、本文の見出しと同じ翻訳キーから出す（ページ側で `label` に渡す）。長い見出しは `short`（短い文言）も渡すと、PC のサイドバーとスマホの目次の両方が `short` を表示する。
  * - 開いている節（スクロール位置）の下にだけ、小見出し（subs）を出す。
  * - 各項目の `id` は、本文の節・見出しの `id` と同じにする（`scroll-mt-28` 以上を付ける）。
  * 置く場所は `WorkShell`（右の列）。単独では置かない。
@@ -52,7 +52,7 @@ export default function WorkSidebar({ items, ariaLabel }: { items: SidebarItem[]
               aria-current={activeId === it.id ? 'true' : undefined}
               className={`text-left text-body font-medium leading-snug text-ink transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none ${activeId === it.id ? 'translate-x-[3px] opacity-100' : 'opacity-50 hover:opacity-80'}`}
             >
-              {it.label}
+              {it.short ?? it.label}
             </button>
             {/* 小見出しは、開いている節の下にだけ。grid の行の高さ 0fr→1fr で、すっと開閉する */}
             {it.subs?.length ? (
@@ -71,7 +71,7 @@ export default function WorkSidebar({ items, ariaLabel }: { items: SidebarItem[]
                           aria-current={activeSub === s.id ? 'true' : undefined}
                           className={`text-left text-body-sm leading-snug text-ink transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none ${activeSub === s.id ? 'translate-x-[3px] opacity-100' : 'opacity-50 hover:opacity-80'}`}
                         >
-                          {s.label}
+                          {s.short ?? s.label}
                         </button>
                       </li>
                     ))}

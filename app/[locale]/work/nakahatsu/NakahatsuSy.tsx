@@ -322,7 +322,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
   const palette = t.raw('palette') as Palette;
   const rl = t.raw('rowLabels') as { overview: string; process: string; reflection: string; credit: string };
   const reflection = t.raw('reflection') as [string, string][];
-  /** スマホの目次（WorkMobileToc）だけに使う短い文言。PC のサイドバーは本文の見出しと同じ長さのまま */
+  /** 目次の短い文言（PC のサイドバーとスマホの目次の両方。本文の見出しは長いまま） */
   const tocShort = t.raw('tocShort') as { steps: string[]; reflection: string[] };
   /** 側面メニュー（共通の WorkSidebar。1280px 以上）。項目は本文の見出しと同じ文言（概要・各ステップの見出し・クレジット）。Figma の Sidebar と同じ */
   const sidebarItems: SidebarItem[] = [
