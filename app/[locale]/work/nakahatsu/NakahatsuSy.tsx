@@ -342,7 +342,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
   );
 
   return (
-    <div data-sharp className="font-sans mt-[var(--site-header-height)] mb-24 [--nk-border:#dad6ce] [--nk-surface:#f0f0f0] md:mb-16">
+    <div data-sharp className="font-sans mt-[var(--site-header-height)] mb-24 max-xl:pr-6 [--nk-border:#dad6ce] [--nk-surface:#f0f0f0] md:mb-16">
       <BackToTopButton />
       <WorkMobileToc items={sidebarItems} ariaLabel={t('tocTitle')} openLabel={t('tocOpen')} />
 
