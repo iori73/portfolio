@@ -244,6 +244,7 @@ function ProcessIterationsFigure({ f, lang, pauseLabel, playLabel }: { f: IterPr
                   width={1280}
                   height={videos[n].height}
                   startWhenVisible
+                  bgClassName="bg-[#f7f9f4]"
                 />
               ) : (
                 <Image key={n} src={`/work/nakahatsu/process-iter-${n}.webp`} alt={f.alts[n - 1]} width={1200} height={ratio[n]} className={`h-auto w-full rounded ${set.length === 1 ? 'md:max-w-[560px]' : ''}`} />

@@ -49,9 +49,9 @@ const AboutPage: React.FC = () => {
 
           {/* Heading + bilingual description */}
           <div className="flex-1">
-            <h1 className={`text-headline mb-6 ${getHeadingFontClass()}`}>About</h1>
+            <h1 className={`text-headline mb-8 ${getHeadingFontClass()}`}>About</h1>
             <div>
-              <p className={`text-body-lg ${getBodyFontClass()} mb-4`}>{t('description1')}</p>
+              <p className={`text-body-lg ${getBodyFontClass()} mb-1`}>{t('description1')}</p>
               <p className={`text-body-lg ${getBodyFontClass()}`}>{t('description2')}</p>
             </div>
 

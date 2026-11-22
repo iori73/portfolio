@@ -10,7 +10,7 @@ export type MetaItem = { label: string; value: string | string[] };
  *   ほかの列は内容の幅」にする。短い値（例: 「インタラクティブWebサイト」）が1文字だけ折り返すのを防ぐ。
  * - 日本語は文節の切れ目で折れる（`word-break: auto-phrase`）。さらに、値の文言に `¦` を書くと、
  *   その位置でだけ折れる（`src/lib/softBreaks.tsx`）。
- * - 値が配列のときは、1行ずつ改行して並べる。
+ * - 値が配列のときは、1行ずつ改行して並べる。近接の原則: ラベルと値の間（12px）は、値どうしの間（行間 leading-snug）より広く取り、「ラベル」と「値のまとまり」の2つに見えるようにする（2026-11-22 河野さんの指摘）。
  * - 新しい作品ページでは、メタ情報を自分で組まず、このコンポーネントを使う。
  */
 export default function WorkMetaGrid({ items, labelClassName = 'text-caption-lg' }: { items: MetaItem[]; labelClassName?: string }) {
@@ -33,8 +33,8 @@ export default function WorkMetaGrid({ items, labelClassName = 'text-caption-lg'
     >
       {items.map((it) => (
         <div key={it.label}>
-          <span className={`${labelClassName} font-space-grotesk font-semibold text-ink-tertiary mb-2 block`}>{it.label}</span>
-          <p className="text-body-lg tracking-[0.2px]">
+          <span className={`${labelClassName} font-space-grotesk font-semibold text-ink-tertiary mb-3 block`}>{it.label}</span>
+          <p className="text-body-lg leading-snug tracking-[0.2px]">
             {(Array.isArray(it.value) ? it.value : [it.value]).map((line, i) => (
               <span key={i} className="block">
                 {softBreaks(line)}

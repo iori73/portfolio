@@ -31,8 +31,8 @@ export default function Home() {
               at once. Going through t() made the left column follow the locale,
               so /jp rendered Japanese twice. */}
           <div className="flex-1">
-            <h1 className="text-display mb-2">{enHero.name}</h1>
-            <p className="text-body-lg font-helvetica-neue mb-1">{enHero.description1}</p>
+            <h1 className="text-display mb-6">{enHero.name}</h1>
+            <p className="text-body-lg font-helvetica-neue">{enHero.description1}</p>
             <p className="text-body-lg font-helvetica-neue">{enHero.description2}</p>
           </div>
 
@@ -40,7 +40,7 @@ export default function Home() {
               text-body-lg-jp, not text-body-lg: at the same px the Japanese
               outweighs the English optically. See the token in tailwind.config.js. */}
           <div className="flex-1">
-            <p className="text-body-lg-jp font-noto-sans-jp font-light mb-1">{jpHero.description1}</p>
+            <p className="text-body-lg-jp font-noto-sans-jp font-light">{jpHero.description1}</p>
             <p className="text-body-lg-jp font-noto-sans-jp font-light">{jpHero.description2}</p>
           </div>
         </div>
@@ -66,7 +66,7 @@ export default function Home() {
             />
           }
           title={t('projects.nakahatsu.title')}
-          tags={['Shopify', 'Design System']}
+          tags={['Shopify', 'Website Design']}
           description1={t('projects.nakahatsu.description1')}
           description2={t('projects.nakahatsu.description2')}
         />

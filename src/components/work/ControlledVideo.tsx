@@ -18,6 +18,7 @@ export default function ControlledVideo({
   width,
   height,
   startWhenVisible = false,
+  bgClassName = 'bg-black',
 }: {
   src: string;
   poster: string;
@@ -27,6 +28,8 @@ export default function ControlledVideo({
   width: number;
   height: number;
   startWhenVisible?: boolean;
+  /** 動画の下地。明るい動画に黒を敷くと、端数の幅のとき縁に黒い細線が出る（2026-11-22）ので、動画の地の色に合わせる */
+  bgClassName?: string;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
@@ -80,7 +83,7 @@ export default function ControlledVideo({
       <video
         ref={ref}
         aria-label={label}
-        className="w-full rounded-media bg-black"
+        className={`block w-full rounded-media ${bgClassName}`}
         src={src}
         poster={poster}
         width={width}

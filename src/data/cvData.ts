@@ -590,7 +590,7 @@ export const cvData: CVData = {
         jp: '個人で受託し、提案・デザイン・Shopify 実装・日英仏の多言語対応・先方との進行まで 1 人で担当。進行中・未公開。',
       },
       period: { en: '2026 - Present', jp: '2026年 - 現在' },
-      technologies: ['Shopify', 'Design System', 'Multilingual'],
+      technologies: ['Shopify', 'Website Design', 'Multilingual'],
       link: '/work/nakahatsu',
     },
     {

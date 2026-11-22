@@ -80,7 +80,7 @@ export default function WorkCard({
             {tags.map((tag) => (
               <span
                 key={tag}
-                className="font-space-grotesk text-body leading-[1.3] px-3.5 py-1.5 rounded-lg bg-surface-muted text-ink-tertiary"
+                className="font-space-grotesk text-body leading-[1.3] px-3.5 py-1.5 rounded-lg bg-surface-muted text-ink-secondary"
               >
                 {tag}
               </span>
