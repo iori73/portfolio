@@ -614,6 +614,7 @@
       ]
     ],
     "rowLabels": { "overview": "Overview", "process": "Process", "reflection": "Reflection", "credit": "Credit", "more": "More detail" },
+    "tocShort": { "steps": ["Existing site", "Two versions", "Home and About", "Three languages", "Brand color"], "reflection": ["With AI", "Beyond AI"] },
     "overviewCatch": "Two separate sites, made into one.",
     "overview": [
       "Nakahatsu Shoten is a soy sauce and miso brewery in Kanazawa. It was founded in 1896 as a food retailer and later moved into brewing.",

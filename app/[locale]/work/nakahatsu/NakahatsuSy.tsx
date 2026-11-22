@@ -322,12 +322,14 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
   const palette = t.raw('palette') as Palette;
   const rl = t.raw('rowLabels') as { overview: string; process: string; reflection: string; credit: string };
   const reflection = t.raw('reflection') as [string, string][];
+  /** スマホの目次（WorkMobileToc）だけに使う短い文言。PC のサイドバーは本文の見出しと同じ長さのまま */
+  const tocShort = t.raw('tocShort') as { steps: string[]; reflection: string[] };
   /** 側面メニュー（共通の WorkSidebar。1280px 以上）。項目は本文の見出しと同じ文言（概要・各ステップの見出し・クレジット）。Figma の Sidebar と同じ */
   const sidebarItems: SidebarItem[] = [
     { id: 'overview', label: rl.overview },
     // 見出し（プロセス）＞ 小見出し（各ステップ）の2段。ukiyoe と同じ構造
-    { id: 'process', label: rl.process, subs: steps.map((st, i) => ({ id: `step-${i + 1}`, label: st.h })) },
-    { id: 'reflection', label: rl.reflection, subs: reflection.map(([h], i) => ({ id: `reflection-${i + 1}`, label: h })) },
+    { id: 'process', label: rl.process, subs: steps.map((st, i) => ({ id: `step-${i + 1}`, label: st.h, short: tocShort.steps[i] })) },
+    { id: 'reflection', label: rl.reflection, subs: reflection.map(([h], i) => ({ id: `reflection-${i + 1}`, label: h, short: tocShort.reflection[i] })) },
     { id: 'credit', label: rl.credit },
   ];
   const body = `${getBodyFontClass()} tracking-[0.2px] text-body-lg text-ink [text-wrap:pretty]`;

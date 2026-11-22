@@ -51,9 +51,9 @@ export default function WorkMobileToc({ items, ariaLabel, openLabel }: { items: 
   };
 
   // Figma（WorkMobileToc）どおり: 見出しは Medium、小見出しは Regular。いまの節だけ ink、ほかは ink-tertiary。背景は塗らない。
-  // いまの節は、角丸の塗り（#666・ドットと同じ色）＋白文字（macOS のメニュー風）。塗りはカードの端から 8px 内側に置く。
+  // いまの節は、角丸の塗り（#d2d2d780。「上へ戻る」ボタンと同じ色）＋ ink の文字（macOS のメニュー風）。塗りはカードの端から 8px 内側に置く。
   const row = (on: boolean, level: 0 | 1) =>
-    `toc-row flex w-full items-center text-left text-body-sm leading-5 tracking-[-0.15px] transition-colors motion-reduce:transition-none ${level === 0 ? 'py-2 px-2 font-medium' : 'min-h-8 pl-4 pr-2'} ${on ? 'bg-[#666] text-white' : 'text-ink-tertiary'}`;
+    `toc-row flex w-full items-center text-left text-body-sm leading-5 tracking-[-0.15px] transition-colors motion-reduce:transition-none ${level === 0 ? 'py-2 px-2 font-medium' : 'min-h-8 pl-4 pr-2'} ${on ? 'bg-[#d2d2d780] text-ink' : 'text-ink-tertiary'}`;
 
   if (isMenuOpen) return null;
   const visible = shown || open;
@@ -94,14 +94,14 @@ export default function WorkMobileToc({ items, ariaLabel, openLabel }: { items: 
           {items.map((it) => (
             <li key={it.id}>
               <button type="button" onClick={() => go(it.id)} aria-current={active === it.id ? 'true' : undefined} className={row(active === it.id, 0)}>
-                {it.label}
+                {it.short ?? it.label}
               </button>
               {it.subs?.length ? (
                 <ul className="flex flex-col">
                   {it.subs.map((sub) => (
                     <li key={sub.id}>
                       <button type="button" onClick={() => go(sub.id)} aria-current={active === sub.id ? 'true' : undefined} className={row(active === sub.id, 1)}>
-                        {sub.label}
+                        {sub.short ?? sub.label}
                       </button>
                     </li>
                   ))}

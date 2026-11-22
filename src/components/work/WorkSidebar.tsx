@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-export type SidebarItem = { id: string; label: string; subs?: { id: string; label: string }[] };
+export type SidebarItem = { id: string; label: string; short?: string; subs?: { id: string; label: string; short?: string }[] };
 
 /**
  * 作品ページの側面メニュー（サイドバー）。全作品ページで同じ見た目・同じ動きにする（幅 224px、文字サイズ（見出し 18px・小見出し 15px）、強調、小見出しの出し方）。
