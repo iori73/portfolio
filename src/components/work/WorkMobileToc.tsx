@@ -51,8 +51,9 @@ export default function WorkMobileToc({ items, ariaLabel, openLabel }: { items: 
   };
 
   // Figma（WorkMobileToc）どおり: 見出しは Medium、小見出しは Regular。いまの節だけ ink、ほかは ink-tertiary。背景は塗らない。
+  // いまの節は、角丸の塗り（#666・ドットと同じ色）＋白文字（macOS のメニュー風）。塗りはカードの端から 8px 内側に置く。
   const row = (on: boolean, level: 0 | 1) =>
-    `flex w-full items-center text-left text-body-sm leading-5 tracking-[-0.15px] transition-colors motion-reduce:transition-none ${level === 0 ? 'py-2 px-4 font-medium' : 'min-h-8 pl-6 pr-4'} ${on ? 'text-ink' : 'text-ink-tertiary'}`;
+    `toc-row flex w-full items-center text-left text-body-sm leading-5 tracking-[-0.15px] transition-colors motion-reduce:transition-none ${level === 0 ? 'py-2 px-2 font-medium' : 'min-h-8 pl-4 pr-2'} ${on ? 'bg-[#666] text-white' : 'text-ink-tertiary'}`;
 
   if (isMenuOpen) return null;
   const visible = shown || open;
@@ -89,7 +90,7 @@ export default function WorkMobileToc({ items, ariaLabel, openLabel }: { items: 
         hidden={!open}
         className="toc-card fixed right-4 top-1/2 z-50 max-h-[70vh] w-max max-w-[min(calc(100vw-2rem),320px)] -translate-y-1/2 origin-right overflow-y-auto overscroll-contain rounded-[8px] border border-black/10 bg-white shadow-[0_12px_40px_rgba(0,0,0,0.14)] motion-safe:animate-[toc-in_160ms_ease-out]"
       >
-        <ul className="flex flex-col py-2">
+        <ul className="flex flex-col px-2 py-2">
           {items.map((it) => (
             <li key={it.id}>
               <button type="button" onClick={() => go(it.id)} aria-current={active === it.id ? 'true' : undefined} className={row(active === it.id, 0)}>

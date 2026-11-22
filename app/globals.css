@@ -494,6 +494,9 @@ body {
 [data-sharp] .toc-card {
   border-radius: 8px;
 }
+[data-sharp] .toc-card .toc-row {
+  border-radius: 8px;
+}
 
 /* スマートフォンの目次（WorkMobileToc）が開くときの動き */
 @keyframes toc-in {
