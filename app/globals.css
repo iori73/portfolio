@@ -490,6 +490,11 @@ body {
   border-radius: 0;
 }
 
+/* スマートフォンの目次のカードだけ、Figma の指定（425:2751）で角丸 8px を残す */
+[data-sharp] .toc-card {
+  border-radius: 8px;
+}
+
 /* スマートフォンの目次（WorkMobileToc）が開くときの動き */
 @keyframes toc-in {
   from {
