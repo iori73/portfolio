@@ -82,13 +82,13 @@ export default function WorkMobileToc({ items, ariaLabel, openLabel }: { items: 
         ))}
       </button>
 
-      {/* 開いているとき: 目次のカード（Figma 425:2751）。角丸 8px・枠 1px（黒 10%）・影。幅は文字に合わせる。
+      {/* 開いているとき: 目次のカード（Figma 425:2751）。角丸 8px・枠なし（2026-11-23）・影。幅は文字に合わせる。
           見出し: 上下 8px・左右 16px。小見出し: 高さ 32px・左 24px。上下の端は 16px。 */}
       <nav
         id="work-mobile-toc"
         aria-label={ariaLabel}
         hidden={!open}
-        className="toc-card fixed right-4 top-1/2 z-50 max-h-[70vh] w-max max-w-[min(calc(100vw-2rem),320px)] -translate-y-1/2 origin-right overflow-y-auto overscroll-contain rounded-[8px] border border-black/10 bg-white/90 backdrop-blur-md shadow-[0_12px_40px_rgba(0,0,0,0.14)] motion-safe:animate-[toc-in_160ms_ease-out]"
+        className="toc-card fixed right-4 top-1/2 z-50 max-h-[70vh] w-max max-w-[min(calc(100vw-2rem),320px)] -translate-y-1/2 origin-right overflow-y-auto overscroll-contain rounded-[8px] bg-white/90 backdrop-blur-md shadow-[0_12px_40px_rgba(0,0,0,0.14)] motion-safe:animate-[toc-in_160ms_ease-out]"
       >
         <ul className="flex flex-col px-2 py-2">
           {items.map((it) => (
