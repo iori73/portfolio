@@ -2165,3 +2165,7 @@ variables / styles はデザインの統一と作業効率のため（現行サ�
 - 事実の出典は ai-ops の ops/content-pipeline.md、.claude/commands/{draft,note}.md、ops/note-editor-runbook.md、scripts/note-lint.py、scripts/recover-published.py、output/published.tsv（26% / 45% の実測）。仕事の情報・他人の名前・記事の本数は載せていない。
 - 検査: pnpm build 成功。next start で 320〜1280px × jp/en の横スクロールなし。コンソールのエラーはローカルだけで出る /_vercel/insights のみ。
 - 残り: 河野さんの Preview 確認と merge → 本番確認 → Figma portfolio_v6（Site — JP / EN の Experiment と詳細ページ）に同期。
+- 追記（同日、河野さんの FB）: 日本語を敬体に。Obsidian の表記を外した（河野さんは Obsidian を開いていない。AI が読み書きするのは Obsidian 形式のフォルダの Markdown なので「共有のノート（Markdown のファイル）」に）。
+  「具体例: サムネイル」の節を追加（A 私が渡すもの＝記事だけ → B AI が型にはめ込む＝Figma の Thumbnail v3/Layout の4つの枠と中身 → C 私が仕上げる＝游ゴシックへの差し替え・縁の色・公開）。
+  完成品は Figma t1TmZXTMJG8QpnIyEwnXBu の 1471:1075（家紋の記事の表紙）を書き出して public/experiment/article-pipeline/thumbnail-kamon.webp に。画像の出典はキャプションに（下がり藤 CC BY-SA 4.0 / エナメル板 PD）。
+  型の見本（880:676）は人名入りなので使わず、rules v3 の版面の値で枠を描いた。

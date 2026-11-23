@@ -14,6 +14,7 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import ProcessDiagram from '@/components/article-pipeline/ProcessDiagram';
+import ThumbnailExample from '@/components/article-pipeline/ThumbnailExample';
 import type { Bi } from '@/src/data/bilingualBooks';
 import {
   AP_LEARNINGS,
@@ -23,6 +24,7 @@ import {
   AP_STEPS,
   AP_SUBTITLE,
   AP_TAGS,
+  AP_THUMB,
   AP_TITLE,
 } from '@/src/data/articlePipeline';
 
@@ -31,7 +33,7 @@ const UI: Record<string, Bi> = {
   process: { en: 'How it works', jp: '仕組み' },
   processLead: {
     en: 'Six steps for every article. Each role has written instructions, so the next article starts from the same place.',
-    jp: '記事ごとに同じ6つの工程を通す。どの役にも手順書があり、次の記事が同じところから始められる。',
+    jp: '記事ごとに同じ6つの工程を通します。どの役にも手順書があるので、次の記事も同じところから始められます。',
   },
   roles: { en: 'Who decides what', jp: '誰が何を決めるか' },
   ai: { en: 'AI', jp: 'AI' },
@@ -124,6 +126,13 @@ export default function ArticlePipelinePage() {
             </li>
           ))}
         </ol>
+      </section>
+
+      {/* Example: a thumbnail */}
+      <section className="py-12 md:py-16 border-t border-line-subtle">
+        <h2 className={`text-title-lg mb-4 ${heading}`}>{AP_THUMB.heading[lang]}</h2>
+        <p className={`text-body-lg text-ink-secondary mb-12 ${body}`}>{AP_THUMB.lead[lang]}</p>
+        <ThumbnailExample lang={lang} body={body} heading={heading} />
       </section>
 
       {/* Who decides what */}
