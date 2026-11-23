@@ -74,7 +74,7 @@
   "experiment": {
     "description": "新しいアイデアやコンセプトを探求するために、さまざまな実験をデザインし構築しています。",
     "podcastNotes": "ポッドキャストノート",
-    "podcastNotesDescription": "ポッドキャストから学んだことを記録する個人的なメモ。SpotifyのURLをCursorのLLMに共有するだけで、エピソードを自動処理し、構造化されたノートをNotionデータベースに追加するワークフローを自動化しています。",
+    "podcastNotesDescription": "ポッドキャストから学んだことを記録する個人的なメモ。SpotifyのURLをLLMに共有するだけで、エピソードを自動処理し、構造化されたノートをNotionデータベースに追加するワークフローを自動化しています。",
     "favoriteVisuals": "Favorite Visuals",
     "favoriteVisualsDescription": "ビジュアルのコレクション。2つのNotionデータベース（Favorite Image DatabaseとData Visualization Database）に整理しています。",
     "favoriteVisualsNote": "これらは他の人の作品の単なる引用であることを痛感しています。私にはまだ個性も強みもなく、今探索しています。私も自分がこの世に残したい、作っていて心地よいと思える何かを表現し作りたいです。",
