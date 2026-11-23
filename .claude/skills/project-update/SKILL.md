@@ -13,8 +13,8 @@ user-invocable: true
 `/project-update <project-id>` — 更新対象のプロジェクトID
 
 引数に追加の指示がある場合はそれに従う。例:
-- `/project-update ana --status completed`
-- `/project-update waseda 新しいハイライトを追加`
+- `/project-update airline-ds --status completed`
+- `/project-update alumni-app 新しいハイライトを追加`
 
 ## 手順
 

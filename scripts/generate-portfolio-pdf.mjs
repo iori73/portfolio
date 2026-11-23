@@ -16,7 +16,7 @@
 
 import { spawn } from 'node:child_process';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
@@ -29,13 +29,15 @@ const OUT_DIR = path.join(ROOT, 'public', 'downloads');
  * Names that must never reach a document we email to strangers. The site and
  * cvData use industry labels instead; this is the cheap last line of defence.
  */
-const CLIENT_DENYLIST = [
-  'パナソニック', 'Panasonic',
-  '花王', 'KANEBO', 'Kanebo', 'LUNASOL', 'SENSAI', 'TWANY', 'ALBLANC',
-  'JPデジタル', 'JP Digital',
-  'ネクストステージ', 'NEXT STAGE', 'NextStage', 'ACRO5',
-  'yumemi.co.jp', 'eNPS',
-];
+// The list itself is confidential (it is the list of client names), so it lives
+// in a git-ignored local file instead of this public repository.
+const DENYLIST_FILE = path.join(__dirname, 'client-denylist.local.json');
+let CLIENT_DENYLIST = [];
+if (existsSync(DENYLIST_FILE)) {
+  CLIENT_DENYLIST = JSON.parse(readFileSync(DENYLIST_FILE, 'utf8'));
+} else {
+  console.warn(`[pdf] ${DENYLIST_FILE} not found: the client-name leak check is skipped.`);
+}
 
 const A4 = { width: 794, height: 1123 }; // CSS px at 96dpi
 
