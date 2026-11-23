@@ -49,6 +49,7 @@ export const PUBLIC_PAGE_PATHS = [
   '/cv',
   '/experiment',
   '/experiment/podcast-notes',
+  '/experiment/bilingual-books',
 ] as const;
 
 /**
