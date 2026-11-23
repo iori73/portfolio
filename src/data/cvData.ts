@@ -209,18 +209,18 @@ export const cvData: CVData = {
           label: { en: 'Construction Tech', jp: '建築テック' },
           period: { start: '2025-03', end: '2025-07' },
           summary: {
-            en: 'Contributed to the UI renewal of a video learning platform for skilled-trade workers in the housing construction industry, on a three-person design team. Owned the search, in-progress and review, e-learning, and shared loading screens, restructuring objects and actions to rebuild the information architecture, with gamification design, through successive client reviews.',
-            jp: '住宅建設業界の技能職（職人）向け動画学習プラットフォームのUIリニューアルに、3名のデザインチームで参画。OOUI手法とゲーミフィケーション設計を用い、検索・受講中/復習・eラーニング・汎用ローディングの各画面を、複数回のクライアントレビューを経て設計した。',
+            en: 'Contributed to the UI renewal of a video learning platform for people working in the construction industry, on a three-person design team. Owned the search, in-progress and review, e-learning, and shared loading screens, restructuring objects and actions to rebuild the information architecture, with gamification design, through successive client reviews.',
+            jp: '建築業界で働く人向けの動画学習プラットフォームのUIリニューアルに、3名のデザインチームで参画。OOUI手法とゲーミフィケーション設計を用い、検索・受講中/復習・eラーニング・汎用ローディングの各画面を、複数回のクライアントレビューを経て設計した。',
           },
           detail: {
             context: {
               en: [
-                'A BtoB cloud video learning service for skilled-trade workers in the housing construction industry, sold primarily on corporate contracts.',
+                'A BtoB cloud video learning service for people working in the construction industry, sold primarily on corporate contracts.',
                 'The existing UI was flagged for not turning learning into results, for creating friction for older tradespeople, and for lacking a structure that worked at the organization level.',
                 'Learning progress could not be tracked systematically, making retention and motivation hard to sustain, against an industry backdrop of labor shortage and skill succession.',
               ],
               jp: [
-                '住宅建設業界の技能職（職人）向けの、法人契約を主対象としたBtoBクラウド動画学習サービス。',
+                '建築業界で働く人向けの、法人契約を主対象としたBtoBクラウド動画学習サービス。',
                 '既存UIには「学びが成果につながらない」「年配の職人層がストレスを感じやすい」「組織的に使いやすい設計が不足している」という課題が指摘されていた。',
                 '学習状況を体系的に管理できず、定着とモチベーション維持が難しい状態だった。背景には人材不足・技能伝承という業界特有の事情がある。',
               ],
