@@ -47,7 +47,7 @@ export interface WorkExperience {
   location: { en: string; jp: string };
   startDate: string; // "2024-01"
   endDate: string | 'Present'; // "2024-12" or "Present"
-  summary: { en: string; jp: string };
+  summary?: { en: string; jp: string }; // 書く価値のない一文は置かない（2026-11-23: ゆめみの「大学卒業後、正社員として参画」を削除）
   projects?: WorkProject[];
   technologies?: string[];
 }
@@ -94,7 +94,7 @@ export const cvData: CVData = {
       en: 'UI/UX Designer',
       jp: 'UI/UXデザイナー',
     },
-    location: { en: 'Tokyo, Japan', jp: '東京都' },
+    location: { en: 'Kanagawa, Japan', jp: '神奈川県' },
     email: 'iorikawano.design@gmail.com',
     website: 'https://iori-kawano.vercel.app',
     summary: {
@@ -131,7 +131,7 @@ export const cvData: CVData = {
           period: { start: '2026-08', end: '2026-08' },
           summary: {
             en: "Supported an RFP proposal for a transport operator's app redesign: VoC and analytics review, as-is/to-be information architecture, and concept direction.",
-            jp: '交通事業者のアプリ刷新に向けたRFP提案を支援。VoC・アナリティクスの分析、現状／将来の情報設計（IA）、コンセプト方向性の検討を担当。',
+            jp: '交通事業者のアプリ刷新に向けたRFP提案を支援。VoC・アナリティクスの分析、現状／将来の情報設計（IA）、コンセプトの方向性の検討を担当。',
           },
         },
         {
@@ -140,7 +140,7 @@ export const cvData: CVData = {
           period: { start: '2026-05', end: '2026-06' },
           summary: {
             en: 'Designed the procedure-selection home of a banking app so one layout holds in Japanese and a second language; created the account-inquiry icon set and merged components into the existing design system.',
-            jp: '銀行アプリの手続き選択ホームを設計。日本語と第2言語の両方で同一レイアウトが成立する構造とし、口座照会アイコンの制作と既存デザインシステムへのコンポーネント統合も担当。',
+            jp: '銀行アプリの、手続きを選ぶホーム画面を設計。日本語と第2言語のどちらでも同じレイアウトで成り立つ構造とし、口座照会アイコンの制作と、既存デザインシステムへのコンポーネント統合も担当。',
           },
         },
         {
@@ -149,7 +149,7 @@ export const cvData: CVData = {
           period: { start: '2026-04', end: '2026-06' },
           summary: {
             en: "Led UI mockups for an inbound-tourist area app (map, trip plan, membership wallet) and supported a proposal for a retailer's e-commerce renewal.",
-            jp: '訪日客向けエリアアプリ（地図・プラン・会員証ウォレット）のUIモックを主担当し、小売事業者のEC刷新提案を支援。',
+            jp: '訪日客向けエリアアプリ（地図・プラン・会員証ウォレット）のUIモックの制作を主に担当し、小売事業者のEC刷新提案を支援。',
           },
         },
         {
@@ -158,7 +158,7 @@ export const cvData: CVData = {
           period: { start: '2026-04', end: '2026-04' },
           summary: {
             en: 'Owned the Figma prototype design for a university alumni app. Designed full-screen flows from LINE-integrated onboarding through donation program participation and completion.',
-            jp: '大学OB・OG向け校友アプリのFigmaプロトタイプ設計を担当。LINE連携オンボーディングから寄付プログラム参加・完了まで全画面フローを設計。',
+            jp: '大学OB・OG向け校友アプリのFigmaプロトタイプ設計を担当。LINE連携オンボーディングから寄付プログラムの参加・完了まで、全画面のフローを設計。',
           },
           resumeLine: {
             en: 'Owned the Figma prototype design for an alumni donation app in 2.5 weeks, with a team of 6 across 4 organizations.',
@@ -171,7 +171,7 @@ export const cvData: CVData = {
           period: { start: '2025-12', end: '2026-03' },
           summary: {
             en: 'Built the token foundation and tooling for the airline\'s design system: a two-layer token architecture spanning color, typography, and spacing with multi-theme support, and custom Figma plugins for token setup, design-lint fixing, and variable migration. Sequencing migration after lint cut manual re-binding significantly.',
-            jp: '航空会社のデザインシステムのトークン基盤とツールを構築。カラー・タイポグラフィ・スペーシングを対象に、マルチテーマ対応の2層トークンアーキテクチャを設計し、トークンの自動セットアップ・デザインLint修正・変数マイグレーションを担うFigmaプラグイン群を開発。「Lint→Migrate」の順序設計により、手作業の再バインドを大幅に削減した。',
+            jp: '航空会社のデザインシステムのトークン基盤とツールを構築。カラー・タイポグラフィ・スペーシングを対象に、マルチテーマ対応の2層トークンアーキテクチャを設計し、トークンの自動セットアップ・デザインLint修正・変数マイグレーションを担うFigmaプラグイン群を開発。「Lint→Migrate」の順に実行する設計で、手作業での変数のつなぎ直しを大幅に減らした。',
           },
           resumeLine: {
             en: 'Built the token foundation of a multi-platform design system, with light/dark modes and targeting WCAG AA, along with the tooling that supports its day-to-day use.',
@@ -194,10 +194,6 @@ export const cvData: CVData = {
       location: { en: 'Tokyo, Japan', jp: '東京都' },
       startDate: '2025-04',
       endDate: '2025-11',
-      summary: {
-        en: 'Joined full-time after graduating.',
-        jp: '大学卒業後、正社員として参画。',
-      },
       projects: [
         {
           id: 'yumemi-voice-push-2',
@@ -205,7 +201,7 @@ export const cvData: CVData = {
           period: { start: '2025-06', end: '2025-10' },
           summary: {
             en: 'Designed the UI for a smart-home voice push-notification service across two tracks (in-house hub + third-party speaker setup). Validated a character-count-aware responsive text system with HTML prototypes.',
-            jp: 'スマートホーム音声プッシュ通知のUIを2トラック（自社ハブ＋他社スピーカー設定）で設計。文字数対応のレスポンシブ設計をHTMLプロトで検証。',
+            jp: 'スマートホームの音声プッシュ通知のUIを、自社ハブ向けと他社スピーカー設定向けの2種類で設計。文字数に応じて変わるレスポンシブな表示を、HTMLのプロトタイプで検証。',
           },
         },
         {
@@ -467,7 +463,7 @@ export const cvData: CVData = {
           period: { start: '2024-07', end: '2024-09' },
           summary: {
             en: 'Designed feature-introduction landing pages for six brands in a major cosmetics group, built as one template with per-brand variants.',
-            jp: '大手化粧品グループ6ブランド向けの機能紹介LPを、共通テンプレート＋ブランド別バリアントの構成で設計。',
+            jp: '大手化粧品グループ6ブランド向けの機能紹介LPを、共通のテンプレートに、ブランドごとの差し替えを加える構成で設計。',
           },
           detail: {
             context: {
@@ -526,7 +522,7 @@ export const cvData: CVData = {
       endDate: '2024-03',
       summary: {
         en: 'Worked as an assistant in the development department. Learned the basics of the product development process and team collaboration, which became the foundation for the UI/UX design career that followed.',
-        jp: 'インターンとして開発部のアシスタント業務に従事。プロダクト開発の現場で基礎的な開発プロセスとチームワークを学び、後のUI/UXデザインキャリアの基盤となった期間。',
+        jp: 'インターンとして開発部のアシスタント業務に従事。プロダクト開発の現場で基礎的な開発プロセスとチームワークを学び、のちのUI/UXデザインのキャリアの土台になった期間。',
       },
     },
   ],
@@ -566,7 +562,6 @@ export const cvData: CVData = {
       items: [
         { en: 'Figma', jp: 'Figma' },
         { en: 'Claude Code', jp: 'Claude Code' },
-        { en: 'Cursor', jp: 'Cursor' },
       ],
     },
     {
@@ -615,7 +610,7 @@ export const cvData: CVData = {
       },
       description: {
         en: 'End-to-end system for real-time gym crowd monitoring: automated screenshot capture via Apple Shortcuts, OCR processing with GitHub Actions, and a live dashboard.',
-        jp: 'Apple Shortcutsによる自動スクリーンショット取得からGitHub ActionsでのOCR処理、リアルタイムダッシュボードまで、ジム混雑状況をモニタリングするEnd-to-Endシステム。',
+        jp: 'Apple Shortcutsによる自動スクリーンショット取得からGitHub ActionsでのOCR処理、リアルタイムダッシュボードまで、ジムの混雑状況を確認できる、取得から表示までの一連のシステム。',
       },
       period: { en: '2025', jp: '2025年' },
       technologies: ['GitHub Actions', 'Apple Shortcuts', 'OCR'],

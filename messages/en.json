@@ -408,7 +408,7 @@
   "figmaPlugins": {
     "title": "Figma Plugins & Widgets",
     "subtitle": "Tools born from dialogue with AI",
-    "overviewText1": "As a designer embedded in a large-scale design system project, I kept encountering repetitive tasks and workflow gaps that no existing plugin addressed. Rather than waiting for someone else to solve them, I started building my own, using AI as a coding partner through vibe-coding sessions with Claude and Cursor.",
+    "overviewText1": "As a designer embedded in a large-scale design system project, I kept encountering repetitive tasks and workflow gaps that no existing plugin addressed. So I started building my own, using AI as a coding partner.",
     "overviewText2": "What began as quick personal utilities grew into an ecosystem of plugins and widgets spanning personal tools and enterprise design system infrastructure. Each one was born from a real problem, shaped through iterative dialogue with AI, and refined against actual daily use.",
     "heroTagline": "Figma Plugins & Widgets",
     "heroTitle": "Tools born from dialogue with AI",
@@ -727,7 +727,7 @@
       "after": "After",
       "k1": "Company introduction",
       "k2": "Shop",
-      "pages": ["About", "News", "Shop", "Contact", "Home", "FAQ", "Policies"],
+      "pages": ["About", "News", "Online Shop", "Contact", "Home", "FAQ", "Policies"],
       "lang": "3 languages",
       "d1": "Two systems ran separately, and updates were done twice",
       "d2": "All updates consolidated into one store",

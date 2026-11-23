@@ -70,9 +70,11 @@ function CompactEntry({ work, lang }: { work: WorkExperience; lang: 'en' | 'jp' 
   return (
     <div className="pdf-block mb-2">
       <EntryHeader work={work} lang={lang} />
-      <p className={`text-body-sm ${body} text-ink-secondary leading-[1.4] mt-0.5`}>
-        {work.summary[lang]}
-      </p>
+      {work.summary && (
+        <p className={`text-body-sm ${body} text-ink-secondary leading-[1.4] mt-0.5`}>
+          {work.summary[lang]}
+        </p>
+      )}
       {work.projects && work.projects.length > 0 && (
         <ul className="mt-0.5">
           {work.projects.map((project) => (
@@ -111,9 +113,11 @@ function DetailedEntry({
     <div className="mb-3">
       <div className="pdf-block mb-1.5">
         <EntryHeader work={work} lang={lang} />
-        <p className={`text-body-sm ${body} text-ink-secondary leading-[1.5] mt-0.5`}>
-          {work.summary[lang]}
-        </p>
+        {work.summary && (
+          <p className={`text-body-sm ${body} text-ink-secondary leading-[1.5] mt-0.5`}>
+            {work.summary[lang]}
+          </p>
+        )}
       </div>
 
       {work.projects?.map((project) => {
@@ -177,7 +181,9 @@ export function ResumeHeader({ lang }: { lang: 'en' | 'jp' }) {
         {personalInfo.location[lang]} · {personalInfo.email}
       </p>
       <p className={`text-caption ${body} text-ink-tertiary`}>
-        {personalInfo.website?.replace(/^https?:\/\//, '')} · linkedin.com/in/iori-kawano
+        {/* 2つのリンクは、PDF でもクリックで開ける（2026-11-23 河野）。表示の文字は変えない */}
+        {personalInfo.website ? <a href={personalInfo.website}>{personalInfo.website.replace(/^https?:\/\//, '')}</a> : null} ·{' '}
+        <a href="https://www.linkedin.com/in/iori-kawano/">linkedin.com/in/iori-kawano</a>
       </p>
     </header>
   );

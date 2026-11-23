@@ -111,7 +111,7 @@ const WorkExperienceItem: React.FC<{ work: WorkExperience; lang: 'en' | 'jp' }> 
       </div>
 
       {/* サマリー */}
-      <p className={`text-body ${getBodyFontClass()} text-ink-secondary leading-[1.6]`}>{work.summary[lang]}</p>
+      {work.summary && <p className={`text-body ${getBodyFontClass()} text-ink-secondary leading-[1.6]`}>{work.summary[lang]}</p>}
 
       {/* プロジェクトカード一覧 */}
       {work.projects && work.projects.length > 0 && (

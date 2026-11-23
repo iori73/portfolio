@@ -103,9 +103,11 @@ function ExperienceEntry({
               {formatDateRange(work.startDate, work.endDate, lang)}
             </span>
           </div>
-          <p className={`text-body-sm ${body} text-ink-secondary leading-[1.55] mt-1`}>
-            {work.summary[lang]}
-          </p>
+          {work.summary && (
+            <p className={`text-body-sm ${body} text-ink-secondary leading-[1.55] mt-1`}>
+              {work.summary[lang]}
+            </p>
+          )}
         </div>
       ) : (
         <p className="font-space-grotesk text-label text-ink-tertiary mb-2">
