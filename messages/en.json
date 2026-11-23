@@ -614,7 +614,7 @@
       ]
     ],
     "rowLabels": { "overview": "Overview", "process": "Process", "reflection": "Reflection", "credit": "Credit", "more": "More detail" },
-    "tocShort": { "steps": ["Existing site", "Two versions", "Home and About", "Three languages", "Brand color"], "reflection": ["With AI", "Beyond AI"] },
+    "tocShort": { "reflection": ["What AI made possible", "What AI could not do"] },
     "overviewCatch": "Two separate sites, made into one.",
     "overview": [
       "Nakahatsu Shoten is a soy sauce and miso brewery in Kanazawa. It was founded in 1896 as a food retailer and later moved into brewing.",
@@ -628,7 +628,7 @@
     ],
     "steps": [
       {
-        "h": "Sorting out the state of the existing site",
+        "h": "Sorting out the existing site",
         "p": [
           "The shop could not take credit cards; payment was by bank transfer, postal transfer or cash on delivery. The site was in Japanese only, with no official translation. What buyers want to know before purchase was only partly on the legal notice page.",
           "The company site and the shop were separate systems, so design and updates were done twice."
@@ -637,7 +637,7 @@
         "cap": "The company-introduction site and the shop ran on two systems (WordPress and EC-CUBE); they became one Shopify store."
       },
       {
-        "h": "Showing two versions side by side",
+        "h": "Comparing two versions",
         "p": [
           "I built one version that reproduced the existing site's structure in Shopify theme code (v1) and one redesign (v2), and shared them side by side. Nakahatsu Shoten replied that v2 was easy to see, with a clean structure that included the purchase path. I worked mainly on v2 from then on."
         ],
@@ -645,7 +645,7 @@
         "cap": "Before: the top page of the WordPress company site. After: the new top page. The shop was a separate system (EC-CUBE)."
       },
       {
-        "h": "Reworking the home page and About page",
+        "h": "Home and About",
         "p": [
           "In the hero, the changes are a larger logo and a short message continuing from 天の恵み (\"the blessings of heaven\"). The photographs are the same carousel of three images before and after (the figure shows the signboard photo in both). The header carries a language switch (Japanese, English, French) and the cart. For frequent visitors, I moved the news from the lower part of the old site to just below the hero."
         ],
@@ -727,7 +727,7 @@
       "after": "After",
       "k1": "Company introduction",
       "k2": "Shop",
-      "pages": ["Home", "FAQ", "Policies", "Shop", "About", "Contact", "News"],
+      "pages": ["About", "News", "Shop", "Contact", "Home", "FAQ", "Policies"],
       "lang": "3 languages",
       "d1": "Two systems ran separately, and updates were done twice",
       "d2": "All updates consolidated into one store",
@@ -757,7 +757,8 @@
       "sizes": ["Heading 32/48, 700", "Subheading 20/32, 500", "Body 16/24, 400", "Button 13/19.5, 400"],
       "colorsTitle": "Colors",
       "colors": [["Text", "#21272A"], ["Accent", "#F4CD00"], ["Border", "#DAD6CE"], ["Surface", "#F0F0F0"], ["Label", "#BC655C"]],
-      "spacingTitle": "Spacing (px)　/　Max content width 1280",
+      "spacingTitle": "Spacing (px)",
+      "maxWidthTitle": "Max content width 1280",
       "spacing": [8, 16, 24, 40, 80],
       "maxWidth": "1280"
     },
@@ -859,7 +860,6 @@
       "note": "Source: Nakahatsu Shoten's Instagram posts (dates are posting dates). All of them are public posts."
     },
     "v1v2FullAlt": "The top pages of v1 and v2 side by side, from the top down to the Instagram section. On the left, v1 reproduces the structure of the existing site; on the right, v2 is the redesign. v2 continues from the hero through the news, the company introduction, three photos, our commitment, the product list, a welcome message and the customers section to Instagram.",
-    "v1v2FullNote": "Some Instagram images in v1 are replaced with gray boxes.",
     "loadingVideoAlt": "A recording of the loading animation. A yellow ring appears on a dark screen, the Tenyu logo fades in inside it, and the screen changes to the top page hero. About 7 seconds.",
     "parallaxVideoAlt": "A recording of the As Brewers section of the About page while scrolling. The photos move slightly inside their frames.",
     "parallaxVideoNote": "I added a parallax effect to the As Brewers section of the About page. As you scroll, the photos shift slightly inside their frames.",

@@ -13,6 +13,7 @@ export type DesignSystemData = {
   colorsTitle: string;
   colors: [string, string][];
   spacingTitle: string;
+  maxWidthTitle: string;
   spacing: number[];
   maxWidth: string;
 };
@@ -68,7 +69,10 @@ export default function DesignSystemFigure({ f, label }: { f: DesignSystemData; 
           </ul>
         </div>
         <div className="flex flex-col gap-6">
-          <p className={section}>{f.spacingTitle}</p>
+          {/* PC（md 以上）: 余白と最大幅の図が横に並ぶので、見出しは1行（余白 / 本文の最大幅）。
+              スマホ: 最大幅の図は余白の下に回るので、見出しを2つに分け、最大幅の見出しは図の上に置く（2026-11-23 河野） */}
+          <p className={`${section} hidden md:block`}>{f.spacingTitle}　/　{f.maxWidthTitle}</p>
+          <p className={`${section} md:hidden`}>{f.spacingTitle}</p>
           <div className="flex flex-wrap items-end justify-between gap-6">
             <ul className="flex flex-wrap items-end gap-6">
               {f.spacing.map((n) => (
@@ -80,12 +84,15 @@ export default function DesignSystemFigure({ f, label }: { f: DesignSystemData; 
             </ul>
             {/* 本文の最大幅の図（Figma 586:861 の型）: 画面（1440x1024 の比率）を実線の枠で、内側の 1280 幅を点線のガイドで示し、
                 ガイドの幅に合わせた目盛りの下に「1280」。地は透明（図の面の色が見える）。 */}
-            <div className="flex w-36 flex-col items-center gap-2" aria-hidden="true">
-              <span className="relative block h-[102px] w-full rounded-[2px] border-2 border-[#212629]">
-                <span className="absolute inset-y-0 left-[6px] right-[6px] border-x border-dashed border-[#21272a]" />
-              </span>
-              <span className="block h-2 w-32 border-x border-b border-[#6b665c]" />
-              <span className="text-body text-ink-tertiary">{f.maxWidth}</span>
+            <div className="flex w-full flex-col gap-6 max-md:mt-6 md:w-auto">
+              <p className={`${section} md:hidden`}>{f.maxWidthTitle}</p>
+              <div className="flex w-36 flex-col items-center gap-2" aria-hidden="true">
+                <span className="relative block h-[102px] w-full rounded-[2px] border-2 border-[#212629]">
+                  <span className="absolute inset-y-0 left-[6px] right-[6px] border-x border-dashed border-[#21272a]" />
+                </span>
+                <span className="block h-2 w-32 border-x border-b border-[#6b665c]" />
+                <span className="text-body text-ink-tertiary">{f.maxWidth}</span>
+              </div>
             </div>
           </div>
         </div>

@@ -322,13 +322,13 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
   const palette = t.raw('palette') as Palette;
   const rl = t.raw('rowLabels') as { overview: string; process: string; reflection: string; credit: string };
   const reflection = t.raw('reflection') as [string, string][];
-  /** 目次の短い文言（PC のサイドバーとスマホの目次の両方。本文の見出しは長いまま） */
-  const tocShort = t.raw('tocShort') as { steps: string[]; reflection: string[] };
-  /** 側面メニュー（共通の WorkSidebar。1280px 以上）。項目は本文の見出しと同じ文言（概要・各ステップの見出し・クレジット）。Figma の Sidebar と同じ */
+  /** 振り返りの2つだけ、目次（PC のサイドバーとスマホ）は短い文言（本文の見出しは長いまま。2026-11-23 河野の指示） */
+  const tocShort = t.raw('tocShort') as { reflection: string[] };
+  /** 側面メニュー（共通の WorkSidebar。1280px 以上）とスマホの目次。項目は本文の見出しと同じ文言（概要・各ステップの見出し・クレジット）。ただし振り返りの2つだけは目次を短くする。Figma の Sidebar と同じ */
   const sidebarItems: SidebarItem[] = [
     { id: 'overview', label: rl.overview },
     // 見出し（プロセス）＞ 小見出し（各ステップ）の2段。ukiyoe と同じ構造
-    { id: 'process', label: rl.process, subs: steps.map((st, i) => ({ id: `step-${i + 1}`, label: st.h, short: tocShort.steps[i] })) },
+    { id: 'process', label: rl.process, subs: steps.map((st, i) => ({ id: `step-${i + 1}`, label: st.h })) },
     { id: 'reflection', label: rl.reflection, subs: reflection.map(([h], i) => ({ id: `reflection-${i + 1}`, label: h, short: tocShort.reflection[i] })) },
     { id: 'credit', label: rl.credit },
   ];
@@ -500,7 +500,6 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                       before={{ src: `/work/nakahatsu/v1-v2-full-${language === 'jp' ? 'jp' : 'en'}-l.webp`, width: 600, height: 2538, label: t('v1Label') }}
                       after={{ src: `/work/nakahatsu/v1-v2-full-${language === 'jp' ? 'jp' : 'en'}-r.webp`, width: 600, height: language === 'jp' ? 3045 : 3096, label: t('v2Label') }}
                     />
-                    <p className="pt-4 text-body-sm text-ink-tertiary">{t('v1v2FullNote')}</p>
                   </div>
                 </div>
               )}
