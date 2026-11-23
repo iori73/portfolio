@@ -77,6 +77,8 @@
     "podcastNotesDescription": "ポッドキャストから学んだことを記録する個人的なメモ。SpotifyのURLをCursorのLLMに共有するだけで、エピソードを自動処理し、構造化されたノートをNotionデータベースに追加するワークフローを自動化しています。",
     "bilingualBooks": "Bilingual Books",
     "bilingualBooksDescription": "公開ドメインの古典を、日本語と英語の対訳で聴くポッドキャスト。茶の本、代表的日本人、武士道の全30話を、原文の選定から翻訳、音声合成、カバー、配信の予約まで、ひとつの仕組みにした実験。",
+    "articlePipeline": "Article Pipeline",
+    "articlePipelineDescription": "メモから note と Medium の下書きまでを、役割を分けた AI エージェントで進める仕組み。下書きの役と、文体・深さ・自分の声・賞味期限・AI らしさを見る5つの点検の役、形式を確かめるスクリプトを Claude Code の上に組み、公開のボタンだけは私が押す。",
     "favoriteVisuals": "Favorite Visuals",
     "favoriteVisualsDescription": "ビジュアルのコレクション。2つのNotionデータベース（Favorite Image DatabaseとData Visualization Database）に整理しています。",
     "favoriteVisualsNote": "これらは他の人の作品の単なる引用であることを痛感しています。私にはまだ個性も強みもなく、今探索しています。私も自分がこの世に残したい、作っていて心地よいと思える何かを表現し作りたいです。",

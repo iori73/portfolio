@@ -2158,3 +2158,10 @@ variables / styles はデザインの統一と作業効率のため（現行サ�
 - Spotify 埋め込みは CSP 変更が要るため不採用、リンクボタンのみ（両セッションの推奨、河野さん了承）。
 - 載せないもの: 未公開の作品と、数字として見せる段階にない指標。
 - 後でやる: 12/2 の武士道の全話配信後、S3 の状態を「配信済み」に直す。Figma portfolio_v6（Site — JP/EN）へ同期。
+
+## 2026-11-23: Experiment に3件目「Article Pipeline」（note / Medium の記事づくりの仕組み）
+- 一覧 `/experiment` に3件目のブロック（6工程の図・タグ・説明・CTA）。詳細 `/experiment/article-pipeline`（概要 → 仕組み6工程 → 誰が何を決めるか → わかったこと → note / Medium へのリンク）。
+- 型は Bilingual Books（#171）と同じ: 内容は `src/data/articlePipeline.ts` の `{en, jp}`、図は `components/article-pipeline/ProcessDiagram.tsx`。sitemap と /experiment のメタ説明にも追加。
+- 事実の出典は ai-ops の ops/content-pipeline.md、.claude/commands/{draft,note}.md、ops/note-editor-runbook.md、scripts/note-lint.py、scripts/recover-published.py、output/published.tsv（26% / 45% の実測）。仕事の情報・他人の名前・記事の本数は載せていない。
+- 検査: pnpm build 成功。next start で 320〜1280px × jp/en の横スクロールなし。コンソールのエラーはローカルだけで出る /_vercel/insights のみ。
+- 残り: 河野さんの Preview 確認と merge → 本番確認 → Figma portfolio_v6（Site — JP / EN の Experiment と詳細ページ）に同期。
