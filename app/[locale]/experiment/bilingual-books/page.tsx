@@ -111,7 +111,7 @@ export default function BilingualBooksPage() {
       {/* Overview */}
       <section className="py-12 md:py-16 border-t border-line-subtle">
         <h2 className={`text-title-lg mb-6 ${heading}`}>{UI.overview[lang]}</h2>
-        <div className="max-w-3xl flex flex-col gap-4">
+        <div className="flex flex-col gap-4">
           {BB_OVERVIEW.map((p, i) => (
             <p key={i} className={`text-body-lg ${body}`}>
               {p[lang]}
@@ -123,9 +123,9 @@ export default function BilingualBooksPage() {
       {/* How it is made */}
       <section className="py-12 md:py-16 border-t border-line-subtle">
         <h2 className={`text-title-lg mb-4 ${heading}`}>{UI.process[lang]}</h2>
-        <p className={`text-body-lg text-ink-secondary mb-12 max-w-3xl ${body}`}>{UI.processLead[lang]}</p>
+        <p className={`text-body-lg text-ink-secondary mb-12 ${body}`}>{UI.processLead[lang]}</p>
         <ProcessDiagram steps={BB_STEPS} lang={lang} />
-        <ol className="mt-12 md:mt-16 flex flex-col gap-10 max-w-3xl">
+        <ol className="mt-12 md:mt-16 flex flex-col gap-10">
           {BB_STEPS.map((step, i) => (
             <li key={step.icon} className="grid grid-cols-[2.5rem_1fr] gap-x-2">
               <span className="font-space-grotesk text-title-sm text-ink-tertiary">{String(i + 1).padStart(2, '0')}</span>
