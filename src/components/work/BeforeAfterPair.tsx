@@ -9,7 +9,7 @@ export type PairSide = { src: string; width: number; height: number; label: stri
  * 画像1枚に矢印を焼き込まない（画像だけで済ませない）。ラベルもコードの文字。
  * 既定: 幅が狭いとき（スマートフォン）は縦に積み、矢印は下向きにする。
  * `sideBySideOnMobile`: スマートフォンでも左右に並べる（2案を見比べる図。縦に積むと比べにくい）。
- *   画像は小さくなるので、`zoom` を渡すと、タップで拡大できる（ZoomImage）。
+ *   画像は小さくなるので、`zoom` を渡すと、タップで拡大できる（ZoomImage）。矢印は md（768px）以上だけ出す。
  * 図全体の説明は、呼ぶ側が `label`（aria-label）で渡す。画像の alt は空（説明は図の側にある）。
  */
 export default function BeforeAfterPair({
@@ -43,14 +43,15 @@ export default function BeforeAfterPair({
       aria-label={label}
       className={`w-full ${
         sideBySideOnMobile
-          ? 'grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] gap-2 md:gap-6'
+          ? 'grid grid-cols-2 gap-3 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-6'
           : 'flex flex-col items-stretch gap-4 md:grid md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-6'
       } ${className}`}
     >
       {side(before)}
       {sideBySideOnMobile ? (
-        <div className="flex items-start justify-center pt-12 md:items-center md:pt-24">
-          <LineArrow direction="right" className="h-auto w-4 md:w-14" />
+        /* スマホ（md 未満）では矢印の列を出さない（幅が狭く、左右に並べるだけで前後は伝わる。2026-11-23 河野） */
+        <div className="hidden items-center justify-center pt-24 md:flex">
+          <LineArrow direction="right" className="w-14" />
         </div>
       ) : (
         <div className="flex justify-center md:items-center md:pt-24">

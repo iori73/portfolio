@@ -332,7 +332,8 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
     { id: 'reflection', label: rl.reflection, subs: reflection.map(([h], i) => ({ id: `reflection-${i + 1}`, label: h, short: tocShort.reflection[i] })) },
     { id: 'credit', label: rl.credit },
   ];
-  const body = `${getBodyFontClass()} tracking-[0.2px] text-body-lg text-ink [text-wrap:pretty]`;
+  // 本文: スマホは 17px（text-body）、md（768px）以上は 19〜21px（text-body-lg）。スマホの 19px は日本語では大きすぎる（2026-11-23 河野）
+  const body = `${getBodyFontClass()} tracking-[0.2px] text-body md:text-body-lg text-ink [text-wrap:pretty]`;
   const catchLine = `text-title text-ink ${getHeadingFontClass()} [text-wrap:balance]`;
 
   /** 見出し（ラベル）は本文の上に縦に並べる（ほかの作品ページと同じ。PC もスマホも同じ並び）。 */
@@ -374,7 +375,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
               <div key={label} className="flex flex-col gap-2">
                 <dt className={LABEL}>{label}</dt>
                 {values.map((v) => (
-                  <dd key={v} className={`${getBodyFontClass()} text-body-lg tracking-[0.2px] text-ink [text-wrap:balance]`}>{v}</dd>
+                  <dd key={v} className={`${getBodyFontClass()} text-body md:text-body-lg tracking-[0.2px] text-ink [text-wrap:balance]`}>{v}</dd>
                 ))}
               </div>
             ))}
