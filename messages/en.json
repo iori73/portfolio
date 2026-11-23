@@ -653,7 +653,7 @@
         "cap": "The About page in Japanese: the miso block. The body text runs vertically over a photograph, and the heading stands vertically to its right."
       },
       {
-        "h": "Showing it in three languages",
+        "h": "Expanding to three languages",
         "p": [
           "The site was Japanese only. It can now be read in English and French too. It started as Japanese and English; Nakahatsu Shoten asked to add French because many visits come from France."
         ],
@@ -756,12 +756,12 @@
       "sizesTitle": "Type sizes (size/line height, weight)",
       "sizes": ["Heading 32/48, 700", "Subheading 20/32, 500", "Body 16/24, 400", "Button 13/19.5, 400"],
       "colorsTitle": "Colors",
-      "colors": [["Text", "#21272A"], ["Accent (yellow)", "#F4CD00"], ["Border", "#DAD6CE"], ["Surface", "#F0F0F0"], ["Bengara", "#BC655C"]],
+      "colors": [["Text", "#21272A"], ["Accent", "#F4CD00"], ["Border", "#DAD6CE"], ["Surface", "#F0F0F0"], ["Label", "#BC655C"]],
       "spacingTitle": "Spacing (px)　/　Max content width 1280",
       "spacing": [8, 16, 24, 40, 80],
       "maxWidth": "1280"
     },
-    "dsAlt": "The design system of the store theme. Fonts: Shippori Mincho for headings and body, Noto Serif JP for accents, Roboto for Latin text. It lists the type sizes, the colors (text, yellow accent, border, surface, bengara) and the spacing from 8 to 80 px.",
+    "dsAlt": "The design system of the store theme. Fonts: Shippori Mincho for headings and body, Noto Serif JP for accents, Roboto for Latin text. It lists the type sizes, the colors (text, accent, border, surface, label) and the spacing from 8 to 80 px.",
     "v1v2TallAlt": "The top pages of v1 and v2 side by side, as longer screenshots. On the left, v1 reproduces the structure of the existing site; on the right, v2 is the redesign. v2 continues from the hero through the news, the company introduction and three photos to the heading of the brewing section.",
     "igAlt": "Four activities seen in the Instagram posts of Nakahatsu Shoten. May 2024: a permanent spot in the Ishikawa Good Products corner at Muji. September 2024: a fermentation culture and arts festival venue in Kanazawa. April 2025 and February 2026: overseas visitors try making miso. March 2026: nursery school children in a visiting miso-making class. The source is the shop's Instagram posts.",
     "iterFig": {
