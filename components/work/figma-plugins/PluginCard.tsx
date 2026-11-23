@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { PluginData, formatUsers } from './pluginData';
 import { MoveUpRight } from 'lucide-react';
+import ColorDotTag from '@/components/ColorDotTag';
 
 interface PluginCardProps {
   plugin: PluginData;
@@ -111,16 +112,9 @@ export default function PluginCard({ plugin }: PluginCardProps) {
 
         <div className="mt-3 flex flex-wrap gap-1.5">
           {plugin.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-md px-2 py-0.5 font-space-grotesk text-caption"
-              style={{
-                backgroundColor: `${accent}10`,
-                color: accent,
-              }}
-            >
+            <ColorDotTag key={tag} color={accent} className="rounded-md px-2 py-0.5 text-caption">
               {tag}
-            </span>
+            </ColorDotTag>
           ))}
         </div>
 

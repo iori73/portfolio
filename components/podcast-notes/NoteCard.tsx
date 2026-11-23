@@ -5,6 +5,7 @@ import { ChevronDown, ExternalLink, Clock, ArrowRight } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { Episode, CATEGORY_COLORS, DEFAULT_CATEGORY_COLOR } from './types';
+import ColorDotTag from '@/components/ColorDotTag';
 
 function formatDuration(minutes: number): string {
   const m = Math.round(minutes);
@@ -62,7 +63,7 @@ export default function NoteCard({ episode, isHighlighted, bodyFontClass, headin
               className="w-12 h-12 md:w-14 md:h-14 rounded-md shrink-0 flex items-center justify-center"
               style={{ backgroundColor: color + '20' }}
             >
-              <span className="text-body-lg" style={{ color }}>
+              <span className="text-body-lg text-ink-secondary">
                 {episode.podcast.charAt(0)}
               </span>
             </div>
@@ -88,12 +89,9 @@ export default function NoteCard({ episode, isHighlighted, bodyFontClass, headin
                 </>
               )}
               {episode.category && (
-                <span
-                  className="font-space-grotesk text-label px-3 py-1 rounded-lg"
-                  style={{ backgroundColor: color + '15', color }}
-                >
+                <ColorDotTag color={color} className="text-label px-3 py-1 rounded-lg">
                   {episode.category}
-                </span>
+                </ColorDotTag>
               )}
             </div>
           </div>
@@ -125,13 +123,9 @@ export default function NoteCard({ episode, isHighlighted, bodyFontClass, headin
               {episode.tags.map((tag) => {
                 const tagColor = CATEGORY_COLORS[tag] || DEFAULT_CATEGORY_COLOR;
                 return (
-                  <span
-                    key={tag}
-                    className="font-space-grotesk text-label px-3 py-1 rounded-lg"
-                    style={{ backgroundColor: tagColor + '15', color: tagColor }}
-                  >
+                  <ColorDotTag key={tag} color={tagColor} className="text-label px-3 py-1 rounded-lg">
                     {tag}
-                  </span>
+                  </ColorDotTag>
                 );
               })}
             </div>

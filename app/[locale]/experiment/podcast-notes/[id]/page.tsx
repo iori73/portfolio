@@ -19,6 +19,7 @@ import OwnNotesSection from '@/components/podcast-notes/OwnNotesSection';
 import BackToTopButton from '@/src/compositions/BackToTopButton';
 import type { Episode, Chapter, OwnNoteSection, PodcastData } from '@/components/podcast-notes/types';
 import { CATEGORY_COLORS, DEFAULT_CATEGORY_COLOR } from '@/components/podcast-notes/types';
+import ColorDotTag from '@/components/ColorDotTag';
 
 interface EpisodeDetail {
   id: string;
@@ -207,7 +208,7 @@ export default function EpisodeDetailPage() {
             className="w-20 h-20 md:w-[120px] md:h-[120px] rounded-md shrink-0 flex items-center justify-center"
             style={{ backgroundColor: color + '20' }}
           >
-            <span className="text-title-lg" style={{ color }}>
+            <span className="text-title-lg text-ink-secondary">
               {detail.podcast.charAt(0)}
             </span>
           </div>
@@ -240,12 +241,9 @@ export default function EpisodeDetailPage() {
           </div>
           <div className="flex items-center gap-3 mt-3 flex-wrap">
             {detail.category && (
-              <span
-                className="font-space-grotesk text-label px-3 py-1 rounded-lg"
-                style={{ backgroundColor: color + '15', color }}
-              >
+              <ColorDotTag color={color} className="text-label px-3 py-1 rounded-lg">
                 {detail.category}
-              </span>
+              </ColorDotTag>
             )}
             {detail.url && (
               <a
