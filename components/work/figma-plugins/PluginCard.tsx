@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { PluginData, formatUsers } from './pluginData';
 import { MoveUpRight } from 'lucide-react';
-import ColorDotTag from '@/components/ColorDotTag';
+import { readableTextColor, tint } from '@/src/lib/contrast';
 
 interface PluginCardProps {
   plugin: PluginData;
@@ -46,6 +46,10 @@ function PluginIcon({ plugin }: { plugin: PluginData }) {
 export default function PluginCard({ plugin }: PluginCardProps) {
   const t = useTranslations('figmaPlugins');
   const accent = plugin.accentColor;
+  // Tag: the accent's light tint (as before) with the same hue, darkened to read.
+  // The bright accents as text failed AA (#1ABCFE 2.06:1, #0ACF83 1.94:1).
+  const tagBg = tint(accent, '#FFFFFF', 0x10 / 255);
+  const tagText = readableTextColor(accent, tagBg);
   const isComingSoon = plugin.status === 'coming-soon';
   const Wrapper = plugin.link ? 'a' : 'div';
   const wrapperProps = plugin.link
@@ -112,9 +116,13 @@ export default function PluginCard({ plugin }: PluginCardProps) {
 
         <div className="mt-3 flex flex-wrap gap-1.5">
           {plugin.tags.map((tag) => (
-            <ColorDotTag key={tag} color={accent} className="rounded-md px-2 py-0.5 text-caption">
+            <span
+              key={tag}
+              className="rounded-md px-2 py-0.5 font-space-grotesk text-caption"
+              style={{ backgroundColor: tagBg, color: tagText }}
+            >
               {tag}
-            </ColorDotTag>
+            </span>
           ))}
         </div>
 

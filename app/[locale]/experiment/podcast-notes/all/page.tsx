@@ -16,6 +16,7 @@ import {
 import FilterBar from '@/components/podcast-notes/FilterBar';
 import NoteCard from '@/components/podcast-notes/NoteCard';
 import type { PodcastData } from '@/components/podcast-notes/types';
+import { registerCategoryColors } from '@/components/podcast-notes/types';
 import BackToTopButton from '@/src/compositions/BackToTopButton';
 
 export default function AllEpisodesPage() {
@@ -36,6 +37,7 @@ export default function AllEpisodesPage() {
         return Promise.reject(new Error(res.status.toString()));
       })
       .then((json: PodcastData) => {
+        registerCategoryColors(json.episodes);
         setData(json);
         setLoading(false);
       })
@@ -43,6 +45,7 @@ export default function AllEpisodesPage() {
         fetch('/data/podcast-notes.json')
           .then((r) => r.json())
           .then((json: PodcastData) => {
+            registerCategoryColors(json.episodes);
             setData(json);
             setLoading(false);
           })

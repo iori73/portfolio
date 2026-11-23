@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import { ChevronDown, ExternalLink, Clock, ArrowRight } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { Episode, CATEGORY_COLORS, DEFAULT_CATEGORY_COLOR } from './types';
-import ColorDotTag from '@/components/ColorDotTag';
+import { Episode, getCategoryColor, getCategoryTagStyle } from './types';
+import CategoryTag from './CategoryTag';
 
 function formatDuration(minutes: number): string {
   const m = Math.round(minutes);
@@ -27,7 +27,8 @@ interface Props {
 export default function NoteCard({ episode, isHighlighted, bodyFontClass, headingFontClass, variant = 'default' }: Props) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [showChapters, setShowChapters] = useState(false);
-  const color = CATEGORY_COLORS[episode.category || 'Others'] || DEFAULT_CATEGORY_COLOR;
+  const color = getCategoryColor(episode.category, episode.categoryColor);
+  const tagStyle = getCategoryTagStyle(episode.category, episode.categoryColor);
   const locale = useLocale();
   const t = useTranslations('podcastNotesPage');
 
@@ -61,9 +62,9 @@ export default function NoteCard({ episode, isHighlighted, bodyFontClass, headin
           ) : (
             <div
               className="w-12 h-12 md:w-14 md:h-14 rounded-md shrink-0 flex items-center justify-center"
-              style={{ backgroundColor: color + '20' }}
+              style={{ backgroundColor: tagStyle.backgroundColor }}
             >
-              <span className="text-body-lg text-ink-secondary">
+              <span className="text-body-lg" style={{ color: tagStyle.color }}>
                 {episode.podcast.charAt(0)}
               </span>
             </div>
@@ -89,9 +90,11 @@ export default function NoteCard({ episode, isHighlighted, bodyFontClass, headin
                 </>
               )}
               {episode.category && (
-                <ColorDotTag color={color} className="text-label px-3 py-1 rounded-lg">
-                  {episode.category}
-                </ColorDotTag>
+                <CategoryTag
+                  category={episode.category}
+                  notionColor={episode.categoryColor}
+                  className="text-label px-3 py-1 rounded-lg"
+                />
               )}
             </div>
           </div>
@@ -121,11 +124,13 @@ export default function NoteCard({ episode, isHighlighted, bodyFontClass, headin
                 <span className="text-ink-tertiary">·</span>
               )}
               {episode.tags.map((tag) => {
-                const tagColor = CATEGORY_COLORS[tag] || DEFAULT_CATEGORY_COLOR;
                 return (
-                  <ColorDotTag key={tag} color={tagColor} className="text-label px-3 py-1 rounded-lg">
-                    {tag}
-                  </ColorDotTag>
+                  <CategoryTag
+                    key={tag}
+                    category={tag}
+                    notionColor={tag === episode.category ? episode.categoryColor : null}
+                    className="text-label px-3 py-1 rounded-lg"
+                  />
                 );
               })}
             </div>

@@ -11,8 +11,7 @@ import { Client } from '@notionhq/client';
 import { rateLimit } from '@/src/lib/rate-limit';
 import type { PodcastData, Episode, Cluster } from '@/components/podcast-notes/types';
 import {
-  CATEGORY_COLORS,
-  DEFAULT_CATEGORY_COLOR,
+  getCategoryColor,
   normalizeCategoryName,
 } from '@/components/podcast-notes/types';
 // Precomputed layout (bundled at build time). Embeddings can't run per-request in
@@ -61,7 +60,8 @@ function extractPageMetadata(page: {
   >;
 }): Omit<Episode, 'embedding2d' | 'cluster'> {
   const props = page.properties;
-  const rawCategory = (props.Category as { select?: { name?: string } })?.select?.name ?? null;
+  const categorySelect = (props.Category as { select?: { name?: string; color?: string } })?.select;
+  const rawCategory = categorySelect?.name ?? null;
   const category = rawCategory ? normalizeCategoryName(rawCategory) : null;
   const nameProp = props.Name as { title?: { plain_text?: string }[] } | undefined;
   const podcastProp = props.Podcast as { select?: { name?: string } } | undefined;
@@ -79,6 +79,8 @@ function extractPageMetadata(page: {
     // same canonical-artwork intent already applied to the aggregation below.
     podcastCover: PRE_COVER.get(podcastName) || page.cover?.external?.url || page.cover?.file?.url || '',
     category,
+    // Notion color name of the option — the site's category colors follow it.
+    categoryColor: categorySelect?.color ?? null,
     tags: [category].filter((t): t is string => Boolean(t)),
     date: releaseProp?.date?.start || (page.created_time?.split('T')[0] ?? ''),
     url: urlProp?.url || '',
@@ -135,7 +137,7 @@ function buildClusters(
     id,
     label,
     center: centroids[id],
-    color: CATEGORY_COLORS[label] || DEFAULT_CATEGORY_COLOR,
+    color: getCategoryColor(label),
     episodeCount: episodes.filter((e) => (e.category || 'Others') === label).length,
   }));
 }

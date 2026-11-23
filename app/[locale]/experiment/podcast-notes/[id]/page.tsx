@@ -18,8 +18,12 @@ import NoteCard from '@/components/podcast-notes/NoteCard';
 import OwnNotesSection from '@/components/podcast-notes/OwnNotesSection';
 import BackToTopButton from '@/src/compositions/BackToTopButton';
 import type { Episode, Chapter, OwnNoteSection, PodcastData } from '@/components/podcast-notes/types';
-import { CATEGORY_COLORS, DEFAULT_CATEGORY_COLOR } from '@/components/podcast-notes/types';
-import ColorDotTag from '@/components/ColorDotTag';
+import {
+  getCategoryColor,
+  getCategoryTagStyle,
+  registerCategoryColors,
+} from '@/components/podcast-notes/types';
+import CategoryTag from '@/components/podcast-notes/CategoryTag';
 
 interface EpisodeDetail {
   id: string;
@@ -27,6 +31,7 @@ interface EpisodeDetail {
   podcast: string;
   podcastCover: string;
   category: string | null;
+  categoryColor?: string | null;
   tags: string[];
   date: string;
   url: string;
@@ -83,6 +88,7 @@ export default function EpisodeDetailPage() {
       try {
         const res = await fetch('/data/podcast-notes.json');
         const data: PodcastData = await res.json();
+        registerCategoryColors(data.episodes);
         const ep = data.episodes.find((e) => e.id === episodeId);
         if (ep && !cancelled) {
           setDetail({
@@ -108,6 +114,7 @@ export default function EpisodeDetailPage() {
       try {
         const res = await fetch('/data/podcast-notes.json');
         const data: PodcastData = await res.json();
+        registerCategoryColors(data.episodes);
         // Find episodes from same podcast or category, excluding current
         const related = data.episodes
           .filter((e) => e.id !== detail!.id)
@@ -122,8 +129,8 @@ export default function EpisodeDetailPage() {
   }, [detail]);
 
   const color = useMemo(
-    () => CATEGORY_COLORS[detail?.category || 'Others'] || DEFAULT_CATEGORY_COLOR,
-    [detail?.category]
+    () => getCategoryColor(detail?.category, detail?.categoryColor),
+    [detail?.category, detail?.categoryColor]
   );
 
   if (loading) {
@@ -206,9 +213,12 @@ export default function EpisodeDetailPage() {
         ) : (
           <div
             className="w-20 h-20 md:w-[120px] md:h-[120px] rounded-md shrink-0 flex items-center justify-center"
-            style={{ backgroundColor: color + '20' }}
+            style={{ backgroundColor: getCategoryTagStyle(detail.category, detail.categoryColor).backgroundColor }}
           >
-            <span className="text-title-lg text-ink-secondary">
+            <span
+              className="text-title-lg"
+              style={{ color: getCategoryTagStyle(detail.category, detail.categoryColor).color }}
+            >
               {detail.podcast.charAt(0)}
             </span>
           </div>
@@ -241,9 +251,11 @@ export default function EpisodeDetailPage() {
           </div>
           <div className="flex items-center gap-3 mt-3 flex-wrap">
             {detail.category && (
-              <ColorDotTag color={color} className="text-label px-3 py-1 rounded-lg">
-                {detail.category}
-              </ColorDotTag>
+              <CategoryTag
+                category={detail.category}
+                notionColor={detail.categoryColor}
+                className="text-label px-3 py-1 rounded-lg"
+              />
             )}
             {detail.url && (
               <a
