@@ -1,10 +1,8 @@
 /**
  * Bilingual Books (podcast) — /experiment/bilingual-books の内容。
  *
- * 事実・数字は 2026-11-23 にポッドキャスト側で裏取りしたもの
- * （ai-ops/output/portfolio/bilingual-books-experiment-content.md）。
- * - 再生数・フォロワー数は載せない
- * - Season 4 と、武士道の読書サイトは未公開なので載せない
+ * 事実・数字は 2026-11-23 に裏取りしたもの。
+ * - 未公開の作品と、数字として見せる段階にない指標は載せない
  * - S3 の状態は 12/2 の全話配信後に「配信済み」へ直す
  */
 
