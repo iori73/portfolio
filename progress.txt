@@ -2158,3 +2158,20 @@ variables / styles はデザインの統一と作業効率のため（現行サ�
 - Spotify 埋め込みは CSP 変更が要るため不採用、リンクボタンのみ（両セッションの推奨、河野さん了承）。
 - 載せないもの: 未公開の作品と、数字として見せる段階にない指標。
 - 後でやる: 12/2 の武士道の全話配信後、S3 の状態を「配信済み」に直す。Figma portfolio_v6（Site — JP/EN）へ同期。
+
+## 2026-11-23: アクセシビリティ・コントラストの全体調査（提案のみ、コードは未変更）
+- きっかけ: Podcast Notes の「Business」タグが読めない（河野さんのスクショ）。黄 #FDCB6E の文字が薄い黄の背景に乗り 1.29:1（基準 4.5:1）。
+- 方法: 本番 iori-kawano.vercel.app の JP/EN×14ページ×PC(1440)/SP(390) を axe-core 4.10（WCAG 2.2 AA + best-practice）で測定。
+  axe が判定できない箇所は、Playwright で親の opacity を掛けた実効コントラスト・Tab でのフォーカス表示・24px 未満のタップ対象・lang を別に測定。
+- 結果（優先度順）:
+  1. カテゴリ色を文字色に使っている: Podcast Notes のタグ（一覧/all/詳細で約330件）。11色中10色が不合格（Business 1.29、Education 1.73、Career 1.82…）。
+     figma-plugins の種類タグ（#1ABCFE 2.06、#0ACF83 1.94、#A259FF 3.61、#E60023 4.28）も同じ構造。
+  2. 目次の非アクティブ項目 opacity-50 → 3.6〜3.7:1。Google UX・ukiyoe で検出、同じ書き方が airline・gym・CaseStudyLayout にもある。
+  3. Podcast Notes の暗いヒーロー内のカテゴリボタン text-white/40 → 3.78:1。ツールチップの Others 色 → 3.74:1。
+  4. 構造: Podcast Notes の並び替えセレクト（Radix combobox）に名前がない／見出しが h2 を飛ばして h3・h4／blog に h1 がない／
+     Google UX の nav が2つ同名・ul の直下に li 以外／ukiyoe（SP）の横スクロール領域にキーボードで入れない／ukiyoe の video 6本にフォーカスの輪が出ない。
+  5. 軽微: CV の LinkedIn リンクの高さ 21px、ukiyoe の目次ボタン高さ 21px（24px 未満）。ヘッダーの現在地ドット（About の黄）は背景と 1.33:1（文字の太さでも示しているので補助扱い）。
+     BackToTop がスマホで opacity-50。docs/architecture/design-system.md の色表が古い（surface は #EFF1F1、ink-tertiary は #565D61 に変わっている）。
+- 問題なし: lang（en/ja）、本文・ラベルのトークン（ink-tertiary 5.91:1）、Tab のフォーカス表示（ukiyoe の video 以外）、画像の alt、リンクの区別。
+- 提案の要点: 「見分けるための色」（ドット・枠・塗り）と「読むための文字色」を分ける。タグの文字は各色を暗くした版（4.8:1 以上、色相は同じ）か ink-secondary＋色ドット。
+- 次: 河野さんが方針（A: 色相を保って暗くする／B: 文字は墨色＋色ドット）を選んだら実装 → pnpm qa:responsive と axe 再測定 → Figma v6 に同期。
