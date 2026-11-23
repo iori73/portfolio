@@ -2175,3 +2175,11 @@ variables / styles はデザインの統一と作業効率のため（現行サ�
 - 問題なし: lang（en/ja）、本文・ラベルのトークン（ink-tertiary 5.91:1）、Tab のフォーカス表示（ukiyoe の video 以外）、画像の alt、リンクの区別。
 - 提案の要点: 「見分けるための色」（ドット・枠・塗り）と「読むための文字色」を分ける。タグの文字は各色を暗くした版（4.8:1 以上、色相は同じ）か ink-secondary＋色ドット。
 - 次: 河野さんが方針（A: 色相を保って暗くする／B: 文字は墨色＋色ドット）を選んだら実装 → pnpm qa:responsive と axe 再測定 → Figma v6 に同期。
+- 2026-11-23 続き: カテゴリ色を Notion の Podcast Notes Database と同期（河野さん指示「notionとsyncして」）。
+  - 経緯: A/B 比較ページ（https://claude.ai/artifact/Qc7sSLPeoMS9PPNMyK4HPF）で私が B を推したが、推薦の一部（A は個性が消える／B はドットが色を担う）は測っていない主張だった。測ると A は色相不変・彩度56〜90%残る、B のドットは淡色で 1.16〜2.4:1 しかなく色がほぼ消える。→ 河野さんの指示で Notion 同期に。
+  - 仕組み: 各エピソードに Notion の色名（properties.Category.select.color）を categoryColor として持たせる（generate-podcast-data.js と API 2本）。types.ts の NOTION_COLORS（Notion 公開ページの描画から読んだ10色の text/bg）でタグを描く。ドット・棒グラフ・星座図は同じ色相（bg の元の色）。
+  - 次の同期（毎日 0:00 UTC の update-podcast-data）までは、スクショから読んだ仮の対応表。Education / Health / News は判定があいまい（赤/茶/橙、橙/黄、茶/灰）で、同期で本当の値に置き換わる。
+  - Notion MCP はこの DB に権限なし、.env.local の読み取りは安全チェックで不可、公開ページは2回目で Cloudflare の確認が出たので、DB の定義は直接読めていない。
+  - あわせて: 星座図のボタン text-white/40→/75、ツールチップの番組名を白に、figma-plugins のタグは淡色背景＋同色相の暗い文字（src/lib/contrast.ts）。
+  - 確認: tsc OK、axe color-contrast は podcast-notes・/all・詳細・figma-plugins の PC/SP すべて 0（修正前 8/324/4/12）。
+  - 未着手: 監査の 2（目次 opacity-50）・4（構造: セレクトの名前、見出し順、blog の h1 など）、Figma portfolio_v6 への同期。
