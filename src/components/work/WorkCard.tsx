@@ -66,9 +66,9 @@ export default function WorkCard({
       onClick={onClick}
     >
       <div className="mb-20">
-        {/* サムネの絵の地色は、ページの地に近いことがある（2026-09-23 河野）。
-            縁がはっきり読めるよう、タグと同じ surface-muted の枠で囲む。 */}
-        <div data-work-thumb-frame className="mb-6 p-2 rounded-card bg-surface-muted" ref={thumbRef}>
+        {/* サムネは外枠なし（2026-11-23 河野。2026-09-23 に足した surface-muted の枠を外した）。
+            サムネ自体の地色（bg-surface-raised）と角丸で縁を出す。 */}
+        <div data-work-thumb-frame className="mb-6" ref={thumbRef}>
           <div data-work-thumb className={`relative ${WORK_THUMB_ASPECT} overflow-hidden rounded-media ${thumbClassName}`}>
             {thumb}
           </div>
