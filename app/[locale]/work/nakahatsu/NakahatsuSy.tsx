@@ -488,7 +488,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                 </div>
               )}
               {/* v1/v2 の 1500px の図（v1-v2-*.webp）と縦長の図（v1-v2-tall-*.webp）は、Figma の v2 で非表示にしたため載せない（JP・EN とも 2026-11-01。画像ファイルは残してある） */}
-              {/* さらに長い版: Instagram の節まで。人物が写る写真と見本（Sample）の画像は、灰色の四角に置き換えてある。Figma の長尺図の下と同じ */}
+              {/* さらに長い版: Instagram の節まで。v2（右）は公開中のストアから撮り直した（2026-11-23）。v1（左）の Instagram の一部だけ、灰色の四角に置き換えてある */}
               {s.fig === 'before-after' && (
                 <div className="flex justify-center">
                   <div className="w-full overflow-hidden rounded-media bg-[var(--nk-surface)] p-3 md:p-8">
@@ -497,7 +497,7 @@ const NakahatsuSy: React.FC<{ launched: boolean }> = () => {
                       zoom={{ openLabel: t('zoomOpen'), closeLabel: t('zoomClose') }}
                       label={t('v1v2FullAlt')}
                       before={{ src: `/work/nakahatsu/v1-v2-full-${language === 'jp' ? 'jp' : 'en'}-l.webp`, width: 600, height: 2538, label: t('v1Label') }}
-                      after={{ src: `/work/nakahatsu/v1-v2-full-${language === 'jp' ? 'jp' : 'en'}-r.webp`, width: 600, height: language === 'jp' ? 3040 : 3098, label: t('v2Label') }}
+                      after={{ src: `/work/nakahatsu/v1-v2-full-${language === 'jp' ? 'jp' : 'en'}-r.webp`, width: 600, height: language === 'jp' ? 3045 : 3096, label: t('v2Label') }}
                     />
                     <p className="pt-4 text-body-sm text-ink-tertiary">{t('v1v2FullNote')}</p>
                   </div>
