@@ -88,7 +88,7 @@ export default function WorkMobileToc({ items, ariaLabel, openLabel }: { items: 
         id="work-mobile-toc"
         aria-label={ariaLabel}
         hidden={!open}
-        className="toc-card fixed right-4 top-1/2 z-50 max-h-[70vh] w-max max-w-[min(calc(100vw-2rem),320px)] -translate-y-1/2 origin-right overflow-y-auto overscroll-contain rounded-[8px] bg-white/90 backdrop-blur-md shadow-[0_12px_40px_rgba(0,0,0,0.14)] motion-safe:animate-[toc-in_160ms_ease-out]"
+        className="toc-card fixed right-4 top-1/2 z-50 max-h-[70vh] w-max max-w-[min(calc(100vw-2rem),320px)] -translate-y-1/2 origin-right overflow-y-auto overscroll-contain rounded-[8px] bg-white/90 backdrop-blur-[8px] shadow-[0_12px_40px_rgba(0,0,0,0.14)] motion-safe:animate-[toc-in_160ms_ease-out]"
       >
         <ul className="flex flex-col px-2 py-2">
           {items.map((it) => (
