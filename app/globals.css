@@ -241,9 +241,8 @@ body {
     --brand-miru: #596327;
 
     /* Active-nav dot — one color for every tab (PC + mobile), matching the logo.
-       Two-tone: crisp core + soft halo (core diluted to 28%). */
+       Solid dot only; the soft halo was removed 2026-11-23. */
     --accent-dot: var(--brand-miru);
-    --accent-dot-halo: rgba(89, 99, 39, 0.28);
 
     /* Per-tab colors (experiment/podcast-notes category palette). No longer used by
        the nav dot (unified to --accent-dot, 2026-11-23); kept for reference. */
