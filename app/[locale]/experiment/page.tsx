@@ -110,6 +110,7 @@ import { CTAButton } from '@/components/ui/cta-button';
 import React, { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
+import { BB_IMG, BB_SEASONS, BB_TAGS } from '@/src/data/bilingualBooks';
 
 const ExperimentPage: React.FC = () => {
   const t = useTranslations('experiment');
@@ -292,6 +293,55 @@ const ExperimentPage: React.FC = () => {
             </div>
 
             <CTAButton href={`/${locale}/experiment/podcast-notes`} className="w-full md:w-auto">
+              {tCommon('goToPage')}
+            </CTAButton>
+          </div>
+        </div>
+      </div>
+
+      {/* 2件目: Bilingual Books（podcast）。1件目と同じ2分割ブロック。内容は src/data/bilingualBooks.ts */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-12 pt-12 border-t border-line-subtle">
+        <div className="lg:col-span-6">
+          <img
+            src={`${BB_IMG}/show-cover.webp`}
+            alt="Bilingual Books show cover"
+            width={1200}
+            height={1200}
+            loading="lazy"
+            className="w-full max-w-[240px] md:max-w-sm mx-auto rounded-media border border-line-subtle"
+          />
+        </div>
+        <div className="lg:col-span-6">
+          <div className="flex flex-col items-start gap-10">
+            <div className="flex flex-col items-start gap-4 self-stretch w-full">
+              <h2 className="text-headline">{t('bilingualBooks')}</h2>
+              <div className="flex gap-2 items-start flex-wrap">
+                {BB_TAGS.map((tag) => (
+                  <span
+                    key={tag}
+                    className="font-space-grotesk text-label leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <p className={`text-body-base md:text-body-lg ${getBodyFontClass()}`}>{t('bilingualBooksDescription')}</p>
+            </div>
+
+            <div className="flex flex-wrap items-end gap-[16px_24px] self-stretch w-full">
+              {BB_SEASONS.map((s) => (
+                <img
+                  key={s.season}
+                  className="w-[72px] h-[72px] object-cover rounded-media"
+                  alt={s.title.en}
+                  title={s.title.en}
+                  src={s.cover}
+                  loading="lazy"
+                />
+              ))}
+            </div>
+
+            <CTAButton href={`/${locale}/experiment/bilingual-books`} className="w-full md:w-auto">
               {tCommon('goToPage')}
             </CTAButton>
           </div>

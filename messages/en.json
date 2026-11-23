@@ -75,6 +75,8 @@
     "description": "I design and build experiments to explore new ideas and concepts.",
     "podcastNotes": "Podcast Notes",
     "podcastNotesDescription": "My personal notes capturing learnings from podcasts. I've automated the workflow: simply share a Spotify URL with Cursor's LLM, and it automatically processes episodes and adds structured notes to my Notion database.",
+    "bilingualBooks": "Bilingual Books",
+    "bilingualBooksDescription": "A podcast that reads public-domain classics in Japanese and English, sentence by sentence. Thirty episodes across The Book of Tea, Representative Men of Japan and Bushido, built as one repeatable pipeline: source selection, translation, synthesized audio, cover design and scheduled release.",
     "favoriteVisuals": "Favorite Visuals",
     "favoriteVisualsDescription": "A collection of visuals organized into two Notion databases: Favorite Image Database and Data Visualization Database.",
     "favoriteVisualsNote": "I'm aware these are simply references to others' work. I don't have a distinct voice or strength yet, and I'm still exploring. I also want to create and express something that I feel comfortable making and that I want to leave in this world.",

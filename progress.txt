@@ -2149,3 +2149,12 @@ variables / styles はデザインの統一と作業効率のため（現行サ�
 - 2026-11-19: トップの Work カードの並びを新しい順（中初 → Figma Plugins → 浮世絵）に変更（河野さん指示）。カードのタグ（Figma Plugin 等）を text-label(14/15px) → text-body(17/18px) に。
 - 2026-11-19: 全ページ（JP/EN×13ページ）×4幅（375/768/1280/1920）で 14px 未満の文字を調査（.capture/scan-small-text.mjs、Chrome 実機）。本文・日付・出典・フッター・ラベルの 13px は --text-size-xs を 13→14px にして解消。About の "You can drag me"（スマホ 11px）を 14px に、ukiyoe の時代番号を 13→14px に。残りは飾りのみ（プラグインカードの縮小イラスト 7〜13px、ukiyoe の ◆ 印 8px aria-hidden、About の円周上の SVG 文字 12px）で意図的に据え置き。
 - 2026-11-19: #159（minor/patch 8件）と #149（区切りドキュメント）を merge。#137（tailwind-merge 3）は Tailwind 4 向けで本サイトは 3.4 のため close（ignore major）。#136・#138・#139 は main を取り込んで競合を解消し（#138 は lock を再生成、#139 は TS6、#136 は code-connect 2）、CI 通過後に merge。Vercel プレビューの失敗は Google Fonts 取得の一時エラーで、vercel redeploy で解消。
+
+## 2026-11-23: /experiment に2件目「Bilingual Books」（ポッドキャスト）を追加 — branch feat/experiment-bilingual-books
+- ポッドキャスト側セッション（terada-nature-japanese-reader）と分担。内容・数字・URL はあちらが 11-23 に裏取り。
+  内容は src/data/bilingualBooks.ts に {en, jp} で集約。
+- 一覧: 1件目と同じ2分割ブロック（番組カバー＋タグ＋説明＋シーズンのカバー3枚＋CTA）。
+- 詳細 /experiment/bilingual-books: 概要 → 作り方5工程（PipelineSection と同じ丸アイコンの図）→ シーズン → 聴く・読む。
+- Spotify 埋め込みは CSP 変更が要るため不採用、リンクボタンのみ（両セッションの推奨、河野さん了承）。
+- 載せないもの: 未公開の作品と、数字として見せる段階にない指標。
+- 後でやる: 12/2 の武士道の全話配信後、S3 の状態を「配信済み」に直す。Figma portfolio_v6（Site — JP/EN）へ同期。

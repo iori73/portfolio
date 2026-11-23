@@ -12,8 +12,8 @@ export async function generateMetadata({
     locale,
     title: { en: 'Experiment', jp: 'Experiment' },
     description: {
-      en: 'Side experiments: podcast notes parsed and mapped by meaning, and other things built to find out whether they work.',
-      jp: 'ポッドキャストの内容を解析して意味で配置する実験など、成立するかを確かめるために作ったもの。',
+      en: 'Side experiments: podcast notes parsed and mapped by meaning, a bilingual podcast of classics built as one pipeline, and other things built to find out whether they work.',
+      jp: 'ポッドキャストの内容を解析して意味で配置する実験や、古典を日英で聴くポッドキャストの仕組みなど、成立するかを確かめるために作ったもの。',
     },
   });
 }
