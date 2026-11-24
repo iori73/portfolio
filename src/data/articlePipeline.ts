@@ -48,7 +48,7 @@ export const AP_STEPS: Array<{ icon: APStepIcon; label: Bi; title: Bi; body: Bi 
     label: { en: 'Intent', jp: '意図' },
     title: { en: 'Fix the intent first', jp: '意図を先に固める' },
     body: {
-      jp: 'メモを読んだ AI が、目的、核になる主張、やらないこと、賞味期限の4行を出します。私が確かめるまで、下書きは始まりません。核がメモから読み取れないときは、推測で埋めずに質問させています。',
+      jp: 'メモを読んだ AI が、目的、核になる主張、やらないこと、今だけの話題か長く読める内容か、の4行を出します。私が確かめるまで、下書きは始まりません。核がメモから読み取れないときは、推測で埋めずに質問させています。',
       en: 'The AI reads my notes and returns four lines: the purpose, the core claim, what the article will not do, and how long it should stay relevant. Drafting does not start until I confirm them. If the core cannot be found in the notes, it asks instead of guessing.',
     },
   },
@@ -66,7 +66,7 @@ export const AP_STEPS: Array<{ icon: APStepIcon; label: Bi; title: Bi; body: Bi 
     label: { en: 'Review', jp: '点検' },
     title: { en: 'Five separate reviews', jp: '5つの点検を別々の役で' },
     body: {
-      jp: '文体、内容の深さ、自分の声、賞味期限、AI らしい言い回しの5つを、別々の役が見ます。直しが要る箇所は下書き役に戻し、2回直しても通らなければ私の判断に回します。',
+      jp: '文体、内容の深さ、自分の声、時間がたっても古びないか、AI らしい言い回しの5つを、別々の役が見ます。直しが要る箇所は下書き役に戻し、2回直しても通らなければ私の判断に回します。',
       en: 'Five roles each check one thing: style, depth, my voice, whether it will still hold up later, and phrasing that sounds like AI. Anything that needs fixing goes back to the drafting role. If it still fails after two rounds, it comes to me.',
     },
   },
