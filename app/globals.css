@@ -184,7 +184,7 @@ body {
     --text-size-xs: 14px;
     --text-size-sm: 14px;
     --text-size-base: 17px;
-    --text-size-lg: 19px;
+    --text-size-lg: 17px; /* 2026-11-24: 19→17。SP の本文 19px は大きすぎる（河野さん）。PC(768px〜)は 21px のまま */
     --text-size-xl: 21px;
     --text-size-2xl: 26px;
     --text-size-3xl: 32px;
