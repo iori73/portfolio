@@ -131,8 +131,7 @@ export default function Header() {
               </Link>
             ))}
             {/* Single active-indicator dot that glides between items.
-                One color for every tab = the logo's 海松色 (--accent-dot);
-                halo = a diluted tint of the same color. */}
+                One color for every tab = the logo's 海松色 (--accent-dot), no halo. */}
             <span
               aria-hidden
               className="pointer-events-none absolute top-full w-2 h-2 rounded-full"
@@ -141,7 +140,6 @@ export default function Header() {
                 transform: 'translateX(-50%) translateY(4px)',
                 opacity: dotVisible ? 1 : 0,
                 background: 'var(--accent-dot)',
-                boxShadow: '0 0 0 2px var(--accent-dot-halo)',
                 transition:
                   'left 0.65s var(--ease-emphasized), opacity 0.3s ease',
               }}
@@ -240,7 +238,6 @@ export default function Header() {
                       className="w-2 h-2 rounded-full"
                       style={{
                         background: 'var(--accent-dot)',
-                        boxShadow: '0 0 0 2px var(--accent-dot-halo)',
                         opacity: 1,
                         transform: 'translateY(-10px)',
                         transition: 'all 0.8s ease',
