@@ -111,6 +111,8 @@ import React, { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useBodyFont, useHeadingFont } from '@/src/hooks/useFonts';
 import { BB_IMG, BB_SEASONS, BB_TAGS } from '@/src/data/bilingualBooks';
+import { AP_STEPS, AP_TAGS } from '@/src/data/articlePipeline';
+import ArticlePipelineDiagram from '@/components/article-pipeline/ProcessDiagram';
 
 const ExperimentPage: React.FC = () => {
   const t = useTranslations('experiment');
@@ -342,6 +344,37 @@ const ExperimentPage: React.FC = () => {
             </div>
 
             <CTAButton href={`/${locale}/experiment/bilingual-books`} className="w-full md:w-auto">
+              {tCommon('goToPage')}
+            </CTAButton>
+          </div>
+        </div>
+      </div>
+
+      {/* 3件目: Article Pipeline（note / Medium の記事づくり）。同じ2分割ブロック。内容は src/data/articlePipeline.ts */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-12 pt-12 border-t border-line-subtle">
+        <div className="lg:col-span-6 min-w-0">
+          <div className="max-w-md mx-auto rounded-media border border-line-subtle px-4 py-8 md:p-10">
+            <ArticlePipelineDiagram steps={AP_STEPS} lang={locale === 'jp' ? 'jp' : 'en'} compact />
+          </div>
+        </div>
+        <div className="lg:col-span-6 min-w-0">
+          <div className="flex flex-col items-start gap-10">
+            <div className="flex flex-col items-start gap-4 self-stretch w-full">
+              <h2 className="text-headline">{t('articlePipeline')}</h2>
+              <div className="flex gap-2 items-start flex-wrap">
+                {AP_TAGS.map((tag) => (
+                  <span
+                    key={tag}
+                    className="font-space-grotesk text-label leading-[1.3] px-3 py-1 rounded-lg bg-surface-muted text-ink-tertiary"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <p className={`text-body-base md:text-body-lg ${getBodyFontClass()}`}>{t('articlePipelineDescription')}</p>
+            </div>
+
+            <CTAButton href={`/${locale}/experiment/article-pipeline`} className="w-full md:w-auto">
               {tCommon('goToPage')}
             </CTAButton>
           </div>

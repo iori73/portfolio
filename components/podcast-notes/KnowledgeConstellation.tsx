@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import * as d3 from 'd3';
-import { Episode, Cluster, CATEGORY_COLORS, DEFAULT_CATEGORY_COLOR } from './types';
+import { Episode, Cluster, getCategoryColor } from './types';
 
 interface Props {
   episodes: Episode[];
@@ -52,8 +52,7 @@ export default function KnowledgeConstellation({
 
   const getColor = useCallback(
     (episode: Episode) => {
-      const cat = episode.category || 'Others';
-      return CATEGORY_COLORS[cat] || DEFAULT_CATEGORY_COLOR;
+      return getCategoryColor(episode.category, episode.categoryColor);
     },
     []
   );
@@ -282,7 +281,7 @@ export default function KnowledgeConstellation({
           <p className="text-white text-body font-medium leading-tight mb-1">
             {tooltip.episode.title}
           </p>
-          <p className="text-label" style={{ color: getColor(tooltip.episode) }}>
+          <p className="text-label text-white/75">
             {tooltip.episode.podcast}
           </p>
         </div>
@@ -295,7 +294,7 @@ export default function KnowledgeConstellation({
           className={`px-2 py-1 md:px-3 md:py-1.5 rounded-full text-caption md:text-body font-space-grotesk transition-all shrink-0 ${
             activeCluster === null && activeTag === null
               ? 'bg-white/20 text-white'
-              : 'bg-white/5 text-white/40 hover:bg-white/10 hover:text-white/70'
+              : 'bg-white/5 text-white/75 hover:bg-white/10 hover:text-white'
           }`}
         >
           All
@@ -307,15 +306,15 @@ export default function KnowledgeConstellation({
               key={c.id}
               onClick={() => onTagChange(isActive ? null : c.label)}
               className={`inline-flex items-center gap-1.5 px-2 py-1 md:px-3 md:py-1.5 rounded-full text-caption md:text-body font-space-grotesk transition-all shrink-0 ${
-                isActive ? 'text-white' : 'text-white/40 hover:text-white/70'
+                isActive ? 'text-white' : 'text-white/75 hover:text-white'
               }`}
               style={{
-                backgroundColor: isActive ? c.color + '40' : 'rgba(255,255,255,0.05)',
+                backgroundColor: isActive ? getCategoryColor(c.label) + '66' : 'rgba(255,255,255,0.05)',
               }}
             >
               <span
                 className="w-1.5 h-1.5 rounded-full shrink-0"
-                style={{ backgroundColor: isActive ? '#fff' : c.color }}
+                style={{ backgroundColor: isActive ? '#fff' : getCategoryColor(c.label) }}
               />
               {c.label}
             </button>

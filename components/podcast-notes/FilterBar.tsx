@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Cluster, CATEGORY_COLORS, DEFAULT_CATEGORY_COLOR } from './types';
+import { Cluster, getCategoryColor } from './types';
 
 interface Props {
   clusters: Cluster[];
@@ -57,7 +57,7 @@ export default function FilterBar({
 
         {/* Category tags */}
         {allTags.map((tag) => {
-          const color = CATEGORY_COLORS[tag] || DEFAULT_CATEGORY_COLOR;
+          const color = getCategoryColor(tag);
           const isActive = activeTag === tag;
           return (
             <button
@@ -111,7 +111,7 @@ export default function FilterBar({
               All
             </button>
             {allTags.map((tag) => {
-              const color = CATEGORY_COLORS[tag] || DEFAULT_CATEGORY_COLOR;
+              const color = getCategoryColor(tag);
               const isActive = activeTag === tag;
               return (
                 <button

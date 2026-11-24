@@ -285,7 +285,8 @@ export async function GET(
     }
     const props = page.properties as Record<string, Record<string, unknown>>;
 
-    const rawCategory = (props.Category as { select?: { name?: string } })?.select?.name ?? null;
+    const categorySelect = (props.Category as { select?: { name?: string; color?: string } })?.select;
+    const rawCategory = categorySelect?.name ?? null;
     const category = rawCategory ? normalizeCategoryName(rawCategory) : null;
     const nameProp = props.Name as { title?: { plain_text?: string }[] } | undefined;
     const podcastProp = props.Podcast as { select?: { name?: string } } | undefined;
@@ -300,6 +301,7 @@ export async function GET(
       podcast: podcastProp?.select?.name || 'Unknown',
       podcastCover: cover?.external?.url || cover?.file?.url || '',
       category,
+      categoryColor: categorySelect?.color ?? null,
       tags: [category].filter(Boolean) as string[],
       date: releaseProp?.date?.start || '',
       url: urlProp?.url || '',
