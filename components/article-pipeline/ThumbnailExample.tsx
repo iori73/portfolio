@@ -86,7 +86,7 @@ export default function ThumbnailExample({ lang, body, heading }: Props) {
                   <p className={`text-body-lg font-medium ${body}`}>{s.label[lang]}</p>
                   <p className={`text-body text-ink-secondary ${body}`}>{s.rule[lang]}</p>
                   <p className={`mt-1 text-body text-ink break-words ${body}`}>
-                    <span className="text-ink-tertiary">{lang === 'jp' ? 'この記事では: ' : 'In this article: '}</span>
+                    <span className="text-ink-tertiary">{lang === 'jp' ? 'この記事では：' : 'In this article: '}</span>
                     {s.value[lang]}
                   </p>
                 </div>

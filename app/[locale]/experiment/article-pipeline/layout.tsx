@@ -13,7 +13,7 @@ export async function generateMetadata({
     title: { en: 'Article Pipeline', jp: 'Article Pipeline' },
     description: {
       en: 'A setup on Claude Code that takes my rough notes to a draft on note and Medium: one drafting role, five reviewing roles, a format check, and publishing left to me.',
-      jp: 'メモから note と Medium の下書きまでを、Claude Code の上で進める仕組みです。下書きの役と5つの点検の役、形式の検査があり、公開だけは私が行います。',
+      jp: 'メモから note と Medium の下書きまでを、Claude Code で進める仕組みです。下書きを書く役、5つの観点で点検する役、形式を確かめるスクリプトがあり、公開だけは私が行います。',
     },
   });
 }

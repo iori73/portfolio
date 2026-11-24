@@ -33,7 +33,7 @@ const UI: Record<string, Bi> = {
   process: { en: 'How it works', jp: '仕組み' },
   processLead: {
     en: 'Six steps for every article. Each role has written instructions, so the next article starts from the same place.',
-    jp: '記事ごとに同じ6つの工程を通します。どの役にも手順書があるので、次の記事も同じところから始められます。',
+    jp: '記事ごとに同じ6つの工程を通します。どの役にも手順書があるので、次の記事も同じ手順で始められます。',
   },
   roles: { en: 'Who decides what', jp: '誰が何を決めるか' },
   ai: { en: 'AI', jp: 'AI' },
