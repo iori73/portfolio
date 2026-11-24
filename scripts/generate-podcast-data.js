@@ -117,6 +117,8 @@ function normalizeCategoryName(name) {
 function extractPageMetadata(page) {
   const props = page.properties;
   const rawCategory = props.Category?.select?.name || null;
+  // Notion color name of the Category option; the site's category colors follow it.
+  const categoryColor = props.Category?.select?.color || null;
   const category = rawCategory ? normalizeCategoryName(rawCategory) : null;
   return {
     id: page.id,
@@ -124,6 +126,7 @@ function extractPageMetadata(page) {
     podcast: props.Podcast?.select?.name || 'Unknown',
     podcastCover: page.cover?.external?.url || page.cover?.file?.url || '',
     category,
+    categoryColor,
     tags: [category].filter(Boolean),
     date: props['Release Date']?.date?.start || page.created_time?.split('T')[0] || '',
     url: props.URL?.url || '',
@@ -567,6 +570,7 @@ async function main() {
       podcast: ep.podcast,
       podcastCover: ep.podcastCover,
       category: ep.category,
+      categoryColor: ep.categoryColor,
       tags: ep.tags,
       date: ep.date,
       url: ep.url,

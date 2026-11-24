@@ -2165,3 +2165,28 @@ variables / styles はデザインの統一と作業効率のため（現行サ�
 - 河野さんは「利休白茶」と呼んでいたが、ロゴの色は海松色（#143）。利休白茶（薄い灰茶）とは別の色。
 - 残り: merge 後に本番で PC/SP 確認、Figma v6 Header/PC の Dot/<タブ名> を同じ色に同期。
 - 追記 (2026-11-23): 河野さん「周りの薄い方不要」→ halo（28%の輪）を PC・スマホ・Figma（Header/PC の Dot/*）から外し、`--accent-dot-halo` を削除。ドットは海松色の単色のみ。
+
+## 2026-11-23: アクセシビリティ・コントラストの全体調査（提案のみ、コードは未変更）
+- きっかけ: Podcast Notes の「Business」タグが読めない（河野さんのスクショ）。黄 #FDCB6E の文字が薄い黄の背景に乗り 1.29:1（基準 4.5:1）。
+- 方法: 本番 iori-kawano.vercel.app の JP/EN×14ページ×PC(1440)/SP(390) を axe-core 4.10（WCAG 2.2 AA + best-practice）で測定。
+  axe が判定できない箇所は、Playwright で親の opacity を掛けた実効コントラスト・Tab でのフォーカス表示・24px 未満のタップ対象・lang を別に測定。
+- 結果（優先度順）:
+  1. カテゴリ色を文字色に使っている: Podcast Notes のタグ（一覧/all/詳細で約330件）。11色中10色が不合格（Business 1.29、Education 1.73、Career 1.82…）。
+     figma-plugins の種類タグ（#1ABCFE 2.06、#0ACF83 1.94、#A259FF 3.61、#E60023 4.28）も同じ構造。
+  2. 目次の非アクティブ項目 opacity-50 → 3.6〜3.7:1。Google UX・ukiyoe で検出、同じ書き方が airline・gym・CaseStudyLayout にもある。
+  3. Podcast Notes の暗いヒーロー内のカテゴリボタン text-white/40 → 3.78:1。ツールチップの Others 色 → 3.74:1。
+  4. 構造: Podcast Notes の並び替えセレクト（Radix combobox）に名前がない／見出しが h2 を飛ばして h3・h4／blog に h1 がない／
+     Google UX の nav が2つ同名・ul の直下に li 以外／ukiyoe（SP）の横スクロール領域にキーボードで入れない／ukiyoe の video 6本にフォーカスの輪が出ない。
+  5. 軽微: CV の LinkedIn リンクの高さ 21px、ukiyoe の目次ボタン高さ 21px（24px 未満）。ヘッダーの現在地ドット（About の黄）は背景と 1.33:1（文字の太さでも示しているので補助扱い）。
+     BackToTop がスマホで opacity-50。docs/architecture/design-system.md の色表が古い（surface は #EFF1F1、ink-tertiary は #565D61 に変わっている）。
+- 問題なし: lang（en/ja）、本文・ラベルのトークン（ink-tertiary 5.91:1）、Tab のフォーカス表示（ukiyoe の video 以外）、画像の alt、リンクの区別。
+- 提案の要点: 「見分けるための色」（ドット・枠・塗り）と「読むための文字色」を分ける。タグの文字は各色を暗くした版（4.8:1 以上、色相は同じ）か ink-secondary＋色ドット。
+- 次: 河野さんが方針（A: 色相を保って暗くする／B: 文字は墨色＋色ドット）を選んだら実装 → pnpm qa:responsive と axe 再測定 → Figma v6 に同期。
+- 2026-11-23 続き: カテゴリ色を Notion の Podcast Notes Database と同期（河野さん指示「notionとsyncして」）。
+  - 経緯: A/B 比較ページ（https://claude.ai/artifact/Qc7sSLPeoMS9PPNMyK4HPF）で私が B を推したが、推薦の一部（A は個性が消える／B はドットが色を担う）は測っていない主張だった。測ると A は色相不変・彩度56〜90%残る、B のドットは淡色で 1.16〜2.4:1 しかなく色がほぼ消える。→ 河野さんの指示で Notion 同期に。
+  - 仕組み: 各エピソードに Notion の色名（properties.Category.select.color）を categoryColor として持たせる（generate-podcast-data.js と API 2本）。types.ts の NOTION_COLORS（Notion 公開ページの描画から読んだ10色の text/bg）でタグを描く。ドット・棒グラフ・星座図は同じ色相（bg の元の色）。
+  - 次の同期（毎日 0:00 UTC の update-podcast-data）までは、スクショから読んだ仮の対応表。Education / Health / News は判定があいまい（赤/茶/橙、橙/黄、茶/灰）で、同期で本当の値に置き換わる。
+  - Notion MCP はこの DB に権限なし、.env.local の読み取りは安全チェックで不可、公開ページは2回目で Cloudflare の確認が出たので、DB の定義は直接読めていない。
+  - あわせて: 星座図のボタン text-white/40→/75、ツールチップの番組名を白に、figma-plugins のタグは淡色背景＋同色相の暗い文字（src/lib/contrast.ts）。
+  - 確認: tsc OK、axe color-contrast は podcast-notes・/all・詳細・figma-plugins の PC/SP すべて 0（修正前 8/324/4/12）。
+  - 未着手: 監査の 2（目次 opacity-50）・4（構造: セレクトの名前、見出し順、blog の h1 など）、Figma portfolio_v6 への同期。
