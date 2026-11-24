@@ -1,0 +1,415 @@
+<meta charset="utf-8">
+<title>Curiosity Hero Prototype</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400&display=swap">
+<style>
+/* Layout: the real top page (header, hero copy, Work) with the pattern band in the slot from the Figma sketch. */
+:root {
+  --bg: #EFF1F1;          /* site --surface */
+  --ink: #0A0A0A;         /* site --ink */
+  --soft: #565D61;        /* site --ink-tertiary */
+  --line: #CAD0D0;        /* site --line-section */
+  --muted: #DFE3E3;       /* site --surface-muted */
+  --raised: #FEFEFE;
+  --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --jp: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #121414; --ink: #E9ECEC; --soft: #9AA3A6; --line: #343A3B; --muted: #1E2222; --raised: #1A1D1D; color-scheme: dark } }
+:root[data-theme="dark"] { --bg: #121414; --ink: #E9ECEC; --soft: #9AA3A6; --line: #343A3B; --muted: #1E2222; --raised: #1A1D1D; color-scheme: dark }
+
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 64px; }
+header { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.logo { width: 34px; height: 34px; border: 2px solid #5B6234; border-radius: 50%; display: grid; place-items: center; color: #5B6234; font-weight: 700; font-size: 18px; font-family: Georgia, serif; }
+nav { display: flex; gap: clamp(12px, 3vw, 36px); font-size: 15px; flex-wrap: wrap; justify-content: flex-end; }
+nav span:last-child b { font-weight: 700; }
+.hero { padding-block: clamp(40px, 7vw, 72px) 0; max-width: 900px; }
+.hero h1 { font-weight: 400; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.25; letter-spacing: -0.01em; margin: 0 0 12px; text-wrap: balance; }
+.hero p { font-weight: 400; font-size: clamp(22px, 3.1vw, 37px); line-height: 1.32; letter-spacing: -0.01em; margin: 0; text-wrap: balance; }
+
+.band { margin-top: clamp(28px, 5vw, 56px); position: relative; }
+.band svg { display: block; width: 100%; height: auto; overflow: visible; }
+.band path { vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+.m { cursor: default; outline: none; }
+.m .hit { fill: transparent; }
+.m:focus-visible .hit { stroke: var(--soft); stroke-dasharray: 2 3; stroke-width: 1; }
+.m.dim { opacity: .28; transition: opacity .5s ease; }
+.m { transition: opacity .5s ease; }
+
+/* The one motion moment: each pattern rises gently into place, then breathes. */
+.rise { transform-box: fill-box; animation: rise 2.8s cubic-bezier(.16, 1, .3, 1) both; animation-delay: var(--d); }
+.drift { transform-box: fill-box; animation: drift var(--t) ease-in-out calc(var(--d) + 2.8s) infinite alternate; }
+@keyframes rise { from { opacity: 0; transform: translateY(26px); filter: blur(3px); } 60% { filter: blur(0); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+@keyframes drift { from { transform: translateY(0); } to { transform: translateY(-3.5px); } }
+@media (prefers-reduced-motion: reduce) { .rise, .drift { animation: none; } }
+
+.caption { min-height: 3.2em; margin-top: 14px; font-size: 13px; line-height: 1.6; color: var(--soft); }
+.caption b { color: var(--ink); font-weight: 500; }
+.caption .jp { font-family: var(--jp); font-weight: 400; }
+
+.controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 8px; font-size: 13px; }
+.controls button { font: inherit; color: var(--ink); background: var(--raised); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+.controls button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.controls button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.seg { display: inline-flex; gap: 4px; }
+.tag { color: var(--soft); margin-left: 4px; }
+
+.work { margin-top: clamp(48px, 7vw, 80px); }
+.work h2 { font-weight: 400; font-size: clamp(28px, 3.4vw, 40px); margin: 0 0 24px; }
+.card { background: var(--muted); border-radius: 16px; padding: 8px; }
+.card div { background: var(--raised); border-radius: 10px; height: 120px; display: grid; place-items: center; color: var(--soft); font-size: 13px; }
+
+.notes { margin-top: 56px; border-top: 1px solid var(--line); padding-top: 28px; }
+.notes h3 { font-weight: 500; font-size: 15px; margin: 0 0 6px; }
+.notes > p { font-size: 13px; line-height: 1.7; color: var(--soft); margin: 0 0 18px; max-width: 70ch; }
+.notes .jp, td .jp { font-family: var(--jp); font-weight: 400; color: var(--ink); }
+.tbl { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: 13px; line-height: 1.6; }
+th { text-align: left; font-weight: 500; color: var(--soft); font-size: 12px; letter-spacing: .04em; padding: 8px 12px 8px 0; border-bottom: 1px solid var(--line); }
+td { vertical-align: top; padding: 12px 12px 12px 0; border-bottom: 1px solid var(--line); color: var(--soft); }
+td:first-child { width: 72px; }
+td svg { width: 60px; height: 44px; display: block; }
+td svg path { vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="logo" aria-hidden="true">i</div>
+    <nav><span>Experiment</span><span>About</span><span>CV</span><span>Blog</span><span>EN | <b>JP</b></span></nav>
+  </header>
+
+  <section class="hero">
+    <h1>Curiosity drives my work and life.</h1>
+    <p>I explore what makes design meaningful today, when anyone can create.</p>
+  </section>
+
+  <div class="band" id="band" aria-label="Patterns for each interest"></div>
+  <div class="caption" id="caption" aria-live="polite"></div>
+  <div class="controls">
+    <button type="button" id="replay">Replay ▸</button>
+    <span class="seg" role="group" aria-label="Line style">
+      <button type="button" id="hand" aria-pressed="true">Hand-drawn</button>
+      <button type="button" id="geo" aria-pressed="false">Geometric</button>
+    </span>
+    <span class="tag">Prototype · not the live site</span>
+  </div>
+
+  <section class="work">
+    <h2>Work</h2>
+    <div class="card"><div>Ukiyoe: Layer by Layer (existing card)</div></div>
+  </section>
+
+  <section class="notes">
+    <h3>What each pattern stands for</h3>
+    <p><span class="jp">関心ごとに1つの文様を割り当て、色は墨1色、線の太さも1種類にそろえた。題材は、メモに書いた2つのデータベース（Data Visualization Input と Favorite Images）の中身から選んだ。</span><br>Each interest gets one pattern, drawn in one ink colour and one line weight. The subjects come from the two databases linked in the memo, Data Visualization Input and Favorite Images.</p>
+    <div class="tbl"><table>
+      <thead><tr><th></th><th>Interest</th><th>Pattern</th><th>Drawn from</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table></div>
+  </section>
+</div>
+
+<script>
+// Motif generator shared by the HTML prototype and the Figma build.
+// buildMotifs({hand:true|false}) -> [{key,en,jp,motifJp,motifEn,x,y,w,h,rot,paths:[...]}]
+// path: {d, tone:'ink'|'soft', w, fill:'bg'|'ink'|null, stroke:bool, dash:'dots'|null}
+function buildMotifs(opts) {
+  var hand = !!(opts && opts.hand);
+  function rng(seed) { return function () { seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  var R = rng(20261124);      // layout randomness: identical in both styles
+  var W = rng(7);             // wobble randomness: only used when hand-drawn
+  var f1 = function (v) { return Math.round(v * 10) / 10; };
+  var TAU = Math.PI * 2;
+
+  function resample(pts, closed, step) {
+    var out = [], n = pts.length, segs = closed ? n : n - 1;
+    for (var i = 0; i < segs; i++) {
+      var a = pts[i], b = pts[(i + 1) % n];
+      var L = Math.hypot(b[0] - a[0], b[1] - a[1]), k = Math.max(1, Math.ceil(L / step));
+      for (var j = 0; j < k; j++) out.push([a[0] + (b[0] - a[0]) * j / k, a[1] + (b[1] - a[1]) * j / k]);
+    }
+    if (!closed) out.push(pts[n - 1]);
+    return out;
+  }
+  // amt scales the hand wobble; 0 keeps the line exact even in hand mode.
+  function line(pts, closed, amt) {
+    if (amt === undefined) amt = 1;
+    var p = pts;
+    if (hand && amt > 0) {
+      p = resample(pts, closed, 5);
+      var a1 = W() * TAU, a2 = W() * TAU, a3 = W() * TAU, a4 = W() * TAU, J = 1.05 * amt;
+      p = p.map(function (q, i) {
+        return [q[0] + J * (Math.sin(i * 0.31 + a1) * 0.65 + Math.sin(i * 0.11 + a2) * 0.35),
+                q[1] + J * (Math.sin(i * 0.27 + a3) * 0.65 + Math.sin(i * 0.09 + a4) * 0.35)];
+      });
+    }
+    var d = 'M' + f1(p[0][0]) + ' ' + f1(p[0][1]);
+    for (var i = 1; i < p.length; i++) d += 'L' + f1(p[i][0]) + ' ' + f1(p[i][1]);
+    return closed ? d + 'Z' : d;
+  }
+  function arcPts(cx, cy, r, a0, a1, n, deform) {
+    var pts = [];
+    for (var i = 0; i <= n; i++) {
+      var a = a0 + (a1 - a0) * i / n, rr = deform ? r * deform(a) : r;
+      pts.push([cx + rr * Math.cos(a), cy + rr * Math.sin(a)]);
+    }
+    return pts;
+  }
+  function sw(base) { return hand ? f1(base * (0.85 + W() * 0.35)) : base; }
+  function inEllipse(x, y, cx, cy, rx, ry) { var dx = (x - cx) / rx, dy = (y - cy) / ry; return dx * dx + dy * dy; }
+
+  var out = [];
+
+  // 1. 浮世絵 → 青海波 (seigaiha)
+  (function () {
+    var P = [], r0 = 20;
+    for (var j = 0; j < 7; j++) for (var i = -1; i < 7; i++) {
+      var cx = i * 2 * r0 + (j % 2 ? r0 : 0) + 14, cy = 20 + j * r0 * 0.5;
+      var e = inEllipse(cx, cy, 108, 58, 104, 52);
+      if (e > 1 || (e > 0.6 && R() < 0.5)) continue;
+      P.push({ d: line(arcPts(cx, cy, r0 * 0.99, Math.PI, TAU, 24), true, 0), fill: 'bg', stroke: false });
+      [1, 0.68, 0.36].forEach(function (k) {
+        P.push({ d: line(arcPts(cx, cy, r0 * k, Math.PI, TAU, Math.round(24 * k) + 6), false), tone: 'ink', w: sw(1.05) });
+      });
+    }
+    out.push({ key: 'ukiyoe', jp: '浮世絵', en: 'Ukiyo-e', motifJp: '青海波。江戸の摺物に繰り返し現れる波の文様', motifEn: 'Seigaiha, the wave pattern that recurs in Edo prints', x: 12, y: 132, w: 216, h: 112, paths: P });
+  })();
+
+  // 2. 文様 → 麻の葉 (asanoha)
+  (function () {
+    var s = 26, h = s * 0.866, P = [], seen = {};
+    function pt(i, j) { return [i * s + (j % 2 ? s / 2 : 0) - 6, j * h + 6]; }
+    function seg(a, b) {
+      var k = [f1(a[0]), f1(a[1]), f1(b[0]), f1(b[1])].join(','), k2 = [f1(b[0]), f1(b[1]), f1(a[0]), f1(a[1])].join(',');
+      if (seen[k] || seen[k2]) return; seen[k] = 1;
+      P.push({ d: line([a, b], false), tone: 'soft', w: sw(0.85) });
+    }
+    for (var j = 0; j < 6; j++) for (var i = -1; i < 8; i++) {
+      var tris = j % 2 === 0
+        ? [[pt(i, j), pt(i + 1, j), pt(i, j + 1)], [pt(i + 1, j), pt(i, j + 1), pt(i + 1, j + 1)]]
+        : [[pt(i, j), pt(i + 1, j), pt(i + 1, j + 1)], [pt(i, j), pt(i, j + 1), pt(i + 1, j + 1)]];
+      tris.forEach(function (t) {
+        var c = [(t[0][0] + t[1][0] + t[2][0]) / 3, (t[0][1] + t[1][1] + t[2][1]) / 3];
+        var e = inEllipse(c[0], c[1], 86, 72, 82, 66);
+        if (e > 1 || (e > 0.62 && R() < 0.45)) return;
+        seg(t[0], t[1]); seg(t[1], t[2]); seg(t[2], t[0]);
+        t.forEach(function (v) { seg(v, c); });
+      });
+    }
+    out.push({ key: 'monyo', jp: '文様', en: 'Traditional patterns', motifJp: '麻の葉。三角の格子から生まれる幾何学の文様', motifEn: 'Asanoha, a geometric pattern grown from a triangular grid', x: 404, y: 118, w: 172, h: 150, paths: P });
+  })();
+
+  // 3. Figma plugin 開発 → nodes, wires, selection handles
+  (function () {
+    var P = [], nodes = [];
+    for (var j = 0; j < 3; j++) for (var i = 0; i < 4; i++) if (R() < 0.78 || (i === 1 && j === 1)) nodes.push([18 + i * 44, 18 + j * 40]);
+    nodes.forEach(function (n, k) {
+      var x = n[0], y = n[1], q = 5;
+      P.push({ d: line([[x - q, y - q], [x + q, y - q], [x + q, y + q], [x - q, y + q]], true, 0.5), fill: k === 2 ? 'ink' : 'bg', tone: 'ink', w: sw(1) });
+    });
+    for (var k = 0; k < nodes.length - 1; k++) {
+      if (R() < 0.3) continue;
+      var a = nodes[k], b = nodes[k + 1];
+      if (b[0] <= a[0]) continue;
+      var mx = (a[0] + b[0]) / 2;
+      P.push({ d: line([[a[0] + 5, a[1]], [mx, a[1]], [mx, b[1]], [b[0] - 5, b[1]]], false, 0.7), tone: 'soft', w: sw(0.9) });
+    }
+    // a selection box with handles around two nodes, the way Figma marks a selection
+    var sx0 = 18 + 44 - 12, sy0 = 58 - 12, sx1 = 18 + 88 + 12, sy1 = 58 + 12;
+    P.push({ d: line([[sx0, sy0], [sx1, sy0], [sx1, sy1], [sx0, sy1]], true, 0.4), tone: 'ink', w: 0.7 });
+    [[sx0, sy0], [sx1, sy0], [sx1, sy1], [sx0, sy1]].forEach(function (c) {
+      P.push({ d: line([[c[0] - 2.2, c[1] - 2.2], [c[0] + 2.2, c[1] - 2.2], [c[0] + 2.2, c[1] + 2.2], [c[0] - 2.2, c[1] + 2.2]], true, 0), fill: 'bg', tone: 'ink', w: 0.8 });
+    });
+    out.push({ key: 'plugin', jp: 'Figmaプラグイン開発', en: 'Figma plugins', motifJp: 'ノードと配線、選択枠のハンドル', motifEn: 'Nodes, wires and the handles of a selection', x: 716, y: 22, w: 168, h: 116, paths: P });
+  })();
+
+  // 4. Podcast 視聴記録 → Dear Data style tally, one mark per episode
+  (function () {
+    var P = [];
+    for (var j = 0; j < 4; j++) {
+      var by = 20 + j * 21;
+      P.push({ d: line([[0, by], [186, by]], false, 0.6), tone: 'soft', w: 0.6 });
+      for (var i = 0; i < 20; i++) {
+        if (R() < 0.18) continue;
+        var x = 4 + i * 9.4, hgt = 3 + R() * 12;
+        P.push({ d: line([[x, by], [x, by - hgt]], false, 0.4), tone: 'ink', w: sw(1.05) });
+        var u = R();
+        if (u < 0.55) P.push({ d: line(arcPts(x, by - hgt - 2.6, 1.35, 0, TAU, 10), true, 0), fill: 'ink', stroke: false });
+        else if (u < 0.68) P.push({ d: line(arcPts(x, by - hgt - 3.4, 2.2, 0, TAU, 12), true, 0), fill: 'bg', tone: 'ink', w: 0.8 });
+      }
+    }
+    out.push({ key: 'notes', jp: 'Podcast視聴記録', en: 'Podcast notes', motifJp: '1話に1本の印。長さは聴いた時間、点はメモを取った回', motifEn: 'One mark per episode: length is time listened, a dot means notes taken', x: 852, y: 172, w: 190, h: 92, paths: P });
+  })();
+
+  // 5. Podcast 制作 → growth rings / sound rings
+  (function () {
+    var P = [], c = 64, ph = R() * TAU, ph2 = R() * TAU;
+    for (var k = 0; k < 7; k++) {
+      var r = 5 + k * 8.4 * (1 + 0.035 * k);
+      var def = (function (kk) { return function (a) { return 1 + 0.035 * Math.sin(3 * a + ph + kk * 0.15) + 0.02 * Math.sin(5 * a + ph2); }; })(k);
+      var gap = k === 4;
+      P.push({ d: line(arcPts(c, c, r, gap ? 0.5 : 0, gap ? TAU - 0.15 : TAU, 56, def), !gap), tone: k % 3 === 2 ? 'soft' : 'ink', w: sw(k === 6 ? 1.2 : 1) });
+    }
+    P.push({ d: line(arcPts(c, c, 1.6, 0, TAU, 10), true, 0), fill: 'ink', stroke: false });
+    out.push({ key: 'rings', jp: 'Podcast制作', en: 'Making a podcast', motifJp: '年輪と音の波紋。1回ごとに輪が1本増える', motifEn: 'Growth rings and sound ripples: each episode adds a ring', x: 560, y: 14, w: 128, h: 128, paths: P });
+  })();
+
+  // 6. 記事執筆 with AI → two hands writing: solid line = me, dots = AI
+  (function () {
+    var P = [], lens = [190, 168, 182, 120, 72];
+    lens.forEach(function (L, k) {
+      var y = 10 + k * 15, fr = 0.34 + R() * 0.12, amp = 2.1, split = L * (0.45 + R() * 0.3), pts = [];
+      for (var x = 0; x <= L; x += 2) pts.push([x, y + amp * Math.sin(x * fr) * (0.55 + 0.45 * Math.sin(x * 0.05 + k))]);
+      var cut = Math.round(split / 2);
+      P.push({ d: line(pts.slice(0, cut + 1), false, 0.5), tone: 'ink', w: sw(1.05) });
+      if (k % 2 === 0 || k === 3) P.push({ d: line([[split + 4, y], [L, y]], false, 0.3), tone: 'ink', w: 1.4, dash: 'dots' });
+      else P.push({ d: line(pts.slice(cut), false, 0.5), tone: 'ink', w: sw(1.05) });
+    });
+    out.push({ key: 'writing', jp: 'AIと記事執筆', en: 'Writing with AI', motifJp: '2つの手で書く行。実線が自分、点線がAI', motifEn: 'Lines written by two hands: solid is me, dotted is the AI', x: 642, y: 186, w: 192, h: 76, paths: P });
+  })();
+
+  // 7. Data visualization → slime-mold network of particles
+  (function () {
+    var P = [], pts = [], tries = 0;
+    while (pts.length < 44 && tries < 4000) {
+      tries++;
+      var x = 6 + R() * 200, y = 6 + R() * 120;
+      if (inEllipse(x, y, 106, 66, 100, 60) > 1) continue;
+      if (pts.some(function (p) { return Math.hypot(p[0] - x, p[1] - y) < 13; })) continue;
+      pts.push([x, y]);
+    }
+    var seen = {};
+    pts.forEach(function (p, i) {
+      var near = pts.map(function (q, j) { return [Math.hypot(q[0] - p[0], q[1] - p[1]), j]; }).filter(function (v) { return v[1] !== i; }).sort(function (a, b) { return a[0] - b[0]; }).slice(0, 2);
+      near.forEach(function (v) {
+        var key = Math.min(i, v[1]) + '-' + Math.max(i, v[1]);
+        if (seen[key]) return; seen[key] = 1;
+        P.push({ d: line([p, pts[v[1]]], false, 0.5), tone: 'soft', w: sw(0.85) });
+      });
+    });
+    pts.forEach(function (p) {
+      var r = 1 + R() * 1.8;
+      if (R() < 0.12) P.push({ d: line(arcPts(p[0], p[1], r + 2.2, 0, TAU, 14), true, 0), fill: 'bg', tone: 'ink', w: 0.8 });
+      else P.push({ d: line(arcPts(p[0], p[1], r, 0, TAU, 10), true, 0), fill: 'ink', stroke: false });
+    });
+    out.push({ key: 'dataviz', jp: 'データ可視化', en: 'Data visualization', motifJp: '粘菌のような網。点を近い順につなぐ', motifEn: 'A slime-mold network: each point joins its nearest neighbours', x: 196, y: 10, w: 212, h: 132, paths: P });
+  })();
+
+  // 8. Favorite images → leaf venation
+  (function () {
+    var P = [], cx = 60, top = 8, base = 138, Lh = base - top;
+    function mid(t) { return [cx + 6 * Math.sin(t * Math.PI * 0.9), base - t * Lh]; }
+    function half(t) { return 46 * Math.pow(Math.sin(Math.PI * t), 0.85) * (1 - 0.3 * t); }
+    var left = [], right = [];
+    for (var i = 0; i <= 30; i++) { var t = i / 30, m = mid(t); left.push([m[0] - half(t), m[1]]); right.push([m[0] + half(t), m[1]]); }
+    P.push({ d: line(left.concat(right.reverse()), true), fill: 'bg', tone: 'ink', w: sw(1.1) });
+    var ribPts = []; for (var i2 = -2; i2 <= 30; i2++) ribPts.push(mid(i2 / 30));
+    P.push({ d: line(ribPts, false), tone: 'ink', w: sw(1.15) });
+    for (var k = 1; k <= 8; k++) {
+      var t0 = 0.06 + k * 0.1, side = k % 2 ? -1 : 1, m0 = mid(t0), t1 = Math.min(0.97, t0 + 0.13);
+      var hw = half(t1) * 0.86, m1 = mid(t1);
+      var end = [m1[0] + side * hw, m1[1]], ctl = [m0[0] + side * hw * 0.55, m0[1] - 4];
+      var vp = []; for (var s = 0; s <= 8; s++) { var u = s / 8; vp.push([(1 - u) * (1 - u) * m0[0] + 2 * u * (1 - u) * ctl[0] + u * u * end[0], (1 - u) * (1 - u) * m0[1] + 2 * u * (1 - u) * ctl[1] + u * u * end[1]]); }
+      P.push({ d: line(vp, false, 0.6), tone: 'ink', w: sw(0.8) });
+      var b = vp[4];
+      P.push({ d: line([b, [b[0] - side * 6, b[1] - 9]], false, 0.4), tone: 'soft', w: 0.6 });
+    }
+    out.push({ key: 'images', jp: 'お気に入りの画像', en: 'Favorite images', motifJp: '葉脈。集めた画像の中で一番多い「生き物の構造」から', motifEn: 'Leaf veins, from the living structures that fill the image collection', x: 912, y: 4, w: 124, h: 150, rot: -16, paths: P });
+  })();
+
+  return out;
+}
+if (typeof module !== 'undefined') module.exports = { buildMotifs: buildMotifs };
+
+(function () {
+  var SOURCES = {
+    ukiyoe: 'Suzuki Harunobu (Favorite Images) · Ukiyoe: Layer by Layer',
+    monyo: 'The Geometric Signs of Ice Age Europe, Genevieve von Petzinger (Favorite Images)',
+    plugin: 'My Figma plugins & widgets',
+    notes: 'Dear Data, Giorgia Lupi (Favorite Images) · Podcast Notes Database',
+    rings: 'Atlantic salmon scale growth rings (Favorite Images)',
+    writing: 'Writing articles together with an AI assistant',
+    dataviz: 'The Insane Biology of: Slime Mold (in both databases)',
+    images: 'Flight feather structure, leaf and bone studies (Favorite Images)'
+  };
+  var ORDER = ['dataviz', 'ukiyoe', 'rings', 'plugin', 'monyo', 'writing', 'notes', 'images'];
+  var NS = 'http://www.w3.org/2000/svg';
+  var band = document.getElementById('band'), cap = document.getElementById('caption');
+  var hand = true;
+
+  function paint(el, p) {
+    el.setAttribute('d', p.d);
+    el.setAttribute('fill', p.fill === 'bg' ? 'var(--bg)' : p.fill === 'ink' ? 'var(--ink)' : 'none');
+    if (p.stroke === false) { el.setAttribute('stroke', 'none'); return; }
+    el.setAttribute('stroke', p.tone === 'soft' ? 'var(--soft)' : 'var(--ink)');
+    el.setAttribute('stroke-width', p.w);
+    if (p.dash === 'dots') el.setAttribute('stroke-dasharray', '0.1 4.2');
+  }
+  function group(m) {
+    var g = document.createElementNS(NS, 'g');
+    m.paths.forEach(function (p) { var el = document.createElementNS(NS, 'path'); paint(el, p); g.appendChild(el); });
+    return g;
+  }
+  function showCaption(m) {
+    cap.innerHTML = m ? '<b class="jp">' + m.jp + '</b> · <b>' + m.en + '</b><br><span class="jp">' + m.motifJp + '</span><br>' + m.motifEn
+                      : '<span class="jp">文様に触れると、何の関心かが出る</span><br>Hover or tab to a pattern to see which interest it stands for.';
+  }
+  function render() {
+    var motifs = buildMotifs({ hand: hand });
+    var svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('viewBox', '0 0 1050 270');
+    svg.setAttribute('role', 'img');
+    svg.setAttribute('aria-label', 'Eight ink patterns, one for each interest');
+    motifs.forEach(function (m) {
+      var outer = document.createElementNS(NS, 'g');
+      var cxr = m.w / 2, cyr = m.h / 2;
+      outer.setAttribute('transform', 'translate(' + m.x + ' ' + m.y + ')' + (m.rot ? ' rotate(' + m.rot + ' ' + cxr + ' ' + cyr + ')' : ''));
+      outer.setAttribute('class', 'm'); outer.setAttribute('tabindex', '0');
+      outer.setAttribute('aria-label', m.en + ' — ' + m.motifEn);
+      var rise = document.createElementNS(NS, 'g'); rise.setAttribute('class', 'rise');
+      var k = ORDER.indexOf(m.key);
+      rise.style.setProperty('--d', (0.25 + k * 0.34).toFixed(2) + 's');
+      var drift = document.createElementNS(NS, 'g'); drift.setAttribute('class', 'drift');
+      drift.style.setProperty('--t', (7 + (k * 1.37) % 4).toFixed(2) + 's');
+      var hit = document.createElementNS(NS, 'rect');
+      hit.setAttribute('class', 'hit'); hit.setAttribute('x', -6); hit.setAttribute('y', -6); hit.setAttribute('width', m.w + 12); hit.setAttribute('height', m.h + 12); hit.setAttribute('rx', 8);
+      drift.appendChild(hit); drift.appendChild(group(m)); rise.appendChild(drift); outer.appendChild(rise); svg.appendChild(outer);
+      function on() { showCaption(m); svg.querySelectorAll('.m').forEach(function (n) { if (n !== outer) n.classList.add('dim'); }); }
+      function off() { showCaption(null); svg.querySelectorAll('.m').forEach(function (n) { n.classList.remove('dim'); }); }
+      outer.addEventListener('mouseenter', on); outer.addEventListener('focus', on);
+      outer.addEventListener('mouseleave', off); outer.addEventListener('blur', off);
+    });
+    band.replaceChildren(svg);
+    showCaption(null);
+    return motifs;
+  }
+  function rows(motifs) {
+    var tb = document.getElementById('rows');
+    tb.replaceChildren();
+    ORDER.forEach(function (key) {
+      var m = motifs.filter(function (x) { return x.key === key; })[0];
+      var tr = document.createElement('tr');
+      var svg = document.createElementNS(NS, 'svg');
+      svg.setAttribute('viewBox', [-4, -4, m.w + 8, m.h + 8].join(' '));
+      svg.setAttribute('aria-hidden', 'true');
+      svg.appendChild(group(m));
+      var td0 = document.createElement('td'); td0.appendChild(svg);
+      var td1 = document.createElement('td'); td1.innerHTML = '<span class="jp">' + m.jp + '</span><br>' + m.en;
+      var td2 = document.createElement('td'); td2.innerHTML = '<span class="jp">' + m.motifJp + '</span><br>' + m.motifEn;
+      var td3 = document.createElement('td'); td3.textContent = SOURCES[key];
+      tr.append(td0, td1, td2, td3); tb.appendChild(tr);
+    });
+  }
+  function setStyle(h) {
+    hand = h;
+    document.getElementById('hand').setAttribute('aria-pressed', String(h));
+    document.getElementById('geo').setAttribute('aria-pressed', String(!h));
+    rows(render());
+  }
+  document.getElementById('replay').addEventListener('click', render);
+  document.getElementById('hand').addEventListener('click', function () { setStyle(true); });
+  document.getElementById('geo').addEventListener('click', function () { setStyle(false); });
+  setStyle(true);
+})();
+</script>

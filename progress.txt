@@ -2208,3 +2208,19 @@ variables / styles はデザインの統一と作業効率のため（現行サ�
   - あわせて: 星座図のボタン text-white/40→/75、ツールチップの番組名を白に、figma-plugins のタグは淡色背景＋同色相の暗い文字（src/lib/contrast.ts）。
   - 確認: tsc OK、axe color-contrast は podcast-notes・/all・詳細・figma-plugins の PC/SP すべて 0（修正前 8/324/4/12）。
   - 未着手: 監査の 2（目次 opacity-50）・4（構造: セレクトの名前、見出し順、blog の h1 など）、Figma portfolio_v6 への同期。
+
+## 2026-11-24: トップのヒーロー構想 — 文様が浮き上がる試作（HTML と Figma Motion）
+
+- 構想: Figma portfolio_v6「Site — JP」の Desktop - 2 とメモ（487:1780）。見出しの下に、関心ごとの抽象的な文様が gently に浮き上がる。
+- メモのリンク2つを先に確認した（Notion 公開ページ）。Data Visualization Input 47件、Favorite Images 49件。題材はここから選んだ:
+  粘菌（両方のDB）→ データ可視化の網、鮭の鱗の成長輪 → Podcast制作の年輪、Dear Data → 視聴記録の印、
+  氷河期の幾何学記号（von Petzinger）→ 文様（麻の葉）、鈴木春信 → 浮世絵（青海波）、羽・葉・骨の構造 → 葉脈。
+- 文様は8つ: 浮世絵=青海波 / 文様=麻の葉 / Figmaプラグイン=ノード・配線・選択ハンドル / 視聴記録=1話1本の印 /
+  Podcast制作=年輪 / AIと記事執筆=実線(自分)と点線(AI) / データ可視化=粘菌の網 / お気に入り画像=葉脈。墨1色・線1種類。
+- 動き: 0.34秒ずつずらして 2.8秒で浮き上がる（opacity・translateY 26px・blur 3→0、cubic-bezier(.16,1,.3,1)）→ 約3.5px の呼吸。
+  reduced-motion では止まった完成形。
+- HTML 試作: https://claude.ai/artifact/EcPALz16aVx55MWnqQXyEg（手描き/幾何の切り替え、ホバーで何の関心か表示、対応表つき）
+- Figma: 「Desktop - 3 · Hero motion prototype」（491:1710、メモの下）。手描き版。Motion のキーフレーム、タイムライン15秒。
+  動画に書き出して 0.8/1.8/2.8/3.8/6 秒のフレームで順番と着地を確認済み。
+- ソース: docs/prototypes/hero-curiosity/（motifs.js が HTML と Figma 共通の生成コード。Figma にはこのコードを流して描いた）
+- 未決: 手描きか幾何か／文様をホバーで Work に飛ばすか／ヒーローを英語だけにするか（今は EN/JP を左右に併記）。本番のコードは未変更。

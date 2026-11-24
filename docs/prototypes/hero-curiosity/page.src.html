@@ -1,0 +1,205 @@
+<meta charset="utf-8">
+<title>Curiosity Hero Prototype</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400&display=swap">
+<style>
+/* Layout: the real top page (header, hero copy, Work) with the pattern band in the slot from the Figma sketch. */
+:root {
+  --bg: #EFF1F1;          /* site --surface */
+  --ink: #0A0A0A;         /* site --ink */
+  --soft: #565D61;        /* site --ink-tertiary */
+  --line: #CAD0D0;        /* site --line-section */
+  --muted: #DFE3E3;       /* site --surface-muted */
+  --raised: #FEFEFE;
+  --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --jp: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #121414; --ink: #E9ECEC; --soft: #9AA3A6; --line: #343A3B; --muted: #1E2222; --raised: #1A1D1D; color-scheme: dark } }
+:root[data-theme="dark"] { --bg: #121414; --ink: #E9ECEC; --soft: #9AA3A6; --line: #343A3B; --muted: #1E2222; --raised: #1A1D1D; color-scheme: dark }
+
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 64px; }
+header { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.logo { width: 34px; height: 34px; border: 2px solid #5B6234; border-radius: 50%; display: grid; place-items: center; color: #5B6234; font-weight: 700; font-size: 18px; font-family: Georgia, serif; }
+nav { display: flex; gap: clamp(12px, 3vw, 36px); font-size: 15px; flex-wrap: wrap; justify-content: flex-end; }
+nav span:last-child b { font-weight: 700; }
+.hero { padding-block: clamp(40px, 7vw, 72px) 0; max-width: 900px; }
+.hero h1 { font-weight: 400; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.25; letter-spacing: -0.01em; margin: 0 0 12px; text-wrap: balance; }
+.hero p { font-weight: 400; font-size: clamp(22px, 3.1vw, 37px); line-height: 1.32; letter-spacing: -0.01em; margin: 0; text-wrap: balance; }
+
+.band { margin-top: clamp(28px, 5vw, 56px); position: relative; }
+.band svg { display: block; width: 100%; height: auto; overflow: visible; }
+.band path { vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+.m { cursor: default; outline: none; }
+.m .hit { fill: transparent; }
+.m:focus-visible .hit { stroke: var(--soft); stroke-dasharray: 2 3; stroke-width: 1; }
+.m.dim { opacity: .28; transition: opacity .5s ease; }
+.m { transition: opacity .5s ease; }
+
+/* The one motion moment: each pattern rises gently into place, then breathes. */
+.rise { transform-box: fill-box; animation: rise 2.8s cubic-bezier(.16, 1, .3, 1) both; animation-delay: var(--d); }
+.drift { transform-box: fill-box; animation: drift var(--t) ease-in-out calc(var(--d) + 2.8s) infinite alternate; }
+@keyframes rise { from { opacity: 0; transform: translateY(26px); filter: blur(3px); } 60% { filter: blur(0); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+@keyframes drift { from { transform: translateY(0); } to { transform: translateY(-3.5px); } }
+@media (prefers-reduced-motion: reduce) { .rise, .drift { animation: none; } }
+
+.caption { min-height: 3.2em; margin-top: 14px; font-size: 13px; line-height: 1.6; color: var(--soft); }
+.caption b { color: var(--ink); font-weight: 500; }
+.caption .jp { font-family: var(--jp); font-weight: 400; }
+
+.controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 8px; font-size: 13px; }
+.controls button { font: inherit; color: var(--ink); background: var(--raised); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+.controls button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.controls button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.seg { display: inline-flex; gap: 4px; }
+.tag { color: var(--soft); margin-left: 4px; }
+
+.work { margin-top: clamp(48px, 7vw, 80px); }
+.work h2 { font-weight: 400; font-size: clamp(28px, 3.4vw, 40px); margin: 0 0 24px; }
+.card { background: var(--muted); border-radius: 16px; padding: 8px; }
+.card div { background: var(--raised); border-radius: 10px; height: 120px; display: grid; place-items: center; color: var(--soft); font-size: 13px; }
+
+.notes { margin-top: 56px; border-top: 1px solid var(--line); padding-top: 28px; }
+.notes h3 { font-weight: 500; font-size: 15px; margin: 0 0 6px; }
+.notes > p { font-size: 13px; line-height: 1.7; color: var(--soft); margin: 0 0 18px; max-width: 70ch; }
+.notes .jp, td .jp { font-family: var(--jp); font-weight: 400; color: var(--ink); }
+.tbl { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: 13px; line-height: 1.6; }
+th { text-align: left; font-weight: 500; color: var(--soft); font-size: 12px; letter-spacing: .04em; padding: 8px 12px 8px 0; border-bottom: 1px solid var(--line); }
+td { vertical-align: top; padding: 12px 12px 12px 0; border-bottom: 1px solid var(--line); color: var(--soft); }
+td:first-child { width: 72px; }
+td svg { width: 60px; height: 44px; display: block; }
+td svg path { vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="logo" aria-hidden="true">i</div>
+    <nav><span>Experiment</span><span>About</span><span>CV</span><span>Blog</span><span>EN | <b>JP</b></span></nav>
+  </header>
+
+  <section class="hero">
+    <h1>Curiosity drives my work and life.</h1>
+    <p>I explore what makes design meaningful today, when anyone can create.</p>
+  </section>
+
+  <div class="band" id="band" aria-label="Patterns for each interest"></div>
+  <div class="caption" id="caption" aria-live="polite"></div>
+  <div class="controls">
+    <button type="button" id="replay">Replay ▸</button>
+    <span class="seg" role="group" aria-label="Line style">
+      <button type="button" id="hand" aria-pressed="true">Hand-drawn</button>
+      <button type="button" id="geo" aria-pressed="false">Geometric</button>
+    </span>
+    <span class="tag">Prototype · not the live site</span>
+  </div>
+
+  <section class="work">
+    <h2>Work</h2>
+    <div class="card"><div>Ukiyoe: Layer by Layer (existing card)</div></div>
+  </section>
+
+  <section class="notes">
+    <h3>What each pattern stands for</h3>
+    <p><span class="jp">関心ごとに1つの文様を割り当て、色は墨1色、線の太さも1種類にそろえた。題材は、メモに書いた2つのデータベース（Data Visualization Input と Favorite Images）の中身から選んだ。</span><br>Each interest gets one pattern, drawn in one ink colour and one line weight. The subjects come from the two databases linked in the memo, Data Visualization Input and Favorite Images.</p>
+    <div class="tbl"><table>
+      <thead><tr><th></th><th>Interest</th><th>Pattern</th><th>Drawn from</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table></div>
+  </section>
+</div>
+
+<script>
+/*MOTIFS*/
+(function () {
+  var SOURCES = {
+    ukiyoe: 'Suzuki Harunobu (Favorite Images) · Ukiyoe: Layer by Layer',
+    monyo: 'The Geometric Signs of Ice Age Europe, Genevieve von Petzinger (Favorite Images)',
+    plugin: 'My Figma plugins & widgets',
+    notes: 'Dear Data, Giorgia Lupi (Favorite Images) · Podcast Notes Database',
+    rings: 'Atlantic salmon scale growth rings (Favorite Images)',
+    writing: 'Writing articles together with an AI assistant',
+    dataviz: 'The Insane Biology of: Slime Mold (in both databases)',
+    images: 'Flight feather structure, leaf and bone studies (Favorite Images)'
+  };
+  var ORDER = ['dataviz', 'ukiyoe', 'rings', 'plugin', 'monyo', 'writing', 'notes', 'images'];
+  var NS = 'http://www.w3.org/2000/svg';
+  var band = document.getElementById('band'), cap = document.getElementById('caption');
+  var hand = true;
+
+  function paint(el, p) {
+    el.setAttribute('d', p.d);
+    el.setAttribute('fill', p.fill === 'bg' ? 'var(--bg)' : p.fill === 'ink' ? 'var(--ink)' : 'none');
+    if (p.stroke === false) { el.setAttribute('stroke', 'none'); return; }
+    el.setAttribute('stroke', p.tone === 'soft' ? 'var(--soft)' : 'var(--ink)');
+    el.setAttribute('stroke-width', p.w);
+    if (p.dash === 'dots') el.setAttribute('stroke-dasharray', '0.1 4.2');
+  }
+  function group(m) {
+    var g = document.createElementNS(NS, 'g');
+    m.paths.forEach(function (p) { var el = document.createElementNS(NS, 'path'); paint(el, p); g.appendChild(el); });
+    return g;
+  }
+  function showCaption(m) {
+    cap.innerHTML = m ? '<b class="jp">' + m.jp + '</b> · <b>' + m.en + '</b><br><span class="jp">' + m.motifJp + '</span><br>' + m.motifEn
+                      : '<span class="jp">文様に触れると、何の関心かが出る</span><br>Hover or tab to a pattern to see which interest it stands for.';
+  }
+  function render() {
+    var motifs = buildMotifs({ hand: hand });
+    var svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('viewBox', '0 0 1050 270');
+    svg.setAttribute('role', 'img');
+    svg.setAttribute('aria-label', 'Eight ink patterns, one for each interest');
+    motifs.forEach(function (m) {
+      var outer = document.createElementNS(NS, 'g');
+      var cxr = m.w / 2, cyr = m.h / 2;
+      outer.setAttribute('transform', 'translate(' + m.x + ' ' + m.y + ')' + (m.rot ? ' rotate(' + m.rot + ' ' + cxr + ' ' + cyr + ')' : ''));
+      outer.setAttribute('class', 'm'); outer.setAttribute('tabindex', '0');
+      outer.setAttribute('aria-label', m.en + ' — ' + m.motifEn);
+      var rise = document.createElementNS(NS, 'g'); rise.setAttribute('class', 'rise');
+      var k = ORDER.indexOf(m.key);
+      rise.style.setProperty('--d', (0.25 + k * 0.34).toFixed(2) + 's');
+      var drift = document.createElementNS(NS, 'g'); drift.setAttribute('class', 'drift');
+      drift.style.setProperty('--t', (7 + (k * 1.37) % 4).toFixed(2) + 's');
+      var hit = document.createElementNS(NS, 'rect');
+      hit.setAttribute('class', 'hit'); hit.setAttribute('x', -6); hit.setAttribute('y', -6); hit.setAttribute('width', m.w + 12); hit.setAttribute('height', m.h + 12); hit.setAttribute('rx', 8);
+      drift.appendChild(hit); drift.appendChild(group(m)); rise.appendChild(drift); outer.appendChild(rise); svg.appendChild(outer);
+      function on() { showCaption(m); svg.querySelectorAll('.m').forEach(function (n) { if (n !== outer) n.classList.add('dim'); }); }
+      function off() { showCaption(null); svg.querySelectorAll('.m').forEach(function (n) { n.classList.remove('dim'); }); }
+      outer.addEventListener('mouseenter', on); outer.addEventListener('focus', on);
+      outer.addEventListener('mouseleave', off); outer.addEventListener('blur', off);
+    });
+    band.replaceChildren(svg);
+    showCaption(null);
+    return motifs;
+  }
+  function rows(motifs) {
+    var tb = document.getElementById('rows');
+    tb.replaceChildren();
+    ORDER.forEach(function (key) {
+      var m = motifs.filter(function (x) { return x.key === key; })[0];
+      var tr = document.createElement('tr');
+      var svg = document.createElementNS(NS, 'svg');
+      svg.setAttribute('viewBox', [-4, -4, m.w + 8, m.h + 8].join(' '));
+      svg.setAttribute('aria-hidden', 'true');
+      svg.appendChild(group(m));
+      var td0 = document.createElement('td'); td0.appendChild(svg);
+      var td1 = document.createElement('td'); td1.innerHTML = '<span class="jp">' + m.jp + '</span><br>' + m.en;
+      var td2 = document.createElement('td'); td2.innerHTML = '<span class="jp">' + m.motifJp + '</span><br>' + m.motifEn;
+      var td3 = document.createElement('td'); td3.textContent = SOURCES[key];
+      tr.append(td0, td1, td2, td3); tb.appendChild(tr);
+    });
+  }
+  function setStyle(h) {
+    hand = h;
+    document.getElementById('hand').setAttribute('aria-pressed', String(h));
+    document.getElementById('geo').setAttribute('aria-pressed', String(!h));
+    rows(render());
+  }
+  document.getElementById('replay').addEventListener('click', render);
+  document.getElementById('hand').addEventListener('click', function () { setStyle(true); });
+  document.getElementById('geo').addEventListener('click', function () { setStyle(false); });
+  setStyle(true);
+})();
+</script>
