@@ -20,6 +20,7 @@ import FilterBar from '@/components/podcast-notes/FilterBar';
 import NoteCard from '@/components/podcast-notes/NoteCard';
 import PipelineSection from '@/components/podcast-notes/PipelineSection';
 import type { PodcastData } from '@/components/podcast-notes/types';
+import { registerCategoryColors } from '@/components/podcast-notes/types';
 
 const INITIAL_DISPLAY_COUNT = 8;
 
@@ -45,6 +46,7 @@ export default function PodcastNotesPage() {
         return Promise.reject(new Error(res.status.toString()));
       })
       .then((json: PodcastData) => {
+        registerCategoryColors(json.episodes);
         setData(json);
         setLoading(false);
       })
@@ -52,6 +54,7 @@ export default function PodcastNotesPage() {
         fetch('/data/podcast-notes.json')
           .then((r) => r.json())
           .then((json: PodcastData) => {
+            registerCategoryColors(json.episodes);
             setData(json);
             setLoading(false);
           })

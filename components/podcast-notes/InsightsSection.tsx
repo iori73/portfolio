@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { PodcastStats, Podcast, CATEGORY_COLORS, DEFAULT_CATEGORY_COLOR } from './types';
+import { PodcastStats, Podcast, getCategoryColor } from './types';
 
 interface Props {
   stats: PodcastStats;
@@ -45,7 +45,7 @@ function useCountUp(target: number, duration = 1500) {
 }
 
 function CategoryBar({ name, count, total }: { name: string; count: number; total: number }) {
-  const color = CATEGORY_COLORS[name] || DEFAULT_CATEGORY_COLOR;
+  const color = getCategoryColor(name);
   const pct = (count / total) * 100;
   const barRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);

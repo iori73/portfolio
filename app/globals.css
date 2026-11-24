@@ -237,13 +237,15 @@ body {
     /* Interactive accent (Apple Blue) — links, active state */
     --accent-interactive: #007aff;
 
-    /* Active-nav dot — Apple system green (matches HIG "Purpose" target icon).
-       Two-tone: crisp core + soft halo for a concentric/glow feel. */
-    --accent-dot: #30d158;
-    --accent-dot-halo: rgba(48, 209, 88, 0.28);
+    /* Brand color — the logo mark (public/icon.svg), 海松色 Miru-iro (#143). */
+    --brand-miru: #596327;
 
-    /* Per-tab dot core colors (experiment/podcast-notes category palette).
-       The dot fill is a 2-stop linear gradient of these; the halo is a diluted tint. */
+    /* Active-nav dot — one color for every tab (PC + mobile), matching the logo.
+       Solid dot only; the soft halo was removed 2026-11-23. */
+    --accent-dot: var(--brand-miru);
+
+    /* Per-tab colors (experiment/podcast-notes category palette). No longer used by
+       the nav dot (unified to --accent-dot, 2026-11-23); kept for reference. */
     --tab-experiment: #0984e3; /* 青 · science */
     --tab-about: #fdcb6e;      /* 黄 · business */
     --tab-cv: #e17055;         /* 赤 · startup&vc */
