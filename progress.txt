@@ -2178,6 +2178,12 @@ variables / styles はデザインの統一と作業効率のため（現行サ�
 - 残り: merge 後に本番で PC/SP 確認、Figma v6 Header/PC の Dot/<タブ名> を同じ色に同期。
 - 追記 (2026-11-23): 河野さん「周りの薄い方不要」→ halo（28%の輪）を PC・スマホ・Figma（Header/PC の Dot/*）から外し、`--accent-dot-halo` を削除。ドットは海松色の単色のみ。
 
+## 2026-11-24 中初: 主要画面の一覧図から PC 画面の枠線を外す
+- 河野さんが Figma の EN PC（628:767）で PC 画面8枚の 1px 枠線（#D0D7DE）を外し、「こっちを正式に採用」。
+- Figma（portfolio_v5）の残り3つ（JP PC 586:759、JP SP 655:767、EN SP 655:786）でも PC 画面の枠線を外して揃えた（24枚）。
+- サイト: overview-pcsp-{jp,en}.webp を差し替え（2176x1312、角の外側は旧版と同じ rgb(246,246,246)）。書き出しは、2倍に rescale した一時複製を get_screenshot で撮り、上 1312px を切り出し（枠が clip しないためスマホ画面が下にはみ出す）。一時複製は削除済み。
+- 残り: merge 後に本番の /jp・/en/work/nakahatsu で図を確認。
+
 ## 2026-11-23: アクセシビリティ・コントラストの全体調査（提案のみ、コードは未変更）
 - きっかけ: Podcast Notes の「Business」タグが読めない（河野さんのスクショ）。黄 #FDCB6E の文字が薄い黄の背景に乗り 1.29:1（基準 4.5:1）。
 - 方法: 本番 iori-kawano.vercel.app の JP/EN×14ページ×PC(1440)/SP(390) を axe-core 4.10（WCAG 2.2 AA + best-practice）で測定。
