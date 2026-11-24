@@ -2159,6 +2159,18 @@ variables / styles はデザインの統一と作業効率のため（現行サ�
 - 載せないもの: 未公開の作品と、数字として見せる段階にない指標。
 - 後でやる: 12/2 の武士道の全話配信後、S3 の状態を「配信済み」に直す。Figma portfolio_v6（Site — JP/EN）へ同期。
 
+## 2026-11-23: Experiment に3件目「Article Pipeline」（note / Medium の記事づくりの仕組み）
+- 一覧 `/experiment` に3件目のブロック（6工程の図・タグ・説明・CTA）。詳細 `/experiment/article-pipeline`（概要 → 仕組み6工程 → 誰が何を決めるか → わかったこと → note / Medium へのリンク）。
+- 型は Bilingual Books（#171）と同じ: 内容は `src/data/articlePipeline.ts` の `{en, jp}`、図は `components/article-pipeline/ProcessDiagram.tsx`。sitemap と /experiment のメタ説明にも追加。
+- 事実の出典は ai-ops の ops/content-pipeline.md、.claude/commands/{draft,note}.md、ops/note-editor-runbook.md、scripts/note-lint.py、scripts/recover-published.py、output/published.tsv（26% / 45% の実測）。仕事の情報・他人の名前・記事の本数は載せていない。
+- 検査: pnpm build 成功。next start で 320〜1280px × jp/en の横スクロールなし。コンソールのエラーはローカルだけで出る /_vercel/insights のみ。
+- 残り: 河野さんの Preview 確認と merge → 本番確認 → Figma portfolio_v6（Site — JP / EN の Experiment と詳細ページ）に同期。
+- 追記（同日、河野さんの FB）: 日本語を敬体に。Obsidian の表記を外した（河野さんは Obsidian を開いていない。AI が読み書きするのは Obsidian 形式のフォルダの Markdown なので「共有のノート（Markdown のファイル）」に）。
+  「具体例: サムネイル」の節を追加（A 私が渡すもの＝記事だけ → B AI が型にはめ込む＝Figma の Thumbnail v3/Layout の4つの枠と中身 → C 私が仕上げる＝游ゴシックへの差し替え・縁の色・公開）。
+  完成品は Figma t1TmZXTMJG8QpnIyEwnXBu の 1471:1075（家紋の記事の表紙）を書き出して public/experiment/article-pipeline/thumbnail-kamon.webp に。画像の出典はキャプションに（下がり藤 CC BY-SA 4.0 / エナメル板 PD）。
+  型の見本（880:676）は人名入りなので使わず、rules v3 の版面の値で枠を描いた。
+- 追記（11-24）: 「賞味期限」を平易な言い方に。続けて日本語の独立監査（約30件）を反映: 回収→振り返り/記録、巻き込み、型にはめ込む→テンプレートに流し込む、題字→タイトル、機械検査→形式の検査、図版→画像、版面→サイズ、昇格→加える、など。「役」はそのまま（自然な日本語のため）。
+
 ## ナビ・ドットをロゴの海松色 1色に統一（2026-11-23, PR #174 draft）
 - 7/26 に決めたタブ別の色（`--tab-*`）をやめ、PC・スマホともロゴと同じ海松色 `#596327`（`--brand-miru` → `--accent-dot`）に。halo は同色28%。
 - スマホメニューのドットは `bg-accent`（shadcn のほぼ白）で、ほぼ見えていなかった → 同じトークンに。
