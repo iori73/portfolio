@@ -1,0 +1,192 @@
+<meta charset="utf-8">
+<title>Curiosity Hero Prototype</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400&display=swap">
+<style>
+/* Layout: the real top page, with a dry landscape garden in the hero slot. Headline upper-left, garden weight right of centre, left and upper right left empty. */
+:root {
+  --bg: #EFF1F1;          /* site --surface: the sand */
+  --ink: #0A0A0A;         /* site --ink */
+  --soft: #565D61;        /* site --ink-tertiary */
+  --line: #CAD0D0;        /* site --line-section */
+  --muted: #DFE3E3;
+  --raised: #FEFEFE;
+  --rake: #C6CCCC;        /* raked sand lines */
+  --ripple: #8E9799;      /* ripples and seigaiha */
+  --stone: #D3D7D3;
+  --stone-deep: #BCC2BE;
+  --moss: #56605A;
+  --leaf: #C2A878;        /* kuchiba, the one colour */
+  --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --jp: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #121414; --ink: #E9ECEC; --soft: #9AA3A6; --line: #343A3B; --muted: #1E2222; --raised: #1A1D1D; --rake: #2F3536; --ripple: #5F686B; --stone: #2B302F; --stone-deep: #383E3C; --moss: #8E9A90; --leaf: #8F7A52; color-scheme: dark } }
+:root[data-theme="dark"] { --bg: #121414; --ink: #E9ECEC; --soft: #9AA3A6; --line: #343A3B; --muted: #1E2222; --raised: #1A1D1D; --rake: #2F3536; --ripple: #5F686B; --stone: #2B302F; --stone-deep: #383E3C; --moss: #8E9A90; --leaf: #8F7A52; color-scheme: dark }
+
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 64px; }
+header { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.logo { width: 34px; height: 34px; border: 2px solid #5B6234; border-radius: 50%; display: grid; place-items: center; color: #5B6234; font-weight: 700; font-size: 18px; font-family: Georgia, serif; }
+nav { display: flex; gap: clamp(12px, 3vw, 36px); font-size: 15px; flex-wrap: wrap; justify-content: flex-end; }
+nav b { font-weight: 700; }
+.hero { padding-block: clamp(40px, 7vw, 72px) 0; max-width: 900px; }
+.hero h1 { font-weight: 400; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.25; letter-spacing: -0.01em; margin: 0 0 12px; text-wrap: balance; }
+.hero p { font-weight: 400; font-size: clamp(22px, 3.1vw, 37px); line-height: 1.32; letter-spacing: -0.01em; margin: 0; text-wrap: balance; }
+
+.garden { margin-top: clamp(24px, 4vw, 44px); }
+.garden svg { display: block; width: 100%; height: auto; overflow: visible; }
+.garden path { stroke-linecap: round; stroke-linejoin: round; }
+.grp { outline: none; transition: opacity .6s ease; }
+.grp .hit { fill: transparent; }
+.grp:focus-visible .hit { stroke: var(--soft); stroke-dasharray: 2 3; stroke-width: 1; }
+.garden.hovering .grp:not(.on):not(.sand) { opacity: .22; }
+.garden.hovering .sand { opacity: .55; }
+
+/* Motion follows how a garden is made: rake, set the stones, ripples spread, moss and steps, one leaf falls. Then stillness. */
+.draw { stroke-dasharray: 1 1; stroke-dashoffset: 1; animation: draw var(--dur) linear var(--d) both; }
+.fade { animation: fade var(--dur) ease-out var(--d) both; }
+.settle { transform-box: fill-box; transform-origin: center; animation: settle var(--dur) cubic-bezier(.2, .8, .2, 1) var(--d) both; }
+.leaf { transform-box: fill-box; transform-origin: center; animation: leaf var(--dur) cubic-bezier(.45, .05, .35, 1) var(--d) both; }
+@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes settle { from { opacity: 0; transform: translateY(-7px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes leaf {
+  0%   { opacity: 0; transform: translate(-46px, -96px) rotate(-38deg); }
+  22%  { opacity: 1; }
+  40%  { transform: translate(-6px, -60px) rotate(14deg); }
+  68%  { transform: translate(-22px, -22px) rotate(-10deg); }
+  86%  { transform: translate(-4px, -5px) rotate(4deg); }
+  100% { opacity: 1; transform: translate(0, 0) rotate(0); }
+}
+@media (prefers-reduced-motion: reduce) { .draw, .fade, .settle, .leaf { animation: none; stroke-dashoffset: 0; } }
+
+.caption { min-height: 3.2em; margin-top: 10px; font-size: 13px; line-height: 1.6; color: var(--soft); }
+.caption b { color: var(--ink); font-weight: 500; }
+.jp { font-family: var(--jp); font-weight: 400; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 8px; font-size: 13px; }
+.controls button { font: inherit; color: var(--ink); background: var(--raised); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+.controls button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.tag { color: var(--soft); }
+
+.work { margin-top: clamp(48px, 7vw, 80px); }
+.work h2 { font-weight: 400; font-size: clamp(28px, 3.4vw, 40px); margin: 0 0 24px; }
+.card { background: var(--muted); border-radius: 16px; padding: 8px; }
+.card div { background: var(--raised); border-radius: 10px; height: 120px; display: grid; place-items: center; color: var(--soft); font-size: 13px; }
+
+.notes { margin-top: 56px; border-top: 1px solid var(--line); padding-top: 28px; display: grid; gap: 14px; }
+.notes h3 { font-weight: 500; font-size: 15px; margin: 0; }
+.notes p { font-size: 13px; line-height: 1.75; color: var(--soft); margin: 0; max-width: 72ch; }
+.notes p .jp, td .jp { color: var(--ink); }
+.tbl { overflow-x: auto; margin-top: 6px; }
+table { border-collapse: collapse; width: 100%; min-width: 600px; font-size: 13px; line-height: 1.6; }
+th { text-align: left; font-weight: 500; color: var(--soft); font-size: 12px; letter-spacing: .04em; padding: 8px 14px 8px 0; border-bottom: 1px solid var(--line); }
+td { vertical-align: top; padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line); color: var(--soft); }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="logo" aria-hidden="true">i</div>
+    <nav><span>Experiment</span><span>About</span><span>CV</span><span>Blog</span><span>EN | <b>JP</b></span></nav>
+  </header>
+
+  <section class="hero">
+    <h1>Curiosity drives my work and life.</h1>
+    <p>I explore what makes design meaningful today, when anyone can create.</p>
+  </section>
+
+  <div class="garden" id="garden"></div>
+  <div class="caption" id="caption" aria-live="polite"></div>
+  <div class="controls">
+    <button type="button" id="replay">Replay ▸</button>
+    <span class="tag">Prototype · not the live site</span>
+  </div>
+
+  <section class="work">
+    <h2>Work</h2>
+    <div class="card"><div>Ukiyoe: Layer by Layer (existing card)</div></div>
+  </section>
+
+  <section class="notes">
+    <h3>A dry garden of interests</h3>
+    <p><span class="jp">枯山水の見立てで作り直した。石・砂紋・苔・飛石・落ち葉の一つひとつが、関心を1つずつ表す。主役は置かず、重心を中心より右に寄せ、左と右上は空けておく。色は墨と砂の灰色に、落ち葉の朽葉色を1つだけ。</span><br>Rebuilt as a dry landscape garden. Each stone, ripple, patch of moss, stepping stone and fallen leaf stands for one interest. There is no single hero: the weight sits right of centre, and the left and upper right stay empty. Ink and sand greys, with one dry-leaf ochre.</p>
+    <p><span class="jp">動きは庭を作る順番に沿う。砂を左から右へ掃き、石を置き、波紋が広がり、苔と飛石が現れ、最後に葉が一枚落ちて止まる。止まった後は、何も動かない。</span><br>The motion follows the order a garden is made in: the sand is raked from left to right, the stones are set, ripples spread, moss and stepping stones appear, and finally a single leaf falls and comes to rest. After that, nothing moves.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Interest</th><th>In the garden</th><th>Drawn from</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table></div>
+  </section>
+</div>
+
+<script>
+/*GARDEN*/
+(function () {
+  var SOURCES = {
+    ukiyoe: 'Suzuki Harunobu (Favorite Images) · Ukiyoe: Layer by Layer',
+    podcast: 'Salmon scale growth rings (Favorite Images) · Podcast Notes Database',
+    plugin: 'My Figma plugins & widgets',
+    moss: 'The Insane Biology of: Slime Mold (in both databases)',
+    steps: 'Writing articles together with an AI assistant',
+    leaf: 'Leaf, bone and flight-feather studies (Favorite Images)'
+  };
+  var TONE = { rake: 'var(--rake)', ripple: 'var(--ripple)', ink: 'var(--ink)', moss: 'var(--moss)' };
+  var FILL = { bg: 'var(--bg)', ink: 'var(--ink)', stone: 'var(--stone)', stoneDeep: 'var(--stone-deep)', moss: 'var(--moss)', leaf: 'var(--leaf)' };
+  var NS = 'http://www.w3.org/2000/svg';
+  var host = document.getElementById('garden'), cap = document.getElementById('caption');
+  var data = buildGarden();
+
+  function el(name, attrs) { var e = document.createElementNS(NS, name); for (var k in attrs) e.setAttribute(k, attrs[k]); return e; }
+  function caption(g) {
+    cap.innerHTML = g ? '<b class="jp">' + g.jp + '</b> · <b>' + g.en + '</b><br><span class="jp">' + g.motifJp + '</span><br>' + g.motifEn
+                      : '<span class="jp">石や砂紋に触れると、何の関心かが出る</span><br>Hover or tab to a stone or a patch of sand to see which interest it stands for.';
+  }
+  function render() {
+    var svg = el('svg', { viewBox: '0 0 ' + data.W + ' ' + data.H, role: 'img', 'aria-label': 'A dry landscape garden: raked sand, stones with ripples, moss, stepping stones and a fallen leaf, each standing for an interest' });
+    var defs = el('defs', {}), lg = el('linearGradient', { id: 'edgefade', x1: '0', x2: '1', y1: '0', y2: '0' });
+    [[0, 0], [0.09, 1], [0.9, 1], [1, 0]].forEach(function (s) { lg.appendChild(el('stop', { offset: s[0], 'stop-color': '#fff', 'stop-opacity': s[1] })); });
+    var mk = el('mask', { id: 'sandmask', maskUnits: 'userSpaceOnUse', x: 0, y: 0, width: data.W, height: data.H });
+    mk.appendChild(el('rect', { x: 0, y: 0, width: data.W, height: data.H, fill: 'url(#edgefade)' }));
+    defs.appendChild(lg); defs.appendChild(mk); svg.appendChild(defs);
+    data.groups.forEach(function (g) {
+      var grp = el('g', { class: 'grp' + (g.key === 'sand' ? ' sand' : '') });
+      if (g.key === 'sand') grp.setAttribute('mask', 'url(#sandmask)');
+      if (g.hit) {
+        grp.setAttribute('tabindex', '0');
+        grp.setAttribute('aria-label', g.en + ' — ' + g.motifEn);
+      }
+      g.items.forEach(function (it) {
+        var p = el('path', { d: it.d, fill: it.fill ? FILL[it.fill] : 'none' });
+        if (it.stroke === false) p.setAttribute('stroke', 'none');
+        else { p.setAttribute('stroke', TONE[it.tone]); p.setAttribute('stroke-width', it.w); }
+        if (it.dash) p.setAttribute('stroke-dasharray', '2.2 2.6');
+        if (it.op !== undefined && it.op < 1) p.setAttribute('opacity', it.op);
+        var a = it.anim;
+        if (a.type === 'draw') p.setAttribute('pathLength', '1');
+        p.setAttribute('class', a.type);
+        p.style.setProperty('--d', a.d + 's');
+        p.style.setProperty('--dur', a.dur + 's');
+        grp.appendChild(p);
+      });
+      if (g.hit) {
+        grp.appendChild(el('ellipse', { class: 'hit', cx: g.hit.cx, cy: g.hit.cy, rx: g.hit.rx, ry: g.hit.ry }));
+        var on = function () { grp.classList.add('on'); host.classList.add('hovering'); caption(g); };
+        var off = function () { grp.classList.remove('on'); host.classList.remove('hovering'); caption(null); };
+        grp.addEventListener('mouseenter', on); grp.addEventListener('focus', on);
+        grp.addEventListener('mouseleave', off); grp.addEventListener('blur', off);
+      }
+      svg.appendChild(grp);
+    });
+    host.replaceChildren(svg);
+    caption(null);
+  }
+  var tb = document.getElementById('rows');
+  data.groups.filter(function (g) { return g.hit; }).forEach(function (g) {
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td><span class="jp">' + g.jp + '</span><br>' + g.en + '</td><td><span class="jp">' + g.motifJp + '</span><br>' + g.motifEn + '</td><td></td>';
+    tr.lastChild.textContent = SOURCES[g.key];
+    tb.appendChild(tr);
+  });
+  document.getElementById('replay').addEventListener('click', render);
+  render();
+})();
+</script>
