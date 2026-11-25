@@ -187,6 +187,48 @@ figure { margin: 0; display: grid; gap: 10px; align-content: start; }
     return function (t) { var u = E.io(P(t, .6, 1.0)); lines.forEach(function (l, i) { set(l, { x: L(30, 38, u), width: L(lens[i], keep[i], u) }); set(dots[i], { opacity: u > .5 ? 1 : 0, r: 2.6 * E.back(P(t, .85 + i * .06, 1.05 + i * .06)) }); }); };
   } });
 
+  // refinements of ② (the user: 「まだこっちの方がマシ」, 2026-11-25)
+  function bubble(s, y0) { y0 = y0 || 0; return el('path', { d: 'M24 ' + (22 + y0) + ' H76 V' + (58 + y0) + ' H44 L34 ' + (68 + y0) + ' V' + (58 + y0) + ' H24 Z', fill: 'none', stroke: INK, 'stroke-width': 3, 'stroke-linejoin': 'round' }, s); }
+  g4.tiles.push({ n: '②-a', jp: '言葉が流れ込み、点だけを残して消える（聞く → 要点）', en: 'Words stream in, then vanish, leaving only the dots: listening becomes key points', cycle: 3.6, setup: function (s) {
+    bubble(s);
+    var lens = [40, 34, 38], lines = lens.map(function (w, i) { return el('rect', { x: 30, y: 30 + i * 9, width: 0, height: 3.6, fill: INK }, s); });
+    var dots = lens.map(function (w, i) { return el('circle', { cx: 32, cy: 31.8 + i * 9, r: 0, fill: INK }, s); });
+    return function (t) {
+      lines.forEach(function (l, i) {
+        var grow = E.out(P(t, .25 + i * .22, .55 + i * .22)), gone = E.io(P(t, 1.45 + i * .05, 1.8 + i * .05));
+        set(l, { x: L(30, 30 + lens[i], gone), width: lens[i] * grow * (1 - gone) });
+        set(dots[i], { r: 2.8 * E.back(P(t, 1.7 + i * .07, 1.95 + i * .07)) });
+      });
+    };
+  } });
+  g4.tiles.push({ n: '②-b', jp: '吹き出しから点だけが落ち、ノートに3つ並ぶ（持ち帰る）', en: 'Only the dots drop out of the bubble and line up in the notebook: taking it home', cycle: 3.6, setup: function (s) {
+    bubble(s, -6);
+    el('rect', { x: 26, y: 86, width: 48, height: 2.4, fill: INK }, s);
+    var lens = [40, 34, 38], lines = lens.map(function (w, i) { return el('rect', { x: 30, y: 24 + i * 9, width: w, height: 3.6, fill: INK }, s); });
+    var dots = lens.map(function (w, i) { return el('circle', { cx: 32, cy: 25.8 + i * 9, r: 2.8, fill: INK, opacity: 0 }, s); });
+    return function (t) {
+      lines.forEach(function (l, i) {
+        var shrink = E.io(P(t, .45, .85)); set(l, { x: L(30, 37, shrink), width: lens[i] * (1 - shrink), opacity: shrink >= 1 ? 0 : 1 });
+        // each dot slides to the tail, then drops out through it onto the notebook line
+        var st = 1.0 + i * .3, f1 = E.io(P(t, st, st + .22)), f2 = E.inn(P(t, st + .22, st + .34)), f3 = P(t, st + .34, st + .64);
+        var x, y;
+        if (f3 > 0) { x = L(35.2, 38 + i * 12, E.io(f3)); y = L(60, 80, E.drop(f3)); }
+        else if (f2 > 0) { x = L(37, 35.2, f2); y = L(44, 60, f2); }
+        else { x = L(32, 37, f1); y = L(25.8 + i * 9, 44, f1); }
+        set(dots[i], { opacity: shrink > .4 ? 1 : 0, cx: x, cy: y });
+      });
+    };
+  } });
+  g4.tiles.push({ n: '②-c', jp: '行はなく、吹き出しの中の点3つが1つに凝縮する', en: 'No lines: three dots in the bubble condense into one', cycle: 3.2, setup: function (s) {
+    bubble(s);
+    var X = [38, 50, 62], dots = X.map(function (x) { return el('circle', { cx: x, cy: 40, r: 3.2, fill: INK }, s); });
+    return function (t) {
+      var appear = function (i) { return E.back(P(t, .25 + i * .16, .45 + i * .16)); };
+      var c = E.io(P(t, 1.1, 1.5)), grow = E.back(P(t, 1.45, 1.75));
+      dots.forEach(function (d, i) { set(d, { cx: L(X[i], 50, c), r: c < 1 ? 3.2 * appear(i) : (i === 1 ? L(3.2, 6, grow) : 0) }); });
+    };
+  } });
+
   // ---------- Podcast 制作 ----------
   var g5 = group('making', 'Podcast 制作', 'Making a podcast');
   g5.tiles.push({ n: '①', jp: '録音の点が灯り、声の波形が立ち上がる', en: 'The record dot lights up and the voice waveform rises', cycle: 3.2, setup: function (s) {
