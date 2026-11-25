@@ -1,0 +1,331 @@
+<meta charset="utf-8">
+<title>Essence Candidates</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&display=swap">
+<style>
+/* Layout: a contact sheet of motion pictograms, one tile per candidate, grouped by interest. Ink on warm white, as EJP. */
+:root {
+  --bg: #F4F4F1;
+  --tile: #F4F4F1;
+  --ink: #111111;
+  --soft: #6B6E6A;
+  --line: #DCDCD6;
+  --miru: #596327;
+  --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --jp: "Noto Sans JP", "Hiragino Sans", sans-serif;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 32px 72px; }
+header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px 32px; border-bottom: 1px solid var(--line); padding-bottom: 20px; }
+h1 { font-weight: 500; font-size: 22px; letter-spacing: .01em; margin: 0 0 6px; }
+.lede { font-size: 13px; line-height: 1.7; color: var(--soft); margin: 0; max-width: 64ch; }
+.jp { font-family: var(--jp); }
+.lede .jp, .cand .jp { color: var(--ink); }
+.ctrl { display: flex; gap: 8px; flex-wrap: wrap; }
+.ctrl button { font: inherit; font-size: 12px; letter-spacing: .04em; color: var(--ink); background: transparent; border: 1px solid var(--ink); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+.ctrl button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.ctrl button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+.group { display: grid; grid-template-columns: 180px 1fr; gap: 16px 28px; padding-block: 28px; border-bottom: 1px solid var(--line); }
+.group h2 { margin: 4px 0 0; font-weight: 500; font-size: 15px; line-height: 1.5; }
+.group h2 small { display: block; font-weight: 400; font-size: 12px; letter-spacing: .06em; color: var(--soft); text-transform: uppercase; margin-top: 2px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 20px; }
+figure { margin: 0; display: grid; gap: 10px; align-content: start; }
+.stage { background: var(--tile); border: 1px solid var(--line); aspect-ratio: 1 / 1; max-width: 100%; display: block; width: 100%; }
+.num { font-size: 11px; letter-spacing: .08em; color: var(--soft); }
+.cand { font-size: 12.5px; line-height: 1.65; color: var(--soft); margin: 0; }
+@media (max-width: 640px) { .group { grid-template-columns: 1fr; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Essence candidates</h1>
+      <p class="lede"><span class="jp">関心ごとに「これをすればそれと分かる」動作の候補を、全部モーションピクトにした。EJP にならい、本質の動作だけが約1秒動いて、止まる。</span><br>Every candidate as a motion pictogram. As in EJP, only the essential action moves, for about a second, then it holds.</p>
+    </div>
+    <div class="ctrl" role="group" aria-label="Playback">
+      <button type="button" id="b1" aria-pressed="true">1×</button>
+      <button type="button" id="b3" aria-pressed="false">0.3× slow</button>
+      <button type="button" id="bp" aria-pressed="false">Pause</button>
+    </div>
+  </header>
+  <main id="main"></main>
+</div>
+
+<script>
+(function () {
+  var NS = 'http://www.w3.org/2000/svg', INK = 'var(--ink)', BG = 'var(--tile)', MIRU = 'var(--miru)';
+  function el(tag, a, parent) { var e = document.createElementNS(NS, tag); for (var k in a) e.setAttribute(k, a[k]); if (parent) parent.appendChild(e); return e; }
+  function set(e, a) { for (var k in a) e.setAttribute(k, a[k]); }
+  var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
+  var P = function (t, a, b) { return clamp((t - a) / (b - a)); };
+  var L = function (a, b, u) { return a + (b - a) * u; };
+  var E = {
+    out: function (t) { return 1 - Math.pow(1 - t, 3); },
+    inn: function (t) { return t * t; },
+    io: function (t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; },
+    back: function (t) { var c1 = 1.5, c3 = c1 + 1; return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); },
+    // a fall that lands with one small bounce
+    drop: function (t) { if (t < .7) return (t / .7) * (t / .7); var u = (t - .7) / .3; return 1 - Math.sin(u * Math.PI) * 0.08; }
+  };
+  function tf(x, y, r, s, cx, cy) { cx = cx || 0; cy = cy || 0; return 'translate(' + x + ' ' + y + ') rotate(' + (r || 0) + ' ' + cx + ' ' + cy + ') translate(' + cx + ' ' + cy + ') scale(' + (s === undefined ? 1 : s) + ') translate(' + (-cx) + ' ' + (-cy) + ')'; }
+  function rng(seed) { return function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
+
+  var G = [];
+  function group(key, jp, en) { var g = { key: key, jp: jp, en: en, tiles: [] }; G.push(g); return g; }
+
+  // ---------- 浮世絵 ----------
+  var g1 = group('ukiyoe', '浮世絵', 'Ukiyo-e');
+  g1.tiles.push({ n: '①', jp: '版を1色ずつ摺り重ねる。色面が1枚ずつ、見当に合わせて落ちる', en: 'Blocks printed one colour at a time, each landing on the registration mark', cycle: 3.2, setup: function (s) {
+    el('rect', { x: 20, y: 66, width: 3.5, height: 16, fill: INK }, s); el('rect', { x: 20, y: 78.5, width: 14, height: 3.5, fill: INK }, s);
+    var layers = [
+      el('rect', { x: 28, y: 64, width: 52, height: 14, fill: INK, stroke: BG, 'stroke-width': 2.4 }, s),
+      el('path', { d: 'M30 64 L54 32 L78 64 Z', fill: INK, stroke: BG, 'stroke-width': 2.4, 'stroke-linejoin': 'round' }, s),
+      el('circle', { cx: 72, cy: 28, r: 6.5, fill: INK, stroke: BG, 'stroke-width': 2.4 }, s)
+    ];
+    return function (t) { layers.forEach(function (l, i) { var u = P(t, .35 + i * .32, .53 + i * .32); set(l, { opacity: u > 0 ? 1 : 0, transform: tf(L(-3, 0, E.inn(u)), L(-12, 0, E.drop(u))) }); }); };
+  } });
+  g1.tiles.push({ n: '②', jp: '紙の角の見当（かぎ形）に、紙がぴたりと合う', en: 'The paper slides into the corner registration mark and fits exactly', cycle: 3.0, setup: function (s) {
+    el('rect', { x: 22, y: 60, width: 3.5, height: 20, fill: INK }, s); el('rect', { x: 22, y: 76.5, width: 20, height: 3.5, fill: INK }, s);
+    var paper = el('rect', { x: 27, y: 30, width: 46, height: 45, fill: 'none', stroke: INK, 'stroke-width': 3.2 }, s);
+    return function (t) { var u = E.back(P(t, .45, .95)); set(paper, { transform: tf(L(16, 0, u), L(-15, 0, u), L(9, 0, u), 1, 27, 75) }); };
+  } });
+  g1.tiles.push({ n: '③', jp: 'バレンが円を描いて擦る', en: 'The baren rubs in circles, then lifts to show the print', cycle: 3.4, setup: function (s) {
+    el('rect', { x: 24, y: 36, width: 52, height: 42, fill: 'none', stroke: INK, 'stroke-width': 3.2 }, s);
+    var print = el('path', { d: 'M32 72 L50 46 L68 72 Z', fill: INK }, s);
+    var baren = el('g', {}, s);
+    el('circle', { cx: 0, cy: 0, r: 13, fill: INK }, baren); el('circle', { cx: 0, cy: 0, r: 7.5, fill: 'none', stroke: BG, 'stroke-width': 1.8 }, baren); el('circle', { cx: 0, cy: 0, r: 2.6, fill: BG }, baren);
+    return function (t) {
+      var u = P(t, .3, 1.7), a = u * Math.PI * 4, lift = E.inn(P(t, 1.8, 2.15));
+      var x = 50 + 9 * Math.cos(a) + lift * 26, y = 58 + 6 * Math.sin(a) - lift * 34;
+      set(baren, { transform: 'translate(' + x + ' ' + y + ')', opacity: lift >= 1 ? 0 : 1 });
+      set(print, { opacity: t > 1.85 ? 1 : 0 });
+    };
+  } });
+
+  // ---------- 文様 ----------
+  var g2 = group('monyo', '文様', 'Traditional patterns');
+  function asanoha(parent, cx, cy, r) {
+    var g = el('g', {}, parent), V = [];
+    for (var i = 0; i < 6; i++) { var a = Math.PI / 6 + i * Math.PI / 3; V.push([cx + r * Math.cos(a), cy + r * Math.sin(a)]); }
+    var d = 'M' + V.map(function (v) { return v[0].toFixed(2) + ' ' + v[1].toFixed(2); }).join('L') + 'Z';
+    for (var j = 0; j < 6; j++) {
+      var A = [cx, cy], B = V[j], C = V[(j + 1) % 6], c = [(A[0] + B[0] + C[0]) / 3, (A[1] + B[1] + C[1]) / 3];
+      d += 'M' + cx + ' ' + cy + 'L' + B[0].toFixed(2) + ' ' + B[1].toFixed(2);
+      [A, B, C].forEach(function (p) { d += 'M' + p[0].toFixed(2) + ' ' + p[1].toFixed(2) + 'L' + c[0].toFixed(2) + ' ' + c[1].toFixed(2); });
+    }
+    el('path', { d: d, fill: 'none', stroke: INK, 'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }, g);
+    return g;
+  }
+  g2.tiles.push({ n: '①', jp: '1つの単位が繰り返されて、面になる', en: 'One unit repeats until it becomes a surface', cycle: 3.4, setup: function (s) {
+    var r = 11, dx = r * Math.sqrt(3), dot = el('circle', { cx: 50, cy: 50, r: 3, fill: INK }, s);
+    var units = [[0, 0]].concat([0, 1, 2, 3, 4, 5].map(function (i) { var a = i * Math.PI / 3; return [dx * Math.cos(a), dx * Math.sin(a)]; }));
+    var gs = units.map(function (o) { return asanoha(s, 50 + o[0], 50 + o[1], r); });
+    return function (t) {
+      set(dot, { opacity: t < .55 ? 1 : 0 });
+      gs.forEach(function (g, i) { var st = i === 0 ? .5 : .95 + (i - 1) * .11, u = P(t, st, st + (i === 0 ? .3 : .12)); set(g, { opacity: u > 0 ? 1 : 0, transform: tf(0, 0, 0, i === 0 ? E.back(u) : L(.85, 1, u), 50 + units[i][0], 50 + units[i][1]) }); });
+    };
+  } });
+  g2.tiles.push({ n: '②', jp: '型紙を外すと、模様が残る', en: 'The stencil lifts and the pattern stays', cycle: 3.2, setup: function (s) {
+    var holes = '', dots = el('g', {}, s);
+    for (var i = 0; i < 3; i++) for (var j = 0; j < 3; j++) { var x = 36 + i * 14, y = 36 + j * 14; holes += 'M' + (x + 4.5) + ' ' + y + 'a4.5 4.5 0 1 0 -9 0a4.5 4.5 0 1 0 9 0Z'; el('circle', { cx: x, cy: y, r: 4.5, fill: INK }, dots); }
+    var stencil = el('g', {}, s);
+    el('path', { d: 'M22 22H78V78H22Z' + holes, fill: INK, 'fill-rule': 'evenodd' }, stencil);
+    var filled = el('g', {}, stencil);
+    for (var a = 0; a < 3; a++) for (var b = 0; b < 3; b++) el('circle', { cx: 36 + a * 14, cy: 36 + b * 14, r: 4.5, fill: INK }, filled);
+    return function (t) {
+      set(dots, { opacity: t > .9 ? 1 : 0 });
+      set(filled, { opacity: t > .6 ? 1 : 0 });
+      var u = E.inn(P(t, 1.0, 1.4));
+      set(stencil, { transform: tf(L(0, 10, u), L(0, -90, u), L(0, -8, u), 1, 50, 50) });
+    };
+  } });
+
+  // ---------- Figma プラグイン ----------
+  var g3 = group('plugin', 'Figmaプラグイン開発', 'Figma plugins');
+  function cursor(parent) { return el('path', { d: 'M0 0 L0 14 L3.6 10.6 L6.4 16.4 L8.8 15.2 L6 9.6 L11 9.6 Z', fill: INK, stroke: BG, 'stroke-width': 1.2, 'stroke-linejoin': 'round' }, parent); }
+  g3.tiles.push({ n: '①', jp: '散らばった四角が、1回の操作で一斉にそろう', en: 'Scattered squares line up all at once with one action', cycle: 3.0, setup: function (s) {
+    var R = rng(11), from = [], to = [], sq = [];
+    for (var i = 0; i < 6; i++) { from.push([18 + R() * 56, 18 + R() * 56, (R() - .5) * 50]); to.push([29 + (i % 3) * 16, 36 + Math.floor(i / 3) * 16, 0]); sq.push(el('rect', { x: 0, y: 0, width: 12, height: 12, fill: INK }, s)); }
+    var cur = cursor(s);
+    return function (t) {
+      var u = P(t, .75, 1.15);
+      sq.forEach(function (q, i) { var v = E.back(clamp(u * 1.15 - i * .03)); var f = from[i], g = to[i]; set(q, { transform: tf(L(f[0], g[0], v), L(f[1], g[1], v), L(f[2], 0, v), 1, 6, 6) }); });
+      var press = t > .55 && t < .7 ? .82 : 1;
+      set(cur, { transform: 'translate(74 70) scale(' + press + ')' });
+    };
+  } });
+  g3.tiles.push({ n: '②', jp: '同じ手作業の繰り返しが、1つのボタンに置き換わる', en: 'A repeated manual task becomes a single button', cycle: 3.6, setup: function (s) {
+    var bars = [0, 1, 2].map(function (i) { return el('rect', { x: 28, y: 32 + i * 13, width: 44, height: 7, fill: 'none', stroke: INK, 'stroke-width': 2.4 }, s); });
+    var btn = el('g', {}, s);
+    el('rect', { x: 28, y: 42, width: 44, height: 18, rx: 9, fill: INK }, btn); el('path', { d: 'M46 46.5 L46 55.5 L54 51 Z', fill: BG }, btn);
+    var cur = cursor(s);
+    return function (t) {
+      bars.forEach(function (b, i) { var tapped = t > .35 + i * .3; var m = E.io(P(t, 1.35, 1.65)); set(b, { fill: tapped ? INK : 'none', opacity: t < 1.65 ? 1 : 0, transform: tf(0, L(0, (1 - i) * 13 + 2.5, m), 0, 1) }); });
+      set(btn, { opacity: t >= 1.65 ? 1 : 0, transform: tf(0, 0, 0, t > 2.05 && t < 2.2 ? .94 : 1, 50, 51) });
+      var cx = 66, cy;
+      if (t < 1.25) { var k = Math.min(2, Math.floor(Math.max(0, t - .2) / .3)); cy = 35 + k * 13; } else cy = 52;
+      set(cur, { transform: 'translate(' + cx + ' ' + cy + ')', opacity: t < 1.3 || t > 1.8 ? 1 : 0 });
+    };
+  } });
+
+  // ---------- Podcast 視聴記録 ----------
+  var g4 = group('notes', 'Podcast 視聴記録', 'Podcast notes');
+  g4.tiles.push({ n: '①', jp: '聴いた1回が1画になり、正の字がたまる', en: 'Each listen adds one stroke, and the 正 tally fills up', cycle: 3.6, setup: function (s) {
+    var W = 6, strokes = [
+      { x: 26, y: 24, w: 48, h: W, dir: 'x' }, { x: 47, y: 24, w: W, h: 52, dir: 'y' }, { x: 47, y: 47, w: 22, h: W, dir: 'x' },
+      { x: 31, y: 47, w: W, h: 29, dir: 'y' }, { x: 22, y: 73, w: 56, h: W, dir: 'x' }
+    ].map(function (o) { o.e = el('rect', { x: o.x, y: o.y, width: o.w, height: o.h, fill: INK }, s); return o; });
+    return function (t) { strokes.forEach(function (o, i) { var u = E.out(P(t, .3 + i * .36, .44 + i * .36)); set(o.e, o.dir === 'x' ? { width: o.w * u } : { height: o.h * u }); }); };
+  } });
+  g4.tiles.push({ n: '②', jp: '聞いた言葉が、要点の点に変わる', en: 'The words heard turn into key-point dots', cycle: 3.0, setup: function (s) {
+    el('path', { d: 'M24 26 H76 V66 H44 L34 76 V66 H24 Z', fill: 'none', stroke: INK, 'stroke-width': 3, 'stroke-linejoin': 'round' }, s);
+    var lens = [40, 34, 38], lines = lens.map(function (w, i) { return el('rect', { x: 30, y: 34 + i * 9, width: w, height: 3.6, fill: INK }, s); });
+    var dots = lens.map(function (w, i) { return el('circle', { cx: 32, cy: 35.8 + i * 9, r: 2.6, fill: INK }, s); });
+    var keep = [16, 12, 20];
+    return function (t) { var u = E.io(P(t, .6, 1.0)); lines.forEach(function (l, i) { set(l, { x: L(30, 38, u), width: L(lens[i], keep[i], u) }); set(dots[i], { opacity: u > .5 ? 1 : 0, r: 2.6 * E.back(P(t, .85 + i * .06, 1.05 + i * .06)) }); }); };
+  } });
+
+  // ---------- Podcast 制作 ----------
+  var g5 = group('making', 'Podcast 制作', 'Making a podcast');
+  g5.tiles.push({ n: '①', jp: '録音の点が灯り、声の波形が立ち上がる', en: 'The record dot lights up and the voice waveform rises', cycle: 3.2, setup: function (s) {
+    var dot = el('circle', { cx: 24, cy: 50, r: 5.5, fill: INK }, s), H = [8, 18, 30, 42, 26, 36, 16, 28, 10, 6], bars = H.map(function (h, i) { return el('rect', { x: 36 + i * 4.4, y: 50, width: 2.6, height: 0, fill: INK }, s); });
+    return function (t) {
+      var pulse = t > .3 && t < .5 ? 1.35 : 1; set(dot, { r: 5.5 * pulse });
+      bars.forEach(function (b, i) { var u = E.back(P(t, .6 + i * .05, .85 + i * .05)), h = H[i] * u; set(b, { y: 50 - h / 2, height: Math.max(0, h) }); });
+    };
+  } });
+  g5.tiles.push({ n: '②', jp: '点から輪が広がる（声が届く）', en: 'Rings spread from a dot: the voice reaches out', cycle: 3.0, setup: function (s) {
+    var dot = el('circle', { cx: 50, cy: 66, r: 5.5, fill: INK }, s);
+    var arcs = [13, 24, 35].map(function (r) { var a0 = -Math.PI * .78, a1 = -Math.PI * .22; return el('path', { d: 'M' + (50 + r * Math.cos(a0)).toFixed(2) + ' ' + (66 + r * Math.sin(a0)).toFixed(2) + 'A' + r + ' ' + r + ' 0 0 1 ' + (50 + r * Math.cos(a1)).toFixed(2) + ' ' + (66 + r * Math.sin(a1)).toFixed(2), fill: 'none', stroke: INK, 'stroke-width': 4.2, 'stroke-linecap': 'round' }, s); });
+    return function (t) { arcs.forEach(function (a, i) { var u = P(t, .5 + i * .22, .66 + i * .22); set(a, { opacity: u > 0 ? 1 : 0, transform: tf(0, 0, 0, L(.8, 1, E.out(u)), 50, 66) }); }); };
+  } });
+
+  // ---------- AIと記事執筆 ----------
+  var g6 = group('writing', 'AIと記事執筆', 'Writing with AI');
+  g6.tiles.push({ n: '①', jp: '自分の1行に、AIの1行が続く（カーソルが行き来する）', en: 'My line, then the AI\'s line, the cursor moving between them', cycle: 3.6, setup: function (s) {
+    var rows = [{ w: 50, me: 1 }, { w: 40, me: 0 }, { w: 46, me: 1 }, { w: 30, me: 0 }];
+    var els = rows.map(function (r, i) {
+      if (r.me) return el('rect', { x: 24, y: 30 + i * 11, width: 0, height: 4.2, fill: INK }, s);
+      var g = el('g', {}, s), n = Math.floor(r.w / 5.2);
+      for (var k = 0; k < n; k++) el('rect', { x: 24 + k * 5.2, y: 30 + i * 11, width: 3.2, height: 4.2, fill: INK, opacity: 0 }, g);
+      return g;
+    });
+    var cur = el('rect', { x: 24, y: 28, width: 2.2, height: 8.2, fill: INK }, s);
+    var spans = [[.3, .75], [.95, 1.3], [1.5, 1.95], [2.15, 2.45]];
+    return function (t) {
+      var cx = 24, cy = 28;
+      rows.forEach(function (r, i) {
+        var u = P(t, spans[i][0], spans[i][1]), w = r.w * u;
+        if (r.me) set(els[i], { width: w }); else [].forEach.call(els[i].children, function (c, k) { c.setAttribute('opacity', (k * 5.2) < w ? 1 : 0); });
+        if (t >= spans[i][0]) { cx = 24 + w + 1.5; cy = 28 + i * 11; }
+      });
+      var blink = t > 2.5 ? (Math.floor(t * 2.5) % 2) : 1;
+      set(cur, { x: cx, y: cy, opacity: blink });
+    };
+  } });
+  g6.tiles.push({ n: '②', jp: '長い下書きが削られて、短くなる（推敲）', en: 'A long draft is cut down: editing', cycle: 3.4, setup: function (s) {
+    var W0 = [54, 50, 54, 46, 40], cut = [0, 1, 0, 1, 0], W1 = [44, 0, 34, 0, 26];
+    var lines = W0.map(function (w, i) { return el('rect', { x: 23, y: 28 + i * 10, width: w, height: 4.2, fill: INK }, s); });
+    return function (t) {
+      var strike = t > .55, u = E.io(P(t, .9, 1.35)), v = E.io(P(t, 1.35, 1.75)), row = 0;
+      lines.forEach(function (l, i) {
+        var deleted = cut[i];
+        if (deleted) { set(l, { fill: strike ? 'none' : INK, stroke: INK, 'stroke-width': strike ? 1.2 : 0, height: L(4.2, 0, u), opacity: u >= 1 ? 0 : 1 }); }
+        else { set(l, { width: L(W0[i], W1[i], v), y: L(28 + i * 10, 28 + row * 10 + 10, u) }); row++; }
+      });
+    };
+  } });
+
+  // ---------- データ可視化 ----------
+  var g7 = group('dataviz', 'データ可視化', 'Data visualization');
+  g7.tiles.push({ n: '①', jp: 'ばらばらの点が並び替わって、形（グラフ）になる', en: 'Scattered dots fall into place and become a chart', cycle: 3.4, setup: function (s) {
+    var R = rng(5), cols = [2, 4, 3, 5], pts = [], base = 74;
+    el('rect', { x: 22, y: base + 4, width: 56, height: 2.4, fill: INK }, s);
+    cols.forEach(function (n, c) { for (var k = 0; k < n; k++) pts.push({ fx: 20 + R() * 60, fy: 18 + R() * 40, tx: 30 + c * 13.3, ty: base - k * 8.2, e: el('circle', { r: 3.4, fill: INK }, s), d: R() * .25 }); });
+    return function (t) { pts.forEach(function (p) { var u = P(t, .6 + p.d, 1.15 + p.d); set(p.e, { cx: L(p.fx, p.tx, E.io(u)), cy: L(p.fy, p.ty, E.drop(u)) }); }); };
+  } });
+  g7.tiles.push({ n: '②', jp: '点が近い順につながって、網になる', en: 'Dots join their nearest neighbours into a network', cycle: 3.4, setup: function (s) {
+    var V = [[30, 30], [52, 24], [72, 34], [38, 50], [60, 52], [26, 68], [48, 72], [74, 66], [64, 80]];
+    var E2 = [[0, 1], [1, 2], [0, 3], [3, 4], [1, 4], [2, 4], [3, 5], [5, 6], [6, 4], [4, 7], [7, 8], [6, 8]];
+    var lines = E2.map(function (e) { var a = V[e[0]], b = V[e[1]], len = Math.hypot(b[0] - a[0], b[1] - a[1]); return { e: el('line', { x1: a[0], y1: a[1], x2: b[0], y2: b[1], stroke: INK, 'stroke-width': 2, 'stroke-dasharray': len, 'stroke-dashoffset': len }, s), len: len }; });
+    var dots = V.map(function (v) { return el('circle', { cx: v[0], cy: v[1], r: 3.6, fill: INK }, s); });
+    return function (t) {
+      dots.forEach(function (d, i) { set(d, { opacity: t > .2 + i * .05 ? 1 : 0 }); });
+      lines.forEach(function (l, i) { var u = E.out(P(t, .8 + i * .07, .98 + i * .07)); set(l.e, { 'stroke-dashoffset': l.len * (1 - u) }); });
+    };
+  } });
+
+  // ---------- お気に入りの画像 ----------
+  var g8 = group('images', 'お気に入りの画像', 'Favorite images');
+  g8.tiles.push({ n: '①', jp: '集めた画像が1枚ずつ重なる', en: 'Collected images stack up one by one', cycle: 3.4, setup: function (s) {
+    var glyphs = ['M-8 6 L0 -6 L8 6 Z', 'M0 -6 a6 6 0 1 0 0.01 0', 'M-8 4 Q-4 -4 0 4 T8 4 V7 H-8 Z', 'M0 7 C-9 0 -6 -7 0 -8 C6 -7 9 0 0 7 Z'], rot = [-7, 5, -3, 8];
+    var cards = glyphs.map(function (gl, i) { var g = el('g', {}, s); el('rect', { x: -17, y: -13, width: 34, height: 26, fill: BG, stroke: INK, 'stroke-width': 3 }, g); el('path', { d: gl, fill: INK }, g); return g; });
+    return function (t) { cards.forEach(function (c, i) { var u = P(t, .35 + i * .3, .58 + i * .3); set(c, { opacity: u > 0 ? 1 : 0, transform: 'translate(' + (50 + (i % 2 ? 3 : -3)) + ' ' + L(30, 56 - i * 2, E.drop(u)) + ') rotate(' + rot[i] + ')' }); }); };
+  } });
+  g8.tiles.push({ n: '②', jp: '葉脈のように、構造が見えてくる', en: 'Like leaf veins, the structure comes into view', cycle: 3.4, setup: function (s) {
+    el('path', { d: 'M50 80 C30 66 26 40 50 18 C74 40 70 66 50 80 Z', fill: INK }, s);
+    el('rect', { x: 48.8, y: 78, width: 2.4, height: 8, fill: INK }, s);
+    var mid = el('line', { x1: 50, y1: 80, x2: 50, y2: 26, stroke: BG, 'stroke-width': 2.2, 'stroke-linecap': 'round' }, s);
+    var veins = [];
+    [[68, 38, 60], [58, 37, 49], [48, 38, 39], [38, 41, 31]].forEach(function (v) { [-1, 1].forEach(function (sd) { veins.push(el('line', { x1: 50, y1: v[0], x2: 50 + sd * (50 - v[1]), y2: v[2], stroke: BG, 'stroke-width': 1.8, 'stroke-linecap': 'round' }, s)); }); });
+    return function (t) {
+      var u = E.out(P(t, .45, .95)); set(mid, { y2: L(80, 26, u) });
+      veins.forEach(function (v, i) { var w = E.out(P(t, .85 + Math.floor(i / 2) * .14, 1.1 + Math.floor(i / 2) * .14)), x1 = 50, x2 = +v.getAttribute('data-x2') || null; if (!v._x2) { v._x2 = +v.getAttribute('x2'); v._y2 = +v.getAttribute('y2'); v._y1 = +v.getAttribute('y1'); } set(v, { x2: L(50, v._x2, w), y2: L(v._y1, v._y2, w), opacity: w > 0 ? 1 : 0 }); });
+    };
+  } });
+
+  // ---------- 着地: ロゴ ----------
+  var g9 = group('logo', '着地: ロゴ「i」', 'Ending: the "i" logo');
+  g9.tiles.push({ n: '—', jp: '点が落ちて止まり、もう1つの点が乗り、縦棒が立ち、輪が閉じる（海松色）', en: 'A dot falls and stops, a second dot lands on it, the stem rises, and the ring closes (miru green)', cycle: 3.8, setup: function (s) {
+    var k = 1.34, o = 50 - 26 * k, g = el('g', { transform: 'translate(' + o + ' ' + o + ') scale(' + k + ')' }, s);
+    var circ = 2 * Math.PI * 22.5;
+    var ring = el('circle', { cx: 26, cy: 26, r: 22.5, fill: 'none', stroke: MIRU, 'stroke-width': 3, 'stroke-dasharray': circ, 'stroke-dashoffset': circ, transform: 'rotate(-90 26 26)' }, g);
+    var d1 = el('circle', { cx: 26, cy: 22.14, r: 3.86, fill: MIRU }, g), d2 = el('circle', { cx: 26, cy: 12.87, r: 3.86, fill: MIRU }, g);
+    var stem = el('rect', { x: 22.14, y: 27.55, width: 7.73, height: 15.45, fill: MIRU }, g);
+    return function (t) {
+      var a = P(t, .3, .75), b = P(t, .85, 1.25), c = E.out(P(t, 1.45, 1.75)), r = E.io(P(t, 1.9, 2.5));
+      set(d1, { opacity: a > 0 ? 1 : 0, transform: 'translate(0 ' + L(-34, 0, E.drop(a)) + ')' });
+      set(d2, { opacity: b > 0 ? 1 : 0, transform: 'translate(0 ' + L(-24, 0, E.drop(b)) + ')' });
+      set(stem, { height: 15.45 * c, y: 27.55 + 15.45 * (1 - c) });
+      set(ring, { 'stroke-dashoffset': circ * (1 - r) });
+    };
+  } });
+
+  // ---------- build + clock ----------
+  var main = document.getElementById('main'), all = [];
+  G.forEach(function (g) {
+    var sec = document.createElement('section'); sec.className = 'group';
+    sec.innerHTML = '<h2><span class="jp">' + g.jp + '</span><small>' + g.en + '</small></h2>';
+    var tiles = document.createElement('div'); tiles.className = 'tiles';
+    g.tiles.forEach(function (tile) {
+      var fig = document.createElement('figure');
+      var svg = el('svg', { class: 'stage', viewBox: '0 0 100 100', role: 'img', 'aria-label': g.en + ' ' + tile.n + ': ' + tile.en });
+      fig.appendChild(svg);
+      var cap = document.createElement('figcaption');
+      cap.innerHTML = '<div class="num">' + g.en.toUpperCase() + ' ' + tile.n + '</div><p class="cand"><span class="jp">' + tile.jp + '</span><br>' + tile.en + '</p>';
+      fig.appendChild(cap); tiles.appendChild(fig);
+      all.push({ update: tile.setup(svg), cycle: tile.cycle });
+    });
+    sec.appendChild(tiles); main.appendChild(sec);
+  });
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var speed = 1, paused = reduce, clock = 0, last = null;
+  function frame(now) {
+    if (last !== null && !paused) clock += (now - last) / 1000 * speed;
+    last = now;
+    all.forEach(function (a) { a.update(reduce ? a.cycle - .01 : clock % a.cycle); });
+    requestAnimationFrame(frame);
+  }
+  if (reduce) all.forEach(function (a) { a.update(a.cycle - .01); });
+  // review hook: freeze every tile at time t
+  window.__seekAll = function (t) { paused = true; clock = t; };
+  requestAnimationFrame(frame);
+  function press(id) { ['b1', 'b3'].forEach(function (b) { document.getElementById(b).setAttribute('aria-pressed', String(b === id)); }); }
+  document.getElementById('b1').onclick = function () { speed = 1; press('b1'); };
+  document.getElementById('b3').onclick = function () { speed = .3; press('b3'); };
+  document.getElementById('bp').onclick = function () { paused = !paused; this.setAttribute('aria-pressed', String(paused)); this.textContent = paused ? 'Play' : 'Pause'; };
+})();
+</script>
