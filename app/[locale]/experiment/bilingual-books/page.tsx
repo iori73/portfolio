@@ -31,7 +31,7 @@ const UI: Record<string, Bi> = {
   process: { en: 'How it is made', jp: '作り方' },
   processLead: {
     en: 'Five steps, repeated for every book. Each one is written down so the next season starts from the same place.',
-    jp: '本ごとに同じ5つの工程をくり返す。どの工程も手順を書き残し、次のシーズンが同じところから始められるようにした。',
+    jp: '本ごとに同じ5つの工程をくり返します。どの工程も手順を書き残し、次のシーズンも同じ手順で始められるようにしました。',
   },
   seasons: { en: 'Seasons', jp: 'シーズン' },
   episodes: { en: 'Episodes', jp: '話数' },
