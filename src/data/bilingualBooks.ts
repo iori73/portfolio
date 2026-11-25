@@ -8,13 +8,7 @@
 
 export type Bi = { en: string; jp: string };
 
-export const BB_TAGS = [
-  'Bilingual',
-  'Text-to-Speech',
-  'Translation',
-  'Publishing Automation',
-  'Figma Variables',
-] as const;
+export const BB_TAGS = ['Text-to-Speech', 'Podcast', 'Publishing Automation'] as const;
 
 export const BB_IMG = '/experiment/bilingual-books';
 
@@ -30,7 +24,7 @@ export const BB_SUBTITLE: Bi = {
 
 export const BB_OVERVIEW: Bi[] = [
   {
-    jp: '日本語を読んでいる途中で、「これは英語でどう言うか」が気になります。その頭の動き方に合わせて、日本語の一文のあとに英語の一文が続く形で、古典を聴ける番組を作りました。',
+    jp: '日本語を読んでいる途中で、「これは英語でどう言うか」が常に気になってしまいます。その頭の動き方に合わせて、日本語の一文のあとに英語の一文が続く形で、古典を聴ける番組を作りました。',
     en: 'While reading in Japanese, I keep wondering how the same sentence would be said in English. This podcast follows that habit: every Japanese sentence is followed by its English counterpart.',
   },
   {
