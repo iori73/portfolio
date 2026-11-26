@@ -156,17 +156,20 @@ figure { margin: 0; display: grid; gap: 10px; align-content: start; }
       set(cur, { transform: 'translate(74 70) scale(' + press + ')' });
     };
   } });
-  g3.tiles.push({ n: '②', jp: '同じ手作業の繰り返しが、1つのボタンに置き換わる', en: 'A repeated manual task becomes a single button', cycle: 3.6, setup: function (s) {
-    var bars = [0, 1, 2].map(function (i) { return el('rect', { x: 28, y: 32 + i * 13, width: 44, height: 7, fill: 'none', stroke: INK, 'stroke-width': 2.4 }, s); });
-    var btn = el('g', {}, s);
-    el('rect', { x: 28, y: 42, width: 44, height: 18, rx: 9, fill: INK }, btn); el('path', { d: 'M46 46.5 L46 55.5 L54 51 Z', fill: BG }, btn);
+  // ② revised 2026-11-26: the play-like ▶ read as media playback (the user: 「なぜ再生ボタンみたいなのがある」).
+  // Now: two bars filled by hand, one at a time; reset; a plain button (no symbol) is clicked once and all three fill together.
+  g3.tiles.push({ n: '②', jp: '1本ずつ手で埋めていた作業が、1回のクリックで全部埋まる', en: 'Work filled in one by one by hand is done all at once with a single click', cycle: 3.8, setup: function (s) {
+    var bars = [0, 1, 2].map(function (i) { return el('rect', { x: 40, y: 34 + i * 12, width: 38, height: 7, fill: 'none', stroke: INK, 'stroke-width': 2.4 }, s); });
+    var btn = el('rect', { x: 20, y: 43, width: 12, height: 12, rx: 3, fill: INK }, s);
     var cur = cursor(s);
     return function (t) {
-      bars.forEach(function (b, i) { var tapped = t > .35 + i * .3; var m = E.io(P(t, 1.35, 1.65)); set(b, { fill: tapped ? INK : 'none', opacity: t < 1.65 ? 1 : 0, transform: tf(0, L(0, (1 - i) * 13 + 2.5, m), 0, 1) }); });
-      set(btn, { opacity: t >= 1.65 ? 1 : 0, transform: tf(0, 0, 0, t > 2.05 && t < 2.2 ? .94 : 1, 50, 51) });
-      var cx = 66, cy;
-      if (t < 1.25) { var k = Math.min(2, Math.floor(Math.max(0, t - .2) / .3)); cy = 35 + k * 13; } else cy = 52;
-      set(cur, { transform: 'translate(' + cx + ' ' + cy + ')', opacity: t < 1.3 || t > 1.8 ? 1 : 0 });
+      var reset = t > 1.25 && t < 1.95, all = t >= 2.05;
+      bars.forEach(function (b, i) { var byHand = i < 2 && t > .45 + i * .4 && t < 1.25; set(b, { fill: byHand || all ? INK : 'none' }); });
+      set(btn, { transform: tf(0, 0, 0, t > 1.95 && t < 2.1 ? .86 : 1, 26, 49) });
+      var x, y;
+      if (t < 1.25) { var k = t < .85 ? 0 : 1; x = 70; y = 36 + k * 12; }
+      else { var m = E.io(P(t, 1.35, 1.8)); x = L(70, 28, m); y = L(48, 50, m); }
+      set(cur, { transform: 'translate(' + x + ' ' + y + ') scale(' + ((t > .4 && t < .5) || (t > .8 && t < .9) || (t > 1.95 && t < 2.1) ? .82 : 1) + ')' });
     };
   } });
 
