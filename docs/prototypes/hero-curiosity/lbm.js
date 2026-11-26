@@ -64,7 +64,32 @@ function pack(NX, NY, solid, ux, uy, Uref, y0 = 0, rows = NY) {
 }
 
 module.exports = { solve, pack };
-if (require.main === module) {
+
+// 諸行無常, second geometry: a river with gently waving banks and a round cove below the lower bank (the shape of the first sketch)
+function river() {
+  const NX = 360, NY = 146, TAU = Math.PI * 2, Umax = 0.08, nu = 0.04;
+  const top = (x) => NY * .3 + Math.sin(x / NX * TAU * .8) * NY * .05, bot = (x) => NY * .74 + Math.sin(x / NX * TAU * .8 + 1) * NY * .04;
+  const ccx = NX * .62, ccy = bot(ccx) + NY * .06, cr = NY * .14;
+  const solid = new Uint8Array(NX * NY);
+  for (let y = 0; y < NY; y++) for (let x = 0; x < NX; x++) {
+    const inChannel = y > top(x) && y < bot(x), inCove = Math.hypot(x - ccx, y - ccy) <= cr;
+    if (!(inChannel || inCove)) solid[y * NX + x] = 1;
+  }
+  const t0 = top(0), b0 = bot(0), H = b0 - t0;
+  const inlet = (y) => { if (y <= t0 || y >= b0) return 0; const s = (y - t0) / H; return 4 * Umax * s * (1 - s); };
+  const r = solve({ NX, NY, solid, inlet, nu, farField: 0, steps: 90000, label: 'river' });
+  let minU = 0; for (let y = 0; y < NY; y++) for (let x = 0; x < NX; x++) { const c = y * NX + x; if (!solid[c] && Math.hypot(x - ccx, y - ccy) < cr && y > bot(x)) minU = Math.min(minU, r.ux[c]); }
+  const Re = Math.round(Umax * H / nu);
+  console.log(`river Re=${Re} tau=${r.tau.toFixed(3)} residual ${r.lastRes.toExponential(2)} strongest reverse flow in the cove = ${(minU / Umax).toFixed(3)} Umax`);
+  return Object.assign(pack(NX, NY, solid, r.ux, r.uy, Umax), { Re, tau: +r.tau.toFixed(3), residual: r.lastRes, reverse: +(minU / Umax).toFixed(3) });
+}
+
+if (require.main === module && process.argv[2] === 'river') {
+  const file = __dirname + '/lbm-fields.json', out = JSON.parse(fs.readFileSync(file, 'utf8'));
+  out.river = river();
+  fs.writeFileSync(file, JSON.stringify(out));
+  console.log('added river to', file);
+} else if (require.main === module) {
 const out = {};
 
 // 空: flow past a circular cylinder at Re = 40 (steady: a still pair of vortices behind it)
