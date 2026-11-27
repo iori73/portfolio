@@ -132,8 +132,13 @@ details.group summary { cursor: pointer; }
     { id: 'sankuzushi', jp: '三崩し', en: 'San-kuzushi', g: 'liked' },
     { id: 'kasumi', jp: '霞', en: 'Kasumi (mist bands)', g: 'liked' },
     { id: 'mandala', jp: '曼荼羅（金剛界）', en: 'Mandala grid', g: 'liked' },
+    { id: 'karakusa', jp: '唐草', en: 'Karakusa', g: 'liked' },
+    { id: 'jukou', jp: '珠光緞子', en: 'Jukō donsu', g: 'chajin' },
+    { id: 'jouou', jp: '紹鷗緞子', en: 'Jōō donsu', g: 'chajin' },
+    { id: 'rikyu', jp: '利休緞子', en: 'Rikyū donsu', g: 'chajin' },
+    { id: 'oribe', jp: '織部緞子', en: 'Oribe donsu', g: 'chajin' },
+    { id: 'enshu', jp: '遠州緞子', en: 'Enshū donsu', g: 'chajin' },
     { id: 'marumon', jp: '丸文', en: 'Maru-mon (roundels)', g: 'rest' },
-    { id: 'karakusa', jp: '唐草', en: 'Karakusa', g: 'rest' },
     { id: 'matsukawabishi', jp: '松皮菱', en: 'Matsukawa-bishi', g: 'rest' },
     { id: 'kagome', jp: '籠目', en: 'Kagome', g: 'rest' },
     { id: 'uroko', jp: '鱗', en: 'Uroko', g: 'rest' },
@@ -176,6 +181,31 @@ details.group summary { cursor: pointer; }
     function diamond(cx, cy, w, h) { poly([[cx, cy - h / 2], [cx + w / 2, cy], [cx, cy + h / 2], [cx - w / 2, cy]], true); }
     function rotated(angle, fn) { c.save(); c.translate(GW / 2, GH / 2); c.rotate(angle); c.translate(-GW / 2, -GH / 2); fn(); c.restore(); }
     function spiral(cx, cy, r0, turns, start, dir) { var pts = []; for (var t = 0; t <= turns * TAU; t += .15) { var r = r0 * (1 - .78 * t / (turns * TAU)); pts.push([cx + r * Math.cos(start + dir * t), cy + r * Math.sin(start + dir * t)]); } poly(pts); }
+    function peonyAt(x, y, r) { for (var q = 0; q < 6; q++) { var an = q * TAU / 6; circle(x + r * .7 * Math.cos(an), y + r * .7 * Math.sin(an), r * .38, an - 1.75, an + 1.75); } }
+    function kikuAt(x, y, r) { circle(x, y, r); circle(x, y, r * .28); for (var q = 0; q < 12; q++) { var an = q * TAU / 12; seg([x + r * .34 * Math.cos(an), y + r * .34 * Math.sin(an)], [x + r * .92 * Math.cos(an), y + r * .92 * Math.sin(an)]); } }
+    function flowerAt(x, y, r, n) { circle(x, y, r * .3); for (var q = 0; q < (n || 6); q++) { var an = q * TAU / (n || 6); circle(x + r * .62 * Math.cos(an), y + r * .62 * Math.sin(an), r * .4); } }
+    function plumAt(x, y, r) { for (var q = 0; q < 5; q++) { var an = -Math.PI / 2 + q * TAU / 5; circle(x + r * .6 * Math.cos(an), y + r * .6 * Math.sin(an), r * .4); } circle(x, y, r * .16); }
+    function clearDisc(x, y, r) { c.save(); c.globalCompositeOperation = 'destination-out'; c.beginPath(); c.arc(x, y, r, 0, TAU); c.fill(); c.restore(); }
+    // karakusa, from the pattern dictionary (p.90, 唐草(1)): S-curved stems in nested rows; at every bend a tendril curls
+    // into the open bay (warabite), turning alternately left and right, and a small counter-curl springs from its rim.
+    function karaVine(o) {
+      var A = o.A, rowH = A * o.rowK, lam = A * o.lamK, R = A * o.curlK, sd = o.seed || 3, rr = function () { sd = (sd * 16807) % 2147483647; return sd / 2147483647; }, nb = 0;
+      for (var jr = -1; jr < GH / rowH + 1; jr++) {
+        var y0 = jr * rowH + rowH / 2, ph = (o.alt && (jr & 1)) ? Math.PI : 0, pts = [];
+        for (var x = -lam; x <= GW + lam; x += 2) pts.push([x, y0 + A * Math.sin(TAU * x / lam + ph)]);
+        poly(pts);
+        var xs0 = lam / 4 - ph / TAU * lam;
+        for (var kb = -2; xs0 + kb * lam / 2 < GW + lam; kb++) {
+          nb++; if (o.skip && rr() < o.skip) continue;
+          var xb = xs0 + kb * lam / 2, sg = Math.sin(TAU * xb / lam + ph) > 0 ? 1 : -1, yb = y0 + sg * A;
+          var cy = yb - sg * R, dir = (kb & 1) ? 1 : -1, st = sg > 0 ? Math.PI / 2 : -Math.PI / 2;
+          var fl = o.flowerEvery && nb % o.flowerEvery === 0;
+          spiral(xb, cy, R, fl ? .55 : o.turns, st, dir);
+          if (fl) peonyAt(xb, cy, R * o.flowerK);
+          if (o.sub) { var a2 = st + dir * Math.PI * .6, sx = xb + R * Math.cos(a2), sy = cy + R * Math.sin(a2), r2 = R * .42; spiral(sx + r2 * Math.cos(a2), sy + r2 * Math.sin(a2), r2, .9, a2 + Math.PI, -dir); }
+        }
+      }
+    }
     function vine(y0, A, lam, phase, curlR, turns) {
       var pts = []; for (var x = -lam; x < GW + lam; x += 1.5) pts.push([x, y0 + A * Math.sin(TAU * x / lam + phase)]); poly(pts);
       for (var m = -1; m < GW / (lam / 2) + 2; m++) {
@@ -206,7 +236,34 @@ details.group summary { cursor: pointer; }
       case 'komochi': hexes(s * .6, .55); break;
       case 'bishamon': hexes(s * .42, 0, function (i, j) { return ((i - (j >> 1) * 0) + 2 * j) % 3 === 0; }); break;
       case 'shippo': { var rr = s * .45; for (j = -1; j < GH / (2 * rr) + 2; j++) for (i = -1; i < GW / (2 * rr) + 2; i++) { circle(i * 2 * rr, j * 2 * rr, rr); circle(i * 2 * rr + rr, j * 2 * rr + rr, rr); } break; }
-      case 'karakusa': for (j = 0; j < 3; j++) vine((j + .5) * GH / 3, s * .14, s * 1.5, j * Math.PI, s * .16, 1.3); break;
+      case 'karakusa': karaVine({ A: s * .32, rowK: 2.3, lamK: 5, curlK: .95, turns: 1.5, sub: true, seed: 3 }); break;
+      // the tea masters' fabrics (名物裂茶人図鑑 p.128-129). Dragons and flames are left out: the slime cannot draw figures.
+      case 'jukou': karaVine({ A: s * .3, rowK: 2.8, lamK: 6.4, curlK: .92, turns: 1.3, sub: true, skip: .15, flowerEvery: 2, flowerK: 1, seed: 11 }); break;   // 珠光: peony scrolls, sparse
+      case 'jouou': karaVine({ A: s * .3, rowK: 2.4, lamK: 5.6, curlK: .92, turns: 1.3, sub: true, flowerEvery: 3, flowerK: .9, seed: 5 }); break;   // 紹鷗: peony scrolls, more flowing and continuous
+      case 'rikyu': {       // 利休: plum-blossom roundels (umebachi) in diagonal rows, each just touching the next
+        var rf = s * .42, dU = rf * 2.1;
+        for (j = -1; j < GH / (dU * .866) + 1; j++) for (i = -1; i < GW / dU + 1; i++) plumAt(i * dU + (j & 1 ? dU / 2 : 0), j * dU * .866, rf);
+        break;
+      }
+      case 'oribe': {       // 織部: running waves, with plum blossoms floating over them
+        var spW = s * .17;
+        for (j = -6; j < GH / spW + 6; j++) { var pw = []; for (var xw = 0; xw <= GW; xw += 2) pw.push([xw, j * spW + xw * .12 + s * .14 * Math.sin(TAU * xw / (s * 2.2) + j * .35)]); poly(pw); }
+        var seedO = 9, ro = function () { seedO = (seedO * 16807) % 2147483647; return seedO / 2147483647; }, rpl = s * .26;
+        for (j = 0; j < GH / (s * .8) + 1; j++) for (i = -1; i < GW / (s * 1.15) + 1; i++) { var pxo = i * s * 1.15 + (j & 1 ? s * .57 : 0) + (ro() - .5) * s * .4, pyo = j * s * .8 + s * .3 + (ro() - .5) * s * .25; clearDisc(pxo, pyo, rpl * 1.12); plumAt(pxo, pyo, rpl); }
+        break;
+      }
+      case 'enshu': {       // 遠州: a stone-pavement grid, each square holding a roundel - shippō, chrysanthemum or peony in turn
+        var qE = GH / 2.4, rE = qE * .36;
+        for (var gx = -qE; gx <= GW + qE; gx += qE) seg([gx, 0], [gx, GH]);
+        for (var gy = 0; gy <= GH + qE; gy += qE) seg([0, gy], [GW, gy]);
+        for (j = 0; j < GH / qE + 1; j++) for (i = -1; i < GW / qE + 1; i++) {
+          var ex = i * qE + qE / 2, ey = j * qE + qE / 2, ty = ((i + j) % 3 + 3) % 3;
+          if (ty === 0) { circle(ex, ey, rE); circle(ex + rE, ey + rE, rE, Math.PI, Math.PI * 1.5); circle(ex - rE, ey + rE, rE, Math.PI * 1.5, TAU); circle(ex - rE, ey - rE, rE, 0, Math.PI / 2); circle(ex + rE, ey - rE, rE, Math.PI / 2, Math.PI); }
+          else if (ty === 1) kikuAt(ex, ey, rE);
+          else peonyAt(ex, ey, rE);
+        }
+        break;
+      }
       case 'kanzemizu': for (j = 0; j < 2; j++) vine((j + .5) * GH / 2, s * .2, s * 2.1, j * Math.PI * .7, s * .28, 2.1); break;
       case 'ryusui': {
         for (j = 0; j < 7; j++) { var y0 = (j + .5) * GH / 7, ph = j * 1.3, pts = []; for (var x = 0; x <= GW; x += 2) pts.push([x, y0 + s * .12 * Math.sin(x / (s * .9) + ph) + s * .07 * Math.sin(x / (s * .37) + ph * 2)]); poly(pts); }
@@ -517,7 +574,7 @@ details.group summary { cursor: pointer; }
   }
   // a click (or Enter / Space) on the stage: another pattern, at random from the ones you liked (never the same twice in a row).
   // The particles stay; the pattern loosens toward the network and forms the next one in about 3-4 s.
-  var LIKED = PATTERNS.filter(function (q) { return q.g === 'liked'; }).map(function (q) { return q.id; });
+  var LIKED = PATTERNS.filter(function (q) { return q.g === 'liked' || q.g === 'chajin'; }).map(function (q) { return q.id; });
   function nextPattern() {
     var pool = LIKED.filter(function (id) { return id !== current; }), id = pool[(Math.random() * pool.length) | 0];
     current = id; sim.setPattern(id);
@@ -535,7 +592,7 @@ details.group summary { cursor: pointer; }
   if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { if (es.some(function (e) { return e.isIntersecting; })) galleryOn = true; }, { rootMargin: '200px' }).observe(document.querySelector('.gallery')); else galleryOn = true;
   var votes = {};
   try { votes = JSON.parse(localStorage.getItem('slime-pattern-votes') || 'null'); } catch (e) { votes = null; }
-  if (!votes) { votes = {}; PATTERNS.forEach(function (p) { if (p.g === 'liked') votes[p.id] = 'like'; if (p.g === 'rest') votes[p.id] = 'dislike'; }); }
+  if (!votes) { votes = {}; PATTERNS.forEach(function (p) { if (p.g === 'liked' || p.g === 'chajin') votes[p.id] = 'like'; if (p.g === 'rest') votes[p.id] = 'dislike'; }); }
   function saveVotes() { try { localStorage.setItem('slime-pattern-votes', JSON.stringify(votes)); } catch (e) { } summary(); }
   function summary() {
     var like = [], dis = [];
@@ -543,7 +600,7 @@ details.group summary { cursor: pointer; }
     document.getElementById('sum').textContent = '好き: ' + (like.join('、') || '（まだなし）') + '\n好きじゃない: ' + (dis.join('、') || '（まだなし）');
   }
   var groups = document.getElementById('groups'), tiles = {};
-  [['liked', '好きと答えた文様', 'Patterns you liked'], ['new', 'あなたの参考から足した文様（未回答）', 'Added from your references, not yet answered'], ['rest', '選ばれなかった文様', 'Not chosen']].forEach(function (gr) {
+  [['liked', '好きと答えた文様', 'Patterns you liked'], ['chajin', '茶人の名物裂（『名物裂茶人図鑑』p.128–129 より）', 'Tea masters\u2019 meibutsu-gire'], ['new', 'あなたの参考から足した文様（未回答）', 'Added from your references, not yet answered'], ['rest', '選ばれなかった文様', 'Not chosen']].forEach(function (gr) {
     if (!PATTERNS.some(function (p) { return p.g === gr[0]; })) return;
     var box = document.createElement(gr[0] === 'rest' ? 'details' : 'div'); box.className = 'group';
     box.innerHTML = gr[0] === 'rest' ? '<summary><h3 style="display:inline"><span class="jp">' + gr[1] + '</span> · ' + gr[2] + '</h3></summary>' : '<h3><span class="jp">' + gr[1] + '</span> · ' + gr[2] + '</h3>';
