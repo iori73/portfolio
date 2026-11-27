@@ -308,7 +308,7 @@ details.group summary { cursor: pointer; }
     c2.filter = 'blur(1.6px)'; c2.drawImage(oc, 0, 0);
     var dd = c2.getImageData(0, 0, GW, GH).data, out = new Float32Array(GW * GH), mx2 = 0;
     for (var p = 0; p < GW * GH; p++) { out[p] = dd[4 * p + 3] / 255; if (out[p] > mx2) mx2 = out[p]; }
-    if (mx2 > 0) for (p = 0; p < GW * GH; p++) out[p] /= mx2;
+    if (mx2 > 0) for (p = 0; p < GW * GH; p++) out[p] = Math.min(1, out[p] / (mx2 * .55));   // lines and crossings pull alike (no clumps at the nodes)
     return out;
   }
 
@@ -403,7 +403,7 @@ details.group summary { cursor: pointer; }
         var x = S.x[a], y = S.y[a], d = S.d[a];
         var F = at(x + lc(d) * SO, y + ls(d) * SO), L = at(x + lc(d - SA) * SO, y + ls(d - SA) * SO), R = at(x + lc(d + SA) * SO, y + ls(d + SA) * SO);
         if (F > L && F > R) { } else if (F < L && F < R) d += (Math.random() < .5 ? -1 : 1) * RA; else if (L > R) d -= RA; else if (R > L) d += RA;
-        if (DOTS && Math.random() < S.morph) {
+        if (DOTS && Math.random() < 1 - Math.pow(1 - S.morph, 3)) {
           var tg = S.target[a]; if (tg === undefined) { S.assign(a); tg = S.target[a]; }
           var tx = DOTS[tg] - x, ty = DOTS[tg + 1] - y, dist = Math.hypot(tx, ty);
           d = dist > 1.1 ? Math.atan2(ty, tx) + rnd(-.15, .15) : rnd(0, TAU);   // close to its dot it keeps moving, but stays
@@ -462,7 +462,7 @@ details.group summary { cursor: pointer; }
         bands[e >= EB ? 3 : (e / EB * 3) | 0].push(i);
       }
       var dot = Math.max(.9, 1.2 * scale);
-      var PM = S.pattern === 'samekomon' ? 1 - .85 * S.morph : 1;
+      var PM = S.pattern === 'samekomon' ? Math.pow(1 - S.morph, 2.2) * .85 + .15 * (1 - S.morph) : 1;   // the loose particles fade quickly as the holes fill
       [.08, .2, .36, .55].forEach(function (al, b) { g.globalAlpha = al * PM; var L = bands[b]; for (var q = 0; q < L.length; q++) { var j = L[q]; g.fillRect(S.x[j] * k2 - dot / 2, S.y[j] * k2 - dot / 2, dot, dot); } });
       if (S.pattern === 'samekomon' && S.morph > 0 && S.dots) {   // each particle that has reached its hole becomes the hole
         var D2 = S.dots, nd2 = D2.length / 2, cnt = new Uint8Array(nd2), lim = Math.max(4, S.pch * S.pch * .8);

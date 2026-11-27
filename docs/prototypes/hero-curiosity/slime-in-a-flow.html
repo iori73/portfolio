@@ -309,7 +309,7 @@ details.group summary { cursor: pointer; }
     c2.filter = 'blur(1.6px)'; c2.drawImage(oc, 0, 0);
     var dd = c2.getImageData(0, 0, GW, GH).data, out = new Float32Array(GW * GH), mx2 = 0;
     for (var p = 0; p < GW * GH; p++) { out[p] = dd[4 * p + 3] / 255; if (out[p] > mx2) mx2 = out[p]; }
-    if (mx2 > 0) for (p = 0; p < GW * GH; p++) out[p] /= mx2;
+    if (mx2 > 0) for (p = 0; p < GW * GH; p++) out[p] = Math.min(1, out[p] / (mx2 * .55));   // lines and crossings pull alike (no clumps at the nodes)
     return out;
   }
 
@@ -419,14 +419,14 @@ details.group summary { cursor: pointer; }
         }
         var F = at(x + lc(d) * SO, y + ls(d) * SO), L = at(x + lc(d - SA) * SO, y + ls(d - SA) * SO), R = at(x + lc(d + SA) * SO, y + ls(d + SA) * SO);
         if (F > L && F > R) { } else if (F < L && F < R) d += (Math.random() < .5 ? -1 : 1) * RA; else if (L > R) d -= RA; else if (R > L) d += RA;
-        if (DOTS && Math.random() < S.morph) {
+        if (DOTS && Math.random() < 1 - Math.pow(1 - S.morph, 3)) {
           var tg = S.target[a]; if (tg === undefined) { S.assign(a); tg = S.target[a]; }
           var tx = DOTS[tg] - x, ty = DOTS[tg + 1] - y, dist = Math.hypot(tx, ty);
           d = dist > 1.1 ? Math.atan2(ty, tx) + rnd(-.15, .15) : rnd(0, TAU);   // close to its dot it keeps moving, but stays
           var hm = true;
         } else hm = false;
         // the flow: every particle is carried gently downstream (to the right), with a slow meander
-        var FX = FLOW, FY = FLOW * .35 * Math.sin(x * .028 + S.step * .006) * Math.cos(y * .05);
+        var calm = 1 - .85 * S.morph * (S.pat[S.c[a]] || 0), FX = FLOW * calm, FY = FLOW * calm * .35 * Math.sin(x * .028 + S.step * .006) * Math.cos(y * .05);
         var nx = x + lc(d) + FX, ny = y + ls(d) + FY, i = nx | 0, j = ny | 0;
         if (i < 0 || i >= GW || j < 0 || j >= GH) { respawn(a); continue; }               // at the edge a particle vanishes; a new one enters upstream
         var c = j * GW + i;
@@ -482,12 +482,12 @@ details.group summary { cursor: pointer; }
       for (var i = 0; i < S.x.length; i++) {
         if (!S.on[i]) continue;
         var px = S.x[i] * k2, py = S.y[i] * k2, ex = Math.min(px, W - px), ey = Math.min(py, H - py), e = Math.min(ex, ey, Math.hypot(ex, ey) * .55);
-        var band = e >= EB ? 3 : (e / EB * 3) | 0, tv = S.T[S.c[i]] || 0, sz = S.free[i] ? 0 : tv > 14 ? 2 : tv > 6 ? 1 : 0;
+        var band = e >= EB ? 3 : (e / EB * 3) | 0, tv = S.T[S.c[i]] || 0, tk = 1 + 1.2 * S.morph, sz = S.free[i] ? 0 : tv > 14 * tk ? 2 : tv > 6 * tk ? 1 : 0;
         groups[band * 3 + sz].push(i);
       }
-      var PM = S.pattern === 'samekomon' ? 1 - .85 * S.morph : 1;
+      var PM = S.pattern === 'samekomon' ? Math.pow(1 - S.morph, 2.2) * .85 + .15 * (1 - S.morph) : 1;   // the loose particles fade quickly as the holes fill
       var SIZES = [Math.max(.9, 1 * scale), Math.max(1, 1.35 * scale), Math.max(1.3, 2.1 * scale)], ALPH = [.62, .72, 1], BANDA = [.12, .3, .55, 1];
-      for (var gI = 0; gI < 12; gI++) { var L = groups[gI]; if (!L.length) continue; var bnd = (gI / 3) | 0, sz2 = gI % 3, dot = SIZES[sz2]; g.globalAlpha = BANDA[bnd] * ALPH[sz2] * .75 * PM * (sz2 === 0 ? 1 - .6 * S.morph : 1); for (var q = 0; q < L.length; q++) { var j = L[q]; g.fillRect(S.x[j] * k2 - dot / 2, S.y[j] * k2 - dot / 2, dot, dot); } }
+      for (var gI = 0; gI < 12; gI++) { var L = groups[gI]; if (!L.length) continue; var bnd = (gI / 3) | 0, sz2 = gI % 3, dot = SIZES[sz2]; g.globalAlpha = BANDA[bnd] * ALPH[sz2] * .75 * PM * (sz2 === 0 ? 1 - .25 * S.morph : 1); for (var q = 0; q < L.length; q++) { var j = L[q]; g.fillRect(S.x[j] * k2 - dot / 2, S.y[j] * k2 - dot / 2, dot, dot); } }
       if (S.pattern === 'samekomon' && S.morph > 0 && S.dots) {   // each particle that has reached its hole becomes the hole
         var D2 = S.dots, nd2 = D2.length / 2, cnt = new Uint8Array(nd2), lim = Math.max(4, S.pch * S.pch * .8);
         for (var a4 = 0; a4 < S.x.length; a4++) { var tg2 = S.target[a4]; if (tg2 === undefined || (S.free && S.free[a4])) continue; var ddx = S.x[a4] - D2[tg2], ddy = S.y[a4] - D2[tg2 + 1]; if (ddx * ddx + ddy * ddy < lim) cnt[tg2 / 2] = 1; }
