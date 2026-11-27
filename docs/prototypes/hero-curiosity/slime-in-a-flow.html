@@ -106,6 +106,11 @@ details.group summary { cursor: pointer; }
   var INK = css.getPropertyValue('--ink').trim() || '#111', MIRU = css.getPropertyValue('--miru').trim() || '#596327';
   var TAU = Math.PI * 2, CS = 2;
   function rnd(a, b) { return a + Math.random() * (b - a); }
+  // cos/sin from a table: the particles turn by a fraction of a circle each step, so 1024 steps per turn is plenty
+  var LUTN = 1024, LK = LUTN / TAU, COS = new Float32Array(LUTN), SIN = new Float32Array(LUTN);
+  for (var li = 0; li < LUTN; li++) { COS[li] = Math.cos(li / LK); SIN[li] = Math.sin(li / LK); }
+  function lc(a) { return COS[((a * LK) | 0) & 1023]; }
+  function ls(a) { return SIN[((a * LK) | 0) & 1023]; }
 
   // ---------- the patterns ----------
   // groups: liked = chosen by the user (2026-11-27); new = added from the user's own references; rest = not chosen
@@ -314,6 +319,9 @@ details.group summary { cursor: pointer; }
     var GW = Math.floor(w / CS), GH = Math.floor(h / CS), N = GW * GH;
     var S = { w: w, h: h, GW: GW, GH: GH, occ: new Int32Array(N), T: new Float32Array(N), T2: new Float32Array(N), x: [], y: [], d: [], c: [], on: [], r: [], step: 0, phase: 1, morph: 0, fullAt: null, pattern: patternId, onPhase: opts.onPhase || function () {} };
     S.pat = template(patternId, GW, GH);
+    function indexPat() { var idx = [], val = []; for (var q = 0; q < N; q++) if (S.pat[q] > .02) { idx.push(q); val.push(S.pat[q]); } S.patIdx = Int32Array.from(idx); S.patVal = Float32Array.from(val); }
+    indexPat();
+    S.TH = new Float32Array(N);
     // same-komon: the particles themselves become the dots. Each particle heads for its nearest dot centre.
     function sameDots() {
       var s0 = GH / 2.3, rs = s0 * .34, out = [], fans = [];
@@ -329,7 +337,10 @@ details.group summary { cursor: pointer; }
           }
         });
       });
-      return out;
+      var sp = s0 * .1, keep = [];
+      for (var q = 0; q < out.length; q += 2) { var ok = true; for (var r2 = 0; r2 < keep.length; r2 += 2) { var ddx = keep[r2] - out[q], ddy = keep[r2 + 1] - out[q + 1]; if (ddx * ddx + ddy * ddy < sp * sp * .36) { ok = false; break; } } if (ok) keep.push(out[q], out[q + 1]); }
+      S.dotR = sp * .27;   // dot radius about a quarter of the spacing, as in the real same-komon
+      return keep;
     }
     S.dots = null; S.target = [];
     S.dotsFor = function () {
@@ -367,7 +378,7 @@ details.group summary { cursor: pointer; }
     S.free = []; for (var fi = 0; fi < S.x.length; fi++) { var isFree = Math.random() < .26; S.free.push(isFree); if (isFree) S.occ[S.c[fi]] = 0; }
 
     S.setPhase = function (p) { S.phase = p; S.onPhase(p); };
-    S.setPattern = function (id) { S.pattern = id; S.pat = template(id, GW, GH); S.dots = null; S.target = []; };
+    S.setPattern = function (id) { S.pattern = id; S.pat = template(id, GW, GH); indexPat(); S.dots = null; S.target = []; };
     var FLOW0 = opts.flow === undefined ? .4 : opts.flow, FLOW = FLOW0;   // cells per step
     function respawn(a) {
       for (var tr = 0; tr < 30; tr++) {
@@ -390,7 +401,7 @@ details.group summary { cursor: pointer; }
           if (S.x[a] < 0 || S.x[a] >= GW || S.y[a] < 0 || S.y[a] >= GH) { S.x[a] = Math.random() * 2; S.y[a] = Math.random() * GH; S.on[a] = true; }
           S.c[a] = ((S.y[a] | 0) * GW + (S.x[a] | 0)); continue;
         }
-        var F = at(x + Math.cos(d) * SO, y + Math.sin(d) * SO), L = at(x + Math.cos(d - SA) * SO, y + Math.sin(d - SA) * SO), R = at(x + Math.cos(d + SA) * SO, y + Math.sin(d + SA) * SO);
+        var F = at(x + lc(d) * SO, y + ls(d) * SO), L = at(x + lc(d - SA) * SO, y + ls(d - SA) * SO), R = at(x + lc(d + SA) * SO, y + ls(d + SA) * SO);
         if (F > L && F > R) { } else if (F < L && F < R) d += (Math.random() < .5 ? -1 : 1) * RA; else if (L > R) d -= RA; else if (R > L) d += RA;
         if (DOTS && Math.random() < S.morph) {
           var tg = S.target[a]; if (tg === undefined) { S.assign(a); tg = S.target[a]; }
@@ -399,7 +410,7 @@ details.group summary { cursor: pointer; }
         }
         // the flow: every particle is carried gently downstream (to the right), with a slow meander
         var FX = FLOW, FY = FLOW * .35 * Math.sin(x * .028 + S.step * .006) * Math.cos(y * .05);
-        var nx = x + Math.cos(d) + FX, ny = y + Math.sin(d) + FY, i = nx | 0, j = ny | 0;
+        var nx = x + lc(d) + FX, ny = y + ls(d) + FY, i = nx | 0, j = ny | 0;
         if (i < 0 || i >= GW || j < 0 || j >= GH) { respawn(a); continue; }               // at the edge a particle vanishes; a new one enters upstream
         var c = j * GW + i;
         if (c !== S.c[a] && occ[c]) {                                                      // one particle per cell: if blocked, let the flow alone carry it
@@ -411,13 +422,17 @@ details.group summary { cursor: pointer; }
         S.x[a] = nx; S.y[a] = ny; S.d[a] = d; T[c] += DEP;
       }
       var TUNE = { samekomon: { gain: .001, decay: .75 } }[S.pattern] || {};
-      if (S.morph > 0) { var P = S.pat, kk = S.morph * 2.2 * (TUNE.gain ? 1 + (TUNE.gain / 2.2 - 1) * S.morph : 1); for (var p = 0; p < N; p++) if (P[p] > .02) T[p] += kk * P[p]; }
+      if (S.morph > 0) { var P = S.pat, kk = S.morph * 2.2 * (TUNE.gain ? 1 + (TUNE.gain / 2.2 - 1) * S.morph : 1); var PI2 = S.patIdx, PV = S.patVal; for (var p = 0; p < PI2.length; p++) T[PI2[p]] += kk * PV[p]; }
       var T2 = S.T2, decay = TUNE.decay ? .9 + (TUNE.decay - .9) * S.morph : .9;
-      for (var y2 = 0; y2 < GH; y2++) for (var x2 = 0; x2 < GW; x2++) {
-        var sum = 0, cc = 0;
-        for (var yy = y2 - 1; yy <= y2 + 1; yy++) { if (yy < 0 || yy >= GH) continue; var row = yy * GW; for (var xx = x2 - 1; xx <= x2 + 1; xx++) { if (xx < 0 || xx >= GW) continue; sum += T[row + xx]; cc++; } }
-        T2[y2 * GW + x2] = sum / cc * decay;
+      var TH = S.TH;
+      for (var y2 = 0; y2 < GH; y2++) {   // horizontal pass
+        var o = y2 * GW; TH[o] = (T[o] + T[o + 1]) * .5;
+        for (var x2 = 1; x2 < GW - 1; x2++) TH[o + x2] = (T[o + x2 - 1] + T[o + x2] + T[o + x2 + 1]) * (1 / 3);
+        TH[o + GW - 1] = (T[o + GW - 2] + T[o + GW - 1]) * .5;
       }
+      for (var x3 = 0; x3 < GW; x3++) T2[x3] = (TH[x3] + TH[x3 + GW]) * .5 * decay;   // vertical pass, with decay
+      for (var y3 = 1; y3 < GH - 1; y3++) { var o2 = y3 * GW; for (var x4 = 0; x4 < GW; x4++) T2[o2 + x4] = (TH[o2 + x4 - GW] + TH[o2 + x4] + TH[o2 + x4 + GW]) * (decay / 3); }
+      var oL = (GH - 1) * GW; for (var x5 = 0; x5 < GW; x5++) T2[oL + x5] = (TH[oL + x5 - GW] + TH[oL + x5]) * .5 * decay;
       // the walls hold little chemical, and the corners even less, so the network does not trace a frame
       for (var e = 0; e < 4; e++) { var f = .55 + e * .12; for (var xe = 0; xe < GW; xe++) { T2[e * GW + xe] *= f; T2[(GH - 1 - e) * GW + xe] *= f; } for (var ye = 0; ye < GH; ye++) { T2[ye * GW + e] *= f; T2[ye * GW + GW - 1 - e] *= f; } }
       var CR = 14; for (var cy2 = 0; cy2 < CR; cy2++) for (var cx2 = 0; cx2 < CR; cx2++) { if (cx2 + cy2 >= CR) continue; var fc = .5 + .5 * (cx2 + cy2) / CR; T2[cy2 * GW + cx2] *= fc; T2[cy2 * GW + GW - 1 - cx2] *= fc; T2[(GH - 1 - cy2) * GW + cx2] *= fc; T2[(GH - 1 - cy2) * GW + GW - 1 - cx2] *= fc; }
@@ -452,8 +467,15 @@ details.group summary { cursor: pointer; }
         var band = e >= EB ? 3 : (e / EB * 3) | 0, tv = S.T[S.c[i]] || 0, sz = S.free[i] ? 0 : tv > 14 ? 2 : tv > 6 ? 1 : 0;
         groups[band * 3 + sz].push(i);
       }
+      var PM = S.pattern === 'samekomon' ? 1 - .85 * S.morph : 1;
       var SIZES = [Math.max(.9, 1 * scale), Math.max(1, 1.35 * scale), Math.max(1.3, 2.1 * scale)], ALPH = [.62, .72, 1], BANDA = [.12, .3, .55, 1];
-      for (var gI = 0; gI < 12; gI++) { var L = groups[gI]; if (!L.length) continue; var bnd = (gI / 3) | 0, sz2 = gI % 3, dot = SIZES[sz2]; g.globalAlpha = BANDA[bnd] * ALPH[sz2] * .75; for (var q = 0; q < L.length; q++) { var j = L[q]; g.fillRect(S.x[j] * k2 - dot / 2, S.y[j] * k2 - dot / 2, dot, dot); } }
+      for (var gI = 0; gI < 12; gI++) { var L = groups[gI]; if (!L.length) continue; var bnd = (gI / 3) | 0, sz2 = gI % 3, dot = SIZES[sz2]; g.globalAlpha = BANDA[bnd] * ALPH[sz2] * .75 * PM * (sz2 === 0 ? 1 - .6 * S.morph : 1); for (var q = 0; q < L.length; q++) { var j = L[q]; g.fillRect(S.x[j] * k2 - dot / 2, S.y[j] * k2 - dot / 2, dot, dot); } }
+      if (S.pattern === 'samekomon' && S.morph > 0 && S.dots) {   // each dot is drawn from the particles gathered at it; its size follows how many are there
+        var D2 = S.dots, nd2 = D2.length / 2, cnt = new Uint16Array(nd2);
+        for (var a4 = 0; a4 < S.x.length; a4++) { var tg2 = S.target[a4]; if (tg2 === undefined || (S.free && S.free[a4])) continue; var ddx = S.x[a4] - D2[tg2], ddy = S.y[a4] - D2[tg2 + 1]; if (ddx * ddx + ddy * ddy < 7) cnt[tg2 / 2]++; }
+        g.fillStyle = INK;
+        for (var q3 = 0; q3 < nd2; q3++) { if (!cnt[q3]) continue; var dxp = D2[2 * q3] * k2, dyp = D2[2 * q3 + 1] * k2, ee = Math.min(dxp, dyp, W - dxp, H - dyp); g.globalAlpha = Math.min(1, S.morph * 1.3) * .88 * Math.min(1, ee / (14 * scale)); g.beginPath(); g.arc(dxp, dyp, S.dotR * Math.sqrt(Math.min(1.3, cnt[q3] / Math.max(1, S.cap))) * k2, 0, TAU); g.fill(); }
+      }
       var fade = S.phase === 1 ? 1 : Math.max(0, 1 - (S.step - S.fullAt) / 240);
       if (fade > 0 && !opts.allOn) { g.globalAlpha = fade; g.fillStyle = MIRU; g.beginPath(); g.arc(S.seed[0] * k2, S.seed[1] * k2, 3.6 * scale, 0, TAU); g.fill(); }
       g.globalAlpha = 1;
@@ -477,7 +499,8 @@ details.group summary { cursor: pointer; }
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ---------- the gallery ----------
-  var queue = [];
+  var queue = [], galleryOn = false;
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { if (es.some(function (e) { return e.isIntersecting; })) galleryOn = true; }, { rootMargin: '200px' }).observe(document.querySelector('.gallery')); else galleryOn = true;
   var votes = {};
   try { votes = JSON.parse(localStorage.getItem('slime-pattern-votes') || 'null'); } catch (e) { votes = null; }
   if (!votes) { votes = {}; PATTERNS.forEach(function (p) { if (p.g === 'liked') votes[p.id] = 'like'; if (p.g === 'rest') votes[p.id] = 'dislike'; }); }
@@ -537,7 +560,7 @@ details.group summary { cursor: pointer; }
 
   function loop() {
     if (!reduce) { for (var k = 0; k < speed; k++) sim.tick(); sim.draw(g); }
-    work(reduce ? 40 : 6);
+    if (galleryOn) work(reduce ? 40 : 4);
     requestAnimationFrame(loop);
   }
   start('asanoha');
@@ -551,6 +574,6 @@ details.group summary { cursor: pointer; }
   document.getElementById('skip').onclick = function () { sim.skip(); };
   // review hooks
   window.__run = function (steps) { reduce = true; for (var k = 0; k < steps; k++) sim.tick(); sim.draw(g); return { n: sim.x.length, phase: sim.phase, morph: +sim.morph.toFixed(2), step: sim.step }; };
-  window.__gallery = function () { reduce = true; var t0 = performance.now(); while ((queue.length || job) && performance.now() - t0 < 120000) work(1000); return { left: queue.length + (job ? 1 : 0), ms: Math.round(performance.now() - t0) }; };
+  window.__gallery = function () { reduce = true; galleryOn = true; var t0 = performance.now(); while ((queue.length || job) && performance.now() - t0 < 120000) work(1000); return { left: queue.length + (job ? 1 : 0), ms: Math.round(performance.now() - t0) }; };
 })();
 </script>
