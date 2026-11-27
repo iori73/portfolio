@@ -4,12 +4,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&display=swap">
 <style>
-/* Layout: mirrors production. Headline on top; below it an invisible rectangle where the slime mold grows, fills, and turns into a pattern. */
+/* Layout: mirrors production. Headline on top; below it an invisible rectangle where the slime mold grows, fills, and turns into a pattern.
+   Below the stage, a gallery of every pattern's end state to mark likes and dislikes. */
 :root {
   --bg: #EFF1F1;     /* site --surface */
   --ink: #111111;
   --soft: #5E6467;
   --line: #D3D8D8;
+  --tile: #E8EBEB;
   --miru: #596327;   /* logo colour */
   --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --jp: "Noto Sans JP", "Hiragino Sans", sans-serif;
@@ -18,17 +20,39 @@ body { background: var(--bg); color: var(--ink); font-family: var(--sans); }
 .wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 40px 72px; }
 .hero h1 { font-weight: 400; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.25; letter-spacing: -0.01em; margin: 0 0 12px; text-wrap: balance; }
 .hero p { font-weight: 400; font-size: clamp(22px, 3.1vw, 37px); line-height: 1.32; letter-spacing: -0.01em; margin: 0; text-wrap: balance; max-width: 900px; }
-canvas { display: block; width: 100%; aspect-ratio: 16 / 6.5; max-width: 100%; margin-top: clamp(24px, 4vw, 40px); background: transparent; }
+#cv { display: block; width: 100%; aspect-ratio: 16 / 6.5; max-width: 100%; margin-top: clamp(24px, 4vw, 40px); background: transparent; }
 .bar { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; justify-content: space-between; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 12px; }
-.stage { display: flex; gap: 14px; color: var(--soft); letter-spacing: .03em; }
+.stage { display: flex; gap: 14px; color: var(--soft); letter-spacing: .03em; flex-wrap: wrap; }
 .stage span[aria-current="step"] { color: var(--ink); font-weight: 500; }
 .ctrl { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
-.ctrl button { font: inherit; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; cursor: pointer; }
-.ctrl button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.ctrl button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-.ctrl .lab { color: var(--soft); margin-right: 2px; }
+button { font: inherit; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; cursor: pointer; }
+button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.lab { color: var(--soft); }
+.now { font-weight: 500; margin-right: 6px; }
 .jp { font-family: var(--jp); }
-.notes { margin-top: 28px; display: grid; gap: 12px; font-size: 12.5px; line-height: 1.75; color: var(--soft); max-width: 80ch; }
+
+.gallery { margin-top: 44px; display: grid; gap: 22px; }
+.gallery h2 { margin: 0; font-weight: 500; font-size: 16px; }
+.gallery .intro { margin: 4px 0 0; font-size: 12.5px; line-height: 1.7; color: var(--soft); max-width: 78ch; }
+.gallery .intro .jp { color: var(--ink); }
+.group h3 { margin: 0 0 10px; font-weight: 500; font-size: 13px; color: var(--soft); letter-spacing: .03em; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+.tile { display: grid; gap: 8px; align-content: start; }
+.tile .pic { position: relative; border-radius: 6px; overflow: hidden; background: var(--tile); cursor: pointer; border: 1px solid transparent; }
+.tile .pic:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.tile .pic.current { border-color: var(--ink); }
+.tile canvas { display: block; width: 100%; aspect-ratio: var(--tile-ar, 1.3 / 1); }
+.tile .wait { position: absolute; inset: 0; display: grid; place-items: center; font-size: 11px; color: var(--soft); }
+.tile .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.tile .name { font-size: 13px; }
+.tile .name small { color: var(--soft); font-size: 11px; margin-left: 6px; }
+.vote { display: flex; gap: 4px; }
+.vote button { padding: 3px 9px; font-size: 11px; }
+.vote button[data-v="like"][aria-pressed="true"] { background: var(--miru); border-color: var(--miru); color: #fff; }
+.summary { border-top: 1px solid var(--line); padding-top: 14px; display: grid; gap: 8px; font-size: 12.5px; line-height: 1.7; }
+.summary pre { margin: 0; white-space: pre-wrap; font-family: var(--jp); font-size: 12.5px; background: var(--tile); border-radius: 6px; padding: 10px 12px; }
+.notes { margin-top: 36px; display: grid; gap: 12px; font-size: 12.5px; line-height: 1.75; color: var(--soft); max-width: 80ch; }
 .notes p { margin: 0; }
 .notes .jp { color: var(--ink); }
 </style>
@@ -44,22 +68,31 @@ canvas { display: block; width: 100%; aspect-ratio: 16 / 6.5; max-width: 100%; m
   <div class="bar">
     <div class="stage" aria-live="polite"><span id="s1">1 <span class="jp">広がる</span> Spread</span><span id="s2">2 <span class="jp">満ちる</span> Fill</span><span id="s3">3 <span class="jp">文様へ</span> Pattern</span></div>
     <div class="ctrl">
-      <span class="lab">Pattern</span>
-      <button type="button" data-pat="asanoha" aria-pressed="true"><span class="jp">麻の葉</span></button>
-      <button type="button" data-pat="seigaiha" aria-pressed="false"><span class="jp">青海波</span></button>
-      <button type="button" data-pat="kikko" aria-pressed="false"><span class="jp">亀甲</span></button>
-      <button type="button" data-pat="shippo" aria-pressed="false"><span class="jp">七宝</span></button>
-      <span class="lab" style="margin-left:10px">Speed</span>
+      <span class="now" id="now"></span>
+      <button type="button" id="skip"><span class="jp">文様へ進む</span> Skip to pattern</button>
+      <span class="lab" style="margin-left:6px">Speed</span>
       <button type="button" data-sp="1" aria-pressed="true">1×</button>
       <button type="button" data-sp="4" aria-pressed="false">4×</button>
       <button type="button" id="replay">Replay</button>
     </div>
   </div>
 
+  <section class="gallery" aria-labelledby="gal-h">
+    <div>
+      <h2 id="gal-h"><span class="jp">文様の候補</span> Pattern candidates</h2>
+      <p class="intro"><span class="jp">どれも、上の区画と同じ縮尺で切り出した、網が文様へ移った後の姿。絵を押すと、上の区画でその文様への変化を見られる。好き・好きじゃないを押すと、下にまとめが出る（コピーして返してください）。</span><br>Each picture is a cut-out of the stage, at the same scale, after the network has moved into that pattern. Click a picture to watch the change on the stage above. Mark like or dislike, and copy the summary at the bottom to send back.</p>
+    </div>
+    <div id="groups"></div>
+    <div class="summary">
+      <div><b class="jp">まとめ</b> Summary <button type="button" id="copy" style="margin-left:8px">Copy</button> <span id="copied" class="lab" aria-live="polite"></span></div>
+      <pre id="sum"></pre>
+    </div>
+  </section>
+
   <div class="notes">
     <p><span class="jp">粒子が一つの点から広がり、粘菌の網になって四角い区画を満たす。満ちきったら、網はゆっくり文様へ移っていく。粒子は最後まで一瞬も止まらない。中身は入れ替わり続け、形だけが移ろう。</span><br>From one point, particles spread into a slime-mold network that fills the rectangle. Once it is full, the network slowly moves into a traditional pattern. The particles never stop; what flows through keeps changing, and only the form shifts.</p>
     <p><span class="jp">根拠: 粘菌の動きは Jones (2010, Artificial Life) のモデル。粒子は前・左前・右前の3点で化学物質の濃さを感じて向きを変え、空いた場所にだけ進み、進んだ所に化学物質を残す。化学物質は拡散して減衰する。粒子ははじめ区画全体に眠っていて、種から広がる活動の範囲に入ると目覚める（広がりの近似）。区画の縁は壁として扱う。</span><br>Basis: Jones (2010) agent model of Physarum. Each particle senses the trail at three points ahead, turns toward the strongest, moves only into a free cell and leaves trail there; the trail diffuses and decays. Particles start asleep across the whole rectangle and wake as an active zone spreads from the seed (an approximation of the spreading). The edges of the rectangle act as walls.</p>
-    <p><span class="jp">デザインとしての介入: 文様への変化は、文様の形に引き寄せる物質を下に敷き、その強さをゆっくり上げることで起こしている（実験で、餌や誘引物質の配置に粘菌が沿うのと同じ仕組み）。文様の強さは控えめにして、「ほのめかす」程度にとどめた。パラメータは見た目で調整している。</span><br>Design intervention: the turn to a pattern comes from laying an attractant in the shape of the pattern underneath and slowly raising its strength, the same way slime mold follows food or attractants placed in experiments. The pattern is kept faint, a hint rather than a stamp. Parameters are tuned by eye.</p>
+    <p><span class="jp">デザインとしての介入: 文様への変化は、文様の形に引き寄せる物質を下に敷き、その強さをゆっくり上げることで起こしている（実験で、餌や誘引物質の配置に粘菌が沿うのと同じ仕組み）。文様は「ほのめかす」程度にとどめた。縁と角の点は薄くして、枠に見えないようにしている。文様の線は『日本・中国の文様事典』などを参考に、粘菌の網が沿える線として描き直した簡略形。パラメータは見た目で調整している。</span><br>Design intervention: the turn to a pattern comes from laying an attractant in the shape of the pattern underneath and slowly raising its strength, the same way slime mold follows attractants placed in experiments. The pattern stays a hint. Dots near the edges and corners are faded so they do not read as a frame. The pattern lines are simplified redrawings, made with a pattern dictionary as one reference. Parameters are tuned by eye.</p>
   </div>
 </div>
 
@@ -67,151 +100,304 @@ canvas { display: block; width: 100%; aspect-ratio: 16 / 6.5; max-width: 100%; m
 (function () {
   var css = getComputedStyle(document.documentElement);
   var INK = css.getPropertyValue('--ink').trim() || '#111', MIRU = css.getPropertyValue('--miru').trim() || '#596327';
-  var TAU = Math.PI * 2, cv = document.getElementById('cv'), g = cv.getContext('2d');
+  var TAU = Math.PI * 2, CS = 2;
   function rnd(a, b) { return a + Math.random() * (b - a); }
 
-  var CS = 2;                 // one lattice cell = 2 css px
-  var S = null, pattern = 'asanoha', speed = 1;
+  // ---------- the patterns ----------
+  var PATTERNS = [
+    { id: 'asanoha', jp: '麻の葉', en: 'Asanoha', mine: true },
+    { id: 'karakusa', jp: '唐草', en: 'Karakusa', mine: true },
+    { id: 'saiwaibishi', jp: '幸菱', en: 'Saiwai-bishi', mine: true },
+    { id: 'matsukawabishi', jp: '松皮菱', en: 'Matsukawa-bishi', mine: true },
+    { id: 'ichimatsu', jp: '市松', en: 'Ichimatsu', mine: true },
+    { id: 'kagome', jp: '籠目', en: 'Kagome', mine: true },
+    { id: 'uroko', jp: '鱗', en: 'Uroko', mine: true },
+    { id: 'seigaiha', jp: '青海波', en: 'Seigaiha' },
+    { id: 'kikko', jp: '亀甲', en: 'Kikkō' },
+    { id: 'komochi', jp: '子持亀甲', en: 'Komochi kikkō' },
+    { id: 'bishamon', jp: '毘沙門亀甲', en: 'Bishamon kikkō' },
+    { id: 'shippo', jp: '七宝', en: 'Shippō' },
+    { id: 'tatewaku', jp: '立涌', en: 'Tatewaku' },
+    { id: 'amime', jp: '網目', en: 'Amime' },
+    { id: 'fundo', jp: '分銅繋ぎ', en: 'Fundō tsunagi' },
+    { id: 'higaki', jp: '檜垣', en: 'Higaki' },
+    { id: 'sayagata', jp: '紗綾形', en: 'Sayagata' },
+    { id: 'koji', jp: '工字繋ぎ', en: 'Kōji tsunagi' },
+    { id: 'shokko', jp: '蜀江', en: 'Shokkō' },
+    { id: 'kanzemizu', jp: '観世水', en: 'Kanze-mizu' },
+    { id: 'ryusui', jp: '流水', en: 'Ryūsui' }
+  ];
+  function byId(id) { return PATTERNS.filter(function (p) { return p.id === id; })[0]; }
 
-  // ---------- pattern templates, rasterised onto the lattice and blurred into an attractant field ----------
+  // each pattern is drawn as lines on the lattice, then blurred into a soft attractant field
   function template(name, GW, GH) {
     var oc = document.createElement('canvas'); oc.width = GW; oc.height = GH; var c = oc.getContext('2d');
     c.strokeStyle = '#000'; c.lineWidth = 1.3; c.lineJoin = 'round'; c.lineCap = 'round';
-    var s = GH / 2.3, i, j;
+    var s = GH / 2.3, D = Math.hypot(GW, GH), i, j, k;
     function seg(a, b) { c.beginPath(); c.moveTo(a[0], a[1]); c.lineTo(b[0], b[1]); c.stroke(); }
-    if (name === 'asanoha') {
-      var hh = s * Math.sqrt(3) / 2;
-      function P(i, j) { return [i * s + (j % 2 ? s / 2 : 0), j * hh]; }
-      for (j = -1; j < GH / hh + 2; j++) for (i = -1; i < GW / s + 2; i++) {
-        var tris = j % 2 === 0 ? [[P(i, j), P(i + 1, j), P(i, j + 1)], [P(i + 1, j), P(i, j + 1), P(i + 1, j + 1)]] : [[P(i, j), P(i + 1, j), P(i + 1, j + 1)], [P(i, j), P(i, j + 1), P(i + 1, j + 1)]];
-        tris.forEach(function (t) { var m = [(t[0][0] + t[1][0] + t[2][0]) / 3, (t[0][1] + t[1][1] + t[2][1]) / 3]; seg(t[0], t[1]); seg(t[1], t[2]); seg(t[2], t[0]); t.forEach(function (v) { seg(v, m); }); });
-      }
-    } else if (name === 'seigaiha') {
-      var r = s * .62;
-      for (j = -1; j < GH / (r * .5) + 3; j++) for (i = -1; i < GW / (2 * r) + 2; i++) {
-        var cx = i * 2 * r + (j % 2 ? r : 0), cy = j * r * .5;
-        c.globalCompositeOperation = 'destination-out'; c.beginPath(); c.arc(cx, cy, r * .98, Math.PI, TAU); c.fill(); c.globalCompositeOperation = 'source-over';
-        [1, .68, .36].forEach(function (k) { c.beginPath(); c.arc(cx, cy, r * k, Math.PI, TAU); c.stroke(); });
-      }
-    } else if (name === 'kikko') {
-      var R = s * .55, w = Math.sqrt(3) * R;
-      for (j = -1; j < GH / (1.5 * R) + 2; j++) for (i = -1; i < GW / w + 2; i++) {
-        var hx = i * w + (j % 2 ? w / 2 : 0), hy = j * 1.5 * R; c.beginPath();
-        for (var k = 0; k <= 6; k++) { var a = Math.PI / 6 + k * Math.PI / 3; c.lineTo(hx + R * Math.cos(a), hy + R * Math.sin(a)); }
-        c.stroke();
-      }
-    } else {   // shippo: interlocking circles
-      var rr = s * .5;
-      for (j = -1; j < GH / rr + 2; j++) for (i = -1; i < GW / rr + 2; i++) { if ((i + j) % 2) continue; c.beginPath(); c.arc(i * rr, j * rr, rr * Math.SQRT2 / 1.0 * .707, 0, TAU); c.stroke(); }
-      for (j = -1; j < GH / (2 * rr) + 2; j++) for (i = -1; i < GW / (2 * rr) + 2; i++) { c.beginPath(); c.arc(i * 2 * rr, j * 2 * rr, rr, 0, TAU); c.stroke(); c.beginPath(); c.arc(i * 2 * rr + rr, j * 2 * rr + rr, rr, 0, TAU); c.stroke(); }
+    function poly(pts, close) { c.beginPath(); pts.forEach(function (p, n) { if (n) c.lineTo(p[0], p[1]); else c.moveTo(p[0], p[1]); }); if (close) c.closePath(); c.stroke(); }
+    function circle(x, y, r, a0, a1) { c.beginPath(); c.arc(x, y, r, a0 || 0, a1 === undefined ? TAU : a1); c.stroke(); }
+    function lines3(d, offs) {   // three families of parallel lines at 0, 60, 120 degrees
+      [0, Math.PI / 3, 2 * Math.PI / 3].forEach(function (th, f) {
+        var nx = -Math.sin(th), ny = Math.cos(th), tx = Math.cos(th), ty = Math.sin(th);
+        for (var q = -D / d - 1; q < D / d + 1; q++) { var o = q * d + offs[f], px = GW / 2 + nx * o, py = GH / 2 + ny * o; seg([px - tx * D, py - ty * D], [px + tx * D, py + ty * D]); }
+      });
     }
-    // blur so the attractant has a soft gradient for the particles to climb
+    function hexes(R, inner, skip) {
+      var w = Math.sqrt(3) * R;
+      for (j = -1; j < GH / (1.5 * R) + 2; j++) for (i = -1; i < GW / w + 2; i++) {
+        if (skip && skip(i, j)) continue;
+        var hx = i * w + (j % 2 ? w / 2 : 0), hy = j * 1.5 * R, pts = [], pin = [];
+        for (k = 0; k < 6; k++) { var a = Math.PI / 6 + k * Math.PI / 3; pts.push([hx + R * Math.cos(a), hy + R * Math.sin(a)]); pin.push([hx + R * inner * Math.cos(a), hy + R * inner * Math.sin(a)]); }
+        poly(pts, true); if (inner) poly(pin, true);
+      }
+    }
+    function diamond(cx, cy, w, h) { poly([[cx, cy - h / 2], [cx + w / 2, cy], [cx, cy + h / 2], [cx - w / 2, cy]], true); }
+    function rotated(angle, fn) { c.save(); c.translate(GW / 2, GH / 2); c.rotate(angle); c.translate(-GW / 2, -GH / 2); fn(); c.restore(); }
+    function spiral(cx, cy, r0, turns, start, dir) { var pts = []; for (var t = 0; t <= turns * TAU; t += .15) { var r = r0 * (1 - .78 * t / (turns * TAU)); pts.push([cx + r * Math.cos(start + dir * t), cy + r * Math.sin(start + dir * t)]); } poly(pts); }
+    function vine(y0, A, lam, phase, curlR, turns) {
+      var pts = []; for (var x = -lam; x < GW + lam; x += 1.5) pts.push([x, y0 + A * Math.sin(TAU * x / lam + phase)]); poly(pts);
+      for (var m = -1; m < GW / (lam / 2) + 2; m++) {
+        var xk = (m + .25) * lam / 2 - phase / TAU * lam, yk = y0 + A * Math.sin(TAU * xk / lam + phase), sg = m % 2 ? 1 : -1;
+        spiral(xk, yk + sg * curlR, curlR, turns, -sg * Math.PI / 2, sg);
+      }
+    }
+
+    switch (name) {
+      case 'asanoha': {
+        var hh = s * Math.sqrt(3) / 2, P = function (i, j) { return [i * s + (j % 2 ? s / 2 : 0), j * hh]; };
+        for (j = -1; j < GH / hh + 2; j++) for (i = -1; i < GW / s + 2; i++) {
+          var tris = j % 2 === 0 ? [[P(i, j), P(i + 1, j), P(i, j + 1)], [P(i + 1, j), P(i, j + 1), P(i + 1, j + 1)]] : [[P(i, j), P(i + 1, j), P(i + 1, j + 1)], [P(i, j), P(i, j + 1), P(i + 1, j + 1)]];
+          tris.forEach(function (t) { var m = [(t[0][0] + t[1][0] + t[2][0]) / 3, (t[0][1] + t[1][1] + t[2][1]) / 3]; seg(t[0], t[1]); seg(t[1], t[2]); seg(t[2], t[0]); t.forEach(function (v) { seg(v, m); }); });
+        }
+        break;
+      }
+      case 'seigaiha': {
+        var r = s * .62;
+        for (j = -1; j < GH / (r * .5) + 3; j++) for (i = -1; i < GW / (2 * r) + 2; i++) {
+          var cx = i * 2 * r + (j % 2 ? r : 0), cy = j * r * .5;
+          c.globalCompositeOperation = 'destination-out'; c.beginPath(); c.arc(cx, cy, r * .98, Math.PI, TAU); c.fill(); c.globalCompositeOperation = 'source-over';
+          [1, .68, .36].forEach(function (q) { circle(cx, cy, r * q, Math.PI, TAU); });
+        }
+        break;
+      }
+      case 'kikko': hexes(s * .55); break;
+      case 'komochi': hexes(s * .6, .55); break;
+      case 'bishamon': hexes(s * .42, 0, function (i, j) { return ((i - (j >> 1) * 0) + 2 * j) % 3 === 0; }); break;
+      case 'shippo': { var rr = s * .45; for (j = -1; j < GH / (2 * rr) + 2; j++) for (i = -1; i < GW / (2 * rr) + 2; i++) { circle(i * 2 * rr, j * 2 * rr, rr); circle(i * 2 * rr + rr, j * 2 * rr + rr, rr); } break; }
+      case 'karakusa': for (j = 0; j < 3; j++) vine((j + .5) * GH / 3, s * .14, s * 1.5, j * Math.PI, s * .16, 1.3); break;
+      case 'kanzemizu': for (j = 0; j < 2; j++) vine((j + .5) * GH / 2, s * .2, s * 2.1, j * Math.PI * .7, s * .28, 2.1); break;
+      case 'ryusui': {
+        for (j = 0; j < 7; j++) { var y0 = (j + .5) * GH / 7, ph = j * 1.3, pts = []; for (var x = 0; x <= GW; x += 2) pts.push([x, y0 + s * .12 * Math.sin(x / (s * .9) + ph) + s * .07 * Math.sin(x / (s * .37) + ph * 2)]); poly(pts); }
+        break;
+      }
+      case 'saiwaibishi': {
+        var W = s * .95, H = s * .7, sx = W * 1.12, sy = H * .58;
+        for (j = -1; j < GH / sy + 2; j++) for (i = -1; i < GW / sx + 2; i++) {
+          var bx = i * sx + (j % 2 ? sx / 2 : 0), by = j * sy, w2 = W / 2 * .92, h2 = H / 2 * .92;
+          diamond(bx - W / 4, by, w2, h2); diamond(bx + W / 4, by, w2, h2); diamond(bx, by - H / 4, w2, h2); diamond(bx, by + H / 4, w2, h2);
+        }
+        break;
+      }
+      case 'matsukawabishi': {
+        var MW = s * .9, MH = s * .95, mx = MW * 1.05, my = MH * .55;
+        for (j = -1; j < GH / my + 2; j++) for (i = -1; i < GW / mx + 2; i++) {
+          var px = i * mx + (j % 2 ? mx / 2 : 0), py = j * my;
+          diamond(px, py, MW, MH * .45); diamond(px, py - MH * .28, MW * .48, MH * .3); diamond(px, py + MH * .28, MW * .48, MH * .3);
+        }
+        break;
+      }
+      case 'ichimatsu': { var q = s * .42; for (var gx = 0; gx <= GW + q; gx += q) seg([gx, 0], [gx, GH]); for (var gy = 0; gy <= GH + q; gy += q) seg([0, gy], [GW, gy]); break; }
+      case 'kagome': lines3(s * .5, [0, 0, s * .25]); break;
+      case 'uroko': lines3(s * .55, [0, 0, 0]); break;
+      case 'tatewaku': {
+        var Wc = s * .75, lam = s * 1.15;
+        for (i = -1; i < GW / Wc + 2; i++) [-1, 1].forEach(function (sd) { var pts = []; for (var y = 0; y <= GH; y += 1.5) pts.push([i * Wc + sd * (Wc * .26 + Wc * .17 * Math.sin(TAU * y / lam)), y]); poly(pts); });
+        break;
+      }
+      case 'amime': {
+        var hr = s * .3, d = s * .55;
+        for (j = -1; j < GH / hr + 2; j++) { var off = (j % 2) * d / 2; for (i = -1; i < GW / d + 2; i++) { c.beginPath(); c.moveTo(i * d + off, j * hr); c.quadraticCurveTo((i + .5) * d + off, j * hr + hr * 1.7, (i + 1) * d + off, j * hr); c.stroke(); } }
+        break;
+      }
+      case 'fundo': { var rf = s * .33; for (j = -1; j < GH / rf + 2; j++) for (i = -1; i < GW / (2 * rf) + 2; i++) circle(i * 2 * rf + (j % 2 ? rf : 0), j * rf, rf); break; }
+      case 'higaki': rotated(Math.PI / 4, function () { var b = s * .42; for (var J = -Math.ceil(D / b); J < D / b; J++) for (var I = -Math.ceil(D / b); I < D / b; I++) { var x0 = GW / 2 + I * b, y0 = GH / 2 + J * b; c.strokeRect(x0, y0, b, b); if ((I + J) % 2) seg([x0, y0 + b / 2], [x0 + b, y0 + b / 2]); else seg([x0 + b / 2, y0], [x0 + b / 2, y0 + b]); } }); break;
+      case 'sayagata': rotated(-.42, function () { var u = s * .24; for (var J = -Math.ceil(D / (2 * u)); J < D / (2 * u); J++) for (var I = -Math.ceil(D / (2 * u)); I < D / (2 * u); I++) { var cx = GW / 2 + I * 2 * u, cy = GH / 2 + J * 2 * u; poly([[cx + u, cy + u], [cx + u, cy], [cx - u, cy], [cx - u, cy - u]]); poly([[cx - u, cy + u], [cx, cy + u], [cx, cy - u], [cx + u, cy - u]]); } }); break;
+      case 'koji': { var ku = s * .36; for (j = -1; j < GH / (2 * ku) + 2; j++) for (i = -1; i < GW / (2 * ku) + 2; i++) { var kx = i * 2 * ku, ky = j * 2 * ku, v = (i + j) % 2 === 0; if (v) { seg([kx - ku, ky - ku * .7], [kx + ku, ky - ku * .7]); seg([kx - ku, ky + ku * .7], [kx + ku, ky + ku * .7]); seg([kx, ky - ku * .7], [kx, ky + ku * .7]); } else { seg([kx - ku * .7, ky - ku], [kx - ku * .7, ky + ku]); seg([kx + ku * .7, ky - ku], [kx + ku * .7, ky + ku]); seg([kx - ku * .7, ky], [kx + ku * .7, ky]); } } break; }
+      case 'shokko': { var a8 = s * .62, r8 = a8 / (2 * Math.cos(Math.PI / 8)); for (j = -1; j < GH / a8 + 2; j++) for (i = -1; i < GW / a8 + 2; i++) { var o = []; for (k = 0; k < 8; k++) { var an = Math.PI / 8 + k * Math.PI / 4; o.push([i * a8 + r8 * Math.cos(an), j * a8 + r8 * Math.sin(an)]); } poly(o, true); } break; }
+    }
     var oc2 = document.createElement('canvas'); oc2.width = GW; oc2.height = GH; var c2 = oc2.getContext('2d');
     c2.filter = 'blur(1.6px)'; c2.drawImage(oc, 0, 0);
-    var d = c2.getImageData(0, 0, GW, GH).data, out = new Float32Array(GW * GH), mx = 0;
-    for (var p = 0; p < GW * GH; p++) { out[p] = d[4 * p + 3] / 255; if (out[p] > mx) mx = out[p]; }
-    if (mx > 0) for (p = 0; p < GW * GH; p++) out[p] /= mx;
+    var dd = c2.getImageData(0, 0, GW, GH).data, out = new Float32Array(GW * GH), mx2 = 0;
+    for (var p = 0; p < GW * GH; p++) { out[p] = dd[4 * p + 3] / 255; if (out[p] > mx2) mx2 = out[p]; }
+    if (mx2 > 0) for (p = 0; p < GW * GH; p++) out[p] /= mx2;
     return out;
   }
 
-  // ---------- the model ----------
-  function init() {
+  // ---------- the simulation (one instance for the stage, one per gallery tile) ----------
+  function createSim(w, h, patternId, opts) {
+    opts = opts || {};
+    var GW = Math.floor(w / CS), GH = Math.floor(h / CS), N = GW * GH;
+    var S = { w: w, h: h, GW: GW, GH: GH, occ: new Int32Array(N), T: new Float32Array(N), T2: new Float32Array(N), x: [], y: [], d: [], c: [], on: [], r: [], step: 0, phase: 1, morph: 0, fullAt: null, pattern: patternId, onPhase: opts.onPhase || function () {} };
+    S.pat = template(patternId, GW, GH);
+    S.seed = [Math.round(GW * .2), Math.round(GH * .55)];
+    function add(i, j, dir) { var c = j * GW + i; if (S.occ[c]) return false; S.x.push(i + .5); S.y.push(j + .5); S.d.push(dir); S.c.push(c); S.occ[c] = S.x.length; return true; }
+    var target = Math.round(N * .15), tries = 0;
+    while (S.x.length < target && tries < target * 4) { tries++; var ii = (Math.random() * GW) | 0, jj = (Math.random() * GH) | 0; if (add(ii, jj, Math.atan2(jj - S.seed[1], ii - S.seed[0]) + rnd(-.7, .7))) { S.on.push(!!opts.allOn); S.r.push(Math.hypot(ii - S.seed[0], jj - S.seed[1])); } }
+    S.reach = Math.hypot(Math.max(S.seed[0], GW - S.seed[0]), Math.max(S.seed[1], GH - S.seed[1]));
+
+    S.setPhase = function (p) { S.phase = p; S.onPhase(p); };
+    S.setPattern = function (id) { S.pattern = id; S.pat = template(id, GW, GH); };
+    S.tick = function () {
+      var T = S.T, occ = S.occ, n = S.x.length, SO = 7, SA = Math.PI / 4, RA = Math.PI / 4, DEP = 5;
+      function at(x, y) { var i = x | 0, j = y | 0; if (i < 0 || j < 0 || i >= GW || j >= GH) return -1; return T[j * GW + i]; }
+      var front = S.reach * Math.min(1, S.step / 780) + 4;      // the active zone reaches the far corner in about 13 s
+      var start = (Math.random() * n) | 0;
+      for (var m = 0; m < n; m++) {
+        var a = (start + m) % n; if (!S.on[a]) { if (S.r[a] < front) S.on[a] = true; else continue; }
+        var x = S.x[a], y = S.y[a], d = S.d[a];
+        var F = at(x + Math.cos(d) * SO, y + Math.sin(d) * SO), L = at(x + Math.cos(d - SA) * SO, y + Math.sin(d - SA) * SO), R = at(x + Math.cos(d + SA) * SO, y + Math.sin(d + SA) * SO);
+        if (F > L && F > R) { } else if (F < L && F < R) d += (Math.random() < .5 ? -1 : 1) * RA; else if (L > R) d -= RA; else if (R > L) d += RA;
+        var nx = x + Math.cos(d), ny = y + Math.sin(d), i = nx | 0, j = ny | 0;
+        if (i < 0 || i >= GW) { S.d[a] = Math.PI - d + rnd(-.3, .3); continue; }            // the edge is a wall: bounce off it
+        if (j < 0 || j >= GH) { S.d[a] = -d + rnd(-.3, .3); continue; }
+        var c = j * GW + i;
+        if (c !== S.c[a] && occ[c]) { S.d[a] = rnd(0, TAU); continue; }                    // one particle per cell
+        if (c !== S.c[a]) { occ[S.c[a]] = 0; occ[c] = a + 1; S.c[a] = c; }
+        S.x[a] = nx; S.y[a] = ny; S.d[a] = d; T[c] += DEP;
+      }
+      if (S.morph > 0) { var P = S.pat, kk = S.morph * 2.2; for (var p = 0; p < N; p++) if (P[p] > .02) T[p] += kk * P[p]; }
+      var T2 = S.T2;
+      for (var y2 = 0; y2 < GH; y2++) for (var x2 = 0; x2 < GW; x2++) {
+        var sum = 0, cc = 0;
+        for (var yy = y2 - 1; yy <= y2 + 1; yy++) { if (yy < 0 || yy >= GH) continue; var row = yy * GW; for (var xx = x2 - 1; xx <= x2 + 1; xx++) { if (xx < 0 || xx >= GW) continue; sum += T[row + xx]; cc++; } }
+        T2[y2 * GW + x2] = sum / cc * .9;
+      }
+      // the walls hold little chemical, and the corners even less, so the network does not trace a frame
+      for (var e = 0; e < 4; e++) { var f = .55 + e * .12; for (var xe = 0; xe < GW; xe++) { T2[e * GW + xe] *= f; T2[(GH - 1 - e) * GW + xe] *= f; } for (var ye = 0; ye < GH; ye++) { T2[ye * GW + e] *= f; T2[ye * GW + GW - 1 - e] *= f; } }
+      var CR = 14; for (var cy2 = 0; cy2 < CR; cy2++) for (var cx2 = 0; cx2 < CR; cx2++) { if (cx2 + cy2 >= CR) continue; var fc = .5 + .5 * (cx2 + cy2) / CR; T2[cy2 * GW + cx2] *= fc; T2[cy2 * GW + GW - 1 - cx2] *= fc; T2[(GH - 1 - cy2) * GW + cx2] *= fc; T2[(GH - 1 - cy2) * GW + GW - 1 - cx2] *= fc; }
+      S.T = T2; S.T2 = T;
+      S.step++;
+      if (S.phase === 1 && S.step > 780 + 300 && S.step % 30 === 0) {
+        var BX = 12, BY = 5, counts = new Int32Array(BX * BY);
+        for (var z = 0; z < S.x.length; z++) counts[Math.min(BY - 1, (S.y[z] / GH * BY) | 0) * BX + Math.min(BX - 1, (S.x[z] / GW * BX) | 0)]++;
+        var need = N / (BX * BY) * .07, ok = true; for (var u = 0; u < counts.length; u++) if (counts[u] < need) { ok = false; break; }
+        if (ok) { S.fullAt = S.step; S.setPhase(2); }
+      }
+      if (S.phase === 2 && S.step - S.fullAt > 240) S.setPhase(3);          // rest about 4 s when full
+      if (S.phase === 3) S.morph = Math.min(1, S.morph + (opts.morphRate || 1 / (60 * 22)));
+    };
+    // fill the space at once and go straight to the pattern stage
+    S.skip = function () {
+      for (var q = 0; q < S.on.length; q++) S.on[q] = true;
+      if (S.step < 1080) S.step = 1080;
+      for (var t = 0; t < 150; t++) S.tick();
+      if (S.phase < 3) { S.fullAt = S.step - 240; S.setPhase(3); }
+    };
+    S.draw = function (g, scale) {
+      scale = scale || 1; var k2 = CS * scale, W = S.w * scale, H = S.h * scale;
+      g.clearRect(0, 0, W, H); g.fillStyle = INK;
+      var EB = 16 * scale, bands = [[], [], [], []];
+      for (var i = 0; i < S.x.length; i++) {
+        if (!S.on[i]) continue;
+        var px = S.x[i] * k2, py = S.y[i] * k2, ex = Math.min(px, W - px), ey = Math.min(py, H - py), e = Math.min(ex, ey, Math.hypot(ex, ey) * .55);
+        bands[e >= EB ? 3 : (e / EB * 3) | 0].push(i);
+      }
+      var dot = Math.max(.9, 1.2 * scale);
+      [.08, .2, .36, .55].forEach(function (al, b) { g.globalAlpha = al; var L = bands[b]; for (var q = 0; q < L.length; q++) { var j = L[q]; g.fillRect(S.x[j] * k2 - dot / 2, S.y[j] * k2 - dot / 2, dot, dot); } });
+      var fade = S.phase === 1 ? 1 : Math.max(0, 1 - (S.step - S.fullAt) / 240);
+      if (fade > 0 && !opts.allOn) { g.globalAlpha = fade; g.fillStyle = MIRU; g.beginPath(); g.arc(S.seed[0] * k2, S.seed[1] * k2, 3.6 * scale, 0, TAU); g.fill(); }
+      g.globalAlpha = 1;
+    };
+    return S;
+  }
+
+  // ---------- the stage ----------
+  var cv = document.getElementById('cv'), g = cv.getContext('2d'), sim = null, current = 'asanoha', speed = 1;
+  function stageUI(p) { ['s1', 's2', 's3'].forEach(function (id, i) { var el = document.getElementById(id); if (i + 1 === p) el.setAttribute('aria-current', 'step'); else el.removeAttribute('aria-current'); }); }
+  function start(id, skip) {
+    current = id || current;
     var dpr = Math.min(2, window.devicePixelRatio || 1), w = cv.clientWidth, h = cv.clientHeight;
     cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); g.setTransform(dpr, 0, 0, dpr, 0, 0);
-    var GW = Math.floor(w / CS), GH = Math.floor(h / CS), N = GW * GH;
-    S = { w: w, h: h, GW: GW, GH: GH, occ: new Int32Array(N), T: new Float32Array(N), T2: new Float32Array(N), x: [], y: [], d: [], c: [], step: 0, phase: 1, morph: 0, fullAt: null, cap: Math.round(N * .16) };
-    S.pat = template(pattern, GW, GH);
-    S.seed = [Math.round(GW * .2), Math.round(GH * .55)];
-    S.on = []; S.r = [];
-    var target = Math.round(N * .15), tries = 0;
-    while (S.x.length < target && tries < target * 4) { tries++; var ii = (Math.random() * GW) | 0, jj = (Math.random() * GH) | 0; if (add(ii, jj, Math.atan2(jj - S.seed[1], ii - S.seed[0]) + rnd(-.7, .7))) { S.on.push(false); S.r.push(Math.hypot(ii - S.seed[0], jj - S.seed[1])); } }
-    S.reach = Math.hypot(Math.max(S.seed[0], GW - S.seed[0]), Math.max(S.seed[1], GH - S.seed[1]));
-    stageUI();
+    sim = createSim(w, h, current, { onPhase: stageUI });
+    stageUI(1);
+    var p = byId(current); document.getElementById('now').innerHTML = '<span class="jp">' + p.jp + '</span> ' + p.en;
+    document.querySelectorAll('.tile .pic').forEach(function (el) { el.classList.toggle('current', el.dataset.id === current); });
+    if (skip) sim.skip();
   }
-  function add(i, j, dir) {
-    if (i < 0 || j < 0 || i >= S.GW || j >= S.GH) return false; var c = j * S.GW + i; if (S.occ[c]) return false;
-    S.x.push(i + .5); S.y.push(j + .5); S.d.push(dir); S.c.push(c); S.occ[c] = S.x.length; return true;
-  }
-  function kill(n) {   // swap-remove agent n
-    var last = S.x.length - 1; S.occ[S.c[n]] = 0;
-    if (n !== last) { S.x[n] = S.x[last]; S.y[n] = S.y[last]; S.d[n] = S.d[last]; S.c[n] = S.c[last]; S.occ[S.c[n]] = n + 1; }
-    S.x.pop(); S.y.pop(); S.d.pop(); S.c.pop();
-  }
-  function tick() {
-    var GW = S.GW, GH = S.GH, T = S.T, occ = S.occ, n = S.x.length;
-    var SO = 7, SA = Math.PI / 4, RA = Math.PI / 4, SS = 1, DEP = 5;
-    function at(x, y) { var i = x | 0, j = y | 0; if (i < 0 || j < 0 || i >= GW || j >= GH) return -1; return T[j * GW + i]; }
-    var front = S.reach * Math.min(1, S.step / 780) + 4;      // the active zone reaches the far corner in about 13 s
-    var start = (Math.random() * n) | 0;
-    for (var m = 0; m < n; m++) {
-      var a = (start + m) % n; if (!S.on[a]) { if (S.r[a] < front) S.on[a] = true; else continue; }
-      var x = S.x[a], y = S.y[a], d = S.d[a];
-      var F = at(x + Math.cos(d) * SO, y + Math.sin(d) * SO), L = at(x + Math.cos(d - SA) * SO, y + Math.sin(d - SA) * SO), R = at(x + Math.cos(d + SA) * SO, y + Math.sin(d + SA) * SO);
-      if (F > L && F > R) { } else if (F < L && F < R) d += (Math.random() < .5 ? -1 : 1) * RA; else if (L > R) d -= RA; else if (R > L) d += RA;
-      var nx = x + Math.cos(d) * SS, ny = y + Math.sin(d) * SS, i = nx | 0, j = ny | 0;
-      if (i < 0 || i >= GW) { S.d[a] = Math.PI - d + rnd(-.3, .3); continue; }            // the edge is a wall: bounce off it
-      if (j < 0 || j >= GH) { S.d[a] = -d + rnd(-.3, .3); continue; }
-      var c = j * GW + i;
-      if (c !== S.c[a] && occ[c]) { S.d[a] = rnd(0, TAU); continue; }                    // one particle per cell
-      if (c !== S.c[a]) { occ[S.c[a]] = 0; occ[c] = a + 1; S.c[a] = c; }
-      S.x[a] = nx; S.y[a] = ny; S.d[a] = d; T[c] += DEP;
-    }
-    // the pattern: an attractant laid underneath, slowly strengthened (design intervention)
-    if (S.morph > 0) { var P = S.pat, k = S.morph * 2.2; for (var p = 0; p < GW * GH; p++) if (P[p] > .02) T[p] += k * P[p]; }
-    // diffuse (3x3 mean) and decay
-    var T2 = S.T2;
-    for (var y2 = 0; y2 < GH; y2++) for (var x2 = 0; x2 < GW; x2++) {
-      var sum = 0, cc = 0;
-      for (var yy = y2 - 1; yy <= y2 + 1; yy++) { if (yy < 0 || yy >= GH) continue; var row = yy * GW; for (var xx = x2 - 1; xx <= x2 + 1; xx++) { if (xx < 0 || xx >= GW) continue; sum += T[row + xx]; cc++; } }
-      T2[y2 * GW + x2] = sum / cc * .9;
-    }
-    // the walls do not hold chemical well, so the network does not cling to the edge (no drawn frame)
-    for (var e = 0; e < 4; e++) { var f = .55 + e * .12; for (var xe = 0; xe < GW; xe++) { T2[e * GW + xe] *= f; T2[(GH - 1 - e) * GW + xe] *= f; } for (var ye = 0; ye < GH; ye++) { T2[ye * GW + e] *= f; T2[ye * GW + GW - 1 - e] *= f; } }
-    S.T = T2; S.T2 = T;
-    S.step++;
-    // is the rectangle full? every block of a 12 x 5 grid must hold a fair share of particles
-    if (S.phase === 1 && S.step > 780 + 300 && S.step % 30 === 0) {
-      var BX = 12, BY = 5, counts = new Int32Array(BX * BY);
-      for (var z = 0; z < S.x.length; z++) counts[Math.min(BY - 1, (S.y[z] / GH * BY) | 0) * BX + Math.min(BX - 1, (S.x[z] / GW * BX) | 0)]++;
-      var need = (GW * GH) / (BX * BY) * .07, ok = true; for (var u = 0; u < counts.length; u++) if (counts[u] < need) { ok = false; break; }
-      if (ok) { S.phase = 2; S.fullAt = S.step; stageUI(); }
-    }
-    if (S.phase === 2 && S.step - S.fullAt > 240) { S.phase = 3; stageUI(); }        // rest about 4 s at full, then begin the pattern
-    if (S.phase === 3) S.morph = Math.min(1, S.morph + 1 / (60 * 22));                // reach full strength over about 22 s
-  }
-  function draw() {
-    g.clearRect(0, 0, S.w, S.h);
-    // dots fade toward the edges so the strand that runs along the walls does not read as a drawn frame (design intervention)
-    g.fillStyle = INK;
-    var EB = 16, bands = [[], [], [], []];
-    for (var i = 0; i < S.x.length; i++) {
-      if (!S.on[i]) continue;
-      var px = S.x[i] * CS, py = S.y[i] * CS, e = Math.min(px, py, S.w - px, S.h - py), b = e >= EB ? 3 : (e / EB * 3) | 0;
-      bands[b].push(i);
-    }
-    [.08, .2, .36, .55].forEach(function (al, b) { g.globalAlpha = al; var L = bands[b]; for (var k = 0; k < L.length; k++) { var j = L[k]; g.fillRect(S.x[j] * CS - .6, S.y[j] * CS - .6, 1.2, 1.2); } });
-    // the seed: one point added to the flow; it fades once the space is full
-    var fade = S.phase === 1 ? 1 : Math.max(0, 1 - (S.step - S.fullAt) / 240);
-    if (fade > 0) { g.globalAlpha = fade; g.fillStyle = MIRU; g.beginPath(); g.arc(S.seed[0] * CS, S.seed[1] * CS, 3.6, 0, TAU); g.fill(); }
-    g.globalAlpha = 1;
-  }
-  function stageUI() { ['s1', 's2', 's3'].forEach(function (id, i) { var el = document.getElementById(id); if (i + 1 === S.phase) el.setAttribute('aria-current', 'step'); else el.removeAttribute('aria-current'); }); }
-
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---------- the gallery ----------
+  var votes = {};
+  try { votes = JSON.parse(localStorage.getItem('slime-pattern-votes') || '{}') || {}; } catch (e) { votes = {}; }
+  function saveVotes() { try { localStorage.setItem('slime-pattern-votes', JSON.stringify(votes)); } catch (e) { } summary(); }
+  function summary() {
+    var like = [], dis = [];
+    PATTERNS.forEach(function (p) { if (votes[p.id] === 'like') like.push(p.jp); if (votes[p.id] === 'dislike') dis.push(p.jp); });
+    document.getElementById('sum').textContent = '好き: ' + (like.join('、') || '（まだなし）') + '\n好きじゃない: ' + (dis.join('、') || '（まだなし）');
+  }
+  var groups = document.getElementById('groups'), tiles = {};
+  [['mine', '以前の会話で挙げていた文様', 'Patterns you mentioned before'], ['rest', 'そのほか', 'Others']].forEach(function (gr) {
+    var box = document.createElement('div'); box.className = 'group';
+    box.innerHTML = '<h3><span class="jp">' + gr[1] + '</span> · ' + gr[2] + '</h3>';
+    var grid = document.createElement('div'); grid.className = 'tiles';
+    PATTERNS.filter(function (p) { return gr[0] === 'mine' ? p.mine : !p.mine; }).forEach(function (p) {
+      var t = document.createElement('div'); t.className = 'tile';
+      t.innerHTML = '<div class="pic" tabindex="0" role="button" data-id="' + p.id + '" aria-label="' + p.en + ': watch it on the stage"><canvas></canvas><div class="wait">computing…</div></div>' +
+        '<div class="row"><span class="name"><span class="jp">' + p.jp + '</span><small>' + p.en + '</small></span><span class="vote"><button type="button" data-v="like" aria-pressed="false"><span class="jp">好き</span></button><button type="button" data-v="dislike" aria-pressed="false"><span class="jp">好きじゃない</span></button></span></div>';
+      var pic = t.querySelector('.pic');
+      pic.onclick = function () { start(p.id, true); cv.scrollIntoView({ behavior: 'smooth', block: 'center' }); };
+      pic.onkeydown = function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); pic.onclick(); } };
+      t.querySelectorAll('.vote button').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(votes[p.id] === b.dataset.v));
+        b.onclick = function () { votes[p.id] = votes[p.id] === b.dataset.v ? null : b.dataset.v; t.querySelectorAll('.vote button').forEach(function (x) { x.setAttribute('aria-pressed', String(votes[p.id] === x.dataset.v)); }); saveVotes(); };
+      });
+      grid.appendChild(t); tiles[p.id] = t;
+    });
+    box.appendChild(grid); groups.appendChild(box);
+  });
+  summary();
+  document.getElementById('copy').onclick = function () {
+    var txt = document.getElementById('sum').textContent, msg = document.getElementById('copied');
+    if (navigator.clipboard) navigator.clipboard.writeText(txt).then(function () { msg.textContent = 'Copied'; }, function () { msg.textContent = 'Select the text below to copy'; });
+  };
+
+  // gallery pictures are computed one at a time in the spare time of each frame, so the stage keeps moving smoothly
+  // each tile is a cut-out of the real stage at the same scale (same height), so the pattern looks as it will on the stage
+  var queue = PATTERNS.map(function (p) { return p.id; }), job = null, TH = 0, TW = 0;
+  function work(budget) {
+    var t0 = performance.now();
+    while (performance.now() - t0 < budget) {
+      if (!TH) { TH = Math.round(sim.h); TW = Math.round(TH * 1.3); document.documentElement.style.setProperty('--tile-ar', TW + ' / ' + TH); }
+      if (!job) { if (!queue.length) return; var id = queue.shift(); job = { id: id, sim: createSim(TW, TH, id, { allOn: true, morphRate: 1 / 320 }) }; job.sim.step = 1080; job.sim.fullAt = 1080 - 200; }
+      var S = job.sim;
+      S.tick();
+      if (S.step === 1080 + 240 && S.phase < 3) { S.fullAt = S.step - 240; S.setPhase(3); }
+      if (S.morph >= 1 && S.step > 1080 + 240 + 320 + 220) {
+        var t = tiles[job.id], tc = t.querySelector('canvas'), dpr = Math.min(2, window.devicePixelRatio || 1);
+        tc.width = Math.round(tc.clientWidth * dpr); tc.height = Math.round(tc.clientHeight * dpr);
+        var tg = tc.getContext('2d'); tg.setTransform(tc.width / TW, 0, 0, tc.width / TW, 0, 0); S.draw(tg, 1);
+        t.querySelector('.wait').remove(); job = null;
+      }
+    }
+  }
+
   function loop() {
-    if (!reduce) { for (var k = 0; k < speed; k++) tick(); draw(); }
+    if (!reduce) { for (var k = 0; k < speed; k++) sim.tick(); sim.draw(g); }
+    work(reduce ? 40 : 6);
     requestAnimationFrame(loop);
   }
-  init();
-  if (reduce) { for (var k = 0; k < 3600; k++) tick(); draw(); }
+  start('asanoha');
+  if (reduce) { for (var k = 0; k < 3600; k++) sim.tick(); sim.draw(g); }
   requestAnimationFrame(loop);
 
   var lastW = cv.clientWidth;
-  window.addEventListener('resize', function () { if (Math.abs(cv.clientWidth - lastW) > 2) { lastW = cv.clientWidth; init(); } });
-  document.querySelectorAll('[data-pat]').forEach(function (b) { b.onclick = function () { pattern = b.dataset.pat; document.querySelectorAll('[data-pat]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); S.pat = template(pattern, S.GW, S.GH); }; });
+  window.addEventListener('resize', function () { if (Math.abs(cv.clientWidth - lastW) > 2) { lastW = cv.clientWidth; start(); } });
   document.querySelectorAll('[data-sp]').forEach(function (b) { b.onclick = function () { speed = +b.dataset.sp; document.querySelectorAll('[data-sp]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); }; });
-  document.getElementById('replay').onclick = init;
-  // review hook
-  window.__run = function (steps) { reduce = true; for (var k = 0; k < steps; k++) tick(); draw(); return { n: S.x.length, phase: S.phase, morph: +S.morph.toFixed(2), step: S.step }; };
+  document.getElementById('replay').onclick = function () { start(); };
+  document.getElementById('skip').onclick = function () { sim.skip(); };
+  // review hooks
+  window.__run = function (steps) { reduce = true; for (var k = 0; k < steps; k++) sim.tick(); sim.draw(g); return { n: sim.x.length, phase: sim.phase, morph: +sim.morph.toFixed(2), step: sim.step }; };
+  window.__gallery = function () { reduce = true; var t0 = performance.now(); while ((queue.length || job) && performance.now() - t0 < 120000) work(1000); return { left: queue.length + (job ? 1 : 0), ms: Math.round(performance.now() - t0) }; };
 })();
 </script>
