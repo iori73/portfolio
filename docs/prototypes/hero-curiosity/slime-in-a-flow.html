@@ -108,6 +108,7 @@ details.group summary { cursor: pointer; }
   var css = getComputedStyle(document.documentElement);
   var INK = css.getPropertyValue('--ink').trim() || '#111', MIRU = css.getPropertyValue('--miru').trim() || '#596327';
   var TAU = Math.PI * 2, CS = 2;
+  var DOTP = { samekomon: 1, ichimatsu: 1 };   // patterns the particles draw as dots, one particle to a dot
   function rnd(a, b) { return a + Math.random() * (b - a); }
   // cos/sin from a table: the particles turn by a fraction of a circle each step, so 1024 steps per turn is plenty
   var LUTN = 1024, LK = LUTN / TAU, COS = new Float32Array(LUTN), SIN = new Float32Array(LUTN);
@@ -286,7 +287,13 @@ details.group summary { cursor: pointer; }
         }
         break;
       }
-      case 'ichimatsu': { var q = s * .42; for (var gx = 0; gx <= GW + q; gx += q) seg([gx, 0], [gx, GH]); for (var gy = 0; gy <= GH + q; gy += q) seg([0, gy], [GW, gy]); break; }
+      case 'ichimatsu': {
+        var q = s * .42, hs = q / 6;
+        for (var gx = 0; gx <= GW + q; gx += q) seg([gx, 0], [gx, GH]);
+        for (var gy = 0; gy <= GH + q; gy += q) seg([0, gy], [GW, gy]);
+        for (j = 0; j < GH / q + 1; j++) for (i = 0; i < GW / q + 1; i++) if ((i + j) % 2 === 0) for (var hy = hs; hy < q; hy += hs) seg([i * q + 2, j * q + hy], [i * q + q - 2, j * q + hy]);
+        break;
+      }
       case 'kagome': lines3(s * .5, [0, 0, s * .25]); break;
       case 'uroko': lines3(s * .55, [0, 0, 0]); break;
       case 'tatewaku': {
@@ -318,11 +325,19 @@ details.group summary { cursor: pointer; }
         for (j = -1; j < GH / msy + 2; j++) for (i = -1; i < GW / msx + 2; i++) { var mcx = i * msx + (j % 2 ? msx / 2 : 0), mcy = j * msy; for (k = 0; k < 5; k++) branch(mcx, mcy, -Math.PI / 2 + k * TAU / 5, mr * .34, 3); }
         break;
       }
-      case 'hanabishi': {   // saiwai-bishi with rounded petals: four soft petals make each diamond, no sharp corners
-        var HW = s * .62, hsx = HW * 1.35, hsy = HW * .78;
+      case 'hanabishi': {
+        var L = s * .5, LV = .8;
+        function petal(cx, cy, ang, Lp) {
+          var pts = [[.22, 0]], k2;
+          for (k2 = 125; k2 >= -80; k2 -= 8) { var r1 = k2 * Math.PI / 180; pts.push([.6 + .27 * Math.cos(r1), .23 + .27 * Math.sin(r1)]); }
+          for (k2 = 80; k2 >= -125; k2 -= 8) { var r2 = k2 * Math.PI / 180; pts.push([.6 + .27 * Math.cos(r2), -.23 + .27 * Math.sin(r2)]); }
+          pts.push([.22, 0]);
+          poly(pts.map(function (uv) { var u = uv[0] * Lp, v = uv[1] * Lp; return [cx + u * Math.cos(ang) - v * Math.sin(ang), cy + u * Math.sin(ang) + v * Math.cos(ang)]; }));
+        }
+        var hsx = L * 2.9, hsy = L * LV * 1.45;   // each flower stands apart, as in 幸菱 / 業平菱
         for (j = -1; j < GH / hsy + 2; j++) for (i = -1; i < GW / hsx + 2; i++) {
-          var hx2 = i * hsx + (j % 2 ? hsx / 2 : 0), hy2 = j * hsy;
-          for (k = 0; k < 4; k++) { var pa = k * Math.PI / 2; c.beginPath(); c.ellipse(hx2 + Math.cos(pa) * HW * .24, hy2 + Math.sin(pa) * HW * .24 * .62, HW * .2 * (k % 2 ? .75 : 1), HW * .12, pa, 0, TAU); c.stroke(); }
+          var hx2 = i * hsx + (j & 1 ? hsx / 2 : 0), hy2 = j * hsy;
+          petal(hx2, hy2, 0, L); petal(hx2, hy2, Math.PI, L); petal(hx2, hy2, Math.PI / 2, L * LV); petal(hx2, hy2, -Math.PI / 2, L * LV);
         }
         break;
       }
@@ -371,8 +386,10 @@ details.group summary { cursor: pointer; }
         var mq = GH / 2.05;
         for (j = -1; j < GH / mq + 1; j++) for (i = -1; i < GW / mq + 1; i++) {
           var mx3 = i * mq + mq / 2, my3 = j * mq + mq / 2 + (GH - Math.floor(GH / mq) * mq) / 2;
-          c.strokeRect(mx3 - mq * .46, my3 - mq * .46, mq * .92, mq * .92); circle(mx3, my3, mq * .36);
-          [[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1]].forEach(function (o3) { circle(mx3 + o3[0] * mq * .2, my3 + o3[1] * mq * .2, mq * .085); });
+          c.strokeRect(mx3 - mq * .47, my3 - mq * .47, mq * .94, mq * .94); circle(mx3, my3, mq * .42);
+          var rm = mq * .13;
+          [[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1]].forEach(function (o3) { circle(mx3 + o3[0] * rm * 2.05, my3 + o3[1] * rm * 2.05, rm); });
+          [[1, 1], [-1, 1], [1, -1], [-1, -1]].forEach(function (o4) { circle(mx3 + o4[0] * rm * 1.75, my3 + o4[1] * rm * 1.75, rm * .42); });
         }
         break;
       }
@@ -437,11 +454,28 @@ details.group summary { cursor: pointer; }
       S.dotJ = new Float32Array(out.length / 2); for (var q = 0; q < S.dotJ.length; q++) S.dotJ[q] = .9 + rr() * .2;
       return out;
     }
+    // ichimatsu: squares of two colours alternate (pattern dictionary p.22). The dark squares are stippled evenly with dots,
+    // as many as there are particles, so each particle settles into one dot; the light squares stay open.
+    function checkDots() {
+      var nA = 0; for (var a0 = 0; a0 < S.x.length; a0++) if (!(S.free && S.free[a0])) nA++;
+      var q = GH / 2.3 * .42, pch = Math.max(2.4, Math.sqrt((GW - 3) * (GH - 3) * .5 / Math.max(1, nA)) * 1.04), out = [];
+      var seedC = 13, rc = function () { seedC = (seedC * 16807) % 2147483647; return seedC / 2147483647; };
+      for (var j = 0; j < GH / q + 1; j++) for (var i = 0; i < GW / q + 1; i++) {
+        if ((i + j) % 2) continue;
+        for (var y = j * q + pch * .6; y < (j + 1) * q - pch * .3; y += pch) for (var x = i * q + pch * .6; x < (i + 1) * q - pch * .3; x += pch) {
+          var xx = x + (rc() - .5) * pch * .1, yy = y + (rc() - .5) * pch * .1;
+          if (xx > 1 && yy > 1 && xx < GW - 2 && yy < GH - 2) out.push(xx, yy);
+        }
+      }
+      S.pch = pch; S.dotR = pch * .3;
+      S.dotJ = new Float32Array(out.length / 2); for (var k = 0; k < S.dotJ.length; k++) S.dotJ[k] = .92 + rc() * .16;
+      return out;
+    }
     S.dots = null; S.target = [];
     S.dotsFor = function () {
-      if (S.pattern !== 'samekomon') return null;
+      if (!DOTP[S.pattern]) return null;
       if (!S.dots) {
-        S.dots = sameDots(); var D2 = S.dots, nd = D2.length / 2, B = 8, BW = Math.ceil(GW / B), BH = Math.ceil(GH / B);
+        S.dots = S.pattern === 'samekomon' ? sameDots() : checkDots(); var D2 = S.dots, nd = D2.length / 2, B = 8, BW = Math.ceil(GW / B), BH = Math.ceil(GH / B);
         S.bucket = []; for (var bI = 0; bI < BW * BH; bI++) S.bucket.push([]);
         for (var q = 0; q < nd; q++) S.bucket[Math.min(BH - 1, (D2[2 * q + 1] / B) | 0) * BW + Math.min(BW - 1, (D2[2 * q] / B) | 0)].push(q);
         S.load = new Int32Array(nd); S.BW = BW; S.BH = BH; S.B = B;
@@ -518,7 +552,7 @@ details.group summary { cursor: pointer; }
         if (c !== S.c[a]) { occ[S.c[a]] = 0; occ[c] = a + 1; S.c[a] = c; }
         S.x[a] = nx; S.y[a] = ny; S.d[a] = d; T[c] += DEP;
       }
-      var TUNE = { samekomon: { gain: .001, decay: .75 } }[S.pattern] || {};
+      var TUNE = DOTP[S.pattern] ? { gain: .001, decay: .75 } : {};
       if (S.morph > 0) { var P = S.pat, kk = (1 - Math.pow(1 - S.morph, 2.5)) * 2.2 *   /* ease-out: the shape shows early, then settles softly */ (TUNE.gain ? 1 + (TUNE.gain / 2.2 - 1) * S.morph : 1); var PI2 = S.patIdx, PV = S.patVal; for (var p = 0; p < PI2.length; p++) T[PI2[p]] += kk * PV[p]; }
       var T2 = S.T2, decay = TUNE.decay ? .9 + (TUNE.decay - .9) * S.morph : .9;
       var TH = S.TH;
@@ -564,10 +598,10 @@ details.group summary { cursor: pointer; }
         var band = e >= EB ? 3 : (e / EB * 3) | 0, tv = S.T[S.c[i]] || 0, tk = 1 + 1.2 * S.morph, sz = S.free[i] ? 0 : tv > 14 * tk ? 2 : tv > 6 * tk ? 1 : 0;
         groups[band * 3 + sz].push(i);
       }
-      var PM = S.pattern === 'samekomon' ? Math.pow(1 - S.morph, 2.2) * .85 + .15 * (1 - S.morph) : 1;   // the loose particles fade quickly as the holes fill
+      var PM = DOTP[S.pattern] ? Math.pow(1 - S.morph, 2.2) * .85 + .15 * (1 - S.morph) : 1;   // the loose particles fade quickly as the holes fill
       var SIZES = [Math.max(.9, 1 * scale), Math.max(1, 1.35 * scale), Math.max(1.3, 2.1 * scale)], ALPH = [.62, .72, 1], BANDA = [.12, .3, .55, 1];
       for (var gI = 0; gI < 12; gI++) { var L = groups[gI]; if (!L.length) continue; var bnd = (gI / 3) | 0, sz2 = gI % 3, dot = SIZES[sz2]; g.globalAlpha = BANDA[bnd] * ALPH[sz2] * .75 * PM * (sz2 === 0 ? 1 - .25 * S.morph : 1); for (var q = 0; q < L.length; q++) { var j = L[q]; g.fillRect(S.x[j] * k2 - dot / 2, S.y[j] * k2 - dot / 2, dot, dot); } }
-      if (S.pattern === 'samekomon' && S.morph > 0 && S.dots) {   // each particle that has reached its hole becomes the hole
+      if (DOTP[S.pattern] && S.morph > 0 && S.dots) {   // each particle that has reached its hole becomes the hole
         var D2 = S.dots, nd2 = D2.length / 2, cnt = new Uint8Array(nd2), lim = Math.max(4, S.pch * S.pch * .8);
         for (var a4 = 0; a4 < S.x.length; a4++) { var tg2 = S.target[a4]; if (tg2 === undefined || (S.free && S.free[a4])) continue; var ddx = S.x[a4] - D2[tg2], ddy = S.y[a4] - D2[tg2 + 1]; if (ddx * ddx + ddy * ddy < lim) cnt[tg2 / 2] = 1; }
         g.fillStyle = INK;
@@ -686,6 +720,7 @@ details.group summary { cursor: pointer; }
   document.getElementById('replay').onclick = function () { start(); };
   document.getElementById('skip').onclick = function () { sim.skip(); };
   // review hooks
+  window.__template = function (id, w, h) { return template(id, w, h); };
   window.__run = function (steps) { reduce = true; for (var k = 0; k < steps; k++) sim.tick(); sim.draw(g); return { n: sim.x.length, phase: sim.phase, morph: +sim.morph.toFixed(2), step: sim.step }; };
   window.__gallery = function () { reduce = true; galleryOn = true; var t0 = performance.now(); while ((queue.length || job) && performance.now() - t0 < 120000) work(1000); return { left: queue.length + (job ? 1 : 0), ms: Math.round(performance.now() - t0) }; };
 })();
