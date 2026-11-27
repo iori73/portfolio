@@ -36,6 +36,7 @@ button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .gallery h2 { margin: 0; font-weight: 500; font-size: 16px; }
 .gallery .intro { margin: 4px 0 0; font-size: 12.5px; line-height: 1.7; color: var(--soft); max-width: 78ch; }
 .gallery .intro .jp { color: var(--ink); }
+details.group summary { cursor: pointer; }
 .group h3 { margin: 0 0 10px; font-weight: 500; font-size: 13px; color: var(--soft); letter-spacing: .03em; }
 .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
 .tile { display: grid; gap: 8px; align-content: start; }
@@ -104,28 +105,38 @@ button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
   function rnd(a, b) { return a + Math.random() * (b - a); }
 
   // ---------- the patterns ----------
+  // groups: liked = chosen by the user (2026-11-27); new = added from the user's own references; rest = not chosen
   var PATTERNS = [
-    { id: 'asanoha', jp: '麻の葉', en: 'Asanoha', mine: true },
-    { id: 'karakusa', jp: '唐草', en: 'Karakusa', mine: true },
-    { id: 'saiwaibishi', jp: '幸菱', en: 'Saiwai-bishi', mine: true },
-    { id: 'matsukawabishi', jp: '松皮菱', en: 'Matsukawa-bishi', mine: true },
-    { id: 'ichimatsu', jp: '市松', en: 'Ichimatsu', mine: true },
-    { id: 'kagome', jp: '籠目', en: 'Kagome', mine: true },
-    { id: 'uroko', jp: '鱗', en: 'Uroko', mine: true },
-    { id: 'seigaiha', jp: '青海波', en: 'Seigaiha' },
-    { id: 'kikko', jp: '亀甲', en: 'Kikkō' },
-    { id: 'komochi', jp: '子持亀甲', en: 'Komochi kikkō' },
-    { id: 'bishamon', jp: '毘沙門亀甲', en: 'Bishamon kikkō' },
-    { id: 'shippo', jp: '七宝', en: 'Shippō' },
-    { id: 'tatewaku', jp: '立涌', en: 'Tatewaku' },
-    { id: 'amime', jp: '網目', en: 'Amime' },
-    { id: 'fundo', jp: '分銅繋ぎ', en: 'Fundō tsunagi' },
-    { id: 'higaki', jp: '檜垣', en: 'Higaki' },
-    { id: 'sayagata', jp: '紗綾形', en: 'Sayagata' },
-    { id: 'koji', jp: '工字繋ぎ', en: 'Kōji tsunagi' },
-    { id: 'shokko', jp: '蜀江', en: 'Shokkō' },
-    { id: 'kanzemizu', jp: '観世水', en: 'Kanze-mizu' },
-    { id: 'ryusui', jp: '流水', en: 'Ryūsui' }
+    { id: 'asanoha', jp: '麻の葉', en: 'Asanoha', g: 'liked' },
+    { id: 'ichimatsu', jp: '市松', en: 'Ichimatsu', g: 'liked' },
+    { id: 'seigaiha', jp: '青海波', en: 'Seigaiha', g: 'liked' },
+    { id: 'kikko', jp: '亀甲', en: 'Kikkō', g: 'liked' },
+    { id: 'komochi', jp: '子持亀甲', en: 'Komochi kikkō', g: 'liked' },
+    { id: 'shippo', jp: '七宝', en: 'Shippō', g: 'liked' },
+    { id: 'saiwaibishi', jp: '幸菱', en: 'Saiwai-bishi', g: 'liked' },
+    { id: 'samekomon', jp: '鮫小紋', en: 'Same-komon', g: 'new' },
+    { id: 'miru', jp: '海松丸', en: 'Miru-maru', g: 'new' },
+    { id: 'hanabishi', jp: '幸菱（丸い花菱）', en: 'Saiwai-bishi, rounded', g: 'new' },
+    { id: 'kuruwa', jp: '曲輪繋ぎ', en: 'Kuruwa tsunagi', g: 'new' },
+    { id: 'komochigoshi', jp: '子持格子', en: 'Komochi gōshi', g: 'new' },
+    { id: 'sankuzushi', jp: '三崩し', en: 'San-kuzushi', g: 'new' },
+    { id: 'kasumi', jp: '霞', en: 'Kasumi (mist bands)', g: 'new' },
+    { id: 'mandala', jp: '曼荼羅（金剛界）', en: 'Mandala grid', g: 'new' },
+    { id: 'marumon', jp: '丸文', en: 'Maru-mon (roundels)', g: 'new' },
+    { id: 'karakusa', jp: '唐草', en: 'Karakusa', g: 'rest' },
+    { id: 'matsukawabishi', jp: '松皮菱', en: 'Matsukawa-bishi', g: 'rest' },
+    { id: 'kagome', jp: '籠目', en: 'Kagome', g: 'rest' },
+    { id: 'uroko', jp: '鱗', en: 'Uroko', g: 'rest' },
+    { id: 'bishamon', jp: '毘沙門亀甲', en: 'Bishamon kikkō', g: 'rest' },
+    { id: 'tatewaku', jp: '立涌', en: 'Tatewaku', g: 'rest' },
+    { id: 'amime', jp: '網目', en: 'Amime', g: 'rest' },
+    { id: 'fundo', jp: '分銅繋ぎ', en: 'Fundō tsunagi', g: 'rest' },
+    { id: 'higaki', jp: '檜垣', en: 'Higaki', g: 'rest' },
+    { id: 'sayagata', jp: '紗綾形', en: 'Sayagata', g: 'rest' },
+    { id: 'koji', jp: '工字繋ぎ', en: 'Kōji tsunagi', g: 'rest' },
+    { id: 'shokko', jp: '蜀江', en: 'Shokkō', g: 'rest' },
+    { id: 'kanzemizu', jp: '観世水', en: 'Kanze-mizu', g: 'rest' },
+    { id: 'ryusui', jp: '流水', en: 'Ryūsui', g: 'rest' }
   ];
   function byId(id) { return PATTERNS.filter(function (p) { return p.id === id; })[0]; }
 
@@ -224,6 +235,66 @@ button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
       case 'higaki': rotated(Math.PI / 4, function () { var b = s * .42; for (var J = -Math.ceil(D / b); J < D / b; J++) for (var I = -Math.ceil(D / b); I < D / b; I++) { var x0 = GW / 2 + I * b, y0 = GH / 2 + J * b; c.strokeRect(x0, y0, b, b); if ((I + J) % 2) seg([x0, y0 + b / 2], [x0 + b, y0 + b / 2]); else seg([x0 + b / 2, y0], [x0 + b / 2, y0 + b]); } }); break;
       case 'sayagata': rotated(-.42, function () { var u = s * .24; for (var J = -Math.ceil(D / (2 * u)); J < D / (2 * u); J++) for (var I = -Math.ceil(D / (2 * u)); I < D / (2 * u); I++) { var cx = GW / 2 + I * 2 * u, cy = GH / 2 + J * 2 * u; poly([[cx + u, cy + u], [cx + u, cy], [cx - u, cy], [cx - u, cy - u]]); poly([[cx - u, cy + u], [cx, cy + u], [cx, cy - u], [cx + u, cy - u]]); } }); break;
       case 'koji': { var ku = s * .36; for (j = -1; j < GH / (2 * ku) + 2; j++) for (i = -1; i < GW / (2 * ku) + 2; i++) { var kx = i * 2 * ku, ky = j * 2 * ku, v = (i + j) % 2 === 0; if (v) { seg([kx - ku, ky - ku * .7], [kx + ku, ky - ku * .7]); seg([kx - ku, ky + ku * .7], [kx + ku, ky + ku * .7]); seg([kx, ky - ku * .7], [kx, ky + ku * .7]); } else { seg([kx - ku * .7, ky - ku], [kx - ku * .7, ky + ku]); seg([kx + ku * .7, ky - ku], [kx + ku * .7, ky + ku]); seg([kx - ku * .7, ky], [kx + ku * .7, ky]); } } break; }
+      case 'samekomon': {   // fine dots laid along overlapping arcs; the particles gather into the dots
+        var rs = s * .5; c.fillStyle = '#000';
+        for (j = -1; j < GH / (rs * .5) + 3; j++) for (i = -1; i < GW / (2 * rs) + 2; i++) {
+          var scx = i * 2 * rs + (j % 2 ? rs : 0), scy = j * rs * .5;
+          c.globalCompositeOperation = 'destination-out'; c.beginPath(); c.arc(scx, scy, rs * .98, Math.PI, TAU); c.fill(); c.globalCompositeOperation = 'source-over';
+          [1, .7, .4].forEach(function (q) { var rr2 = rs * q, nd = Math.max(3, Math.round(Math.PI * rr2 / (s * .16))); for (var dI = 0; dI <= nd; dI++) { var an2 = Math.PI + Math.PI * dI / nd; c.beginPath(); c.arc(scx + rr2 * Math.cos(an2), scy + rr2 * Math.sin(an2), s * .035, 0, TAU); c.fill(); } });
+        }
+        break;
+      }
+      case 'miru': {        // miru seaweed roundels: branches that fork in two, like the network itself (and the logo colour's namesake)
+        var mr = s * .62, msx = mr * 2.2, msy = mr * 1.9;
+        var branch = function (x, y, an, len, dep) { var x2 = x + Math.cos(an) * len, y2 = y + Math.sin(an) * len; seg([x, y], [x2, y2]); if (dep > 0) { branch(x2, y2, an - .42, len * .72, dep - 1); branch(x2, y2, an + .42, len * .72, dep - 1); } };
+        for (j = -1; j < GH / msy + 2; j++) for (i = -1; i < GW / msx + 2; i++) { var mcx = i * msx + (j % 2 ? msx / 2 : 0), mcy = j * msy; for (k = 0; k < 5; k++) branch(mcx, mcy, -Math.PI / 2 + k * TAU / 5, mr * .34, 3); }
+        break;
+      }
+      case 'hanabishi': {   // saiwai-bishi with rounded petals: four soft petals make each diamond, no sharp corners
+        var HW = s * .62, hsx = HW * 1.35, hsy = HW * .78;
+        for (j = -1; j < GH / hsy + 2; j++) for (i = -1; i < GW / hsx + 2; i++) {
+          var hx2 = i * hsx + (j % 2 ? hsx / 2 : 0), hy2 = j * hsy;
+          for (k = 0; k < 4; k++) { var pa = k * Math.PI / 2; c.beginPath(); c.ellipse(hx2 + Math.cos(pa) * HW * .24, hy2 + Math.sin(pa) * HW * .24 * .62, HW * .2 * (k % 2 ? .75 : 1), HW * .12, pa, 0, TAU); c.stroke(); }
+        }
+        break;
+      }
+      case 'kuruwa': {      // interlocking rings in rows
+        var kr = s * .3; for (j = -1; j < GH / (kr * 1.7) + 2; j++) for (i = -1; i < GW / (kr * 1.45) + 2; i++) { c.beginPath(); c.ellipse(i * kr * 1.45 + (j % 2 ? kr * .72 : 0), j * kr * 1.7, kr, kr * .78, 0, 0, TAU); c.stroke(); }
+        break;
+      }
+      case 'komochigoshi': { // a lattice of paired lines, one thick and one thin
+        var cq = s * .62, gap = cq * .22;
+        for (var gx2 = -cq; gx2 <= GW + cq; gx2 += cq) { c.lineWidth = 2.2; seg([gx2, 0], [gx2, GH]); c.lineWidth = 1; seg([gx2 + gap, 0], [gx2 + gap, GH]); }
+        for (var gy2 = -cq; gy2 <= GH + cq; gy2 += cq) { c.lineWidth = 2.2; seg([0, gy2], [GW, gy2]); c.lineWidth = 1; seg([0, gy2 + gap], [GW, gy2 + gap]); }
+        c.lineWidth = 1.3;
+        break;
+      }
+      case 'sankuzushi': {  // three parallel bars, turning a quarter in each square
+        var bq = s * .46;
+        for (j = -1; j < GH / bq + 1; j++) for (i = -1; i < GW / bq + 1; i++) { var bx2 = i * bq, by2 = j * bq; for (k = 1; k <= 3; k++) { var o2 = k * bq / 4; if ((i + j) % 2) seg([bx2 + bq * .12, by2 + o2], [bx2 + bq * .88, by2 + o2]); else seg([bx2 + o2, by2 + bq * .12], [bx2 + o2, by2 + bq * .88]); } }
+        break;
+      }
+      case 'kasumi': {      // suyari-gasumi: long rounded mist bands, staggered, as in Japanese painting
+        var seedK = 7, rk = function () { seedK = (seedK * 16807) % 2147483647; return seedK / 2147483647; };
+        var bh = s * .22, rowH = s * .42;
+        for (j = 0; j < GH / rowH; j++) { var xk2 = -rk() * s; while (xk2 < GW) { var len = s * (1.1 + rk() * 1.6), yk2 = j * rowH + rowH / 2; c.beginPath(); c.moveTo(xk2 + bh / 2, yk2 - bh / 2); c.lineTo(xk2 + len - bh / 2, yk2 - bh / 2); c.arc(xk2 + len - bh / 2, yk2, bh / 2, -Math.PI / 2, Math.PI / 2); c.lineTo(xk2 + bh / 2, yk2 + bh / 2); c.arc(xk2 + bh / 2, yk2, bh / 2, Math.PI / 2, Math.PI * 1.5); c.stroke(); xk2 += len + s * (.35 + rk() * .6); } }
+        break;
+      }
+      case 'mandala': {     // the Diamond-realm grid: squares, each holding a large circle and five small ones in a cross
+        var mq = GH / 2.05;
+        for (j = -1; j < GH / mq + 1; j++) for (i = -1; i < GW / mq + 1; i++) {
+          var mx3 = i * mq + mq / 2, my3 = j * mq + mq / 2 + (GH - Math.floor(GH / mq) * mq) / 2;
+          c.strokeRect(mx3 - mq * .46, my3 - mq * .46, mq * .92, mq * .92); circle(mx3, my3, mq * .36);
+          [[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1]].forEach(function (o3) { circle(mx3 + o3[0] * mq * .2, my3 + o3[1] * mq * .2, mq * .085); });
+        }
+        break;
+      }
+      case 'marumon': {     // scattered roundels of a few sizes, each a ring within a ring
+        var seedM = 11, rm = function () { seedM = (seedM * 16807) % 2147483647; return seedM / 2147483647; };
+        var msp = s * .95;
+        for (j = -1; j < GH / (msp * .86) + 1; j++) for (i = -1; i < GW / msp + 1; i++) { var mcx2 = i * msp + (j % 2 ? msp / 2 : 0) + (rm() - .5) * msp * .25, mcy2 = j * msp * .86 + (rm() - .5) * msp * .2, mr2 = msp * (.28 + rm() * .14); circle(mcx2, mcy2, mr2); circle(mcx2, mcy2, mr2 * .62); }
+        break;
+      }
       case 'shokko': { var a8 = s * .62, r8 = a8 / (2 * Math.cos(Math.PI / 8)); for (j = -1; j < GH / a8 + 2; j++) for (i = -1; i < GW / a8 + 2; i++) { var o = []; for (k = 0; k < 8; k++) { var an = Math.PI / 8 + k * Math.PI / 4; o.push([i * a8 + r8 * Math.cos(an), j * a8 + r8 * Math.sin(an)]); } poly(o, true); } break; }
     }
     var oc2 = document.createElement('canvas'); oc2.width = GW; oc2.height = GH; var c2 = oc2.getContext('2d');
@@ -328,8 +399,10 @@ button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ---------- the gallery ----------
+  var queue = [];
   var votes = {};
-  try { votes = JSON.parse(localStorage.getItem('slime-pattern-votes') || '{}') || {}; } catch (e) { votes = {}; }
+  try { votes = JSON.parse(localStorage.getItem('slime-pattern-votes') || 'null'); } catch (e) { votes = null; }
+  if (!votes) { votes = {}; PATTERNS.forEach(function (p) { if (p.g === 'liked') votes[p.id] = 'like'; if (p.g === 'rest') votes[p.id] = 'dislike'; }); }
   function saveVotes() { try { localStorage.setItem('slime-pattern-votes', JSON.stringify(votes)); } catch (e) { } summary(); }
   function summary() {
     var like = [], dis = [];
@@ -337,11 +410,12 @@ button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
     document.getElementById('sum').textContent = '好き: ' + (like.join('、') || '（まだなし）') + '\n好きじゃない: ' + (dis.join('、') || '（まだなし）');
   }
   var groups = document.getElementById('groups'), tiles = {};
-  [['mine', '以前の会話で挙げていた文様', 'Patterns you mentioned before'], ['rest', 'そのほか', 'Others']].forEach(function (gr) {
-    var box = document.createElement('div'); box.className = 'group';
-    box.innerHTML = '<h3><span class="jp">' + gr[1] + '</span> · ' + gr[2] + '</h3>';
-    var grid = document.createElement('div'); grid.className = 'tiles';
-    PATTERNS.filter(function (p) { return gr[0] === 'mine' ? p.mine : !p.mine; }).forEach(function (p) {
+  [['liked', '好きと答えた文様', 'Patterns you liked'], ['new', 'あなたの参考から足した文様', 'Added from your references'], ['rest', '選ばれなかった文様', 'Not chosen']].forEach(function (gr) {
+    var box = document.createElement(gr[0] === 'rest' ? 'details' : 'div'); box.className = 'group';
+    box.innerHTML = gr[0] === 'rest' ? '<summary><h3 style="display:inline"><span class="jp">' + gr[1] + '</span> · ' + gr[2] + '</h3></summary>' : '<h3><span class="jp">' + gr[1] + '</span> · ' + gr[2] + '</h3>';
+    if (gr[0] === 'rest') box.addEventListener('toggle', function () { if (box.open) PATTERNS.forEach(function (p) { if (p.g === 'rest' && queue.indexOf(p.id) < 0 && tiles[p.id].querySelector('.wait')) queue.push(p.id); }); });
+    var grid = document.createElement('div'); grid.className = 'tiles'; if (gr[0] === 'rest') grid.style.marginTop = '10px';
+    PATTERNS.filter(function (p) { return p.g === gr[0]; }).forEach(function (p) {
       var t = document.createElement('div'); t.className = 'tile';
       t.innerHTML = '<div class="pic" tabindex="0" role="button" data-id="' + p.id + '" aria-label="' + p.en + ': watch it on the stage"><canvas></canvas><div class="wait">computing…</div></div>' +
         '<div class="row"><span class="name"><span class="jp">' + p.jp + '</span><small>' + p.en + '</small></span><span class="vote"><button type="button" data-v="like" aria-pressed="false"><span class="jp">好き</span></button><button type="button" data-v="dislike" aria-pressed="false"><span class="jp">好きじゃない</span></button></span></div>';
@@ -364,7 +438,7 @@ button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 
   // gallery pictures are computed one at a time in the spare time of each frame, so the stage keeps moving smoothly
   // each tile is a cut-out of the real stage at the same scale (same height), so the pattern looks as it will on the stage
-  var queue = PATTERNS.map(function (p) { return p.id; }), job = null, TH = 0, TW = 0;
+  queue = PATTERNS.filter(function (p) { return p.g !== 'rest'; }).map(function (p) { return p.id; }); var job = null, TH = 0, TW = 0;
   function work(budget) {
     var t0 = performance.now();
     while (performance.now() - t0 < budget) {
