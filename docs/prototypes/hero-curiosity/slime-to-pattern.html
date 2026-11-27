@@ -114,15 +114,15 @@ details.group summary { cursor: pointer; }
     { id: 'komochi', jp: '子持亀甲', en: 'Komochi kikkō', g: 'liked' },
     { id: 'shippo', jp: '七宝', en: 'Shippō', g: 'liked' },
     { id: 'saiwaibishi', jp: '幸菱', en: 'Saiwai-bishi', g: 'liked' },
-    { id: 'samekomon', jp: '鮫小紋', en: 'Same-komon', g: 'new' },
-    { id: 'miru', jp: '海松丸', en: 'Miru-maru', g: 'new' },
-    { id: 'hanabishi', jp: '幸菱（丸い花菱）', en: 'Saiwai-bishi, rounded', g: 'new' },
-    { id: 'kuruwa', jp: '曲輪繋ぎ', en: 'Kuruwa tsunagi', g: 'new' },
-    { id: 'komochigoshi', jp: '子持格子', en: 'Komochi gōshi', g: 'new' },
-    { id: 'sankuzushi', jp: '三崩し', en: 'San-kuzushi', g: 'new' },
-    { id: 'kasumi', jp: '霞', en: 'Kasumi (mist bands)', g: 'new' },
-    { id: 'mandala', jp: '曼荼羅（金剛界）', en: 'Mandala grid', g: 'new' },
-    { id: 'marumon', jp: '丸文', en: 'Maru-mon (roundels)', g: 'new' },
+    { id: 'samekomon', jp: '鮫小紋', en: 'Same-komon', g: 'liked' },
+    { id: 'miru', jp: '海松丸', en: 'Miru-maru', g: 'liked' },
+    { id: 'hanabishi', jp: '幸菱（丸い花菱）', en: 'Saiwai-bishi, rounded', g: 'liked' },
+    { id: 'kuruwa', jp: '曲輪繋ぎ', en: 'Kuruwa tsunagi', g: 'liked' },
+    { id: 'komochigoshi', jp: '子持格子', en: 'Komochi gōshi', g: 'liked' },
+    { id: 'sankuzushi', jp: '三崩し', en: 'San-kuzushi', g: 'liked' },
+    { id: 'kasumi', jp: '霞', en: 'Kasumi (mist bands)', g: 'liked' },
+    { id: 'mandala', jp: '曼荼羅（金剛界）', en: 'Mandala grid', g: 'liked' },
+    { id: 'marumon', jp: '丸文', en: 'Maru-mon (roundels)', g: 'rest' },
     { id: 'karakusa', jp: '唐草', en: 'Karakusa', g: 'rest' },
     { id: 'matsukawabishi', jp: '松皮菱', en: 'Matsukawa-bishi', g: 'rest' },
     { id: 'kagome', jp: '籠目', en: 'Kagome', g: 'rest' },
@@ -236,11 +236,11 @@ details.group summary { cursor: pointer; }
       case 'sayagata': rotated(-.42, function () { var u = s * .24; for (var J = -Math.ceil(D / (2 * u)); J < D / (2 * u); J++) for (var I = -Math.ceil(D / (2 * u)); I < D / (2 * u); I++) { var cx = GW / 2 + I * 2 * u, cy = GH / 2 + J * 2 * u; poly([[cx + u, cy + u], [cx + u, cy], [cx - u, cy], [cx - u, cy - u]]); poly([[cx - u, cy + u], [cx, cy + u], [cx, cy - u], [cx + u, cy - u]]); } }); break;
       case 'koji': { var ku = s * .36; for (j = -1; j < GH / (2 * ku) + 2; j++) for (i = -1; i < GW / (2 * ku) + 2; i++) { var kx = i * 2 * ku, ky = j * 2 * ku, v = (i + j) % 2 === 0; if (v) { seg([kx - ku, ky - ku * .7], [kx + ku, ky - ku * .7]); seg([kx - ku, ky + ku * .7], [kx + ku, ky + ku * .7]); seg([kx, ky - ku * .7], [kx, ky + ku * .7]); } else { seg([kx - ku * .7, ky - ku], [kx - ku * .7, ky + ku]); seg([kx + ku * .7, ky - ku], [kx + ku * .7, ky + ku]); seg([kx - ku * .7, ky], [kx + ku * .7, ky]); } } break; }
       case 'samekomon': {   // fine dots laid along overlapping arcs; the particles gather into the dots
-        var rs = s * .5; c.fillStyle = '#000';
+        var rs = s * .62; c.fillStyle = '#000';
         for (j = -1; j < GH / (rs * .5) + 3; j++) for (i = -1; i < GW / (2 * rs) + 2; i++) {
           var scx = i * 2 * rs + (j % 2 ? rs : 0), scy = j * rs * .5;
           c.globalCompositeOperation = 'destination-out'; c.beginPath(); c.arc(scx, scy, rs * .98, Math.PI, TAU); c.fill(); c.globalCompositeOperation = 'source-over';
-          [1, .7, .4].forEach(function (q) { var rr2 = rs * q, nd = Math.max(3, Math.round(Math.PI * rr2 / (s * .16))); for (var dI = 0; dI <= nd; dI++) { var an2 = Math.PI + Math.PI * dI / nd; c.beginPath(); c.arc(scx + rr2 * Math.cos(an2), scy + rr2 * Math.sin(an2), s * .035, 0, TAU); c.fill(); } });
+          [1, .7, .4].forEach(function (q) { var rr2 = rs * q, nd = Math.max(3, Math.round(Math.PI * rr2 / (s * .24))); for (var dI = 0; dI <= nd; dI++) { var an2 = Math.PI + Math.PI * dI / nd; c.beginPath(); c.arc(scx + rr2 * Math.cos(an2), scy + rr2 * Math.sin(an2), s * .05, 0, TAU); c.fill(); } });
         }
         break;
       }
@@ -270,7 +270,7 @@ details.group summary { cursor: pointer; }
         break;
       }
       case 'sankuzushi': {  // three parallel bars, turning a quarter in each square
-        var bq = s * .46;
+        var bq = s * .82;
         for (j = -1; j < GH / bq + 1; j++) for (i = -1; i < GW / bq + 1; i++) { var bx2 = i * bq, by2 = j * bq; for (k = 1; k <= 3; k++) { var o2 = k * bq / 4; if ((i + j) % 2) seg([bx2 + bq * .12, by2 + o2], [bx2 + bq * .88, by2 + o2]); else seg([bx2 + o2, by2 + bq * .12], [bx2 + o2, by2 + bq * .88]); } }
         break;
       }
@@ -337,12 +337,13 @@ details.group summary { cursor: pointer; }
         if (c !== S.c[a]) { occ[S.c[a]] = 0; occ[c] = a + 1; S.c[a] = c; }
         S.x[a] = nx; S.y[a] = ny; S.d[a] = d; T[c] += DEP;
       }
-      if (S.morph > 0) { var P = S.pat, kk = S.morph * 2.2; for (var p = 0; p < N; p++) if (P[p] > .02) T[p] += kk * P[p]; }
-      var T2 = S.T2;
+      var TUNE = { samekomon: { gain: 4.5, decay: .8 } }[S.pattern] || {};
+      if (S.morph > 0) { var P = S.pat, kk = S.morph * 2.2 * (TUNE.gain ? 1 + (TUNE.gain / 2.2 - 1) * S.morph : 1); for (var p = 0; p < N; p++) if (P[p] > .02) T[p] += kk * P[p]; }
+      var T2 = S.T2, decay = TUNE.decay ? .9 + (TUNE.decay - .9) * S.morph : .9;
       for (var y2 = 0; y2 < GH; y2++) for (var x2 = 0; x2 < GW; x2++) {
         var sum = 0, cc = 0;
         for (var yy = y2 - 1; yy <= y2 + 1; yy++) { if (yy < 0 || yy >= GH) continue; var row = yy * GW; for (var xx = x2 - 1; xx <= x2 + 1; xx++) { if (xx < 0 || xx >= GW) continue; sum += T[row + xx]; cc++; } }
-        T2[y2 * GW + x2] = sum / cc * .9;
+        T2[y2 * GW + x2] = sum / cc * decay;
       }
       // the walls hold little chemical, and the corners even less, so the network does not trace a frame
       for (var e = 0; e < 4; e++) { var f = .55 + e * .12; for (var xe = 0; xe < GW; xe++) { T2[e * GW + xe] *= f; T2[(GH - 1 - e) * GW + xe] *= f; } for (var ye = 0; ye < GH; ye++) { T2[ye * GW + e] *= f; T2[ye * GW + GW - 1 - e] *= f; } }
@@ -410,7 +411,8 @@ details.group summary { cursor: pointer; }
     document.getElementById('sum').textContent = '好き: ' + (like.join('、') || '（まだなし）') + '\n好きじゃない: ' + (dis.join('、') || '（まだなし）');
   }
   var groups = document.getElementById('groups'), tiles = {};
-  [['liked', '好きと答えた文様', 'Patterns you liked'], ['new', 'あなたの参考から足した文様', 'Added from your references'], ['rest', '選ばれなかった文様', 'Not chosen']].forEach(function (gr) {
+  [['liked', '好きと答えた文様', 'Patterns you liked'], ['new', 'あなたの参考から足した文様（未回答）', 'Added from your references, not yet answered'], ['rest', '選ばれなかった文様', 'Not chosen']].forEach(function (gr) {
+    if (!PATTERNS.some(function (p) { return p.g === gr[0]; })) return;
     var box = document.createElement(gr[0] === 'rest' ? 'details' : 'div'); box.className = 'group';
     box.innerHTML = gr[0] === 'rest' ? '<summary><h3 style="display:inline"><span class="jp">' + gr[1] + '</span> · ' + gr[2] + '</h3></summary>' : '<h3><span class="jp">' + gr[1] + '</span> · ' + gr[2] + '</h3>';
     if (gr[0] === 'rest') box.addEventListener('toggle', function () { if (box.open) PATTERNS.forEach(function (p) { if (p.g === 'rest' && queue.indexOf(p.id) < 0 && tiles[p.id].querySelector('.wait')) queue.push(p.id); }); });
