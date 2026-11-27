@@ -74,6 +74,8 @@ details.group summary { cursor: pointer; }
       <span class="lab" style="margin-left:6px">Speed</span>
       <button type="button" data-sp="1" aria-pressed="true">1×</button>
       <button type="button" data-sp="4" aria-pressed="false">4×</button>
+      <button type="button" data-sp="8" aria-pressed="false">8×</button>
+      <button type="button" data-sp="16" aria-pressed="false">16×</button>
       <button type="button" id="replay">Replay</button>
     </div>
   </div>
@@ -311,6 +313,51 @@ details.group summary { cursor: pointer; }
     var GW = Math.floor(w / CS), GH = Math.floor(h / CS), N = GW * GH;
     var S = { w: w, h: h, GW: GW, GH: GH, occ: new Int32Array(N), T: new Float32Array(N), T2: new Float32Array(N), x: [], y: [], d: [], c: [], on: [], r: [], step: 0, phase: 1, morph: 0, fullAt: null, pattern: patternId, onPhase: opts.onPhase || function () {} };
     S.pat = template(patternId, GW, GH);
+    // same-komon: the particles themselves become the dots. Each particle heads for its nearest dot centre.
+    function sameDots() {
+      var s0 = GH / 2.3, rs = s0 * .34, out = [], fans = [];
+      for (var j = -1; j < GH / (rs * .5) + 3; j++) for (var i = -1; i < GW / (2 * rs) + 2; i++) fans.push([i * 2 * rs + (j % 2 ? rs : 0), j * rs * .5, j]);
+      fans.forEach(function (f) {
+        [1, .75, .5, .25].forEach(function (q) {
+          var r = rs * q, nd = Math.max(2, Math.round(Math.PI * r / (s0 * .1)));
+          for (var k = 0; k <= nd; k++) {
+            var an = Math.PI + Math.PI * k / nd, x = f[0] + r * Math.cos(an), y = f[1] + r * Math.sin(an);
+            if (x < 1 || y < 1 || x > GW - 2 || y > GH - 2) continue;
+            var hidden = fans.some(function (g2) { return g2[2] > f[2] && g2[2] <= f[2] + 2 && y < g2[1] && Math.hypot(x - g2[0], y - g2[1]) < rs * .98; });
+            if (!hidden) out.push(x, y);
+          }
+        });
+      });
+      return out;
+    }
+    S.dots = null; S.target = [];
+    S.dotsFor = function () {
+      if (S.pattern !== 'samekomon') return null;
+      if (!S.dots) {
+        S.dots = sameDots(); var D2 = S.dots, nd = D2.length / 2, B = 8, BW = Math.ceil(GW / B), BH = Math.ceil(GH / B);
+        S.bucket = []; for (var bI = 0; bI < BW * BH; bI++) S.bucket.push([]);
+        for (var q = 0; q < nd; q++) S.bucket[Math.min(BH - 1, (D2[2 * q + 1] / B) | 0) * BW + Math.min(BW - 1, (D2[2 * q] / B) | 0)].push(q);
+        S.load = new Int32Array(nd); S.BW = BW; S.BH = BH; S.B = B;
+        var agents = []; for (var a2 = 0; a2 < S.x.length; a2++) if (!(S.free && S.free[a2])) agents.push(a2);
+        S.cap = Math.ceil(agents.length / nd);
+        for (var k = agents.length - 1; k > 0; k--) { var r2 = (Math.random() * (k + 1)) | 0, tmp = agents[k]; agents[k] = agents[r2]; agents[r2] = tmp; }
+        agents.forEach(function (a3) { S.assign(a3); });
+      }
+      return S.dots;
+    };
+    S.assign = function (a) {
+      var D2 = S.dots, x = S.x[a], y = S.y[a], bx = Math.min(S.BW - 1, (x / S.B) | 0), by = Math.min(S.BH - 1, (y / S.B) | 0);
+      for (var ring = 0; ring < Math.max(S.BW, S.BH); ring++) {
+        var best = -1, bd = 1e18;
+        for (var yy = by - ring; yy <= by + ring; yy++) for (var xx = bx - ring; xx <= bx + ring; xx++) {
+          if (yy < 0 || xx < 0 || yy >= S.BH || xx >= S.BW || (Math.abs(yy - by) !== ring && Math.abs(xx - bx) !== ring)) continue;
+          var L = S.bucket[yy * S.BW + xx];
+          for (var t = 0; t < L.length; t++) { var q = L[t]; if (S.load[q] >= S.cap) continue; var dd = (D2[2 * q] - x) * (D2[2 * q] - x) + (D2[2 * q + 1] - y) * (D2[2 * q + 1] - y); if (dd < bd) { bd = dd; best = q; } }
+        }
+        if (best >= 0) { S.load[best]++; S.target[a] = 2 * best; return; }
+      }
+      S.target[a] = 0;
+    };
     S.seed = [Math.round(GW * .2), Math.round(GH * .55)];
     function add(i, j, dir) { var c = j * GW + i; if (S.occ[c]) return false; S.x.push(i + .5); S.y.push(j + .5); S.d.push(dir); S.c.push(c); S.occ[c] = S.x.length; return true; }
     var target = Math.round(N * .15), tries = 0;
@@ -318,9 +365,9 @@ details.group summary { cursor: pointer; }
     S.reach = Math.hypot(Math.max(S.seed[0], GW - S.seed[0]), Math.max(S.seed[1], GH - S.seed[1]));
 
     S.setPhase = function (p) { S.phase = p; S.onPhase(p); };
-    S.setPattern = function (id) { S.pattern = id; S.pat = template(id, GW, GH); };
+    S.setPattern = function (id) { S.pattern = id; S.pat = template(id, GW, GH); S.dots = null; S.target = []; };
     S.tick = function () {
-      var T = S.T, occ = S.occ, n = S.x.length, SO = 7, SA = Math.PI / 4, RA = Math.PI / 4, DEP = 5;
+      var T = S.T, occ = S.occ, n = S.x.length, SO = 7, SA = Math.PI / 4, RA = Math.PI / 4, DEP = 5, DOTS = S.morph > 0 ? S.dotsFor() : null;
       function at(x, y) { var i = x | 0, j = y | 0; if (i < 0 || j < 0 || i >= GW || j >= GH) return -1; return T[j * GW + i]; }
       var front = S.reach * Math.min(1, S.step / 780) + 4;      // the active zone reaches the far corner in about 13 s
       var start = (Math.random() * n) | 0;
@@ -329,6 +376,11 @@ details.group summary { cursor: pointer; }
         var x = S.x[a], y = S.y[a], d = S.d[a];
         var F = at(x + Math.cos(d) * SO, y + Math.sin(d) * SO), L = at(x + Math.cos(d - SA) * SO, y + Math.sin(d - SA) * SO), R = at(x + Math.cos(d + SA) * SO, y + Math.sin(d + SA) * SO);
         if (F > L && F > R) { } else if (F < L && F < R) d += (Math.random() < .5 ? -1 : 1) * RA; else if (L > R) d -= RA; else if (R > L) d += RA;
+        if (DOTS && Math.random() < S.morph) {
+          var tg = S.target[a]; if (tg === undefined) { S.assign(a); tg = S.target[a]; }
+          var tx = DOTS[tg] - x, ty = DOTS[tg + 1] - y, dist = Math.hypot(tx, ty);
+          d = dist > 1.1 ? Math.atan2(ty, tx) + rnd(-.15, .15) : rnd(0, TAU);   // close to its dot it keeps moving, but stays
+        }
         var nx = x + Math.cos(d), ny = y + Math.sin(d), i = nx | 0, j = ny | 0;
         if (i < 0 || i >= GW) { S.d[a] = Math.PI - d + rnd(-.3, .3); continue; }            // the edge is a wall: bounce off it
         if (j < 0 || j >= GH) { S.d[a] = -d + rnd(-.3, .3); continue; }
@@ -337,7 +389,7 @@ details.group summary { cursor: pointer; }
         if (c !== S.c[a]) { occ[S.c[a]] = 0; occ[c] = a + 1; S.c[a] = c; }
         S.x[a] = nx; S.y[a] = ny; S.d[a] = d; T[c] += DEP;
       }
-      var TUNE = { samekomon: { gain: 4.5, decay: .8 } }[S.pattern] || {};
+      var TUNE = { samekomon: { gain: .001, decay: .75 } }[S.pattern] || {};
       if (S.morph > 0) { var P = S.pat, kk = S.morph * 2.2 * (TUNE.gain ? 1 + (TUNE.gain / 2.2 - 1) * S.morph : 1); for (var p = 0; p < N; p++) if (P[p] > .02) T[p] += kk * P[p]; }
       var T2 = S.T2, decay = TUNE.decay ? .9 + (TUNE.decay - .9) * S.morph : .9;
       for (var y2 = 0; y2 < GH; y2++) for (var x2 = 0; x2 < GW; x2++) {
