@@ -2252,3 +2252,14 @@ variables / styles はデザインの統一と作業効率のため（現行サ�
 - 学習ノートに ritar と動的平衡館の観察を追記（docs/design/ndc-motion-study.md）。
 - 設定: ~/.claude/settings.json の allow に、信頼済み MCP（playwright・chrome-devtools・Figma・Notion・cursor-ide-browser・claude-in-chrome の読み取り）を追加。
 - 次: 河野さんが問い5つに答え、動きを1〜2個選ぶ → 本物の映像と並べて詰める。
+
+## 2026-11-27: ヒーロー試作 — 空・諸行無常を格子ボルツマン法で／粘菌が区画を満たし文様へ
+
+- 空・諸行無常: 河野さんが学術的な根拠を求めたので、格子ボルツマン法（D2Q9・BGK）で計算し直した（docs/prototypes/hero-curiosity/lbm.js）。
+  円柱 Re=40 の後ろの渦は直径の2.38倍（文献 Fornberg 1980: 2.24、Dennis & Chang 1970: 2.35）。Poiseuille との比較で誤差0.19%。
+  見た目は「前の方が良い」との指摘で、点の描き方・大きな円・波打つ岸に戻した（流れは計算のまま）。
+- Slime to Pattern（河野さんの案）: 粒子が絶えず流れる動的平衡はそのまま、粘菌が網を広げる。本番は見出しの下の透明な長方形（枠線なし）。
+  Jones (2010) の粘菌モデル（3点で感じて向きを変える、1マス1粒子、拡散と減衰）。縁は壁。広がりは「眠る粒子を種から広がる活動範囲で目覚めさせる」近似。
+  満ちたら約4秒休み、文様の形の誘引物質を約22秒かけて強める（デザインとしての介入、注記あり）。縁の点は薄く。文様は麻の葉・青海波・亀甲・七宝。
+  4つとも、広がる→満ちる→文様が浮かぶまでをフレームで確認。粒子約1.9万、1ステップ約3〜5ms。
+  artifact: https://claude.ai/artifact/6Qnp5SKWf35U1qzmvv6hH9 、ソース: docs/prototypes/hero-curiosity/slime-to-pattern.html
