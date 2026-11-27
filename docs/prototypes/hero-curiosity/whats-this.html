@@ -1,0 +1,976 @@
+<meta charset="utf-8">
+<title>What's This Hero</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&display=swap">
+<style>
+/* Layout: mirrors production. Headline on top; below it an invisible rectangle where the slime mold grows, fills, and turns into a pattern.
+   Below the stage, a gallery of every pattern's end state to mark likes and dislikes. */
+:root {
+  --bg: #EFF1F1;     /* site --surface */
+  --ink: #111111;
+  --soft: #5E6467;
+  --line: #D3D8D8;
+  --tile: #E8EBEB;
+  --miru: #596327;   /* logo colour */
+  --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --jp: "Noto Sans JP", "Hiragino Sans", sans-serif;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 40px 72px; }
+.hero h1 { font-weight: 400; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.25; letter-spacing: -0.01em; margin: 0 0 12px; text-wrap: balance; }
+.hero p { font-weight: 400; font-size: clamp(22px, 3.1vw, 37px); line-height: 1.32; letter-spacing: -0.01em; margin: 0; text-wrap: balance; max-width: 900px; }
+.hint { margin: 8px 0 0; font-size: 12px; color: var(--muted, #777); }
+#cv:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+#cv { cursor: pointer; display: block; width: 100%; aspect-ratio: 16 / 6.5; max-width: 100%; margin-top: clamp(24px, 4vw, 40px); background: transparent; }
+.bar { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; justify-content: space-between; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 12px; }
+.stage { display: flex; gap: 14px; color: var(--soft); letter-spacing: .03em; flex-wrap: wrap; }
+.stage span[aria-current="step"] { color: var(--ink); font-weight: 500; }
+.ctrl { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+button { font: inherit; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; cursor: pointer; }
+button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.lab { color: var(--soft); }
+.now { font-weight: 500; margin-right: 6px; }
+.jp { font-family: var(--jp); }
+
+.gallery { margin-top: 44px; display: grid; gap: 22px; }
+.gallery h2 { margin: 0; font-weight: 500; font-size: 16px; }
+.gallery .intro { margin: 4px 0 0; font-size: 12.5px; line-height: 1.7; color: var(--soft); max-width: 78ch; }
+.gallery .intro .jp { color: var(--ink); }
+details.group summary { cursor: pointer; }
+.group h3 { margin: 0 0 10px; font-weight: 500; font-size: 13px; color: var(--soft); letter-spacing: .03em; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+.tile { display: grid; gap: 8px; align-content: start; }
+.tile .pic { position: relative; border-radius: 6px; overflow: hidden; background: var(--tile); cursor: pointer; border: 1px solid transparent; }
+.tile .pic:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.tile .pic.current { border-color: var(--ink); }
+.tile canvas { display: block; width: 100%; aspect-ratio: var(--tile-ar, 1.3 / 1); }
+.tile .wait { position: absolute; inset: 0; display: grid; place-items: center; font-size: 11px; color: var(--soft); }
+.tile .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.tile .name { font-size: 13px; }
+.tile .name small { color: var(--soft); font-size: 11px; margin-left: 6px; }
+.vote { display: flex; gap: 4px; }
+.vote button { padding: 3px 9px; font-size: 11px; }
+.vote button[data-v="like"][aria-pressed="true"] { background: var(--miru); border-color: var(--miru); color: #fff; }
+.summary { border-top: 1px solid var(--line); padding-top: 14px; display: grid; gap: 8px; font-size: 12.5px; line-height: 1.7; }
+.summary pre { margin: 0; white-space: pre-wrap; font-family: var(--jp); font-size: 12.5px; background: var(--tile); border-radius: 6px; padding: 10px 12px; }
+.notes { margin-top: 36px; display: grid; gap: 12px; font-size: 12.5px; line-height: 1.75; color: var(--soft); max-width: 80ch; }
+.notes p { margin: 0; }
+.notes .jp { color: var(--ink); }
+</style>
+
+<div class="wrap">
+  <div class="lab-bar" role="group" aria-label="Experiment controls">
+    <div class="seg" id="seg" role="radiogroup" aria-label="Variant">
+      <button type="button" role="radio" data-v="a">A 浮かぶ丸ボタン</button>
+      <button type="button" role="radio" data-v="b">B 区画の角</button>
+      <button type="button" role="radio" data-v="c">C キャプション</button>
+      <button type="button" role="radio" data-v="d">D カーソル</button>
+      <button type="button" role="radio" data-v="e">E 字幕</button>
+    </div>
+    <div class="seg" id="langseg" role="radiogroup" aria-label="Language">
+      <button type="button" role="radio" data-l="en">EN</button>
+      <button type="button" role="radio" data-l="jp">JP</button>
+    </div>
+    <button type="button" id="xreplay">最初から</button>
+  </div>
+  <section class="hero">
+    <h1>Curiosity drives my work and life.</h1>
+    <p>I explore what makes design meaningful today, when anyone can create.</p>
+  </section>
+
+  <div class="stagewrap" id="stagewrap"><canvas id="cv" tabindex="0" role="button" aria-label="Particles grow into a slime-mold network, then settle into a Japanese pattern. Click or press Enter for another pattern."></canvas></div>
+
+
+  <section class="xnotes" aria-label="Notes on the variants">
+    <h3>何を比べているか</h3>
+    <p>初めて来た人は文脈を持たず、ヒーローには約10秒しかいない。案内は「気づけるが、見出しと動きの邪魔をしない」ことが条件。スマホでは hover がないので、開くのはクリック／タップにした（いわゆる tooltip ではなく、クリックで開く toggletip。Esc・×・外側のクリックで閉じ、開いたボタンにフォーカスが戻る）。文言は仮。</p>
+    <h3>A 浮かぶ丸ボタン</h3>
+    <p class="pro">いちばん見慣れた形で、見つけやすい。ヒーローが画面にある間だけ出す。</p>
+    <p class="con">チャットやヘルプ窓口と読まれやすい（押すと人と話せると思われる）。説明の対象（区画）から離れた画面の角にある。</p>
+    <h3>B 区画の角</h3>
+    <p class="pro">説明する物のすぐ隣にある（近さで関係がわかる）。文様ができ始めてから出るので、最初の数秒は動きだけを見せられる。</p>
+    <p class="con">動きの上に小さく乗る。文様の種類によっては背景とまざる。</p>
+    <h3>C キャプション（おすすめ）</h3>
+    <p class="pro">美術館で作品の横にある名札と同じ慣習。いまの文様の名前と段階（広がる・満ちる・文様へ）が常に見える（何が起きているかが見える）。開いても動きを隠さない。ポートフォリオの「余白とタイポ」の静けさに合う。</p>
+    <p class="con">気づかれにくい。下線の「これについて」が目立たないと開かれない。13インチのノートPCでは区画の下端が最初の画面の外に出るので、キャプションは少しスクロールしないと見えない（本番では区画の高さを少し詰めるか、キャプションを区画の下端に重ねる必要がある）。</p>
+    <h3>D カーソル</h3>
+    <p class="pro">区画に手を伸ばした人にだけ出る。クリックできることも同時に伝わる。</p>
+    <p class="con">マウスだけ。スマホでは下に1行出す代わりの形が要る。読み終わる前にカーソルが動く。</p>
+    <h3>E 字幕</h3>
+    <p class="pro">押さなくても、起きていることをその場で言葉にする。10秒しかいない人にも届く。</p>
+    <p class="con">文字が常に動き、見出しと注意を取り合う。説明を読みたい人には短すぎる。</p>
+  </section>
+
+  <div class="bar">
+    <div class="stage" aria-live="polite"><span id="s1">1 <span class="jp">広がる</span> Spread</span><span id="s2">2 <span class="jp">満ちる</span> Fill</span><span id="s3">3 <span class="jp">文様へ</span> Pattern</span></div>
+    <div class="ctrl">
+      <span class="now" id="now"></span>
+      <button type="button" id="skip"><span class="jp">文様へ進む</span> Skip to pattern</button>
+      <span class="lab" style="margin-left:6px">Speed</span>
+      <button type="button" data-sp="1" aria-pressed="true">1×</button>
+      <button type="button" data-sp="4" aria-pressed="false">4×</button>
+      <button type="button" data-sp="8" aria-pressed="false">8×</button>
+      <button type="button" data-sp="16" aria-pressed="false">16×</button>
+      <button type="button" id="replay">Replay</button>
+    </div>
+  </div>
+
+  <section class="gallery" aria-labelledby="gal-h">
+    <div>
+      <h2 id="gal-h"><span class="jp">文様の候補</span> Pattern candidates</h2>
+      <p class="intro"><span class="jp">どれも、上の区画と同じ縮尺で切り出した、網が文様へ移った後の姿。絵を押すと、上の区画でその文様への変化を見られる。好き・好きじゃないを押すと、下にまとめが出る（コピーして返してください）。</span><br>Each picture is a cut-out of the stage, at the same scale, after the network has moved into that pattern. Click a picture to watch the change on the stage above. Mark like or dislike, and copy the summary at the bottom to send back.</p>
+    </div>
+    <div id="groups"></div>
+    <div class="summary">
+      <div><b class="jp">まとめ</b> Summary <button type="button" id="copy" style="margin-left:8px">Copy</button> <span id="copied" class="lab" aria-live="polite"></span></div>
+      <pre id="sum"></pre>
+    </div>
+  </section>
+
+  <div class="notes">
+    <p><span class="jp">粒子が一つの点から広がり、粘菌の網になって四角い区画を満たす。満ちきったら、網はゆっくり文様へ移っていく。粒子は最後まで一瞬も止まらない。中身は入れ替わり続け、形だけが移ろう。</span><br>From one point, particles spread into a slime-mold network that fills the rectangle. Once it is full, the network slowly moves into a traditional pattern. The particles never stop; what flows through keeps changing, and only the form shifts.</p>
+    <p><span class="jp">根拠: 粘菌の動きは Jones (2010, Artificial Life) のモデル。粒子は前・左前・右前の3点で化学物質の濃さを感じて向きを変え、空いた場所にだけ進み、進んだ所に化学物質を残す。化学物質は拡散して減衰する。粒子ははじめ区画全体に眠っていて、種から広がる活動の範囲に入ると目覚める（広がりの近似）。区画の縁は壁として扱う。</span><br>Basis: Jones (2010) agent model of Physarum. Each particle senses the trail at three points ahead, turns toward the strongest, moves only into a free cell and leaves trail there; the trail diffuses and decays. Particles start asleep across the whole rectangle and wake as an active zone spreads from the seed (an approximation of the spreading). The edges of the rectangle act as walls.</p>
+    <p><span class="jp">デザインとしての介入: 文様への変化は、文様の形に引き寄せる物質を下に敷き、その強さをゆっくり上げることで起こしている（実験で、餌や誘引物質の配置に粘菌が沿うのと同じ仕組み）。文様は「ほのめかす」程度にとどめた。縁と角の点は薄くして、枠に見えないようにしている。文様の線は『日本・中国の文様事典』などを参考に、粘菌の網が沿える線として描き直した簡略形。パラメータは見た目で調整している。</span><br>Design intervention: the turn to a pattern comes from laying an attractant in the shape of the pattern underneath and slowly raising its strength, the same way slime mold follows attractants placed in experiments. The pattern stays a hint. Dots near the edges and corners are faded so they do not read as a frame. The pattern lines are simplified redrawings, made with a pattern dictionary as one reference. Parameters are tuned by eye.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var css = getComputedStyle(document.documentElement);
+  var INK = css.getPropertyValue('--ink').trim() || '#111', MIRU = css.getPropertyValue('--miru').trim() || '#596327';
+  var TAU = Math.PI * 2, CS = 2;
+  var DOTP = { samekomon: 1, ichimatsu: 1 };   // patterns the particles draw as dots, one particle to a dot
+  function rnd(a, b) { return a + Math.random() * (b - a); }
+  // cos/sin from a table: the particles turn by a fraction of a circle each step, so 1024 steps per turn is plenty
+  var LUTN = 1024, LK = LUTN / TAU, COS = new Float32Array(LUTN), SIN = new Float32Array(LUTN);
+  for (var li = 0; li < LUTN; li++) { COS[li] = Math.cos(li / LK); SIN[li] = Math.sin(li / LK); }
+  function lc(a) { return COS[((a * LK) | 0) & 1023]; }
+  function ls(a) { return SIN[((a * LK) | 0) & 1023]; }
+
+  // ---------- the patterns ----------
+  // groups: liked = chosen by the user (2026-11-27); new = added from the user's own references; rest = not chosen
+  var PATTERNS = [
+    { id: 'asanoha', jp: '麻の葉', en: 'Asanoha', g: 'liked' },
+    { id: 'ichimatsu', jp: '市松', en: 'Ichimatsu', g: 'liked' },
+    { id: 'seigaiha', jp: '青海波', en: 'Seigaiha', g: 'liked' },
+    { id: 'kikko', jp: '亀甲', en: 'Kikkō', g: 'liked' },
+    { id: 'komochi', jp: '子持亀甲', en: 'Komochi kikkō', g: 'liked' },
+    { id: 'shippo', jp: '七宝', en: 'Shippō', g: 'liked' },
+    { id: 'saiwaibishi', jp: '幸菱', en: 'Saiwai-bishi', g: 'liked' },
+    { id: 'samekomon', jp: '鮫小紋', en: 'Same-komon', g: 'liked' },
+    { id: 'miru', jp: '海松丸', en: 'Miru-maru', g: 'liked' },
+    { id: 'hanabishi', jp: '幸菱（丸い花菱）', en: 'Saiwai-bishi, rounded', g: 'liked' },
+    { id: 'kuruwa', jp: '曲輪繋ぎ', en: 'Kuruwa tsunagi', g: 'liked' },
+    { id: 'komochigoshi', jp: '子持格子', en: 'Komochi gōshi', g: 'liked' },
+    { id: 'sankuzushi', jp: '三崩し', en: 'San-kuzushi', g: 'liked' },
+    { id: 'kasumi', jp: '霞', en: 'Kasumi (mist bands)', g: 'liked' },
+    { id: 'mandala', jp: '曼荼羅（金剛界）', en: 'Mandala grid', g: 'liked' },
+    { id: 'karakusa', jp: '唐草', en: 'Karakusa', g: 'liked' },
+    { id: 'jukou', jp: '珠光緞子', en: 'Jukō donsu', g: 'chajin' },
+    { id: 'jouou', jp: '紹鷗緞子', en: 'Jōō donsu', g: 'chajin' },
+    { id: 'rikyu', jp: '利休緞子', en: 'Rikyū donsu', g: 'chajin' },
+    { id: 'oribe', jp: '織部緞子', en: 'Oribe donsu', g: 'chajin' },
+    { id: 'enshu', jp: '遠州緞子', en: 'Enshū donsu', g: 'chajin' },
+    { id: 'marumon', jp: '丸文', en: 'Maru-mon (roundels)', g: 'rest' },
+    { id: 'matsukawabishi', jp: '松皮菱', en: 'Matsukawa-bishi', g: 'rest' },
+    { id: 'kagome', jp: '籠目', en: 'Kagome', g: 'rest' },
+    { id: 'uroko', jp: '鱗', en: 'Uroko', g: 'rest' },
+    { id: 'bishamon', jp: '毘沙門亀甲', en: 'Bishamon kikkō', g: 'rest' },
+    { id: 'tatewaku', jp: '立涌', en: 'Tatewaku', g: 'rest' },
+    { id: 'amime', jp: '網目', en: 'Amime', g: 'rest' },
+    { id: 'fundo', jp: '分銅繋ぎ', en: 'Fundō tsunagi', g: 'rest' },
+    { id: 'higaki', jp: '檜垣', en: 'Higaki', g: 'rest' },
+    { id: 'sayagata', jp: '紗綾形', en: 'Sayagata', g: 'rest' },
+    { id: 'koji', jp: '工字繋ぎ', en: 'Kōji tsunagi', g: 'rest' },
+    { id: 'shokko', jp: '蜀江', en: 'Shokkō', g: 'rest' },
+    { id: 'kanzemizu', jp: '観世水', en: 'Kanze-mizu', g: 'rest' },
+    { id: 'ryusui', jp: '流水', en: 'Ryūsui', g: 'rest' }
+  ];
+  function byId(id) { return PATTERNS.filter(function (p) { return p.id === id; })[0]; }
+
+  // each pattern is drawn as lines on the lattice, then blurred into a soft attractant field
+  function template(name, GW, GH) {
+    var oc = document.createElement('canvas'); oc.width = GW; oc.height = GH; var c = oc.getContext('2d');
+    c.strokeStyle = '#000'; c.lineWidth = 1.3; c.lineJoin = 'round'; c.lineCap = 'round';
+    var s = GH / 2.3, D = Math.hypot(GW, GH), i, j, k;
+    function seg(a, b) { c.beginPath(); c.moveTo(a[0], a[1]); c.lineTo(b[0], b[1]); c.stroke(); }
+    function poly(pts, close) { c.beginPath(); pts.forEach(function (p, n) { if (n) c.lineTo(p[0], p[1]); else c.moveTo(p[0], p[1]); }); if (close) c.closePath(); c.stroke(); }
+    function circle(x, y, r, a0, a1) { c.beginPath(); c.arc(x, y, r, a0 || 0, a1 === undefined ? TAU : a1); c.stroke(); }
+    function lines3(d, offs) {   // three families of parallel lines at 0, 60, 120 degrees
+      [0, Math.PI / 3, 2 * Math.PI / 3].forEach(function (th, f) {
+        var nx = -Math.sin(th), ny = Math.cos(th), tx = Math.cos(th), ty = Math.sin(th);
+        for (var q = -D / d - 1; q < D / d + 1; q++) { var o = q * d + offs[f], px = GW / 2 + nx * o, py = GH / 2 + ny * o; seg([px - tx * D, py - ty * D], [px + tx * D, py + ty * D]); }
+      });
+    }
+    function hexes(R, inner, skip) {
+      var w = Math.sqrt(3) * R;
+      for (j = -1; j < GH / (1.5 * R) + 2; j++) for (i = -1; i < GW / w + 2; i++) {
+        if (skip && skip(i, j)) continue;
+        var hx = i * w + (j % 2 ? w / 2 : 0), hy = j * 1.5 * R, pts = [], pin = [];
+        for (k = 0; k < 6; k++) { var a = Math.PI / 6 + k * Math.PI / 3; pts.push([hx + R * Math.cos(a), hy + R * Math.sin(a)]); pin.push([hx + R * inner * Math.cos(a), hy + R * inner * Math.sin(a)]); }
+        poly(pts, true); if (inner) poly(pin, true);
+      }
+    }
+    function diamond(cx, cy, w, h) { poly([[cx, cy - h / 2], [cx + w / 2, cy], [cx, cy + h / 2], [cx - w / 2, cy]], true); }
+    function rotated(angle, fn) { c.save(); c.translate(GW / 2, GH / 2); c.rotate(angle); c.translate(-GW / 2, -GH / 2); fn(); c.restore(); }
+    function spiral(cx, cy, r0, turns, start, dir) { var pts = []; for (var t = 0; t <= turns * TAU; t += .15) { var r = r0 * (1 - .78 * t / (turns * TAU)); pts.push([cx + r * Math.cos(start + dir * t), cy + r * Math.sin(start + dir * t)]); } poly(pts); }
+    function peonyAt(x, y, r) { for (var q = 0; q < 6; q++) { var an = q * TAU / 6; circle(x + r * .7 * Math.cos(an), y + r * .7 * Math.sin(an), r * .38, an - 1.75, an + 1.75); } }
+    function kikuAt(x, y, r) { circle(x, y, r); circle(x, y, r * .28); for (var q = 0; q < 12; q++) { var an = q * TAU / 12; seg([x + r * .34 * Math.cos(an), y + r * .34 * Math.sin(an)], [x + r * .92 * Math.cos(an), y + r * .92 * Math.sin(an)]); } }
+    function flowerAt(x, y, r, n) { circle(x, y, r * .3); for (var q = 0; q < (n || 6); q++) { var an = q * TAU / (n || 6); circle(x + r * .62 * Math.cos(an), y + r * .62 * Math.sin(an), r * .4); } }
+    function plumAt(x, y, r) { for (var q = 0; q < 5; q++) { var an = -Math.PI / 2 + q * TAU / 5; circle(x + r * .6 * Math.cos(an), y + r * .6 * Math.sin(an), r * .4); } circle(x, y, r * .16); }
+    function clearDisc(x, y, r) { c.save(); c.globalCompositeOperation = 'destination-out'; c.beginPath(); c.arc(x, y, r, 0, TAU); c.fill(); c.restore(); }
+    // karakusa, from the pattern dictionary (p.90, 唐草(1)): S-curved stems in nested rows; at every bend a tendril curls
+    // into the open bay (warabite), turning alternately left and right, and a small counter-curl springs from its rim.
+    function karaVine(o) {
+      var A = o.A, rowH = A * o.rowK, lam = A * o.lamK, R = A * o.curlK, sd = o.seed || 3, rr = function () { sd = (sd * 16807) % 2147483647; return sd / 2147483647; }, nb = 0;
+      for (var jr = -1; jr < GH / rowH + 1; jr++) {
+        var y0 = jr * rowH + rowH / 2, ph = (o.alt && (jr & 1)) ? Math.PI : 0, pts = [];
+        for (var x = -lam; x <= GW + lam; x += 2) pts.push([x, y0 + A * Math.sin(TAU * x / lam + ph)]);
+        poly(pts);
+        var xs0 = lam / 4 - ph / TAU * lam;
+        for (var kb = -2; xs0 + kb * lam / 2 < GW + lam; kb++) {
+          nb++; if (o.skip && rr() < o.skip) continue;
+          var xb = xs0 + kb * lam / 2, sg = Math.sin(TAU * xb / lam + ph) > 0 ? 1 : -1, yb = y0 + sg * A;
+          var cy = yb - sg * R, dir = (kb & 1) ? 1 : -1, st = sg > 0 ? Math.PI / 2 : -Math.PI / 2;
+          var fl = o.flowerEvery && nb % o.flowerEvery === 0;
+          spiral(xb, cy, R, fl ? .55 : o.turns, st, dir);
+          if (fl) peonyAt(xb, cy, R * o.flowerK);
+          if (o.sub) { var a2 = st + dir * Math.PI * .6, sx = xb + R * Math.cos(a2), sy = cy + R * Math.sin(a2), r2 = R * .42; spiral(sx + r2 * Math.cos(a2), sy + r2 * Math.sin(a2), r2, .9, a2 + Math.PI, -dir); }
+        }
+      }
+    }
+    function vine(y0, A, lam, phase, curlR, turns) {
+      var pts = []; for (var x = -lam; x < GW + lam; x += 1.5) pts.push([x, y0 + A * Math.sin(TAU * x / lam + phase)]); poly(pts);
+      for (var m = -1; m < GW / (lam / 2) + 2; m++) {
+        var xk = (m + .25) * lam / 2 - phase / TAU * lam, yk = y0 + A * Math.sin(TAU * xk / lam + phase), sg = m % 2 ? 1 : -1;
+        spiral(xk, yk + sg * curlR, curlR, turns, -sg * Math.PI / 2, sg);
+      }
+    }
+
+    switch (name) {
+      case 'asanoha': {
+        var hh = s * Math.sqrt(3) / 2, P = function (i, j) { return [i * s + (j % 2 ? s / 2 : 0), j * hh]; };
+        for (j = -1; j < GH / hh + 2; j++) for (i = -1; i < GW / s + 2; i++) {
+          var tris = j % 2 === 0 ? [[P(i, j), P(i + 1, j), P(i, j + 1)], [P(i + 1, j), P(i, j + 1), P(i + 1, j + 1)]] : [[P(i, j), P(i + 1, j), P(i + 1, j + 1)], [P(i, j), P(i, j + 1), P(i + 1, j + 1)]];
+          tris.forEach(function (t) { var m = [(t[0][0] + t[1][0] + t[2][0]) / 3, (t[0][1] + t[1][1] + t[2][1]) / 3]; seg(t[0], t[1]); seg(t[1], t[2]); seg(t[2], t[0]); t.forEach(function (v) { seg(v, m); }); });
+        }
+        break;
+      }
+      case 'seigaiha': {
+        var r = s * .62;
+        for (j = -1; j < GH / (r * .5) + 3; j++) for (i = -1; i < GW / (2 * r) + 2; i++) {
+          var cx = i * 2 * r + (j % 2 ? r : 0), cy = j * r * .5;
+          c.globalCompositeOperation = 'destination-out'; c.beginPath(); c.arc(cx, cy, r * .98, Math.PI, TAU); c.fill(); c.globalCompositeOperation = 'source-over';
+          [1, .68, .36].forEach(function (q) { circle(cx, cy, r * q, Math.PI, TAU); });
+        }
+        break;
+      }
+      case 'kikko': hexes(s * .55); break;
+      case 'komochi': hexes(s * .6, .55); break;
+      case 'bishamon': hexes(s * .42, 0, function (i, j) { return ((i - (j >> 1) * 0) + 2 * j) % 3 === 0; }); break;
+      case 'shippo': { var rr = s * .45; for (j = -1; j < GH / (2 * rr) + 2; j++) for (i = -1; i < GW / (2 * rr) + 2; i++) { circle(i * 2 * rr, j * 2 * rr, rr); circle(i * 2 * rr + rr, j * 2 * rr + rr, rr); } break; }
+      case 'karakusa': karaVine({ A: s * .32, rowK: 2.3, lamK: 5, curlK: .95, turns: 1.5, sub: true, seed: 3 }); break;
+      // the tea masters' fabrics (名物裂茶人図鑑 p.128-129). Dragons and flames are left out: the slime cannot draw figures.
+      case 'jukou': karaVine({ A: s * .3, rowK: 2.8, lamK: 6.4, curlK: .92, turns: 1.3, sub: true, skip: .15, flowerEvery: 2, flowerK: 1, seed: 11 }); break;   // 珠光: peony scrolls, sparse
+      case 'jouou': karaVine({ A: s * .3, rowK: 2.4, lamK: 5.6, curlK: .92, turns: 1.3, sub: true, flowerEvery: 3, flowerK: .9, seed: 5 }); break;   // 紹鷗: peony scrolls, more flowing and continuous
+      case 'rikyu': {       // 利休: plum-blossom roundels (umebachi) in diagonal rows, each just touching the next
+        var rf = s * .42, dU = rf * 2.1;
+        for (j = -1; j < GH / (dU * .866) + 1; j++) for (i = -1; i < GW / dU + 1; i++) plumAt(i * dU + (j & 1 ? dU / 2 : 0), j * dU * .866, rf);
+        break;
+      }
+      case 'oribe': {       // 織部: running waves, with plum blossoms floating over them
+        var spW = s * .17;
+        for (j = -6; j < GH / spW + 6; j++) { var pw = []; for (var xw = 0; xw <= GW; xw += 2) pw.push([xw, j * spW + xw * .12 + s * .14 * Math.sin(TAU * xw / (s * 2.2) + j * .35)]); poly(pw); }
+        var seedO = 9, ro = function () { seedO = (seedO * 16807) % 2147483647; return seedO / 2147483647; }, rpl = s * .26;
+        for (j = 0; j < GH / (s * .8) + 1; j++) for (i = -1; i < GW / (s * 1.15) + 1; i++) { var pxo = i * s * 1.15 + (j & 1 ? s * .57 : 0) + (ro() - .5) * s * .4, pyo = j * s * .8 + s * .3 + (ro() - .5) * s * .25; clearDisc(pxo, pyo, rpl * 1.12); plumAt(pxo, pyo, rpl); }
+        break;
+      }
+      case 'enshu': {       // 遠州: a stone-pavement grid, each square holding a roundel - shippō, chrysanthemum or peony in turn
+        var qE = GH / 2.4, rE = qE * .36;
+        for (var gx = -qE; gx <= GW + qE; gx += qE) seg([gx, 0], [gx, GH]);
+        for (var gy = 0; gy <= GH + qE; gy += qE) seg([0, gy], [GW, gy]);
+        for (j = 0; j < GH / qE + 1; j++) for (i = -1; i < GW / qE + 1; i++) {
+          var ex = i * qE + qE / 2, ey = j * qE + qE / 2, ty = ((i + j) % 3 + 3) % 3;
+          if (ty === 0) { circle(ex, ey, rE); circle(ex + rE, ey + rE, rE, Math.PI, Math.PI * 1.5); circle(ex - rE, ey + rE, rE, Math.PI * 1.5, TAU); circle(ex - rE, ey - rE, rE, 0, Math.PI / 2); circle(ex + rE, ey - rE, rE, Math.PI / 2, Math.PI); }
+          else if (ty === 1) kikuAt(ex, ey, rE);
+          else peonyAt(ex, ey, rE);
+        }
+        break;
+      }
+      case 'kanzemizu': for (j = 0; j < 2; j++) vine((j + .5) * GH / 2, s * .2, s * 2.1, j * Math.PI * .7, s * .28, 2.1); break;
+      case 'ryusui': {
+        for (j = 0; j < 7; j++) { var y0 = (j + .5) * GH / 7, ph = j * 1.3, pts = []; for (var x = 0; x <= GW; x += 2) pts.push([x, y0 + s * .12 * Math.sin(x / (s * .9) + ph) + s * .07 * Math.sin(x / (s * .37) + ph * 2)]); poly(pts); }
+        break;
+      }
+      case 'saiwaibishi': {
+        var W = s * .95, H = s * .7, sx = W * 1.12, sy = H * .58;
+        for (j = -1; j < GH / sy + 2; j++) for (i = -1; i < GW / sx + 2; i++) {
+          var bx = i * sx + (j % 2 ? sx / 2 : 0), by = j * sy, w2 = W / 2 * .92, h2 = H / 2 * .92;
+          diamond(bx - W / 4, by, w2, h2); diamond(bx + W / 4, by, w2, h2); diamond(bx, by - H / 4, w2, h2); diamond(bx, by + H / 4, w2, h2);
+        }
+        break;
+      }
+      case 'matsukawabishi': {
+        var MW = s * .9, MH = s * .95, mx = MW * 1.05, my = MH * .55;
+        for (j = -1; j < GH / my + 2; j++) for (i = -1; i < GW / mx + 2; i++) {
+          var px = i * mx + (j % 2 ? mx / 2 : 0), py = j * my;
+          diamond(px, py, MW, MH * .45); diamond(px, py - MH * .28, MW * .48, MH * .3); diamond(px, py + MH * .28, MW * .48, MH * .3);
+        }
+        break;
+      }
+      case 'ichimatsu': {
+        var q = s * .42, hs = q / 6;
+        for (var gx = 0; gx <= GW + q; gx += q) seg([gx, 0], [gx, GH]);
+        for (var gy = 0; gy <= GH + q; gy += q) seg([0, gy], [GW, gy]);
+        for (j = 0; j < GH / q + 1; j++) for (i = 0; i < GW / q + 1; i++) if ((i + j) % 2 === 0) for (var hy = hs; hy < q; hy += hs) seg([i * q + 2, j * q + hy], [i * q + q - 2, j * q + hy]);
+        break;
+      }
+      case 'kagome': lines3(s * .5, [0, 0, s * .25]); break;
+      case 'uroko': lines3(s * .55, [0, 0, 0]); break;
+      case 'tatewaku': {
+        var Wc = s * .75, lam = s * 1.15;
+        for (i = -1; i < GW / Wc + 2; i++) [-1, 1].forEach(function (sd) { var pts = []; for (var y = 0; y <= GH; y += 1.5) pts.push([i * Wc + sd * (Wc * .26 + Wc * .17 * Math.sin(TAU * y / lam)), y]); poly(pts); });
+        break;
+      }
+      case 'amime': {
+        var hr = s * .3, d = s * .55;
+        for (j = -1; j < GH / hr + 2; j++) { var off = (j % 2) * d / 2; for (i = -1; i < GW / d + 2; i++) { c.beginPath(); c.moveTo(i * d + off, j * hr); c.quadraticCurveTo((i + .5) * d + off, j * hr + hr * 1.7, (i + 1) * d + off, j * hr); c.stroke(); } }
+        break;
+      }
+      case 'fundo': { var rf = s * .33; for (j = -1; j < GH / rf + 2; j++) for (i = -1; i < GW / (2 * rf) + 2; i++) circle(i * 2 * rf + (j % 2 ? rf : 0), j * rf, rf); break; }
+      case 'higaki': rotated(Math.PI / 4, function () { var b = s * .42; for (var J = -Math.ceil(D / b); J < D / b; J++) for (var I = -Math.ceil(D / b); I < D / b; I++) { var x0 = GW / 2 + I * b, y0 = GH / 2 + J * b; c.strokeRect(x0, y0, b, b); if ((I + J) % 2) seg([x0, y0 + b / 2], [x0 + b, y0 + b / 2]); else seg([x0 + b / 2, y0], [x0 + b / 2, y0 + b]); } }); break;
+      case 'sayagata': rotated(-.42, function () { var u = s * .24; for (var J = -Math.ceil(D / (2 * u)); J < D / (2 * u); J++) for (var I = -Math.ceil(D / (2 * u)); I < D / (2 * u); I++) { var cx = GW / 2 + I * 2 * u, cy = GH / 2 + J * 2 * u; poly([[cx + u, cy + u], [cx + u, cy], [cx - u, cy], [cx - u, cy - u]]); poly([[cx - u, cy + u], [cx, cy + u], [cx, cy - u], [cx + u, cy - u]]); } }); break;
+      case 'koji': { var ku = s * .36; for (j = -1; j < GH / (2 * ku) + 2; j++) for (i = -1; i < GW / (2 * ku) + 2; i++) { var kx = i * 2 * ku, ky = j * 2 * ku, v = (i + j) % 2 === 0; if (v) { seg([kx - ku, ky - ku * .7], [kx + ku, ky - ku * .7]); seg([kx - ku, ky + ku * .7], [kx + ku, ky + ku * .7]); seg([kx, ky - ku * .7], [kx, ky + ku * .7]); } else { seg([kx - ku * .7, ky - ku], [kx - ku * .7, ky + ku]); seg([kx + ku * .7, ky - ku], [kx + ku * .7, ky + ku]); seg([kx - ku * .7, ky], [kx + ku * .7, ky]); } } break; }
+      case 'samekomon': {   // fine dots laid along overlapping arcs; the particles gather into the dots
+        var rs = s * .62; c.fillStyle = '#000';
+        for (j = -1; j < GH / (rs * .5) + 3; j++) for (i = -1; i < GW / (2 * rs) + 2; i++) {
+          var scx = i * 2 * rs + (j % 2 ? rs : 0), scy = j * rs * .5;
+          c.globalCompositeOperation = 'destination-out'; c.beginPath(); c.arc(scx, scy, rs * .98, Math.PI, TAU); c.fill(); c.globalCompositeOperation = 'source-over';
+          [1, .7, .4].forEach(function (q) { var rr2 = rs * q, nd = Math.max(3, Math.round(Math.PI * rr2 / (s * .24))); for (var dI = 0; dI <= nd; dI++) { var an2 = Math.PI + Math.PI * dI / nd; c.beginPath(); c.arc(scx + rr2 * Math.cos(an2), scy + rr2 * Math.sin(an2), s * .05, 0, TAU); c.fill(); } });
+        }
+        break;
+      }
+      case 'miru': {        // miru seaweed roundels: branches that fork in two, like the network itself (and the logo colour's namesake)
+        var mr = s * .62, msx = mr * 2.2, msy = mr * 1.9;
+        var branch = function (x, y, an, len, dep) { var x2 = x + Math.cos(an) * len, y2 = y + Math.sin(an) * len; seg([x, y], [x2, y2]); if (dep > 0) { branch(x2, y2, an - .42, len * .72, dep - 1); branch(x2, y2, an + .42, len * .72, dep - 1); } };
+        for (j = -1; j < GH / msy + 2; j++) for (i = -1; i < GW / msx + 2; i++) { var mcx = i * msx + (j % 2 ? msx / 2 : 0), mcy = j * msy; for (k = 0; k < 5; k++) branch(mcx, mcy, -Math.PI / 2 + k * TAU / 5, mr * .34, 3); }
+        break;
+      }
+      case 'hanabishi': {
+        var L = s * .5, LV = .8;
+        function petal(cx, cy, ang, Lp) {
+          var pts = [[.22, 0]], k2;
+          for (k2 = 125; k2 >= -80; k2 -= 8) { var r1 = k2 * Math.PI / 180; pts.push([.6 + .27 * Math.cos(r1), .23 + .27 * Math.sin(r1)]); }
+          for (k2 = 80; k2 >= -125; k2 -= 8) { var r2 = k2 * Math.PI / 180; pts.push([.6 + .27 * Math.cos(r2), -.23 + .27 * Math.sin(r2)]); }
+          pts.push([.22, 0]);
+          poly(pts.map(function (uv) { var u = uv[0] * Lp, v = uv[1] * Lp; return [cx + u * Math.cos(ang) - v * Math.sin(ang), cy + u * Math.sin(ang) + v * Math.cos(ang)]; }));
+        }
+        var hsx = L * 2.9, hsy = L * LV * 1.45;   // each flower stands apart, as in 幸菱 / 業平菱
+        for (j = -1; j < GH / hsy + 2; j++) for (i = -1; i < GW / hsx + 2; i++) {
+          var hx2 = i * hsx + (j & 1 ? hsx / 2 : 0), hy2 = j * hsy;
+          petal(hx2, hy2, 0, L); petal(hx2, hy2, Math.PI, L); petal(hx2, hy2, Math.PI / 2, L * LV); petal(hx2, hy2, -Math.PI / 2, L * LV);
+        }
+        break;
+      }
+      case 'kuruwa': {      // interlocking rings in rows
+        var kr = s * .3; for (j = -1; j < GH / (kr * 1.7) + 2; j++) for (i = -1; i < GW / (kr * 1.45) + 2; i++) { c.beginPath(); c.ellipse(i * kr * 1.45 + (j % 2 ? kr * .72 : 0), j * kr * 1.7, kr, kr * .78, 0, 0, TAU); c.stroke(); }
+        break;
+      }
+      case 'komochigoshi': { // a lattice of paired lines, one thick and one thin
+        var cq = s * .62, gap = cq * .22;
+        for (var gx2 = -cq; gx2 <= GW + cq; gx2 += cq) { c.lineWidth = 2.2; seg([gx2, 0], [gx2, GH]); c.lineWidth = 1; seg([gx2 + gap, 0], [gx2 + gap, GH]); }
+        for (var gy2 = -cq; gy2 <= GH + cq; gy2 += cq) { c.lineWidth = 2.2; seg([0, gy2], [GW, gy2]); c.lineWidth = 1; seg([0, gy2 + gap], [GW, gy2 + gap]); }
+        c.lineWidth = 1.3;
+        break;
+      }
+      case 'sankuzushi': {  // three parallel bars, turning a quarter in each square
+        var bq = s * .82;
+        for (j = -1; j < GH / bq + 1; j++) for (i = -1; i < GW / bq + 1; i++) { var bx2 = i * bq, by2 = j * bq; for (k = 1; k <= 3; k++) { var o2 = k * bq / 4; if ((i + j) % 2) seg([bx2 + bq * .12, by2 + o2], [bx2 + bq * .88, by2 + o2]); else seg([bx2 + o2, by2 + bq * .12], [bx2 + o2, by2 + bq * .88]); } }
+        break;
+      }
+      case 'kasumi': {      // e-gasumi (工霞): from the pattern dictionary (p.136, 「花菱に霞と秋草文様縫箔」). One mist is a cluster of
+        // 3-4 thin outlined bands stacked close together, each row shifted a little; every other row is split at one point,
+        // and short vertical strokes pass through the split to join the rows above and below (the shape of エ / 工).
+        // The clusters lie loosely, with open ground between them.
+        var seedK = 7, rk = function () { seedK = (seedK * 16807) % 2147483647; return seedK / 2147483647; };
+        var bh = s * .16, rp = bh * 1.85;   // bands and gaps wide enough that the slime keeps them apart
+        function pill(x0, x1, y) { if (x1 - x0 < bh * 1.2) return; c.beginPath(); c.moveTo(x0 + bh / 2, y - bh / 2); c.lineTo(x1 - bh / 2, y - bh / 2); c.arc(x1 - bh / 2, y, bh / 2, -Math.PI / 2, Math.PI / 2); c.lineTo(x0 + bh / 2, y + bh / 2); c.arc(x0 + bh / 2, y, bh / 2, Math.PI / 2, Math.PI * 1.5); c.stroke(); }
+        function cluster(cx, cy, wc) {
+          var nr = 3, gp = bh * 1.3, xs = cx + (rk() - .5) * wc * .3, y0 = cy - (nr - 1) * rp / 2, rows = [];
+          for (var r = 0; r < nr; r++) { var off = (rk() - .5) * wc * .3, ln = wc * (r % 2 ? .95 : (.7 + rk() * .3)) * (r === nr - 1 ? .8 : 1); rows.push([cx + off - ln / 2, cx + off + ln / 2, y0 + r * rp]); }
+          rows.forEach(function (R, r) {
+            var x0 = Math.min(R[0], xs - gp * 1.5), x1 = Math.max(R[1], xs + gp * 1.5);
+            if (r % 2) { pill(x0, xs - gp / 2, R[2]); pill(xs + gp / 2, x1, R[2]); } else pill(R[0], R[1], R[2]);
+          });
+          for (var r2 = 1; r2 < nr; r2 += 2) {   // the vertical strokes through the split, joining the rows above and below
+            var ya = rows[r2 - 1][2] + bh / 2, yb = r2 + 1 < nr ? rows[r2 + 1][2] - bh / 2 : rows[r2][2] + bh / 2;
+            seg([xs - gp * .28, ya], [xs - gp * .28, yb]); seg([xs + gp * .28, ya], [xs + gp * .28, yb]);
+          }
+        }
+        var cw = s * 2.4, ch = GH / 2.55;
+        for (j = -1; j < GH / ch + 1; j++) for (i = -1; i < GW / cw + 1; i++) {
+          cluster(i * cw + (j & 1 ? cw / 2 : 0) + (rk() - .5) * cw * .35, j * ch + ch / 2 + (rk() - .5) * ch * .3, cw * (.6 + rk() * .25));
+        }
+        break;
+      }
+      case 'mandala': {     // the Diamond-realm grid: squares, each holding a large circle and five small ones in a cross
+        var mq = GH / 2.05;
+        for (j = -1; j < GH / mq + 1; j++) for (i = -1; i < GW / mq + 1; i++) {
+          var mx3 = i * mq + mq / 2, my3 = j * mq + mq / 2 + (GH - Math.floor(GH / mq) * mq) / 2;
+          c.strokeRect(mx3 - mq * .47, my3 - mq * .47, mq * .94, mq * .94); circle(mx3, my3, mq * .42);
+          var rm = mq * .13;
+          [[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1]].forEach(function (o3) { circle(mx3 + o3[0] * rm * 2.05, my3 + o3[1] * rm * 2.05, rm); });
+          [[1, 1], [-1, 1], [1, -1], [-1, -1]].forEach(function (o4) { circle(mx3 + o4[0] * rm * 1.75, my3 + o4[1] * rm * 1.75, rm * .42); });
+        }
+        break;
+      }
+      case 'marumon': {     // scattered roundels of a few sizes, each a ring within a ring
+        var seedM = 11, rm = function () { seedM = (seedM * 16807) % 2147483647; return seedM / 2147483647; };
+        var msp = s * .95;
+        for (j = -1; j < GH / (msp * .86) + 1; j++) for (i = -1; i < GW / msp + 1; i++) { var mcx2 = i * msp + (j % 2 ? msp / 2 : 0) + (rm() - .5) * msp * .25, mcy2 = j * msp * .86 + (rm() - .5) * msp * .2, mr2 = msp * (.28 + rm() * .14); circle(mcx2, mcy2, mr2); circle(mcx2, mcy2, mr2 * .62); }
+        break;
+      }
+      case 'shokko': { var a8 = s * .62, r8 = a8 / (2 * Math.cos(Math.PI / 8)); for (j = -1; j < GH / a8 + 2; j++) for (i = -1; i < GW / a8 + 2; i++) { var o = []; for (k = 0; k < 8; k++) { var an = Math.PI / 8 + k * Math.PI / 4; o.push([i * a8 + r8 * Math.cos(an), j * a8 + r8 * Math.sin(an)]); } poly(o, true); } break; }
+    }
+    var oc2 = document.createElement('canvas'); oc2.width = GW; oc2.height = GH; var c2 = oc2.getContext('2d');
+    c2.filter = 'blur(1.6px)'; c2.drawImage(oc, 0, 0);
+    var dd = c2.getImageData(0, 0, GW, GH).data, out = new Float32Array(GW * GH), mx2 = 0;
+    for (var p = 0; p < GW * GH; p++) { out[p] = dd[4 * p + 3] / 255; if (out[p] > mx2) mx2 = out[p]; }
+    if (mx2 > 0) for (p = 0; p < GW * GH; p++) out[p] = Math.min(1, out[p] / (mx2 * .55));   // lines and crossings pull alike (no clumps at the nodes)
+    return out;
+  }
+
+  // ---------- the simulation (one instance for the stage, one per gallery tile) ----------
+  function createSim(w, h, patternId, opts) {
+    opts = opts || {};
+    var GW = Math.floor(w / CS), GH = Math.floor(h / CS), N = GW * GH;
+    var S = { w: w, h: h, GW: GW, GH: GH, occ: new Int32Array(N), T: new Float32Array(N), T2: new Float32Array(N), x: [], y: [], d: [], c: [], on: [], r: [], step: 0, phase: 1, morph: 0, fullAt: null, pattern: patternId, onPhase: opts.onPhase || function () {} };
+    S.pat = template(patternId, GW, GH);
+    function indexPat() { var idx = [], val = []; for (var q = 0; q < N; q++) if (S.pat[q] > .02) { idx.push(q); val.push(S.pat[q]); } S.patIdx = Int32Array.from(idx); S.patVal = Float32Array.from(val); }
+    indexPat();
+    S.TH = new Float32Array(N);
+    // same-komon: the particles themselves become the dots. Each particle heads for its nearest dot centre.
+    function sameDots() {
+      // Measured from a real same-komon stencil (Ise katagami): the whole cloth is covered with round holes,
+      // laid along the concentric rings of fans. The fans overlap like seigaiha, so only the outer crescent of each shows.
+      // Along an arc the holes are one pitch apart, the same as the gap between rings; a hole is about half the pitch across;
+      // a fan's radius is about 20 pitches. The pitch here is set so that there is about one particle for every hole.
+      var nA = 0; for (var a0 = 0; a0 < S.x.length; a0++) if (!(S.free && S.free[a0])) nA++;
+      var pch = Math.max(2.4, Math.sqrt((GW - 3) * (GH - 3) / Math.max(1, nA)) * 1.04);
+      var R = pch * 20, rows = [], fans = [];
+      var seedD = 7, rr = function () { seedD = (seedD * 16807) % 2147483647; return seedD / 2147483647; };
+      for (var j = -2; j < GH / (R * .5) + 3; j++) for (var i = -2; i < GW / (2 * R) + 2; i++) fans.push([i * 2 * R + (j & 1 ? R : 0), j * R * .5, j]);
+      function owner(x, y) {   // the fan drawn last (lowest row) whose upper half-disc covers the point
+        var best = null;
+        for (var f = 0; f < fans.length; f++) { var F = fans[f]; if (y <= F[1] + 1e-6 && (x - F[0]) * (x - F[0]) + (y - F[1]) * (y - F[1]) <= R * R && (!best || F[2] > best[2])) best = F; }
+        return best;
+      }
+      var out = [], HB = pch * .62, HW = Math.ceil(GW / HB) + 2, hash = {};
+      function near(x, y) { var hx = (x / HB) | 0, hy = (y / HB) | 0; for (var yy = hy - 1; yy <= hy + 1; yy++) for (var xx = hx - 1; xx <= hx + 1; xx++) { var L = hash[yy * HW + xx]; if (!L) continue; for (var t = 0; t < L.length; t += 2) { var dx = L[t] - x, dy = L[t + 1] - y; if (dx * dx + dy * dy < pch * pch * .5) return true; } } return false; }
+      function put(x, y) { var k = ((y / HB) | 0) * HW + ((x / HB) | 0); (hash[k] = hash[k] || []).push(x, y); out.push(x, y); }
+      fans.forEach(function (F) {
+        if (F[0] < -R || F[0] > GW + R || F[1] < -1 || F[1] > GH + R) return;
+        for (var k = Math.round(R / pch); k >= 1; k--) {   // outer ring first, so the crescent edge is clean
+          var r = k * pch, nd = Math.max(1, Math.round(Math.PI * r / pch));
+          for (var m = 0; m <= nd; m++) {
+            var an = Math.PI + Math.PI * m / nd, x = F[0] + r * Math.cos(an), y = F[1] + r * Math.sin(an);
+            if (x < 1 || y < 1 || x > GW - 2 || y > GH - 2) continue;
+            if (owner(x, y) !== F || near(x, y)) continue;
+            // cut by hand with a round blade: each hole sits a little off the ideal point
+            put(x + (rr() - .5) * pch * .12, y + (rr() - .5) * pch * .12);
+          }
+        }
+      });
+      S.pch = pch; S.dotR = pch * .26;   // hole diameter about half the pitch
+      S.dotJ = new Float32Array(out.length / 2); for (var q = 0; q < S.dotJ.length; q++) S.dotJ[q] = .9 + rr() * .2;
+      return out;
+    }
+    // ichimatsu: squares of two colours alternate (pattern dictionary p.22). The dark squares are stippled evenly with dots,
+    // as many as there are particles, so each particle settles into one dot; the light squares stay open.
+    function checkDots() {
+      var nA = 0; for (var a0 = 0; a0 < S.x.length; a0++) if (!(S.free && S.free[a0])) nA++;
+      var q = GH / 2.3 * .42, pch = Math.max(2.4, Math.sqrt((GW - 3) * (GH - 3) * .5 / Math.max(1, nA)) * 1.04), out = [];
+      var seedC = 13, rc = function () { seedC = (seedC * 16807) % 2147483647; return seedC / 2147483647; };
+      for (var j = 0; j < GH / q + 1; j++) for (var i = 0; i < GW / q + 1; i++) {
+        if ((i + j) % 2) continue;
+        for (var y = j * q + pch * .6; y < (j + 1) * q - pch * .3; y += pch) for (var x = i * q + pch * .6; x < (i + 1) * q - pch * .3; x += pch) {
+          var xx = x + (rc() - .5) * pch * .1, yy = y + (rc() - .5) * pch * .1;
+          if (xx > 1 && yy > 1 && xx < GW - 2 && yy < GH - 2) out.push(xx, yy);
+        }
+      }
+      S.pch = pch; S.dotR = pch * .3;
+      S.dotJ = new Float32Array(out.length / 2); for (var k = 0; k < S.dotJ.length; k++) S.dotJ[k] = .92 + rc() * .16;
+      return out;
+    }
+    S.dots = null; S.target = [];
+    S.dotsFor = function () {
+      if (!DOTP[S.pattern]) return null;
+      if (!S.dots) {
+        S.dots = S.pattern === 'samekomon' ? sameDots() : checkDots(); var D2 = S.dots, nd = D2.length / 2, B = 8, BW = Math.ceil(GW / B), BH = Math.ceil(GH / B);
+        S.bucket = []; for (var bI = 0; bI < BW * BH; bI++) S.bucket.push([]);
+        for (var q = 0; q < nd; q++) S.bucket[Math.min(BH - 1, (D2[2 * q + 1] / B) | 0) * BW + Math.min(BW - 1, (D2[2 * q] / B) | 0)].push(q);
+        S.load = new Int32Array(nd); S.BW = BW; S.BH = BH; S.B = B;
+        var agents = []; for (var a2 = 0; a2 < S.x.length; a2++) if (!(S.free && S.free[a2])) agents.push(a2);
+        S.cap = 1;
+        for (var k = agents.length - 1; k > 0; k--) { var r2 = (Math.random() * (k + 1)) | 0, tmp = agents[k]; agents[k] = agents[r2]; agents[r2] = tmp; }
+        agents.forEach(function (a3) { S.assign(a3); });
+      }
+      return S.dots;
+    };
+    S.assign = function (a) {
+      var D2 = S.dots, x = S.x[a], y = S.y[a], bx = Math.min(S.BW - 1, (x / S.B) | 0), by = Math.min(S.BH - 1, (y / S.B) | 0);
+      for (var ring = 0; ring < Math.max(S.BW, S.BH); ring++) {
+        var best = -1, bd = 1e18;
+        for (var yy = by - ring; yy <= by + ring; yy++) for (var xx = bx - ring; xx <= bx + ring; xx++) {
+          if (yy < 0 || xx < 0 || yy >= S.BH || xx >= S.BW || (Math.abs(yy - by) !== ring && Math.abs(xx - bx) !== ring)) continue;
+          var L = S.bucket[yy * S.BW + xx];
+          for (var t = 0; t < L.length; t++) { var q = L[t]; if (S.load[q] >= S.cap) continue; var dd = (D2[2 * q] - x) * (D2[2 * q] - x) + (D2[2 * q + 1] - y) * (D2[2 * q + 1] - y); if (dd < bd) { bd = dd; best = q; } }
+        }
+        if (best >= 0) { S.load[best]++; S.target[a] = 2 * best; return; }
+      }
+      if (S.cap < 64) { S.cap++; S.assign(a); } else S.target[a] = 0;   // all holes taken: allow one more per hole
+    };
+    S.seed = [Math.round(GW * .2), Math.round(GH * .55)];
+    function add(i, j, dir) { var c = j * GW + i; if (S.occ[c]) return false; S.x.push(i + .5); S.y.push(j + .5); S.d.push(dir); S.c.push(c); S.occ[c] = S.x.length; return true; }
+    var target = Math.round(N * .15), tries = 0;
+    while (S.x.length < target && tries < target * 4) { tries++; var ii = (Math.random() * GW) | 0, jj = (Math.random() * GH) | 0; if (add(ii, jj, Math.atan2(jj - S.seed[1], ii - S.seed[0]) + rnd(-.7, .7))) { S.on.push(!!opts.allOn); S.r.push(Math.hypot(ii - S.seed[0], jj - S.seed[1])); } }
+    S.reach = Math.hypot(Math.max(S.seed[0], GW - S.seed[0]), Math.max(S.seed[1], GH - S.seed[1]));
+
+    S.setPhase = function (p) { S.phase = p; S.onPhase(p); };
+    S.setPattern = function (id) { S.pattern = id; S.pat = template(id, GW, GH); indexPat(); S.dots = null; S.target = []; };
+    S.tick = function () {
+      var T = S.T, occ = S.occ, n = S.x.length, SO = 7, SA = Math.PI / 4, RA = Math.PI / 4, DEP = 5, DOTS = S.morph > 0 ? S.dotsFor() : null;
+      function at(x, y) { var i = x | 0, j = y | 0; if (i < 0 || j < 0 || i >= GW || j >= GH) return -1; return T[j * GW + i]; }
+      var front = S.reach * Math.min(1, S.step / 260) + 4;      // the active zone reaches the far corner in about 2 s
+      var start = (Math.random() * n) | 0;
+      for (var m = 0; m < n; m++) {
+        var a = (start + m) % n; if (!S.on[a]) { if (S.r[a] < front) S.on[a] = true; else continue; }
+        var x = S.x[a], y = S.y[a], d = S.d[a];
+        var F = at(x + lc(d) * SO, y + ls(d) * SO), L = at(x + lc(d - SA) * SO, y + ls(d - SA) * SO), R = at(x + lc(d + SA) * SO, y + ls(d + SA) * SO);
+        if (F > L && F > R) { } else if (F < L && F < R) d += (Math.random() < .5 ? -1 : 1) * RA; else if (L > R) d -= RA; else if (R > L) d += RA;
+        if (DOTS && Math.random() < 1 - Math.pow(1 - S.morph, 3)) {
+          var tg = S.target[a]; if (tg === undefined) { S.assign(a); tg = S.target[a]; }
+          var tx = DOTS[tg] - x, ty = DOTS[tg + 1] - y, dist = Math.hypot(tx, ty);
+          d = dist > 1.1 ? Math.atan2(ty, tx) + rnd(-.15, .15) : rnd(0, TAU);   // close to its dot it keeps moving, but stays
+          var hm = true;
+        } else hm = false;
+        var nx = x + lc(d), ny = y + ls(d), i = nx | 0, j = ny | 0;
+        if (i < 0 || i >= GW) { S.d[a] = Math.PI - d + rnd(-.3, .3); continue; }            // the edge is a wall: bounce off it
+        if (j < 0 || j >= GH) { S.d[a] = -d + rnd(-.3, .3); continue; }
+        var c = j * GW + i;
+        if (c !== S.c[a] && occ[c] && hm) { S.x[a] = nx; S.y[a] = ny; S.d[a] = d; continue; }
+        if (c !== S.c[a] && occ[c]) { S.d[a] = rnd(0, TAU); continue; }                    // one particle per cell
+        if (c !== S.c[a]) { occ[S.c[a]] = 0; occ[c] = a + 1; S.c[a] = c; }
+        S.x[a] = nx; S.y[a] = ny; S.d[a] = d; T[c] += DEP;
+      }
+      var TUNE = DOTP[S.pattern] ? { gain: .001, decay: .75 } : {};
+      if (S.morph > 0) { var P = S.pat, kk = (1 - Math.pow(1 - S.morph, 2.5)) * 2.2 *   /* ease-out: the shape shows early, then settles softly */ (TUNE.gain ? 1 + (TUNE.gain / 2.2 - 1) * S.morph : 1); var PI2 = S.patIdx, PV = S.patVal; for (var p = 0; p < PI2.length; p++) T[PI2[p]] += kk * PV[p]; }
+      var T2 = S.T2, decay = TUNE.decay ? .9 + (TUNE.decay - .9) * S.morph : .9;
+      var TH = S.TH;
+      for (var y2 = 0; y2 < GH; y2++) {   // horizontal pass
+        var o = y2 * GW; TH[o] = (T[o] + T[o + 1]) * .5;
+        for (var x2 = 1; x2 < GW - 1; x2++) TH[o + x2] = (T[o + x2 - 1] + T[o + x2] + T[o + x2 + 1]) * (1 / 3);
+        TH[o + GW - 1] = (T[o + GW - 2] + T[o + GW - 1]) * .5;
+      }
+      for (var x3 = 0; x3 < GW; x3++) T2[x3] = (TH[x3] + TH[x3 + GW]) * .5 * decay;   // vertical pass, with decay
+      for (var y3 = 1; y3 < GH - 1; y3++) { var o2 = y3 * GW; for (var x4 = 0; x4 < GW; x4++) T2[o2 + x4] = (TH[o2 + x4 - GW] + TH[o2 + x4] + TH[o2 + x4 + GW]) * (decay / 3); }
+      var oL = (GH - 1) * GW; for (var x5 = 0; x5 < GW; x5++) T2[oL + x5] = (TH[oL + x5 - GW] + TH[oL + x5]) * .5 * decay;
+      // the walls hold little chemical, and the corners even less, so the network does not trace a frame
+      for (var e = 0; e < 4; e++) { var f = .55 + e * .12; for (var xe = 0; xe < GW; xe++) { T2[e * GW + xe] *= f; T2[(GH - 1 - e) * GW + xe] *= f; } for (var ye = 0; ye < GH; ye++) { T2[ye * GW + e] *= f; T2[ye * GW + GW - 1 - e] *= f; } }
+      var CR = 14; for (var cy2 = 0; cy2 < CR; cy2++) for (var cx2 = 0; cx2 < CR; cx2++) { if (cx2 + cy2 >= CR) continue; var fc = .5 + .5 * (cx2 + cy2) / CR; T2[cy2 * GW + cx2] *= fc; T2[cy2 * GW + GW - 1 - cx2] *= fc; T2[(GH - 1 - cy2) * GW + cx2] *= fc; T2[(GH - 1 - cy2) * GW + GW - 1 - cx2] *= fc; }
+      S.T = T2; S.T2 = T;
+      S.step++;
+      if (S.phase === 1 && S.step > 250) { S.fullAt = S.step; S.setPhase(2); }
+      if (S.phase === 1 && S.step > 780 + 300 && S.step % 30 === 0) {
+        var BX = 12, BY = 5, counts = new Int32Array(BX * BY);
+        for (var z = 0; z < S.x.length; z++) counts[Math.min(BY - 1, (S.y[z] / GH * BY) | 0) * BX + Math.min(BX - 1, (S.x[z] / GW * BX) | 0)]++;
+        var need = N / (BX * BY) * .07, ok = true; for (var u = 0; u < counts.length; u++) if (counts[u] < need) { ok = false; break; }
+        if (ok) { S.fullAt = S.step; S.setPhase(2); }
+      }
+      if (S.phase === 2 && S.step - S.fullAt > 30) S.setPhase(3);           // a breath (0.25 s), then the pattern
+      if (S.phase === 3) S.morph = Math.min(1, S.morph + (opts.morphRate || 1 / 600));
+    };
+    // fill the space at once and go straight to the pattern stage
+    S.skip = function () {
+      for (var q = 0; q < S.on.length; q++) S.on[q] = true;
+      if (S.step < 1080) S.step = 1080;
+      for (var t = 0; t < 150; t++) S.tick();
+      if (S.phase < 3) { S.fullAt = S.step - 240; S.setPhase(3); }
+    };
+    S.draw = function (g, scale) {
+      scale = scale || 1; var k2 = CS * scale, W = S.w * scale, H = S.h * scale;
+      g.clearRect(0, 0, W, H); g.fillStyle = INK;
+      var EB = 16 * scale, bands = [[], [], [], []];
+      for (var i = 0; i < S.x.length; i++) {
+        if (!S.on[i]) continue;
+        var px = S.x[i] * k2, py = S.y[i] * k2, ex = Math.min(px, W - px), ey = Math.min(py, H - py), e = Math.min(ex, ey, Math.hypot(ex, ey) * .55);
+        bands[e >= EB ? 3 : (e / EB * 3) | 0].push(i);
+      }
+      var dot = Math.max(.9, 1.2 * scale);
+      var PM = DOTP[S.pattern] ? Math.pow(1 - S.morph, 2.2) * .85 + .15 * (1 - S.morph) : 1;   // the loose particles fade quickly as the holes fill
+      [.08, .2, .36, .55].forEach(function (al, b) { g.globalAlpha = al * PM; var L = bands[b]; for (var q = 0; q < L.length; q++) { var j = L[q]; g.fillRect(S.x[j] * k2 - dot / 2, S.y[j] * k2 - dot / 2, dot, dot); } });
+      if (DOTP[S.pattern] && S.morph > 0 && S.dots) {   // each particle that has reached its hole becomes the hole
+        var D2 = S.dots, nd2 = D2.length / 2, cnt = new Uint8Array(nd2), lim = Math.max(4, S.pch * S.pch * .8);
+        for (var a4 = 0; a4 < S.x.length; a4++) { var tg2 = S.target[a4]; if (tg2 === undefined || (S.free && S.free[a4])) continue; var ddx = S.x[a4] - D2[tg2], ddy = S.y[a4] - D2[tg2 + 1]; if (ddx * ddx + ddy * ddy < lim) cnt[tg2 / 2] = 1; }
+        g.fillStyle = INK;
+        var NB = 4, paths = []; for (var bq = 0; bq < NB; bq++) paths.push(new Path2D());
+        var edge = 14 * scale, rad = S.dotR * k2;
+        for (var q3 = 0; q3 < nd2; q3++) { if (!cnt[q3]) continue; var dxp = D2[2 * q3] * k2, dyp = D2[2 * q3 + 1] * k2, ee = Math.min(dxp, dyp, W - dxp, H - dyp), bi = Math.min(NB - 1, Math.floor(NB * ee / edge)); var rq = rad * S.dotJ[q3]; paths[bi].moveTo(dxp + rq, dyp); paths[bi].arc(dxp, dyp, rq, 0, TAU); }
+        for (var bq2 = 0; bq2 < NB; bq2++) { g.globalAlpha = Math.min(1, S.morph * 1.3) * .9 * ((bq2 + 1) / NB); g.fill(paths[bq2]); }
+      }
+      var fade = S.phase === 1 ? 1 : Math.max(0, 1 - (S.step - S.fullAt) / 240);
+      if (fade > 0 && !opts.allOn) { g.globalAlpha = fade; g.fillStyle = MIRU; g.beginPath(); g.arc(S.seed[0] * k2, S.seed[1] * k2, 3.6 * scale, 0, TAU); g.fill(); }
+      g.globalAlpha = 1;
+    };
+    return S;
+  }
+
+  // ---------- the stage ----------
+  var cv = document.getElementById('cv'), g = cv.getContext('2d'), sim = null, current = 'asanoha', speed = 1;
+  function stageUI(p) { ['s1', 's2', 's3'].forEach(function (id, i) { var el = document.getElementById(id); if (i + 1 === p) el.setAttribute('aria-current', 'step'); else el.removeAttribute('aria-current'); }); window.__heroPhase && window.__heroPhase(p); }
+  function start(id, skip) {
+    current = id || current;
+    var dpr = Math.min(2, window.devicePixelRatio || 1), w = cv.clientWidth, h = cv.clientHeight;
+    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    sim = createSim(w, h, current, { onPhase: stageUI });
+    stageUI(1);
+    var p = byId(current); document.getElementById('now').innerHTML = '<span class="jp">' + p.jp + '</span> ' + p.en; window.__heroPattern && window.__heroPattern(p);
+    document.querySelectorAll('.tile .pic').forEach(function (el) { el.classList.toggle('current', el.dataset.id === current); });
+    if (skip) sim.skip();
+  }
+  // a click (or Enter / Space) on the stage: another pattern, at random from the ones you liked (never the same twice in a row).
+  // The particles stay; the pattern loosens toward the network and forms the next one in about 3-4 s.
+  var LIKED = PATTERNS.filter(function (q) { return q.g === 'liked' || q.g === 'chajin'; }).map(function (q) { return q.id; });
+  function nextPattern() {
+    var pool = LIKED.filter(function (id) { return id !== current; }), id = pool[(Math.random() * pool.length) | 0];
+    current = id; sim.setPattern(id);
+    if (sim.phase >= 3) sim.morph = Math.min(sim.morph, .3);
+    var q = byId(id); document.getElementById('now').innerHTML = '<span class="jp">' + q.jp + '</span> ' + q.en; window.__heroPattern && window.__heroPattern(q);
+    document.querySelectorAll('.tile .pic').forEach(function (el) { el.classList.toggle('current', el.dataset.id === current); });
+    if (reduce) { for (var k = 0; k < 600; k++) sim.tick(); sim.draw(g); }
+  }
+  cv.addEventListener('click', nextPattern);
+  cv.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); nextPattern(); } });
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---------- the gallery ----------
+  var queue = [], galleryOn = false;
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { if (es.some(function (e) { return e.isIntersecting; })) galleryOn = true; }, { rootMargin: '200px' }).observe(document.querySelector('.gallery')); else galleryOn = true;
+  var votes = {};
+  try { votes = JSON.parse(localStorage.getItem('slime-pattern-votes') || 'null'); } catch (e) { votes = null; }
+  if (!votes) { votes = {}; PATTERNS.forEach(function (p) { if (p.g === 'liked' || p.g === 'chajin') votes[p.id] = 'like'; if (p.g === 'rest') votes[p.id] = 'dislike'; }); }
+  function saveVotes() { try { localStorage.setItem('slime-pattern-votes', JSON.stringify(votes)); } catch (e) { } summary(); }
+  function summary() {
+    var like = [], dis = [];
+    PATTERNS.forEach(function (p) { if (votes[p.id] === 'like') like.push(p.jp); if (votes[p.id] === 'dislike') dis.push(p.jp); });
+    document.getElementById('sum').textContent = '好き: ' + (like.join('、') || '（まだなし）') + '\n好きじゃない: ' + (dis.join('、') || '（まだなし）');
+  }
+  var groups = document.getElementById('groups'), tiles = {};
+  [['liked', '好きと答えた文様', 'Patterns you liked'], ['chajin', '茶人の名物裂（『名物裂茶人図鑑』p.128–129 より）', 'Tea masters\u2019 meibutsu-gire'], ['new', 'あなたの参考から足した文様（未回答）', 'Added from your references, not yet answered'], ['rest', '選ばれなかった文様', 'Not chosen']].forEach(function (gr) {
+    if (!PATTERNS.some(function (p) { return p.g === gr[0]; })) return;
+    var box = document.createElement(gr[0] === 'rest' ? 'details' : 'div'); box.className = 'group';
+    box.innerHTML = gr[0] === 'rest' ? '<summary><h3 style="display:inline"><span class="jp">' + gr[1] + '</span> · ' + gr[2] + '</h3></summary>' : '<h3><span class="jp">' + gr[1] + '</span> · ' + gr[2] + '</h3>';
+    if (gr[0] === 'rest') box.addEventListener('toggle', function () { if (box.open) PATTERNS.forEach(function (p) { if (p.g === 'rest' && queue.indexOf(p.id) < 0 && tiles[p.id].querySelector('.wait')) queue.push(p.id); }); });
+    var grid = document.createElement('div'); grid.className = 'tiles'; if (gr[0] === 'rest') grid.style.marginTop = '10px';
+    PATTERNS.filter(function (p) { return p.g === gr[0]; }).forEach(function (p) {
+      var t = document.createElement('div'); t.className = 'tile';
+      t.innerHTML = '<div class="pic" tabindex="0" role="button" data-id="' + p.id + '" aria-label="' + p.en + ': watch it on the stage"><canvas></canvas><div class="wait">computing…</div></div>' +
+        '<div class="row"><span class="name"><span class="jp">' + p.jp + '</span><small>' + p.en + '</small></span><span class="vote"><button type="button" data-v="like" aria-pressed="false"><span class="jp">好き</span></button><button type="button" data-v="dislike" aria-pressed="false"><span class="jp">好きじゃない</span></button></span></div>';
+      var pic = t.querySelector('.pic');
+      pic.onclick = function () { start(p.id, true); cv.scrollIntoView({ behavior: 'smooth', block: 'center' }); };
+      pic.onkeydown = function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); pic.onclick(); } };
+      t.querySelectorAll('.vote button').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(votes[p.id] === b.dataset.v));
+        b.onclick = function () { votes[p.id] = votes[p.id] === b.dataset.v ? null : b.dataset.v; t.querySelectorAll('.vote button').forEach(function (x) { x.setAttribute('aria-pressed', String(votes[p.id] === x.dataset.v)); }); saveVotes(); };
+      });
+      grid.appendChild(t); tiles[p.id] = t;
+    });
+    box.appendChild(grid); groups.appendChild(box);
+  });
+  summary();
+  document.getElementById('copy').onclick = function () {
+    var txt = document.getElementById('sum').textContent, msg = document.getElementById('copied');
+    if (navigator.clipboard) navigator.clipboard.writeText(txt).then(function () { msg.textContent = 'Copied'; }, function () { msg.textContent = 'Select the text below to copy'; });
+  };
+
+  // gallery pictures are computed one at a time in the spare time of each frame, so the stage keeps moving smoothly
+  // each tile is a cut-out of the real stage at the same scale (same height), so the pattern looks as it will on the stage
+  queue = PATTERNS.filter(function (p) { return p.g !== 'rest'; }).map(function (p) { return p.id; }); var job = null, TH = 0, TW = 0;
+  function work(budget) {
+    var t0 = performance.now();
+    while (performance.now() - t0 < budget) {
+      if (!TH) { TH = Math.round(sim.h); TW = Math.round(TH * 1.3); document.documentElement.style.setProperty('--tile-ar', TW + ' / ' + TH); }
+      if (!job) { if (!queue.length) return; var id = queue.shift(); job = { id: id, sim: createSim(TW, TH, id, { allOn: true, morphRate: 1 / 320 }) }; job.sim.step = 1080; job.sim.fullAt = 1080 - 200; }
+      var S = job.sim;
+      S.tick();
+      if (S.step === 1080 + 240 && S.phase < 3) { S.fullAt = S.step - 240; S.setPhase(3); }
+      if (S.morph >= 1 && S.step > 1080 + 240 + 320 + 220) {
+        var t = tiles[job.id], tc = t.querySelector('canvas'), dpr = Math.min(2, window.devicePixelRatio || 1);
+        tc.width = Math.round(tc.clientWidth * dpr); tc.height = Math.round(tc.clientHeight * dpr);
+        var tg = tc.getContext('2d'); tg.setTransform(tc.width / TW, 0, 0, tc.width / TW, 0, 0); S.draw(tg, 1);
+        t.querySelector('.wait').remove(); job = null;
+      }
+    }
+  }
+
+  function loop() {
+    if (!reduce) { for (var k = 0; k < speed * 2; k++) sim.tick(); sim.draw(g); }
+    if (galleryOn) work(reduce ? 40 : 4);
+    requestAnimationFrame(loop);
+  }
+  start('asanoha');
+  if (reduce) { for (var k = 0; k < 3600; k++) sim.tick(); sim.draw(g); }
+  requestAnimationFrame(loop);
+
+  var lastW = cv.clientWidth;
+  window.addEventListener('resize', function () { if (Math.abs(cv.clientWidth - lastW) > 2) { lastW = cv.clientWidth; start(); } });
+  document.querySelectorAll('[data-sp]').forEach(function (b) { b.onclick = function () { speed = +b.dataset.sp; document.querySelectorAll('[data-sp]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); }; });
+  document.getElementById('replay').onclick = function () { start(); };
+  document.getElementById('skip').onclick = function () { sim.skip(); };
+  // review hooks
+  window.__template = function (id, w, h) { return template(id, w, h); };
+  window.__run = function (steps) { reduce = true; for (var k = 0; k < steps; k++) sim.tick(); sim.draw(g); return { n: sim.x.length, phase: sim.phase, morph: +sim.morph.toFixed(2), step: sim.step }; };
+  window.__gallery = function () { reduce = true; galleryOn = true; var t0 = performance.now(); while ((queue.length || job) && performance.now() - t0 < 120000) work(1000); return { left: queue.length + (job ? 1 : 0), ms: Math.round(performance.now() - t0) }; };
+})();
+</script>
+
+<style>
+/* ---- the explainer experiments ----
+   Tokens follow the portfolio: surface #EFF1F1, ink #111, Helvetica Neue / Noto Sans JP, quiet and typographic.
+   The card is the one object that floats, so it alone gets a border, radius and a soft shadow. */
+:root { --card: #FBFCFC; --shadow: 0 10px 30px rgba(17, 20, 22, .10), 0 1px 2px rgba(17, 20, 22, .06); --dur: 180ms; }
+@media (prefers-reduced-motion: reduce) { :root { --dur: 0ms; } }
+.bar, .gallery, .notes, .summary { display: none !important; }
+.lab-bar { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; padding-bottom: 18px; margin-bottom: 28px; border-bottom: 1px dashed var(--line); font-size: 12px; }
+.seg { display: flex; flex-wrap: wrap; gap: 4px; }
+.seg button[aria-checked="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.stagewrap { position: relative; }
+body:not([data-v="a"]) [data-only="a"], body:not([data-v="b"]) [data-only="b"], body:not([data-v="c"]) [data-only="c"], body:not([data-v="d"]) [data-only="d"], body:not([data-v="e"]) [data-only="e"] { display: none !important; }
+
+/* the toggletip card, shared by A, B and C */
+.tip { position: fixed; z-index: 30; width: min(340px, calc(100vw - 32px)); background: var(--card); color: var(--ink); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); padding: 18px 18px 14px; display: grid; gap: 12px; font-size: 14px; line-height: 1.6;
+  opacity: 0; transform: translateY(4px); transition: opacity var(--dur) ease, transform var(--dur) ease; }
+.tip.open { opacity: 1; transform: none; }
+.tip:focus { outline: none; }
+.tip h2 { margin: 0; font-size: 15px; font-weight: 500; padding-right: 36px; }
+.tip p { margin: 0; }
+.tip .x { position: absolute; top: 6px; right: 6px; width: 36px; height: 36px; padding: 0; border: 0; border-radius: 50%; font-size: 18px; line-height: 1; color: var(--soft); }
+.tip .x:hover { background: var(--tile); color: var(--ink); }
+.tip .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 2px 0; }
+.tip .steps figure { margin: 0; display: grid; gap: 4px; justify-items: center; font-size: 11.5px; color: var(--soft); text-align: center; }
+.tip .steps svg { width: 100%; height: 44px; background: var(--bg); border-radius: 8px; }
+.tip .steps figure.on { color: var(--ink); }
+.tip .steps figure.on svg { outline: 1px solid var(--ink); }
+.tip .now { font-weight: 500; }
+.tip .act { color: var(--ink); }
+.tip .foot { font-size: 12px; color: var(--soft); border-top: 1px solid var(--line); padding-top: 10px; }
+body[data-lang="jp"] .tip, body[data-lang="jp"] .cap, body[data-lang="jp"] .sub, body[data-lang="jp"] .curs, body[data-lang="jp"] .fab-label, body[data-lang="jp"] .chip { font-family: var(--jp); }
+body[data-lang="jp"] .tip p { line-height: 1.8; }
+
+/* A: floating round button, bottom-right of the screen, only while the hero is on screen */
+.fab { position: fixed; z-index: 20; right: calc(20px + env(safe-area-inset-right, 0px)); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); display: flex; align-items: center; gap: 10px; transition: opacity var(--dur) ease, transform var(--dur) ease; }
+.fab.away { opacity: 0; transform: translateY(8px); pointer-events: none; }
+.fab button { width: 48px; height: 48px; padding: 0; border-radius: 50%; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); font-size: 19px; font-weight: 500; }
+.fab-label { font-size: 13px; color: var(--soft); background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; }
+@media (max-width: 600px) { .fab-label { display: none; } }
+
+/* B: a chip in the stage's lower-right corner; it arrives once the pattern begins */
+.chip { position: absolute; right: 0; bottom: 0; display: inline-flex; align-items: center; gap: 8px; font-size: 13px; padding: 7px 12px 7px 8px; background: color-mix(in srgb, var(--bg) 82%, transparent); border: 1px solid var(--line); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  opacity: 0; transform: translateY(4px); transition: opacity 600ms ease, transform 600ms ease; pointer-events: none; }
+.chip.in { opacity: 1; transform: none; pointer-events: auto; }
+@media (prefers-reduced-motion: reduce) { .chip { transition: none; } }
+.chip .dot { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--ink); font-size: 12px; font-weight: 500; }
+
+/* C: a caption under the stage, like the label beside a work in a gallery */
+.cap { margin-top: 14px; display: grid; gap: 10px; }
+.cap-row { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: baseline; font-size: 13px; }
+.cap-name { font-weight: 500; font-size: 14px; }
+.cap-name small { font-weight: 400; color: var(--soft); margin-left: 8px; }
+.cap-steps { display: flex; gap: 6px; color: var(--soft); }
+.cap-steps span[aria-current="step"] { color: var(--ink); }
+.cap-steps i { font-style: normal; color: var(--line); }
+.cap-more { border: 0; padding: 4px 0; border-radius: 0; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line); margin-left: auto; }
+.cap-more:hover { text-decoration-color: var(--ink); }
+.cap-more .chev { display: inline-block; transition: transform var(--dur) ease; margin-left: 4px; }
+.cap-more[aria-expanded="true"] .chev { transform: rotate(180deg); }
+.cap-panel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 300px); gap: 12px 32px; border-top: 1px solid var(--line); padding-top: 14px; font-size: 14px; line-height: 1.65; max-width: 860px; }
+.cap-panel p { margin: 0 0 6px; }
+.cap-panel .foot { font-size: 12px; color: var(--soft); }
+@media (max-width: 640px) { .cap-panel { grid-template-columns: 1fr; } .cap-more { margin-left: 0; } }
+.cap .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; align-content: start; }
+.cap .steps figure { margin: 0; display: grid; gap: 4px; justify-items: center; font-size: 11.5px; color: var(--soft); }
+.cap .steps svg { width: 100%; height: 48px; background: var(--tile); border-radius: 8px; }
+.cap .steps figure.on { color: var(--ink); }
+
+/* D: a short line that follows the cursor over the stage (touch: shown once under the stage) */
+.curs { position: fixed; z-index: 25; pointer-events: none; font-size: 12.5px; background: var(--ink); color: var(--bg); border-radius: 999px; padding: 6px 12px; white-space: nowrap; opacity: 0; transition: opacity 120ms ease; }
+.curs.on { opacity: 1; }
+.curs-touch { margin-top: 12px; font-size: 13px; color: var(--soft); }
+
+/* E: one subtitle line, in step with the stages */
+.sub { margin-top: 14px; min-height: 1.6em; font-size: 14px; color: var(--soft); text-align: center; transition: opacity 400ms ease; }
+.sub b { font-weight: 500; color: var(--ink); }
+.sub.fade { opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .sub { transition: none; } }
+
+/* notes on each variant (for the review only) */
+.xnotes { margin-top: 48px; padding-top: 18px; border-top: 1px dashed var(--line); display: grid; gap: 10px; font-family: var(--jp); font-size: 13px; line-height: 1.85; color: var(--ink); max-width: 76ch; }
+.xnotes h3 { margin: 0; font-size: 14px; font-weight: 500; }
+.xnotes p { margin: 0; }
+.xnotes .pro { color: var(--ink); }
+.xnotes .con { color: var(--soft); }
+</style>
+
+<!-- A -->
+<div class="fab away" id="fab" data-only="a">
+  <span class="fab-label" id="fabLabel" aria-hidden="true"></span>
+  <button type="button" id="fabBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="tip">?</button>
+</div>
+<!-- D: cursor line -->
+<div class="curs" id="curs" data-only="d" aria-hidden="true"></div>
+
+<!-- the shared toggletip -->
+<div class="tip" id="tip" role="dialog" aria-modal="false" aria-labelledby="tipTitle" tabindex="-1" hidden>
+  <button type="button" class="x" id="tipClose" aria-label="Close">×</button>
+  <h2 id="tipTitle"></h2>
+  <p id="tipBody"></p>
+  <div class="steps" id="tipSteps"></div>
+  <p><span class="now" id="tipNow"></span><br><span class="act" id="tipAct"></span></p>
+  <p class="foot" id="tipFoot"></p>
+</div>
+
+<script>
+(function () {
+  var COPY = {
+    en: {
+      title: "What you're seeing",
+      body: "Particles that move like a slime mold. They spread, join into a network that fills the space, then settle into a Japanese pattern.",
+      steps: ['Spread', 'Fill', 'Pattern'],
+      now: function (p) { return 'Now: ' + p.en; },
+      act: 'Click the area to see another pattern.',
+      foot: 'Movement: the Physarum agent model of Jones (2010). The patterns come from Japanese textiles.',
+      label: "What's this?",
+      more: 'About this',
+      cursor: function (p) { return 'Slime-mold particles, now ' + p.en + ' · click for another'; },
+      subs: ['Particles spread, the way a slime mold does.', 'They join into a network that fills the space.', function (p) { return 'And settle into a Japanese pattern: <b>' + p.en + '</b>.'; }],
+      subNext: function (p) { return 'Click for another pattern. Now: <b>' + p.en + '</b>'; },
+      touch: function (p) { return 'Slime-mold particles settle into ' + p.en + '. Tap for another pattern.'; }
+    },
+    jp: {
+      title: 'これは何？',
+      body: '粘菌のように動く粒子です。広がってつながり、区画を網で満たすと、日本の文様に落ち着きます。',
+      steps: ['広がる', '満ちる', '文様へ'],
+      now: function (p) { return 'いまの文様：' + p.jp; },
+      act: '区画をクリックすると、別の文様に変わります。',
+      foot: '動きは Jones (2010) の粘菌モデル。文様は日本の染織から。',
+      label: 'これは何？',
+      more: 'これについて',
+      cursor: function (p) { return '粘菌のように動く粒子 → ' + p.jp + '　クリックで別の文様へ'; },
+      subs: ['粒子が、粘菌のように広がります。', 'つながって、区画を網で満たします。', function (p) { return 'そして日本の文様に落ち着きます：<b>' + p.jp + '</b>'; }],
+      subNext: function (p) { return 'クリックすると、別の文様へ。いま：<b>' + p.jp + '</b>'; },
+      touch: function (p) { return '粘菌のように動く粒子が、' + p.jp + 'に。タップで別の文様へ。'; }
+    }
+  };
+  var ICONS = [
+    '<svg viewBox="0 0 60 44" aria-hidden="true"><g fill="#111">' + [[12,30],[18,22],[24,27],[30,18],[22,14],[34,26],[40,20],[28,33],[46,28],[15,15]].map(function (d) { return '<circle cx="' + d[0] + '" cy="' + d[1] + '" r="1.6"/>'; }).join('') + '</g></svg>',
+    '<svg viewBox="0 0 60 44" aria-hidden="true"><g fill="none" stroke="#111" stroke-width="1"><path d="M10 12 L22 18 L34 10 L48 16 M22 18 L20 30 L32 34 L34 22 L48 16 L50 30 L32 34 M34 22 L22 18 M10 12 L8 26 L20 30 M50 30 L44 38"/></g><g fill="#111"><circle cx="22" cy="18" r="1.8"/><circle cx="34" cy="22" r="1.8"/><circle cx="48" cy="16" r="1.8"/><circle cx="20" cy="30" r="1.8"/><circle cx="32" cy="34" r="1.8"/><circle cx="50" cy="30" r="1.8"/><circle cx="10" cy="12" r="1.8"/><circle cx="34" cy="10" r="1.8"/></g></svg>',
+    '<svg viewBox="0 0 60 44" aria-hidden="true"><g fill="none" stroke="#111" stroke-width="1.1"><path d="M30 6 L30 38 M16 14 L44 30 M44 14 L16 30 M16 14 L30 6 L44 14 L44 30 L30 38 L16 30 Z"/></g></svg>'
+  ];
+  var lang = 'en', variant = 'c', phase = 1, pat = { jp: '麻の葉', en: 'Asanoha' };
+  try { lang = localStorage.getItem('xlang') || 'en'; variant = localStorage.getItem('xvar') || 'c'; } catch (e) {}
+  var $ = function (id) { return document.getElementById(id); };
+  var tip = $('tip'), opener = null;
+
+  function stepsHTML(cls) { var c = COPY[lang]; return [0, 1, 2].map(function (i) { return '<figure class="' + (phase === i + 1 ? 'on' : '') + '">' + ICONS[i] + '<figcaption>' + c.steps[i] + '</figcaption></figure>'; }).join(''); }
+  function fillTip() {
+    var c = COPY[lang];
+    $('tipTitle').textContent = c.title; $('tipBody').textContent = c.body; $('tipSteps').innerHTML = stepsHTML();
+    $('tipNow').textContent = c.now(pat); $('tipAct').textContent = c.act; $('tipFoot').textContent = c.foot;
+    $('tipClose').setAttribute('aria-label', lang === 'jp' ? '閉じる' : 'Close');
+  }
+  function place(trigger) {
+    var r = trigger.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight, m = 12;
+    var left = Math.min(window.innerWidth - w - 16, Math.max(16, r.right - w));
+    var top = r.top - h - m; if (top < 16) top = Math.min(window.innerHeight - h - 16, r.bottom + m);
+    tip.style.left = left + 'px'; tip.style.top = top + 'px';
+  }
+  function openTip(trigger) {
+    if (!tip.hidden && opener === trigger) { closeTip(); return; }
+    opener = trigger; fillTip(); tip.hidden = false; place(trigger);
+    requestAnimationFrame(function () { tip.classList.add('open'); });
+    trigger.setAttribute('aria-expanded', 'true'); tip.focus({ preventScroll: true });
+  }
+  function closeTip() {
+    if (tip.hidden) return; tip.classList.remove('open'); tip.hidden = true;
+    if (opener) { opener.setAttribute('aria-expanded', 'false'); opener.focus({ preventScroll: true }); }
+    opener = null;
+  }
+  $('tipClose').onclick = closeTip;
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeTip(); });
+  document.addEventListener('pointerdown', function (e) { if (!tip.hidden && !tip.contains(e.target) && e.target !== opener && !(opener && opener.contains(e.target))) closeTip(); });
+  window.addEventListener('resize', function () { if (!tip.hidden && opener) place(opener); });
+  window.addEventListener('scroll', function () { if (!tip.hidden && opener) place(opener); }, { passive: true });
+
+  // ---- A ----
+  $('fabBtn').onclick = function () { openTip($('fabBtn')); };
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { var vis = es[0].isIntersecting; $('fab').classList.toggle('away', !vis); if (!vis) closeTip(); }, { threshold: .25 }).observe($('cv'));
+  else $('fab').classList.remove('away');
+
+  // ---- B ----
+  var chip = document.createElement('button'); chip.type = 'button'; chip.className = 'chip'; chip.id = 'chip'; chip.setAttribute('data-only', 'b'); chip.setAttribute('aria-haspopup', 'dialog'); chip.setAttribute('aria-expanded', 'false'); chip.setAttribute('aria-controls', 'tip');
+  chip.innerHTML = '<span class="dot" aria-hidden="true">?</span><span id="chipText"></span>';
+  $('stagewrap').appendChild(chip);
+  chip.onclick = function (e) { e.stopPropagation(); openTip(chip); };
+
+  // ---- C ----
+  var cap = document.createElement('div'); cap.className = 'cap'; cap.setAttribute('data-only', 'c');
+  cap.innerHTML = '<div class="cap-row"><span class="cap-name" id="capName"></span><span class="cap-steps" id="capSteps" aria-label="Stage"></span><button type="button" class="cap-more" id="capMore" aria-expanded="false" aria-controls="capPanel"><span id="capMoreText"></span><span class="chev" aria-hidden="true">⌄</span></button></div>' +
+    '<div class="cap-panel" id="capPanel" hidden><div><p id="capBody"></p><p id="capAct"></p><p class="foot" id="capFoot"></p></div><div class="steps" id="capFig"></div></div>';
+  $('stagewrap').insertAdjacentElement('afterend', cap);
+  $('capMore').onclick = function () { var open = $('capPanel').hidden; $('capPanel').hidden = !open; $('capMore').setAttribute('aria-expanded', String(open)); };
+
+  // ---- D ----
+  var touchLine = document.createElement('p'); touchLine.className = 'curs-touch'; touchLine.id = 'cursTouch'; touchLine.setAttribute('data-only', 'd'); touchLine.hidden = true;
+  cap.insertAdjacentElement('afterend', touchLine);
+  var fine = window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (!fine) touchLine.hidden = false;
+  $('cv').addEventListener('pointermove', function (e) { if (variant !== 'd' || e.pointerType !== 'mouse') return; var cu = $('curs'); cu.textContent = COPY[lang].cursor(pat); cu.style.left = Math.min(window.innerWidth - cu.offsetWidth - 12, e.clientX + 16) + 'px'; cu.style.top = (e.clientY + 18) + 'px'; cu.classList.add('on'); });
+  $('cv').addEventListener('pointerleave', function () { $('curs').classList.remove('on'); });
+
+  // ---- E ----
+  var sub = document.createElement('p'); sub.className = 'sub'; sub.id = 'sub'; sub.setAttribute('data-only', 'e'); sub.setAttribute('aria-live', 'polite');
+  touchLine.insertAdjacentElement('afterend', sub);
+  var subTimer = null, lastSub = '';
+  function setSub(html) { if (html === lastSub) return; lastSub = html; sub.classList.add('fade'); setTimeout(function () { sub.innerHTML = html; sub.classList.remove('fade'); }, 220); }
+  function updateSub() {
+    var c = COPY[lang]; clearTimeout(subTimer);
+    if (phase < 3) setSub(c.subs[phase - 1]);
+    else { var t = c.subs[2]; setSub(t(pat)); subTimer = setTimeout(function () { setSub(c.subNext(pat)); }, 4000); }
+  }
+
+  // ---- shared state ----
+  function render() {
+    var c = COPY[lang];
+    document.body.dataset.lang = lang; document.body.dataset.v = variant;
+    document.documentElement.lang = lang === 'jp' ? 'ja' : 'en';
+    $('fabLabel').textContent = c.label; $('fabBtn').setAttribute('aria-label', c.label);
+    $('chipText').textContent = c.label; chip.classList.toggle('in', phase >= 3);
+    $('capName').innerHTML = (lang === 'jp' ? pat.jp + '<small>' + pat.en + '</small>' : pat.en + '<small class="jp">' + pat.jp + '</small>');
+    $('capSteps').innerHTML = c.steps.map(function (t, i) { return (i ? '<i aria-hidden="true">·</i>' : '') + '<span' + (phase === i + 1 ? ' aria-current="step"' : '') + '>' + t + '</span>'; }).join('');
+    $('capMoreText').textContent = c.more; $('capBody').textContent = c.body; $('capAct').textContent = c.act; $('capFoot').textContent = c.foot; $('capFig').innerHTML = stepsHTML();
+    touchLine.textContent = c.touch(pat);
+    if (!tip.hidden) fillTip();
+    updateSub();
+    document.querySelectorAll('#seg button').forEach(function (b) { b.setAttribute('aria-checked', String(b.dataset.v === variant)); });
+    document.querySelectorAll('#langseg button').forEach(function (b) { b.setAttribute('aria-checked', String(b.dataset.l === lang)); });
+  }
+  window.__heroPhase = function (p) { phase = p; render(); };
+  window.__heroPattern = function (p) { pat = p; render(); };
+  document.querySelectorAll('#seg button').forEach(function (b) { b.onclick = function () { variant = b.dataset.v; closeTip(); try { localStorage.setItem('xvar', variant); } catch (e) {} render(); }; });
+  document.querySelectorAll('#langseg button').forEach(function (b) { b.onclick = function () { lang = b.dataset.l; try { localStorage.setItem('xlang', lang); } catch (e) {} render(); }; });
+  $('xreplay').onclick = function () { closeTip(); document.getElementById('replay').click(); };
+  render();
+})();
+</script>
