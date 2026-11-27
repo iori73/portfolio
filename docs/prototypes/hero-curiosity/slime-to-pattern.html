@@ -20,7 +20,9 @@ body { background: var(--bg); color: var(--ink); font-family: var(--sans); }
 .wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 40px 72px; }
 .hero h1 { font-weight: 400; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.25; letter-spacing: -0.01em; margin: 0 0 12px; text-wrap: balance; }
 .hero p { font-weight: 400; font-size: clamp(22px, 3.1vw, 37px); line-height: 1.32; letter-spacing: -0.01em; margin: 0; text-wrap: balance; max-width: 900px; }
-#cv { display: block; width: 100%; aspect-ratio: 16 / 6.5; max-width: 100%; margin-top: clamp(24px, 4vw, 40px); background: transparent; }
+.hint { margin: 8px 0 0; font-size: 12px; color: var(--muted, #777); }
+#cv:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+#cv { cursor: pointer; display: block; width: 100%; aspect-ratio: 16 / 6.5; max-width: 100%; margin-top: clamp(24px, 4vw, 40px); background: transparent; }
 .bar { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; justify-content: space-between; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 12px; }
 .stage { display: flex; gap: 14px; color: var(--soft); letter-spacing: .03em; flex-wrap: wrap; }
 .stage span[aria-current="step"] { color: var(--ink); font-weight: 500; }
@@ -64,7 +66,8 @@ details.group summary { cursor: pointer; }
     <p>I explore what makes design meaningful today, when anyone can create.</p>
   </section>
 
-  <canvas id="cv" role="img" aria-label="Particles grow from one point into a slime-mold network that fills the space, then slowly settle into a traditional Japanese pattern"></canvas>
+  <canvas id="cv" tabindex="0" role="button" aria-label="Particles grow into a slime-mold network, then settle into a Japanese pattern. Click or press Enter for another pattern."></canvas>
+  <p class="hint"><span class="jp">クリックすると、別の文様に変わります</span> · Click for another pattern</p>
 
   <div class="bar">
     <div class="stage" aria-live="polite"><span id="s1">1 <span class="jp">広がる</span> Spread</span><span id="s2">2 <span class="jp">満ちる</span> Fill</span><span id="s3">3 <span class="jp">文様へ</span> Pattern</span></div>
@@ -281,10 +284,29 @@ details.group summary { cursor: pointer; }
         for (j = -1; j < GH / bq + 1; j++) for (i = -1; i < GW / bq + 1; i++) { var bx2 = i * bq, by2 = j * bq; for (k = 1; k <= 3; k++) { var o2 = k * bq / 4; if ((i + j) % 2) seg([bx2 + bq * .12, by2 + o2], [bx2 + bq * .88, by2 + o2]); else seg([bx2 + o2, by2 + bq * .12], [bx2 + o2, by2 + bq * .88]); } }
         break;
       }
-      case 'kasumi': {      // suyari-gasumi: long rounded mist bands, staggered, as in Japanese painting
+      case 'kasumi': {      // e-gasumi (工霞): from the pattern dictionary (p.136, 「花菱に霞と秋草文様縫箔」). One mist is a cluster of
+        // 3-4 thin outlined bands stacked close together, each row shifted a little; every other row is split at one point,
+        // and short vertical strokes pass through the split to join the rows above and below (the shape of エ / 工).
+        // The clusters lie loosely, with open ground between them.
         var seedK = 7, rk = function () { seedK = (seedK * 16807) % 2147483647; return seedK / 2147483647; };
-        var bh = s * .22, rowH = s * .42;
-        for (j = 0; j < GH / rowH; j++) { var xk2 = -rk() * s; while (xk2 < GW) { var len = s * (1.1 + rk() * 1.6), yk2 = j * rowH + rowH / 2; c.beginPath(); c.moveTo(xk2 + bh / 2, yk2 - bh / 2); c.lineTo(xk2 + len - bh / 2, yk2 - bh / 2); c.arc(xk2 + len - bh / 2, yk2, bh / 2, -Math.PI / 2, Math.PI / 2); c.lineTo(xk2 + bh / 2, yk2 + bh / 2); c.arc(xk2 + bh / 2, yk2, bh / 2, Math.PI / 2, Math.PI * 1.5); c.stroke(); xk2 += len + s * (.35 + rk() * .6); } }
+        var bh = s * .16, rp = bh * 1.85;   // bands and gaps wide enough that the slime keeps them apart
+        function pill(x0, x1, y) { if (x1 - x0 < bh * 1.2) return; c.beginPath(); c.moveTo(x0 + bh / 2, y - bh / 2); c.lineTo(x1 - bh / 2, y - bh / 2); c.arc(x1 - bh / 2, y, bh / 2, -Math.PI / 2, Math.PI / 2); c.lineTo(x0 + bh / 2, y + bh / 2); c.arc(x0 + bh / 2, y, bh / 2, Math.PI / 2, Math.PI * 1.5); c.stroke(); }
+        function cluster(cx, cy, wc) {
+          var nr = 3, gp = bh * 1.3, xs = cx + (rk() - .5) * wc * .3, y0 = cy - (nr - 1) * rp / 2, rows = [];
+          for (var r = 0; r < nr; r++) { var off = (rk() - .5) * wc * .3, ln = wc * (r % 2 ? .95 : (.7 + rk() * .3)) * (r === nr - 1 ? .8 : 1); rows.push([cx + off - ln / 2, cx + off + ln / 2, y0 + r * rp]); }
+          rows.forEach(function (R, r) {
+            var x0 = Math.min(R[0], xs - gp * 1.5), x1 = Math.max(R[1], xs + gp * 1.5);
+            if (r % 2) { pill(x0, xs - gp / 2, R[2]); pill(xs + gp / 2, x1, R[2]); } else pill(R[0], R[1], R[2]);
+          });
+          for (var r2 = 1; r2 < nr; r2 += 2) {   // the vertical strokes through the split, joining the rows above and below
+            var ya = rows[r2 - 1][2] + bh / 2, yb = r2 + 1 < nr ? rows[r2 + 1][2] - bh / 2 : rows[r2][2] + bh / 2;
+            seg([xs - gp * .28, ya], [xs - gp * .28, yb]); seg([xs + gp * .28, ya], [xs + gp * .28, yb]);
+          }
+        }
+        var cw = s * 2.4, ch = GH / 2.55;
+        for (j = -1; j < GH / ch + 1; j++) for (i = -1; i < GW / cw + 1; i++) {
+          cluster(i * cw + (j & 1 ? cw / 2 : 0) + (rk() - .5) * cw * .35, j * ch + ch / 2 + (rk() - .5) * ch * .3, cw * (.6 + rk() * .25));
+        }
         break;
       }
       case 'mandala': {     // the Diamond-realm grid: squares, each holding a large circle and five small ones in a cross
@@ -493,6 +515,19 @@ details.group summary { cursor: pointer; }
     document.querySelectorAll('.tile .pic').forEach(function (el) { el.classList.toggle('current', el.dataset.id === current); });
     if (skip) sim.skip();
   }
+  // a click (or Enter / Space) on the stage: another pattern, at random from the ones you liked (never the same twice in a row).
+  // The particles stay; the pattern loosens toward the network and forms the next one in about 3-4 s.
+  var LIKED = PATTERNS.filter(function (q) { return q.g === 'liked'; }).map(function (q) { return q.id; });
+  function nextPattern() {
+    var pool = LIKED.filter(function (id) { return id !== current; }), id = pool[(Math.random() * pool.length) | 0];
+    current = id; sim.setPattern(id);
+    if (sim.phase >= 3) sim.morph = Math.min(sim.morph, .3);
+    var q = byId(id); document.getElementById('now').innerHTML = '<span class="jp">' + q.jp + '</span> ' + q.en;
+    document.querySelectorAll('.tile .pic').forEach(function (el) { el.classList.toggle('current', el.dataset.id === current); });
+    if (reduce) { for (var k = 0; k < 600; k++) sim.tick(); sim.draw(g); }
+  }
+  cv.addEventListener('click', nextPattern);
+  cv.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); nextPattern(); } });
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ---------- the gallery ----------
