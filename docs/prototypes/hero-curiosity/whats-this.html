@@ -796,7 +796,10 @@ body[data-lang="jp"] .tip p { line-height: 1.8; }
 .morph-now { border-radius: 8px; padding: 8px 10px; margin: 0 -10px; background: transparent; transition: background 700ms ease; }
 .morph-now.flash { background: var(--tile); transition: none; }
 .morph-now b { font-weight: 500; }
+.morph-now { display: grid; gap: 4px; }
+.morph-now .pdesc { font-size: 13.5px; line-height: 1.6; }
 .morph-now .count { color: var(--soft); font-size: 12.5px; }
+body[data-lang="jp"] .morph-now .pdesc { line-height: 1.8; }
 .morph-card .foot { font-size: 12px; color: var(--soft); border-top: 1px solid var(--line); padding-top: 10px; }
 .morph-body { display: grid; gap: 12px; }
 body[data-lang="jp"] .morph { font-family: var(--jp); }
@@ -872,7 +875,7 @@ body[data-lang="jp"] .morph-card p { line-height: 1.8; }
   <h2 id="tipTitle"></h2>
   <p id="tipBody"></p>
   <div class="steps" id="tipSteps"></div>
-  <p><span class="now" id="tipNow"></span><br><span class="act" id="tipAct"></span></p>
+  <p><span class="now" id="tipNow"></span><br><span id="tipDesc"></span><br><span class="act" id="tipAct"></span></p>
   <p class="foot" id="tipFoot"></p>
 </div>
 
@@ -915,7 +918,31 @@ body[data-lang="jp"] .morph-card p { line-height: 1.8; }
     '<svg viewBox="0 0 60 44" aria-hidden="true"><g fill="none" stroke="#111" stroke-width="1"><path d="M10 12 L22 18 L34 10 L48 16 M22 18 L20 30 L32 34 L34 22 L48 16 L50 30 L32 34 M34 22 L22 18 M10 12 L8 26 L20 30 M50 30 L44 38"/></g><g fill="#111"><circle cx="22" cy="18" r="1.8"/><circle cx="34" cy="22" r="1.8"/><circle cx="48" cy="16" r="1.8"/><circle cx="20" cy="30" r="1.8"/><circle cx="32" cy="34" r="1.8"/><circle cx="50" cy="30" r="1.8"/><circle cx="10" cy="12" r="1.8"/><circle cx="34" cy="10" r="1.8"/></g></svg>',
     '<svg viewBox="0 0 60 44" aria-hidden="true"><g fill="none" stroke="#111" stroke-width="1.1"><path d="M30 6 L30 38 M16 14 L44 30 M44 14 L16 30 M16 14 L30 6 L44 14 L44 30 L30 38 L16 30 Z"/></g></svg>'
   ];
-  var lang = 'en', variant = 'c', phase = 1, pat = { jp: '麻の葉', en: 'Asanoha' };
+  var PDESC = {
+    asanoha: { jp: '六角形を基本にした幾何学文様。麻はまっすぐ早く伸びるので、子どもの産着によく使われた。', en: 'A geometric pattern built on hexagons. Hemp grows straight and fast, so it was often used for babies’ clothes.' },
+    ichimatsu: { jp: '色違いの正方形を交互に敷き詰めた文様。古くは石畳と呼ばれ、歌舞伎役者の佐野川市松が好んだことから市松の名に。', en: 'Squares of two colours laid in turn. Once called ishidatami (paving); it took the name of the kabuki actor Sanogawa Ichimatsu, who favoured it.' },
+    seigaiha: { jp: '同心円の扇を重ねて、穏やかな波がどこまでも続く様子を表した文様。', en: 'Fans of concentric arcs, overlapped like calm waves that go on and on.' },
+    kikko: { jp: '亀の甲羅に見立てた六角形をつないだ文様。', en: 'Hexagons joined edge to edge, seen as the shell of a tortoise.' },
+    komochi: { jp: '亀甲の中に、もう一回り小さな亀甲を入れた文様。', en: 'A tortoise-shell hexagon with a smaller one inside.' },
+    shippo: { jp: '同じ大きさの円を重ねて、どこまでもつないでいく文様。', en: 'Circles of one size, overlapped and linked without end.' },
+    saiwaibishi: { jp: '菱を組み合わせた有職文様。公家の装束に使われてきた。', en: 'A court pattern of nested diamonds, used on the robes of the nobility.' },
+    samekomon: { jp: '錐で彫った細かな点を扇のように重ねた江戸小紋。極鮫は一寸角に九百以上の穴があり、遠目には無地に見える。', en: 'An Edo komon of tiny drilled dots laid in overlapping fans. The finest has over 900 holes per square sun (about 3 cm), and reads as plain from afar.' },
+    miru: { jp: '海藻の海松（みる）を丸く図案化した文様。枝分かれする形を円にまとめる。', en: 'Miru, a branching seaweed, drawn into a round motif.' },
+    hanabishi: { jp: '4枚の花びらで菱の形をつくる花菱。花菱をつないだものが幸菱。', en: 'Four petals that make a diamond (hanabishi). Linked together they become saiwai-bishi.' },
+    kuruwa: { jp: '輪を重ねてつないだ文様。輪違い（わちがい）とも呼ばれる。', en: 'Rings overlapped and linked; also called wachigai.' },
+    komochigoshi: { jp: '太い線の脇に細い線を添えた格子。', en: 'A check of thick lines, each with a thin line beside it.' },
+    sankuzushi: { jp: '3本の線の組を、縦と横で交互に並べた文様。', en: 'Groups of three bars laid alternately upright and flat.' },
+    kasumi: { jp: 'たなびく霞をエの字のように図案化した文様。遠近や時の移ろいを表し、模様の区切りにも使われる。', en: 'Drifting mist drawn like the letter エ. It suggests depth and the passing of time, and divides a design into parts.' },
+    mandala: { jp: '金剛界曼荼羅は九つの区画からなり、円の中に仏を配する。ここでは円が十字に並ぶ形だけを抜き出した。', en: 'The Diamond Realm mandala has nine sections, with buddhas set in circles. Only the cross of circles is kept here.' },
+    karakusa: { jp: 'つる草が空間を埋めながら伸びていく文様。もとはギリシャ・ローマの連続文様から発展したとの説もある。', en: 'Vines that fill the space as they grow. One account traces it to Greek and Roman scroll patterns.' },
+    jukou: { jp: '村田珠光ゆかりの名物裂。紺地に牡丹唐草、龍、火焔の文。龍と火焔はここでは省いた。', en: 'A meibutsu-gire linked to Murata Jukō: peony scrolls, dragons and flames on navy. The dragons and flames are left out here.' },
+    jouou: { jp: '武野紹鷗ゆかりの名物裂。珠光緞子に似た牡丹唐草が、より流れるように続く。', en: 'A meibutsu-gire linked to Takeno Jōō: peony scrolls like Jukō’s, but more flowing and continuous.' },
+    rikyu: { jp: '千利休ゆかりの名物裂。五弁の梅鉢文で、花と花が微妙につながっている。', en: 'A meibutsu-gire linked to Sen no Rikyū: five-petal plum roundels that just touch one another.' },
+    oribe: { jp: '古田織部ゆかりの名物裂。波に梅を散らした、自在で華やかな意匠。', en: 'A meibutsu-gire linked to Furuta Oribe: plum blossoms over waves, free and bright.' },
+    enshu: { jp: '小堀遠州ゆかりの名物裂。石畳の格子に、牡丹・菊・七宝を整然と収める。', en: 'A meibutsu-gire linked to Kobori Enshū: peony, chrysanthemum and shippō set neatly in a paving grid.' }
+  };
+  function pdesc(p) { var d = PDESC[p.id]; return d ? d[lang] : ''; }
+  var lang = 'en', variant = 'c', phase = 1, pat = { id: 'asanoha', jp: '麻の葉', en: 'Asanoha' };
   try { lang = localStorage.getItem('xlang') || 'en'; variant = localStorage.getItem('xvar') || 'c'; } catch (e) {}
   var $ = function (id) { return document.getElementById(id); };
   var tip = $('tip'), opener = null;
@@ -924,7 +951,7 @@ body[data-lang="jp"] .morph-card p { line-height: 1.8; }
   function fillTip() {
     var c = COPY[lang];
     $('tipTitle').textContent = c.title; $('tipBody').textContent = c.body; $('tipSteps').innerHTML = stepsHTML();
-    $('tipNow').textContent = c.now(pat); $('tipAct').textContent = c.act; $('tipFoot').textContent = c.foot;
+    $('tipNow').textContent = c.now(pat); $('tipDesc').textContent = pdesc(pat); $('tipAct').textContent = c.act; $('tipFoot').textContent = c.foot;
     $('tipClose').setAttribute('aria-label', lang === 'jp' ? '閉じる' : 'Close');
   }
   function place(trigger) {
@@ -964,7 +991,7 @@ body[data-lang="jp"] .morph-card p { line-height: 1.8; }
     var c = COPY[lang], n = Object.keys(seen).length;
     $('morphLabel').textContent = c.label; $('morphTitle').textContent = c.title; $('morphBody').textContent = c.body;
     $('morphSteps').innerHTML = stepsHTML();
-    $('morphNow').innerHTML = '<b>' + c.now(pat) + '</b><br>' + (n > 1 ? '<span class="count">' + c.seen(n, TOTAL) + '</span>' : c.act);
+    $('morphNow').innerHTML = '<b>' + c.now(pat) + '</b><span class="pdesc">' + pdesc(pat) + '</span>' + (n > 1 ? '<span class="count">' + c.seen(n, TOTAL) + '</span>' : '<span class="count">' + c.act + '</span>');
     $('morphFoot').textContent = c.foot; $('morphClose').setAttribute('aria-label', lang === 'jp' ? '閉じる' : 'Close');
     if (flash && mOpen && !reduceM) { var el = $('morphNow'); el.classList.add('flash'); requestAnimationFrame(function () { requestAnimationFrame(function () { el.classList.remove('flash'); }); }); }
   }
@@ -992,7 +1019,7 @@ body[data-lang="jp"] .morph-card p { line-height: 1.8; }
   // ---- C ----
   var cap = document.createElement('div'); cap.className = 'cap'; cap.setAttribute('data-only', 'c');
   cap.innerHTML = '<div class="cap-row"><span class="cap-name" id="capName"></span><span class="cap-steps" id="capSteps" aria-label="Stage"></span><button type="button" class="cap-more" id="capMore" aria-expanded="false" aria-controls="capPanel"><span id="capMoreText"></span><span class="chev" aria-hidden="true">⌄</span></button></div>' +
-    '<div class="cap-panel" id="capPanel" hidden><div><p id="capBody"></p><p id="capAct"></p><p class="foot" id="capFoot"></p></div><div class="steps" id="capFig"></div></div>';
+    '<div class="cap-panel" id="capPanel" hidden><div><p id="capBody"></p><p id="capDesc"></p><p id="capAct"></p><p class="foot" id="capFoot"></p></div><div class="steps" id="capFig"></div></div>';
   $('stagewrap').insertAdjacentElement('afterend', cap);
   $('capMore').onclick = function () { var open = $('capPanel').hidden; $('capPanel').hidden = !open; $('capMore').setAttribute('aria-expanded', String(open)); };
 
@@ -1024,7 +1051,7 @@ body[data-lang="jp"] .morph-card p { line-height: 1.8; }
     $('chipText').textContent = c.label; chip.classList.toggle('in', phase >= 3);
     $('capName').innerHTML = (lang === 'jp' ? pat.jp + '<small>' + pat.en + '</small>' : pat.en + '<small class="jp">' + pat.jp + '</small>');
     $('capSteps').innerHTML = c.steps.map(function (t, i) { return (i ? '<i aria-hidden="true">·</i>' : '') + '<span' + (phase === i + 1 ? ' aria-current="step"' : '') + '>' + t + '</span>'; }).join('');
-    $('capMoreText').textContent = c.more; $('capBody').textContent = c.body; $('capAct').textContent = c.act; $('capFoot').textContent = c.foot; $('capFig').innerHTML = stepsHTML();
+    $('capMoreText').textContent = c.more; $('capBody').textContent = c.body; $('capDesc').textContent = pdesc(pat); $('capAct').textContent = c.act; $('capFoot').textContent = c.foot; $('capFig').innerHTML = stepsHTML();
     touchLine.textContent = c.touch(pat);
     if (!tip.hidden) fillTip();
     updateSub();
