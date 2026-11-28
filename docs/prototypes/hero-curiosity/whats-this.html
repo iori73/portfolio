@@ -63,7 +63,7 @@ details.group summary { cursor: pointer; }
 <div class="wrap">
   <div class="lab-bar" role="group" aria-label="Experiment controls">
     <div class="seg" id="seg" role="radiogroup" aria-label="Variant">
-      <button type="button" role="radio" data-v="a">A 浮かぶ丸ボタン</button>
+      <button type="button" role="radio" data-v="a">A ピルが窓に</button>
       <button type="button" role="radio" data-v="b">B 区画の角</button>
       <button type="button" role="radio" data-v="c">C キャプション</button>
       <button type="button" role="radio" data-v="d">D カーソル</button>
@@ -85,13 +85,16 @@ details.group summary { cursor: pointer; }
 
   <section class="xnotes" aria-label="Notes on the variants">
     <h3>何を比べているか</h3>
-    <p>初めて来た人は文脈を持たず、ヒーローには約10秒しかいない。案内は「気づけるが、見出しと動きの邪魔をしない」ことが条件。スマホでは hover がないので、開くのはクリック／タップにした（いわゆる tooltip ではなく、クリックで開く toggletip。Esc・×・外側のクリックで閉じ、開いたボタンにフォーカスが戻る）。文言は仮。</p>
-    <h3>A 浮かぶ丸ボタン</h3>
-    <p class="pro">いちばん見慣れた形で、見つけやすい。ヒーローが画面にある間だけ出す。</p>
-    <p class="con">チャットやヘルプ窓口と読まれやすい（押すと人と話せると思われる）。説明の対象（区画）から離れた画面の角にある。</p>
+    <p>初めて来た人は文脈を持たず、ヒーローには約10秒しかいない。案内は「気づけるが、見出しと動きの邪魔をしない」ことが条件。スマホでは hover がないので、開くのはクリック／タップにした（いわゆる tooltip ではなく、クリックで開く toggletip。×（と Esc）で閉じ、開いたボタンにフォーカスが戻る。外側のクリックでは閉じない）。文言は仮。</p>
+    <h3>A ピルが窓に（作り直し）</h3>
+    <p class="pro">「？」と「What's this?」を1つのピルにまとめた（ラベルとボタンが別々では、どちらを押すのか・なぜ2つあるのかが伝わらない）。押すと、ピルがその場で窓に広がる（同じ物が開くので、どこから出てきたかがわかる）。区画の右下に付き、画面の下端より下には行かない。ヒーローが画面の外に出ると隠れ、戻ると元の状態で出る。</p>
+    <p class="pro">窓は「×」（とキーボードの Esc）でだけ閉じる。外をクリックしても閉じない：読みながら区画をクリックして文様を変えたいはずなので。変えると「いまの文様」が一瞬淡く光り、「21種のうち n つ目」が増える（自分の操作で変わったことがわかる）。</p>
+    <p class="con">窓を開くと、スマホでは区画の一部を隠す。</p>
+    <h3>初めての人の動き（想定）</h3>
+    <p>0秒：見出しを読む。粒子が動き出す。→ 3秒：文様ができ始め、区画の右下にピルが静かに現れる（区画のそばで変わるのはこれだけなので目に入る。繰り返し動かさない）。→ 押す：ピルが窓に広がる。2行の説明と3段階の小図、いまの文様。→「区画をクリックすると別の文様に」を読んで区画を押す：窓は開いたまま、文様と名前が変わり、数が増える。→ 下の作品へスクロール：ピルと窓は隠れる。→ ×で閉じる：窓がピルに戻る。先に区画を押した人も、文様が変わることでクリックできると知る。</p>
     <h3>B 区画の角</h3>
     <p class="pro">説明する物のすぐ隣にある（近さで関係がわかる）。文様ができ始めてから出るので、最初の数秒は動きだけを見せられる。</p>
-    <p class="con">動きの上に小さく乗る。文様の種類によっては背景とまざる。</p>
+    <p class="con">動きの上に小さく乗る。文様の種類によっては背景とまざる。窓は外をクリックしても閉じないように直した（A と同じ）。</p>
     <h3>C キャプション（おすすめ）</h3>
     <p class="pro">美術館で作品の横にある名札と同じ慣習。いまの文様の名前と段階（広がる・満ちる・文様へ）が常に見える（何が起きているかが見える）。開いても動きを隠さない。ポートフォリオの「余白とタイポ」の静けさに合う。</p>
     <p class="con">気づかれにくい。下線の「これについて」が目立たないと開かれない。13インチのノートPCでは区画の下端が最初の画面の外に出るので、キャプションは少しスクロールしないと見えない（本番では区画の高さを少し詰めるか、キャプションを区画の下端に重ねる必要がある）。</p>
@@ -740,6 +743,7 @@ details.group summary { cursor: pointer; }
 /* ---- the explainer experiments ----
    Tokens follow the portfolio: surface #EFF1F1, ink #111, Helvetica Neue / Noto Sans JP, quiet and typographic.
    The card is the one object that floats, so it alone gets a border, radius and a soft shadow. */
+[hidden] { display: none !important; }
 :root { --card: #FBFCFC; --shadow: 0 10px 30px rgba(17, 20, 22, .10), 0 1px 2px rgba(17, 20, 22, .06); --dur: 180ms; }
 @media (prefers-reduced-motion: reduce) { :root { --dur: 0ms; } }
 .bar, .gallery, .notes, .summary { display: none !important; }
@@ -769,12 +773,35 @@ body:not([data-v="a"]) [data-only="a"], body:not([data-v="b"]) [data-only="b"], 
 body[data-lang="jp"] .tip, body[data-lang="jp"] .cap, body[data-lang="jp"] .sub, body[data-lang="jp"] .curs, body[data-lang="jp"] .fab-label, body[data-lang="jp"] .chip { font-family: var(--jp); }
 body[data-lang="jp"] .tip p { line-height: 1.8; }
 
-/* A: floating round button, bottom-right of the screen, only while the hero is on screen */
-.fab { position: fixed; z-index: 20; right: calc(20px + env(safe-area-inset-right, 0px)); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); display: flex; align-items: center; gap: 10px; transition: opacity var(--dur) ease, transform var(--dur) ease; }
-.fab.away { opacity: 0; transform: translateY(8px); pointer-events: none; }
-.fab button { width: 48px; height: 48px; padding: 0; border-radius: 50%; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); font-size: 19px; font-weight: 500; }
-.fab-label { font-size: 13px; color: var(--soft); background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; }
-@media (max-width: 600px) { .fab-label { display: none; } }
+/* A: one pill that grows into the card in place (one object, not a label beside a button).
+   It belongs to the hero: it sits at the hero's lower-right, never below the bottom of the screen, and hides when the hero is out of view. */
+.morph { position: fixed; z-index: 20; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); border-radius: 999px; overflow: hidden; transition: opacity var(--dur) ease; }
+.morph.away { opacity: 0; pointer-events: none; }
+.morph.open { border-radius: 16px; width: min(340px, calc(100vw - 32px)); }
+.morph-btn { display: inline-flex; align-items: center; gap: 9px; border: 0; border-radius: 999px; padding: 8px 15px 8px 9px; font-size: 13.5px; background: transparent; white-space: nowrap; }
+.morph-btn:hover { background: var(--tile); }
+.glyph { width: 22px; height: 22px; flex: none; border-radius: 50%; border: 1.25px solid var(--ink); display: inline-grid; place-items: center; font-size: 12px; font-weight: 500; line-height: 1; }
+.morph-card { display: grid; gap: 12px; padding: 14px 16px 14px; font-size: 14px; line-height: 1.6; }
+.morph-card:focus { outline: none; }
+.morph-head { display: flex; align-items: center; gap: 9px; }
+.morph-head h2 { margin: 0; font-size: 15px; font-weight: 500; flex: 1; }
+.morph-head .x { width: 36px; height: 36px; padding: 0; border: 0; border-radius: 50%; font-size: 18px; color: var(--soft); margin: -6px -8px -6px 0; }
+.morph-head .x:hover { background: var(--tile); color: var(--ink); }
+.morph-card p { margin: 0; }
+.morph-card .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.morph-card .steps figure { margin: 0; display: grid; gap: 4px; justify-items: center; font-size: 11.5px; color: var(--soft); }
+.morph-card .steps svg { width: 100%; height: 44px; background: var(--bg); border-radius: 8px; }
+.morph-card .steps figure.on { color: var(--ink); }
+.morph-card .steps figure.on svg { outline: 1px solid var(--ink); }
+.morph-now { border-radius: 8px; padding: 8px 10px; margin: 0 -10px; background: transparent; transition: background 700ms ease; }
+.morph-now.flash { background: var(--tile); transition: none; }
+.morph-now b { font-weight: 500; }
+.morph-now .count { color: var(--soft); font-size: 12.5px; }
+.morph-card .foot { font-size: 12px; color: var(--soft); border-top: 1px solid var(--line); padding-top: 10px; }
+.morph-body { display: grid; gap: 12px; }
+body[data-lang="jp"] .morph { font-family: var(--jp); }
+body[data-lang="jp"] .morph-card p { line-height: 1.8; }
+#cv { cursor: pointer; }
 
 /* B: a chip in the stage's lower-right corner; it arrives once the pattern begins */
 .chip { position: absolute; right: 0; bottom: 0; display: inline-flex; align-items: center; gap: 8px; font-size: 13px; padding: 7px 12px 7px 8px; background: color-mix(in srgb, var(--bg) 82%, transparent); border: 1px solid var(--line); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
@@ -824,9 +851,17 @@ body[data-lang="jp"] .tip p { line-height: 1.8; }
 </style>
 
 <!-- A -->
-<div class="fab away" id="fab" data-only="a">
-  <span class="fab-label" id="fabLabel" aria-hidden="true"></span>
-  <button type="button" id="fabBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="tip">?</button>
+<div class="morph away" id="morph" data-only="a">
+  <button type="button" class="morph-btn" id="morphBtn" aria-expanded="false" aria-controls="morphCard"><span class="glyph" aria-hidden="true">?</span><span id="morphLabel"></span></button>
+  <div class="morph-card" id="morphCard" role="region" aria-labelledby="morphTitle" tabindex="-1" hidden>
+    <div class="morph-head"><span class="glyph" aria-hidden="true">?</span><h2 id="morphTitle"></h2><button type="button" class="x" id="morphClose">×</button></div>
+    <div class="morph-body">
+      <p id="morphBody"></p>
+      <div class="steps" id="morphSteps"></div>
+      <p class="morph-now" id="morphNow" aria-live="polite"></p>
+      <p class="foot" id="morphFoot"></p>
+    </div>
+  </div>
 </div>
 <!-- D: cursor line -->
 <div class="curs" id="curs" data-only="d" aria-hidden="true"></div>
@@ -850,6 +885,7 @@ body[data-lang="jp"] .tip p { line-height: 1.8; }
       steps: ['Spread', 'Fill', 'Pattern'],
       now: function (p) { return 'Now: ' + p.en; },
       act: 'Click the area to see another pattern.',
+      seen: function (n, t) { return n + ' of ' + t + ' patterns seen. Keep clicking.'; },
       foot: 'Movement: the Physarum agent model of Jones (2010). The patterns come from Japanese textiles.',
       label: "What's this?",
       more: 'About this',
@@ -864,6 +900,7 @@ body[data-lang="jp"] .tip p { line-height: 1.8; }
       steps: ['広がる', '満ちる', '文様へ'],
       now: function (p) { return 'いまの文様：' + p.jp; },
       act: '区画をクリックすると、別の文様に変わります。',
+      seen: function (n, t) { return t + '種のうち ' + n + ' つ目。続けてクリックできます。'; },
       foot: '動きは Jones (2010) の粘菌モデル。文様は日本の染織から。',
       label: 'これは何？',
       more: 'これについて',
@@ -909,14 +946,42 @@ body[data-lang="jp"] .tip p { line-height: 1.8; }
   }
   $('tipClose').onclick = closeTip;
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeTip(); });
-  document.addEventListener('pointerdown', function (e) { if (!tip.hidden && !tip.contains(e.target) && e.target !== opener && !(opener && opener.contains(e.target))) closeTip(); });
   window.addEventListener('resize', function () { if (!tip.hidden && opener) place(opener); });
   window.addEventListener('scroll', function () { if (!tip.hidden && opener) place(opener); }, { passive: true });
 
-  // ---- A ----
-  $('fabBtn').onclick = function () { openTip($('fabBtn')); };
-  if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { var vis = es[0].isIntersecting; $('fab').classList.toggle('away', !vis); if (!vis) closeTip(); }, { threshold: .25 }).observe($('cv'));
-  else $('fab').classList.remove('away');
+  // ---- A: the pill grows into the card where it stands; only x (or Esc) closes it ----
+  var morph = $('morph'), mOpen = false, seen = {}; seen[pat.en] = 1; var TOTAL = 21, reduceM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function placeMorph() {
+    var r = $('cv').getBoundingClientRect(), vh = window.innerHeight, vw = window.innerWidth;
+    var vis = r.top < vh - 80 && r.bottom > 120;
+    morph.classList.toggle('away', !vis || phase < 3);
+    var right = Math.max(16, vw - r.right), bottom = Math.max(16, vh - Math.min(r.bottom - 8, vh - 16));
+    morph.style.right = right + 'px'; morph.style.bottom = bottom + 'px';
+  }
+  window.addEventListener('scroll', function () { requestAnimationFrame(placeMorph); }, { passive: true });
+  window.addEventListener('resize', placeMorph);
+  function fillMorph(flash) {
+    var c = COPY[lang], n = Object.keys(seen).length;
+    $('morphLabel').textContent = c.label; $('morphTitle').textContent = c.title; $('morphBody').textContent = c.body;
+    $('morphSteps').innerHTML = stepsHTML();
+    $('morphNow').innerHTML = '<b>' + c.now(pat) + '</b><br>' + (n > 1 ? '<span class="count">' + c.seen(n, TOTAL) + '</span>' : c.act);
+    $('morphFoot').textContent = c.foot; $('morphClose').setAttribute('aria-label', lang === 'jp' ? '閉じる' : 'Close');
+    if (flash && mOpen && !reduceM) { var el = $('morphNow'); el.classList.add('flash'); requestAnimationFrame(function () { requestAnimationFrame(function () { el.classList.remove('flash'); }); }); }
+  }
+  function morphTo(open) {
+    var first = morph.getBoundingClientRect();
+    mOpen = open; $('morphBtn').hidden = open; $('morphCard').hidden = !open; morph.classList.toggle('open', open);
+    $('morphBtn').setAttribute('aria-expanded', String(open));
+    var last = morph.getBoundingClientRect();
+    if (!reduceM && morph.animate) {
+      morph.animate([{ width: first.width + 'px', height: first.height + 'px', borderRadius: open ? '999px' : '16px' }, { width: last.width + 'px', height: last.height + 'px', borderRadius: open ? '16px' : '999px' }], { duration: 260, easing: 'cubic-bezier(.2,.8,.2,1)' });
+      if (open) $('morphCard').animate([{ opacity: 0 }, { opacity: 0, offset: .35 }, { opacity: 1 }], { duration: 300 });
+    }
+    (open ? $('morphCard') : $('morphBtn')).focus({ preventScroll: true });
+  }
+  $('morphBtn').onclick = function () { fillMorph(false); morphTo(true); };
+  $('morphClose').onclick = function () { morphTo(false); };
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && mOpen) morphTo(false); });
 
   // ---- B ----
   var chip = document.createElement('button'); chip.type = 'button'; chip.className = 'chip'; chip.id = 'chip'; chip.setAttribute('data-only', 'b'); chip.setAttribute('aria-haspopup', 'dialog'); chip.setAttribute('aria-expanded', 'false'); chip.setAttribute('aria-controls', 'tip');
@@ -955,7 +1020,7 @@ body[data-lang="jp"] .tip p { line-height: 1.8; }
     var c = COPY[lang];
     document.body.dataset.lang = lang; document.body.dataset.v = variant;
     document.documentElement.lang = lang === 'jp' ? 'ja' : 'en';
-    $('fabLabel').textContent = c.label; $('fabBtn').setAttribute('aria-label', c.label);
+    fillMorph(false); placeMorph();
     $('chipText').textContent = c.label; chip.classList.toggle('in', phase >= 3);
     $('capName').innerHTML = (lang === 'jp' ? pat.jp + '<small>' + pat.en + '</small>' : pat.en + '<small class="jp">' + pat.jp + '</small>');
     $('capSteps').innerHTML = c.steps.map(function (t, i) { return (i ? '<i aria-hidden="true">·</i>' : '') + '<span' + (phase === i + 1 ? ' aria-current="step"' : '') + '>' + t + '</span>'; }).join('');
@@ -967,8 +1032,8 @@ body[data-lang="jp"] .tip p { line-height: 1.8; }
     document.querySelectorAll('#langseg button').forEach(function (b) { b.setAttribute('aria-checked', String(b.dataset.l === lang)); });
   }
   window.__heroPhase = function (p) { phase = p; render(); };
-  window.__heroPattern = function (p) { pat = p; render(); };
-  document.querySelectorAll('#seg button').forEach(function (b) { b.onclick = function () { variant = b.dataset.v; closeTip(); try { localStorage.setItem('xvar', variant); } catch (e) {} render(); }; });
+  window.__heroPattern = function (p) { var changed = pat.en !== p.en; pat = p; seen[p.en] = 1; render(); if (changed) fillMorph(true); };
+  document.querySelectorAll('#seg button').forEach(function (b) { b.onclick = function () { variant = b.dataset.v; closeTip(); if (mOpen) morphTo(false); try { localStorage.setItem('xvar', variant); } catch (e) {} render(); }; });
   document.querySelectorAll('#langseg button').forEach(function (b) { b.onclick = function () { lang = b.dataset.l; try { localStorage.setItem('xlang', lang); } catch (e) {} render(); }; });
   $('xreplay').onclick = function () { closeTip(); document.getElementById('replay').click(); };
   render();
